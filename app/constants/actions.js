@@ -1,0 +1,1 @@
+export const AUTH_UPDATE_FIELD = 'AUTH_UPDATE_FIELD'
