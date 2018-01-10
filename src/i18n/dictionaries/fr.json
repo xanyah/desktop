@@ -1,0 +1,36 @@
+{
+  "home-link": {
+    "checkout": {
+      "title": "Caisse",
+      "subtitle": "Encaisser une vente"
+    },
+    "articles": {
+      "title": "Articles",
+      "subtitle": "Gérer les articles"
+    },
+    "shippings": {
+      "title": "Livraisons",
+      "subtitle": "Gérer les livraisons"
+    },
+    "orders": {
+      "title": "Commandes",
+      "subtitle": "Gérer les commandes"
+    }, 
+    "inventories": {
+      "title": "Inventaires",
+      "subtitle": "Gérer les inventaires"
+    }, 
+    "clients": {
+      "title": "Clients",
+      "subtitle": "Gérer les clients"
+    }, 
+    "providers": {
+      "title": "Fournisseurs",
+      "subtitle": "Gérer les fournisseurs"
+    }, 
+    "manufacturers": {
+      "title": "Fabricants",
+      "subtitle": "Gérer les fabricants"
+    }
+  }
+}

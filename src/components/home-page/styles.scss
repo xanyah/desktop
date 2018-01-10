@@ -1,0 +1,22 @@
+@import '../../constants/scss/colors';
+
+.home-page {
+  align-items: center;
+  background: url(../../images/background.png);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  padding: 4rem 5rem;
+  width: 100vw;
+
+  .links-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
