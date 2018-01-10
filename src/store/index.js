@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
@@ -8,7 +8,7 @@ import reducers from '../reducers'
 
 const router = routerMiddleware(history)
 
-const configureStore = () => 
+const configureStore = () =>
   createStore(
     reducers,
     {},

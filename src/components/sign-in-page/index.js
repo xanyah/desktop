@@ -1,26 +1,35 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import './styles.scss'
 
-export default class SignIn extends Component {
-  render() {
-    const {
-      email,
-      errors,
-      loading,
-      password,
-      signIn,
-      updateField,
-    } = this.props
-    return (
-      <div key="sign-in" className="sign-in-page">
-        <div className="container">
-          <input type="email" value={email} onChange={e => updateField('email', e.target.value)} />
-          <input type="password" value={password} onChange={e => updateField('password', e.target.value)} />
-          <button onClick={signIn}>Sign in</button>
-        </div>
-      </div>
-    )
-  }
+const SignIn = ({
+  email,
+  password,
+  signIn,
+  updateField,
+}) => (
+  <div key="sign-in" className="sign-in-page">
+    <div className="container">
+      <input type="email" value={email} onChange={e => updateField('email', e.target.value)} />
+      <input type="password" value={password} onChange={e => updateField('password', e.target.value)} />
+      <button onClick={signIn}>Sign in</button>
+    </div>
+  </div>
+)
+
+SignIn.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  signIn: PropTypes.func,
+  updateField: PropTypes.func,
 }
+
+SignIn.defaultProps = {
+  email: '',
+  password: '',
+  signIn: () => null,
+  updateField: () => null,
+}
+
+export default SignIn

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { updateAuthField, signIn } from '../../actions'
+import { signIn, updateAuthField } from '../../actions'
 import SignInPage from '../../components/sign-in-page'
 
 const mapStateToProps = ({
@@ -9,7 +9,7 @@ const mapStateToProps = ({
     errors,
     loading,
     password,
-  }
+  },
 }) => ({
   email,
   errors,
@@ -18,8 +18,8 @@ const mapStateToProps = ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateField: (f, v) => dispatch(updateAuthField(f, v)),
   dispatch,
+  updateField: (f, v) => dispatch(updateAuthField(f, v)),
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

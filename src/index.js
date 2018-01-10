@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import App from './app'
 
 let root = document.createElement('div')
-root.id = "root"
+root.id = 'root'
 document.body.appendChild(root)
 
 render(<App />, document.getElementById('root'))

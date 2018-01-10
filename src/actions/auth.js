@@ -6,8 +6,8 @@ import {
 } from '../utils/api-helper'
 
 export const updateAuthField = (field, value) => ({
-  type: AUTH_UPDATE_FIELD,
   field,
+  type: AUTH_UPDATE_FIELD,
   value,
 })
 

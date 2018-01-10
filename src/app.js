@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-  Switch,
   Route,
+  Switch,
 } from 'react-router'
 import { Provider } from 'react-redux'
 import { ConnectedRouter, push } from 'react-router-redux'

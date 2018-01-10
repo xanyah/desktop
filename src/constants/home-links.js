@@ -1,44 +1,44 @@
-import { barcodeScanner, warehouse, list, delivery, clipboard, deliveryTruck, box, users } from '../images'
+import { barcodeScanner, box, clipboard, delivery, deliveryTruck, list, users, warehouse } from '../images'
 
 export default [
   {
-    key: "checkout",
-    url: "/checkout",
     image: barcodeScanner,
+    key: 'checkout',
+    url: '/checkout',
   },
   {
-    key: "articles",
-    url: "/articles",
     image: warehouse,
+    key: 'articles',
+    url: '/articles',
   },
   {
-    key: "shippings",
-    url: "/shippings",
     image: clipboard,
+    key: 'shippings',
+    url: '/shippings',
   },
   {
-    key: "orders",
-    url: "/orders",
     image: delivery,
+    key: 'orders',
+    url: '/orders',
   },
   {
-    key: "inventories",
-    url: "/inventories",
     image: list,
+    key: 'inventories',
+    url: '/inventories',
   },
   {
-    key: "clients",
-    url: "/clients",
     image: users,
+    key: 'clients',
+    url: '/clients',
   },
   {
-    key: "providers",
-    url: "/providers",
     image: deliveryTruck,
+    key: 'providers',
+    url: '/providers',
   },
   {
-    key: "manufacturers",
-    url: "/manufacturers",
     image: box,
+    key: 'manufacturers',
+    url: '/manufacturers',
   },
 ]

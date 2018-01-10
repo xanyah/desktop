@@ -4,12 +4,12 @@ import {
 
 const initialState = {
   email: '',
+  errors: [],
   loading: false,
   password: '',
   passwordConfirmation: '',
   passwordInput: null,
   passwordToken: '',
-  errors: [],
   signedIn: false,
 }
 
