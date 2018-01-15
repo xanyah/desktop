@@ -5,7 +5,7 @@ import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
 
-const Home = ({ image, string, url }) => (
+const HomeLink = ({ image, string, url }) => (
   <div className="home-link">
     <Link className="link" to={url}>
       <img src={image} className="image" />
@@ -21,14 +21,16 @@ const Home = ({ image, string, url }) => (
   </div>
 )
 
-Home.propTypes = {
+HomeLink.propTypes = {
   image: PropTypes.string,
   string: PropTypes.string,
   url: PropTypes.string,
 }
 
-Home.defaultProps = {
+HomeLink.defaultProps = {
   image: '',
   string: '',
   url: '',
 }
+
+export default HomeLink

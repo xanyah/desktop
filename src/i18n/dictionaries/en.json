@@ -1,4 +1,11 @@
 {
+  "home": {
+    "welcome": {
+      "morning": "Good morning %{firstname} !",
+      "afternoon": "Good afternoon %{firstname} !",
+      "evening": "Good evening %{firstname} !"
+    }
+  },
   "home-link": {
     "checkout": {
       "title": "Checkout",
@@ -32,5 +39,15 @@
       "title": "Manufacturers",
       "subtitle": "Manage your manufacturers"
     }
+  },
+  "models": {
+    "providers": {
+      "name": "Name",
+      "notes": "Notes",
+      "createdAt": "Date of creation"
+    }
+  },
+  "routes": {
+    "providers": "Providers"
   }
 }

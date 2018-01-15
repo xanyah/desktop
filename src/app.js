@@ -14,12 +14,11 @@ import {
 import history from './history'
 import store from './store'
 
-import HomePage from './containers/home-page'
-import SignIn from './containers/sign-in-page'
-
 import translations from './i18n'
 
-import { validateToken } from './utils/api-helper'
+import { validateToken } from './actions'
+
+import { routes } from './constants'
 
 import './app.scss'
 
@@ -28,9 +27,10 @@ class App extends React.Component {
     syncTranslationWithStore(store)
     store.dispatch(loadTranslations(translations))
     store.dispatch(setLocale('en'))
-    validateToken()
-      .then(() => store.dispatch(push('/home')))
-      .catch(() => store.dispatch(push('/sign-in')))
+    store.dispatch(validateToken(
+      () => store.dispatch(push('/home')),
+      () => store.dispatch(push('/sign-in'))
+    ))
   }
 
   render() {
@@ -38,8 +38,16 @@ class App extends React.Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path="/sign-in" component={SignIn} />
-            <Route path="/home" component={HomePage} />
+            {routes
+              .filter(route => route.inRouter)
+              .map(route =>
+                <Route
+                  component={route.component}
+                  key={route.path}
+                  exact={route.exact}
+                  path={route.path}
+                  strict={route.strict}
+                />)}
           </Switch>
         </ConnectedRouter>
       </Provider>

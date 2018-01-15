@@ -1,2 +1,8 @@
+import { connect } from 'react-redux'
 import Home from '../../components/home-page'
-export default Home
+
+const mapStateToProps = ({ user: { firstname }}) => ({
+  firstname,
+})
+
+export default connect(mapStateToProps)(Home)

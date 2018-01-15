@@ -1,0 +1,50 @@
+@import '../../constants/scss/colors';
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+    .navigation {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      img {
+        height: 50px;
+        margin-right: 20px;
+        object-fit: contain;
+        width: 50px;
+      }
+
+      .breadcrumb {
+        font-size: 2rem;
+        font-weight: 500;
+        color: $darkBlue;
+
+        &.inactive {
+          color: $secondaryBlueText;
+        }
+      }
+    }
+
+    .close {
+
+    }
+  }
+
+  .content {
+    padding: 0 90px;
+  }
+
+  .footer {
+
+  }
+}

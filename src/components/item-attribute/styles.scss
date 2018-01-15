@@ -1,0 +1,22 @@
+@import '../../constants/scss/colors';
+
+.item-attribute {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+
+  label {
+    color: $secondaryBlueText;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  > div {
+    color: $darkBlue;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+}

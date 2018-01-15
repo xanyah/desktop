@@ -1,4 +1,11 @@
 {
+  "home": {
+    "welcome": {
+      "morning": "Bonjour %{firstname} !",
+      "afternoon": "Bonjour %{firstname} !",
+      "evening": "Bonsoir %{firstname} !"
+    }
+  },
   "home-link": {
     "checkout": {
       "title": "Caisse",
@@ -32,5 +39,15 @@
       "title": "Fabricants",
       "subtitle": "Gérer les fabricants"
     }
+  },
+  "models": {
+    "providers": {
+      "name": "Nom",
+      "notes": "Notes",
+      "createdAt": "Date de création"
+    }
+  },
+  "routes": {
+    "providers": "Fournisseurs"
   }
 }

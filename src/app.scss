@@ -1,2 +1,16 @@
 @import '~normalize-scss/sass/normalize';
 @include normalize();
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import 'constants/scss/colors';
+
+// To prevent "Couldn't set selectedTextBackgroundColor from default ()"
+::selection { background: white; /* WebKit/Blink Browsers */ }
+
+* {
+  font-family: Roboto, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  color: $darkBlue;
+}

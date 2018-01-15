@@ -1,7 +1,7 @@
 @import '../../constants/scss/colors';
 
 .home-page {
-  align-items: center;
+  align-items: flex-start;
   background: url(../../images/background.png);
   background-attachment: fixed;
   background-position: center center;
@@ -13,6 +13,20 @@
   justify-content: center;
   padding: 4rem 5rem;
   width: 100vw;
+
+  .header {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
+    width: 100%;
+
+    h1 {
+      color: $white;
+    }
+  }
 
   .links-container {
     display: flex;
