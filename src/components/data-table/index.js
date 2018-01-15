@@ -1,5 +1,6 @@
 import React from 'react'
 import { Translate } from 'react-redux-i18n'
+import PropTypes from 'prop-types'
 import { formatData } from '../../utils/data-helper'
 
 import './styles.scss'
@@ -53,6 +54,20 @@ class DataTable extends React.Component {
       </div>
     )
   }
+}
+
+DataTable.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.string),
+  data: PropTypes.array,
+  onItemView: PropTypes.func,
+  type: PropTypes.string,
+}
+
+DataTable.defaultProps = {
+  columns: [],
+  data: [],
+  onItemView: () => null,
+  type: '',
 }
 
 export default DataTable

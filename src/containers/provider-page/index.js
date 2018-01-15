@@ -5,6 +5,6 @@ const mapStateToProps = ({ providers: { selectedProvider } }) => ({
   selectedProvider,
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = () => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProviderPage)

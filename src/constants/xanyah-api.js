@@ -21,7 +21,6 @@ xanyahApi.interceptors.request.use(
   config => {
     authHeaders.forEach(key =>
       config.headers[key] = localStorage.getItem(`Xanyah:${key}`))
-    console.log('headers', config.headers)
     config.data = decamelizeKeys(config.data)
     return config
   },
