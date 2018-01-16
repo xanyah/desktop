@@ -1,8 +1,21 @@
 {
   "name": "Xanyah",
   "version": "0.7.0",
-  "description": "Minimal and modern react+electron+webpack boilerplate",
-  "author": "Phillip Barbiero",
+  "description": "Checkout software",
+  "author": {
+    "name": "Xanyah Team",
+    "email": "sofiane@xanyah.io"
+  },
+  "contributors": [
+    {
+      "name": "Clément Montois",
+      "email": "clement@xanyah.io"
+    },
+    {
+      "name": "Sofiane Gargouri",
+      "email": "sofiane@xanyah.io"
+    }
+  ],
   "homepage": "https://github.com/pbarbiero/basic-electron-react-boilerplate",
   "productName": "Xanyah",
   "repository": {
@@ -15,10 +28,8 @@
     "build": "webpack --config webpack.build.config.js",
     "dev": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js",
     "lint": "eslint src/* --fix --quiet",
-    "package": "electron-packager ./ --out=./builds --all",
     "prod": "webpack --config webpack.build.config.js && electron --noDevServer .",
-    "build-osx": "electron-installer-dmg ./builds/Xanyah-darwin-x64/Xanyah.app builds/Xanyah",
-    "build-deb64": "electron-installer-debian --src ./builds/Xanyah-linux-x64/ --dest ./builds/ --arch amd64"
+    "package": "ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true yarn build && electron-builder --mac --linux --win"
   },
   "devDependencies": {
     "axios": "^0.17.1",
@@ -32,6 +43,7 @@
     "babili-webpack-plugin": "^0.1.2",
     "css-loader": "^0.28.1",
     "electron": "^1.7.8",
+    "electron-builder": "^19.53.7",
     "electron-installer-debian": "^0.7.1",
     "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^9.1.0",
@@ -63,8 +75,29 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-target-electron-renderer": "^0.4.0"
   },
-  "dependencies": {
+  "dependencies": {},
+  "build": {
+    "appId": "io.xanyah.desktop",
+    "directories": {
+      "app": ".",
+      "output": "builds"
+    },
+    "linux": {
+      "category": "Office",
+      "target": "deb"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": "dmg",
+      "type": "distribution"
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "publisherName": "Xanyah",
+      "target": "msi"
+    }
   }
 }
