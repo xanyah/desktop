@@ -28,16 +28,16 @@
       .breadcrumb {
         font-size: 2rem;
         font-weight: 500;
-        color: $darkBlue;
+        color: $primary-text-color;
 
         &.inactive {
-          color: $secondaryBlueText;
+          color: $secondary-text-color;
           text-decoration: none;
         }
       }
 
       .arrow {
-        color: $secondaryBlueText;
+        color: $secondary-text-color;
         margin: 0 20px;
       }
     }
