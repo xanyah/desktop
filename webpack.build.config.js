@@ -13,30 +13,26 @@ const defaultInclude = [SRC_DIR]
 
 module.exports = {
   entry: SRC_DIR + '/index.js',
-  output: {
-    path: OUTPUT_DIR,
-    publicPath: './',
-    filename: 'bundle.js',
-  },
   module: {
     rules: [
       {
+        include: defaultInclude,
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader',
         }),
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'sass-loader',
-          use: 'style-loader',
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
         }),
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.jsx?$/,
         use: [{
           loader: 'babel-loader',
@@ -44,21 +40,24 @@ module.exports = {
             presets: ['es2015', 'stage-0', 'react'],
           },
         }],
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.(jpe?g|png|gif)$/,
         use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
-        include: defaultInclude,
       },
     ],
   },
-  target: 'electron-renderer',
+  output: {
+    filename: 'bundle.js',
+    path: OUTPUT_DIR,
+    publicPath: './',
+  },
   plugins: [
     new HtmlWebpackPlugin(),
     new ExtractTextPlugin('bundle.css'),
@@ -68,9 +67,10 @@ module.exports = {
     new BabiliPlugin(),
   ],
   stats: {
-    colors: true,
     children: false,
     chunks: false,
+    colors: true,
     modules: false,
   },
+  target: 'electron-renderer',
 }

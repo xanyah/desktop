@@ -11,6 +11,8 @@ import {
   syncTranslationWithStore,
 } from 'react-redux-i18n'
 
+import { ipcRenderer } from 'electron'
+
 import history from './history'
 import store from './store'
 
@@ -26,7 +28,7 @@ class App extends React.Component {
   componentWillMount() {
     syncTranslationWithStore(store)
     store.dispatch(loadTranslations(translations))
-    store.dispatch(setLocale('en'))
+    store.dispatch(setLocale(ipcRenderer.sendSync('get-locale')))
     store.dispatch(validateToken(
       () => store.dispatch(push('/home')),
       () => store.dispatch(push('/sign-in'))

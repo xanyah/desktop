@@ -1,11 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ProviderType } from '../../types'
 import DataDetails from '../data-details'
-import PageContainer from '../page-container'
+import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
 
 export default class Provider extends React.Component {
+  componentWillMount() {
+    this.props.setPageName(this.props.selectedProvider.name)
+  }
+
+  componentWillUnmount() {
+    this.props.setPageName('')
+  }
+
   render() {
     const { selectedProvider } = this.props
     return (
@@ -24,6 +33,7 @@ export default class Provider extends React.Component {
               },
             ],
           ]}
+          type="providers"
         />
       </PageContainer>
     )
@@ -32,8 +42,10 @@ export default class Provider extends React.Component {
 
 Provider.propTypes = {
   selectedProvider: ProviderType,
+  setPageName: PropTypes.func,
 }
 
 Provider.defaultProps = {
   selectedProvider: {},
+  setPageName: () => null,
 }

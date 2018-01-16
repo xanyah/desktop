@@ -9,7 +9,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 20px;
+    padding: 40px 20px;
+    -webkit-app-region: drag;
 
     .navigation {
       align-items: center;
@@ -31,7 +32,13 @@
 
         &.inactive {
           color: $secondaryBlueText;
+          text-decoration: none;
         }
+      }
+
+      .arrow {
+        color: $secondaryBlueText;
+        margin: 0 20px;
       }
     }
 

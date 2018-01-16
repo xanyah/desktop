@@ -8,7 +8,7 @@ import { getCurrentRoute, getParentRoute } from '../../utils/router-helper'
 
 import './styles.scss'
 
-const PageContainer = ({ children, location }) => {
+const PageContainer = ({ children, currentNavigationStep, location }) => {
   const currentRoute = getCurrentRoute(location.pathname)
   const parentRoute = getParentRoute(location.pathname)
 
@@ -18,12 +18,17 @@ const PageContainer = ({ children, location }) => {
         <div className="navigation">
           <img src={currentRoute.image} />
           {parentRoute
-            && <Link className="breadcrumb inactive" to={parentRoute.path}>
-              <Translate value={`routes.${parentRoute.key}`} />
-            </Link>}
+            && [
+              <Link key="link" className="breadcrumb inactive" to={parentRoute.path}>
+                <Translate value={`routes.${parentRoute.key}`} />
+              </Link>,
+              <span key="arrow" className="arrow">></span>,
+            ]}
           {currentRoute
             && <div className="breadcrumb">
-              <Translate value={`routes.${currentRoute.key}`} />
+              {currentNavigationStep.length > 0
+                ? currentNavigationStep
+                : <Translate value={`routes.${currentRoute.key}`} />}
             </div>}
         </div>
         <div className="close">
@@ -42,11 +47,13 @@ export default withRouter(PageContainer)
 
 PageContainer.propTypes = {
   children: PropTypes.element,
+  currentNavigationStep: PropTypes.string,
   location: PropTypes.object,
 }
 
 PageContainer.defaultProps = {
   children: null,
+  currentNavigationStep: '',
   location: {},
 }
 

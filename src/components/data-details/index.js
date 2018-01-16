@@ -7,6 +7,7 @@ import './styles.scss'
 const DataDetails = ({
   children,
   formattedData,
+  type,
 }) => (
   <div className="data-details">
     {formattedData.map((row, idx) => (
@@ -16,6 +17,7 @@ const DataDetails = ({
             attribute={item.attribute}
             key={item.attribute}
             value={item.value}
+            type={type}
           />
         ))}
       </div>
@@ -34,11 +36,13 @@ DataDetails.propTypes = {
       })
     )
   ),
+  type: PropTypes.string,
 }
 
 DataDetails.defaultProps = {
   children: null,
   formattedData: [],
+  type: '',
 }
 
 export default DataDetails

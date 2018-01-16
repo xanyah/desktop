@@ -44,7 +44,8 @@
     "providers": {
       "name": "Nom",
       "notes": "Notes",
-      "createdAt": "Date de création"
+      "createdAt": "Date de création",
+      "open": "Voir le fournisseur"
     }
   },
   "routes": {

@@ -11,25 +11,43 @@ const OUTPUT_DIR = path.resolve(__dirname, 'dist')
 const defaultInclude = [SRC_DIR]
 
 module.exports = {
-  entry: SRC_DIR + '/index.js',
-  output: {
-    path: OUTPUT_DIR,
-    publicPath: '/',
-    filename: 'bundle.js',
+  devServer: {
+    before: () => {
+      spawn(
+        'electron',
+        ['.'],
+        {
+          env: process.env,
+          shell: true,
+          stdio: 'inherit',
+        }
+      )
+        .on('close', () => process.exit(0))
+        .on('error', spawnError => console.error(spawnError))
+    },
+    contentBase: OUTPUT_DIR,
+    stats: {
+      children: false,
+      chunks: false,
+      colors: true,
+    },
   },
+  devtool: 'cheap-source-map',
+  entry: SRC_DIR + '/index.js',
   module: {
     rules: [
       {
+        include: defaultInclude,
         test: /\.css$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.scss$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }],
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.jsx?$/,
         use: [{
           loader: 'babel-loader',
@@ -37,43 +55,29 @@ module.exports = {
             presets: ['es2015', 'stage-0', 'react'],
           },
         }],
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.(jpe?g|png|gif)$/,
         use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
-        include: defaultInclude,
       },
       {
+        include: defaultInclude,
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
-        include: defaultInclude,
       },
     ],
   },
-  target: 'electron-renderer',
+  output: {
+    filename: 'bundle.js',
+    path: OUTPUT_DIR,
+    publicPath: '/',
+  },
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
   ],
-  devtool: 'cheap-source-map',
-  devServer: {
-    contentBase: OUTPUT_DIR,
-    stats: {
-      colors: true,
-      chunks: false,
-      children: false,
-    },
-    before() {
-      spawn(
-        'electron',
-        ['.'],
-        { shell: true, env: process.env, stdio: 'inherit' }
-      )
-        .on('close', code => process.exit(0))
-        .on('error', spawnError => console.error(spawnError))
-    },
-  },
+  target: 'electron-renderer',
 }
