@@ -9,7 +9,7 @@ notifications:
     on_failure: always
 
 install:
-  - yarn
+  - npm install
 
 script:
   - yarn lint
