@@ -3,6 +3,8 @@ import { barcodeScanner, box, clipboard, delivery, deliveryTruck, list, users, w
 import HomePage from '../containers/home-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
+import ManufacturerPage from '../containers/manufacturer-page'
+import ManufacturersPage from '../containers/manufacturers-page'
 import SignInPage from '../containers/sign-in-page'
 
 export const routes = [
@@ -69,11 +71,24 @@ export const routes = [
     strict: true,
   },
   {
+    component: ManufacturersPage,
     displayHome: true,
+    exact: true,
     image: box,
-    inRouter: false,
+    inRouter: true,
     key: 'manufacturers',
     path: '/manufacturers',
+    strict: true,
+  },
+  {
+    component: ManufacturerPage,
+    displayHome: false,
+    exact: true,
+    image: box,
+    inRouter: true,
+    key: 'manufacturer',
+    path: '/manufacturers/:id',
+    strict: true,
   },
   {
     component: SignInPage,

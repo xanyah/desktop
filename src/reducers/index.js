@@ -4,6 +4,7 @@ import { routerReducer as router } from 'react-router-redux'
 
 import auth from './auth'
 import global from './global'
+import manufacturers from './manufacturers'
 import providers from './providers'
 import user from './user'
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   auth,
   global,
   i18n,
+  manufacturers,
   providers,
   router,
   user,
