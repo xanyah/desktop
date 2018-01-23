@@ -1,13 +1,14 @@
 language: node_js
 
 node_js:
-  - "6.9.1"
+  - "8.9.1"
 
-before_script:
+install:
   - yarn
 
 script:
   - yarn lint
+  # - yarn check-translations
 
 notifications:
   email:
