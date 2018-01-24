@@ -1,6 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
+import PropTypes from 'prop-types'
 
 import HomeLink from '../home-link'
 
@@ -17,7 +18,7 @@ const Home = ({ firstname }) => (
       </h1>
       <div className="settings">
         <span>U</span>
-        <span>R</span>
+        <Link to="/settings">R</Link>
       </div>
     </div>
     <div className="links-container">

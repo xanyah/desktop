@@ -1,4 +1,6 @@
 export * from './auth'
 export * from './global'
 export * from './providers'
+export * from './settings'
+export * from './stores'
 export * from './user'

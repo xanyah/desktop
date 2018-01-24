@@ -3,7 +3,7 @@
 .data-table {
   .header-row {
     align-items: center;
-    color: $darkBlue;
+    color: $primary-text-color;
     display: flex;
     flex-direction: row;
     font-size: 1rem;
@@ -21,7 +21,7 @@
 
   .row {
     align-items: center;
-    color: $darkBlue;
+    color: $primary-text-color;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
 
     .data-row {
       align-items: center;
-      color: $darkBlue;
+      color: $primary-text-color;
       cursor: pointer;
       display: flex;
       flex-direction: row;
@@ -61,7 +61,7 @@
       background: none;
       border: none;
       bottom: 0;
-      color: $darkBlue;
+      color: $primary-text-color;
       cursor: pointer;
       opacity: 0;
       position: absolute;
@@ -80,7 +80,7 @@
     }
 
     &.selected {
-      background-color: $grey;
+      background-color: $secondary-white;
       opacity: 1;
 
       .action {

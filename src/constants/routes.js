@@ -1,8 +1,20 @@
-import { barcodeScanner, box, clipboard, delivery, deliveryTruck, list, users, warehouse } from '../images'
+import {
+  barcodeScanner,
+  box,
+  clipboard,
+  delivery,
+  deliveryTruck,
+  flag,
+  list,
+  settings,
+  users,
+  warehouse,
+} from '../images'
 
 import HomePage from '../containers/home-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
+import SettingsPage from '../containers/settings-page'
 import SignInPage from '../containers/sign-in-page'
 
 export const routes = [
@@ -86,5 +98,13 @@ export const routes = [
     displayHome: false,
     inRouter: true,
     path: '/home',
+  },
+  {
+    component: SettingsPage,
+    displayHome: false,
+    image: settings,
+    inRouter: true,
+    key: 'settings',
+    path: '/settings',
   },
 ]

@@ -1,5 +1,6 @@
 @import '~normalize-scss/sass/normalize';
 @include normalize();
+@import '~toastedjs/src/sass/toast.scss';
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 @import 'constants/scss/colors';
 
@@ -12,9 +13,9 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
-  color: $darkBlue;
+  color: $primary-text-color;
 }
 
 html {
-  background-color: $white;
+  background-color: $primary-white;
 }
