@@ -1,0 +1,39 @@
+@import '../../constants/scss/colors';
+
+.settings-page {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .side-navigation {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -90px;
+    padding: 0 10px;
+    width: 12rem;
+
+    button {
+      background: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px 0;
+      outline: 0;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+      width: 100%;
+
+      &:hover {
+        background-color: $secondary-white;
+      }
+
+      &.active {
+        background-color: $blue-color;
+        color: $primary-white;
+      }
+    }
+  }
+}

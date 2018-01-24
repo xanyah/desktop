@@ -5,15 +5,17 @@ import { routerReducer as router } from 'react-router-redux'
 import auth from './auth'
 import global from './global'
 import providers from './providers'
+import settings from './settings'
+import stores from './stores'
 import user from './user'
 
-const rootReducer = combineReducers({
+export default combineReducers({
   auth,
   global,
   i18n,
   providers,
   router,
+  settings,
+  stores,
   user,
 })
-
-export default rootReducer

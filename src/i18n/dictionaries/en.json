@@ -49,6 +49,7 @@
     }
   },
   "routes": {
-    "providers": "Providers"
+    "providers": "Providers",
+    "settings": "Settings"
   }
 }
