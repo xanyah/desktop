@@ -10,31 +10,31 @@
     "checkout": {
       "title": "Checkout",
       "subtitle": "Cash a sale"
-    }, 
+    },
     "articles": {
       "title": "Articles",
       "subtitle": "Manage your articles"
-    }, 
+    },
     "shippings": {
       "title": "Shippings",
       "subtitle": "Manage your shippings"
-    }, 
+    },
     "orders": {
       "title": "Orders",
       "subtitle": "Manage your orders"
-    }, 
+    },
     "inventories": {
       "title": "Inventories",
       "subtitle": "Manage your inventories"
-    }, 
+    },
     "clients": {
       "title": "Clients",
       "subtitle": "Manage your clients"
-    }, 
+    },
     "providers": {
       "title": "Providers",
       "subtitle": "Manage your providers"
-    }, 
+    },
     "manufacturers": {
       "title": "Manufacturers",
       "subtitle": "Manage your manufacturers"
@@ -46,9 +46,16 @@
       "notes": "Notes",
       "createdAt": "Date of creation",
       "open": "Open provider"
+    },
+    "manufacturers": {
+      "name": "Name",
+      "notes": "Notes",
+      "createdAt": "Date of creation",
+      "open": "Open manufacturer"
     }
   },
   "routes": {
-    "providers": "Providers"
+    "providers": "Providers",
+    "manufacturers": "Manufacturers"
   }
 }
