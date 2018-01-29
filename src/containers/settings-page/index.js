@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { updateSettingsField, updateStore } from '../../actions'
 import SettingsPage from '../../components/settings-page'
+import { getTvaSettings } from '../../actions'
 
 const mapStateToProps = ({ settings: { step, storeName }, stores: { currentStore }}) => ({
   currentStore,
@@ -9,6 +10,7 @@ const mapStateToProps = ({ settings: { step, storeName }, stores: { currentStore
 })
 
 const mapDispatchToProps = dispatch => ({
+  getTvaSettings: countryCode => dispatch(getTvaSettings(countryCode)),
   updateField: (field, value) => dispatch(updateSettingsField(field, value)),
   updateStore: newStore => dispatch(updateStore(newStore)),
 })

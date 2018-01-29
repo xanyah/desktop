@@ -22,9 +22,11 @@ export default class Settings extends React.Component {
   }
 
   componentWillMount() {
-    const { currentStore, updateField } = this.props
+    const { currentStore, getTvaSettings, updateField } = this.props
     updateField('step', this.steps[0].key)
     updateField('storeName', currentStore.name)
+    updateField('tvaCountry', currentStore.country)
+    updateField('tva', getTvaSettings('fr'))
   }
 
   renderGeneral() {
@@ -40,19 +42,25 @@ export default class Settings extends React.Component {
       }}
     >
       <input
+        className="input-text"
         onChange={e => updateField('storeName', e.target.value)}
         required
         type="text"
         value={storeName}
       />
-      <button type="submit">
-        Submit
-      </button>
+      <input
+        className="input-text"
+        required
+        type="text"
+        value="France"
+      />
+      <div>Taux de TVA: Normal: 20% - Intermédiaire: 10% - Réduit: 5.5% - Super-réduit: 2.1% - Parking: 0%</div>
+      <button className="btn-link" type="submit">Save</button>
     </form>
   }
 
   renderCategories() {
-
+    return <div>Categories</div>
   }
 
   render() {
@@ -83,6 +91,7 @@ export default class Settings extends React.Component {
 
 Settings.propTypes = {
   currentStore: PropTypes.objectOf(StoreType),
+  getTvaSettings: PropTypes.func,
   step: PropTypes.string,
   storeName: PropTypes.string,
   updateField: PropTypes.func,
@@ -91,6 +100,7 @@ Settings.propTypes = {
 
 Settings.defaultProps = {
   currentStore: {},
+  getTvaSettings: () => null,
   step: '',
   storeName: '',
   updateField: () => null,
