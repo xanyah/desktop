@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
-import { updateSettingsField, updateStore } from '../../actions'
+import { updateSettingsField, updateStore, getTvaSettings } from '../../actions'
 import SettingsPage from '../../components/settings-page'
-import { getTvaSettings } from '../../actions'
 
 const mapStateToProps = ({ settings: { step, storeName }, stores: { currentStore }}) => ({
   currentStore,

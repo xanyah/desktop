@@ -17,7 +17,7 @@ const Home = ({ firstname }) => (
         <Translate value={`home.welcome.${getGreetingTime()}`} firstname={firstname} />
       </h1>
       <div className="settings">
-        <span>U</span>
+        <Link to="/account">U</Link>
         <Link to="/settings">R</Link>
       </div>
     </div>

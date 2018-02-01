@@ -11,6 +11,7 @@ import {
   warehouse,
 } from '../images'
 
+import AccountPage from '../containers/account-page'
 import HomePage from '../containers/home-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
@@ -106,5 +107,13 @@ export const routes = [
     inRouter: true,
     key: 'settings',
     path: '/settings',
+  },
+  {
+    component: AccountPage,
+    displayHome: false,
+    image: flag,
+    inRouter: true,
+    key: 'account',
+    path: '/account',
   },
 ]

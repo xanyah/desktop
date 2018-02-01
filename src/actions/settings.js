@@ -10,12 +10,13 @@ export const updateSettingsField = (field, value) => ({
   value,
 })
 
-export const getTvaSettings = () =>
+export const getTvaSettings = (countryCode) =>
   dispatch => {
     dispatch(updateSettingsField('loading', true))
-    apiGetTvaSettings()
-      .then(({ data }) => {
-        dispatch(updateSettingsField('tva', data))
+    apiGetTvaSettings(countryCode)
+      .then((data) => {
+        console.log(data)
+        // dispatch(updateSettingsField('tva', vat))
         dispatch(updateSettingsField('loading', false))
       })
   }

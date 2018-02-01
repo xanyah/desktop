@@ -1,0 +1,22 @@
+@import '../../constants/scss/colors';
+@import '../../constants/scss/inputs';
+@import '../../constants/scss/buttons';
+
+.content {
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input.input-text {
+    margin-top: 49px;
+    height: 37px;
+    width: 664px;
+  }
+
+  button.submit {
+    text-align: right;
+  }
+}

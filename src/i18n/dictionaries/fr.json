@@ -50,6 +50,7 @@
   },
   "routes": {
     "providers": "Fournisseurs",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "account": "Mon compte"
   }
 }
