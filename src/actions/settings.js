@@ -2,7 +2,8 @@ import {
   SETTINGS_UPDATE_FIELD,
 } from '../constants/actions'
 
-import { getTvaSettings as apiGetTvaSettings } from '../utils/api-helper'
+import { getCategories as apiGetCategories } from '../utils/api-helper'
+import { orderCategories } from '../utils/category-helper'
 
 export const updateSettingsField = (field, value) => ({
   field,
@@ -10,13 +11,13 @@ export const updateSettingsField = (field, value) => ({
   value,
 })
 
-export const getTvaSettings = (countryCode) =>
+export const getCategories = () =>
   dispatch => {
     dispatch(updateSettingsField('loading', true))
-    apiGetTvaSettings(countryCode)
-      .then((data) => {
-        console.log(data)
-        // dispatch(updateSettingsField('tva', vat))
+    apiGetCategories()
+      .then(({ data }) => {
+        const categories = orderCategories(data)
+        dispatch(updateSettingsField('categories', categories))
         dispatch(updateSettingsField('loading', false))
       })
   }

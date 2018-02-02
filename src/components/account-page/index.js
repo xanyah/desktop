@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PageContainer from '../page-container'
+import { Translate } from 'react-redux-i18n'
 import { verifyPassword, errorHandler } from '../../utils/password-helper'
 
 import './styles.scss'
@@ -11,7 +12,7 @@ export default class Account extends React.Component {
       firstname,
       lastname,
       loading,
-      // locale,
+      locale,
       updateField,
       newPassword,
       confirmNewPassword,
@@ -19,18 +20,17 @@ export default class Account extends React.Component {
     } = this.props
     return (
       <PageContainer>
-
-        <h2>Modification de vos informations personnelles</h2>
-
         <form
           onSubmit={e => {
             e.preventDefault()
             updateUserParams({
               'firstname': firstname.trim(),
               'lastname': lastname.trim(),
+              'locale': locale,
             })
           }}
         >
+          <h2><Translate value='account.form.first.title'/></h2>
           <input
             className="input-text"
             onChange={e => updateField('firstname', e.target.value)}
@@ -45,20 +45,19 @@ export default class Account extends React.Component {
             type="text"
             value={lastname}
           />
-          {/* <select>
+          <select
+            className='select-locale'
+            onChange={e => updateField('locale', e.target.value)}
+          >
             <option
               value="fr"
               selected={'fr' === locale}
-            >
-              FR
-            </option>
+            >FR</option>
             <option
               value="en"
               selected={'en' === locale}
-            >
-              EN
-            </option>
-          </select> */}
+            >EN</option>
+          </select>
           <button
             className="btn-primary submit"
             type="submit"
@@ -67,9 +66,6 @@ export default class Account extends React.Component {
               SAVE
           </button>
         </form>
-
-        <h2>Modification du Mot de Passe</h2>
-
         <form
           onSubmit={e => {
             e.preventDefault()
@@ -85,6 +81,7 @@ export default class Account extends React.Component {
             })
           }}
         >
+          <h2><Translate value='account.form.second.title'/></h2>
           <input
             className="input-text"
             onChange={e => updateField('newPassword', e.target.value)}
@@ -117,6 +114,7 @@ Account.propTypes = {
   firstname: PropTypes.string,
   lastname: PropTypes.string,
   loading: PropTypes.bool,
+  locale: PropTypes.string,
   newPassword: PropTypes.string,
   updateField: PropTypes.func,
   updateUserParams: PropTypes.func,
@@ -127,6 +125,7 @@ Account.defaultProps = {
   firstname: '',
   lastname: '',
   loading: false,
+  locale: 'en',
   newPassword: '',
   updateField: () => null,
   updateUserParams: () => null,

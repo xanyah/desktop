@@ -3,6 +3,7 @@ import {
 } from '../constants/actions'
 
 const initialState = {
+  categories: [],
   step: '',
   storeName: '',
   tvaCountry: '',

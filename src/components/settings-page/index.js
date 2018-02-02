@@ -22,21 +22,23 @@ export default class Settings extends React.Component {
   }
 
   componentWillMount() {
-    const { currentStore, getTvaSettings, updateField } = this.props
+    const { currentStore, updateField } = this.props
     updateField('step', this.steps[0].key)
     updateField('storeName', currentStore.name)
     updateField('tvaCountry', currentStore.country)
-    updateField('tva', getTvaSettings('fr'))
+    this.props.getCategories()
   }
 
   renderGeneral() {
     const { currentStore, storeName, updateField, updateStore } = this.props
+    // const { country } = currentStore
     return <form
       className="general"
       onSubmit={e => {
         e.preventDefault()
         updateStore({
           ...currentStore,
+          // country: country,
           name: storeName.trim(),
         })
       }}
@@ -48,19 +50,45 @@ export default class Settings extends React.Component {
         type="text"
         value={storeName}
       />
-      <input
-        className="input-text"
-        required
-        type="text"
-        value="France"
-      />
-      <div>Taux de TVA: Normal: 20% - Intermédiaire: 10% - Réduit: 5.5% - Super-réduit: 2.1% - Parking: 0%</div>
+      {/* <select
+        className='select-locale'
+        onChange={e => updateField('locale', e.target.value)}
+      >
+        <option
+          value="FR"
+          selected={'FR' === country}
+        >FR</option>
+        <option
+          value="EN"
+          selected={'EN' === country}
+        >EN</option>
+      </select> */}
       <button className="btn-link" type="submit">Save</button>
     </form>
   }
 
   renderCategories() {
-    return <div>Categories</div>
+    const { categories } = this.props
+
+    if(!categories.length)
+      return <h3>Aucune categorie !</h3>
+    return (
+      <div>
+        <ul>
+          { categories.map((category, index) => {
+            return (!category.children)
+              ? <li key={category.id}>{category.name}</li>
+              : (
+                <ul key={`children_${index}`}>
+                  {category.children.map((child) => {
+                    return <li key={child.id}>{child.name}</li>
+                  })}
+                </ul>
+              )
+          })}
+        </ul>
+      </div>
+    )
   }
 
   render() {
@@ -90,8 +118,9 @@ export default class Settings extends React.Component {
 }
 
 Settings.propTypes = {
+  categories: PropTypes.array,
   currentStore: PropTypes.objectOf(StoreType),
-  getTvaSettings: PropTypes.func,
+  getCategories: PropTypes.func,
   step: PropTypes.string,
   storeName: PropTypes.string,
   updateField: PropTypes.func,
@@ -99,8 +128,9 @@ Settings.propTypes = {
 }
 
 Settings.defaultProps = {
+  categories: [],
   currentStore: {},
-  getTvaSettings: () => null,
+  getCategories: () => null,
   step: '',
   storeName: '',
   updateField: () => null,

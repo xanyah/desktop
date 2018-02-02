@@ -9,9 +9,6 @@ export const getProviders = () => xanyahApi.get('providers')
 export const getStores = () => xanyahApi.get('stores')
 export const updateStore = (storeId, params) => xanyahApi.patch(`stores/${storeId}`, params)
 
-export const getTvaSettings = countryCode => fetch(
-  `https://cors-anywhere.herokuapp.com/https://euvat.ga/api/rate/${countryCode}`,
-  { method: 'get' }
-)
-
 export const updateUserParams = params => xanyahApi.patch('auth', params)
+
+export const getCategories = () => xanyahApi.get('categories')

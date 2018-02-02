@@ -43,6 +43,7 @@ export const validateToken = (successCallback = null, errorCallback = null) =>
         dispatch(updateUserField('email', data.data.email))
         dispatch(updateUserField('firstname', data.data.firstname))
         dispatch(updateUserField('lastname', data.data.lastname))
+        dispatch(updateUserField('locale', data.data.locale))
         if (successCallback) {
           successCallback()
         }

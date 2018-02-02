@@ -6,6 +6,7 @@ export const updateUserParams = (params) =>
     dispatch(updateUserField('loading', true))
     apiPatchUserParams(params)
       .then(({data}) => {
+        //Handle Error
         console.log(data)
         dispatch(updateUserField('loading', false))
       })
