@@ -2,21 +2,10 @@ export const orderCategories = (categories) => {
   if(!categories)
     return []
 
-  const parentCategories = []
-
-  categories
-    .filter(category => category.categoryId === null)
-    .map((category, index) => { parentCategories[index] = category })
-
-  categories
-    .filter(category => category.categoryId !== null)
-    .map((child) => {
-      let parent = categories.find(e => e.id === child.categoryId)
-      if(!parent.children) {
-        parent.children = []
-      }
-      parent.children[parent.children.length] = child
-    })
-
-  return parentCategories
+  return categories
+    .map(category => ({
+      ...category,
+      children: categories.filter(cat => cat.categoryId === category.id)
+    }))
+    .filter(category => !category.categoryId)
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PageContainer from '../page-container'
 
-import { StoreType } from '../../types'
+import { StoreType, CategoryType } from '../../types'
 
 import './styles.scss'
 
@@ -23,22 +23,21 @@ export default class Settings extends React.Component {
 
   componentWillMount() {
     const { currentStore, updateField } = this.props
+    updateField('country', currentStore.country)
     updateField('step', this.steps[0].key)
     updateField('storeName', currentStore.name)
-    updateField('tvaCountry', currentStore.country)
     this.props.getCategories()
   }
 
   renderGeneral() {
-    const { currentStore, storeName, updateField, updateStore } = this.props
-    // const { country } = currentStore
+    const { country, currentStore, storeName, updateField, updateStore } = this.props
     return <form
       className="general"
       onSubmit={e => {
         e.preventDefault()
         updateStore({
           ...currentStore,
-          // country: country,
+          country: country,
           name: storeName.trim(),
         })
       }}
@@ -50,9 +49,9 @@ export default class Settings extends React.Component {
         type="text"
         value={storeName}
       />
-      {/* <select
+      <select
         className='select-locale'
-        onChange={e => updateField('locale', e.target.value)}
+        onChange={e => updateField('country', e.target.value)}
       >
         <option
           value="FR"
@@ -62,7 +61,7 @@ export default class Settings extends React.Component {
           value="EN"
           selected={'EN' === country}
         >EN</option>
-      </select> */}
+      </select>
       <button className="btn-link" type="submit">Save</button>
     </form>
   }
@@ -71,15 +70,15 @@ export default class Settings extends React.Component {
     const { categories } = this.props
 
     if(!categories.length)
-      return <h3>Aucune categorie !</h3>
+      return <h3>Il n'y a aucune catégorie pour le moment !</h3>
     return (
       <div>
         <ul>
-          { categories.map((category, index) => {
-            return (!category.children)
+          { categories.map((category) => {
+            return (!category.children.length)
               ? <li key={category.id}>{category.name}</li>
               : (
-                <ul key={`children_${index}`}>
+                <ul key={category.id}>
                   {category.children.map((child) => {
                     return <li key={child.id}>{child.name}</li>
                   })}
@@ -118,7 +117,8 @@ export default class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  categories: PropTypes.array,
+  categories: PropTypes.arrayOf(CategoryType),
+  country: PropTypes.string,
   currentStore: PropTypes.objectOf(StoreType),
   getCategories: PropTypes.func,
   step: PropTypes.string,
@@ -129,6 +129,7 @@ Settings.propTypes = {
 
 Settings.defaultProps = {
   categories: [],
+  country: '',
   currentStore: {},
   getCategories: () => null,
   step: '',
