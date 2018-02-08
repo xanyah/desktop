@@ -25,6 +25,7 @@ export default class Manufacturer extends React.Component {
             [
               {
                 attribute: 'notes',
+                // type: 'textarea',
                 value: selectedManufacturer.notes,
               },
               {

@@ -16,7 +16,7 @@ export default class Provider extends React.Component {
   }
 
   render() {
-    const { selectedProvider } = this.props
+    const { editing, toggleProvider, selectedProvider } = this.props
     return (
       <PageContainer>
         <h1>{selectedProvider.name}</h1>
@@ -25,15 +25,20 @@ export default class Provider extends React.Component {
             [
               {
                 attribute: 'notes',
+                editable: true,
+                type: 'textarea',
                 value: selectedProvider.notes,
               },
               {
                 attribute: 'createdAt',
+                editable: false,
                 value: selectedProvider.createdAt,
               },
             ],
           ]}
           type="providers"
+          editing={editing}
+          toggleEdit={toggleProvider}
         />
       </PageContainer>
     )
@@ -41,11 +46,15 @@ export default class Provider extends React.Component {
 }
 
 Provider.propTypes = {
+  editing: PropTypes.bool,
   selectedProvider: ProviderType,
   setPageName: PropTypes.func,
+  toggleProvider: PropTypes.func,
 }
 
 Provider.defaultProps = {
+  editing: false,
   selectedProvider: {},
   setPageName: () => null,
+  toggleProvider: () => null,
 }
