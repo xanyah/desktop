@@ -7,3 +7,10 @@ export const signIn = params => xanyahApi.post('auth/sign_in', params)
 export const getProviders = () => xanyahApi.get('providers')
 
 export const getManufacturers = () => xanyahApi.get('manufacturers')
+
+export const getStores = () => xanyahApi.get('stores')
+export const updateStore = (storeId, params) => xanyahApi.patch(`stores/${storeId}`, params)
+
+export const updateUserParams = params => xanyahApi.patch('auth', params)
+
+export const getCategories = () => xanyahApi.get('categories')
