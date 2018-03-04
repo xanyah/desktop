@@ -16,25 +16,36 @@ export default class Manufacturer extends React.Component {
   }
 
   render() {
-    const { selectedManufacturer } = this.props
+    const {
+      editing,
+      toggleManufacturer,
+      selectedManufacturer,
+      updateManufacturerParams,
+    } = this.props
     return (
       <PageContainer>
         <h1>{selectedManufacturer.name}</h1>
         <DataDetails
+          currentEntity={selectedManufacturer}
+          editing={editing}
           formattedData={[
             [
               {
                 attribute: 'notes',
-                // type: 'textarea',
+                editable: true,
+                type: 'textarea',
                 value: selectedManufacturer.notes,
               },
               {
                 attribute: 'createdAt',
+                editable: false,
                 value: selectedManufacturer.createdAt,
               },
             ],
           ]}
+          toggleEdit={toggleManufacturer}
           type="manufacturers"
+          updateEntity={updateManufacturerParams}
         />
       </PageContainer>
     )
@@ -42,11 +53,17 @@ export default class Manufacturer extends React.Component {
 }
 
 Manufacturer.propTypes = {
+  editing: PropTypes.bool,
   selectedManufacturer: ManufacturerType,
   setPageName: PropTypes.func,
+  toggleManufacturer: PropTypes.func,
+  updateManufacturerParams: PropTypes.func,
 }
 
 Manufacturer.defaultProps = {
+  editing: false,
   selectedManufacturer: {},
   setPageName: () => null,
+  toggleManufacturer: () => null,
+  updateManufacturerParams: () => null,
 }

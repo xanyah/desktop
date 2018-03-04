@@ -1,8 +1,17 @@
 import {
   PROVIDERS_UPDATE_FIELD,
+  PROVIDERS_UPDATE_PROVIDER,
 } from '../constants/actions'
 
-import { getProviders as apiGetProviders } from '../utils/api-helper'
+import {
+  getProviders as apiGetProviders,
+  updateProvider as apiPatchProviderParams,
+} from '../utils/api-helper'
+
+export const updateProvider = provider => ({
+  provider,
+  type: PROVIDERS_UPDATE_PROVIDER,
+})
 
 export const updateProviderField = (field, value) => ({
   field,
@@ -20,4 +29,12 @@ export const getProviders = () =>
       })
   }
 
-
+export const updateProviderParams = (id, params) =>
+  dispatch => {
+    dispatch(updateProviderField('loading', true))
+    apiPatchProviderParams(id, params)
+      .then(({ data }) => {
+        dispatch(updateProviderField('loading', false))
+        dispatch(updateProvider(data))
+      })
+  }

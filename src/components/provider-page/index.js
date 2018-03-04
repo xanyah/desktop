@@ -16,11 +16,27 @@ export default class Provider extends React.Component {
   }
 
   render() {
-    const { editing, toggleProvider, selectedProvider } = this.props
+    const {
+      editing,
+      toggleProvider,
+      selectedProvider,
+      updateProviderParams,
+    } = this.props
     return (
-      <PageContainer>
+      <PageContainer
+        // footerElements={(
+      //   <div className="footer">
+      //     {(editing)
+      //       ? <button className="btn-link" onClick={() => toggleProvider()}>Validate</button>
+      //       : <button className="btn-link" onClick={() => toggleProvider()}>Edit</button>
+      //     }
+      //   </div>
+      // )}
+      >
         <h1>{selectedProvider.name}</h1>
         <DataDetails
+          currentEntity={selectedProvider}
+          editing={editing}
           formattedData={[
             [
               {
@@ -36,9 +52,9 @@ export default class Provider extends React.Component {
               },
             ],
           ]}
-          type="providers"
-          editing={editing}
           toggleEdit={toggleProvider}
+          type="providers"
+          updateEntity={updateProviderParams}
         />
       </PageContainer>
     )
@@ -50,6 +66,7 @@ Provider.propTypes = {
   selectedProvider: ProviderType,
   setPageName: PropTypes.func,
   toggleProvider: PropTypes.func,
+  updateProviderParams: PropTypes.func,
 }
 
 Provider.defaultProps = {
@@ -57,4 +74,5 @@ Provider.defaultProps = {
   selectedProvider: {},
   setPageName: () => null,
   toggleProvider: () => null,
+  updateProviderParams: () => null,
 }

@@ -5,64 +5,117 @@ import FormAttribute from '../form-attribute'
 
 import './styles.scss'
 
-const DataDetails = ({
-  children,
-  editing,
-  formattedData,
-  toggleEdit,
-  type,
-}) => (
-  <div className="data-details">
-    {formattedData.map((row, idx) => (
-      <div className="row" key={idx}>
-        { row.map(item => (
-          (item.editable && editing)
-            ? <FormAttribute
-              attribute={item.attribute}
-              key={item.attribute}
-              value={item.value}
-              model={type}
-              type={item.type}
-            />
-            : <ItemAttribute
-              attribute={item.attribute}
-              key={item.attribute}
-              value={item.value}
-              type={type}
-            />
-        ))}
-      </div>
-    ))}
-    {children}
-
-    {(editing)
-      ? <button className="link" onClick={() => toggleEdit()}>Validate</button>
-      : <button className="link" onClick={() => toggleEdit()}>Edit</button>
+export default class DataDetails extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selectedEntity: null,
     }
-  </div>
-)
+  }
+
+  componentWillMount() {
+    this.setState({selectedEntity: this.props.currentEntity})
+  }
+
+  handleUpdate(attribute, value) {
+    this.setState({selectedEntity: {
+      ...this.state.selectedEntity,
+      [attribute]: value.trim(),
+    }})
+  }
+
+  handleCancelUpdate(toggleEdit) {
+    this.setState({selectedEntity: this.props.currentEntity})
+    toggleEdit()
+  }
+
+  render() {
+    const {
+      // children,
+      currentEntity,
+      editing,
+      formattedData,
+      toggleEdit,
+      type,
+      updateEntity,
+    } = this.props
+    return (
+      <div className="data-details">
+        <div className="info">
+          <form
+            onSubmit={e => {
+              console.log('On Submit')
+              e.preventDefault()
+              if(editing)
+                return
+              console.log('Submitting')
+              updateEntity(currentEntity.id, this.state.selectedEntity)
+            }}>
+
+            {formattedData.map((row, idx) => (
+              <div className="row" key={idx}>
+                { row.map(item => (
+                  (item.editable && editing)
+                    ? <FormAttribute
+                      attribute={item.attribute}
+                      key={item.attribute}
+                      value={item.value}
+                      model={type}
+                      type={item.type}
+                      onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+                    />
+                    : <ItemAttribute
+                      attribute={item.attribute}
+                      key={item.attribute}
+                      value={this.state.selectedEntity[item.attribute]}
+                      type={type}
+                    />
+                ))}
+              </div>
+            ))}
+            {(editing)
+              ? (
+                <button className="btn-link" onClick={() => toggleEdit()} type="submit">Validate</button>
+                //{/* <div>
+                //  <button className="btn-link" onClick={() => toggleEdit()} type="submit">Validate</button>
+                //  <button className="btn-link" onClick={() => this.handleCancelUpdate(toggleEdit)}>Cancel</button>
+                //</div> */}
+              )
+              : <button className="btn-link" onClick={() => toggleEdit()}>Edit</button>
+            }
+          </form>
+          {/* {children} */}
+        </div>
+      </div>
+    )
+  }
+}
 
 DataDetails.propTypes = {
   children: PropTypes.element,
+  currentEntity: PropTypes.object,
   editing: PropTypes.bool,
   formattedData: PropTypes.arrayOf(
     PropTypes.arrayOf(
       PropTypes.objectOf({
         attribute: PropTypes.string,
+        editable: PropTypes.bool,
+        type: PropTypes.string,
         value: PropTypes.string,
       })
     )
   ),
   toggleEdit: PropTypes.func,
   type: PropTypes.string,
+  updateEntity: PropTypes.func,
 }
 
 DataDetails.defaultProps = {
   children: null,
+  currentEntity: {},
   editing: false,
   formattedData: [],
   toggleEdit: () => null,
   type: '',
+  updateEntity: () => null,
 }
-
-export default DataDetails

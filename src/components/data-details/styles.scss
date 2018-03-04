@@ -1,12 +1,20 @@
+@import '../../constants/scss/buttons';
+
 .data-details {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
-  .row {
-    align-items: flex-start;
+  .info {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
+    height: 100%;
+
+    .row {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 100%;
+    }
   }
 }
