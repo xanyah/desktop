@@ -24,9 +24,9 @@ export default class Account extends React.Component {
           onSubmit={e => {
             e.preventDefault()
             updateUserParams({
-              'firstname': firstname.trim(),
-              'lastname': lastname.trim(),
-              'locale': locale,
+              firstname: firstname.trim(),
+              lastname: lastname.trim(),
+              locale: locale,
             })
           }}
         >
@@ -76,8 +76,8 @@ export default class Account extends React.Component {
               return null
             }
             updateUserParams({
-              'password': newPassword.trim(),
-              'password_confirmation': confirmNewPassword.trim(),
+              password: newPassword.trim(),
+              password_confirmation: confirmNewPassword.trim(),
             })
           }}
         >

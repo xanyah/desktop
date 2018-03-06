@@ -6,21 +6,17 @@ import FormAttribute from '../form-attribute'
 import './styles.scss'
 
 export default class DataDetails extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      selectedEntity: null,
+      selectedEntity: props.currentEntity,
     }
-  }
-
-  componentWillMount() {
-    this.setState({selectedEntity: this.props.currentEntity})
   }
 
   handleUpdate(attribute, value) {
     this.setState({selectedEntity: {
       ...this.state.selectedEntity,
-      [attribute]: value.trim(),
+      [attribute]: value,
     }})
   }
 
@@ -44,11 +40,9 @@ export default class DataDetails extends React.Component {
         <div className="info">
           <form
             onSubmit={e => {
-              console.log('On Submit')
               e.preventDefault()
               if(editing)
                 return
-              console.log('Submitting')
               updateEntity(currentEntity.id, this.state.selectedEntity)
             }}>
 

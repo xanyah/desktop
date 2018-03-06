@@ -132,7 +132,7 @@ Settings.defaultProps = {
   country: '',
   currentStore: {},
   getCategories: () => null,
-  step: '',
+  step: 'general',
   storeName: '',
   updateField: () => null,
   updateStore: () => null,

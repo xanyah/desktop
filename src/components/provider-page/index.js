@@ -20,7 +20,7 @@ export default class Provider extends React.Component {
       editing,
       toggleProvider,
       selectedProvider,
-      updateProviderParams,
+      updateApiProvider,
     } = this.props
     return (
       <PageContainer
@@ -54,7 +54,7 @@ export default class Provider extends React.Component {
           ]}
           toggleEdit={toggleProvider}
           type="providers"
-          updateEntity={updateProviderParams}
+          updateEntity={updateApiProvider}
         />
       </PageContainer>
     )
@@ -66,7 +66,7 @@ Provider.propTypes = {
   selectedProvider: ProviderType,
   setPageName: PropTypes.func,
   toggleProvider: PropTypes.func,
-  updateProviderParams: PropTypes.func,
+  updateApiProvider: PropTypes.func,
 }
 
 Provider.defaultProps = {
@@ -74,5 +74,5 @@ Provider.defaultProps = {
   selectedProvider: {},
   setPageName: () => null,
   toggleProvider: () => null,
-  updateProviderParams: () => null,
+  updateApiProvider: () => null,
 }

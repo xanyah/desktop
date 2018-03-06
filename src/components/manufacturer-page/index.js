@@ -20,7 +20,7 @@ export default class Manufacturer extends React.Component {
       editing,
       toggleManufacturer,
       selectedManufacturer,
-      updateManufacturerParams,
+      updateApiManufacturer,
     } = this.props
     return (
       <PageContainer>
@@ -45,7 +45,7 @@ export default class Manufacturer extends React.Component {
           ]}
           toggleEdit={toggleManufacturer}
           type="manufacturers"
-          updateEntity={updateManufacturerParams}
+          updateEntity={updateApiManufacturer}
         />
       </PageContainer>
     )
@@ -57,7 +57,7 @@ Manufacturer.propTypes = {
   selectedManufacturer: ManufacturerType,
   setPageName: PropTypes.func,
   toggleManufacturer: PropTypes.func,
-  updateManufacturerParams: PropTypes.func,
+  updateApiManufacturer: PropTypes.func,
 }
 
 Manufacturer.defaultProps = {
@@ -65,5 +65,5 @@ Manufacturer.defaultProps = {
   selectedManufacturer: {},
   setPageName: () => null,
   toggleManufacturer: () => null,
-  updateManufacturerParams: () => null,
+  updateApiManufacturer: () => null,
 }

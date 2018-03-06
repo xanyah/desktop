@@ -23,11 +23,11 @@ export const initialSync = () =>
     Promise.all([
       getProviders(),
       getStores(),
-    ]).then(data => {
-      dispatch(updateProviderField('providers', data[0].data))
-      dispatch(updateStoresField('stores', data[1].data))
-      if (data[1].data.length > 0) {
-        dispatch(updateStoresField('currentStore', data[1].data[0]))
+    ]).then(([ providersResponse, storesResponse ]) => {
+      dispatch(updateProviderField('providers', providersResponse.data))
+      dispatch(updateStoresField('stores', storesResponse.data))
+      if (storesResponse.data.length > 0) {
+        dispatch(updateStoresField('currentStore', storesResponse.data[0]))
       }
     })
   }
