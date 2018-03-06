@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ProviderType } from '../../types'
+import { ProviderType, ProviderFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 
@@ -37,21 +37,7 @@ export default class Provider extends React.Component {
         <DataDetails
           currentEntity={selectedProvider}
           editing={editing}
-          formattedData={[
-            [
-              {
-                attribute: 'notes',
-                editable: true,
-                type: 'textarea',
-                value: selectedProvider.notes,
-              },
-              {
-                attribute: 'createdAt',
-                editable: false,
-                value: selectedProvider.createdAt,
-              },
-            ],
-          ]}
+          formattedData={ProviderFormat}
           toggleEdit={toggleProvider}
           type="providers"
           updateEntity={updateApiProvider}

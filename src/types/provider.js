@@ -6,17 +6,21 @@ export const ProviderType = {
   notes: PropTypes.string,
 }
 
-export const ProviderFormat = {
-  currentEntity:ProviderType,
-  editing:PropTypes.bool,
-  formattedData:PropTypes.object,
-  toggleEdit:PropTypes.func,
-  type:'providers',
-  updateEntity:PropTypes.func,
-}
+export const ProviderFormat = [
+  [
+    {
+      attribute: 'notes',
+      editable: true,
+      type: 'textarea',
+    },
+    {
+      attribute: 'createdAt',
+      editable: false,
+    },
+  ],
+]
 
-export const formatProvider = (provider) => {
-  return Object.assign({}, provider, {
-    notes: provider.notes.trim(),
-  })
-}
+export const formatProvider = (provider) => ({
+  ...provider,
+  notes: provider.notes.trim(),
+})

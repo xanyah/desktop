@@ -95,7 +95,6 @@ DataDetails.propTypes = {
         attribute: PropTypes.string,
         editable: PropTypes.bool,
         type: PropTypes.string,
-        value: PropTypes.string,
       })
     )
   ),

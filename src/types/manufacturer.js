@@ -6,17 +6,21 @@ export const ManufacturerType = {
   notes: PropTypes.string,
 }
 
-export const ManufacturerFormat = {
-  currentEntity:ManufacturerType,
-  editing:PropTypes.bool,
-  formattedData:PropTypes.object,
-  toggleEdit:PropTypes.func,
-  type:'manufacturers',
-  updateEntity:PropTypes.func,
-}
+export const ManufacturerFormat = [
+  [
+    {
+      attribute: 'notes',
+      editable: true,
+      type: 'textarea',
+    },
+    {
+      attribute: 'createdAt',
+      editable: false,
+    },
+  ],
+]
 
-export const formatManufacturer = (manufacturer) => {
-  return Object.assign({}, manufacturer, {
-    notes: manufacturer.notes.trim(),
-  })
-}
+export const formatProvider = (manufacturer) => ({
+  ...manufacturer,
+  notes: manufacturer.notes.trim(),
+})
