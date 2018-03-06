@@ -27,7 +27,7 @@ export default class DataDetails extends React.Component {
 
   render() {
     const {
-      // children,
+      children,
       currentEntity,
       editing,
       formattedData,
@@ -41,8 +41,9 @@ export default class DataDetails extends React.Component {
           <form
             onSubmit={e => {
               e.preventDefault()
-              if(editing)
+              if(!editing)
                 return
+              toggleEdit()
               updateEntity(currentEntity.id, this.state.selectedEntity)
             }}>
 
@@ -53,7 +54,7 @@ export default class DataDetails extends React.Component {
                     ? <FormAttribute
                       attribute={item.attribute}
                       key={item.attribute}
-                      value={item.value}
+                      value={this.state.selectedEntity[item.attribute]}
                       model={type}
                       type={item.type}
                       onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
@@ -69,16 +70,15 @@ export default class DataDetails extends React.Component {
             ))}
             {(editing)
               ? (
-                <button className="btn-link" onClick={() => toggleEdit()} type="submit">Validate</button>
-                //{/* <div>
-                //  <button className="btn-link" onClick={() => toggleEdit()} type="submit">Validate</button>
-                //  <button className="btn-link" onClick={() => this.handleCancelUpdate(toggleEdit)}>Cancel</button>
-                //</div> */}
+                [
+                  <button className="btn-link" type="submit">Validate</button>,
+                  <button className="btn-link" onClick={() => this.handleCancelUpdate(toggleEdit)}>Cancel</button>,
+                ]
               )
               : <button className="btn-link" onClick={() => toggleEdit()}>Edit</button>
             }
           </form>
-          {/* {children} */}
+          {children}
         </div>
       </div>
     )

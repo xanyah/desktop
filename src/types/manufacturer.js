@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types'
 
 export const ManufacturerType = {
+  created_at: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
   notes: PropTypes.string,
+  store_id: PropTypes.string,
+  updated_at: PropTypes.string,
 }
 
 export const ManufacturerFormat = [
@@ -16,11 +19,13 @@ export const ManufacturerFormat = [
     {
       attribute: 'createdAt',
       editable: false,
+      type: 'date',
     },
   ],
 ]
 
 export const formatProvider = (manufacturer) => ({
   ...manufacturer,
+  name: manufacturer.name.trim(),
   notes: manufacturer.notes.trim(),
 })

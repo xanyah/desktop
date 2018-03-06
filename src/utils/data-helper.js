@@ -12,18 +12,21 @@ export const getFormElement = (item) => {
   case 'textarea': return (
     <textarea
       onChange={e =>item.onUpdate(item.attribute, e.target.value)}
+      value={item.value}
       name={item.attribute}>
     </textarea>
   )
   case 'number': return (
     <input
       onChange={e => item.onUpdate(item.attribute, e.target.value)}
+      value={item.value}
       name={item.attribute}
       type="number"/>
   )
   case 'string': return (
     <input
       onChange={e => item.onUpdate(item.attribute, e.target.value)}
+      value={item.value}
       name={item.attribute}
       type="text"/>
   )
