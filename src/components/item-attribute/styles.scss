@@ -8,13 +8,13 @@
   width: 100%;
 
   label {
-    color: $secondaryBlueText;
+    color: $secondary-text-color;
     font-size: 0.8rem;
     text-transform: uppercase;
   }
 
   > div {
-    color: $darkBlue;
+    color: $primary-text-color;
     font-size: 1rem;
     font-weight: 500;
     margin-top: 10px;
