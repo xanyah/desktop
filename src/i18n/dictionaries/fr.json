@@ -56,6 +56,18 @@
   },
   "routes": {
     "providers": "Fournisseurs",
-    "manufacturers": "Fabricants"
+    "manufacturers": "Fabricants",
+    "settings": "Paramètres",
+    "account": "Mon compte"
+  },
+  "account": {
+    "form": {
+      "first": {
+        "title": "Modification de vos informations personnelles"
+      },
+      "second": {
+        "title": "Modification du Mot de Passe"
+      }
+    }
   }
 }

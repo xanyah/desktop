@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ManufacturerType } from '../../types'
+import { ManufacturerType, ManufacturerFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 
@@ -16,24 +16,22 @@ export default class Manufacturer extends React.Component {
   }
 
   render() {
-    const { selectedManufacturer } = this.props
+    const {
+      editing,
+      toggleManufacturer,
+      selectedManufacturer,
+      updateApiManufacturer,
+    } = this.props
     return (
       <PageContainer>
         <h1>{selectedManufacturer.name}</h1>
         <DataDetails
-          formattedData={[
-            [
-              {
-                attribute: 'notes',
-                value: selectedManufacturer.notes,
-              },
-              {
-                attribute: 'createdAt',
-                value: selectedManufacturer.createdAt,
-              },
-            ],
-          ]}
+          currentEntity={selectedManufacturer}
+          editing={editing}
+          formattedData={ManufacturerFormat}
+          toggleEdit={toggleManufacturer}
           type="manufacturers"
+          updateEntity={updateApiManufacturer}
         />
       </PageContainer>
     )
@@ -41,11 +39,17 @@ export default class Manufacturer extends React.Component {
 }
 
 Manufacturer.propTypes = {
+  editing: PropTypes.bool,
   selectedManufacturer: ManufacturerType,
   setPageName: PropTypes.func,
+  toggleManufacturer: PropTypes.func,
+  updateApiManufacturer: PropTypes.func,
 }
 
 Manufacturer.defaultProps = {
+  editing: false,
   selectedManufacturer: {},
   setPageName: () => null,
+  toggleManufacturer: () => null,
+  updateApiManufacturer: () => null,
 }
