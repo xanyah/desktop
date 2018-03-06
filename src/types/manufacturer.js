@@ -24,7 +24,7 @@ export const ManufacturerFormat = [
   ],
 ]
 
-export const formatProvider = (manufacturer) => ({
+export const formatManufacturer = (manufacturer) => ({
   ...manufacturer,
   name: manufacturer.name.trim(),
   notes: manufacturer.notes.trim(),

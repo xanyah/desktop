@@ -8,3 +8,8 @@ export const StoreType = {
   name: PropTypes.string,
   notes: PropTypes.string,
 }
+
+export const formatStore = (store) => ({
+  ...store,
+  name: store.name.trim(),
+})

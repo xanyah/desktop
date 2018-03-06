@@ -10,7 +10,7 @@ const mapStateToProps = ({ manufacturers: { editing, selectedManufacturer } }) =
 const mapDispatchToProps = dispatch => ({
   dispatch,
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
-  updateApiManufacturer: (id,params) => dispatch(updateApiManufacturer(id,params)),
+  updateApiManufacturer: newManufacturer => dispatch(updateApiManufacturer(newManufacturer)),
   updateManufacturerField: (field,value) => dispatch(updateManufacturerField(field,value)),
 })
 

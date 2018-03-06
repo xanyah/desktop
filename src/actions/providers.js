@@ -8,7 +8,7 @@ import {
   updateProvider as apiPatchProviderParams,
 } from '../utils/api-helper'
 
-import { formatProvider } from '../types/provider'
+import { formatProvider } from '../types'
 
 export const updateProvider = provider => ({
   provider,
@@ -31,11 +31,11 @@ export const getProviders = () =>
       })
   }
 
-export const updateApiProvider = (id, params) =>
+export const updateApiProvider = newProvider =>
   dispatch => {
-    params = formatProvider(params)
+    newProvider = formatProvider(newProvider)
     dispatch(updateProviderField('loading', true))
-    apiPatchProviderParams(id, params)
+    apiPatchProviderParams(newProvider.id, newProvider)
       .then(({ data }) => {
         dispatch(updateProviderField('loading', false))
         dispatch(updateProvider(data))

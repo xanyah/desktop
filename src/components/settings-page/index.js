@@ -38,7 +38,7 @@ export default class Settings extends React.Component {
         updateStore({
           ...currentStore,
           country: country,
-          name: storeName.trim(),
+          name: storeName,
         })
       }}
     >

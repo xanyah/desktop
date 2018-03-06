@@ -10,7 +10,7 @@ const mapStateToProps = ({ providers: { editing, selectedProvider } }) => ({
 const mapDispatchToProps = dispatch => ({
   dispatch,
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
-  updateApiProvider: (id,params) => dispatch(updateApiProvider(id,params)),
+  updateApiProvider: newProvider => dispatch(updateApiProvider(newProvider)),
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

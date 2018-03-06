@@ -28,7 +28,6 @@ export default class DataDetails extends React.Component {
   render() {
     const {
       children,
-      currentEntity,
       editing,
       formattedData,
       toggleEdit,
@@ -44,7 +43,7 @@ export default class DataDetails extends React.Component {
               if(!editing)
                 return
               toggleEdit()
-              updateEntity(currentEntity.id, this.state.selectedEntity)
+              updateEntity(this.state.selectedEntity)
             }}>
 
             {formattedData.map((row, idx) => (

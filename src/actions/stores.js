@@ -3,6 +3,8 @@ import {
   STORES_UPDATE_STORE,
 } from '../constants/actions'
 
+import { formatStore } from '../types'
+
 import {
   updateStore as updateApiStore,
 } from '../utils/api-helper'
@@ -26,6 +28,7 @@ export const updateSingleStore = store => ({
 
 export const updateStore = newStore =>
   dispatch => {
+    newStore = formatStore(newStore)
     updateApiStore(newStore.id, newStore)
       .then(({ data }) => {
         dispatch(updateSingleStore(data))

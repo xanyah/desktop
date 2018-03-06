@@ -8,7 +8,7 @@ import {
   updateManufacturer as apiPatchManufacturerParams,
 } from '../utils/api-helper'
 
-import { formatManufacturer } from '../types/manufacturer'
+import { formatManufacturer } from '../types'
 
 export const updateManufacturer = manufacturer => ({
   manufacturer,
@@ -31,11 +31,11 @@ export const getManufacturers = () =>
       })
   }
 
-export const updateApiManufacturer = (id, params) =>
+export const updateApiManufacturer = newManufacturer =>
   dispatch => {
-    params = formatManufacturer(params)
+    newManufacturer = formatManufacturer(newManufacturer)
     dispatch(updateManufacturerField('loading', true))
-    apiPatchManufacturerParams(id, params)
+    apiPatchManufacturerParams(newManufacturer.id, newManufacturer)
       .then(({ data }) => {
         dispatch(updateManufacturerField('loading', false))
         dispatch(updateManufacturer(data))
