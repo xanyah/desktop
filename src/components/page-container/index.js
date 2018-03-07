@@ -8,7 +8,7 @@ import { getCurrentRoute, getParentRoute } from '../../utils/router-helper'
 
 import './styles.scss'
 
-const PageContainer = ({ children, currentNavigationStep, footerElements, location }) => {
+const PageContainer = ({ children, currentNavigationStep, location }) => {
   const currentRoute = getCurrentRoute(location.pathname)
   const parentRoute = getParentRoute(location.pathname)
 
@@ -38,9 +38,7 @@ const PageContainer = ({ children, currentNavigationStep, footerElements, locati
       <div className="content">
         {children}
       </div>
-      <div className="footer">
-        {footerElements}
-      </div>
+      <div className="footer"></div>
     </div>
   )
 }
@@ -50,13 +48,12 @@ export default withRouter(PageContainer)
 PageContainer.propTypes = {
   children: PropTypes.element,
   currentNavigationStep: PropTypes.string,
-  footerElements: PropTypes.element,
   location: PropTypes.object,
 }
 
 PageContainer.defaultProps = {
   children: null,
   currentNavigationStep: '',
-  footerElements: null,
   location: {},
 }
+

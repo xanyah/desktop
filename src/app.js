@@ -18,7 +18,7 @@ import store from './store'
 
 import translations from './i18n'
 
-import { initialSync, validateToken } from './actions'
+import { validateToken } from './actions'
 
 import { routes } from './constants'
 
@@ -30,10 +30,7 @@ class App extends React.Component {
     store.dispatch(loadTranslations(translations))
     store.dispatch(setLocale(ipcRenderer.sendSync('get-locale')))
     store.dispatch(validateToken(
-      () => {
-        store.dispatch(initialSync())
-        store.dispatch(push('/home'))
-      },
+      () => store.dispatch(push('/home')),
       () => store.dispatch(push('/sign-in'))
     ))
   }

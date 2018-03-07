@@ -3,7 +3,6 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 
   .header {
     align-items: center;
@@ -29,16 +28,16 @@
       .breadcrumb {
         font-size: 2rem;
         font-weight: 500;
-        color: $primary-text-color;
+        color: $darkBlue;
 
         &.inactive {
-          color: $secondary-text-color;
+          color: $secondaryBlueText;
           text-decoration: none;
         }
       }
 
       .arrow {
-        color: $secondary-text-color;
+        color: $secondaryBlueText;
         margin: 0 20px;
       }
     }
@@ -49,13 +48,10 @@
   }
 
   .content {
-    display: flex;
-    flex-grow: 1;
     padding: 0 90px;
   }
 
   .footer {
-    text-align: right;
-    background-color: #FAFAFA
+
   }
 }

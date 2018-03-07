@@ -5,7 +5,7 @@ import {
   signIn as apiSignIn,
   validateToken as apiValidateToken,
 } from '../utils/api-helper'
-import { initialSync, updateUserField } from './index'
+import { updateUserField } from './index'
 
 export const updateAuthField = (field, value) => ({
   field,
@@ -23,8 +23,6 @@ export const signIn = (email, password, successCallback = null) =>
         dispatch(updateUserField('email', data.data.email))
         dispatch(updateUserField('firstname', data.data.firstname))
         dispatch(updateUserField('lastname', data.data.lastname))
-        dispatch(updateUserField('locale', data.data.locale))
-        dispatch(initialSync())
         if (successCallback) {
           successCallback()
         }
@@ -43,7 +41,6 @@ export const validateToken = (successCallback = null, errorCallback = null) =>
         dispatch(updateUserField('email', data.data.email))
         dispatch(updateUserField('firstname', data.data.firstname))
         dispatch(updateUserField('lastname', data.data.lastname))
-        dispatch(updateUserField('locale', data.data.locale))
         if (successCallback) {
           successCallback()
         }

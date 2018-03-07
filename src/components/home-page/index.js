@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
+import { Translate } from 'react-redux-i18n'
 
 import HomeLink from '../home-link'
 
@@ -17,8 +16,8 @@ const Home = ({ firstname }) => (
         <Translate value={`home.welcome.${getGreetingTime()}`} firstname={firstname} />
       </h1>
       <div className="settings">
-        <Link to="/account">U</Link>
-        <Link to="/settings">R</Link>
+        <span>U</span>
+        <span>R</span>
       </div>
     </div>
     <div className="links-container">
