@@ -56,18 +56,6 @@
   },
   "routes": {
     "providers": "Providers",
-    "manufacturers": "Manufacturers",
-    "settings": "Settings",
-    "account": "My account"
-  },
-  "account": {
-    "form": {
-      "first": {
-        "title": "Change your personal informations"
-      },
-      "second": {
-        "title": "Change your password"
-      }
-    }
+    "manufacturers": "Manufacturers"
   }
 }

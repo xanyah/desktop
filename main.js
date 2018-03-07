@@ -25,7 +25,6 @@ function createWindow() {
     show: false,
     title: 'Xanyah',
     titleBarStyle: 'hiddenInset',
-    webPreference: { webSecurity: false },
     width: 1340,
   })
 

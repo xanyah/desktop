@@ -9,9 +9,9 @@
 
   .link {
     align-items: center;
-    background-color: $primary-white;
+    background-color: $white;
     border-radius: 16px;
-    box-shadow: 0 0 8px 0 $primary-white;
+    box-shadow: 0 0 8px 0 $white;
     display: flex;
     height: 140px;
     overflow: hidden;
@@ -28,13 +28,13 @@
     }
 
     h2 {
-      color: $blue-color;
+      color: $blueText;
       font-size: $title;
       margin: 0;
     }
 
     h3 {
-      color: $secondary-text-color;
+      color: $secondaryBlueText;
       font-size: $subtitle;
       font-weight: normal;
       margin: 0;
@@ -43,7 +43,7 @@
     }
 
     &:hover {
-      box-shadow: 0 0 20px 0 $primary-white;
+      box-shadow: 0 0 20px 0 $white;
     }
   }
 }

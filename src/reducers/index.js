@@ -6,18 +6,16 @@ import auth from './auth'
 import global from './global'
 import manufacturers from './manufacturers'
 import providers from './providers'
-import settings from './settings'
-import stores from './stores'
 import user from './user'
 
-export default combineReducers({
+const rootReducer = combineReducers({
   auth,
   global,
   i18n,
   manufacturers,
   providers,
   router,
-  settings,
-  stores,
   user,
 })
+
+export default rootReducer
