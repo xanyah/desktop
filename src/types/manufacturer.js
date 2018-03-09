@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
 
 export const ManufacturerType = {
-  created_at: PropTypes.string,
+  createdAt: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
   notes: PropTypes.string,
-  store_id: PropTypes.string,
-  updated_at: PropTypes.string,
+  storeId: PropTypes.string,
+  updatedAt: PropTypes.string,
 }
 
-export const ManufacturerFormat = [
+export const manufacturerFormat = [
   [
     {
       attribute: 'notes',

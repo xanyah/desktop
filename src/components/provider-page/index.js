@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ProviderType, ProviderFormat } from '../../types'
+import { ProviderType, providerFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 
@@ -37,7 +37,7 @@ export default class Provider extends React.Component {
         <DataDetails
           currentEntity={selectedProvider}
           editing={editing}
-          formattedData={ProviderFormat}
+          formattedData={providerFormat}
           toggleEdit={toggleProvider}
           type="providers"
           updateEntity={updateApiProvider}

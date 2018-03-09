@@ -4,6 +4,7 @@ import {
 } from '../constants/actions'
 
 import { formatStore } from '../types'
+import { I18n } from 'react-redux-i18n'
 
 import {
   updateStore as updateApiStore,
@@ -32,8 +33,7 @@ export const updateStore = newStore =>
     updateApiStore(newStore.id, newStore)
       .then(({ data }) => {
         dispatch(updateSingleStore(data))
-        // TODO: i18n
-        showSuccessToast('Updated')
+        showSuccessToast(I18n.t('toast.updated'))
       })
       .catch(e => showErrorToast(e))
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ManufacturerType, ManufacturerFormat } from '../../types'
+import { ManufacturerType, manufacturerFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 
@@ -28,7 +28,7 @@ export default class Manufacturer extends React.Component {
         <DataDetails
           currentEntity={selectedManufacturer}
           editing={editing}
-          formattedData={ManufacturerFormat}
+          formattedData={manufacturerFormat}
           toggleEdit={toggleManufacturer}
           type="manufacturers"
           updateEntity={updateApiManufacturer}

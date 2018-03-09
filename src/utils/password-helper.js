@@ -1,6 +1,8 @@
+import { I18n } from 'react-redux-i18n'
+
 export const errorHandler = {
-  1: 'Le nouveau mot de passe et sa confirmation ne sont pas égaux',
-  2: 'La longueur du mot de passe doit être supérieur à 8',
+  1: I18n.t('password-helper.tips.same-confirm'),
+  2: I18n.t('password-helper.tips.length'),
 }
 
 export const verifyPassword = (password, confirmPassword) => {
