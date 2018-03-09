@@ -77,7 +77,8 @@
     "form": {
       "buttons": {
         "submit": "Valider",
-        "cancel": "Annuler"
+        "cancel": "Annuler",
+        "edit": "Modifier"
       }
     }
   },

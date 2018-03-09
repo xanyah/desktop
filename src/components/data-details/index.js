@@ -89,7 +89,14 @@ export default class DataDetails extends React.Component {
                   </button>,
                 ]
               )
-              : <button className="btn-link" onClick={() => toggleEdit()}>Edit</button>
+              : (
+                <button
+                  className="btn-link"
+                  onClick={() => toggleEdit()}
+                >
+                  <Translate value={'data-details.form.buttons.edit'}/>
+                </button>
+              )
             }
           </form>
           {children}
