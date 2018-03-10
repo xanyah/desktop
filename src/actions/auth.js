@@ -5,7 +5,7 @@ import {
   signIn as apiSignIn,
   validateToken as apiValidateToken,
 } from '../utils/api-helper'
-import { updateUserField } from './index'
+import { initialSync, updateUserField } from './index'
 
 export const updateAuthField = (field, value) => ({
   field,
@@ -17,12 +17,14 @@ export const signIn = (email, password, successCallback = null) =>
   dispatch => {
     dispatch(updateAuthField('loading', true))
     apiSignIn({email, password})
-      .then(({ data }) => {
+      .then(({data: { data } }) => {
         dispatch(updateAuthField('loading', false))
         dispatch(updateAuthField('signedIn', true))
-        dispatch(updateUserField('email', data.data.email))
-        dispatch(updateUserField('firstname', data.data.firstname))
-        dispatch(updateUserField('lastname', data.data.lastname))
+        dispatch(updateUserField('email', data.email))
+        dispatch(updateUserField('firstname', data.firstname))
+        dispatch(updateUserField('lastname', data.lastname))
+        dispatch(updateUserField('locale', data.locale))
+        dispatch(initialSync())
         if (successCallback) {
           successCallback()
         }
@@ -36,11 +38,12 @@ export const signIn = (email, password, successCallback = null) =>
 export const validateToken = (successCallback = null, errorCallback = null) =>
   dispatch =>
     apiValidateToken()
-      .then(({ data }) => {
+      .then(({data: { data } }) => {
         dispatch(updateAuthField('signedIn', true))
-        dispatch(updateUserField('email', data.data.email))
-        dispatch(updateUserField('firstname', data.data.firstname))
-        dispatch(updateUserField('lastname', data.data.lastname))
+        dispatch(updateUserField('email', data.email))
+        dispatch(updateUserField('firstname', data.firstname))
+        dispatch(updateUserField('lastname', data.lastname))
+        dispatch(updateUserField('locale', data.locale))
         if (successCallback) {
           successCallback()
         }

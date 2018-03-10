@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ProviderType } from '../../types'
+import { ProviderType, providerFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 
@@ -16,24 +16,31 @@ export default class Provider extends React.Component {
   }
 
   render() {
-    const { selectedProvider } = this.props
+    const {
+      editing,
+      toggleProvider,
+      selectedProvider,
+      updateApiProvider,
+    } = this.props
     return (
-      <PageContainer>
+      <PageContainer
+        // footerElements={(
+      //   <div className="footer">
+      //     {(editing)
+      //       ? <button className="btn-link" onClick={() => toggleProvider()}>Validate</button>
+      //       : <button className="btn-link" onClick={() => toggleProvider()}>Edit</button>
+      //     }
+      //   </div>
+      // )}
+      >
         <h1>{selectedProvider.name}</h1>
         <DataDetails
-          formattedData={[
-            [
-              {
-                attribute: 'notes',
-                value: selectedProvider.notes,
-              },
-              {
-                attribute: 'createdAt',
-                value: selectedProvider.createdAt,
-              },
-            ],
-          ]}
+          currentEntity={selectedProvider}
+          editing={editing}
+          formattedData={providerFormat}
+          toggleEdit={toggleProvider}
           type="providers"
+          updateEntity={updateApiProvider}
         />
       </PageContainer>
     )
@@ -41,11 +48,17 @@ export default class Provider extends React.Component {
 }
 
 Provider.propTypes = {
+  editing: PropTypes.bool,
   selectedProvider: ProviderType,
   setPageName: PropTypes.func,
+  toggleProvider: PropTypes.func,
+  updateApiProvider: PropTypes.func,
 }
 
 Provider.defaultProps = {
+  editing: false,
   selectedProvider: {},
   setPageName: () => null,
+  toggleProvider: () => null,
+  updateApiProvider: () => null,
 }

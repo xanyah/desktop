@@ -56,6 +56,36 @@
   },
   "routes": {
     "providers": "Providers",
-    "manufacturers": "Manufacturers"
+    "manufacturers": "Manufacturers",
+    "settings": "Settings",
+    "account": "My account"
+  },
+  "account": {
+    "form": {
+      "first": {
+        "title": "Change your personal informations"
+      },
+      "second": {
+        "title": "Change your password"
+      }
+    }
+  },
+  "toast": {
+    "updated": "Updated"
+  },
+  "data-details": {
+    "form": {
+      "buttons": {
+        "submit": "Validate",
+        "cancel": "Cancel",
+        "edit": "Edit"
+      }
+    }
+  },
+  "password-helper": {
+    "tips": {
+      "same-confirm": "Password does not match the confirm password",
+      "length": "Minimum password lenght is 8"
+    }
   }
 }

@@ -56,6 +56,36 @@
   },
   "routes": {
     "providers": "Fournisseurs",
-    "manufacturers": "Fabricants"
+    "manufacturers": "Fabricants",
+    "settings": "Paramètres",
+    "account": "Mon compte"
+  },
+  "account": {
+    "form": {
+      "first": {
+        "title": "Modification de vos informations personnelles"
+      },
+      "second": {
+        "title": "Modification du Mot de Passe"
+      }
+    }
+  },
+  "toast": {
+    "updated": "Mis à jour"
+  },
+  "data-details": {
+    "form": {
+      "buttons": {
+        "submit": "Valider",
+        "cancel": "Annuler",
+        "edit": "Modifier"
+      }
+    }
+  },
+  "password-helper": {
+    "tips": {
+      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas",
+      "length": "La longueur du mot de passe doit être supérieur à 8"
+    }
   }
 }

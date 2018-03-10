@@ -78,7 +78,9 @@
     "webpack-dev-server": "^2.4.5",
     "webpack-target-electron-renderer": "^0.4.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "toastedjs": "^0.0.2"
+  },
   "build": {
     "appId": "io.xanyah.desktop",
     "directories": {
