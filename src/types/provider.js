@@ -12,10 +12,17 @@ export const ProviderType = {
 export const providerFormat = [
   [
     {
+      attribute: 'name',
+      editable: true,
+      type: 'string',
+    },
+    {
       attribute: 'notes',
       editable: true,
       type: 'textarea',
     },
+  ],
+  [
     {
       attribute: 'createdAt',
       editable: false,

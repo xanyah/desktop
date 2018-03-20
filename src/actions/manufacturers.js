@@ -3,10 +3,17 @@ import {
   MANUFACTURERS_UPDATE_FIELD,
 } from '../constants/actions'
 
+import { I18n } from 'react-redux-i18n'
+
 import {
   getManufacturers as apiGetManufacturers,
   updateManufacturer as apiPatchManufacturerParams,
+  createManufacturer as apiPostManufacturer,
 } from '../utils/api-helper'
+
+import {
+  showSuccessToast,
+} from '../utils/notification-helper'
 
 import { formatManufacturer } from '../types'
 
@@ -31,13 +38,31 @@ export const getManufacturers = () =>
       })
   }
 
-export const updateApiManufacturer = newManufacturer =>
+export const updateApiManufacturer = updatedManufacturer =>
   dispatch => {
-    newManufacturer = formatManufacturer(newManufacturer)
+    updatedManufacturer = formatManufacturer(updatedManufacturer)
     dispatch(updateManufacturerField('loading', true))
-    apiPatchManufacturerParams(newManufacturer.id, newManufacturer)
+    apiPatchManufacturerParams(updatedManufacturer.id, updatedManufacturer)
       .then(({ data }) => {
         dispatch(updateManufacturerField('loading', false))
         dispatch(updateManufacturer(data))
+        showSuccessToast(I18n.t('toast.updated'))
       })
+  }
+
+//TODO update currentManufacturer ? after creation ?
+export const createApiManufacturer = newManufacturer =>
+  (dispatch, currentState) => {
+    const state = currentState()
+
+    if(state && state.stores && state.stores.currentStore) {
+      const storeId = state.stores.currentStore.id
+      newManufacturer = formatManufacturer(newManufacturer)
+      dispatch(updateManufacturerField('loading', true))
+      apiPostManufacturer({...newManufacturer, storeId})
+        .then(({ data }) => {
+          dispatch(updateManufacturerField('loading', false))
+          dispatch(updateManufacturer(data))
+        })
+    }
   }

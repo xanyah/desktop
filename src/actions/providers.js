@@ -3,10 +3,17 @@ import {
   PROVIDERS_UPDATE_PROVIDER,
 } from '../constants/actions'
 
+import { I18n } from 'react-redux-i18n'
+
 import {
   getProviders as apiGetProviders,
   updateProvider as apiPatchProviderParams,
+  createProvider as apiPostProvider,
 } from '../utils/api-helper'
+
+import {
+  showSuccessToast,
+} from '../utils/notification-helper'
 
 import { formatProvider } from '../types'
 
@@ -31,13 +38,30 @@ export const getProviders = () =>
       })
   }
 
-export const updateApiProvider = newProvider =>
+export const updateApiProvider = updatedProvider =>
   dispatch => {
-    newProvider = formatProvider(newProvider)
+    updatedProvider = formatProvider(updatedProvider)
     dispatch(updateProviderField('loading', true))
-    apiPatchProviderParams(newProvider.id, newProvider)
+    apiPatchProviderParams(updatedProvider.id, updatedProvider)
       .then(({ data }) => {
         dispatch(updateProviderField('loading', false))
         dispatch(updateProvider(data))
+        showSuccessToast(I18n.t('toast.updated'))
       })
+  }
+
+export const createApiProvider = newProvider =>
+  (dispatch, currentState) => {
+    const state = currentState()
+
+    if(state && state.stores && state.stores.currentStore) {
+      const storeId = state.stores.currentStore.id
+      newProvider = formatProvider(newProvider)
+      dispatch(updateProviderField('loading', true))
+      apiPostProvider({...newProvider, storeId})
+        .then(({ data }) => {
+          dispatch(updateProviderField('loading', false))
+          dispatch(updateProvider(data))
+        })
+    }
   }

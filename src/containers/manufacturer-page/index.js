@@ -1,5 +1,10 @@
 import { connect } from 'react-redux'
-import { updateGlobalField, updateManufacturerField, updateApiManufacturer } from '../../actions'
+import {
+  createApiManufacturer,
+  updateGlobalField,
+  updateManufacturerField,
+  updateApiManufacturer,
+} from '../../actions'
 import ManufacturerPage from '../../components/manufacturer-page'
 
 const mapStateToProps = ({ manufacturers: { editing, selectedManufacturer } }) => ({
@@ -8,9 +13,13 @@ const mapStateToProps = ({ manufacturers: { editing, selectedManufacturer } }) =
 })
 
 const mapDispatchToProps = dispatch => ({
+  createApiManufacturer: newManufacturer => dispatch(createApiManufacturer(newManufacturer)),
   dispatch,
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
-  updateApiManufacturer: newManufacturer => dispatch(updateApiManufacturer(newManufacturer)),
+  updateApiManufacturer: updatedManufacturer => {
+    dispatch(updateApiManufacturer(updatedManufacturer))
+    dispatch(updateGlobalField('currentNavigationStep', updateApiManufacturer.name))
+  },
   updateManufacturerField: (field,value) => dispatch(updateManufacturerField(field,value)),
 })
 
