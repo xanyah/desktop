@@ -6,11 +6,14 @@ export const validateToken = () => xanyahApi.get('auth/validate_token')
 
 export const signIn = params => xanyahApi.post('auth/sign_in', params)
 
+// Inventories API Calls
+
+export const getInventories = params => xanyahApi.get('inventories', params)
 
 // Providers API Calls
 
 export const getProviders = () => xanyahApi.get('providers')
-export const updateProvider = (providerId, params )=>
+export const updateProvider = (providerId, params) =>
   xanyahApi.patch(`providers/${providerId}`, params)
 
 export const createProvider = (newProvider) =>

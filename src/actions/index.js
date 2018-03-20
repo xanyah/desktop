@@ -1,6 +1,7 @@
 export * from './account'
 export * from './auth'
 export * from './global'
+export * from './inventories'
 export * from './manufacturers'
 export * from './providers'
 export * from './settings'
