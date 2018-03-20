@@ -17,24 +17,17 @@ export default class Provider extends React.Component {
 
   render() {
     const {
+      createApiProvider,
       editing,
       toggleProvider,
       selectedProvider,
       updateApiProvider,
     } = this.props
     return (
-      <PageContainer
-        // footerElements={(
-      //   <div className="footer">
-      //     {(editing)
-      //       ? <button className="btn-link" onClick={() => toggleProvider()}>Validate</button>
-      //       : <button className="btn-link" onClick={() => toggleProvider()}>Edit</button>
-      //     }
-      //   </div>
-      // )}
-      >
+      <PageContainer>
         <h1>{selectedProvider.name}</h1>
         <DataDetails
+          createEntity={createApiProvider}
           currentEntity={selectedProvider}
           editing={editing}
           formattedData={providerFormat}
@@ -48,6 +41,7 @@ export default class Provider extends React.Component {
 }
 
 Provider.propTypes = {
+  createApiProvider: PropTypes.func,
   editing: PropTypes.bool,
   selectedProvider: ProviderType,
   setPageName: PropTypes.func,
@@ -56,6 +50,7 @@ Provider.propTypes = {
 }
 
 Provider.defaultProps = {
+  createApiProvider: () => null,
   editing: false,
   selectedProvider: {},
   setPageName: () => null,

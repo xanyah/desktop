@@ -17,6 +17,7 @@ export default class Manufacturer extends React.Component {
 
   render() {
     const {
+      createApiManufacturer,
       editing,
       toggleManufacturer,
       selectedManufacturer,
@@ -26,6 +27,7 @@ export default class Manufacturer extends React.Component {
       <PageContainer>
         <h1>{selectedManufacturer.name}</h1>
         <DataDetails
+          createEntity={createApiManufacturer}
           currentEntity={selectedManufacturer}
           editing={editing}
           formattedData={manufacturerFormat}
@@ -39,6 +41,7 @@ export default class Manufacturer extends React.Component {
 }
 
 Manufacturer.propTypes = {
+  createApiManufacturer: PropTypes.func,
   editing: PropTypes.bool,
   selectedManufacturer: ManufacturerType,
   setPageName: PropTypes.func,
@@ -47,6 +50,7 @@ Manufacturer.propTypes = {
 }
 
 Manufacturer.defaultProps = {
+  createApiManufacturer: () => null,
   editing: false,
   selectedManufacturer: {},
   setPageName: () => null,

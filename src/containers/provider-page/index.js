@@ -1,5 +1,10 @@
 import { connect } from 'react-redux'
-import { updateGlobalField, updateProviderField, updateApiProvider } from '../../actions'
+import {
+  createApiProvider,
+  updateGlobalField,
+  updateProviderField,
+  updateApiProvider,
+} from '../../actions'
 import ProviderPage from '../../components/provider-page'
 
 const mapStateToProps = ({ providers: { editing, selectedProvider } }) => ({
@@ -8,9 +13,14 @@ const mapStateToProps = ({ providers: { editing, selectedProvider } }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  createApiProvider: newProvider => dispatch(createApiProvider(newProvider)),
   dispatch,
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
-  updateApiProvider: newProvider => dispatch(updateApiProvider(newProvider)),
+  updateApiProvider: updatedProvider => {
+    dispatch(updateApiProvider(updatedProvider))
+    dispatch(updateGlobalField('currentNavigationStep', updatedProvider.name))
+  },
+  updateProviderField: (field,value) => dispatch(updateProviderField(field,value)),
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({

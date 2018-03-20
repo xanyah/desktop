@@ -42,12 +42,14 @@
   },
   "models": {
     "providers": {
+      "create": "Create a provider",
       "name": "Name",
       "notes": "Notes",
       "createdAt": "Date of creation",
       "open": "Open provider"
     },
     "manufacturers": {
+      "create": "Create a manufacturer",
       "name": "Name",
       "notes": "Notes",
       "createdAt": "Date of creation",
@@ -78,6 +80,7 @@
       "buttons": {
         "submit": "Validate",
         "cancel": "Cancel",
+        "create": "Create",
         "edit": "Edit"
       }
     }

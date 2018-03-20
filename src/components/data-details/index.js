@@ -16,10 +16,12 @@ export default class DataDetails extends React.Component {
   }
 
   handleUpdate(attribute, value) {
-    this.setState({selectedEntity: {
-      ...this.state.selectedEntity,
-      [attribute]: value,
-    }})
+    this.setState({
+      selectedEntity: {
+        ...this.state.selectedEntity,
+        [attribute]: value,
+      },
+    })
   }
 
   handleCancelUpdate(toggleEdit) {
@@ -27,7 +29,60 @@ export default class DataDetails extends React.Component {
     toggleEdit()
   }
 
-  render() {
+  renderCreate() {
+    const {
+      children,
+      createEntity,
+      formattedData,
+      toggleEdit,
+      type,
+    } = this.props
+    const { selectedEntity } = this.state
+
+    return (
+      <div className="data-details">
+        <div className="info">
+          <form
+            onSubmit={e => {
+              e.preventDefault()
+              toggleEdit()
+              createEntity(selectedEntity)
+            }}>
+
+            {formattedData.map((row, idx) => (
+              <div className="row" key={idx}>
+                { row.map(item => (
+                  (item.editable)
+                    &&
+                    <FormAttribute
+                      attribute={item.attribute}
+                      key={item.attribute}
+                      value={selectedEntity[item.attribute]}
+                      model={type}
+                      type={item.type}
+                      onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+                    />
+                ))}
+              </div>
+            ))}
+            {
+              (
+                <button
+                  className="btn-link"
+                  key="btn-submit"
+                >
+                  <Translate value={'data-details.form.buttons.create'}/>
+                </button>
+              )
+            }
+          </form>
+          {children}
+        </div>
+      </div>
+    )
+  }
+
+  renderUpdate() {
     const {
       children,
       editing,
@@ -37,16 +92,15 @@ export default class DataDetails extends React.Component {
       updateEntity,
     } = this.props
     const { selectedEntity } = this.state
+
     return (
       <div className="data-details">
         <div className="info">
           <form
             onSubmit={e => {
               e.preventDefault()
-              if(!editing)
-                return
               toggleEdit()
-              updateEntity(this.state.selectedEntity)
+              updateEntity(selectedEntity)
             }}>
 
             {formattedData.map((row, idx) => (
@@ -104,10 +158,17 @@ export default class DataDetails extends React.Component {
       </div>
     )
   }
+
+  render() {
+    return this.state.selectedEntity.id
+      ? this.renderUpdate()
+      : this.renderCreate()
+  }
 }
 
 DataDetails.propTypes = {
   children: PropTypes.element,
+  createEntity: PropTypes.func,
   currentEntity: PropTypes.object,
   editing: PropTypes.bool,
   formattedData: PropTypes.arrayOf(
@@ -126,6 +187,7 @@ DataDetails.propTypes = {
 
 DataDetails.defaultProps = {
   children: null,
+  createEntity: () => null,
   currentEntity: {},
   editing: false,
   formattedData: [],

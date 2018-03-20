@@ -12,10 +12,17 @@ export const ManufacturerType = {
 export const manufacturerFormat = [
   [
     {
+      attribute: 'name',
+      editable: true,
+      type: 'string',
+    },
+    {
       attribute: 'notes',
       editable: true,
       type: 'textarea',
     },
+  ],
+  [
     {
       attribute: 'createdAt',
       editable: false,
