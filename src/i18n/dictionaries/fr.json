@@ -54,6 +54,11 @@
       "notes": "Notes",
       "createdAt": "Date de création",
       "open": "Voir le fabricant"
+    },
+    "inventories": {
+      "create": "Créer un inventaire",
+      "createdAt": "Date de création",
+      "open": "Voir l'inventaire"
     }
   },
   "routes": {

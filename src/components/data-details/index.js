@@ -5,6 +5,8 @@ import FormAttribute from '../form-attribute'
 
 import { Translate } from 'react-redux-i18n'
 
+import { isEditableEntity } from '../../utils/entity-helper'
+
 import './styles.scss'
 
 export default class DataDetails extends React.Component {
@@ -92,6 +94,7 @@ export default class DataDetails extends React.Component {
       updateEntity,
     } = this.props
     const { selectedEntity } = this.state
+    const editableEntity = isEditableEntity(formattedData)
 
     return (
       <div className="data-details">
@@ -106,7 +109,7 @@ export default class DataDetails extends React.Component {
             {formattedData.map((row, idx) => (
               <div className="row" key={idx}>
                 { row.map(item => (
-                  (item.editable && editing)
+                  (item.editable && editing && editableEntity)
                     ? <FormAttribute
                       attribute={item.attribute}
                       key={item.attribute}
@@ -124,33 +127,35 @@ export default class DataDetails extends React.Component {
                 ))}
               </div>
             ))}
-            {(editing)
-              ? (
-                [
+            {
+              (editableEntity) &&
+              ((editing)
+                ? (
+                  [
+                    <button
+                      className="btn-link"
+                      key="btn-submit"
+                      type="submit"
+                    >
+                      <Translate value={'data-details.form.buttons.submit'}/>
+                    </button>,
+                    <button
+                      className="btn-link"
+                      key="btn-cancel"
+                      onClick={() => this.handleCancelUpdate(toggleEdit)}
+                    >
+                      <Translate value={'data-details.form.buttons.cancel'}/>
+                    </button>,
+                  ]
+                )
+                : (
                   <button
                     className="btn-link"
-                    key="btn-submit"
-                    type="submit"
+                    onClick={() => toggleEdit()}
                   >
-                    <Translate value={'data-details.form.buttons.submit'}/>
-                  </button>,
-                  <button
-                    className="btn-link"
-                    key="btn-cancel"
-                    onClick={() => this.handleCancelUpdate(toggleEdit)}
-                  >
-                    <Translate value={'data-details.form.buttons.cancel'}/>
-                  </button>,
-                ]
-              )
-              : (
-                <button
-                  className="btn-link"
-                  onClick={() => toggleEdit()}
-                >
-                  <Translate value={'data-details.form.buttons.edit'}/>
-                </button>
-              )
+                    <Translate value={'data-details.form.buttons.edit'}/>
+                  </button>
+                ))
             }
           </form>
           {children}

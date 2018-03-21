@@ -13,12 +13,15 @@ import {
 
 import AccountPage from '../containers/account-page'
 import HomePage from '../containers/home-page'
+import SettingsPage from '../containers/settings-page'
+import SignInPage from '../containers/sign-in-page'
+
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
 import ManufacturerPage from '../containers/manufacturer-page'
 import ManufacturersPage from '../containers/manufacturers-page'
-import SettingsPage from '../containers/settings-page'
-import SignInPage from '../containers/sign-in-page'
+import InventoryPage from '../containers/inventory-page'
+import InventoriesPage from '../containers/inventories-page'
 
 export const routes = [
   {
@@ -50,11 +53,24 @@ export const routes = [
     path: '/orders',
   },
   {
+    component: InventoriesPage,
     displayHome: true,
+    exact: true,
     image: list,
-    inRouter: false,
+    inRouter: true,
     key: 'inventories',
     path: '/inventories',
+    strict: true,
+  },
+  {
+    component: InventoryPage,
+    displayHome: false,
+    exact: true,
+    image: list,
+    inRouter: true,
+    key: 'inventory',
+    path: '/inventories/:id',
+    strict: true,
   },
   {
     displayHome: true,
