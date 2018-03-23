@@ -2,9 +2,15 @@ import {
   INVENTORIES_UPDATE_FIELD,
 } from '../constants/actions'
 
+import { I18n } from 'react-redux-i18n'
+
 import {
   getInventories as apiGetInventories,
 } from '../utils/api-helper'
+
+import {
+  showErrorToast,
+} from '../utils/notification-helper'
 
 export const updateInventoriesField = (field, value) => ({
   field,
@@ -20,5 +26,8 @@ export const getInventories = () =>
       .then(({ data }) => {
         dispatch(updateInventoriesField('inventories', data))
         dispatch(updateInventoriesField('loading', false))
+      })
+      .catch({
+        showErrorToast(I18n.t('toast.error'))
       })
   }

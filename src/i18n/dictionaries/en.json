@@ -83,7 +83,8 @@
     }
   },
   "toast": {
-    "updated": "Updated"
+    "updated": "Updated",
+    "error": "ErrorrrR !"
   },
   "data-details": {
     "form": {

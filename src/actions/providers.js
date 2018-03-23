@@ -13,6 +13,7 @@ import {
 
 import {
   showSuccessToast,
+  showErrorToast,
 } from '../utils/notification-helper'
 
 import { formatProvider } from '../types'
@@ -36,6 +37,9 @@ export const getProviders = () =>
       .then(({ data }) => {
         dispatch(updateProviderField('providers', data))
         dispatch(updateProviderField('loading', false))
+      })
+      .catch({
+        showErrorToast(I18n.t('toast.error'))
       })
   }
 

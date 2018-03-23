@@ -6,6 +6,10 @@ import {
   getProducts as apiGetProducts,
 } from '../utils/api-helper'
 
+import {
+  showErrorToast,
+} from '../utils/notification-helper'
+
 export const updateProductsField = (field, value) => ({
   field,
   type: PRODUCTS_UPDATE_FIELD,
@@ -20,5 +24,8 @@ export const getProducts = () =>
       .then(({ data }) => {
         dispatch(updateProductsField('products', data))
         dispatch(updateProductsField('loading', false))
+      })
+      .catch({
+        showErrorToast(I18n.t('toast.error'))
       })
   }

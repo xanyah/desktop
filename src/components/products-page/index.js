@@ -13,6 +13,7 @@ export default class Products extends React.Component {
 
   render() {
     const {
+      loading,
       openProduct,
       products,
     } = this.props
@@ -21,6 +22,7 @@ export default class Products extends React.Component {
         <DataTable
           columns={['name', 'categoryId', 'createdAt']}
           data={products}
+          loading={loading}
           onItemView={item => openProduct(item)}
           type="products"
         />
@@ -31,12 +33,14 @@ export default class Products extends React.Component {
 
 Products.propTypes = {
   getProducts: PropTypes.func,
+  loading: PropTypes.bool,
   openProduct: PropTypes.func,
   products: PropTypes.arrayOf(ProductType),
 }
 
 Products.defaultProps = {
   getProducts: () => null,
+  loading: true,
   openProduct: () => null,
   products: [],
 }

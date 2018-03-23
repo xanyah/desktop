@@ -3,7 +3,8 @@ import { push } from 'react-router-redux'
 import ProductsPage from '../../components/products-page'
 import { getProducts, updateProductsField } from '../../actions'
 
-const mapStateToProps = ({ products: { products } }) => ({
+const mapStateToProps = ({ products: { loading, products } }) => ({
+  loading,
   products,
 })
 
