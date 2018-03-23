@@ -1,7 +1,7 @@
 import React from 'react'
 import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
-import { formatData, testData } from '../../utils/data-helper'
+import { formatData } from '../../utils/data-helper'
 
 import './styles.scss'
 
