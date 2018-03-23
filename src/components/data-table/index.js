@@ -1,7 +1,7 @@
 import React from 'react'
 import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
-import { formatData } from '../../utils/data-helper'
+import { formatData, testData } from '../../utils/data-helper'
 
 import './styles.scss'
 
@@ -39,7 +39,7 @@ class DataTable extends React.Component {
             <div className="data-row">
               {columns.map(column => (
                 <div className="column" key={idx + column}>
-                  {formatData(row[column])}
+                  {formatData(row[column], column)}
                 </div>
               ))}
             </div>

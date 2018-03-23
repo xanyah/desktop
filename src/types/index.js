@@ -1,5 +1,6 @@
 export * from './category'
 export * from './inventory'
 export * from './manufacturer'
+export * from './product'
 export * from './provider'
 export * from './store'

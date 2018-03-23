@@ -2,6 +2,10 @@ export const AUTH_UPDATE_FIELD = 'AUTH_UPDATE_FIELD'
 
 export const GLOBAL_UPDATE_FIELD = 'GLOBAL_UPDATE_FIELD'
 
+// Product actions
+
+export const PRODUCTS_UPDATE_FIELD = 'PRODUCTS_UPDATE_FIELD'
+
 // Inventory actions
 
 export const INVENTORIES_UPDATE_FIELD = 'INVENTORIES_UPDATE_FIELD'

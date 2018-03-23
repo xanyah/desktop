@@ -11,9 +11,9 @@
       "title": "Caisse",
       "subtitle": "Encaisser une vente"
     },
-    "articles": {
-      "title": "Articles",
-      "subtitle": "Gérer les articles"
+    "products": {
+      "title": "Produits",
+      "subtitle": "Gérer les produits"
     },
     "shippings": {
       "title": "Livraisons",
@@ -59,6 +59,11 @@
       "create": "Créer un inventaire",
       "createdAt": "Date de création",
       "open": "Voir l'inventaire"
+    },
+    "products": {
+      "create": "Créer un produit",
+      "createdAt": "Date de création",
+      "open": "Voir le produit"
     }
   },
   "routes": {
