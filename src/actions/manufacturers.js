@@ -13,7 +13,7 @@ import {
 
 import {
   showSuccessToast,
-  showErrorToast
+  showErrorToast,
 } from '../utils/notification-helper'
 
 import { formatManufacturer } from '../types'
@@ -38,7 +38,7 @@ export const getManufacturers = () =>
         dispatch(updateManufacturerField('manufacturers', data))
         dispatch(updateManufacturerField('loading', false))
       })
-      .catch({
+      .catch(() => {
         showErrorToast(I18n.t('toast.error'))
       })
   }

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js lint
+  /usr/local/Cellar/node/9.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js
 
 PATH: 
   /Users/mac-clement/.rvm/gems/ruby-2.4.2/bin:/Users/mac-clement/.rvm/gems/ruby-2.4.2@global/bin:/Users/mac-clement/.rvm/rubies/ruby-2.4.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mac-clement/.rvm/bin
@@ -95,7 +95,7 @@ npm manifest:
       "webpack-target-electron-renderer": "^0.4.0"
     },
     "dependencies": {
-      "npm": "^5.7.1",
+      "npm": "^5.8.0",
       "react-spinners": "^0.2.6",
       "toastedjs": "^0.0.2"
     },
@@ -9714,16 +9714,22 @@ Lockfile:
       fd-slicer "~1.0.1"
 
 Trace: 
-  Error: Command failed.
+  Error: /Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c eslint src/* --fix --quiet
-  Directory: /Users/mac-clement/Documents/projets/pinf/xanyah-desktop
+  Arguments: -c node install.js
+  Directory: /Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron
   Output:
+  /Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron/install.js:48
+    throw err
+    ^
   
+  Error: EEXIST: file already exists, symlink 'Versions/Current/Electron Framework' -> '/Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron/dist/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework'
       at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
       at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
       at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
       at ChildProcess.emit (events.js:180:13)
       at maybeClose (internal/child_process.js:936:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
+      at Socket.stream.socket.on (internal/child_process.js:353:11)
+      at Socket.emit (events.js:180:13)
+      at Pipe._handle.close [as _onclose] (net.js:541:12)

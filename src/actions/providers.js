@@ -38,7 +38,7 @@ export const getProviders = () =>
         dispatch(updateProviderField('providers', data))
         dispatch(updateProviderField('loading', false))
       })
-      .catch({
+      .catch(() => {
         showErrorToast(I18n.t('toast.error'))
       })
   }

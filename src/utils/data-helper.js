@@ -12,15 +12,12 @@ export const formatData = (data, column) => {
   }
 }
 
-export const isOfDateType = attribute => {
-  switch (attribute) {
-  case 'createdAt':
-  case 'updateAt':
-  case 'lockedAt':
-    return true
-  }
-  return false
-}
+export const isOfDateType = attribute =>
+  [
+    'createdAt',
+    'updatedAt',
+    'lockedAt',
+  ].includes(attribute)
 
 
 export const getFormElement = (item) => {

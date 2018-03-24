@@ -2,6 +2,8 @@ import {
   PRODUCTS_UPDATE_FIELD,
 } from '../constants/actions'
 
+import { I18n } from 'react-redux-i18n'
+
 import {
   getProducts as apiGetProducts,
 } from '../utils/api-helper'
@@ -25,7 +27,7 @@ export const getProducts = () =>
         dispatch(updateProductsField('products', data))
         dispatch(updateProductsField('loading', false))
       })
-      .catch({
+      .catch(() => {
         showErrorToast(I18n.t('toast.error'))
       })
   }

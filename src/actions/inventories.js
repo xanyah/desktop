@@ -27,7 +27,7 @@ export const getInventories = () =>
         dispatch(updateInventoriesField('inventories', data))
         dispatch(updateInventoriesField('loading', false))
       })
-      .catch({
+      .catch(() => {
         showErrorToast(I18n.t('toast.error'))
       })
   }
