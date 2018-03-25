@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { PulseLoader } from 'react-spinners'
 
 import { formatData } from '../../utils/data-helper'
+import { secondaryTextColor } from '../../constants'
 
 import './styles.scss'
 
@@ -38,7 +39,7 @@ class DataTable extends React.Component {
             ? (
               <div className='sweet-loading'>
                 <PulseLoader
-                  color={'#9FA8DA'}
+                  color={secondaryTextColor}
                   loading={loading}
                 />
               </div>
