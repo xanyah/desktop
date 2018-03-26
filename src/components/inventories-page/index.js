@@ -13,6 +13,7 @@ export default class Inventories extends React.Component {
 
   render() {
     const {
+      loading,
       openInventory,
       inventories,
     } = this.props
@@ -21,6 +22,7 @@ export default class Inventories extends React.Component {
         <DataTable
           columns={['createdAt']}
           data={inventories}
+          loading={loading}
           onItemView={item => openInventory(item)}
           type="inventories"
         />
@@ -32,11 +34,13 @@ export default class Inventories extends React.Component {
 Inventories.propTypes = {
   getInventories: PropTypes.func,
   inventories: PropTypes.arrayOf(InventoryType),
+  loading: PropTypes.bool,
   openInventory: PropTypes.func,
 }
 
 Inventories.defaultProps = {
   getInventories: () => null,
   inventories: [],
+  loading: true,
   openInventory: () => null,
 }

@@ -3,8 +3,9 @@ import { push } from 'react-router-redux'
 import InventoriesPage from '../../components/inventories-page'
 import { getInventories, updateInventoriesField } from '../../actions'
 
-const mapStateToProps = ({ inventories: { inventories } }) => ({
+const mapStateToProps = ({ inventories: { inventories, loading } }) => ({
   inventories,
+  loading,
 })
 
 const mapDispatchToProps = dispatch => ({

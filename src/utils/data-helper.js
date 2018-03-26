@@ -2,10 +2,23 @@ import React from 'react'
 
 import moment from 'moment'
 
-export const formatData = data =>
-  moment(data).isValid()
-    ? moment(data).format('llll')
-    : data
+export const formatData = (data, column) => {
+  if(isOfDateType(column)) {
+    return moment(data).isValid()
+      ? moment(data).format('llll')
+      : data
+  } else {
+    return data
+  }
+}
+
+export const isOfDateType = attribute =>
+  [
+    'createdAt',
+    'updatedAt',
+    'lockedAt',
+  ].includes(attribute)
+
 
 export const getFormElement = (item) => {
   switch(item.type) {

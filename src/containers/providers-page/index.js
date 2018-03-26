@@ -3,7 +3,8 @@ import { push } from 'react-router-redux'
 import ProvidersPage from '../../components/providers-page'
 import { getProviders, updateProviderField } from '../../actions'
 
-const mapStateToProps = ({ providers: { providers } }) => ({
+const mapStateToProps = ({ providers: { loading, providers } }) => ({
+  loading,
   providers,
 })
 

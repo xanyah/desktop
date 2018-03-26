@@ -13,6 +13,7 @@ export default class Providers extends React.Component {
 
   render() {
     const {
+      loading,
       openProvider,
       providers,
     } = this.props
@@ -21,6 +22,7 @@ export default class Providers extends React.Component {
         <DataTable
           columns={['name', 'notes', 'createdAt']}
           data={providers}
+          loading={loading}
           onItemView={item => openProvider(item)}
           type="providers"
         />
@@ -31,12 +33,14 @@ export default class Providers extends React.Component {
 
 Providers.propTypes = {
   getProviders: PropTypes.func,
+  loading: PropTypes.bool,
   openProvider: PropTypes.func,
   providers: PropTypes.arrayOf(ProviderType),
 }
 
 Providers.defaultProps = {
   getProviders: () => null,
+  loading: true,
   openProvider: () => null,
   providers: [],
 }

@@ -13,14 +13,16 @@ export default class Manufacturers extends React.Component {
 
   render() {
     const {
-      openManufacturer,
+      loading,
       manufacturers,
+      openManufacturer,
     } = this.props
     return (
       <PageContainer>
         <DataTable
           columns={['name', 'notes', 'createdAt']}
           data={manufacturers}
+          loading={loading}
           onItemView={item => openManufacturer(item)}
           type="manufacturers"
         />
@@ -31,12 +33,14 @@ export default class Manufacturers extends React.Component {
 
 Manufacturers.propTypes = {
   getManufacturers: PropTypes.func,
+  loading: PropTypes.bool,
   manufacturers: PropTypes.arrayOf(ManufacturerType),
   openManufacturer: PropTypes.func,
 }
 
 Manufacturers.defaultProps = {
   getManufacturers: () => null,
+  loading: true,
   manufacturers: [],
   openManufacturer: () => null,
 }

@@ -11,9 +11,9 @@
       "title": "Checkout",
       "subtitle": "Cash a sale"
     },
-    "articles": {
-      "title": "Articles",
-      "subtitle": "Manage your articles"
+    "products": {
+      "title": "Products",
+      "subtitle": "Manage your products"
     },
     "shippings": {
       "title": "Shippings",
@@ -59,6 +59,11 @@
       "create": "Create an inventory",
       "createdAt": "Date of creation",
       "open": "Open inventory"
+    },
+    "products": {
+      "create": "Create a product",
+      "createdAt": "Date of creation",
+      "open": "Open product"
     }
   },
   "routes": {
@@ -78,7 +83,8 @@
     }
   },
   "toast": {
-    "updated": "Updated"
+    "updated": "Updated",
+    "error": "An error has occured !"
   },
   "data-details": {
     "form": {

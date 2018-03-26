@@ -13,6 +13,7 @@ import {
 
 import {
   showSuccessToast,
+  showErrorToast,
 } from '../utils/notification-helper'
 
 import { formatProvider } from '../types'
@@ -29,12 +30,16 @@ export const updateProviderField = (field, value) => ({
 })
 
 export const getProviders = () =>
-  dispatch => {
+  (dispatch, currentState) => {
+    const state = currentState()
     dispatch(updateProviderField('loading', true))
-    apiGetProviders()
+    apiGetProviders({ storeId: state.stores.currentStore.id })
       .then(({ data }) => {
         dispatch(updateProviderField('providers', data))
         dispatch(updateProviderField('loading', false))
+      })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
       })
   }
 

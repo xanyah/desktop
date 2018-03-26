@@ -22,6 +22,8 @@ import ManufacturerPage from '../containers/manufacturer-page'
 import ManufacturersPage from '../containers/manufacturers-page'
 import InventoryPage from '../containers/inventory-page'
 import InventoriesPage from '../containers/inventories-page'
+// import ProductPage from '../containers/product-page'
+import ProductsPage from '../containers/products-page'
 
 export const routes = [
   {
@@ -32,11 +34,14 @@ export const routes = [
     path: '/checkout',
   },
   {
+    component: ProductsPage,
     displayHome: true,
+    exact: true,
     image: warehouse,
-    inRouter: false,
-    key: 'articles',
-    path: '/articles',
+    inRouter: true,
+    key: 'products',
+    path: '/products',
+    strict: true,
   },
   {
     displayHome: true,

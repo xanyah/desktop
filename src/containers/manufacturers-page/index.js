@@ -3,7 +3,8 @@ import { push } from 'react-router-redux'
 import ManufacturersPage from '../../components/manufacturers-page'
 import { getManufacturers, updateManufacturerField } from '../../actions'
 
-const mapStateToProps = ({ manufacturers: { manufacturers } }) => ({
+const mapStateToProps = ({ manufacturers: { loading, manufacturers } }) => ({
+  loading,
   manufacturers,
 })
 
