@@ -5,6 +5,8 @@ import {
 const initialState = {
   loading: false,
   products: [],
+  selectedProduct: {},
+  variants: [],
 }
 
 export default (state = initialState, action) => {

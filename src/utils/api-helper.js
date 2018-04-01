@@ -6,6 +6,10 @@ export const validateToken = () => xanyahApi.get('auth/validate_token')
 
 export const signIn = params => xanyahApi.post('auth/sign_in', params)
 
+// Variants API Calls
+
+export const getVariants = params => xanyahApi.get('variants', {params})
+
 // Products API Calls
 
 export const getProducts = params => xanyahApi.get('products', params)
