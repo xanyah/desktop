@@ -10,6 +10,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
+  console.log(action)
   switch(action.type) {
   case PRODUCTS_UPDATE_FIELD:
     return {
