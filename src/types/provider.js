@@ -31,7 +31,7 @@ export const providerFormat = [
   ],
 ]
 
-export const formatProvider = (provider) => ({
+export const formatProvider = provider => ({
   ...provider,
   name: provider.name.trim(),
   notes: provider.notes.trim(),

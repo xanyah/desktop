@@ -61,9 +61,23 @@
       "open": "Voir l'inventaire"
     },
     "products": {
+      "category": "Catégorie",
       "create": "Créer un produit",
       "createdAt": "Date de création",
-      "open": "Voir le produit"
+      "open": "Voir le produit",
+      "manufacturer": "Fabricant",
+      "name": "Nom du produit",
+      "updatedAt": "Dernière mise à jour"
+    },
+    "variants": {
+      "create": "Créer un dérivé",
+      "barcode": "Code Barre",
+      "buyingPrice": "Prix d'achat",
+      "open": "Voir le variant",
+      "provider": "Fournisseur",
+      "quantity": "Quantité",
+      "ratio": "Coefficient",
+      "taxFreePrice": "Prix hors taxe"
     }
   },
   "routes": {

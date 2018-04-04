@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js
+  /usr/local/Cellar/node/9.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js lint
 
 PATH: 
   /Users/mac-clement/.rvm/gems/ruby-2.4.2/bin:/Users/mac-clement/.rvm/gems/ruby-2.4.2@global/bin:/Users/mac-clement/.rvm/rubies/ruby-2.4.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mac-clement/.rvm/bin
@@ -96,6 +96,7 @@ npm manifest:
     },
     "dependencies": {
       "npm": "^5.8.0",
+      "react-select": "^1.2.1",
       "react-spinners": "^0.2.6",
       "toastedjs": "^0.0.2"
     },
@@ -2118,6 +2119,10 @@ Lockfile:
       lazy-cache "^2.0.2"
       static-extend "^0.1.1"
   
+  classnames@^2.2.4:
+    version "2.2.5"
+    resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+  
   clean-css@4.1.x:
     version "4.1.9"
     resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.9.tgz#35cee8ae7687a49b98034f70de00c4edd3826301"
@@ -2805,6 +2810,10 @@ Lockfile:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   
+  detect-newline@^2.1.0:
+    version "2.1.0"
+    resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
+  
   detect-node@^2.0.3:
     version "2.0.3"
     resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
@@ -2928,6 +2937,10 @@ Lockfile:
   dotenv@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+  
+  dotenv@^5.0.1:
+    version "5.0.1"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
   
   ds-store@^0.1.5:
     version "0.1.6"
@@ -4431,11 +4444,11 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.5.tgz#788b29815b12d53bacf575648476e6f9041d133f"
   
-  hosted-git-info@^2.1.4, hosted-git-info@^2.5.0, hosted-git-info@~2.5.0:
+  hosted-git-info@^2.1.4, hosted-git-info@^2.5.0:
     version "2.5.0"
     resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
   
-  hosted-git-info@^2.4.2:
+  hosted-git-info@^2.4.2, hosted-git-info@^2.6.0:
     version "2.6.0"
     resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
   
@@ -4680,7 +4693,7 @@ Lockfile:
     version "1.3.5"
     resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   
-  init-package-json@~1.10.1:
+  init-package-json@^1.10.3:
     version "1.10.3"
     resolved "https://registry.yarnpkg.com/init-package-json/-/init-package-json-1.10.3.tgz#45ffe2f610a8ca134f2bd1db5637b235070f6cbe"
     dependencies:
@@ -5339,7 +5352,7 @@ Lockfile:
       prelude-ls "~1.1.2"
       type-check "~0.3.2"
   
-  libcipm@^1.3.3:
+  libcipm@^1.6.0:
     version "1.6.1"
     resolved "https://registry.yarnpkg.com/libcipm/-/libcipm-1.6.1.tgz#156c0efd3f091aa3cf53592a32d0f026d3605eff"
     dependencies:
@@ -5357,18 +5370,18 @@ Lockfile:
       rimraf "^2.6.2"
       worker-farm "^1.5.4"
   
-  libnpx@~9.7.1:
-    version "9.7.1"
-    resolved "https://registry.yarnpkg.com/libnpx/-/libnpx-9.7.1.tgz#55300b5e119bd47b714be9704ca0696ffb18b025"
+  libnpx@^10.0.1:
+    version "10.0.1"
+    resolved "https://registry.yarnpkg.com/libnpx/-/libnpx-10.0.1.tgz#a0104a1336e7621e52172d7970dc1b97fa17ae89"
     dependencies:
-      dotenv "^4.0.0"
-      npm-package-arg "^5.1.2"
-      rimraf "^2.6.1"
+      dotenv "^5.0.1"
+      npm-package-arg "^6.0.0"
+      rimraf "^2.6.2"
       safe-buffer "^5.1.0"
-      update-notifier "^2.2.0"
-      which "^1.2.14"
-      y18n "^3.2.1"
-      yargs "^8.0.2"
+      update-notifier "^2.3.0"
+      which "^1.3.0"
+      y18n "^4.0.0"
+      yargs "^11.0.0"
   
   load-json-file@^1.0.0:
     version "1.1.0"
@@ -6200,7 +6213,7 @@ Lockfile:
     dependencies:
       semver "^2.3.0 || 3.x || 4 || 5"
   
-  npm-lifecycle@^2.0.0, npm-lifecycle@~2.0.0:
+  npm-lifecycle@^2.0.0, npm-lifecycle@^2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/npm-lifecycle/-/npm-lifecycle-2.0.1.tgz#897313f05ed24db8e28d99fa8b42c31b625e6237"
     dependencies:
@@ -6256,7 +6269,7 @@ Lockfile:
       aproba "^1.1.2"
       make-fetch-happen "^2.5.0"
   
-  npm-registry-client@~8.5.0:
+  npm-registry-client@^8.5.1:
     version "8.5.1"
     resolved "https://registry.yarnpkg.com/npm-registry-client/-/npm-registry-client-8.5.1.tgz#8115809c0a4b40938b8a109b8ea74d26c6f5d7f1"
     dependencies:
@@ -6290,9 +6303,9 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/npm-user-validate/-/npm-user-validate-1.0.0.tgz#8ceca0f5cea04d4e93519ef72d0557a75122e951"
   
-  npm@^5.7.1:
-    version "5.7.1"
-    resolved "https://registry.yarnpkg.com/npm/-/npm-5.7.1.tgz#cf03d41f70472a74d08061cbe8d56ac418026a55"
+  npm@^5.8.0:
+    version "5.8.0"
+    resolved "https://registry.yarnpkg.com/npm/-/npm-5.8.0.tgz#5e4bfb8c2e7ada01dd41ec0555d13dd0f446ddb2"
     dependencies:
       JSONStream "^1.3.2"
       abbrev "~1.1.1"
@@ -6311,6 +6324,7 @@ Lockfile:
       columnify "~1.5.4"
       config-chain "~1.1.11"
       detect-indent "~5.0.0"
+      detect-newline "^2.1.0"
       dezalgo "~1.0.3"
       editor "~1.0.0"
       find-npm-prefix "^1.0.2"
@@ -6320,16 +6334,17 @@ Lockfile:
       glob "~7.1.2"
       graceful-fs "~4.1.11"
       has-unicode "~2.0.1"
-      hosted-git-info "~2.5.0"
+      hosted-git-info "^2.6.0"
       iferr "~0.1.5"
       inflight "~1.0.6"
       inherits "~2.0.3"
       ini "^1.3.5"
-      init-package-json "~1.10.1"
+      init-package-json "^1.10.3"
       is-cidr "~1.0.0"
+      json-parse-better-errors "^1.0.1"
       lazy-property "~1.0.0"
-      libcipm "^1.3.3"
-      libnpx "~9.7.1"
+      libcipm "^1.6.0"
+      libnpx "^10.0.1"
       lockfile "~1.0.3"
       lodash._baseuniq "~4.6.0"
       lodash.clonedeep "~4.5.0"
@@ -6338,24 +6353,24 @@ Lockfile:
       lodash.without "~4.4.0"
       lru-cache "~4.1.1"
       meant "~1.0.1"
-      mississippi "^2.0.0"
+      mississippi "^3.0.0"
       mkdirp "~0.5.1"
       move-concurrently "^1.0.1"
       nopt "~4.0.1"
       normalize-package-data "~2.4.0"
       npm-cache-filename "~1.0.2"
       npm-install-checks "~3.0.0"
-      npm-lifecycle "~2.0.0"
+      npm-lifecycle "^2.0.1"
       npm-package-arg "~6.0.0"
       npm-packlist "~1.1.10"
       npm-profile "^3.0.1"
-      npm-registry-client "~8.5.0"
+      npm-registry-client "^8.5.1"
       npm-user-validate "~1.0.0"
       npmlog "~4.1.2"
       once "~1.4.0"
       opener "~1.4.3"
       osenv "^0.1.5"
-      pacote "^7.3.3"
+      pacote "^7.6.1"
       path-is-inside "~1.0.2"
       promise-inflight "~1.0.1"
       qrcode-terminal "~0.11.0"
@@ -6364,9 +6379,9 @@ Lockfile:
       read "~1.0.7"
       read-cmd-shim "~1.0.1"
       read-installed "~4.0.3"
-      read-package-json "~2.0.12"
+      read-package-json "^2.0.13"
       read-package-tree "~5.1.6"
-      readable-stream "^2.3.4"
+      readable-stream "^2.3.5"
       request "~2.83.0"
       retry "~0.10.1"
       rimraf "~2.6.2"
@@ -6378,7 +6393,7 @@ Lockfile:
       sorted-union-stream "~2.1.3"
       ssri "^5.2.4"
       strip-ansi "~4.0.0"
-      tar "^4.3.3"
+      tar "^4.4.0"
       text-table "~0.2.0"
       uid-number "0.0.6"
       umask "~1.1.0"
@@ -6388,9 +6403,9 @@ Lockfile:
       uuid "^3.2.1"
       validate-npm-package-name "~3.0.0"
       which "~1.3.0"
-      worker-farm "^1.5.2"
+      worker-farm "^1.5.4"
       wrappy "~1.0.2"
-      write-file-atomic "~2.1.0"
+      write-file-atomic "^2.3.0"
   
   "npmlog@0 || 1 || 2 || 3 || 4", "npmlog@2 || ^3.1.0 || ^4.0.0", npmlog@^4.0.0, npmlog@^4.0.2, npmlog@~4.1.2:
     version "4.1.2"
@@ -6622,7 +6637,7 @@ Lockfile:
       registry-url "^3.0.3"
       semver "^5.1.0"
   
-  pacote@^7.3.3, pacote@^7.5.1:
+  pacote@^7.5.1, pacote@^7.6.1:
     version "7.6.1"
     resolved "https://registry.yarnpkg.com/pacote/-/pacote-7.6.1.tgz#d44621c89a5a61f173989b60236757728387c094"
     dependencies:
@@ -7423,6 +7438,12 @@ Lockfile:
       prop-types "^15.5.8"
       react "^15.5.4"
   
+  react-input-autosize@^2.1.2:
+    version "2.2.1"
+    resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.1.tgz#ec428fa15b1592994fb5f9aa15bb1eb6baf420f8"
+    dependencies:
+      prop-types "^15.5.8"
+  
   react-redux-i18n@^1.9.1:
     version "1.9.1"
     resolved "https://registry.yarnpkg.com/react-redux-i18n/-/react-redux-i18n-1.9.1.tgz#3a0081928eb8ca0668518d37b1c36bd01250a5f9"
@@ -7470,6 +7491,14 @@ Lockfile:
       path-to-regexp "^1.7.0"
       prop-types "^15.5.4"
       warning "^3.0.0"
+  
+  react-select@^1.2.1:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/react-select/-/react-select-1.2.1.tgz#a2fe58a569eb14dcaa6543816260b97e538120d1"
+    dependencies:
+      classnames "^2.2.4"
+      prop-types "^15.5.8"
+      react-input-autosize "^2.1.2"
   
   react-spinners@^0.2.6:
     version "0.2.6"
@@ -7533,7 +7562,7 @@ Lockfile:
     optionalDependencies:
       graceful-fs "^4.1.2"
   
-  "read-package-json@1 || 2", read-package-json@^2.0.0, read-package-json@^2.0.12, read-package-json@~2.0.12:
+  "read-package-json@1 || 2", read-package-json@^2.0.0, read-package-json@^2.0.12, read-package-json@^2.0.13:
     version "2.0.13"
     resolved "https://registry.yarnpkg.com/read-package-json/-/read-package-json-2.0.13.tgz#2e82ebd9f613baa6d2ebe3aa72cefe3f68e41f4a"
     dependencies:
@@ -7590,7 +7619,7 @@ Lockfile:
     dependencies:
       mute-stream "~0.0.4"
   
-  "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.4, readable-stream@^2.1.5, readable-stream@^2.3.4:
+  "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.4, readable-stream@^2.1.5, readable-stream@^2.3.5:
     version "2.3.5"
     resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.5.tgz#b4f85003a938cbb6ecbce2a124fb1012bd1a838d"
     dependencies:
@@ -8274,7 +8303,7 @@ Lockfile:
     dependencies:
       is-fullwidth-code-point "^2.0.0"
   
-  slide@^1.1.3, slide@^1.1.5, slide@^1.1.6, slide@~1.1.3, slide@~1.1.6:
+  slide@^1.1.3, slide@^1.1.6, slide@~1.1.3, slide@~1.1.6:
     version "1.1.6"
     resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
   
@@ -8746,7 +8775,7 @@ Lockfile:
       fstream "^1.0.2"
       inherits "2"
   
-  tar@^4.3.3, tar@^4.4.0:
+  tar@^4.4.0:
     version "4.4.0"
     resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.0.tgz#3aaf8c29b6b800a8215f33efb4df1c95ce2ac2f5"
     dependencies:
@@ -9172,7 +9201,7 @@ Lockfile:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
   
-  update-notifier@^2.2.0, update-notifier@^2.3.0, update-notifier@~2.3.0:
+  update-notifier@^2.3.0, update-notifier@~2.3.0:
     version "2.3.0"
     resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-2.3.0.tgz#4e8827a6bb915140ab093559d7014e3ebb837451"
     dependencies:
@@ -9480,7 +9509,7 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/which-module/-/which-module-2.0.0.tgz#d9ef07dce77b9902b8a3a8fa4b31c3e3f7e6e87a"
   
-  which@1, which@^1.2.14, which@^1.2.8, which@^1.2.9, which@^1.3.0, which@~1.3.0:
+  which@1, which@^1.2.8, which@^1.2.9, which@^1.3.0, which@~1.3.0:
     version "1.3.0"
     resolved "https://registry.yarnpkg.com/which/-/which-1.3.0.tgz#ff04bdfc010ee547d780bec38e1ac1c2777d253a"
     dependencies:
@@ -9522,7 +9551,7 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   
-  worker-farm@^1.5.2, worker-farm@^1.5.4:
+  worker-farm@^1.5.4:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/worker-farm/-/worker-farm-1.6.0.tgz#aecc405976fab5a95526180846f0dba288f3a4a0"
     dependencies:
@@ -9546,14 +9575,6 @@ Lockfile:
       graceful-fs "^4.1.11"
       imurmurhash "^0.1.4"
       signal-exit "^3.0.2"
-  
-  write-file-atomic@~2.1.0:
-    version "2.1.0"
-    resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-2.1.0.tgz#1769f4b551eedce419f0505deae2e26763542d37"
-    dependencies:
-      graceful-fs "^4.1.11"
-      imurmurhash "^0.1.4"
-      slide "^1.1.5"
   
   write@^0.2.1:
     version "0.2.1"
@@ -9627,6 +9648,12 @@ Lockfile:
     dependencies:
       camelcase "^4.1.0"
   
+  yargs-parser@^9.0.2:
+    version "9.0.2"
+    resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-9.0.2.tgz#9ccf6a43460fe4ed40a9bb68f48d43b8a68cc077"
+    dependencies:
+      camelcase "^4.1.0"
+  
   yargs@6.6.0:
     version "6.6.0"
     resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
@@ -9661,6 +9688,23 @@ Lockfile:
       which-module "^2.0.0"
       y18n "^3.2.1"
       yargs-parser "^8.1.0"
+  
+  yargs@^11.0.0:
+    version "11.0.0"
+    resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.0.0.tgz#c052931006c5eee74610e5fc0354bedfd08a201b"
+    dependencies:
+      cliui "^4.0.0"
+      decamelize "^1.1.1"
+      find-up "^2.1.0"
+      get-caller-file "^1.0.1"
+      os-locale "^2.0.0"
+      require-directory "^2.1.1"
+      require-main-filename "^1.0.1"
+      set-blocking "^2.0.0"
+      string-width "^2.0.0"
+      which-module "^2.0.0"
+      y18n "^3.2.1"
+      yargs-parser "^9.0.2"
   
   yargs@^7.0.0:
     version "7.1.0"
@@ -9714,22 +9758,16 @@ Lockfile:
       fd-slicer "~1.0.1"
 
 Trace: 
-  Error: /Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron: Command failed.
+  Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c node install.js
-  Directory: /Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron
+  Arguments: -c eslint src/* --fix --quiet
+  Directory: /Users/mac-clement/Documents/projets/pinf/xanyah-desktop
   Output:
-  /Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron/install.js:48
-    throw err
-    ^
   
-  Error: EEXIST: file already exists, symlink 'Versions/Current/Electron Framework' -> '/Users/mac-clement/Documents/projets/pinf/xanyah-desktop/node_modules/electron/dist/Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework'
       at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
       at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
       at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
       at ChildProcess.emit (events.js:180:13)
       at maybeClose (internal/child_process.js:936:16)
-      at Socket.stream.socket.on (internal/child_process.js:353:11)
-      at Socket.emit (events.js:180:13)
-      at Pipe._handle.close [as _onclose] (net.js:541:12)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)

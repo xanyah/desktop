@@ -61,9 +61,23 @@
       "open": "Open inventory"
     },
     "products": {
+      "category": "Category",
       "create": "Create a product",
       "createdAt": "Date of creation",
-      "open": "Open product"
+      "open": "Open product",
+      "manufacturer": "Manufacturer",
+      "name": "Product name",
+      "updatedAt": "Date of last update"
+    },
+    "variants": {
+      "create": "Create a variant",
+      "barcode": "Barcode",
+      "buyingPrice": "Buying Price",
+      "open": "Open variant",
+      "provider": "Provider",
+      "quantity": "Quantity",
+      "ratio": "Ratio",
+      "taxFreePrice": "Tax Free Price"
     }
   },
   "routes": {

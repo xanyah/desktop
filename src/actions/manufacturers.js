@@ -55,7 +55,6 @@ export const updateApiManufacturer = updatedManufacturer =>
       })
   }
 
-//TODO update currentManufacturer ? after creation ?
 export const createApiManufacturer = newManufacturer =>
   (dispatch, currentState) => {
     const state = currentState()

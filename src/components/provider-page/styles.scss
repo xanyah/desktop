@@ -1,26 +1,3 @@
-@import '../../constants/scss/colors';
-
-.sign-in-page {
-  align-items: center;
-  background: url(../../images/background.png);
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-
-  .container {
-    align-items: center;
-    background-color: $primary-white;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 25rem;
-    padding: 5rem 2.5rem;
-  }
+.data-details-providers {
+  
 }

@@ -1,6 +1,7 @@
 @import '~normalize-scss/sass/normalize';
 @include normalize();
 @import '~toastedjs/src/sass/toast.scss';
+@import '~react-select/scss/default';
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
 @import 'constants/scss/colors';
 

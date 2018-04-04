@@ -1,5 +1,3 @@
-import React from 'react'
-
 import moment from 'moment'
 
 export const formatData = (data, column) => {
@@ -7,10 +5,18 @@ export const formatData = (data, column) => {
     return moment(data).isValid()
       ? moment(data).format('llll')
       : data
-  } else {
-    return data
   }
+
+  if(isOfEntityType(column)) {
+    return (data.name)
+      ? data.name
+      : data.id
+  }
+
+  return data
 }
+
+export const formatPrice = data => parseFloat(data).toFixed(2)+' €'
 
 export const isOfDateType = attribute =>
   [
@@ -19,34 +25,22 @@ export const isOfDateType = attribute =>
     'lockedAt',
   ].includes(attribute)
 
+export const isOfEntityType = attribute =>
+  [
+    'category',
+    'inventory',
+    'manufacturer',
+    'product',
+    'provider',
+  ].includes(attribute)
 
-export const getFormElement = (item) => {
-  switch(item.type) {
-  case 'textarea':
-    return (
-      <textarea
-        onChange={e =>item.onUpdate(item.attribute, e.target.value)}
-        value={item.value}
-        name={item.attribute}>
-      </textarea>
-    )
-  case 'number':
-    return (
-      <input
-        onChange={e => item.onUpdate(item.attribute, e.target.value)}
-        value={item.value}
-        name={item.attribute}
-        type="number"
-      />
-    )
-  case 'string':
-    return (
-      <input
-        onChange={e => item.onUpdate(item.attribute, e.target.value)}
-        value={item.value}
-        name={item.attribute}
-        type="text"
-      />
-    )
+export const getModel = entity => {
+  switch(entity) {
+  case 'category': return 'categories'
+  case 'inventory': return 'inventories'
+  case 'manufacturer': return 'manufacturers'
+  case 'product': return 'products'
+  case 'provider': return 'providers'
+  default: return null
   }
 }

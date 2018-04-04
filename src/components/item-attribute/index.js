@@ -5,21 +5,42 @@ import { formatData } from '../../utils/data-helper'
 
 import './styles.scss'
 
-const ItemAttribute = ({ attribute, type, value }) => (
-  <div className="item-attribute">
-    <label htmlFor={attribute}><Translate value={`models.${type}.${attribute}`} /></label>
-    <div id={attribute}>{formatData(value)}</div>
-  </div>
-)
+const ItemAttribute = ({ attribute, type, value, model }) => {
+  return(
+    (type == 'entity')
+      ? (
+        <div className="item-attribute">
+          <label htmlFor={attribute}><Translate value={`models.${model}.${attribute}`} /></label>
+          <div id={attribute}>{
+            (value.name)
+              ? formatData(value.name)
+              : formatData(value.id)
+          }
+          </div>
+        </div>
+      )
+      : (
+        <div className="item-attribute">
+          <label htmlFor={attribute}><Translate value={`models.${model}.${attribute}`} /></label>
+          <div id={attribute}>{formatData(value)}</div>
+        </div>
+      )
+  )
+}
 
 ItemAttribute.propTypes = {
   attribute: PropTypes.string,
+  model: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
 }
 
 ItemAttribute.defaultProps = {
   attribute: '',
+  model: '',
   type: '',
   value: '',
 }

@@ -18,9 +18,11 @@ class DataTable extends React.Component {
   }
 
   render() {
+    //By default create = true (render button to create in dataDetails)
     const {
       data,
       columns,
+      create,
       loading,
       onItemView,
       type,
@@ -70,9 +72,12 @@ class DataTable extends React.Component {
               ))
             )
         }
-        <button className="btn-link" onClick={() => onItemView({})}>
-          <Translate value={`models.${type}.create`} />
-        </button>
+        {
+          (create) &&
+          <button className="btn-link" onClick={() => onItemView({})}>
+            <Translate value={`models.${type}.create`} />
+          </button>
+        }
       </div>
     )
   }
@@ -80,6 +85,7 @@ class DataTable extends React.Component {
 
 DataTable.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.string),
+  create: PropTypes.bool,
   data: PropTypes.array,
   loading: PropTypes.bool,
   onItemView: PropTypes.func,
@@ -88,6 +94,7 @@ DataTable.propTypes = {
 
 DataTable.defaultProps = {
   columns: [],
+  create: true,
   data: [],
   loading: false,
   onItemView: () => null,

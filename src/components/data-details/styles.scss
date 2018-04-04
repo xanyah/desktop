@@ -8,11 +8,28 @@
     height: 100%;
 
     .row {
+      min-height: 80px;
       align-items: flex-start;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       width: 100%;
     }
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .btn-stand-alone {
+    justify-content: flex-end;
+    align-self: flex-end;
+  }
+
+  .children {
+    margin-top: 10px;
   }
 }

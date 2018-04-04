@@ -1,5 +1,9 @@
 import { xanyahApi } from '../constants'
-
+// TODO add decamelizeKeys
+// import {
+//   camelizeKeys,
+//   decamelizeKeys,
+// } from 'humps'
 
 export const validateToken = () => xanyahApi.get('auth/validate_token')
 
@@ -9,18 +13,22 @@ export const signIn = params => xanyahApi.post('auth/sign_in', params)
 // Variants API Calls
 
 export const getVariants = params => xanyahApi.get('variants', {params})
-
+export const updateVariant = (variantId, params) =>
+  xanyahApi.patch(`variants/${variantId}`, params)
+export const createVariant = newVariant => xanyahApi.post('variants', newVariant)
 // Products API Calls
 
-export const getProducts = params => xanyahApi.get('products', params)
+export const getProducts = params => xanyahApi.get('products', {params})
+export const updateProduct = (productId, params) =>
+  xanyahApi.patch(`products/${productId}`, params)
 
 // Inventories API Calls
 
-export const getInventories = params => xanyahApi.get('inventories', params)
+export const getInventories = params => xanyahApi.get('inventories', {params})
 
 // Providers API Calls
 
-export const getProviders = params => xanyahApi.get('providers', params)
+export const getProviders = params => xanyahApi.get('providers', {params})
 export const updateProvider = (providerId, params) =>
   xanyahApi.patch(`providers/${providerId}`, params)
 
@@ -30,7 +38,7 @@ export const createProvider = (newProvider) =>
 
 // Manufacturers API Calls
 
-export const getManufacturers = params => xanyahApi.get('manufacturers', params)
+export const getManufacturers = params => xanyahApi.get('manufacturers', {params})
 export const updateManufacturer = (manufacturerId, params) =>
   xanyahApi.patch(`manufacturers/${manufacturerId}`, params)
 
