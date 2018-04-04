@@ -83,7 +83,6 @@ const getSelect = item => {
   )
 }
 
-//TODO manage value can be object or string to avoid error in console
 FormAttribute.propTypes = {
   attribute: PropTypes.string,
   type: PropTypes.string,
