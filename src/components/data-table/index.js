@@ -72,12 +72,11 @@ class DataTable extends React.Component {
               ))
             )
         }
-        {
-          (create) &&
+        {create && (
           <button className="btn-link" onClick={() => onItemView({})}>
             <Translate value={`models.${type}.create`} />
           </button>
-        }
+        )}
       </div>
     )
   }

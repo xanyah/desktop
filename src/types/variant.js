@@ -18,12 +18,6 @@ export const VariantType = {
 export const formatVariant = variant => ({
   ...variant,
   providerId: variant.provider.id,
-  // buyingPrice: variant.buyingPrice.trim(),
-  // originalBarcode: variant.originalBarcode.trim(),
-  // providerId: variant.providerId.trim(),
-  // quantity: variant.quantity.trim(),
-  // ratio: variant.ratio.trim(),
-  // taxFreePrice: variant.taxFreePrice.trim(),
 })
 
 export const variantFormat = [

@@ -6,7 +6,7 @@ import { formatData } from '../../utils/data-helper'
 import './styles.scss'
 
 const ItemAttribute = ({ attribute, type, value, model }) => {
-  return(
+  return (
     (type == 'entity')
       ? (
         <div className="item-attribute">
