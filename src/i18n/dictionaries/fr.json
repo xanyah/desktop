@@ -10,6 +10,7 @@
     }
   },
   "checkout": {
+    "add-promotion": "Ajouter une promotion",
     "change": "Monnaie à rendre",
     "left-to-pay": "Reste à facturer",
     "remove-article": "Retirer l'article",
@@ -118,6 +119,10 @@
       "length": "La longueur du mot de passe doit être supérieur à 8",
       "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
     }
+  },
+  "promotion-types": {
+    "flat_discount": "Remise (en €)",
+    "percent_discount": "Remise (en %)"
   },
   "routes": {
     "account": "Mon compte",

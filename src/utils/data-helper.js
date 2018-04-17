@@ -12,7 +12,7 @@ export const formatData = (data, column) => {
   }
 }
 
-export const formatPrice = price => `${price.toFixed(2)} €`
+export const formatPrice = price => `${(price || 0).toFixed(2)} €`
 
 export const isOfDateType = attribute =>
   [
@@ -52,3 +52,15 @@ export const getFormElement = (item) => {
     )
   }
 }
+
+export const getSaleVariantsTotal = saleVariants =>
+  saleVariants.reduce((a, b) =>
+    b.saleVariantPromotion
+      ? a + (b.saleVariantPromotion.type.calculatePrice(b.quantity * b.variant.price, b.saleVariantPromotion.amount || 0))
+      : a + (b.quantity * b.variant.price), 0)
+
+export const getSaleTotal = sale =>
+  sale.salePromotion.type
+    ? sale.salePromotion.type.calculatePrice(getSaleVariantsTotal(sale.saleVariants), sale.salePromotion.amount || 0)
+    : getSaleVariantsTotal(sale.saleVariants)
+

@@ -10,6 +10,7 @@
     }
   },
   "checkout": {
+    "add-promotion": "Add a promotion",
     "change": "Change",
     "left-to-pay": "Left to pay",
     "remove-article": "Remove article",
@@ -118,6 +119,10 @@
       "length": "Minimum password lenght is 8",
       "same-confirm": "Password does not match the confirm password"
     }
+  },
+  "promotion-types": {
+    "flat_discount": "Discount (in €)",
+    "percent_discount": "Discount (in %)"
   },
   "routes": {
     "account": "My account",
