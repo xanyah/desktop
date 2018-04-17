@@ -21,6 +21,7 @@ export default class Account extends React.Component {
     return (
       <PageContainer>
         <form
+          id="settings-page"
           onSubmit={e => {
             e.preventDefault()
             updateUserParams({

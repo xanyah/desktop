@@ -16,6 +16,7 @@ import HomePage from '../containers/home-page'
 import SettingsPage from '../containers/settings-page'
 import SignInPage from '../containers/sign-in-page'
 
+import CheckoutPage from '../containers/checkout-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
 import ManufacturerPage from '../containers/manufacturer-page'
@@ -27,11 +28,14 @@ import ProductsPage from '../containers/products-page'
 
 export const routes = [
   {
+    component: CheckoutPage,
     displayHome: true,
+    exact: true,
     image: barcodeScanner,
-    inRouter: false,
+    inRouter: true,
     key: 'checkout',
     path: '/checkout',
+    strict: true,
   },
   {
     component: ProductsPage,

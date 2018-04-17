@@ -32,7 +32,9 @@ const PageContainer = ({ children, currentNavigationStep, footerElements, locati
             </div>}
         </div>
         <div className="close">
-          <Link to="/home">x</Link>
+          <Link to="/home">
+            <i className="im im-x-mark-circle-o" />
+          </Link>
         </div>
       </div>
       <div className="content">

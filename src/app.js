@@ -24,6 +24,8 @@ import { routes } from './constants'
 
 import './app.scss'
 
+import './libs/iconic-font/css/iconmonstr-iconic-font.css'
+
 class App extends React.Component {
   componentWillMount() {
     syncTranslationWithStore(store)

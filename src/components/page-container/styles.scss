@@ -43,8 +43,14 @@
       }
     }
 
-    .close {
+    .close i {
+      color: $secondary-text-color;
+      font-size: 2rem;
+      transition: all 0.3s ease;
 
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 

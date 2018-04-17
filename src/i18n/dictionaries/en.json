@@ -1,77 +1,4 @@
 {
-  "home": {
-    "welcome": {
-      "morning": "Good morning %{firstname} !",
-      "afternoon": "Good afternoon %{firstname} !",
-      "evening": "Good evening %{firstname} !"
-    }
-  },
-  "home-link": {
-    "checkout": {
-      "title": "Checkout",
-      "subtitle": "Cash a sale"
-    },
-    "products": {
-      "title": "Products",
-      "subtitle": "Manage your products"
-    },
-    "shippings": {
-      "title": "Shippings",
-      "subtitle": "Manage your shippings"
-    },
-    "orders": {
-      "title": "Orders",
-      "subtitle": "Manage your orders"
-    },
-    "inventories": {
-      "title": "Inventories",
-      "subtitle": "Manage your inventories"
-    },
-    "clients": {
-      "title": "Clients",
-      "subtitle": "Manage your clients"
-    },
-    "providers": {
-      "title": "Providers",
-      "subtitle": "Manage your providers"
-    },
-    "manufacturers": {
-      "title": "Manufacturers",
-      "subtitle": "Manage your manufacturers"
-    }
-  },
-  "models": {
-    "providers": {
-      "create": "Create a provider",
-      "name": "Name",
-      "notes": "Notes",
-      "createdAt": "Date of creation",
-      "open": "Open provider"
-    },
-    "manufacturers": {
-      "create": "Create a manufacturer",
-      "name": "Name",
-      "notes": "Notes",
-      "createdAt": "Date of creation",
-      "open": "Open manufacturer"
-    },
-    "inventories": {
-      "create": "Create an inventory",
-      "createdAt": "Date of creation",
-      "open": "Open inventory"
-    },
-    "products": {
-      "create": "Create a product",
-      "createdAt": "Date of creation",
-      "open": "Open product"
-    }
-  },
-  "routes": {
-    "providers": "Providers",
-    "manufacturers": "Manufacturers",
-    "settings": "Settings",
-    "account": "My account"
-  },
   "account": {
     "form": {
       "first": {
@@ -82,24 +9,126 @@
       }
     }
   },
-  "toast": {
-    "updated": "Updated",
-    "error": "An error has occured !"
+  "checkout": {
+    "change": "Change",
+    "left-to-pay": "Left to pay",
+    "remove-article": "Remove article",
+    "reset-alert": {
+      "text": "The sale will be canceled and the stock won't be affected with the changes",
+      "title": "Are you sure ?"
+    },
+    "total": "Total",
+    "type-barcode": "Type the product barcode"
   },
   "data-details": {
     "form": {
       "buttons": {
-        "submit": "Validate",
         "cancel": "Cancel",
         "create": "Create",
-        "edit": "Edit"
+        "edit": "Edit",
+        "submit": "Validate"
       }
+    }
+  },
+  "global": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "validate": "Validate"
+  },
+  "home": {
+    "welcome": {
+      "afternoon": "Good afternoon %{firstname} !",
+      "evening": "Good evening %{firstname} !",
+      "morning": "Good morning %{firstname} !"
+    }
+  },
+  "home-link": {
+    "checkout": {
+      "subtitle": "Cash a sale",
+      "title": "Checkout"
+    },
+    "clients": {
+      "subtitle": "Manage your clients",
+      "title": "Clients"
+    },
+    "inventories": {
+      "subtitle": "Manage your inventories",
+      "title": "Inventories"
+    },
+    "manufacturers": {
+      "subtitle": "Manage your manufacturers",
+      "title": "Manufacturers"
+    },
+    "orders": {
+      "subtitle": "Manage your orders",
+      "title": "Orders"
+    },
+    "products": {
+      "subtitle": "Manage your products",
+      "title": "Products"
+    },
+    "providers": {
+      "subtitle": "Manage your providers",
+      "title": "Providers"
+    },
+    "shippings": {
+      "subtitle": "Manage your shippings",
+      "title": "Shippings"
+    }
+  },
+  "models": {
+    "inventories": {
+      "create": "Create an inventory",
+      "createdAt": "Date of creation",
+      "open": "Open inventory",
+      "title": "Inventory"
+    },
+    "manufacturers": {
+      "create": "Create a manufacturer",
+      "createdAt": "Date of creation",
+      "name": "Name",
+      "notes": "Notes",
+      "open": "Open manufacturer",
+      "title": "Manufacturer"
+    },
+    "products": {
+      "create": "Create a product",
+      "createdAt": "Date of creation",
+      "open": "Open product",
+      "title": "Product"
+    },
+    "providers": {
+      "create": "Create a provider",
+      "createdAt": "Date of creation",
+      "name": "Name",
+      "notes": "Notes",
+      "open": "Open provider",
+      "title": "Provider"
+    },
+    "sales": {
+      "title": "Sale"
+    },
+    "variants": {
+      "unitPrice": "Unit price"
     }
   },
   "password-helper": {
     "tips": {
-      "same-confirm": "Password does not match the confirm password",
-      "length": "Minimum password lenght is 8"
+      "length": "Minimum password lenght is 8",
+      "same-confirm": "Password does not match the confirm password"
     }
+  },
+  "routes": {
+    "account": "My account",
+    "manufacturers": "Manufacturers",
+    "providers": "Providers",
+    "settings": "Settings"
+  },
+  "toast": {
+    "created": "%{entity} created !",
+    "error": "An error has occured !",
+    "not-found": "%{entity} not found",
+    "updated": "Updated"
   }
 }

@@ -1,77 +1,4 @@
 {
-  "home": {
-    "welcome": {
-      "morning": "Bonjour %{firstname} !",
-      "afternoon": "Bonjour %{firstname} !",
-      "evening": "Bonsoir %{firstname} !"
-    }
-  },
-  "home-link": {
-    "checkout": {
-      "title": "Caisse",
-      "subtitle": "Encaisser une vente"
-    },
-    "products": {
-      "title": "Produits",
-      "subtitle": "Gérer les produits"
-    },
-    "shippings": {
-      "title": "Livraisons",
-      "subtitle": "Gérer les livraisons"
-    },
-    "orders": {
-      "title": "Commandes",
-      "subtitle": "Gérer les commandes"
-    },
-    "inventories": {
-      "title": "Inventaires",
-      "subtitle": "Gérer les inventaires"
-    },
-    "clients": {
-      "title": "Clients",
-      "subtitle": "Gérer les clients"
-    },
-    "providers": {
-      "title": "Fournisseurs",
-      "subtitle": "Gérer les fournisseurs"
-    },
-    "manufacturers": {
-      "title": "Fabricants",
-      "subtitle": "Gérer les fabricants"
-    }
-  },
-  "models": {
-    "providers": {
-      "create": "Créer un fournisseur",
-      "name": "Nom",
-      "notes": "Notes",
-      "createdAt": "Date de création",
-      "open": "Voir le fournisseur"
-    },
-    "manufacturers": {
-      "create": "Créer un fabricant",
-      "name": "Nom",
-      "notes": "Notes",
-      "createdAt": "Date de création",
-      "open": "Voir le fabricant"
-    },
-    "inventories": {
-      "create": "Créer un inventaire",
-      "createdAt": "Date de création",
-      "open": "Voir l'inventaire"
-    },
-    "products": {
-      "create": "Créer un produit",
-      "createdAt": "Date de création",
-      "open": "Voir le produit"
-    }
-  },
-  "routes": {
-    "providers": "Fournisseurs",
-    "manufacturers": "Fabricants",
-    "settings": "Paramètres",
-    "account": "Mon compte"
-  },
   "account": {
     "form": {
       "first": {
@@ -82,24 +9,126 @@
       }
     }
   },
-  "toast": {
-    "updated": "Mis à jour",
-    "error": "Une erreur est survenue !"
+  "checkout": {
+    "change": "Monnaie à rendre",
+    "left-to-pay": "Reste à facturer",
+    "remove-article": "Retirer l'article",
+    "reset-alert": {
+      "text": "La vente sera annulée et le stock ne sera pas affecté",
+      "title": "Êtes-vous sûr ?"
+    },
+    "total": "Total",
+    "type-barcode": "Saisir le code barre"
   },
   "data-details": {
     "form": {
       "buttons": {
-        "submit": "Valider",
         "cancel": "Annuler",
         "create": "Créer",
-        "edit": "Modifier"
+        "edit": "Modifier",
+        "submit": "Valider"
       }
+    }
+  },
+  "global": {
+    "back": "Retour",
+    "cancel": "Annuler",
+    "reset": "Remettre à zéro",
+    "validate": "Valider"
+  },
+  "home": {
+    "welcome": {
+      "afternoon": "Bonjour %{firstname} !",
+      "evening": "Bonsoir %{firstname} !",
+      "morning": "Bonjour %{firstname} !"
+    }
+  },
+  "home-link": {
+    "checkout": {
+      "subtitle": "Encaisser une vente",
+      "title": "Caisse"
+    },
+    "clients": {
+      "subtitle": "Gérer les clients",
+      "title": "Clients"
+    },
+    "inventories": {
+      "subtitle": "Gérer les inventaires",
+      "title": "Inventaires"
+    },
+    "manufacturers": {
+      "subtitle": "Gérer les fabricants",
+      "title": "Fabricants"
+    },
+    "orders": {
+      "subtitle": "Gérer les commandes",
+      "title": "Commandes"
+    },
+    "products": {
+      "subtitle": "Gérer les produits",
+      "title": "Produits"
+    },
+    "providers": {
+      "subtitle": "Gérer les fournisseurs",
+      "title": "Fournisseurs"
+    },
+    "shippings": {
+      "subtitle": "Gérer les livraisons",
+      "title": "Livraisons"
+    }
+  },
+  "models": {
+    "inventories": {
+      "create": "Créer un inventaire",
+      "createdAt": "Date de création",
+      "open": "Voir l'inventaire",
+      "title": "Inventaire"
+    },
+    "manufacturers": {
+      "create": "Créer un fabricant",
+      "createdAt": "Date de création",
+      "name": "Nom",
+      "notes": "Notes",
+      "open": "Voir le fabricant",
+      "title": "Fabricant"
+    },
+    "products": {
+      "create": "Créer un produit",
+      "createdAt": "Date de création",
+      "open": "Voir le produit",
+      "title": "Produit"
+    },
+    "providers": {
+      "create": "Créer un fournisseur",
+      "createdAt": "Date de création",
+      "name": "Nom",
+      "notes": "Notes",
+      "open": "Voir le fournisseur",
+      "title": "Fournisseur"
+    },
+    "sales": {
+      "title": "Vante"
+    },
+    "variants": {
+      "unitPrice": "Prix unitaire"
     }
   },
   "password-helper": {
     "tips": {
-      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas",
-      "length": "La longueur du mot de passe doit être supérieur à 8"
+      "length": "La longueur du mot de passe doit être supérieur à 8",
+      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
     }
+  },
+  "routes": {
+    "account": "Mon compte",
+    "manufacturers": "Fabricants",
+    "providers": "Fournisseurs",
+    "settings": "Paramètres"
+  },
+  "toast": {
+    "created": "%{entity} créé(e) !",
+    "error": "Une erreur s'est produite !",
+    "not-found": "%{entity} inexistant",
+    "updated": "Mis à jour"
   }
 }

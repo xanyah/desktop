@@ -1,24 +1,24 @@
 .content {
   flex-direction: column;
 
-  form {
+  form#settings-page {
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
 
-  input.input-text {
-    margin-top: 49px;
-    height: 37px;
-    width: 664px;
-  }
-
-  button.submit {
-    text-align: right;
-  }
-
-  select.select-locale {
-    width: 60px;
-    margin-top: 40px;
+    input.input-text {
+      margin-top: 49px;
+      height: 37px;
+      width: 664px;
+    }
+  
+    button.submit {
+      text-align: right;
+    }
+  
+    select.select-locale {
+      width: 60px;
+      margin-top: 40px;
+    }
   }
 }

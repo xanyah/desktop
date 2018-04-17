@@ -62,6 +62,7 @@
     "moment": "^2.20.1",
     "node-sass": "^4.7.2",
     "normalize-scss": "^7.0.0",
+    "prop-types": "^15.6.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
@@ -81,6 +82,7 @@
   "dependencies": {
     "npm": "^5.8.0",
     "react-spinners": "^0.2.6",
+    "sweetalert": "^2.1.0",
     "toastedjs": "^0.0.2"
   },
   "build": {

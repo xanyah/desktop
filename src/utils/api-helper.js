@@ -1,4 +1,5 @@
 import { xanyahApi } from '../constants'
+import { decamelizeKeys } from 'humps'
 
 
 export const validateToken = () => xanyahApi.get('auth/validate_token')
@@ -13,6 +14,8 @@ export const getProducts = params => xanyahApi.get('products', params)
 // Inventories API Calls
 
 export const getInventories = params => xanyahApi.get('inventories', params)
+
+export const getPaymentTypes = params => xanyahApi.get('payment_types', { params: decamelizeKeys(params)})
 
 // Providers API Calls
 
@@ -33,6 +36,9 @@ export const updateManufacturer = (manufacturerId, params) =>
 export const createManufacturer = (newManufacturer) =>
   xanyahApi.post('manufacturers', newManufacturer)
 
+export const createSale = sale =>
+  xanyahApi.post('sales', {sale})
+
 
 // Stores API Calls
 
@@ -45,3 +51,7 @@ export const updateUserParams = params => xanyahApi.patch('auth', params)
 
 
 export const getCategories = () => xanyahApi.get('categories')
+
+// Variants
+
+export const getVariantByBarcode = barcode => xanyahApi.get(`variants/${barcode}/by_barcode`)

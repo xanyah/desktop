@@ -1,11 +1,26 @@
 @import './_colors.scss';
 
 .btn {
+  align-items: center;
   border: 0px;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  outline: 0;
   padding: 10px 20px;
+  text-transform: capitalize;
   transition: all 0.3s ease;
+
+  .im {
+    font-size: 1.4rem;
+    margin-right: 10px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .btn-primary {
@@ -14,7 +29,7 @@
   background-color: transparent;
   color: $link-color;
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 600;
   margin: 20px 0;
   padding: 0;
 
