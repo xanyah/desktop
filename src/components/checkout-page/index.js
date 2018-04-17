@@ -330,7 +330,7 @@ export default class Checkout extends React.Component {
               onChange={() => this.setState({ hasPromotion: !hasPromotion })}
               checked={hasPromotion}
             >
-              Has promotion
+              {I18n.t('checkout.add-promotion')}
             </Checkbox>
             {hasPromotion && (
               <div className="price-promotion">
