@@ -46,19 +46,24 @@
       "name": "Name",
       "notes": "Notes",
       "createdAt": "Date of creation",
-      "open": "Open provider"
+      "open": "Open provider",
+      "search": "Search a provider...",
+      "shippingsCount": "Shippings number"
     },
     "manufacturers": {
       "create": "Create a manufacturer",
       "name": "Name",
       "notes": "Notes",
       "createdAt": "Date of creation",
-      "open": "Open manufacturer"
+      "open": "Open manufacturer",
+      "search": "Search a manufacturer...",
+      "productsCount": "Products number"
     },
     "inventories": {
       "create": "Create an inventory",
       "createdAt": "Date of creation",
-      "open": "Open inventory"
+      "open": "Open inventory",
+      "search": "Search an inventory..."
     },
     "products": {
       "category": "Category",
@@ -67,7 +72,8 @@
       "open": "Open product",
       "manufacturer": "Manufacturer",
       "name": "Product name",
-      "updatedAt": "Date of last update"
+      "updatedAt": "Date of last update",
+      "search": "Search a product..."
     },
     "variants": {
       "create": "Create a variant",
@@ -77,14 +83,36 @@
       "provider": "Provider",
       "quantity": "Quantity",
       "ratio": "Ratio",
-      "taxFreePrice": "Tax Free Price"
+      "taxFreePrice": "Tax Free Price",
+      "search": "Search a variant..."
+    },
+    "clients": {
+      "create": "Create a client",
+      "open": "Open client",
+      "search": "Search a client ...",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "address": "Address",
+      "email": "Email",
+      "notes": "Notes",
+      "phone": "Phone"
     }
   },
   "routes": {
     "providers": "Providers",
+    "provider": "Provider",
     "manufacturers": "Manufacturers",
+    "manufacturer": "Manufacturer",
     "settings": "Settings",
-    "account": "My account"
+    "account": "My account",
+    "product": "Product",
+    "products": "Products",
+    "variant": "Variant",
+    "inventories": "Inventories",
+    "inventory": "Inventory",
+    "custom-attribute": "Custom Attributes",
+    "clients": "Clients",
+    "client": "Client"
   },
   "account": {
     "form": {
@@ -97,7 +125,8 @@
     }
   },
   "toast": {
-    "updated": "Updated",
+    "created": "Entity created !",
+    "updated": "Entity updated !",
     "error": "An error has occured !"
   },
   "data-details": {

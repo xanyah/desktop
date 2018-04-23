@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Collapsible from 'react-collapsible'
 
 import { productFormat, ProductType, VariantType } from '../../types'
 import DataTable from '../data-table'
@@ -49,17 +50,13 @@ export default class Product extends React.Component {
           type="products"
           updateEntity={updateApiProduct}
         >
-          {this.renderProductChildren()}
+          <div>
+            {this.renderVariantsForm()}
+            {this.renderVariantsTable()}
+          </div>
         </DataDetails>
       </PageContainer>
     )
-  }
-
-  renderProductChildren() {
-    return [
-      this.renderVariantsForm(),
-      this.renderVariantsTable(),
-    ]
   }
 
   renderVariantsTable() {
@@ -85,76 +82,77 @@ export default class Product extends React.Component {
     const { newVariant } = this.state
     const { createApiVariant, selectedProduct } = this.props
     return (
-      <form
-        className="variant-form"
-        onSubmit={e=> {
-          e.preventDefault()
-          createApiVariant({...newVariant, productId: selectedProduct.id})
-        }}>
+      <Collapsible trigger={<h1>> Crée un nouveau dérivé</h1>}>
+        <form
+          className="variant-form"
+          onSubmit={e=> {
+            e.preventDefault()
+            //TODO add in action the productId ?
+            createApiVariant({...newVariant, productId: selectedProduct.id})
+          }}>
 
-        <h1>Crée un nouveau dérivé</h1>
+          <div className="row">
+            <FormAttribute
+              attribute="provider"
+              key="provider"
+              value={newVariant['provider']}
+              model="variants"
+              type="entity"
+              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            />
 
-        <div className="row">
-          <FormAttribute
-            attribute="provider"
-            key="provider"
-            value={newVariant['provider']}
-            model="variants"
-            type="entity"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-          />
+            <FormAttribute
+              attribute="buyingPrice"
+              key="buyingPrice"
+              value={newVariant['buyingPrice']}
+              model="variants"
+              type="number"
+              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            />
+          </div>
 
-          <FormAttribute
-            attribute="buyingPrice"
-            key="buyingPrice"
-            value={newVariant['buyingPrice']}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-          />
-        </div>
+          <div className="row">
+            <FormAttribute
+              attribute="originalBarcode"
+              key="originalBarcode"
+              value={newVariant['originalBarcode']}
+              model="variants"
+              type="string"
+              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            />
 
-        <div className="row">
-          <FormAttribute
-            attribute="originalBarcode"
-            key="originalBarcode"
-            value={newVariant['originalBarcode']}
-            model="variants"
-            type="string"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-          />
+            <FormAttribute
+              attribute="quantity"
+              key="quantity"
+              value={newVariant['quantity']}
+              model="variants"
+              type="number"
+              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            />
+          </div>
 
-          <FormAttribute
-            attribute="quantity"
-            key="quantity"
-            value={newVariant['quantity']}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-          />
-        </div>
+          <div className="row">
+            <FormAttribute
+              attribute="ratio"
+              key="ratio"
+              value={newVariant['ratio']}
+              model="variants"
+              type="number"
+              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            />
 
-        <div className="row">
-          <FormAttribute
-            attribute="ratio"
-            key="ratio"
-            value={newVariant['ratio']}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-          />
-
-          <FormAttribute
-            attribute="taxFreePrice"
-            key="taxFreePrice"
-            value={newVariant['taxFreePrice']}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-          />
-        </div>
-        <button className="btn-link btn-stand-alone">Envoyer</button>
-      </form>
+            <FormAttribute
+              attribute="taxFreePrice"
+              key="taxFreePrice"
+              value={newVariant['taxFreePrice']}
+              model="variants"
+              type="number"
+              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            />
+          </div>
+          <button className="btn-link btn-stand-alone">Envoyer</button>
+        </form>
+      </Collapsible>
     )
   }
 }

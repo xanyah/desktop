@@ -11,7 +11,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-  //TODO Update currentNavigationStep too (to updated breadcrumb)
   case PROVIDERS_UPDATE_PROVIDER:
     return {
       ...state,

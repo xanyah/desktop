@@ -5,6 +5,7 @@ export const ProviderType = {
   id: PropTypes.string,
   name: PropTypes.string,
   notes: PropTypes.string,
+  shippingsCount: PropTypes.number,
   storeId: PropTypes.string,
   updatedAt: PropTypes.string,
 }
@@ -23,6 +24,11 @@ export const providerFormat = [
     },
   ],
   [
+    {
+      attribute: 'shippingsCount',
+      editable: false,
+      type: 'number',
+    },
     {
       attribute: 'createdAt',
       editable: false,

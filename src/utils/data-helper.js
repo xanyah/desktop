@@ -28,6 +28,7 @@ export const isOfDateType = attribute =>
 export const isOfEntityType = attribute =>
   [
     'category',
+    'customAttribute',
     'inventory',
     'manufacturer',
     'product',
@@ -37,6 +38,7 @@ export const isOfEntityType = attribute =>
 export const getModel = entity => {
   switch(entity) {
   case 'category': return 'categories'
+  case 'customAttribute': return 'customAttributes'
   case 'inventory': return 'inventories'
   case 'manufacturer': return 'manufacturers'
   case 'product': return 'products'
@@ -44,3 +46,8 @@ export const getModel = entity => {
   default: return null
   }
 }
+
+export const getTypeOptions = () => [
+  { label: 'String', value: 'text' },
+  { label: 'Number', value: 'number' },
+]

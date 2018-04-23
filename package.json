@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "npm": "^5.8.0",
+    "react-collapsible": "^2.0.4",
     "react-select": "^1.2.1",
     "react-spinners": "^0.2.6",
     "toastedjs": "^0.0.2"

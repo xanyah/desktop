@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
 
-import { isOfEntityType, getModel } from '../../utils/data-helper'
+import { isOfEntityType, getModel, getTypeOptions } from '../../utils/data-helper'
 
 import './styles.scss'
 
@@ -46,20 +46,17 @@ const getFormElement = item => {
         type="text"
       />
     )
-  //TODO Checkbox Type for boolean attribute (custom variant attribute)
-  // case 'boolean':
-  //   return (
-  //     <input
-  //       className="input-text"
-  //       onChange={e => item.onUpdate(item.attribute, e.target.value)}
-  //       // value={item.value}
-  //       name={item.attribute}
-  //       type="checkbox"
-  //       // {(item.value) ? checked : null}
-  //     />
-  //   )
   case 'entity':
     return getSelect(item)
+  case 'type':
+    return (
+      <Select
+        name="form-field-name"
+        value={item.value}
+        onChange={e => item.onUpdate(item.attribute, e.value)}
+        options={getTypeOptions()}
+      />
+    )
   }
 }
 

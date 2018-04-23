@@ -5,6 +5,7 @@ export const ManufacturerType = {
   id: PropTypes.string,
   name: PropTypes.string,
   notes: PropTypes.string,
+  productsCount: PropTypes.number,
   storeId: PropTypes.string,
   updatedAt: PropTypes.string,
 }
@@ -23,6 +24,11 @@ export const manufacturerFormat = [
     },
   ],
   [
+    {
+      attribute: 'productsCount',
+      editable: false,
+      type: 'number',
+    },
     {
       attribute: 'createdAt',
       editable: false,

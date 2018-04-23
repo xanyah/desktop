@@ -15,3 +15,22 @@
     color: $secondary-text-color;
   }
 }
+
+.input-search {
+  width: 460px;
+  font-weight: 500;
+  font-size: 2rem;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: $primary-text-color;
+  border-bottom: 1px solid $grey-color;
+
+  &:empty {
+    border-bottom: 1px solid $grey-color;
+  }
+
+  &::placeholder {
+    color: $secondary-text-color;
+  }
+}

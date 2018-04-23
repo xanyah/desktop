@@ -62,7 +62,8 @@ export default class DataDetails extends React.Component {
                       value={selectedEntity[item.attribute]}
                       model={type}
                       type={item.type}
-                      onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+                      onUpdate={(attribute, value) =>
+                        this.handleUpdate(attribute, value)}
                     />
                 ))}
               </div>
@@ -118,7 +119,8 @@ export default class DataDetails extends React.Component {
                       value={selectedEntity[item.attribute]}
                       model={type}
                       type={item.type}
-                      onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+                      onUpdate={(attribute, value) =>
+                        this.handleUpdate(attribute, value)}
                     />
                     : <ItemAttribute
                       attribute={item.attribute}

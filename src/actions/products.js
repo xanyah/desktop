@@ -1,22 +1,18 @@
 import {
   PRODUCTS_UPDATE_FIELD,
   PRODUCTS_UPDATE_PRODUCT,
-  PRODUCTS_UPDATE_VARIANT,
 } from '../constants/actions'
 
 import { I18n } from 'react-redux-i18n'
 
 import {
   getProducts as apiGetProducts,
-  getVariants as apiGetVariants,
-  createVariant as apiPostVariant,
-  updateVariant as apiPatchVariantParams,
   updateProduct as apiPatchProductParams,
+  searchProduct as apiSearchProduct,
 } from '../utils/api-helper'
 
 import {
   formatProduct,
-  formatVariant,
 } from '../types'
 
 import {
@@ -35,11 +31,6 @@ export const updateProductsField = (field, value) => ({
   value,
 })
 
-export const updateVariant = variant => ({
-  type: PRODUCTS_UPDATE_VARIANT,
-  variant,
-})
-
 export const getProducts = () =>
   (dispatch, currentState) => {
     const state = currentState()
@@ -54,45 +45,6 @@ export const getProducts = () =>
       })
   }
 
-export const getVariants = (productId) =>
-  (dispatch) => {
-    dispatch(updateProductsField('loading', true))
-    apiGetVariants({ product_id: productId })
-      .then(({ data }) => {
-        dispatch(updateProductsField('variants', data))
-        dispatch(updateProductsField('loading', false))
-      })
-      .catch(() => {
-        showErrorToast(I18n.t('toast.error'))
-      })
-  }
-
-export const createApiVariant = newVariant =>
-  (dispatch) => {
-    newVariant = formatVariant(newVariant)
-    dispatch(updateProductsField('loading', true))
-    apiPostVariant({...newVariant})
-      .then(({ data }) => {
-        dispatch(updateProductsField('loading', false))
-        dispatch(updateVariant(data))
-      })
-      .catch(() => {
-        showErrorToast(I18n.t('toast.error'))
-      })
-  }
-
-export const updateApiVariant = updatedVariant =>
-  dispatch => {
-    updatedVariant = formatVariant(updatedVariant)
-    dispatch(updateProductsField('loading', true))
-    apiPatchVariantParams(updatedVariant.id, updatedVariant)
-      .then(({ data }) => {
-        dispatch(updateProductsField('loading', false))
-        dispatch(updateVariant(data))
-        showSuccessToast(I18n.t('toast.updated'))
-      })
-  }
-
 export const updateApiProduct = updatedProduct =>
   dispatch => {
     updatedProduct = formatProduct(updatedProduct)
@@ -102,5 +54,21 @@ export const updateApiProduct = updatedProduct =>
         dispatch(updateProductsField('loading', false))
         dispatch(updateProduct(data))
         showSuccessToast(I18n.t('toast.updated'))
+      })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
+      })
+  }
+
+export const searchApiProduct = query =>
+  (dispatch, currentState) => {
+    const state = currentState()
+    apiSearchProduct({ query: query, storeId: state.stores.currentStore.id })
+      .then(({ data }) => {
+        //TODO Improve with loader ?
+        dispatch(updateProductsField('products', data))
+      })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
       })
   }

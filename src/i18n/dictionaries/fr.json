@@ -43,22 +43,27 @@
   "models": {
     "providers": {
       "create": "Créer un fournisseur",
-      "name": "Nom",
+      "name": "Nom du fournisseur",
       "notes": "Notes",
       "createdAt": "Date de création",
-      "open": "Voir le fournisseur"
+      "open": "Voir le fournisseur",
+      "search": "Rechercher un fournisseur...",
+      "shippingsCount": "Nombre de livraisons"
     },
     "manufacturers": {
       "create": "Créer un fabricant",
-      "name": "Nom",
+      "name": "Nom du fabricant",
       "notes": "Notes",
       "createdAt": "Date de création",
-      "open": "Voir le fabricant"
+      "open": "Voir le fabricant",
+      "search": "Rechercher un fabricant...",
+      "productsCount": "Nombre de produits"
     },
     "inventories": {
       "create": "Créer un inventaire",
       "createdAt": "Date de création",
-      "open": "Voir l'inventaire"
+      "open": "Voir l'inventaire",
+      "search": "Rechercher un inventaire..."
     },
     "products": {
       "category": "Catégorie",
@@ -67,7 +72,8 @@
       "open": "Voir le produit",
       "manufacturer": "Fabricant",
       "name": "Nom du produit",
-      "updatedAt": "Dernière mise à jour"
+      "updatedAt": "Dernière mise à jour",
+      "search": "Rechercher un produit..."
     },
     "variants": {
       "create": "Créer un dérivé",
@@ -77,14 +83,36 @@
       "provider": "Fournisseur",
       "quantity": "Quantité",
       "ratio": "Coefficient",
-      "taxFreePrice": "Prix hors taxe"
+      "taxFreePrice": "Prix hors taxe",
+      "search": "Rechercher un dérivé..."
+    },
+    "clients": {
+      "create": "Créer un client",
+      "open": "Voir le client",
+      "search": "Rechercher un client ...",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "address": "Adresse",
+      "email": "Mail",
+      "notes": "Notes",
+      "phone": "Téléphone"
     }
   },
   "routes": {
     "providers": "Fournisseurs",
+    "provider": "Fournisseur",
     "manufacturers": "Fabricants",
+    "manufacturer": "Fabricant",
     "settings": "Paramètres",
-    "account": "Mon compte"
+    "account": "Mon compte",
+    "product": "Produit",
+    "products": "Produits",
+    "variant": "Dérivé",
+    "inventories": "Inventaires",
+    "inventory": "Inventaire",
+    "custom-attribute": "Attribut dérivé",
+    "clients": "Clients",
+    "client": "Client"
   },
   "account": {
     "form": {
@@ -97,7 +125,8 @@
     }
   },
   "toast": {
-    "updated": "Mis à jour",
+    "created": "Entité créée !",
+    "updated": "Entité mise à jour !",
     "error": "Une erreur est survenue !"
   },
   "data-details": {

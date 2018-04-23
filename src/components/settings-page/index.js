@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PageContainer from '../page-container'
 
-import { StoreType, CategoryType } from '../../types'
+import { StoreType, CategoryType, CustomAttributeType } from '../../types'
+import CustomAttribute from './custom-attributes'
 
 import './styles.scss'
 
@@ -18,15 +19,19 @@ export default class Settings extends React.Component {
         key: 'categories',
         render: () => this.renderCategories(),
       },
+      {
+        key: 'custom-attributes',
+        render: () => this.renderCustomAttributes(),
+      },
     ]
   }
 
   componentWillMount() {
-    const { currentStore, updateField } = this.props
+    const { currentStore, getCategories, updateField } = this.props
     updateField('country', currentStore.country)
     updateField('step', this.steps[0].key)
     updateField('storeName', currentStore.name)
-    this.props.getCategories()
+    getCategories()
   }
 
   renderGeneral() {
@@ -74,6 +79,7 @@ export default class Settings extends React.Component {
     return (
       <div>
         <ul>
+          {/* <Collapsible trigger={<h1>> Crée un nouveau dérivé</h1>}> */}
           { categories.map((category) => {
             return (!category.children.length)
               ? <li key={category.id}>{category.name}</li>
@@ -88,6 +94,21 @@ export default class Settings extends React.Component {
         </ul>
       </div>
     )
+  }
+
+  renderCustomAttributes() {
+    const {
+      createApiCustomAttribute,
+      customAttributes,
+      openCustomAttribute,
+      getCustomAttributes,
+    } = this.props
+    return <CustomAttribute
+      createApiCustomAttribute={createApiCustomAttribute}
+      customAttributes={customAttributes}
+      getCustomAttributes={getCustomAttributes}
+      openCustomAttribute={openCustomAttribute}
+    />
   }
 
   render() {
@@ -119,8 +140,12 @@ export default class Settings extends React.Component {
 Settings.propTypes = {
   categories: PropTypes.arrayOf(CategoryType),
   country: PropTypes.string,
+  createApiCustomAttribute: PropTypes.func,
   currentStore: PropTypes.objectOf(StoreType),
+  customAttributes: PropTypes.arrayOf(CustomAttributeType),
   getCategories: PropTypes.func,
+  getCustomAttributes: PropTypes.func,
+  openCustomAttribute: PropTypes.func,
   step: PropTypes.string,
   storeName: PropTypes.string,
   updateField: PropTypes.func,
@@ -130,8 +155,12 @@ Settings.propTypes = {
 Settings.defaultProps = {
   categories: [],
   country: '',
+  createApiCustomAttribute: () => null,
   currentStore: {},
+  customAttributes: [],
   getCategories: () => null,
+  getCustomAttributes: () => null,
+  openCustomAttribute: () => null,
   step: 'general',
   storeName: '',
   updateField: () => null,

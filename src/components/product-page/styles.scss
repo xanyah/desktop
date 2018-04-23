@@ -2,6 +2,10 @@
 
 .data-details-products {
   .children {
+    .Collapsible__trigger > h1 {
+      border-bottom: 3px solid $primary-text-color;
+    }
+
     .variant-form {
       display: flex;
       flex-direction: column;

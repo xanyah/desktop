@@ -8,7 +8,12 @@ import { getCurrentRoute, getParentRoute } from '../../utils/router-helper'
 
 import './styles.scss'
 
-const PageContainer = ({ children, currentNavigationStep, footerElements, location }) => {
+const PageContainer = ({
+  children,
+  currentNavigationStep,
+  footerElements,
+  location,
+}) => {
   const currentRoute = getCurrentRoute(location.pathname)
   const parentRoute = getParentRoute(location.pathname)
 
@@ -19,7 +24,11 @@ const PageContainer = ({ children, currentNavigationStep, footerElements, locati
           <img src={currentRoute.image} />
           {parentRoute
             && [
-              <Link key="link" className="breadcrumb inactive" to={parentRoute.path}>
+              <Link
+                className="breadcrumb inactive"
+                key="link"
+                to={parentRoute.path}
+              >
                 <Translate value={`routes.${parentRoute.key}`} />
               </Link>,
               <span key="arrow" className="arrow">></span>,

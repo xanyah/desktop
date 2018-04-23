@@ -9,6 +9,7 @@ import {
   getProviders as apiGetProviders,
   updateProvider as apiPatchProviderParams,
   createProvider as apiPostProvider,
+  searchProvider as apiSearchProvider,
 } from '../utils/api-helper'
 
 import {
@@ -53,12 +54,14 @@ export const updateApiProvider = updatedProvider =>
         dispatch(updateProvider(data))
         showSuccessToast(I18n.t('toast.updated'))
       })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
+      })
   }
 
 export const createApiProvider = newProvider =>
   (dispatch, currentState) => {
     const state = currentState()
-
     if(state && state.stores && state.stores.currentStore) {
       const storeId = state.stores.currentStore.id
       newProvider = formatProvider(newProvider)
@@ -67,6 +70,23 @@ export const createApiProvider = newProvider =>
         .then(({ data }) => {
           dispatch(updateProviderField('loading', false))
           dispatch(updateProvider(data))
+          showSuccessToast(I18n.t('toast.created'))
+        })
+        .catch(() => {
+          showErrorToast(I18n.t('toast.error'))
         })
     }
+  }
+
+export const searchApiProvider = query =>
+  (dispatch, currentState) => {
+    const state = currentState()
+    apiSearchProvider({ query: query, storeId: state.stores.currentStore.id })
+      .then(({ data }) => {
+        //TODO Improve with loader ?
+        dispatch(updateProviderField('providers', data))
+      })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
+      })
   }

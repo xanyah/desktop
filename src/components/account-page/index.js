@@ -3,14 +3,39 @@ import PropTypes from 'prop-types'
 import PageContainer from '../page-container'
 import { Translate } from 'react-redux-i18n'
 import { verifyPassword, errorHandler } from '../../utils/password-helper'
+import FormAttribute from '../../containers/form-attribute'
 
 import './styles.scss'
 
 export default class Account extends React.Component {
-  render() {
+  componentWillMount() {
     const {
       firstname,
       lastname,
+      locale,
+    } = this.props
+
+    this.setState({
+      updatedUser: {
+        'firstname': firstname,
+        'lastname': lastname,
+        'locale': locale,
+      },
+    })
+  }
+
+  handleUpdateFieldUser(attribute, value) {
+    this.setState({
+      updatedUser: {
+        ...this.state.updatedUser,
+        [attribute]: value,
+      },
+    })
+  }
+
+
+  render() {
+    const {
       loading,
       locale,
       updateField,
@@ -18,54 +43,59 @@ export default class Account extends React.Component {
       confirmNewPassword,
       updateUserParams,
     } = this.props
+    const {updatedUser} = this.state
     return (
       <PageContainer>
-        <form
-          onSubmit={e => {
-            e.preventDefault()
-            updateUserParams({
-              firstname: firstname.trim(),
-              lastname: lastname.trim(),
-              locale: locale,
-            })
-          }}
-        >
-          <h2><Translate value='account.form.first.title'/></h2>
-          <input
-            className="input-text"
-            onChange={e => updateField('firstname', e.target.value)}
-            required
-            type="text"
-            value={firstname}
-          />
-          <input
-            className="input-text"
-            onChange={e => updateField('lastname', e.target.value)}
-            required
-            type="text"
-            value={lastname}
-          />
-          <select
-            className='select-locale'
-            onChange={e => updateField('locale', e.target.value)}
+        <div className="account">
+          <form
+            onSubmit={e => {
+              e.preventDefault()
+              updateUserParams(updatedUser)
+            }}
           >
-            <option
-              value="fr"
-              selected={'fr' === locale}
-            >FR</option>
-            <option
-              value="en"
-              selected={'en' === locale}
-            >EN</option>
-          </select>
-          <button
-            className="btn-primary submit"
-            type="submit"
-            disabled={loading}
-          >
-              SAVE
-          </button>
-        </form>
+            <h2><Translate value='account.form.first.title'/></h2>
+
+            <FormAttribute
+              attribute="firstname"
+              key="firstname"
+              value={updatedUser['firstname']}
+              model="variant-attributes"
+              type="string"
+              onUpdate={(attribute, value) => this.handleUpdateFieldUser('firstname', value)}
+            />
+
+            <FormAttribute
+              attribute="lastname"
+              key="lastname"
+              value={updatedUser['lastname']}
+              model="variant-attributes"
+              type="string"
+              onUpdate={(attribute, value) => this.handleUpdateFieldUser('lastname', value)}
+            />
+
+            <select
+              className='select-locale'
+              onChange={e => updateField('locale', e.target.value)}
+            >
+              <option
+                value="fr"
+                selected={'fr' === locale}
+              >FR</option>
+              <option
+                value="en"
+                selected={'en' === locale}
+              >EN</option>
+            </select>
+            <button
+              className="btn-primary submit"
+              type="submit"
+              disabled={loading}
+            >
+                SAVE
+            </button>
+          </form>
+        </div>
+
         <form
           onSubmit={e => {
             e.preventDefault()

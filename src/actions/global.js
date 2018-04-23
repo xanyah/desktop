@@ -9,6 +9,7 @@ import {
   getInventories,
   getManufacturers,
   getCategories,
+  getCustomAttributes,
 } from '../utils/api-helper'
 
 import {
@@ -17,7 +18,8 @@ import {
   updateProductsField,
   updateInventoriesField,
   updateManufacturerField,
-  updateSettingsField,
+  updateCategoriesField,
+  updateCustomAttributesField,
 } from './index'
 
 export const updateGlobalField = (field, value) => ({
@@ -35,15 +37,41 @@ export const initialSync = () =>
       getInventories(),
       getManufacturers(),
       getCategories(),
-    ]).then(([ providersResponse, storesResponse, productsResponse, inventoriesResponse, manufacturersResponses, categoriesResponses ]) => {
-      dispatch(updateProviderField('providers', providersResponse.data))
-      dispatch(updateStoresField('stores', storesResponse.data))
-      dispatch(updateProductsField('products', productsResponse.data))
-      dispatch(updateInventoriesField('inventories', inventoriesResponse.data))
-      dispatch(updateManufacturerField('manufacturers', manufacturersResponses.data))
-      dispatch(updateSettingsField('categories', categoriesResponses.data))
+      getCustomAttributes(),
+    ]).then(([
+      providersResponse,
+      storesResponse,
+      productsResponse,
+      inventoriesResponse,
+      manufacturersResponses,
+      categoriesResponses,
+      customAttributesResponses,
+    ]) => {
+      dispatch(updateProviderField(
+        'providers', providersResponse.data
+      ))
+      dispatch(updateStoresField(
+        'stores', storesResponse.data
+      ))
+      dispatch(updateProductsField(
+        'products', productsResponse.data
+      ))
+      dispatch(updateInventoriesField(
+        'inventories', inventoriesResponse.data
+      ))
+      dispatch(updateManufacturerField(
+        'manufacturers', manufacturersResponses.data
+      ))
+      dispatch(updateCategoriesField(
+        'categories', categoriesResponses.data
+      ))
+      dispatch(updateCustomAttributesField(
+        'customAttributes', customAttributesResponses.data
+      ))
       if (storesResponse.data.length > 0) {
-        dispatch(updateStoresField('currentStore', storesResponse.data[0]))
+        dispatch(updateStoresField(
+          'currentStore', storesResponse.data[0]
+        ))
       }
     })
   }

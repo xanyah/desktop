@@ -15,7 +15,9 @@ import AccountPage from '../containers/account-page'
 import HomePage from '../containers/home-page'
 import SettingsPage from '../containers/settings-page'
 import SignInPage from '../containers/sign-in-page'
-
+import CustomAttributePage from '../containers/custom-attribute-page'
+import ClientPage from '../containers/client-page'
+import ClientsPage from '../containers/clients-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
 import ManufacturerPage from '../containers/manufacturer-page'
@@ -99,11 +101,24 @@ export const routes = [
     strict: true,
   },
   {
+    component: ClientsPage,
     displayHome: true,
+    exact: true,
     image: users,
-    inRouter: false,
+    inRouter: true,
     key: 'clients',
     path: '/clients',
+    strict: true,
+  },
+  {
+    component: ClientPage,
+    displayHome: false,
+    exact: true,
+    image: users,
+    inRouter: true,
+    key: 'client',
+    path: '/clients/:id',
+    strict: true,
   },
   {
     component: ProvidersPage,
@@ -160,10 +175,20 @@ export const routes = [
   {
     component: SettingsPage,
     displayHome: false,
+    exact: true,
     image: settings,
     inRouter: true,
     key: 'settings',
     path: '/settings',
+  },
+  {
+    component: CustomAttributePage,
+    displayHome: false,
+    exact: true,
+    image: settings,
+    inRouter: true,
+    key: 'custom-attribute',
+    path: '/settings/custom-attributes/:id',
   },
   {
     component: AccountPage,

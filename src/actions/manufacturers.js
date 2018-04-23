@@ -9,6 +9,7 @@ import {
   getManufacturers as apiGetManufacturers,
   updateManufacturer as apiPatchManufacturerParams,
   createManufacturer as apiPostManufacturer,
+  searchManufacturer as apiSearchManufacturer,
 } from '../utils/api-helper'
 
 import {
@@ -53,6 +54,9 @@ export const updateApiManufacturer = updatedManufacturer =>
         dispatch(updateManufacturer(data))
         showSuccessToast(I18n.t('toast.updated'))
       })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
+      })
   }
 
 export const createApiManufacturer = newManufacturer =>
@@ -67,6 +71,27 @@ export const createApiManufacturer = newManufacturer =>
         .then(({ data }) => {
           dispatch(updateManufacturerField('loading', false))
           dispatch(updateManufacturer(data))
+          showSuccessToast(I18n.t('toast.created'))
+        })
+        .catch(() => {
+          showErrorToast(I18n.t('toast.error'))
         })
     }
+  }
+
+export const searchApiManufacturer = query =>
+  (dispatch, currentState) => {
+    const state = currentState()
+    apiSearchManufacturer(
+      {
+        query: query,
+        storeId: state.stores.currentStore.id,
+      })
+      .then(({ data }) => {
+        //TODO Improve with loader ?
+        dispatch(updateManufacturerField('manufacturers', data))
+      })
+      .catch(() => {
+        showErrorToast(I18n.t('toast.error'))
+      })
   }
