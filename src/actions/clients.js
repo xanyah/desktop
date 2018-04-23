@@ -30,11 +30,11 @@ export const updateClientField = (field, value) => ({
   value,
 })
 
-export const getClients = () =>
+export const getClients = params =>
   (dispatch, currentState) => {
     const state = currentState()
     dispatch(updateClientField('loading', true))
-    apiGetClients({ storeId: state.stores.currentStore.id })
+    apiGetClients({ ...params, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
         dispatch(updateClientField('clients', data))
         dispatch(updateClientField('loading', false))

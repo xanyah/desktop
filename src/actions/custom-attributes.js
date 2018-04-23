@@ -37,11 +37,11 @@ export const updateCustomAttributesField = (field, value) => ({
   value,
 })
 
-export const getCustomAttributes = () =>
+export const getCustomAttributes = params =>
   (dispatch, currentState) => {
     const state = currentState()
     dispatch(updateCustomAttributesField('loading', true))
-    apiGetCustomAttributes({ storeId: state.stores.currentStore.id })
+    apiGetCustomAttributes({ ...params, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
         dispatch(updateCustomAttributesField('customAttributes', data))
         dispatch(updateCustomAttributesField('loading', false))

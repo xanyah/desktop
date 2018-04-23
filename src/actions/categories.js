@@ -11,7 +11,7 @@ export const updateCategoriesField = (field, value) => ({
   value,
 })
 
-export const getCategories = () =>
+export const getCategories = params =>
   dispatch => {
     dispatch(updateCategoriesField('loading', true))
     apiGetCategories()

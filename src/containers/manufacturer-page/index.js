@@ -1,20 +1,32 @@
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import {
   createApiManufacturer,
+  getProducts,
+  getVariants,
   updateGlobalField,
+  updateProductsField,
   updateManufacturerField,
   updateApiManufacturer,
 } from '../../actions'
 import ManufacturerPage from '../../components/manufacturer-page'
 
-const mapStateToProps = ({ manufacturers: { editing, selectedManufacturer } }) => ({
+const mapStateToProps = ({ manufacturers: { editing, selectedManufacturer }, products: { loading, products } }) => ({
   editing,
+  loading,
+  products,
   selectedManufacturer,
 })
 
 const mapDispatchToProps = dispatch => ({
   createApiManufacturer: newManufacturer => dispatch(createApiManufacturer(newManufacturer)),
   dispatch,
+  getProducts: params => dispatch(getProducts(params)),
+  openProduct: product => {
+    dispatch(updateProductsField('selectedProduct', product))
+    dispatch(getVariants(product.id))
+    dispatch(push(`/products/${product.id}`))
+  },
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
   updateApiManufacturer: updatedManufacturer => {
     dispatch(updateApiManufacturer(updatedManufacturer))

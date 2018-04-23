@@ -31,11 +31,11 @@ export const updateProductsField = (field, value) => ({
   value,
 })
 
-export const getProducts = () =>
+export const getProducts = params =>
   (dispatch, currentState) => {
     const state = currentState()
     dispatch(updateProductsField('loading', true))
-    apiGetProducts({ storeId: state.stores.currentStore.id })
+    apiGetProducts({ ...params, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
         dispatch(updateProductsField('products', data))
         dispatch(updateProductsField('loading', false))

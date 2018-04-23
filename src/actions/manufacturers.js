@@ -30,11 +30,11 @@ export const updateManufacturerField = (field, value) => ({
   value,
 })
 
-export const getManufacturers = () =>
+export const getManufacturers = params =>
   (dispatch, currentState) => {
     const state = currentState()
     dispatch(updateManufacturerField('loading', true))
-    apiGetManufacturers({ storeId: state.stores.currentStore.id })
+    apiGetManufacturers({ ...params, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
         dispatch(updateManufacturerField('manufacturers', data))
         dispatch(updateManufacturerField('loading', false))

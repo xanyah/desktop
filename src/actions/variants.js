@@ -32,7 +32,7 @@ export const createVariant = variant => ({
   variant,
 })
 
-export const getVariants = (productId) =>
+export const getVariants = productId =>
   (dispatch) => {
     dispatch(updateProductsField('loading', true))
     apiGetVariants({ product_id: productId })
