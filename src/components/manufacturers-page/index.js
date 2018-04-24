@@ -16,15 +16,17 @@ export default class Manufacturers extends React.Component {
       loading,
       manufacturers,
       openManufacturer,
+      searchApiManufacturer,
     } = this.props
     return (
       <PageContainer>
         <DataTable
-          columns={['name', 'notes', 'createdAt']}
+          columns={['name', 'notes', 'productsCount']}
           data={manufacturers}
           loading={loading}
           onItemView={item => openManufacturer(item)}
           type="manufacturers"
+          searchEntity={searchApiManufacturer}
         />
       </PageContainer>
     )
@@ -36,6 +38,7 @@ Manufacturers.propTypes = {
   loading: PropTypes.bool,
   manufacturers: PropTypes.arrayOf(ManufacturerType),
   openManufacturer: PropTypes.func,
+  searchApiManufacturer: PropTypes.func,
 }
 
 Manufacturers.defaultProps = {
@@ -43,4 +46,5 @@ Manufacturers.defaultProps = {
   loading: true,
   manufacturers: [],
   openManufacturer: () => null,
+  searchApiManufacturer: () => null,
 }

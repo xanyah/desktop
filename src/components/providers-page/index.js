@@ -13,6 +13,7 @@ export default class Providers extends React.Component {
 
   render() {
     const {
+      searchApiProvider,
       loading,
       openProvider,
       providers,
@@ -20,11 +21,12 @@ export default class Providers extends React.Component {
     return (
       <PageContainer>
         <DataTable
-          columns={['name', 'notes', 'createdAt']}
+          columns={['name', 'notes', 'shippingsCount']}
           data={providers}
           loading={loading}
           onItemView={item => openProvider(item)}
           type="providers"
+          searchEntity={searchApiProvider}
         />
       </PageContainer>
     )
@@ -36,6 +38,7 @@ Providers.propTypes = {
   loading: PropTypes.bool,
   openProvider: PropTypes.func,
   providers: PropTypes.arrayOf(ProviderType),
+  searchApiProvider: PropTypes.func,
 }
 
 Providers.defaultProps = {
@@ -43,4 +46,5 @@ Providers.defaultProps = {
   loading: true,
   openProvider: () => null,
   providers: [],
+  searchApiProvider: () => null,
 }

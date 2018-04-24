@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ItemAttribute from '../item-attribute'
-import FormAttribute from '../form-attribute'
+import FormAttribute from '../../containers/form-attribute'
 
 import { Translate } from 'react-redux-i18n'
 
@@ -42,7 +42,7 @@ export default class DataDetails extends React.Component {
     const { selectedEntity } = this.state
 
     return (
-      <div className="data-details">
+      <div className={`data-details data-details-${type}`}>
         <div className="info">
           <form
             onSubmit={e => {
@@ -62,7 +62,8 @@ export default class DataDetails extends React.Component {
                       value={selectedEntity[item.attribute]}
                       model={type}
                       type={item.type}
-                      onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+                      onUpdate={(attribute, value) =>
+                        this.handleUpdate(attribute, value)}
                     />
                 ))}
               </div>
@@ -70,7 +71,7 @@ export default class DataDetails extends React.Component {
             {
               (
                 <button
-                  className="btn-link"
+                  className="btn-link btn-stand-alone"
                   key="btn-submit"
                 >
                   <Translate value={'data-details.form.buttons.create'}/>
@@ -78,6 +79,8 @@ export default class DataDetails extends React.Component {
               )
             }
           </form>
+        </div>
+        <div className="children">
           {children}
         </div>
       </div>
@@ -97,7 +100,7 @@ export default class DataDetails extends React.Component {
     const editableEntity = isEditableEntity(formattedData)
 
     return (
-      <div className="data-details">
+      <div className={`data-details data-details-${type}`}>
         <div className="info">
           <form
             onSubmit={e => {
@@ -116,13 +119,15 @@ export default class DataDetails extends React.Component {
                       value={selectedEntity[item.attribute]}
                       model={type}
                       type={item.type}
-                      onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+                      onUpdate={(attribute, value) =>
+                        this.handleUpdate(attribute, value)}
                     />
                     : <ItemAttribute
                       attribute={item.attribute}
                       key={item.attribute}
                       value={selectedEntity[item.attribute]}
-                      type={type}
+                      model={type}
+                      type={item.type}
                     />
                 ))}
               </div>
@@ -131,26 +136,26 @@ export default class DataDetails extends React.Component {
               (editableEntity) &&
               ((editing)
                 ? (
-                  [
+                  <div className="btn-group">
+                    <button
+                      className="btn-danger"
+                      key="btn-cancel"
+                      onClick={() => this.handleCancelUpdate(toggleEdit)}
+                    >
+                      <Translate value={'data-details.form.buttons.cancel'}/>
+                    </button>
                     <button
                       className="btn-link"
                       key="btn-submit"
                       type="submit"
                     >
                       <Translate value={'data-details.form.buttons.submit'}/>
-                    </button>,
-                    <button
-                      className="btn-link"
-                      key="btn-cancel"
-                      onClick={() => this.handleCancelUpdate(toggleEdit)}
-                    >
-                      <Translate value={'data-details.form.buttons.cancel'}/>
-                    </button>,
-                  ]
+                    </button>
+                  </div>
                 )
                 : (
                   <button
-                    className="btn-link"
+                    className="btn-link btn-stand-alone"
                     onClick={() => toggleEdit()}
                   >
                     <Translate value={'data-details.form.buttons.edit'}/>
@@ -158,6 +163,8 @@ export default class DataDetails extends React.Component {
                 ))
             }
           </form>
+        </div>
+        <div className="children">
           {children}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import ProvidersPage from '../../components/providers-page'
-import { getProviders, updateProviderField } from '../../actions'
+import { getProviders, searchApiProvider, updateProviderField } from '../../actions'
 
 const mapStateToProps = ({ providers: { loading, providers } }) => ({
   loading,
@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateProviderField('selectedProvider', provider))
     dispatch(push(`/providers/${provider.id}`))
   },
+  searchApiProvider: query => dispatch(searchApiProvider(query)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProvidersPage)
