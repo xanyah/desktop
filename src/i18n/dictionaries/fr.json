@@ -1,189 +1,189 @@
 {
-  "account": {
-    "form": {
-      "first": {
-        "title": "Modification de vos informations personnelles"
-      },
-      "second": {
-        "title": "Modification du Mot de Passe"
-      }
-    }
-  },
-  "checkout": {
-    "add-promotion": "Ajouter une promotion",
-    "change": "Monnaie à rendre",
-    "left-to-pay": "Reste à facturer",
-    "remove-article": "Retirer l'article",
-    "reset-alert": {
-      "text": "La vente sera annulée et le stock ne sera pas affecté",
-      "title": "Êtes-vous sûr ?"
+    "account": {
+        "form": {
+            "first": {
+                "title": "Modification de vos informations personnelles"
+            },
+            "second": {
+                "title": "Modification du Mot de Passe"
+            }
+        }
     },
-    "total": "Total",
-    "type-barcode": "Saisir le code barre"
-  },
-  "data-details": {
-    "form": {
-      "buttons": {
-        "cancel": "Annuler",
-        "create": "Créer",
-        "edit": "Modifier",
-        "submit": "Valider"
-      }
-    }
-  },
-  "global": {
-    "back": "Retour",
-    "cancel": "Annuler",
-    "reset": "Remettre à zéro",
-    "validate": "Valider"
-  },
-  "home": {
-    "welcome": {
-      "afternoon": "Bonjour %{firstname} !",
-      "evening": "Bonsoir %{firstname} !",
-      "morning": "Bonjour %{firstname} !"
-    }
-  },
-  "home-link": {
     "checkout": {
-      "subtitle": "Encaisser une vente",
-      "title": "Caisse"
+        "add-promotion": "Ajouter une promotion",
+        "change": "Monnaie à rendre",
+        "left-to-pay": "Reste à facturer",
+        "remove-article": "Retirer l'article",
+        "reset-alert": {
+            "text": "La vente sera annulée et le stock ne sera pas affecté",
+            "title": "Êtes-vous sûr ?"
+        },
+        "total": "Total",
+        "type-barcode": "Saisir le code barre"
     },
-    "clients": {
-      "subtitle": "Gérer les clients",
-      "title": "Clients"
+    "data-details": {
+        "form": {
+            "buttons": {
+                "cancel": "Annuler",
+                "create": "Créer",
+                "edit": "Modifier",
+                "submit": "Valider"
+            }
+        }
     },
-    "inventories": {
-      "subtitle": "Gérer les inventaires",
-      "title": "Inventaires"
+    "global": {
+        "back": "Retour",
+        "cancel": "Annuler",
+        "reset": "Remettre à zéro",
+        "validate": "Valider"
     },
-    "manufacturers": {
-      "subtitle": "Gérer les fabricants",
-      "title": "Fabricants"
+    "home": {
+        "welcome": {
+            "afternoon": "Bonjour %{firstname} !",
+            "evening": "Bonsoir %{firstname} !",
+            "morning": "Bonjour %{firstname} !"
+        }
     },
-    "orders": {
-      "subtitle": "Gérer les commandes",
-      "title": "Commandes"
+    "home-link": {
+        "checkout": {
+            "subtitle": "Encaisser une vente",
+            "title": "Caisse"
+        },
+        "clients": {
+            "subtitle": "Gérer les clients",
+            "title": "Clients"
+        },
+        "inventories": {
+            "subtitle": "Gérer les inventaires",
+            "title": "Inventaires"
+        },
+        "manufacturers": {
+            "subtitle": "Gérer les fabricants",
+            "title": "Fabricants"
+        },
+        "orders": {
+            "subtitle": "Gérer les commandes",
+            "title": "Commandes"
+        },
+        "products": {
+            "subtitle": "Gérer les produits",
+            "title": "Produits"
+        },
+        "providers": {
+            "subtitle": "Gérer les fournisseurs",
+            "title": "Fournisseurs"
+        },
+        "shippings": {
+            "subtitle": "Gérer les livraisons",
+            "title": "Livraisons"
+        }
     },
-    "products": {
-      "subtitle": "Gérer les produits",
-      "title": "Produits"
+    "models": {
+        "clients": {
+            "address": "Adresse",
+            "create": "Créer un client",
+            "email": "Mail",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "notes": "Notes",
+            "open": "Voir le client",
+            "phone": "Téléphone",
+            "search": "Rechercher un client ..."
+        },
+        "inventories": {
+            "create": "Créer un inventaire",
+            "createdAt": "Date de création",
+            "open": "Voir l'inventaire",
+            "search": "Rechercher un client...",
+            "title": "Inventaire"
+        },
+        "manufacturers": {
+            "create": "Créer un fabricant",
+            "createdAt": "Date de création",
+            "name": "Nom",
+            "notes": "Notes",
+            "open": "Voir le fabricant",
+            "productsCount": "Nombre de produits",
+            "search": "Rechercher un fabricant...",
+            "title": "Fabricant"
+        },
+        "orders": {
+            "create": "Créer une commande",
+            "open": "Voir la commande",
+            "search": "Rechercher une commande ...",
+            "status": "Statut"
+        },
+        "products": {
+            "category": "Catégorie",
+            "create": "Créer un produit",
+            "createdAt": "Date de création",
+            "manufacturer": "Fabricant",
+            "name": "Nom du produit",
+            "open": "Voir le produit",
+            "search": "Rechercher un produit...",
+            "title": "Produit",
+            "updatedAt": "Dernière mise à jour"
+        },
+        "providers": {
+            "create": "Créer un fournisseur",
+            "createdAt": "Date de création",
+            "name": "Nom",
+            "notes": "Notes",
+            "open": "Voir le fournisseur",
+            "search": "Rechercher un fournisseur...",
+            "shippingsCount": "Nombre de livraisons",
+            "title": "Fournisseur"
+        },
+        "sales": {
+            "title": "Vente"
+        },
+        "shippings": {
+            "create": "Créer une livraison",
+            "open": "Voir la livraison",
+            "provider": "Fournisseur",
+            "search": "Rechercher une livraison ...",
+            "title": "Livraison"
+        },
+        "variants": {
+            "barcode": "Barcode",
+            "buyingPrice": "Buying Price",
+            "create": "Create a variant",
+            "open": "Open variant",
+            "provider": "Provider",
+            "quantity": "Quantity",
+            "ratio": "Ratio",
+            "search": "Search a variant...",
+            "taxFreePrice": "Tax Free Price",
+            "title": "Variant",
+            "unitPrice": "Prix unitaire"
+        }
     },
-    "providers": {
-      "subtitle": "Gérer les fournisseurs",
-      "title": "Fournisseurs"
+    "password-helper": {
+        "tips": {
+            "length": "La longueur du mot de passe doit être supérieur à 8",
+            "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
+        }
     },
-    "shippings": {
-      "subtitle": "Gérer les livraisons",
-      "title": "Livraisons"
+    "promotion-types": {
+        "flat_discount": "Remise (en €)",
+        "percent_discount": "Remise (en %)"
+    },
+    "routes": {
+        "account": "Mon compte",
+        "clients": "Clients",
+        "custom-attribute": "Attributs Personnalisés",
+        "inventories": "Inventaires",
+        "manufacturers": "Fabricants",
+        "orders": "Commandes",
+        "products": "Produits",
+        "providers": "Fournisseurs",
+        "settings": "Paramètres",
+        "shippings": "Livraisons"
+    },
+    "toast": {
+        "created": "%{entity} créé(e) !",
+        "error": "Une erreur s'est produite !",
+        "not-found": "%{entity} inexistant",
+        "updated": "Mis à jour"
     }
-  },
-  "models": {
-    "clients": {
-      "create": "Créer un client",
-      "open": "Voir le client",
-      "search": "Rechercher un client ...",
-      "firstname": "Prénom",
-      "lastname": "Nom",
-      "address": "Adresse",
-      "email": "Mail",
-      "notes": "Notes",
-      "phone": "Téléphone"
-    },
-    "inventories": {
-      "create": "Créer un inventaire",
-      "createdAt": "Date de création",
-      "open": "Voir l'inventaire",
-      "search": "Rechercher un client...",
-      "title": "Inventaire"
-    },
-    "manufacturers": {
-      "create": "Créer un fabricant",
-      "createdAt": "Date de création",
-      "name": "Nom",
-      "notes": "Notes",
-      "open": "Voir le fabricant",
-      "search": "Rechercher un fabricant...",
-      "productsCount": "Nombre de produits",
-      "title": "Fabricant"
-    },
-    "orders": {
-      "create": "Créer une commande",
-      "open": "Voir la commande",
-      "search": "Rechercher une commande ...",
-      "status": "Statut"
-    },
-    "products": {
-      "category": "Catégorie",
-      "create": "Créer un produit",
-      "createdAt": "Date de création",
-      "open": "Voir le produit",
-      "manufacturer": "Fabricant",
-      "name": "Nom du produit",
-      "updatedAt": "Dernière mise à jour",
-      "search": "Rechercher un produit...",
-      "title": "Produit"
-    },
-    "providers": {
-      "create": "Créer un fournisseur",
-      "createdAt": "Date de création",
-      "name": "Nom",
-      "notes": "Notes",
-      "open": "Voir le fournisseur",
-      "search": "Rechercher un fournisseur...",
-      "shippingsCount": "Nombre de livraisons",
-      "title": "Fournisseur"
-    },
-    "sales": {
-      "title": "Vente"
-    },
-    "shippings": {
-      "create": "Créer une livraison",
-      "open": "Voir la livraison",
-      "search": "Rechercher une livraison ...",
-      "provider": "Fournisseur",
-      "title": "Livraison"
-    },
-    "variants": {
-      "unitPrice": "Prix unitaire",
-      "title": "Variant",
-      "create": "Create a variant",
-      "barcode": "Barcode",
-      "buyingPrice": "Buying Price",
-      "open": "Open variant",
-      "provider": "Provider",
-      "quantity": "Quantity",
-      "ratio": "Ratio",
-      "taxFreePrice": "Tax Free Price",
-      "search": "Search a variant..."
-    }
-  },
-  "password-helper": {
-    "tips": {
-      "length": "La longueur du mot de passe doit être supérieur à 8",
-      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
-    }
-  },
-  "promotion-types": {
-    "flat_discount": "Remise (en €)",
-    "percent_discount": "Remise (en %)"
-  },
-  "routes": {
-    "account": "Mon compte",
-    "clients": "Clients",
-    "custom-attribute": "Attributs Personnalisés",
-    "inventories": "Inventaires",
-    "manufacturers": "Fabricants",
-    "orders": "Commandes",
-    "products": "Produits",
-    "providers": "Fournisseurs",
-    "settings": "Paramètres",
-    "shippings": "Livraisons"
-  },
-  "toast": {
-    "created": "%{entity} créé(e) !",
-    "error": "Une erreur s'est produite !",
-    "not-found": "%{entity} inexistant",
-    "updated": "Mis à jour"
-  }
 }
