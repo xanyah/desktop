@@ -27,6 +27,10 @@ import InventoriesPage from '../containers/inventories-page'
 import ProductPage from '../containers/product-page'
 import ProductsPage from '../containers/products-page'
 import VariantPage from '../containers/variant-page'
+import OrderPage from '../containers/order-page'
+import OrdersPage from '../containers/orders-page'
+import ShippingPage from '../containers/shipping-page'
+import ShippingsPage from '../containers/shippings-page'
 
 export const routes = [
   {
@@ -67,18 +71,44 @@ export const routes = [
     strict: true,
   },
   {
+    component: ShippingsPage,
     displayHome: true,
+    exact: true,
     image: clipboard,
-    inRouter: false,
+    inRouter: true,
     key: 'shippings',
     path: '/shippings',
+    strict: true,
   },
   {
+    component: ShippingPage,
+    displayHome: false,
+    exact: true,
+    image: clipboard,
+    inRouter: true,
+    key: 'shipping',
+    path: '/shippings/:id',
+    strict: true,
+  },
+  {
+    component: OrdersPage,
     displayHome: true,
+    exact: true,
     image: delivery,
-    inRouter: false,
+    inRouter: true,
     key: 'orders',
     path: '/orders',
+    strict: true,
+  },
+  {
+    component: OrderPage,
+    displayHome: false,
+    exact: true,
+    image: delivery,
+    inRouter: true,
+    key: 'order',
+    path: '/orders/:id',
+    strict: true,
   },
   {
     component: InventoriesPage,

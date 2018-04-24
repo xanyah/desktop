@@ -105,3 +105,23 @@ export const updateCategory = (categoryId, params) =>
   xanyahApi.patch(`categories/${categoryId}`, decamelizeKeys(params))
 export const createCategory = newCategory =>
   xanyahApi.post('categories', decamelizeKeys(newCategory))
+
+// Orders API Calls
+
+export const getOrders = params =>
+  xanyahApi.get('orders', decamelizeKeys({params}))
+export const updateOrder = (orderId, params) =>
+  xanyahApi.patch(`orders/${orderId}`, decamelizeKeys(params))
+export const createOrder = newOrder =>
+  xanyahApi.post('orders', decamelizeKeys(newOrder))
+export const searchOrder = params =>
+  xanyahApi.get('orders/search', decamelizeKeys({params}))
+
+// Shippings API Calls
+
+export const getShippings = params =>
+  xanyahApi.get('shippings', decamelizeKeys({params}))
+export const updateShipping = (shippingId, params) =>
+  xanyahApi.patch(`shippings/${shippingId}`, decamelizeKeys(params))
+export const createShipping = newShipping =>
+  xanyahApi.post('shippings', decamelizeKeys(newShipping))

@@ -96,6 +96,18 @@
       "email": "Mail",
       "notes": "Notes",
       "phone": "Téléphone"
+    },
+    "orders": {
+      "create": "Créer une commande",
+      "open": "Voir la commande",
+      "search": "Rechercher une commande ...",
+      "status": "Statut"
+    },
+    "shippings": {
+      "create": "Créer une livraison",
+      "open": "Voir la livraison",
+      "search": "Rechercher une livraison ...",
+      "provider": "Fournisseur"
     }
   },
   "routes": {
@@ -112,7 +124,11 @@
     "inventory": "Inventaire",
     "custom-attribute": "Attribut dérivé",
     "clients": "Clients",
-    "client": "Client"
+    "client": "Client",
+    "orders": "Commandes",
+    "order": "Commande",
+    "shippings": "Livraisons",
+    "shipping": "Livraison"
   },
   "account": {
     "form": {

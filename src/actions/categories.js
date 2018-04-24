@@ -14,7 +14,7 @@ export const updateCategoriesField = (field, value) => ({
 export const getCategories = params =>
   dispatch => {
     dispatch(updateCategoriesField('loading', true))
-    apiGetCategories()
+    apiGetCategories(params)
       .then(({ data }) => {
         const categories = orderCategories(data)
         dispatch(updateCategoriesField('categories', categories))

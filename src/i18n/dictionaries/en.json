@@ -96,6 +96,18 @@
       "email": "Email",
       "notes": "Notes",
       "phone": "Phone"
+    },
+    "orders": {
+      "create": "Create an order",
+      "open": "Open order",
+      "search": "Search an order ...",
+      "status": "Status"
+    },
+    "shippings": {
+      "create": "Create an shipping",
+      "open": "Open shipping",
+      "search": "Search an shipping ...",
+      "provider": "Provider"
     }
   },
   "routes": {
@@ -112,7 +124,11 @@
     "inventory": "Inventory",
     "custom-attribute": "Custom Attributes",
     "clients": "Clients",
-    "client": "Client"
+    "client": "Client",
+    "orders": "Orders",
+    "order": "Order",
+    "shippings": "Shippings",
+    "shipping": "Shipping"
   },
   "account": {
     "form": {
