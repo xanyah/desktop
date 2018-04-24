@@ -5,6 +5,7 @@ export const ManufacturerType = {
   id: PropTypes.string,
   name: PropTypes.string,
   notes: PropTypes.string,
+  productsCount: PropTypes.number,
   storeId: PropTypes.string,
   updatedAt: PropTypes.string,
 }
@@ -24,6 +25,11 @@ export const manufacturerFormat = [
   ],
   [
     {
+      attribute: 'productsCount',
+      editable: false,
+      type: 'number',
+    },
+    {
       attribute: 'createdAt',
       editable: false,
       type: 'date',
@@ -31,7 +37,7 @@ export const manufacturerFormat = [
   ],
 ]
 
-export const formatManufacturer = (manufacturer) => ({
+export const formatManufacturer = manufacturer => ({
   ...manufacturer,
   name: manufacturer.name.trim(),
   notes: manufacturer.notes.trim(),

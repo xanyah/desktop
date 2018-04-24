@@ -1,0 +1,24 @@
+@import '../../constants/scss/_colors.scss';
+
+.data-details-products {
+  .children {
+    .Collapsible__trigger > h1 {
+      border-bottom: 3px solid $primary-text-color;
+    }
+
+    .variant-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .row {
+        min-height: 80px;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+      }
+    }
+  }
+}

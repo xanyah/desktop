@@ -1,9 +1,6 @@
 @import './_colors.scss';
 
 .input-text {
-  height: 40px;
-  width: 360px;
-  font-size: 24px;
   appearance: none;
   background-color: transparent;
   border: none;
@@ -12,6 +9,25 @@
 
   &:empty {
     border-bottom: 1px solid $secondary-text-color;
+  }
+
+  &::placeholder {
+    color: $secondary-text-color;
+  }
+}
+
+.input-search {
+  width: 460px;
+  font-weight: 500;
+  font-size: 2rem;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: $primary-text-color;
+  border-bottom: 1px solid $grey-color;
+
+  &:empty {
+    border-bottom: 1px solid $grey-color;
   }
 
   &::placeholder {

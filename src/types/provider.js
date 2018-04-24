@@ -5,6 +5,7 @@ export const ProviderType = {
   id: PropTypes.string,
   name: PropTypes.string,
   notes: PropTypes.string,
+  shippingsCount: PropTypes.number,
   storeId: PropTypes.string,
   updatedAt: PropTypes.string,
 }
@@ -24,6 +25,11 @@ export const providerFormat = [
   ],
   [
     {
+      attribute: 'shippingsCount',
+      editable: false,
+      type: 'number',
+    },
+    {
       attribute: 'createdAt',
       editable: false,
       type: 'date',
@@ -31,7 +37,7 @@ export const providerFormat = [
   ],
 ]
 
-export const formatProvider = (provider) => ({
+export const formatProvider = provider => ({
   ...provider,
   name: provider.name.trim(),
   notes: provider.notes.trim(),

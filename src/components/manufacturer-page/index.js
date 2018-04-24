@@ -2,13 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ManufacturerType, manufacturerFormat } from '../../types'
 import DataDetails from '../data-details'
+import DataTable from '../data-table'
 import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
 
 export default class Manufacturer extends React.Component {
   componentWillMount() {
-    this.props.setPageName(this.props.selectedManufacturer.name)
+    const { setPageName, getProducts } = this.props
+    setPageName(this.props.selectedManufacturer.name)
+    getProducts({'manufacturerId': this.props.selectedManufacturer.id})
   }
 
   componentWillUnmount() {
@@ -19,7 +22,10 @@ export default class Manufacturer extends React.Component {
     const {
       createApiManufacturer,
       editing,
+      loading,
+      openProduct,
       toggleManufacturer,
+      products,
       selectedManufacturer,
       updateApiManufacturer,
     } = this.props
@@ -34,7 +40,15 @@ export default class Manufacturer extends React.Component {
           toggleEdit={toggleManufacturer}
           type="manufacturers"
           updateEntity={updateApiManufacturer}
-        />
+        >
+          <DataTable
+            columns={['name', 'category', 'manufacturer']}
+            data={products}
+            loading={loading}
+            onItemView={item => openProduct(item)}
+            type="products"
+          />
+        </DataDetails>
       </PageContainer>
     )
   }
@@ -43,6 +57,10 @@ export default class Manufacturer extends React.Component {
 Manufacturer.propTypes = {
   createApiManufacturer: PropTypes.func,
   editing: PropTypes.bool,
+  getProducts: PropTypes.func,
+  loading: PropTypes.bool,
+  openProduct: PropTypes.func,
+  products: PropTypes.func,
   selectedManufacturer: ManufacturerType,
   setPageName: PropTypes.func,
   toggleManufacturer: PropTypes.func,
@@ -52,6 +70,10 @@ Manufacturer.propTypes = {
 Manufacturer.defaultProps = {
   createApiManufacturer: () => null,
   editing: false,
+  getProducts: () => {},
+  loading: false,
+  openProduct: () => {},
+  products: () => {},
   selectedManufacturer: {},
   setPageName: () => null,
   toggleManufacturer: () => null,

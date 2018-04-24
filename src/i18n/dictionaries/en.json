@@ -79,39 +79,82 @@
     }
   },
   "models": {
+    "clients": {
+      "create": "Create a client",
+      "open": "Open client",
+      "search": "Search a client ...",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "address": "Address",
+      "email": "Email",
+      "notes": "Notes",
+      "phone": "Phone"
+    },
     "inventories": {
       "create": "Create an inventory",
       "createdAt": "Date of creation",
       "open": "Open inventory",
+      "search": "Search an inventory...",
       "title": "Inventory"
     },
     "manufacturers": {
       "create": "Create a manufacturer",
-      "createdAt": "Date of creation",
       "name": "Name",
       "notes": "Notes",
+      "createdAt": "Date of creation",
       "open": "Open manufacturer",
+      "search": "Search a manufacturer...",
+      "productsCount": "Products number",
       "title": "Manufacturer"
     },
+    "orders": {
+      "create": "Create an order",
+      "open": "Open order",
+      "search": "Search an order ...",
+      "status": "Status"
+    },
     "products": {
+      "category": "Category",
       "create": "Create a product",
       "createdAt": "Date of creation",
       "open": "Open product",
+      "manufacturer": "Manufacturer",
+      "name": "Product name",
+      "updatedAt": "Date of last update",
+      "search": "Search a product...",
       "title": "Product"
     },
     "providers": {
       "create": "Create a provider",
-      "createdAt": "Date of creation",
       "name": "Name",
       "notes": "Notes",
+      "createdAt": "Date of creation",
       "open": "Open provider",
+      "search": "Search a provider...",
+      "shippingsCount": "Shippings number",
       "title": "Provider"
     },
     "sales": {
       "title": "Sale"
     },
+    "shippings": {
+      "create": "Create an shipping",
+      "open": "Open shipping",
+      "provider": "Provider",
+      "search": "Search an shipping ..."
+    }
     "variants": {
-      "unitPrice": "Unit price"
+      "unitPrice": "Unit price",
+      "title": "Variant",
+      "create": "Create a variant",
+      "barcode": "Barcode",
+      "buyingPrice": "Buying Price",
+      "open": "Open variant",
+      "provider": "Provider",
+      "quantity": "Quantity",
+      "ratio": "Ratio",
+      "taxFreePrice": "Tax Free Price",
+      "search": "Search a variant..."
     }
   },
   "password-helper": {
@@ -126,9 +169,15 @@
   },
   "routes": {
     "account": "My account",
+    "clients": "Clients",
+    "custom-attribute": "Custom Attributes",
+    "inventories": "Inventories",
     "manufacturers": "Manufacturers",
+    "orders": "Orders",
+    "products": "Products",
     "providers": "Providers",
-    "settings": "Settings"
+    "settings": "Settings",
+    "shippings": "Shippings"
   },
   "toast": {
     "created": "%{entity} created !",

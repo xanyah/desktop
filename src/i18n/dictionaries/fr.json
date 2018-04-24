@@ -79,10 +79,22 @@
     }
   },
   "models": {
+    "clients": {
+      "create": "Créer un client",
+      "open": "Voir le client",
+      "search": "Rechercher un client ...",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "address": "Adresse",
+      "email": "Mail",
+      "notes": "Notes",
+      "phone": "Téléphone"
+    },
     "inventories": {
       "create": "Créer un inventaire",
       "createdAt": "Date de création",
       "open": "Voir l'inventaire",
+      "search": "Rechercher un client...",
       "title": "Inventaire"
     },
     "manufacturers": {
@@ -91,12 +103,25 @@
       "name": "Nom",
       "notes": "Notes",
       "open": "Voir le fabricant",
+      "search": "Rechercher un fabricant...",
+      "productsCount": "Nombre de produits",
       "title": "Fabricant"
     },
+    "orders": {
+      "create": "Créer une commande",
+      "open": "Voir la commande",
+      "search": "Rechercher une commande ...",
+      "status": "Statut"
+    },
     "products": {
+      "category": "Catégorie",
       "create": "Créer un produit",
       "createdAt": "Date de création",
       "open": "Voir le produit",
+      "manufacturer": "Fabricant",
+      "name": "Nom du produit",
+      "updatedAt": "Dernière mise à jour",
+      "search": "Rechercher un produit...",
       "title": "Produit"
     },
     "providers": {
@@ -105,13 +130,32 @@
       "name": "Nom",
       "notes": "Notes",
       "open": "Voir le fournisseur",
+      "search": "Rechercher un fournisseur...",
+      "shippingsCount": "Nombre de livraisons",
       "title": "Fournisseur"
     },
     "sales": {
-      "title": "Vante"
+      "title": "Vente"
+    },
+    "shippings": {
+      "create": "Créer une livraison",
+      "open": "Voir la livraison",
+      "search": "Rechercher une livraison ...",
+      "provider": "Fournisseur",
+      "title": "Livraison"
     },
     "variants": {
-      "unitPrice": "Prix unitaire"
+      "unitPrice": "Prix unitaire",
+      "title": "Variant",
+      "create": "Create a variant",
+      "barcode": "Barcode",
+      "buyingPrice": "Buying Price",
+      "open": "Open variant",
+      "provider": "Provider",
+      "quantity": "Quantity",
+      "ratio": "Ratio",
+      "taxFreePrice": "Tax Free Price",
+      "search": "Search a variant..."
     }
   },
   "password-helper": {
@@ -126,9 +170,15 @@
   },
   "routes": {
     "account": "Mon compte",
+    "clients": "Clients",
+    "custom-attribute": "Attributs Personnalisés",
+    "inventories": "Inventaires",
     "manufacturers": "Fabricants",
+    "orders": "Commandes",
+    "products": "Produits",
     "providers": "Fournisseurs",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "shippings": "Livraisons"
   },
   "toast": {
     "created": "%{entity} créé(e) !",

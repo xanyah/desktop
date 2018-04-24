@@ -16,15 +16,17 @@ export default class Products extends React.Component {
       loading,
       openProduct,
       products,
+      searchApiProduct,
     } = this.props
     return (
       <PageContainer>
         <DataTable
-          columns={['name', 'categoryId', 'createdAt']}
+          columns={['name', 'category', 'manufacturer']}
           data={products}
           loading={loading}
           onItemView={item => openProduct(item)}
           type="products"
+          searchEntity={searchApiProduct}
         />
       </PageContainer>
     )
@@ -36,6 +38,7 @@ Products.propTypes = {
   loading: PropTypes.bool,
   openProduct: PropTypes.func,
   products: PropTypes.arrayOf(ProductType),
+  searchApiProduct: PropTypes.func,
 }
 
 Products.defaultProps = {
@@ -43,4 +46,5 @@ Products.defaultProps = {
   loading: true,
   openProduct: () => null,
   products: [],
+  searchApiProduct: () => null,
 }

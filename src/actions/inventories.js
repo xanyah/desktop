@@ -18,11 +18,11 @@ export const updateInventoriesField = (field, value) => ({
   value,
 })
 
-export const getInventories = () =>
+export const getInventories = params =>
   (dispatch, currentState) => {
     const state = currentState()
     dispatch(updateInventoriesField('loading', true))
-    apiGetInventories({ storeId: state.stores.currentStore.id })
+    apiGetInventories({ ...params, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
         dispatch(updateInventoriesField('inventories', data))
         dispatch(updateInventoriesField('loading', false))
