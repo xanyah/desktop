@@ -20,3 +20,12 @@ h1, h2, h3, h4, h5, h6 {
 html {
   background-color: $primary-white;
 }
+
+button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

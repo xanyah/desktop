@@ -1,91 +1,84 @@
 {
+  "account": {
+    "form": {
+      "first": {
+        "title": "Modification de vos informations personnelles"
+      },
+      "second": {
+        "title": "Modification du Mot de Passe"
+      }
+    }
+  },
+  "checkout": {
+    "add-promotion": "Ajouter une promotion",
+    "change": "Monnaie à rendre",
+    "left-to-pay": "Reste à facturer",
+    "remove-article": "Retirer l'article",
+    "reset-alert": {
+      "text": "La vente sera annulée et le stock ne sera pas affecté",
+      "title": "Êtes-vous sûr ?"
+    },
+    "total": "Total",
+    "type-barcode": "Saisir le code barre"
+  },
+  "data-details": {
+    "form": {
+      "buttons": {
+        "cancel": "Annuler",
+        "create": "Créer",
+        "edit": "Modifier",
+        "submit": "Valider"
+      }
+    }
+  },
+  "global": {
+    "back": "Retour",
+    "cancel": "Annuler",
+    "reset": "Remettre à zéro",
+    "validate": "Valider"
+  },
   "home": {
     "welcome": {
-      "morning": "Bonjour %{firstname} !",
       "afternoon": "Bonjour %{firstname} !",
-      "evening": "Bonsoir %{firstname} !"
+      "evening": "Bonsoir %{firstname} !",
+      "morning": "Bonjour %{firstname} !"
     }
   },
   "home-link": {
     "checkout": {
-      "title": "Caisse",
-      "subtitle": "Encaisser une vente"
-    },
-    "products": {
-      "title": "Produits",
-      "subtitle": "Gérer les produits"
-    },
-    "shippings": {
-      "title": "Livraisons",
-      "subtitle": "Gérer les livraisons"
-    },
-    "orders": {
-      "title": "Commandes",
-      "subtitle": "Gérer les commandes"
-    },
-    "inventories": {
-      "title": "Inventaires",
-      "subtitle": "Gérer les inventaires"
+      "subtitle": "Encaisser une vente",
+      "title": "Caisse"
     },
     "clients": {
-      "title": "Clients",
-      "subtitle": "Gérer les clients"
+      "subtitle": "Gérer les clients",
+      "title": "Clients"
     },
-    "providers": {
-      "title": "Fournisseurs",
-      "subtitle": "Gérer les fournisseurs"
+    "inventories": {
+      "subtitle": "Gérer les inventaires",
+      "title": "Inventaires"
     },
     "manufacturers": {
-      "title": "Fabricants",
-      "subtitle": "Gérer les fabricants"
+      "subtitle": "Gérer les fabricants",
+      "title": "Fabricants"
+    },
+    "orders": {
+      "subtitle": "Gérer les commandes",
+      "title": "Commandes"
+    },
+    "products": {
+      "subtitle": "Gérer les produits",
+      "title": "Produits"
+    },
+    "providers": {
+      "subtitle": "Gérer les fournisseurs",
+      "title": "Fournisseurs"
+    },
+    "shippings": {
+      "subtitle": "Gérer les livraisons",
+      "title": "Livraisons"
     }
   },
   "models": {
-    "providers": {
-      "create": "Créer un fournisseur",
-      "name": "Nom du fournisseur",
-      "notes": "Notes",
-      "createdAt": "Date de création",
-      "open": "Voir le fournisseur",
-      "search": "Rechercher un fournisseur...",
-      "shippingsCount": "Nombre de livraisons"
-    },
-    "manufacturers": {
-      "create": "Créer un fabricant",
-      "name": "Nom du fabricant",
-      "notes": "Notes",
-      "createdAt": "Date de création",
-      "open": "Voir le fabricant",
-      "search": "Rechercher un fabricant...",
-      "productsCount": "Nombre de produits"
-    },
-    "inventories": {
-      "create": "Créer un inventaire",
-      "createdAt": "Date de création",
-      "open": "Voir l'inventaire",
-      "search": "Rechercher un inventaire..."
-    },
-    "products": {
-      "category": "Catégorie",
-      "create": "Créer un produit",
-      "createdAt": "Date de création",
-      "open": "Voir le produit",
-      "manufacturer": "Fabricant",
-      "name": "Nom du produit",
-      "updatedAt": "Dernière mise à jour",
-      "search": "Rechercher un produit..."
-    },
-    "variants": {
-      "create": "Créer un dérivé",
-      "barcode": "Code Barre",
-      "buyingPrice": "Prix d'achat",
-      "open": "Voir le variant",
-      "provider": "Fournisseur",
-      "quantity": "Quantité",
-      "ratio": "Coefficient",
-      "taxFreePrice": "Prix hors taxe",
-      "search": "Rechercher un dérivé..."
-    },
     "clients": {
       "create": "Créer un client",
       "open": "Voir le client",
@@ -97,68 +90,100 @@
       "notes": "Notes",
       "phone": "Téléphone"
     },
+    "inventories": {
+      "create": "Créer un inventaire",
+      "createdAt": "Date de création",
+      "open": "Voir l'inventaire",
+      "search": "Rechercher un client...",
+      "title": "Inventaire"
+    },
+    "manufacturers": {
+      "create": "Créer un fabricant",
+      "createdAt": "Date de création",
+      "name": "Nom",
+      "notes": "Notes",
+      "open": "Voir le fabricant",
+      "search": "Rechercher un fabricant...",
+      "productsCount": "Nombre de produits",
+      "title": "Fabricant"
+    },
     "orders": {
       "create": "Créer une commande",
       "open": "Voir la commande",
       "search": "Rechercher une commande ...",
       "status": "Statut"
     },
+    "products": {
+      "category": "Catégorie",
+      "create": "Créer un produit",
+      "createdAt": "Date de création",
+      "open": "Voir le produit",
+      "manufacturer": "Fabricant",
+      "name": "Nom du produit",
+      "updatedAt": "Dernière mise à jour",
+      "search": "Rechercher un produit...",
+      "title": "Produit"
+    },
+    "providers": {
+      "create": "Créer un fournisseur",
+      "createdAt": "Date de création",
+      "name": "Nom",
+      "notes": "Notes",
+      "open": "Voir le fournisseur",
+      "search": "Rechercher un fournisseur...",
+      "shippingsCount": "Nombre de livraisons",
+      "title": "Fournisseur"
+    },
+    "sales": {
+      "title": "Vente"
+    },
     "shippings": {
       "create": "Créer une livraison",
       "open": "Voir la livraison",
       "search": "Rechercher une livraison ...",
-      "provider": "Fournisseur"
-    }
-  },
-  "routes": {
-    "providers": "Fournisseurs",
-    "provider": "Fournisseur",
-    "manufacturers": "Fabricants",
-    "manufacturer": "Fabricant",
-    "settings": "Paramètres",
-    "account": "Mon compte",
-    "product": "Produit",
-    "products": "Produits",
-    "variant": "Dérivé",
-    "inventories": "Inventaires",
-    "inventory": "Inventaire",
-    "custom-attribute": "Attribut dérivé",
-    "clients": "Clients",
-    "client": "Client",
-    "orders": "Commandes",
-    "order": "Commande",
-    "shippings": "Livraisons",
-    "shipping": "Livraison"
-  },
-  "account": {
-    "form": {
-      "first": {
-        "title": "Modification de vos informations personnelles"
-      },
-      "second": {
-        "title": "Modification du Mot de Passe"
-      }
-    }
-  },
-  "toast": {
-    "created": "Entité créée !",
-    "updated": "Entité mise à jour !",
-    "error": "Une erreur est survenue !"
-  },
-  "data-details": {
-    "form": {
-      "buttons": {
-        "submit": "Valider",
-        "cancel": "Annuler",
-        "create": "Créer",
-        "edit": "Modifier"
-      }
+      "provider": "Fournisseur",
+      "title": "Livraison"
+    },
+    "variants": {
+      "unitPrice": "Prix unitaire",
+      "title": "Variant",
+      "create": "Create a variant",
+      "barcode": "Barcode",
+      "buyingPrice": "Buying Price",
+      "open": "Open variant",
+      "provider": "Provider",
+      "quantity": "Quantity",
+      "ratio": "Ratio",
+      "taxFreePrice": "Tax Free Price",
+      "search": "Search a variant..."
     }
   },
   "password-helper": {
     "tips": {
-      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas",
-      "length": "La longueur du mot de passe doit être supérieur à 8"
+      "length": "La longueur du mot de passe doit être supérieur à 8",
+      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
     }
+  },
+  "promotion-types": {
+    "flat_discount": "Remise (en €)",
+    "percent_discount": "Remise (en %)"
+  },
+  "routes": {
+    "account": "Mon compte",
+    "clients": "Clients",
+    "custom-attribute": "Attributs Personnalisés",
+    "inventories": "Inventaires",
+    "manufacturers": "Fabricants",
+    "orders": "Commandes",
+    "products": "Produits",
+    "providers": "Fournisseurs",
+    "settings": "Paramètres",
+    "shippings": "Livraisons"
+  },
+  "toast": {
+    "created": "%{entity} créé(e) !",
+    "error": "Une erreur s'est produite !",
+    "not-found": "%{entity} inexistant",
+    "updated": "Mis à jour"
   }
 }

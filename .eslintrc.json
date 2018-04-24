@@ -9,7 +9,9 @@
     ],
     "globals": {
         "__DEV__": true,
-        "process": true
+        "process": true,
+        "expect": true,
+        "test": true
     },
     "parser": "babel-eslint",
     "parserOptions": {

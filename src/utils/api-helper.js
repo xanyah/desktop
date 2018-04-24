@@ -63,6 +63,8 @@ export const searchProduct = params =>
 export const getInventories = params =>
   xanyahApi.get('inventories', decamelizeKeys({params}))
 
+export const getPaymentTypes = params => xanyahApi.get('payment_types', { params: decamelizeKeys(params)})
+
 // Providers API Calls
 
 export const getProviders = params =>
@@ -84,6 +86,12 @@ export const createManufacturer = newManufacturer =>
   xanyahApi.post('manufacturers', decamelizeKeys(newManufacturer))
 export const searchManufacturer = params =>
   xanyahApi.get('manufacturers/search', decamelizeKeys({params}))
+
+// Sale
+
+export const createSale = sale =>
+  xanyahApi.post('sales', {sale})
+
 
 // Stores API Calls
 
@@ -118,6 +126,10 @@ export const searchOrder = params =>
   xanyahApi.get('orders/search', decamelizeKeys({params}))
 
 // Shippings API Calls
+
+// Variants
+
+export const getVariantByBarcode = barcode => xanyahApi.get(`variants/${barcode}/by_barcode`)
 
 export const getShippings = params =>
   xanyahApi.get('shippings', decamelizeKeys({params}))

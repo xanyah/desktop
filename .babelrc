@@ -1,4 +1,9 @@
 {
   "presets": ["react"],
-  "plugins": ["emotion"]
+  "plugins": ["emotion"],
+  "env": {
+    "test": {
+      "presets": [["env"], "react"]
+    }
+  }
 }

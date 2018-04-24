@@ -1,91 +1,84 @@
 {
+  "account": {
+    "form": {
+      "first": {
+        "title": "Change your personal informations"
+      },
+      "second": {
+        "title": "Change your password"
+      }
+    }
+  },
+  "checkout": {
+    "add-promotion": "Add a promotion",
+    "change": "Change",
+    "left-to-pay": "Left to pay",
+    "remove-article": "Remove article",
+    "reset-alert": {
+      "text": "The sale will be canceled and the stock won't be affected with the changes",
+      "title": "Are you sure ?"
+    },
+    "total": "Total",
+    "type-barcode": "Type the product barcode"
+  },
+  "data-details": {
+    "form": {
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "edit": "Edit",
+        "submit": "Validate"
+      }
+    }
+  },
+  "global": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "validate": "Validate"
+  },
   "home": {
     "welcome": {
-      "morning": "Good morning %{firstname} !",
       "afternoon": "Good afternoon %{firstname} !",
-      "evening": "Good evening %{firstname} !"
+      "evening": "Good evening %{firstname} !",
+      "morning": "Good morning %{firstname} !"
     }
   },
   "home-link": {
     "checkout": {
-      "title": "Checkout",
-      "subtitle": "Cash a sale"
-    },
-    "products": {
-      "title": "Products",
-      "subtitle": "Manage your products"
-    },
-    "shippings": {
-      "title": "Shippings",
-      "subtitle": "Manage your shippings"
-    },
-    "orders": {
-      "title": "Orders",
-      "subtitle": "Manage your orders"
-    },
-    "inventories": {
-      "title": "Inventories",
-      "subtitle": "Manage your inventories"
+      "subtitle": "Cash a sale",
+      "title": "Checkout"
     },
     "clients": {
-      "title": "Clients",
-      "subtitle": "Manage your clients"
+      "subtitle": "Manage your clients",
+      "title": "Clients"
     },
-    "providers": {
-      "title": "Providers",
-      "subtitle": "Manage your providers"
+    "inventories": {
+      "subtitle": "Manage your inventories",
+      "title": "Inventories"
     },
     "manufacturers": {
-      "title": "Manufacturers",
-      "subtitle": "Manage your manufacturers"
+      "subtitle": "Manage your manufacturers",
+      "title": "Manufacturers"
+    },
+    "orders": {
+      "subtitle": "Manage your orders",
+      "title": "Orders"
+    },
+    "products": {
+      "subtitle": "Manage your products",
+      "title": "Products"
+    },
+    "providers": {
+      "subtitle": "Manage your providers",
+      "title": "Providers"
+    },
+    "shippings": {
+      "subtitle": "Manage your shippings",
+      "title": "Shippings"
     }
   },
   "models": {
-    "providers": {
-      "create": "Create a provider",
-      "name": "Name",
-      "notes": "Notes",
-      "createdAt": "Date of creation",
-      "open": "Open provider",
-      "search": "Search a provider...",
-      "shippingsCount": "Shippings number"
-    },
-    "manufacturers": {
-      "create": "Create a manufacturer",
-      "name": "Name",
-      "notes": "Notes",
-      "createdAt": "Date of creation",
-      "open": "Open manufacturer",
-      "search": "Search a manufacturer...",
-      "productsCount": "Products number"
-    },
-    "inventories": {
-      "create": "Create an inventory",
-      "createdAt": "Date of creation",
-      "open": "Open inventory",
-      "search": "Search an inventory..."
-    },
-    "products": {
-      "category": "Category",
-      "create": "Create a product",
-      "createdAt": "Date of creation",
-      "open": "Open product",
-      "manufacturer": "Manufacturer",
-      "name": "Product name",
-      "updatedAt": "Date of last update",
-      "search": "Search a product..."
-    },
-    "variants": {
-      "create": "Create a variant",
-      "barcode": "Barcode",
-      "buyingPrice": "Buying Price",
-      "open": "Open variant",
-      "provider": "Provider",
-      "quantity": "Quantity",
-      "ratio": "Ratio",
-      "taxFreePrice": "Tax Free Price",
-      "search": "Search a variant..."
-    },
     "clients": {
       "create": "Create a client",
       "open": "Open client",
@@ -97,68 +90,99 @@
       "notes": "Notes",
       "phone": "Phone"
     },
+    "inventories": {
+      "create": "Create an inventory",
+      "createdAt": "Date of creation",
+      "open": "Open inventory",
+      "search": "Search an inventory...",
+      "title": "Inventory"
+    },
+    "manufacturers": {
+      "create": "Create a manufacturer",
+      "name": "Name",
+      "notes": "Notes",
+      "createdAt": "Date of creation",
+      "open": "Open manufacturer",
+      "search": "Search a manufacturer...",
+      "productsCount": "Products number",
+      "title": "Manufacturer"
+    },
     "orders": {
       "create": "Create an order",
       "open": "Open order",
       "search": "Search an order ...",
       "status": "Status"
     },
+    "products": {
+      "category": "Category",
+      "create": "Create a product",
+      "createdAt": "Date of creation",
+      "open": "Open product",
+      "manufacturer": "Manufacturer",
+      "name": "Product name",
+      "updatedAt": "Date of last update",
+      "search": "Search a product...",
+      "title": "Product"
+    },
+    "providers": {
+      "create": "Create a provider",
+      "name": "Name",
+      "notes": "Notes",
+      "createdAt": "Date of creation",
+      "open": "Open provider",
+      "search": "Search a provider...",
+      "shippingsCount": "Shippings number",
+      "title": "Provider"
+    },
+    "sales": {
+      "title": "Sale"
+    },
     "shippings": {
       "create": "Create an shipping",
       "open": "Open shipping",
-      "search": "Search an shipping ...",
-      "provider": "Provider"
+      "provider": "Provider",
+      "search": "Search an shipping ..."
     }
-  },
-  "routes": {
-    "providers": "Providers",
-    "provider": "Provider",
-    "manufacturers": "Manufacturers",
-    "manufacturer": "Manufacturer",
-    "settings": "Settings",
-    "account": "My account",
-    "product": "Product",
-    "products": "Products",
-    "variant": "Variant",
-    "inventories": "Inventories",
-    "inventory": "Inventory",
-    "custom-attribute": "Custom Attributes",
-    "clients": "Clients",
-    "client": "Client",
-    "orders": "Orders",
-    "order": "Order",
-    "shippings": "Shippings",
-    "shipping": "Shipping"
-  },
-  "account": {
-    "form": {
-      "first": {
-        "title": "Change your personal informations"
-      },
-      "second": {
-        "title": "Change your password"
-      }
-    }
-  },
-  "toast": {
-    "created": "Entity created !",
-    "updated": "Entity updated !",
-    "error": "An error has occured !"
-  },
-  "data-details": {
-    "form": {
-      "buttons": {
-        "submit": "Validate",
-        "cancel": "Cancel",
-        "create": "Create",
-        "edit": "Edit"
-      }
+    "variants": {
+      "unitPrice": "Unit price",
+      "title": "Variant",
+      "create": "Create a variant",
+      "barcode": "Barcode",
+      "buyingPrice": "Buying Price",
+      "open": "Open variant",
+      "provider": "Provider",
+      "quantity": "Quantity",
+      "ratio": "Ratio",
+      "taxFreePrice": "Tax Free Price",
+      "search": "Search a variant..."
     }
   },
   "password-helper": {
     "tips": {
-      "same-confirm": "Password does not match the confirm password",
-      "length": "Minimum password lenght is 8"
+      "length": "Minimum password lenght is 8",
+      "same-confirm": "Password does not match the confirm password"
     }
+  },
+  "promotion-types": {
+    "flat_discount": "Discount (in €)",
+    "percent_discount": "Discount (in %)"
+  },
+  "routes": {
+    "account": "My account",
+    "clients": "Clients",
+    "custom-attribute": "Custom Attributes",
+    "inventories": "Inventories",
+    "manufacturers": "Manufacturers",
+    "orders": "Orders",
+    "products": "Products",
+    "providers": "Providers",
+    "settings": "Settings",
+    "shippings": "Shippings"
+  },
+  "toast": {
+    "created": "%{entity} created !",
+    "error": "An error has occured !",
+    "not-found": "%{entity} not found",
+    "updated": "Updated"
   }
 }
