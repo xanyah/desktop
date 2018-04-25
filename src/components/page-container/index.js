@@ -21,7 +21,7 @@ const PageContainer = ({
     <div className="page-container">
       <div className="header">
         <div className="navigation">
-          <img src={currentRoute.image} />
+          <img src={(currentRoute) ? currentRoute.image : null} />
           {parentRoute
             && [
               <Link

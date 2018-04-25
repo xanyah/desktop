@@ -48,7 +48,7 @@ export default class Settings extends React.Component {
       }}
     >
       <input
-        className="input-text"
+        className="input"
         onChange={e => updateField('storeName', e.target.value)}
         required
         type="text"

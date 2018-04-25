@@ -19,7 +19,6 @@ class DataTable extends React.Component {
   }
 
   render() {
-    //By default create = true (render button to create in dataDetails)
     const {
       data,
       columns,

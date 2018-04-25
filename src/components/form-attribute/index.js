@@ -2,11 +2,13 @@ import React from 'react'
 import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
+import Input from '../input'
 
 import { isOfEntityType, getModel, getTypeOptions } from '../../utils/data-helper'
 
 import './styles.scss'
 
+//TODO add checkbox Sofiane
 const FormAttribute = item => {
   return (
     <div className="form-attribute">
@@ -28,8 +30,7 @@ const getFormElement = item => {
     )
   case 'number':
     return (
-      <input
-        className="input-text"
+      <Input
         onChange={e => item.onUpdate(item.attribute, e.target.value)}
         value={item.value}
         name={item.attribute}
@@ -38,8 +39,7 @@ const getFormElement = item => {
     )
   case 'string':
     return (
-      <input
-        className="input-text"
+      <Input
         onChange={e => item.onUpdate(item.attribute, e.target.value)}
         value={item.value}
         name={item.attribute}

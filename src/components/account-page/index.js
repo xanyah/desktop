@@ -113,14 +113,14 @@ export default class Account extends React.Component {
         >
           <h2><Translate value='account.form.second.title'/></h2>
           <input
-            className="input-text"
+            className="input"
             onChange={e => updateField('newPassword', e.target.value)}
             required
             type="password"
             placeholder="Nouveau mot de passe"
           />
           <input
-            className="input-text"
+            className="input"
             onChange={e => updateField('confirmNewPassword', e.target.value)}
             required
             type="password"
