@@ -3,17 +3,21 @@ import PropTypes from 'prop-types'
 
 import './styles.scss'
 
-const Input = ({ onChange, type, placeholder, value }) => (
+const Input = ({ className, onChange, placeholder, type, value }) => (
   <input
-    className={`input input-${type}`}
+    className={`input input-${type} ${className}`}
     onChange={onChange}
-    type={type}
     placeholder={placeholder}
+    type={type}
     value={value}
   />
 )
 
 Input.propTypes = {
+  /**
+  * Other classes on the input element
+  */
+  className: PropTypes.string,
   /**
    * Function to trigger on change
    */
@@ -36,6 +40,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
+  className: '',
   onChange: () => {},
   placeholder: '',
   type: '',

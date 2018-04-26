@@ -6,6 +6,7 @@ import { PulseLoader } from 'react-spinners'
 import { formatData } from '../../utils/data-helper'
 import { secondaryTextColor } from '../../constants'
 import { I18n } from 'react-redux-i18n'
+import Input from '../input'
 
 import './styles.scss'
 
@@ -14,8 +15,17 @@ class DataTable extends React.Component {
     super(props)
 
     this.state = {
+      searchEntityQuery: '',
       selected: null,
     }
+  }
+
+  handleSearchEntity= query => {
+    this.setState({
+      ...this.state,
+      searchEntityQuery: query,
+    })
+    this.props.searchEntity(query)
   }
 
   render() {
@@ -28,15 +38,25 @@ class DataTable extends React.Component {
       searchEntity,
       type,
     } = this.props
+
+    const {
+      searchEntityQuery,
+      selected,
+    } = this.state
+
     return (
       <div className="data-table">
         <div className="search-bar">
-          <input
-            className="search-input input-search"
-            type="string"
-            placeholder={I18n.t(`models.${type}.search`)}
-            onChange={e => searchEntity(e.target.value)}
-          ></input>
+          {
+            searchEntity &&
+              <Input
+                className="search-input input-search"
+                type="text"
+                placeholder={I18n.t(`models.${type}.search`)}
+                onChange={e => this.handleSearchEntity(e.target.value)}
+                value={searchEntityQuery}
+              />
+          }
         </div>
         <div className="header-row">
           {columns.map(column => (
@@ -57,29 +77,35 @@ class DataTable extends React.Component {
                 </div>
               )
               : (
-                data.map((row, idx) => (
-                  <div
-                    key={idx}
-                    className={this.state.selected == row ? 'row selected' :  'row'}
-                    onClick={() => this.setState({ selected: row })}
-                  >
-                    <div className="data-row">
-                      {columns.map(column => (
-                        <div className="column" key={idx + column}>
-                          {formatData(row[column], column)}
+                (data.length)
+                  ? (
+                    data.map((row, idx) => (
+                      <div
+                        key={idx}
+                        className={selected == row ? 'row selected' :  'row'}
+                        onClick={() => this.setState({ selected: row })}
+                      >
+                        <div className="data-row">
+                          {columns.map(column => (
+                            <div className="column" key={idx + column}>
+                              {formatData(row[column], column)}
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                    <button className="link" onClick={() => onItemView(row)}>
-                      ->
-                    </button>
-                    <div className="action">
-                      <button className="btn-primary" onClick={() => onItemView(row)}>
-                        <Translate value={`models.${type}.open`} />
-                      </button>
-                    </div>
-                  </div>
-                ))
+                        <button className="link" onClick={() => onItemView(row)}>
+                          ->
+                        </button>
+                        <div className="action">
+                          <button className="btn-primary" onClick={() => onItemView(row)}>
+                            <Translate value={`models.${type}.open`} />
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )
+                  : (
+                    <div>No data found !</div>
+                  )
               )
           }
         </div>
@@ -99,7 +125,7 @@ DataTable.propTypes = {
   data: PropTypes.array,
   loading: PropTypes.bool,
   onItemView: PropTypes.func,
-  searchEntity: PropTypes.func,
+  searchEntity: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   type: PropTypes.string,
 }
 
@@ -109,7 +135,7 @@ DataTable.defaultProps = {
   data: [],
   loading: false,
   onItemView: () => null,
-  searchEntity: () => null,
+  searchEntity: false,
   type: '',
 }
 
