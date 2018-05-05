@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import ProductPage from '../../components/product-page'
 import {
+  createApiProduct,
   createApiVariant,
   updateApiProduct,
   updateGlobalField,
@@ -17,7 +18,11 @@ const mapStateToProps = ({ products: { loading, productEditing, selectedProduct,
 })
 
 const mapDispatchToProps = dispatch => ({
-  createApiVariant: newManufacturer => dispatch(createApiVariant(newManufacturer)),
+  createApiProduct: (newProduct, newVariant) => {
+    dispatch(createApiProduct(newProduct))
+    dispatch(createApiVariant(newVariant, true))
+  },
+  createApiVariant: newVariant => dispatch(createApiVariant(newVariant)),
   dispatch,
   openVariant: variant => {
     dispatch(updateProductsField('selectedVariant', variant))

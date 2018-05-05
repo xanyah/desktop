@@ -7,7 +7,7 @@ import { formatStore } from '../types'
 import { I18n } from 'react-redux-i18n'
 
 import {
-  updateStore as updateApiStore,
+  updateStore as apiPatchStore,
 } from '../utils/api-helper'
 
 import {
@@ -21,18 +21,18 @@ export const updateStoresField = (field, value) => ({
   value,
 })
 
-export const updateSingleStore = store => ({
+export const updateStore = store => ({
   store,
   type: STORES_UPDATE_STORE,
 })
 
-
-export const updateStore = newStore =>
-  dispatch => {
-    newStore = formatStore(newStore)
-    updateApiStore(newStore.id, newStore)
+export const updateApiStore = updatedStore =>
+  (dispatch, currentState) => {
+    const state = currentState()
+    updatedStore = formatStore(updatedStore)
+    apiPatchStore(state.stores.currentStore.id, updatedStore)
       .then(({ data }) => {
-        dispatch(updateSingleStore(data))
+        dispatch(updateStore(data))
         showSuccessToast(I18n.t('toast.updated'))
       })
       .catch(e => showErrorToast(e))

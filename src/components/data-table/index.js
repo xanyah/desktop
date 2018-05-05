@@ -32,7 +32,8 @@ class DataTable extends React.Component {
     const {
       data,
       columns,
-      create,
+      creation,
+      creationFunction,
       loading,
       onItemView,
       searchEntity,
@@ -109,10 +110,24 @@ class DataTable extends React.Component {
               )
           }
         </div>
-        {create && (
-          <button className="btn-primary data-table-create-button" onClick={() => onItemView({})}>
-            <Translate value={`models.${type}.create`} />
-          </button>
+        {creation && (
+          (creationFunction)
+            ? (
+              <button
+                className="btn-primary data-table-create-button"
+                onClick={() => creationFunction()}
+              >
+                <Translate value={`models.${type}.create`} />
+              </button>
+            )
+            : (
+              <button
+                className="btn-primary data-table-create-button"
+                onClick={() => creationFunction()}//{() => onItemView(row)}
+              >
+                <Translate value={`models.${type}.create`} />
+              </button>
+            )
         )}
       </div>
     )
@@ -121,7 +136,8 @@ class DataTable extends React.Component {
 
 DataTable.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.string),
-  create: PropTypes.bool,
+  creation: PropTypes.bool,
+  creationFunction: PropTypes.func,
   data: PropTypes.array,
   loading: PropTypes.bool,
   onItemView: PropTypes.func,
@@ -131,7 +147,8 @@ DataTable.propTypes = {
 
 DataTable.defaultProps = {
   columns: [],
-  create: true,
+  creation: true,
+  creationFunction: false,
   data: [],
   loading: false,
   onItemView: () => null,

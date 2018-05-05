@@ -137,3 +137,9 @@ export const updateShipping = (shippingId, params) =>
   xanyahApi.patch(`shippings/${shippingId}`, decamelizeKeys(params))
 export const createShipping = newShipping =>
   xanyahApi.post('shippings', decamelizeKeys(newShipping))
+
+// VAT Rates
+
+export const getAllVatRates = () => xanyahApi.get('vat_rates')
+export const getVatRates = countryCode =>
+  xanyahApi.get(`vat_rates/${countryCode}`)

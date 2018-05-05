@@ -45,15 +45,15 @@ export const getVariants = productId =>
       })
   }
 
-export const createApiVariant = newVariant =>
+export const createApiVariant = (newVariant, defaultVariant = false) =>
   (dispatch) => {
     newVariant = formatVariant(newVariant)
     dispatch(updateProductsField('loading', true))
-    apiPostVariant({...newVariant})
+    apiPostVariant({...newVariant, default: defaultVariant})
       .then(({ data }) => {
         dispatch(updateProductsField('loading', false))
         dispatch(createVariant(data))
-        showSuccessToast(I18n.t('toast.created'))
+        showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.variants.title')}))
       })
       .catch(() => {
         showErrorToast(I18n.t('toast.error'))

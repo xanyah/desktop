@@ -15,7 +15,7 @@ storiesOf('DataTable', module)
       },
       ]}
       columns={['name', 'value']}
-      create={false}
+      creation={false}
     />
   ))
 
@@ -23,6 +23,6 @@ storiesOf('DataTable', module)
     <DataTable
       data={[]}
       columns={['name', 'value']}
-      create={false}
+      creation={false}
     />
   ))

@@ -73,7 +73,7 @@ export default class CustomAttribute extends React.Component {
           loading={false}
           onItemView={item => openCustomAttribute(item)}
           type="custom_attributes"
-          create={false}
+          creation={false}
         />
 
       </div>

@@ -71,9 +71,77 @@ export default class Product extends React.Component {
           loading={false}
           onItemView={item => openVariant(item)}
           type="variants"
-          create={false}
+          creation={false}
         />
 
+      </div>
+    )
+  }
+
+  getVariantsFormAttribute() {
+    const { newVariant } = this.state
+
+    return (
+      <div>
+        <div className="row">
+          <FormAttribute
+            attribute="provider"
+            key="provider"
+            value={newVariant['provider']}
+            model="variants"
+            type="entity"
+            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+          />
+
+          <FormAttribute
+            attribute="buyingPrice"
+            key="buyingPrice"
+            value={newVariant['buyingPrice']}
+            model="variants"
+            type="number"
+            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+          />
+        </div>
+
+        <div className="row">
+          <FormAttribute
+            attribute="originalBarcode"
+            key="originalBarcode"
+            value={newVariant['originalBarcode']}
+            model="variants"
+            type="string"
+            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+          />
+
+          <FormAttribute
+            attribute="quantity"
+            key="quantity"
+            value={newVariant['quantity']}
+            model="variants"
+            type="number"
+            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+          />
+        </div>
+
+        <div className="row">
+          <FormAttribute
+            attribute="ratio"
+            key="ratio"
+            value={newVariant['ratio']}
+            model="variants"
+            type="number"
+            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+          />
+
+          <FormAttribute
+            attribute="taxFreePrice"
+            key="taxFreePrice"
+            value={newVariant['taxFreePrice']}
+            model="variants"
+            type="number"
+            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+          />
+        </div>
       </div>
     )
   }
@@ -87,69 +155,9 @@ export default class Product extends React.Component {
           className="variant-form"
           onSubmit={e=> {
             e.preventDefault()
-            //TODO add in action the productId ?
             createApiVariant({...newVariant, productId: selectedProduct.id})
           }}>
-
-          <div className="row">
-            <FormAttribute
-              attribute="provider"
-              key="provider"
-              value={newVariant['provider']}
-              model="variants"
-              type="entity"
-              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-            />
-
-            <FormAttribute
-              attribute="buyingPrice"
-              key="buyingPrice"
-              value={newVariant['buyingPrice']}
-              model="variants"
-              type="number"
-              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-            />
-          </div>
-
-          <div className="row">
-            <FormAttribute
-              attribute="originalBarcode"
-              key="originalBarcode"
-              value={newVariant['originalBarcode']}
-              model="variants"
-              type="string"
-              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-            />
-
-            <FormAttribute
-              attribute="quantity"
-              key="quantity"
-              value={newVariant['quantity']}
-              model="variants"
-              type="number"
-              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-            />
-          </div>
-
-          <div className="row">
-            <FormAttribute
-              attribute="ratio"
-              key="ratio"
-              value={newVariant['ratio']}
-              model="variants"
-              type="number"
-              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-            />
-
-            <FormAttribute
-              attribute="taxFreePrice"
-              key="taxFreePrice"
-              value={newVariant['taxFreePrice']}
-              model="variants"
-              type="number"
-              onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
-            />
-          </div>
+          {this.getVariantsFormAttribute()}
           <button className="btn-link btn-stand-alone">Envoyer</button>
         </form>
       </Collapsible>
@@ -158,6 +166,7 @@ export default class Product extends React.Component {
 }
 
 Product.propTypes = {
+  createApiProduct: PropTypes.func,
   createApiVariant: PropTypes.func,
   openVariant: PropTypes.func,
   productEditing: PropTypes.bool,
@@ -169,6 +178,7 @@ Product.propTypes = {
 }
 
 Product.defaultProps = {
+  createApiProduct: () => null,
   createApiVariant: () => null,
   openVariant: () => null,
   productEditing: false,

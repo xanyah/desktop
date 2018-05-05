@@ -36,6 +36,7 @@ export default class DataDetails extends React.Component {
       children,
       createEntity,
       formattedData,
+      formChildren,
       toggleEdit,
       type,
     } = this.props
@@ -68,6 +69,9 @@ export default class DataDetails extends React.Component {
                 ))}
               </div>
             ))}
+
+            { formChildren }
+
             {
               (
                 <button
@@ -183,6 +187,7 @@ DataDetails.propTypes = {
   createEntity: PropTypes.func,
   currentEntity: PropTypes.object,
   editing: PropTypes.bool,
+  formChildren: PropTypes.element,
   formattedData: PropTypes.arrayOf(
     PropTypes.arrayOf(
       PropTypes.objectOf({
@@ -202,6 +207,7 @@ DataDetails.defaultProps = {
   createEntity: () => null,
   currentEntity: {},
   editing: false,
+  formChildren: null,
   formattedData: [],
   toggleEdit: () => null,
   type: '',

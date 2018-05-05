@@ -1,0 +1,28 @@
+@import '../../../constants/scss/_colors.scss';
+
+div.vat-rates {
+  display: flex;
+  flex-direction: row;
+
+  div.title {
+    color: $secondary-text-color;
+    font-weight: bold;
+  }
+
+  div.separator {
+    color: $secondary-text-color;
+  }
+
+  div.vat-rate {
+    display: flex;
+    flex-direction: row;
+
+    div.label {
+      color: $secondary-text-color;
+    }
+
+    div.rate {
+      color: $primary-text-color;
+    }
+  }
+}

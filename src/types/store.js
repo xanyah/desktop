@@ -11,5 +11,6 @@ export const StoreType = {
 
 export const formatStore = (store) => ({
   ...store,
+  address: store.address.trim(),
   name: store.name.trim(),
 })

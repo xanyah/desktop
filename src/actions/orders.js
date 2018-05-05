@@ -70,7 +70,7 @@ export const createApiOrder = newOrder =>
         .then(({ data }) => {
           dispatch(updateOrderField('loading', false))
           dispatch(updateOrder(data))
-          showSuccessToast(I18n.t('toast.created'))
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.orders.title')}))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))
@@ -83,7 +83,6 @@ export const searchApiOrder = query =>
     const state = currentState()
     apiSearchOrder({ query: query, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
-        //TODO Improve with loader ?
         dispatch(updateOrderField('orders', data))
       })
       .catch(() => {

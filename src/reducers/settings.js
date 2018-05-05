@@ -3,10 +3,9 @@ import {
 } from '../constants/actions'
 
 const initialState = {
-  categories: [],
   step: '',
   storeName: '',
-  tvaCountry: '',
+  vatRatesCountry: {},
 }
 
 export default (state = initialState, action) => {

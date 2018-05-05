@@ -62,4 +62,3 @@ export const getTypeOptions = () => [
   { label: 'String', value: 'text' },
   { label: 'Number', value: 'number' },
 ]
-
