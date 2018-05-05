@@ -15,6 +15,9 @@ const mapStateToProps = ({ products: { loading, products } }) => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
+  goToProductCreationPage: () => {
+    dispatch(push('/test'))
+  },
   openProduct: product => {
     dispatch(updateProductsField('selectedProduct', product))
     dispatch(getVariants(product.id))

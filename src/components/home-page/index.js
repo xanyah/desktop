@@ -17,8 +17,8 @@ const Home = ({ firstname }) => (
         <Translate value={`home.welcome.${getGreetingTime()}`} firstname={firstname} />
       </h1>
       <div className="settings">
-        <Link to="/account">U</Link>
-        <Link to="/settings">R</Link>
+        <Link to="/account"><i class="im im-4x im-user-settings"></i></Link>
+        <Link to="/settings"><i class="im im-10x im-gear"></i></Link>
       </div>
     </div>
     <div className="links-container">

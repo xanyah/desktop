@@ -13,6 +13,7 @@ export default class Products extends React.Component {
 
   render() {
     const {
+      goToProductCreationPage,
       loading,
       openProduct,
       products,
@@ -22,11 +23,12 @@ export default class Products extends React.Component {
       <PageContainer>
         <DataTable
           columns={['name', 'category', 'manufacturer']}
+          creationFunction={() => goToProductCreationPage()}
           data={products}
           loading={loading}
           onItemView={item => openProduct(item)}
-          type="products"
           searchEntity={searchApiProduct}
+          type="products"
         />
       </PageContainer>
     )
@@ -35,6 +37,7 @@ export default class Products extends React.Component {
 
 Products.propTypes = {
   getProducts: PropTypes.func,
+  goToProductCreationPage: PropTypes.func,
   loading: PropTypes.bool,
   openProduct: PropTypes.func,
   products: PropTypes.arrayOf(ProductType),
@@ -43,6 +46,7 @@ Products.propTypes = {
 
 Products.defaultProps = {
   getProducts: () => null,
+  goToProductCreationPage: false,
   loading: true,
   openProduct: () => null,
   products: [],

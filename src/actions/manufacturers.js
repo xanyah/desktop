@@ -71,7 +71,7 @@ export const createApiManufacturer = newManufacturer =>
         .then(({ data }) => {
           dispatch(updateManufacturerField('loading', false))
           dispatch(updateManufacturer(data))
-          showSuccessToast(I18n.t('toast.created'))
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.manufacturers.title')}))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))
@@ -88,7 +88,6 @@ export const searchApiManufacturer = query =>
         storeId: state.stores.currentStore.id,
       })
       .then(({ data }) => {
-        //TODO Improve with loader ?
         dispatch(updateManufacturerField('manufacturers', data))
       })
       .catch(() => {

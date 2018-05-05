@@ -69,7 +69,7 @@ export const createApiShipping = newShipping =>
         .then(({ data }) => {
           dispatch(updateShippingField('loading', false))
           dispatch(updateShipping(data))
-          showSuccessToast(I18n.t('toast.created'))
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.shippings.title')}))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))

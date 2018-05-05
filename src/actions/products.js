@@ -9,11 +9,12 @@ import {
   getProducts as apiGetProducts,
   updateProduct as apiPatchProductParams,
   searchProduct as apiSearchProduct,
+  createProduct as apiPostProduct,
 } from '../utils/api-helper'
 
-import {
-  formatProduct,
-} from '../types'
+import { createApiVariant } from './'
+
+import { formatProduct, formatVariant } from '../types'
 
 import {
   showErrorToast,
@@ -60,12 +61,35 @@ export const updateApiProduct = updatedProduct =>
       })
   }
 
+export const createApiProduct = (newProduct, newVariant) =>
+  (dispatch, currentState) => {
+    const state = currentState()
+    if(state && state.stores && state.stores.currentStore) {
+      const storeId = state.stores.currentStore.id
+      newProduct = formatProduct(newProduct)
+      newVariant = formatVariant(newVariant)
+      dispatch(updateProductsField('loading', true))
+      apiPostProduct({
+        'product': {...newProduct, storeId},
+        'variant': newVariant,
+      })
+        .then(({ data }) => {
+          dispatch(updateProductsField('loading', false))
+          dispatch(updateProduct(data))
+          createApiVariant({...newVariant, productId: data.id}, true)
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.products.title')}))
+        })
+        .catch(() => {
+          showErrorToast(I18n.t('toast.error'))
+        })
+    }
+  }
+
 export const searchApiProduct = query =>
   (dispatch, currentState) => {
     const state = currentState()
-    apiSearchProduct({ query: query, storeId: state.stores.currentStore.id })
+    apiSearchProduct({query: query, storeId: state.stores.currentStore.id})
       .then(({ data }) => {
-        //TODO Improve with loader ?
         dispatch(updateProductsField('products', data))
       })
       .catch(() => {

@@ -70,7 +70,7 @@ export const createApiProvider = newProvider =>
         .then(({ data }) => {
           dispatch(updateProviderField('loading', false))
           dispatch(updateProvider(data))
-          showSuccessToast(I18n.t('toast.created'))
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.providers.title')}))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))
@@ -83,7 +83,6 @@ export const searchApiProvider = query =>
     const state = currentState()
     apiSearchProvider({ query: query, storeId: state.stores.currentStore.id })
       .then(({ data }) => {
-        //TODO Improve with loader ?
         dispatch(updateProviderField('providers', data))
       })
       .catch(() => {

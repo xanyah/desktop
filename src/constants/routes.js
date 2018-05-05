@@ -27,6 +27,7 @@ import InventoryPage from '../containers/inventory-page'
 import InventoriesPage from '../containers/inventories-page'
 import ProductPage from '../containers/product-page'
 import ProductsPage from '../containers/products-page'
+import CreateProductPage from '../containers/create-product-page'
 import VariantPage from '../containers/variant-page'
 import OrderPage from '../containers/order-page'
 import OrdersPage from '../containers/orders-page'
@@ -62,6 +63,16 @@ export const routes = [
     inRouter: true,
     key: 'product',
     path: '/products/:id',
+    strict: true,
+  },
+  {
+    component: CreateProductPage,
+    displayHome: false,
+    exact: true,
+    image: warehouse,
+    inRouter: true,
+    key: 'product',
+    path: '/test',
     strict: true,
   },
   {

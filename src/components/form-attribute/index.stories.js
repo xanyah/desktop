@@ -21,12 +21,12 @@ storiesOf('FormAttribute', module)
     <FormAttribute
       attribute="Attribute"
       type="number"
-      value="Value"
+      value={42}
     />
   ))
   .add('Entity', () => (
     <FormAttribute
-      attribute="Attribute"
+      attribute="provider"
       type="entity"
       value="Value"
     />

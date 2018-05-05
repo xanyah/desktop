@@ -71,7 +71,7 @@ export const createApiClient = newClient =>
         .then(({ data }) => {
           dispatch(updateClientField('loading', false))
           dispatch(updateClient(data))
-          showSuccessToast(I18n.t('toast.created'))
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.clients.title')}))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))
@@ -82,13 +82,8 @@ export const createApiClient = newClient =>
 export const searchApiClient = query =>
   (dispatch, currentState) => {
     const state = currentState()
-    apiSearchClient(
-      {
-        query: query,
-        storeId: state.stores.currentStore.id,
-      })
+    apiSearchClient({query: query, storeId: state.stores.currentStore.id})
       .then(({ data }) => {
-        //TODO Improve with loader ?
         dispatch(updateClientField('clients', data))
       })
       .catch(() => {

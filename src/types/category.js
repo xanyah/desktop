@@ -8,3 +8,7 @@ export const CategoryType = {
   storeId:    PropTypes.string,
   tva:        PropTypes.string,
 }
+
+export const formatCategory = category => ({
+  ...category,
+})
