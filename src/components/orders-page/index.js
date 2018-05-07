@@ -21,7 +21,7 @@ export default class Orders extends React.Component {
     return (
       <PageContainer>
         <DataTable
-          columns={['id', 'status']}
+          columns={['status', 'id']}
           data={orders}
           loading={loading}
           onItemView={item => openOrder(item)}

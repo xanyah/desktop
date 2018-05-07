@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { PulseLoader } from 'react-spinners'
 
 import { formatData } from '../../utils/data-helper'
+import { getStatusClass } from '../../utils/status-helper'
 import { secondaryTextColor } from '../../constants'
 import { I18n } from 'react-redux-i18n'
 import Input from '../input'
@@ -61,9 +62,15 @@ class DataTable extends React.Component {
         </div>
         <div className="header-row">
           {columns.map(column => (
-            <div className="column" key={column}>
-              <Translate value={`models.${type}.${column}`} />
-            </div>
+            (column == 'status')
+              ? (
+                <div className={`column column-${column}`} key={column}></div>
+              )
+              : (
+                <div className={`column column-${column}`} key={column}>
+                  <Translate value={`models.${type}.${column}`} />
+                </div>
+              )
           ))}
         </div>
         <div className="rows-container">
@@ -88,9 +95,17 @@ class DataTable extends React.Component {
                       >
                         <div className="data-row">
                           {columns.map(column => (
-                            <div className="column" key={idx + column}>
-                              {formatData(row[column], column)}
-                            </div>
+                            (column == 'status')
+                              ? (
+                                <div className={`column column-${column}`} key={idx + column}>
+                                  <div className={`sticker-${getStatusClass(row, type)}`}></div>
+                                </div>
+                              )
+                              : (
+                                <div className={`column column-${column}`} key={idx + column}>
+                                  {formatData(row[column], column)}
+                                </div>
+                              )
                           ))}
                         </div>
                         <button className="link" onClick={() => onItemView(row)}>

@@ -20,7 +20,7 @@ export default class Inventories extends React.Component {
     return (
       <PageContainer>
         <DataTable
-          columns={['createdAt']}
+          columns={['status', 'createdAt']}
           data={inventories}
           loading={loading}
           onItemView={item => openInventory(item)}

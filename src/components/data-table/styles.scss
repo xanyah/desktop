@@ -1,4 +1,5 @@
 @import '../../constants/scss/colors';
+@import '../../constants/scss/sticker';
 
 .data-table {
   max-height: calc(100vh - 88px);
@@ -22,6 +23,10 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
+    }
+
+    .column-status {
+      width:4%;
     }
   }
 
@@ -67,6 +72,10 @@
           text-overflow: ellipsis;
           white-space: nowrap;
           width: 100%;
+        }
+
+        .column-status {
+          width:4%;
         }
       }
 
