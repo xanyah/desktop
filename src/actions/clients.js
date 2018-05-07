@@ -1,4 +1,5 @@
 import {
+  CLIENTS_CREATE_FIELD,
   CLIENTS_UPDATE_CLIENT,
   CLIENTS_UPDATE_FIELD,
 } from '../constants/actions'
@@ -18,6 +19,11 @@ import {
 } from '../utils/notification-helper'
 
 import { formatClient } from '../types'
+
+export const createClient = client => ({
+  client,
+  type: CLIENTS_CREATE_FIELD,
+})
 
 export const updateClient = client => ({
   client,
@@ -70,7 +76,7 @@ export const createApiClient = newClient =>
       apiPostClient({...newClient, storeId})
         .then(({ data }) => {
           dispatch(updateClientField('loading', false))
-          dispatch(updateClient(data))
+          dispatch(createClient(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.clients.title')}))
         })
         .catch(() => {

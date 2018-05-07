@@ -1,4 +1,5 @@
 import {
+  PRODUCTS_CREATE_PRODUCT,
   PRODUCTS_UPDATE_FIELD,
   PRODUCTS_UPDATE_PRODUCT,
   PRODUCTS_CREATE_VARIANT,
@@ -21,6 +22,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+  case PRODUCTS_CREATE_PRODUCT:
+    return {
+      ...state,
+      products: [...state.products, action.product],
+    }
   case PRODUCTS_UPDATE_FIELD:
     return {
       ...state,

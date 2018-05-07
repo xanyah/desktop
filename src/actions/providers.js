@@ -1,4 +1,5 @@
 import {
+  PROVIDERS_CREATE_PROVIDER,
   PROVIDERS_UPDATE_FIELD,
   PROVIDERS_UPDATE_PROVIDER,
 } from '../constants/actions'
@@ -18,6 +19,11 @@ import {
 } from '../utils/notification-helper'
 
 import { formatProvider } from '../types'
+
+export const createProvider = provider => ({
+  provider,
+  type: PROVIDERS_CREATE_PROVIDER,
+})
 
 export const updateProvider = provider => ({
   provider,
@@ -69,7 +75,7 @@ export const createApiProvider = newProvider =>
       apiPostProvider({...newProvider, storeId})
         .then(({ data }) => {
           dispatch(updateProviderField('loading', false))
-          dispatch(updateProvider(data))
+          dispatch(createProvider(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.providers.title')}))
         })
         .catch(() => {

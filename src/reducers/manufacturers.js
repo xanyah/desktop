@@ -1,4 +1,5 @@
 import {
+  MANUFACTURERS_CREATE_MANUFACTURER,
   MANUFACTURERS_UPDATE_FIELD,
   MANUFACTURERS_UPDATE_MANUFACTURER,
 } from '../constants/actions'
@@ -11,6 +12,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+  case MANUFACTURERS_CREATE_MANUFACTURER:
+    return {
+      ...state,
+      manufacturers: [...state.manufacturers, action.manufacturer],
+    }
   case MANUFACTURERS_UPDATE_MANUFACTURER:
     return {
       ...state,

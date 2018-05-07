@@ -1,4 +1,5 @@
 import {
+  ORDERS_CREATE_ORDER,
   ORDERS_UPDATE_FIELD,
   ORDERS_UPDATE_ORDER,
 } from '../constants/actions'
@@ -11,6 +12,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+  case ORDERS_CREATE_ORDER:
+    return {
+      ...state,
+      orders: [...state.orders, action.order],
+    }
   case ORDERS_UPDATE_ORDER:
     return {
       ...state,

@@ -1,4 +1,5 @@
 import {
+  ORDERS_CREATE_ORDER,
   ORDERS_UPDATE_FIELD,
   ORDERS_UPDATE_ORDER,
 } from '../constants/actions'
@@ -18,6 +19,11 @@ import {
 } from '../utils/notification-helper'
 
 import { formatOrder } from '../types'
+
+export const createOrder = order => ({
+  order,
+  type: ORDERS_CREATE_ORDER,
+})
 
 export const updateOrder = order => ({
   order,
@@ -69,7 +75,7 @@ export const createApiOrder = newOrder =>
       apiPostOrder({...newOrder, storeId})
         .then(({ data }) => {
           dispatch(updateOrderField('loading', false))
-          dispatch(updateOrder(data))
+          dispatch(createOrder(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.orders.title')}))
         })
         .catch(() => {

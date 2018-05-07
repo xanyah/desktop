@@ -1,4 +1,5 @@
 import {
+  MANUFACTURERS_CREATE_MANUFACTURER,
   MANUFACTURERS_UPDATE_MANUFACTURER,
   MANUFACTURERS_UPDATE_FIELD,
 } from '../constants/actions'
@@ -18,6 +19,11 @@ import {
 } from '../utils/notification-helper'
 
 import { formatManufacturer } from '../types'
+
+export const createManufacturer = manufacturer => ({
+  manufacturer,
+  type: MANUFACTURERS_CREATE_MANUFACTURER,
+})
 
 export const updateManufacturer = manufacturer => ({
   manufacturer,
@@ -70,7 +76,7 @@ export const createApiManufacturer = newManufacturer =>
       apiPostManufacturer({...newManufacturer, storeId})
         .then(({ data }) => {
           dispatch(updateManufacturerField('loading', false))
-          dispatch(updateManufacturer(data))
+          dispatch(createManufacturer(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.manufacturers.title')}))
         })
         .catch(() => {
