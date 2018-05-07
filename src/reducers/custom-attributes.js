@@ -31,10 +31,7 @@ export default (state = initialState, action) => {
   case CUSTOM_ATTRIBUTES_CREATE_CUSTOM_ATTRIBUTE:
     return {
       ...state,
-      customAttributes: [
-        ...state.customAttributes,
-        action.customAttribute,
-      ],
+      customAttributes: [...state.customAttributes, action.customAttribute],
     }
   default:
     return state

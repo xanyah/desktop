@@ -1,4 +1,5 @@
 import {
+  CLIENTS_CREATE_CLIENT,
   CLIENTS_UPDATE_FIELD,
   CLIENTS_UPDATE_CLIENT,
 } from '../constants/actions'
@@ -12,6 +13,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+  case CLIENTS_CREATE_CLIENT:
+    return {
+      ...state,
+      clients: [...state.clients, action.client],
+    }
   case CLIENTS_UPDATE_CLIENT:
     return {
       ...state,

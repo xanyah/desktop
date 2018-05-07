@@ -1,4 +1,5 @@
 import {
+  PRODUCTS_CREATE_PRODUCT,
   PRODUCTS_UPDATE_FIELD,
   PRODUCTS_UPDATE_PRODUCT,
 } from '../constants/actions'
@@ -20,6 +21,12 @@ import {
   showErrorToast,
   showSuccessToast,
 } from '../utils/notification-helper'
+
+export const createProduct = product => ({
+  product,
+  type: PRODUCTS_CREATE_PRODUCT,
+})
+
 
 export const updateProduct = product => ({
   product,
