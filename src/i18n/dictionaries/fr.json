@@ -80,6 +80,9 @@
     },
     "models": {
         "categories": {
+          "name": "Nom",
+          "tva": "TVA",
+          "category_id": "Sous-catégorie de ? (optionnel)",
           "title": "Catégorie"
         },
         "clients": {

@@ -80,6 +80,9 @@
     },
     "models": {
         "categories": {
+          "name": "Name",
+          "tva": "VAT",
+          "category_id": "Sub-category of ? (optional)",
           "title": "Category"
         },
         "clients": {
