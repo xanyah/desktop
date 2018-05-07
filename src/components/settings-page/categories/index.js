@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CategoryType } from '../../../types'
+import { Translate } from 'react-redux-i18n'
+import { PulseLoader } from 'react-spinners'
+
 import FormAttribute from '../../../containers/form-attribute'
-import Select from 'react-select'
+import { CategoryType } from '../../../types'
+import { secondaryTextColor } from '../../../constants'
 
 import './styles.scss'
 
@@ -14,9 +17,8 @@ export default class Categories extends React.Component {
     }
   }
 
-  componentWillMount() {
-    const { getCategories } = this.props
-    getCategories()
+  componentDidMount() {
+    this.props.getCategories()
   }
 
   handleUpdateCategory(attribute, value) {
@@ -28,7 +30,6 @@ export default class Categories extends React.Component {
     })
   }
 
-  //TODO category creation
   renderCategoriesForm() {
     const { createApiCategory } = this.props
     const { newCategory } = this.state
@@ -39,6 +40,7 @@ export default class Categories extends React.Component {
         onSubmit={e=> {
           e.preventDefault()
           createApiCategory(newCategory)
+          this.setState({newCategory: {}})
         }}>
 
         <div>
@@ -49,32 +51,55 @@ export default class Categories extends React.Component {
               value={newCategory['name']}
               model="categories"
               type="string"
-              onUpdate={(attribute, value) => this.handleUpdateCategory(attribute, value)}
+              onUpdate={(attribute, value) =>
+                this.handleUpdateCategory(attribute, value)}
             />
 
-            <Select
-              name="form-field-name"
+            <FormAttribute
+              attribute="tva"
+              key="tva"
               value={newCategory['tva']}
-              onChange={e => {this.handleUpdateCategory('tva', e.value)}}
-              options={[
-                { label: 'Standard Rate', value: 'standard_rate' },
-                { label: 'Reduced Rate', value: 'reduced_rate' },
-                { label: 'Reduced Rate Alt', value: 'reduced_rate_alt' },
-                { label: 'Super Reduced Rate', value: 'super_reduced_rate' },
-                { label: 'Parking', value: 'parking_rate' },
-              ]}
+              model="categories"
+              type="vat-rates"
+              onUpdate={(attribute, value) =>
+                this.handleUpdateCategory(attribute, value)}
+            />
+
+            <FormAttribute
+              attribute="category_id"
+              key="category_id"
+              value={
+                (newCategory['category_id'])
+                  ? newCategory['category_id']
+                  : null
+              }
+              model="categories"
+              type="parent-category"
+              onUpdate={(attribute, value) =>
+                this.handleUpdateCategory(attribute, value)}
             />
           </div>
         </div>
 
-        <button className="btn-link btn-stand-alone" type="submit">Envoyer</button>
+        <button className="btn-link btn-stand-alone" type="submit">
+          <Translate value='global.validate'/>
+        </button>
       </form>
     )
   }
 
   renderCategoriesList() {
-    const { categories } = this.props
-    //Errored
+    const { categories, loading } = this.props
+
+    if(loading)
+      return (
+        <div className='sweet-loading'>
+          <PulseLoader
+            color={secondaryTextColor}
+            loading={loading}
+          />
+        </div>
+      )
 
     if(!categories.length)
       return <h3>Il n'y a aucune catégorie pour le moment !</h3>
@@ -83,25 +108,28 @@ export default class Categories extends React.Component {
         {
           categories.map((category) => {
             if(!category.children)
-              return <h1>ERRORRRRRRRRRRRR !</h1>
-            else return (!category.children.length)
-              ? (
-                <div className='parent-category' key={category.id}>
-                  {category.name}
-                </div>
+              return (
+                <h1 key={category.id}>Error To Correct !</h1>
               )
-              : (
-                <div className='parent-category' key={category.id}>
-                  {category.name}
-                  <div className='children-categories-container'>
-                    {category.children.map((child) => (
-                      <div className='children-category' key={child.id}>
-                        {child.name}
-                      </div>
-                    ))}
+            else
+              return (!category.children.length)
+                ? (
+                  <div className='parent-category' key={category.id}>
+                    {category.name}
                   </div>
-                </div>
-              )
+                )
+                : (
+                  <div className='parent-category' key={category.id}>
+                    {category.name}
+                    <div className='children-categories-container'>
+                      {category.children.map((child) => (
+                        <div className='children-category' key={child.id}>
+                          {child.name}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
           })
         }
       </div>
@@ -109,7 +137,12 @@ export default class Categories extends React.Component {
   }
 
   render() {
-    return [this.renderCategoriesList(), this.renderCategoriesForm()]
+    return (
+      <div className="categories-content">
+        {this.renderCategoriesList()}
+        {this.renderCategoriesForm()}
+      </div>
+    )
   }
 }
 
@@ -117,10 +150,12 @@ Categories.propTypes = {
   categories: PropTypes.arrayOf(CategoryType),
   createApiCategory: PropTypes.func,
   getCategories: PropTypes.func,
+  loading: PropTypes.bool,
 }
 
 Categories.defaultProps = {
   categories: [],
   createApiCategory: () => null,
   getCategories: () => null,
+  loading: false,
 }

@@ -4,15 +4,25 @@ import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
 import Input from '../input'
 
-import { isOfEntityType, getModel, getTypeOptions } from '../../utils/data-helper'
+import {
+  isOfEntityType,
+  getModel,
+  getTypeOptions,
+} from '../../utils/data-helper'
+import {
+  getParentCategoriesList,
+  getVatRatesOptions,
+} from '../../utils/category-helper'
 
 import './styles.scss'
 
-//TODO add checkbox Sofiane
+//TODO add checkbox / Vat Rates ? / Parent Category ? Sofiane
 const FormAttribute = item => {
   return (
     <div className="form-attribute">
-      <label htmlFor={item.attribute}><Translate value={`models.${item.model}.${item.attribute}`} /></label>
+      <label htmlFor={item.attribute}>
+        <Translate value={`models.${item.model}.${item.attribute}`}/>
+      </label>
       { getFormElement(item) }
     </div>
   )
@@ -51,10 +61,28 @@ const getFormElement = item => {
   case 'type':
     return (
       <Select
-        name="form-field-name"
+        name={item.attribute}
         value={item.value}
         onChange={e => item.onUpdate(item.attribute, e.value)}
         options={getTypeOptions()}
+      />
+    )
+  case 'parent-category':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={e => item.onUpdate(item.attribute, e.value)}
+        options={getParentCategoriesList(item['categories'])}
+      />
+    )
+  case 'vat-rates':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={e => item.onUpdate(item.attribute, e.value)}
+        options={getVatRatesOptions()}
       />
     )
   }
@@ -69,9 +97,13 @@ const getSelect = item => {
 
   return (
     <Select
-      name="form-field-name"
+      name={item.attribute}
       value={item.value.id}
-      onChange={e => item.onUpdate(item.attribute, item[model].find(entity => entity.id === e.value))}
+      onChange={
+        e => item
+          .onUpdate(item.attribute, item[model]
+            .find(entity => entity.id === e.value))
+      }
       options={item[model].map(entity => ({
         label: entity.name,
         value: entity.id,

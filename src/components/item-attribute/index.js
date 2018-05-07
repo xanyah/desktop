@@ -10,7 +10,9 @@ const ItemAttribute = ({ attribute, type, value, model }) => {
     (type == 'entity')
       ? (
         <div className="item-attribute">
-          <label htmlFor={attribute}><Translate value={`models.${model}.${attribute}`} /></label>
+          <label htmlFor={attribute}>
+            <Translate value={`models.${model}.${attribute}`}/>
+          </label>
           <div id={attribute}>{
             (value.name)
               ? formatData(value.name)
@@ -21,7 +23,9 @@ const ItemAttribute = ({ attribute, type, value, model }) => {
       )
       : (
         <div className="item-attribute">
-          <label htmlFor={attribute}><Translate value={`models.${model}.${attribute}`} /></label>
+          <label htmlFor={attribute}>
+            <Translate value={`models.${model}.${attribute}`} />
+          </label>
           <div id={attribute}>{formatData(value)}</div>
         </div>
       )

@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Translate } from 'react-redux-i18n'
+
 import PageContainer from '../page-container'
-
-import { StoreType, CategoryType, CustomAttributeType } from '../../types'
-
 import CustomAttribute from './custom-attributes'
 import Categories from './categories'
 import StoreSettings from './store-settings'
+import { StoreType, CategoryType, CustomAttributeType } from '../../types'
 
 import './styles.scss'
 
@@ -15,8 +15,8 @@ export default class Settings extends React.Component {
     super(props)
     this.steps = [
       {
-        key: 'general',
-        render: () => this.renderGeneral(),
+        key: 'store-settings',
+        render: () => this.renderStoreSettings(),
       },
       {
         key: 'categories',
@@ -34,7 +34,7 @@ export default class Settings extends React.Component {
     updateField('step', this.steps[0].key)
   }
 
-  renderGeneral() {
+  renderStoreSettings() {
     const {
       currentStore,
       getVatRates,
@@ -55,12 +55,14 @@ export default class Settings extends React.Component {
       categories,
       createApiCategory,
       getCategories,
+      loadingCategory,
     } = this.props
 
     return <Categories
       createApiCategory={createApiCategory}
       categories={categories}
       getCategories={getCategories}
+      loading={loadingCategory}
     />
   }
 
@@ -93,7 +95,7 @@ export default class Settings extends React.Component {
                 key={s.key}
                 onClick={() => updateField('step', s.key)}
               >
-                {s.key}
+                <Translate value={`settings-page.side-navigation.${s.key}`}/>
               </button>
             ))}
           </div>
@@ -116,6 +118,7 @@ Settings.propTypes = {
   getCategories: PropTypes.func,
   getCustomAttributes: PropTypes.func,
   getVatRates: PropTypes.func,
+  loadingCategory: PropTypes.bool,
   openCustomAttribute: PropTypes.func,
   step: PropTypes.string,
   storeName: PropTypes.string,
@@ -134,6 +137,7 @@ Settings.defaultProps = {
   getCategories: () => null,
   getCustomAttributes: () => null,
   getVatRates: () => null,
+  loadingCategory: false,
   openCustomAttribute: () => null,
   step: 'general',
   storeName: '',

@@ -1,13 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
 
 import FormAttribute from '../../../containers/form-attribute'
 import { CustomAttributeType } from '../../../types'
 import DataTable from '../../data-table'
-import { getTypeOptions } from '../../../utils/data-helper'
 
-// import { Translate } from 'react-redux-i18n'
+import { Translate } from 'react-redux-i18n'
 
 export default class CustomAttribute extends React.Component {
   constructor(props) {
@@ -48,15 +46,19 @@ export default class CustomAttribute extends React.Component {
             onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
           />
 
-          <Select
-            // name="form-field-name"
+          <FormAttribute
+            attribute="type"
+            key="type"
             value={newCustomAttribute['type']}
-            onChange={e => this.handleUpdate('type', e.value)}
-            options={getTypeOptions()}
+            model="custom_attributes"
+            type="type"
+            onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
           />
         </div>
 
-        <button className="btn-link btn-stand-alone" type="submit">Envoyer</button>
+        <button className="btn-link btn-stand-alone" type="submit">
+          <Translate value='global.validate'/>
+        </button>
       </form>
     )
   }

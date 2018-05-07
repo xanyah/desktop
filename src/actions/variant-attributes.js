@@ -62,7 +62,7 @@ export const createApiVariantAttribute = newVariantAttribute =>
       .then(({ data }) => {
         dispatch(updateProductsField('loading', false))
         dispatch(createvariantAttribute(data))
-        showSuccessToast(I18n.t('toast.created'))
+        showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.variant-attributes.title')}))
       })
       .catch(() => {
         showErrorToast(I18n.t('toast.error'))

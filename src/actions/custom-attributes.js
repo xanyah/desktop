@@ -82,7 +82,7 @@ export const createApiCustomAttribute = newCustomAttribute =>
       .then(({ data }) => {
         dispatch(updateCustomAttributesField('loading', false))
         dispatch(createCustomAttribute(data))
-        showSuccessToast(I18n.t('toast.created'))
+        showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.custom-attributes.title')}))
       })
       .catch(() => {
         showErrorToast(I18n.t('toast.error'))

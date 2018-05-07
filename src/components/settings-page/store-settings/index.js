@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import FormAttribute from '../../../containers/form-attribute'
 import Select from 'react-select'
+import { Translate } from 'react-redux-i18n'
 
+import FormAttribute from '../../../containers/form-attribute'
 import { countryList } from '../../../utils/country-helper'
 
 import './styles.scss'
@@ -10,19 +11,26 @@ import './styles.scss'
 export default class StoreSettings extends React.Component {
   constructor(props) {
     super(props)
-    const { address, country, name } = this.props.currentStore
     this.state = {
+      updatedStore: {
+        address: '',
+        country: '',
+        name: '',
+      },
+    }
+  }
+
+  componentDidMount() {
+    this.props.getVatRates(this.props.currentStore.country)
+
+    const { address, country, name } = this.props.currentStore
+    this.setState({
       updatedStore: {
         address: address,
         country: country,
         name: name,
       },
-    }
-  }
-
-  componentWillMount() {
-    const { getVatRates } = this.props
-    getVatRates(this.props.currentStore.country)
+    })
   }
 
   handleUpdateStore(attribute, value) {
@@ -51,27 +59,37 @@ export default class StoreSettings extends React.Component {
       <div className="vat-rates">
         <div className="title">TVA:</div>
         <div className="vat-rate">
-          <div className="label">Normal:</div>
+          <div className="label">
+            <Translate value='vat-rates.standard'/>:
+          </div>
           <div className="rate"> {standardRate} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
-          <div className="label">Intermédiaire:</div>
+          <div className="label">
+            <Translate value='vat-rates.reduced_rate'/>:
+          </div>
           <div className="rate"> {reducedRate} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
-          <div className="label">Réduit:</div>
+          <div className="label">
+            <Translate value='vat-rates.reduced_rate_alt'/>:
+          </div>
           <div className="rate"> {reducedRateAlt} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
-          <div className="label">Super-réduit:</div>
+          <div className="label">
+            <Translate value='vat-rates.super_reduced_rate'/>:
+          </div>
           <div className="rate"> {superReducedRate} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
-          <div className="label">Parking:</div>
+          <div className="label">
+            <Translate value='vat-rates.parking_rate'/>:
+          </div>
           <div className="rate"> {parkingRate} %</div>
         </div>
       </div>
@@ -128,7 +146,7 @@ export default class StoreSettings extends React.Component {
           </div>
         </div>
         <button className="btn-link btn-stand-alone" type="submit">
-          Envoyer
+          <Translate value='global.validate'/>
         </button>
       </form>
     )

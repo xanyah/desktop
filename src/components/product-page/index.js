@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Collapsible from 'react-collapsible'
+import { Translate } from 'react-redux-i18n'
 
 import { productFormat, ProductType, VariantType } from '../../types'
 import DataTable from '../data-table'
@@ -66,7 +67,14 @@ export default class Product extends React.Component {
         <h1>Voir les dérivés de ce produit</h1>
 
         <DataTable
-          columns={['barcode', 'buyingPrice', 'provider', 'quantity', 'ratio', 'taxFreePrice']}
+          columns={[
+            'barcode',
+            'buyingPrice',
+            'provider',
+            'quantity',
+            'ratio',
+            'taxFreePrice',
+          ]}
           data={variants}
           loading={false}
           onItemView={item => openVariant(item)}
@@ -90,7 +98,8 @@ export default class Product extends React.Component {
             value={newVariant['provider']}
             model="variants"
             type="entity"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateFieldNewVariant(attribute, value)}
           />
 
           <FormAttribute
@@ -99,7 +108,8 @@ export default class Product extends React.Component {
             value={newVariant['buyingPrice']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateFieldNewVariant(attribute, value)}
           />
         </div>
 
@@ -110,7 +120,8 @@ export default class Product extends React.Component {
             value={newVariant['originalBarcode']}
             model="variants"
             type="string"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateFieldNewVariant(attribute, value)}
           />
 
           <FormAttribute
@@ -119,7 +130,8 @@ export default class Product extends React.Component {
             value={newVariant['quantity']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateFieldNewVariant(attribute, value)}
           />
         </div>
 
@@ -130,7 +142,8 @@ export default class Product extends React.Component {
             value={newVariant['ratio']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateFieldNewVariant(attribute, value)}
           />
 
           <FormAttribute
@@ -139,7 +152,8 @@ export default class Product extends React.Component {
             value={newVariant['taxFreePrice']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateFieldNewVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateFieldNewVariant(attribute, value)}
           />
         </div>
       </div>
@@ -158,7 +172,9 @@ export default class Product extends React.Component {
             createApiVariant({...newVariant, productId: selectedProduct.id})
           }}>
           {this.getVariantsFormAttribute()}
-          <button className="btn-link btn-stand-alone">Envoyer</button>
+          <button className="btn-link btn-stand-alone">
+            <Translate value='global.validate'/>
+          </button>
         </form>
       </Collapsible>
     )

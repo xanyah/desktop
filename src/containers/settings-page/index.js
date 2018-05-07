@@ -13,14 +13,15 @@ import {
 import SettingsPage from '../../components/settings-page'
 
 const mapStateToProps = ({
-  categories: { categories },
-  customAttributes: {customAttributes},
+  categories: { categories, loading: loadingCategory },
+  customAttributes: { customAttributes },
   settings: { country, step, storeName, vatRatesCountry },
   stores: { currentStore }}) => ({
   categories,
   country,
   currentStore,
   customAttributes,
+  loadingCategory,
   step,
   storeName,
   vatRatesCountry,

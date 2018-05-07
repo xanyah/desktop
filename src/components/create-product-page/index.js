@@ -49,7 +49,8 @@ export default class CreateProduct extends React.Component {
             value={newVariant['provider']}
             model="variants"
             type="entity"
-            onUpdate={(attribute, value) => this.handleUpdateVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateVariant(attribute, value)}
           />
 
           <FormAttribute
@@ -58,7 +59,8 @@ export default class CreateProduct extends React.Component {
             value={newVariant['buyingPrice']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateVariant(attribute, value)}
           />
         </div>
 
@@ -69,7 +71,8 @@ export default class CreateProduct extends React.Component {
             value={newVariant['originalBarcode']}
             model="variants"
             type="string"
-            onUpdate={(attribute, value) => this.handleUpdateVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateVariant(attribute, value)}
           />
 
           <FormAttribute
@@ -78,7 +81,8 @@ export default class CreateProduct extends React.Component {
             value={newVariant['ratio']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateVariant(attribute, value)}
           />
         </div>
 
@@ -89,7 +93,8 @@ export default class CreateProduct extends React.Component {
             value={newVariant['taxFreePrice']}
             model="variants"
             type="number"
-            onUpdate={(attribute, value) => this.handleUpdateVariant(attribute, value)}
+            onUpdate={(attribute, value) =>
+              this.handleUpdateVariant(attribute, value)}
           />
         </div>
       </div>
