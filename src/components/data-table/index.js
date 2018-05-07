@@ -93,11 +93,17 @@ class DataTable extends React.Component {
                             </div>
                           ))}
                         </div>
-                        <button className="link" onClick={() => onItemView(row)}>
+                        <button
+                          className="link"
+                          onClick={() => onItemView(row)}
+                        >
                           ->
                         </button>
                         <div className="action">
-                          <button className="btn-primary" onClick={() => onItemView(row)}>
+                          <button
+                            className="btn-primary"
+                            onClick={() => onItemView(row)}
+                          >
                             <Translate value={`models.${type}.open`} />
                           </button>
                         </div>
@@ -123,7 +129,7 @@ class DataTable extends React.Component {
             : (
               <button
                 className="btn-primary data-table-create-button"
-                onClick={() => creationFunction()}//{() => onItemView(row)}
+                onClick={() => onItemView({})}
               >
                 <Translate value={`models.${type}.create`} />
               </button>

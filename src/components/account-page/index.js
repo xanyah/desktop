@@ -61,7 +61,8 @@ export default class Account extends React.Component {
               value={updatedUser['firstname']}
               model="variant-attributes"
               type="string"
-              onUpdate={(attribute, value) => this.handleUpdateFieldUser('firstname', value)}
+              onUpdate={(attribute, value) =>
+                this.handleUpdateFieldUser('firstname', value)}
             />
 
             <FormAttribute
@@ -70,7 +71,8 @@ export default class Account extends React.Component {
               value={updatedUser['lastname']}
               model="variant-attributes"
               type="string"
-              onUpdate={(attribute, value) => this.handleUpdateFieldUser('lastname', value)}
+              onUpdate={(attribute, value) =>
+                this.handleUpdateFieldUser('lastname', value)}
             />
 
             <select
@@ -91,7 +93,7 @@ export default class Account extends React.Component {
               type="submit"
               disabled={loading}
             >
-                SAVE
+              <Translate value='global.validate'/>
             </button>
           </form>
         </div>
@@ -131,7 +133,7 @@ export default class Account extends React.Component {
             type="submit"
             disabled={loading}
           >
-              SAVE
+            <Translate value='global.validate'/>
           </button>
         </form>
       </PageContainer>

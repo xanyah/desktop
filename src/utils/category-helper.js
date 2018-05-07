@@ -1,4 +1,6 @@
-export const orderCategories = (categories) => {
+import { I18n } from 'react-redux-i18n'
+
+export const orderCategories = categories => {
   if(!categories)
     return []
 
@@ -8,4 +10,45 @@ export const orderCategories = (categories) => {
       children: categories.filter(cat => cat.categoryId === category.id),
     }))
     .filter(category => !category.categoryId)
+}
+
+export const getParentCategoriesList = categories => {
+  if(!categories)
+    return []
+
+  let parentCategories = []
+
+  categories
+    .filter(category => category.categoryId === null)
+    .map(category => {
+      parentCategories.push({'label': category.name, 'value': category.id})
+    })
+
+  return parentCategories
+}
+
+
+export const getVatRatesOptions = () => {
+  return [
+    {
+      label: I18n.t('vat-rates.standard'),
+      value: 'standard_rate',
+    },
+    {
+      label: I18n.t('vat-rates.reduced_rate'),
+      value: 'reduced_rate',
+    },
+    {
+      label: I18n.t('vat-rates.reduced_rate_alt'),
+      value: 'reduced_rate_alt',
+    },
+    {
+      label: I18n.t('vat-rates.super_reduced_rate'),
+      value: 'super_reduced_rate',
+    },
+    {
+      label: I18n.t('vat-rates.parking_rate'),
+      value: 'parking_rate',
+    },
+  ]
 }

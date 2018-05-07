@@ -79,6 +79,9 @@
         }
     },
     "models": {
+        "categories": {
+          "title": "Category"
+        },
         "clients": {
             "address": "Address",
             "create": "Create a client",
@@ -89,6 +92,9 @@
             "open": "Open client",
             "phone": "Phone",
             "search": "Search a client ..."
+        },
+        "custom-attributes": {
+          "title": "Custom Attribute"
         },
         "inventories": {
             "create": "Create an inventory",
@@ -179,10 +185,30 @@
         "settings": "Settings",
         "shippings": "Shippings"
     },
+    "settings-page": {
+      "side-navigation": {
+        "categories": "Categories",
+        "custom-attributes": "Custom Attributes",
+        "store-settings": "Store Settings"
+      }
+    },
+    "sign-in-page": {
+      "email": "Email",
+      "forgotten-password": "Forgotten password ?",
+      "password": "Password",
+      "sign-in": "Sign in"
+    },
     "toast": {
         "created": "%{entity} created !",
         "error": "An error has occured !",
         "not-found": "%{entity} not found",
         "updated": "Updated"
+    },
+    "vat-rates": {
+      "parking_rate": "Parking",
+      "reduced_rate": "Reduced",
+      "reduced_rate_alt": "Reduced Alt",
+      "standard": "Standard",
+      "super_reduced_rate": "Super Reduced"
     }
 }

@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Collapsible from 'react-collapsible'
+import { Translate } from 'react-redux-i18n'
 
-import { variantFormat, variantAttributeFormat, VariantType } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 import FormAttribute from '../../containers/form-attribute'
+import { variantFormat, variantAttributeFormat, VariantType } from '../../types'
 
 import './styles.scss'
 
@@ -116,7 +117,9 @@ export default class Variant extends React.Component {
             />
           </div>
 
-          <button className="btn-link btn-stand-alone">Envoyer</button>
+          <button className="btn-link btn-stand-alone">
+            <Translate value='global.validate'/>
+          </button>
         </form>
       </Collapsible>
     )

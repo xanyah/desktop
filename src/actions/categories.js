@@ -51,7 +51,7 @@ export const createApiCategory = newCategory =>
         .then(({ data }) => {
           dispatch(updateCategoriesField('loading', false))
           dispatch(createCategory(data))
-          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.manufacturers.title')}))
+          showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.categories.title')}))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))

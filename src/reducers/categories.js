@@ -3,6 +3,8 @@ import {
   CATEGORIES_UPDATE_FIELD,
 } from '../constants/actions'
 
+import { orderCategories } from '../utils/category-helper'
+
 const initialState = {
   categories: [],
   loading: false,
@@ -10,10 +12,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-  case CATEGORIES_CREATE_CATEGORY:
+  case CATEGORIES_CREATE_CATEGORY :
     return {
       ...state,
-      categories: state.categories.push(action.category),
+      categories: orderCategories([...state.categories, action.category]),
     }
   case CATEGORIES_UPDATE_FIELD:
     return {

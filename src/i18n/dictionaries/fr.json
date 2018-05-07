@@ -79,6 +79,9 @@
         }
     },
     "models": {
+        "categories": {
+          "title": "Catégorie"
+        },
         "clients": {
             "address": "Adresse",
             "create": "Créer un client",
@@ -89,6 +92,9 @@
             "open": "Voir le client",
             "phone": "Téléphone",
             "search": "Rechercher un client ..."
+        },
+        "custom-attributes": {
+          "title": "Attibut Personnalisé"
         },
         "inventories": {
             "create": "Créer un inventaire",
@@ -180,10 +186,30 @@
         "settings": "Paramètres",
         "shippings": "Livraisons"
     },
+    "settings-page": {
+      "side-navigation": {
+        "categories": "Catégories",
+        "custom-attributes": "Attributs personalisés",
+        "store-settings": "Paramètres du magasin"
+      }
+    },
+    "sign-in-page": {
+      "email": "Adresse Mail",
+      "forgotten-password": "Mot de passe oublié ?",
+      "password": "Mot de passe",
+      "sign-in": "Connexion"
+    },
     "toast": {
         "created": "%{entity} créé(e) !",
         "error": "Une erreur s'est produite !",
         "not-found": "%{entity} inexistant",
         "updated": "Mis à jour"
+    },
+    "vat-rates": {
+      "parking_rate": "Parking",
+      "reduced_rate": "Réduit",
+      "reduced_rate_alt": "Intermédiaire",
+      "standard": "Normal",
+      "super_reduced_rate": "Super Réduit"
     }
 }
