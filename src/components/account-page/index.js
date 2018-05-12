@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import PageContainer from '../page-container'
+import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
+import swal from 'sweetalert'
+
+import PageContainer from '../page-container'
 import { verifyPassword, errorHandler } from '../../utils/password-helper'
 import FormAttribute from '../../containers/form-attribute'
 
@@ -16,10 +19,14 @@ export default class Account extends React.Component {
     } = this.props
 
     this.setState({
+      updatedPassword: {
+        password: '',
+        passwordConfirmation: '',
+      },
       updatedUser: {
-        'firstname': firstname,
-        'lastname': lastname,
-        'locale': locale,
+        firstname: firstname,
+        lastname: lastname,
+        locale: locale,
       },
     })
   }
@@ -33,132 +40,166 @@ export default class Account extends React.Component {
     })
   }
 
+  handleUpdatePassword(attribute, value) {
+    this.setState({
+      updatedPassword: {
+        ...this.state.updatedPassword,
+        [attribute]: value,
+      },
+    })
+  }
 
-  render() {
+  renderUpdateUserForm() {
     const {
       loading,
-      locale,
-      updateField,
-      newPassword,
-      confirmNewPassword,
       updateUserParams,
     } = this.props
-    const {updatedUser} = this.state
+
+    const { updatedUser } = this.state
+
+    return (
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          updateUserParams(updatedUser)
+        }}
+      >
+        <h2><Translate value='account.form.first.title'/></h2>
+
+        <FormAttribute
+          attribute="firstname"
+          key="firstname"
+          value={updatedUser['firstname']}
+          model="account"
+          type="string"
+          onUpdate={(attribute, value) =>
+            this.handleUpdateFieldUser('firstname', value)}
+        />
+
+        <FormAttribute
+          attribute="lastname"
+          key="lastname"
+          value={updatedUser['lastname']}
+          model="account"
+          type="string"
+          onUpdate={(attribute, value) =>
+            this.handleUpdateFieldUser('lastname', value)}
+        />
+
+        <Select
+          name="form-field-locale"
+          value={updatedUser['locale']}
+          onChange={e =>
+            this.handleUpdateFieldUser('locale', e.value)}
+          options={[
+            {label: 'Français', value: 'fr'},
+            {label: 'Anglais', value: 'en'},
+          ]}
+        />
+
+        <button
+          className="btn-primary submit"
+          type="submit"
+          disabled={loading}
+        >
+          <Translate value='global.validate'/>
+        </button>
+      </form>
+    )
+  }
+
+  renderUpdatePasswordForm() {
+    const {
+      loading,
+      updateUserParams,
+    } = this.props
+
+    const { updatedPassword } = this.state
+
+    return (
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          const passwordError = verifyPassword(
+            updatedPassword['password'],
+            updatedPassword['passwordConfirmation'],
+          )
+          if(passwordError) {
+            var messageError = errorHandler[passwordError]
+
+            swal({
+              button: true,
+              dangerMode: true,
+              icon: 'error',
+              text: messageError,
+              title: 'Something is wrong !',
+            })
+
+            return null
+          }
+          updateUserParams({
+            password: updatedPassword['password'].trim(),
+            password_confirmation: updatedPassword['passwordConfirmation'].trim(),
+          })
+        }}
+      >
+        <h2><Translate value='account.form.second.title'/></h2>
+
+        <FormAttribute
+          attribute="password"
+          key="password"
+          value={updatedPassword['password']}
+          model="account"
+          type="password"
+          onUpdate={(attribute, value) =>
+            this.handleUpdatePassword('password', value)}
+        />
+
+        <FormAttribute
+          attribute="confirmPassword"
+          key="confirmPassword"
+          value={updatedPassword['confirmPassword']}
+          model="account"
+          type="password"
+          onUpdate={(attribute, value) =>
+            this.handleUpdatePassword('confirmPassword', value)}
+        />
+
+        <button
+          className="btn-primary submit"
+          type="submit"
+          disabled={loading}
+        >
+          <Translate value='global.validate'/>
+        </button>
+      </form>
+    )
+  }
+
+  render() {
     return (
       <PageContainer>
         <div className="account">
-          <form
-            onSubmit={e => {
-              e.preventDefault()
-              updateUserParams(updatedUser)
-            }}
-          >
-            <h2><Translate value='account.form.first.title'/></h2>
-
-            <FormAttribute
-              attribute="firstname"
-              key="firstname"
-              value={updatedUser['firstname']}
-              model="variant-attributes"
-              type="string"
-              onUpdate={(attribute, value) =>
-                this.handleUpdateFieldUser('firstname', value)}
-            />
-
-            <FormAttribute
-              attribute="lastname"
-              key="lastname"
-              value={updatedUser['lastname']}
-              model="variant-attributes"
-              type="string"
-              onUpdate={(attribute, value) =>
-                this.handleUpdateFieldUser('lastname', value)}
-            />
-
-            <select
-              className='select-locale'
-              onChange={e => updateField('locale', e.target.value)}
-            >
-              <option
-                value="fr"
-                selected={'fr' === locale}
-              >FR</option>
-              <option
-                value="en"
-                selected={'en' === locale}
-              >EN</option>
-            </select>
-            <button
-              className="btn-primary submit"
-              type="submit"
-              disabled={loading}
-            >
-              <Translate value='global.validate'/>
-            </button>
-          </form>
+          {this.renderUpdateUserForm()}
+          {this.renderUpdatePasswordForm()}
         </div>
-
-        <form
-          onSubmit={e => {
-            e.preventDefault()
-            const passwordError = verifyPassword(newPassword, confirmNewPassword)
-            if(passwordError) {
-              var messageError = errorHandler[passwordError]
-              alert(messageError)
-              return null
-            }
-            updateUserParams({
-              password: newPassword.trim(),
-              password_confirmation: confirmNewPassword.trim(),
-            })
-          }}
-        >
-          <h2><Translate value='account.form.second.title'/></h2>
-          <input
-            className="input"
-            onChange={e => updateField('newPassword', e.target.value)}
-            required
-            type="password"
-            placeholder="Nouveau mot de passe"
-          />
-          <input
-            className="input"
-            onChange={e => updateField('confirmNewPassword', e.target.value)}
-            required
-            type="password"
-            placeholder="Confirmation mot de passe"
-          />
-          <button
-            className="btn-primary submit"
-            type="submit"
-            disabled={loading}
-          >
-            <Translate value='global.validate'/>
-          </button>
-        </form>
       </PageContainer>
     )
   }
 }
 
 Account.propTypes = {
-  confirmNewPassword: PropTypes.string,
   firstname: PropTypes.string,
   lastname: PropTypes.string,
   loading: PropTypes.bool,
   locale: PropTypes.string,
-  newPassword: PropTypes.string,
-  updateField: PropTypes.func,
   updateUserParams: PropTypes.func,
 }
 
 Account.defaultProps = {
-  confirmNewPassword: '',
   firstname: '',
   lastname: '',
   loading: false,
   locale: 'en',
-  newPassword: '',
-  updateField: () => null,
   updateUserParams: () => null,
 }

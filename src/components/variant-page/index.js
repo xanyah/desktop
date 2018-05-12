@@ -7,6 +7,7 @@ import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 import FormAttribute from '../../containers/form-attribute'
 import { variantFormat, variantAttributeFormat, VariantType } from '../../types'
+import VariantMovements from './variant-movements'
 
 import './styles.scss'
 
@@ -51,10 +52,15 @@ export default class Variant extends React.Component {
           <div>
             {this.renderVariantAttributesForm()}
             {this.renderVariantAttributesList()}
+            {this.renderVariantMovements()}
           </div>
         </DataDetails>
       </PageContainer>
     )
+  }
+
+  renderVariantMovements() {
+    return <VariantMovements variantId={this.props.selectedVariant.id}/>
   }
 
   renderVariantAttributesList() {

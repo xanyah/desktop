@@ -18,7 +18,6 @@ export default (state = initialState, action) => {
       ...state,
       [action.field]: action.value,
     }
-  //TODO Change this
   case USER_UPDATE_USER:
     return (state.email === action.user.email)
       ? action.user

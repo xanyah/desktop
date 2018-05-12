@@ -150,7 +150,8 @@
             "create": "Create an shipping",
             "open": "Open shipping",
             "provider": "Provider",
-            "search": "Search an shipping ..."
+            "search": "Search an shipping ...",
+            "title": "Shipping"
         },
         "variants": {
             "barcode": "Barcode",

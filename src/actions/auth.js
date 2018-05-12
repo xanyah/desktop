@@ -6,6 +6,9 @@ import {
   validateToken as apiValidateToken,
 } from '../utils/api-helper'
 import { initialSync, updateUserField } from './index'
+import {
+  setLocale,
+} from 'react-redux-i18n'
 
 export const updateAuthField = (field, value) => ({
   field,
@@ -24,6 +27,7 @@ export const signIn = (email, password, successCallback = null) =>
         dispatch(updateUserField('firstname', data.firstname))
         dispatch(updateUserField('lastname', data.lastname))
         dispatch(updateUserField('locale', data.locale))
+        dispatch(setLocale(data.locale))
         dispatch(initialSync())
         if (successCallback) {
           successCallback()
@@ -44,6 +48,7 @@ export const validateToken = (successCallback = null, errorCallback = null) =>
         dispatch(updateUserField('firstname', data.firstname))
         dispatch(updateUserField('lastname', data.lastname))
         dispatch(updateUserField('locale', data.locale))
+        dispatch(setLocale(data.locale))
         if (successCallback) {
           successCallback()
         }

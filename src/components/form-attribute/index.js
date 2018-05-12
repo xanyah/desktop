@@ -76,6 +76,15 @@ const getFormElement = item => {
         options={getParentCategoriesList(item['categories'])}
       />
     )
+  case 'password':
+    return (
+      <Input
+        onChange={e => item.onUpdate(item.attribute, e.target.value)}
+        value={item.value}
+        name={item.attribute}
+        type="password"
+      />
+    )
   case 'vat-rates':
     return (
       <Select
