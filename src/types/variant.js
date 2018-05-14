@@ -30,15 +30,13 @@ export const variantFormat = [
   ],
   [
     {
-      attribute: 'buyingPrice',
-      editable: true,
-      type: 'number',
-    },
-  ],
-  [
-    {
       attribute: 'provider',
       editable: true,
+      type: 'entity',
+    },
+    {
+      attribute: 'product',
+      editable: false,
       type: 'entity',
     },
   ],
@@ -48,26 +46,20 @@ export const variantFormat = [
       editable: true,
       type: 'number',
     },
-  ],
-  [
     {
       attribute: 'ratio',
       editable: true,
       type: 'number',
     },
-  ],
-  [
+    {
+      attribute: 'buyingPrice',
+      editable: true,
+      type: 'number',
+    },
     {
       attribute: 'taxFreePrice',
       editable: true,
       type: 'number',
-    },
-  ],
-  [
-    {
-      attribute: 'product',
-      editable: false,
-      type: 'entity',
     },
   ],
 ]

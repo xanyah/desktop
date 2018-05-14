@@ -6,9 +6,7 @@ import {
   validateToken as apiValidateToken,
 } from '../utils/api-helper'
 import { initialSync, updateUserField } from './index'
-import {
-  setLocale,
-} from 'react-redux-i18n'
+import { setLocale } from 'react-redux-i18n'
 
 export const updateAuthField = (field, value) => ({
   field,

@@ -154,16 +154,16 @@
             "title": "Livraison"
         },
         "variants": {
-            "barcode": "Barcode",
-            "buyingPrice": "Buying Price",
-            "create": "Create a variant",
-            "open": "Open variant",
-            "provider": "Provider",
-            "quantity": "Quantity",
-            "ratio": "Ratio",
-            "search": "Search a variant...",
-            "taxFreePrice": "Tax Free Price",
-            "title": "Variant",
+            "barcode": "Code barre",
+            "buyingPrice": "Prix d'achat",
+            "create": "Créer un dérivé",
+            "open": "Voir le dérivé",
+            "provider": "Fournisseur",
+            "quantity": "Quantité",
+            "ratio": "Coefficient",
+            "search": "Rechercher un dérivé...",
+            "taxFreePrice": "Prix HT",
+            "title": "Dérivé",
             "unitPrice": "Prix unitaire"
         }
     },

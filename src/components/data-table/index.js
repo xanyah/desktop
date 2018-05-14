@@ -48,18 +48,21 @@ class DataTable extends React.Component {
 
     return (
       <div className="data-table">
-        <div className="search-bar">
-          {
-            searchEntity &&
-              <Input
-                className="search-input input-search"
-                type="text"
-                placeholder={I18n.t(`models.${type}.search`)}
-                onChange={e => this.handleSearchEntity(e.target.value)}
-                value={searchEntityQuery}
-              />
-          }
-        </div>
+        {
+          searchEntity &&
+            <div className="search-bar">
+              <div className="search-bar-content">
+                <i className="im im-magnifier" />
+                <Input
+                  className="search-input input-search"
+                  type="text"
+                  placeholder={I18n.t(`models.${type}.search`)}
+                  onChange={e => this.handleSearchEntity(e.target.value)}
+                  value={searchEntityQuery}
+                />
+              </div>
+            </div>
+        }
         <div className="header-row">
           {columns.map(column => (
             (column == 'status')

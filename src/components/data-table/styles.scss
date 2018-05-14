@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   .header-row {
     align-items: center;
     color: $primary-text-color;
@@ -31,8 +32,35 @@
   }
 
   .search-bar {
-    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .search-bar-content {
+      align-items: center;
+      border-bottom: 1px solid $grey-color;
+      display: flex;
+      flex-direction: row;
+      min-width: 400px;
+      position: relative;
+
+      i {
+        color: $secondary-text-color;
+        font-size: 2rem;
+        left: -50px;
+        position: absolute;
+      }
+
+      input {
+        border: none;
+        font-size: 2.2rem;
+        font-weight: 500;
+      }
+    }
   }
+
+
 
   .rows-container {
     overflow-y: auto;

@@ -91,6 +91,8 @@ export const searchManufacturer = params =>
 
 export const createSale = sale =>
   xanyahApi.post('sales', {sale})
+export const getSales = params =>
+  xanyahApi.get('sales', decamelizeKeys({params}))
 
 
 // Stores API Calls

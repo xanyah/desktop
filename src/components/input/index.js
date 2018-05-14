@@ -15,7 +15,7 @@ const Input = ({ className, onChange, placeholder, type, value }) => (
         value={value}
       />
       {/* <i
-        class="im im-eye"
+        className="im im-eye"
         onClick={e => {
           console.log(e)
           let passwordInput = document.getElementByClassName('.input-password')

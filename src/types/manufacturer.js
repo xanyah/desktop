@@ -17,11 +17,6 @@ export const manufacturerFormat = [
       editable: true,
       type: 'string',
     },
-    {
-      attribute: 'notes',
-      editable: true,
-      type: 'textarea',
-    },
   ],
   [
     {
@@ -33,6 +28,13 @@ export const manufacturerFormat = [
       attribute: 'createdAt',
       editable: false,
       type: 'date',
+    },
+  ],
+  [
+    {
+      attribute: 'notes',
+      editable: true,
+      type: 'textarea',
     },
   ],
 ]

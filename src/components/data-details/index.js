@@ -9,6 +9,7 @@ import { isEditableEntity } from '../../utils/entity-helper'
 
 import './styles.scss'
 
+// TODO: ItemAttribute type entity => add link to the entity !!!
 export default class DataDetails extends React.Component {
   constructor(props) {
     super(props)

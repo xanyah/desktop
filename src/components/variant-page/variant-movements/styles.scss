@@ -3,6 +3,11 @@
 div.variant-movements-content {
   color: $primary-text-color;
 
+  div.section-title {
+    color: $secondary-text-color;
+    font-size: 1.2rem;
+  }
+
   div.variant-movements-table {
     display: flex;
     flex-direction: column;
@@ -13,12 +18,16 @@ div.variant-movements-content {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      font-size: 18px;
+      font-size: 1.4rem;
       border-bottom: 1px solid $grey-color;
       height: 40px;
 
       div.column {
+        text-align: left;
 
+        &:last-of-type {
+          text-align: right;
+        }
       }
     }
 
@@ -31,19 +40,17 @@ div.variant-movements-content {
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        font-size: 1rem;
+        font-size: 1.6rem;
         justify-content: space-between;
-        opacity: 0.7;
+        opacity: 0.6;
         margin: 0 -90px;
         padding: 20px 90px;
         position: relative;
         transition: all 0.3s ease;
         align-items: center;
-        height: 80px;
         border-bottom: 1px solid $grey-color;
 
         div.data-row {
-          text-align: center;
           align-items: center;
           color: $primary-text-color;
           cursor: pointer;
@@ -57,6 +64,20 @@ div.variant-movements-content {
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 100%;
+            text-align: left;
+
+            &:last-of-type {
+              text-align: right;
+            }
+          }
+
+          div.column-arrow {
+            position: absolute;
+            left: 15px;
+
+            i {
+              font-size: 2rem;
+            }
           }
 
           div.column-success {
