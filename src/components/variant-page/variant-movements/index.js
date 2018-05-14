@@ -127,10 +127,9 @@ export default class VariantMovements extends React.Component {
 
   renderSaleRow(row, idx) {
     const { selected } = this.state
-    const { variantId } = this.props
+    // const { variantId } = this.props
 
-    console.log(row)
-    console.log(variantId)
+    // TODO: getQuantity by variantId in saleVariants
 
     return (
       <div

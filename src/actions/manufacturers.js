@@ -81,13 +81,12 @@ export const createApiManufacturer = newManufacturer =>
           dispatch(updateManufacturerField('loading', false))
           dispatch(createManufacturer(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.manufacturers.title')}))
+          // TODO: Redirect after creation
           if(data.id) {
-            console.log('Hello Push Id')
             // dispatch(push(`/manufacturers/${data.id}`))
             // dispatch(browserHistory.push(`/manufacturers/${data.id}`))
           }
           else {
-            console.log('Hello Push No Id')
             // dispatch(push('/manufacturers'))
             // dispatch(browserHistory.push('/manufacturers'))
           }

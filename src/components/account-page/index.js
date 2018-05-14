@@ -6,6 +6,7 @@ import swal from 'sweetalert'
 
 import PageContainer from '../page-container'
 import { verifyPassword, errorHandler } from '../../utils/password-helper'
+import { supportedLangages } from '../../utils/i18n-helper'
 import FormAttribute from '../../containers/form-attribute'
 
 import './styles.scss'
@@ -91,10 +92,7 @@ export default class Account extends React.Component {
           value={updatedUser['locale']}
           onChange={e =>
             this.handleUpdateFieldUser('locale', e.value)}
-          options={[
-            {label: 'Français', value: 'fr'},
-            {label: 'Anglais', value: 'en'},
-          ]}
+          options={supportedLangages}
         />
 
         <button

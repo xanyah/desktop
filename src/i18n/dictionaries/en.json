@@ -202,6 +202,10 @@
       "password": "Password",
       "sign-in": "Sign in"
     },
+    "supported-langage": {
+      "english": "English",
+      "french": "French"
+    },
     "toast": {
         "created": "%{entity} created !",
         "error": "An error has occured !",

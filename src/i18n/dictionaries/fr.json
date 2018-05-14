@@ -202,6 +202,10 @@
       "password": "Mot de passe",
       "sign-in": "Connexion"
     },
+    "supported-langage": {
+      "english": "Anglais",
+      "french": "Français"
+    },
     "toast": {
         "created": "%{entity} créé(e) !",
         "error": "Une erreur s'est produite !",
