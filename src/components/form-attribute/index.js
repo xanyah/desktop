@@ -17,6 +17,8 @@ import {
 import './styles.scss'
 
 //TODO add checkbox / Vat Rates ? / Parent Category ? Sofiane
+// TODO: formatPrice on Price
+// TODO: link in entity type to the concerned entity
 const FormAttribute = item => {
   return (
     <div className="form-attribute">

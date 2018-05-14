@@ -104,7 +104,7 @@ export default class VariantMovements extends React.Component {
         <div className="data-row">
           <div className="column-arrow column-primary"><i className="im im-arrow-right"></i></div>
           <div className="column"><Translate value='models.inventories.open'/></div>
-          <div className="column">{formatData(row.updatedAt)}</div>
+          <div className="column">{formatData(row.createdAt)}</div>
           <div className="column column-primary">= {row.quantity}</div>
         </div>
         <button
@@ -171,7 +171,7 @@ export default class VariantMovements extends React.Component {
         <div className="data-row">
           <div className="column-arrow column-success"><i className="im im-arrow-right"></i></div>
           <div className="column"><Translate value='models.shippings.title'/></div>
-          <div className="column">{formatData(row.updatedAt)}</div>
+          <div className="column">{formatData(row.createdAt)}</div>
           <div className="column column-success">+ {row.quantity}</div>
         </div>
         <button
