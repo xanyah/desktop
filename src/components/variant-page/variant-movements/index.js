@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Translate } from 'react-redux-i18n'
 import { browserHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import {
   getInventoryVariants,
@@ -60,6 +61,7 @@ export default class VariantMovements extends React.Component {
       saleVariantMovements,
       shippingVariantMovements,
     } = this.state
+
     const variantMovements = [
       ...inventoryVariantMovements,
       ...saleVariantMovements,
@@ -95,6 +97,7 @@ export default class VariantMovements extends React.Component {
 
   renderInventoryRow(row, idx) {
     const { selected } = this.state
+    const { openInventory } = this.props
 
     return (
       <div
@@ -109,14 +112,14 @@ export default class VariantMovements extends React.Component {
         </div>
         <button
           className="link"
-          onClick={() => { browserHistory.push('/inventories') }}
+          onClick={() => { openInventory(row) }}
         >
           ->
         </button>
         <div className="action">
           <button
             className="btn-primary"
-            onClick={() => { browserHistory.push('/inventories') }}
+            onClick={() => { openInventory(row) }}
           >
             <Translate value='models.inventories.open' />
           </button>
@@ -127,6 +130,7 @@ export default class VariantMovements extends React.Component {
 
   renderSaleRow(row, idx) {
     const { selected } = this.state
+    const { openSale } = this.props
     // const { variantId } = this.props
 
     // TODO: getQuantity by variantId in saleVariants
@@ -144,14 +148,14 @@ export default class VariantMovements extends React.Component {
         </div>
         <button
           className="link"
-          onClick={() => { browserHistory.push('/sales') }}
+          onClick={() => { openSale(row) }}
         >
           ->
         </button>
         <div className="action">
           <button
             className="btn-primary"
-            onClick={() => { browserHistory.push('/sales') }}
+            onClick={() => { openSale(row) }}
           >
             <Translate value='models.sales.open' />
           </button>
@@ -162,6 +166,7 @@ export default class VariantMovements extends React.Component {
 
   renderShippingRow(row, idx) {
     const { selected } = this.state
+    const { openShipping } = this.props
 
     return (
       <div
@@ -176,14 +181,14 @@ export default class VariantMovements extends React.Component {
         </div>
         <button
           className="link"
-          onClick={() => { browserHistory.push('/shippings') }}
+          onClick={() => { openShipping(row) }}
         >
           ->
         </button>
         <div className="action">
           <button
             className="btn-primary"
-            onClick={() => { browserHistory.push('/shippings') }}
+            onClick={() => { openShipping(row) }}
           >
             <Translate value='models.shippings.open' />
           </button>
@@ -194,9 +199,15 @@ export default class VariantMovements extends React.Component {
 }
 
 VariantMovements.propTypes = {
+  openInventory: PropTypes.func,
+  openSale: PropTypes.func,
+  openShipping: PropTypes.func,
   variantId: PropTypes.string,
 }
 
 VariantMovements.defaultProps = {
+  openInventory: () => null,
+  openSale: () => null,
+  openShipping: () => null,
   variantId: '',
 }

@@ -72,7 +72,7 @@ export const routes = [
     image: warehouse,
     inRouter: true,
     key: 'product',
-    path: '/test',
+    path: '/product/new',
     strict: true,
   },
   {

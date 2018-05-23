@@ -5,34 +5,25 @@ import './styles.scss'
 
 //TODO add eye icon  on password type to set visible or not password input
 const Input = ({ className, onChange, placeholder, type, value }) => (
-  (type === 'password') ? (
-    <div>
-      <input
-        className={`input input-${type} ${className}`}
-        onChange={onChange}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-      />
-      {/* <i
-        className="im im-eye"
-        onClick={e => {
-          console.log(e)
-          let passwordInput = document.getElementByClassName('.input-password')
-          passwordInput.type = 'string'
-        }}
-      ></i> */}
-    </div>
+  (type === 'password')
+  ? (
+    <input
+      className={`input input-${type} ${className}`}
+      onChange={onChange}
+      placeholder={placeholder}
+      type={type}
+      value={value}
+    />
   )
-    : (
-      <input
-        className={`input input-${type} ${className}`}
-        onChange={onChange}
-        placeholder={placeholder}
-        type={type}
-        value={value}
-      />
-    )
+  : (
+    <input
+      className={`input input-${type} ${className}`}
+      onChange={onChange}
+      placeholder={placeholder}
+      type={type}
+      value={value}
+    />
+  )
 )
 
 Input.propTypes = {

@@ -60,35 +60,35 @@ export default class StoreSettings extends React.Component {
         <div className="title">TVA:</div>
         <div className="vat-rate">
           <div className="label">
-            <Translate value='vat-rates.standard'/>:
+            <Translate value='vat-rates.standard'/>:&nbsp;
           </div>
           <div className="rate"> {standardRate} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
           <div className="label">
-            <Translate value='vat-rates.reduced_rate'/>:
+            <Translate value='vat-rates.reduced_rate'/>:&nbsp;
           </div>
           <div className="rate"> {reducedRate} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
           <div className="label">
-            <Translate value='vat-rates.reduced_rate_alt'/>:
+            <Translate value='vat-rates.reduced_rate_alt'/>:&nbsp;
           </div>
           <div className="rate"> {reducedRateAlt} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
           <div className="label">
-            <Translate value='vat-rates.super_reduced_rate'/>:
+            <Translate value='vat-rates.super_reduced_rate'/>:&nbsp;
           </div>
           <div className="rate"> {superReducedRate} %</div>
         </div>
         <div className="separator"> - </div>
         <div className="vat-rate">
           <div className="label">
-            <Translate value='vat-rates.parking_rate'/>:
+            <Translate value='vat-rates.parking_rate'/>:&nbsp;
           </div>
           <div className="rate"> {parkingRate} %</div>
         </div>

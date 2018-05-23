@@ -60,7 +60,20 @@ export default class Variant extends React.Component {
   }
 
   renderVariantMovements() {
-    return <VariantMovements variantId={this.props.selectedVariant.id}/>
+    const {
+      openInventory,
+      openSale,
+      openShipping,
+      selectedVariant
+    } = this.props
+    return (
+      <VariantMovements
+        variantId={selectedVariant.id}
+        openInventory={openInventory}
+        openSale={openSale}
+        openShipping={openShipping}
+      />
+    )
   }
 
   renderVariantAttributesList() {
@@ -134,6 +147,9 @@ export default class Variant extends React.Component {
 
 Variant.propTypes = {
   createApiVariantAttribute: PropTypes.func,
+  openInventory: PropTypes.func,
+  openSale: PropTypes.func,
+  openShipping: PropTypes.func,
   selectedVariant: PropTypes.shape(VariantType),
   setPageName: PropTypes.func,
   toggleVariant: PropTypes.func,
@@ -146,6 +162,9 @@ Variant.propTypes = {
 
 Variant.defaultProps = {
   createApiVariantAttribute: () => null,
+  openInventory: () => null,
+  openSale: () => null,
+  openShipping: () => null,
   selectedVariant: {},
   setPageName: () => null,
   toggleVariant: () => null,
