@@ -7,8 +7,13 @@ $horizontal-padding: 5.625rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: calc(100vh - 88px);
   max-height: calc(100vh - 88px);
-  overflow-y: auto;
+  overflow-y: hidden;
+
+  .table {
+    overflow-y: auto;
+  }
 
   .header-row {
     align-items: center;
@@ -34,10 +39,6 @@ $horizontal-padding: 5.625rem;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
-    }
-
-    .column-status {
-      width: 4%;
     }
   }
 
@@ -115,8 +116,21 @@ $horizontal-padding: 5.625rem;
         width: 100%;
       }
 
-      .column-status {
-        width: 4%;
+      .status {
+        align-items: center;
+        background: none;
+        border: 0;
+        bottom: 0;
+        color: $primary-text-color;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        transition: all .3s ease;
+        width: $horizontal-padding;
       }
 
       .link {
@@ -174,6 +188,7 @@ $horizontal-padding: 5.625rem;
 
   .data-table-create-btn-group {
     align-items: center;
+    align-self: flex-end;
     background-color: $secondary-white;
     box-shadow: 0 0 4px 0 $shadow;
     display: flex;

@@ -48,90 +48,83 @@ class DataTable extends React.Component {
 
     return (
       <div className={`data-table data-table-${type}`}>
-        {
-          searchEntity &&
-            <div className="search-bar">
-              <div className="search-bar-content">
-                <i className="im im-magnifier" />
-                <Input
-                  className="search-input input-search"
-                  type="text"
-                  placeholder={I18n.t(`models.${type}.search`)}
-                  onChange={e => this.handleSearchEntity(e.target.value)}
-                  value={searchEntityQuery}
-                />
-              </div>
-            </div>
-        }
-        <div className="header-row">
-          {columns.map(column => (
-            (column == 'status')
-              ? (
-                <div className={`column column-${column}`} key={column}></div>
-              )
-              : (
-                <div className={`column column-${column}`} key={column}>
-                  <Translate value={`models.${type}.${column}`} />
-                </div>
-              )
-          ))}
-        </div>
-        <div className="rows-container">
+        <div className="table">
           {
-            (loading)
-              ? (
-                <div className='sweet-loading'>
-                  <PulseLoader
-                    color={secondaryTextColor}
-                    loading={loading}
+            searchEntity &&
+              <div className="search-bar">
+                <div className="search-bar-content">
+                  <i className="im im-magnifier" />
+                  <Input
+                    className="search-input input-search"
+                    type="text"
+                    placeholder={I18n.t(`models.${type}.search`)}
+                    onChange={e => this.handleSearchEntity(e.target.value)}
+                    value={searchEntityQuery}
                   />
                 </div>
-              )
-              : (
-                (data.length)
-                  ? (
-                    data.map((row, idx) => (
-                      <div
-                        key={idx}
-                        className={selected == row ? 'row selected' :  'row'}
-                        onClick={() => this.setState({ selected: row })}
-                      >
-                        {columns.map(column => (
-                          (column == 'status')
-                            ? (
-                              <div className={`column column-${column}`} key={idx + column}>
-                                <div className={`sticker-${getStatusClass(row, type)}`}></div>
-                              </div>
-                            )
-                            : (
+              </div>
+          }
+          <div className="header-row">
+            {columns.map(column =>
+              (column !== 'status') && (
+                <div className={`column column-${column}`} key={column}>
+                  <Translate value={`models.${type}.${column}`} />
+                </div>))}
+          </div>
+          <div className="rows-container">
+            {
+              (loading)
+                ? (
+                  <div className='sweet-loading'>
+                    <PulseLoader
+                      color={secondaryTextColor}
+                      loading={loading}
+                    />
+                  </div>
+                )
+                : (
+                  (data.length)
+                    ? (
+                      data.map((row, idx) => (
+                        <div
+                          key={idx}
+                          className={selected == row ? 'row selected' :  'row'}
+                          onClick={() => this.setState({ selected: row })}
+                        >
+                          {columns.map(column => (
+                            (column != 'status') && (
                               <div className={`column column-${column}`} key={idx + column}>
                                 {formatData(row[column], column)}
-                              </div>
-                            )
-                        ))}
-                        <button
-                          className="link"
-                          onClick={() => onItemView(row)}
-                        >
-                          <i className="im im-arrow-right"></i>
-                        </button>
-                        <div className="action">
+                              </div>)))}
+                          {columns.includes('status') && (
+                            <div className="status">
+                              <div className={`sticker-${getStatusClass(row, type)}`}></div>
+                            </div>
+                          )}
                           <button
-                            className="btn-primary"
+                            className="link"
                             onClick={() => onItemView(row)}
                           >
-                            <Translate value={`models.${type}.open`} />
+                            <i className="im im-arrow-right"></i>
                           </button>
+                          <div className="action">
+                            <button
+                              className="btn-primary"
+                              onClick={() => onItemView(row)}
+                            >
+                              <Translate value={`models.${type}.open`} />
+                            </button>
+                          </div>
+                          <div className="border" />
                         </div>
-                        <div className="border" />
-                      </div>
-                    ))
-                  )
-                  : (
-                    <div>No data found !</div>
-                  )
-              )
-          }
+                      ))
+                    )
+                    : (
+                      <div>No data found !</div>
+                    )
+                )
+            }
+          </div>
         </div>
         {creation && (
           <div className="data-table-create-btn-group">
