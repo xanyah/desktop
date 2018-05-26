@@ -7,6 +7,7 @@ import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 import FormAttribute from '../../containers/form-attribute'
 import { variantFormat, variantAttributeFormat, VariantType } from '../../types'
+import VariantMovements from './variant-movements'
 
 import './styles.scss'
 
@@ -51,9 +52,27 @@ export default class Variant extends React.Component {
           <div>
             {this.renderVariantAttributesForm()}
             {this.renderVariantAttributesList()}
+            {this.renderVariantMovements()}
           </div>
         </DataDetails>
       </PageContainer>
+    )
+  }
+
+  renderVariantMovements() {
+    const {
+      openInventory,
+      openSale,
+      openShipping,
+      selectedVariant,
+    } = this.props
+    return (
+      <VariantMovements
+        variantId={selectedVariant.id}
+        openInventory={openInventory}
+        openSale={openSale}
+        openShipping={openShipping}
+      />
     )
   }
 
@@ -128,6 +147,9 @@ export default class Variant extends React.Component {
 
 Variant.propTypes = {
   createApiVariantAttribute: PropTypes.func,
+  openInventory: PropTypes.func,
+  openSale: PropTypes.func,
+  openShipping: PropTypes.func,
   selectedVariant: PropTypes.shape(VariantType),
   setPageName: PropTypes.func,
   toggleVariant: PropTypes.func,
@@ -140,6 +162,9 @@ Variant.propTypes = {
 
 Variant.defaultProps = {
   createApiVariantAttribute: () => null,
+  openInventory: () => null,
+  openSale: () => null,
+  openShipping: () => null,
   selectedVariant: {},
   setPageName: () => null,
   toggleVariant: () => null,

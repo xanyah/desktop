@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux'
+
 import {
   MANUFACTURERS_CREATE_MANUFACTURER,
   MANUFACTURERS_UPDATE_MANUFACTURER,
@@ -78,6 +80,9 @@ export const createApiManufacturer = newManufacturer =>
           dispatch(updateManufacturerField('loading', false))
           dispatch(createManufacturer(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.manufacturers.title')}))
+          // TODO: Redirect after creation
+          dispatch(updateManufacturerField('editing', false))
+          dispatch(push('manufacturers'))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))

@@ -17,6 +17,8 @@ import {
 import './styles.scss'
 
 //TODO add checkbox / Vat Rates ? / Parent Category ? Sofiane
+// TODO: formatPrice on Price
+// TODO: link in entity type to the concerned entity
 const FormAttribute = item => {
   return (
     <div className="form-attribute">
@@ -74,6 +76,15 @@ const getFormElement = item => {
         value={item.value}
         onChange={e => item.onUpdate(item.attribute, e.value)}
         options={getParentCategoriesList(item['categories'])}
+      />
+    )
+  case 'password':
+    return (
+      <Input
+        onChange={e => item.onUpdate(item.attribute, e.target.value)}
+        value={item.value}
+        name={item.attribute}
+        type="password"
       />
     )
   case 'vat-rates':

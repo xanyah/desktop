@@ -1,14 +1,23 @@
 @import './_colors.scss';
 
 .input {
-  appearance: none;
-  background-color: transparent;
+  background-color: none;
   border: none;
-  color: $primary-text-color;
   border-bottom: 1px solid $primary-text-color;
+  color: $primary-text-color;
+  font-size: 1.2rem;
+  height: 40px;
+  margin: 10px 0;
+  outline: 0;
+  transition: all 0.3s ease;
+  // font-weight: 500;
 
   &:empty {
     border-bottom: 1px solid $secondary-text-color;
+  }
+
+  &:valid, &:focus {
+    border-bottom: 1px solid $primary-text-color;
   }
 
   &::placeholder {

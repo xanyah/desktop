@@ -11,8 +11,13 @@ export const OrderType = {
 export const orderFormat = [
   [
     {
-      attribute: 'status',
+      attribute: 'client',
       editable: true,
+      type: 'entity',
+    },
+    {
+      attribute: 'status',
+      editable: false,
       type: 'string',
     },
   ],

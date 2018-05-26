@@ -47,19 +47,22 @@ class DataTable extends React.Component {
     } = this.state
 
     return (
-      <div className="data-table">
-        <div className="search-bar">
-          {
-            searchEntity &&
-              <Input
-                className="search-input input-search"
-                type="text"
-                placeholder={I18n.t(`models.${type}.search`)}
-                onChange={e => this.handleSearchEntity(e.target.value)}
-                value={searchEntityQuery}
-              />
-          }
-        </div>
+      <div className={`data-table data-table-${type}`}>
+        {
+          searchEntity &&
+            <div className="search-bar">
+              <div className="search-bar-content">
+                <i className="im im-magnifier" />
+                <Input
+                  className="search-input input-search"
+                  type="text"
+                  placeholder={I18n.t(`models.${type}.search`)}
+                  onChange={e => this.handleSearchEntity(e.target.value)}
+                  value={searchEntityQuery}
+                />
+              </div>
+            </div>
+        }
         <div className="header-row">
           {columns.map(column => (
             (column == 'status')
@@ -112,7 +115,7 @@ class DataTable extends React.Component {
                           className="link"
                           onClick={() => onItemView(row)}
                         >
-                          ->
+                          <i className="im im-arrow-right"></i>
                         </button>
                         <div className="action">
                           <button
@@ -132,23 +135,25 @@ class DataTable extends React.Component {
           }
         </div>
         {creation && (
-          (creationFunction)
-            ? (
-              <button
-                className="btn-primary data-table-create-button"
-                onClick={() => creationFunction()}
-              >
-                <Translate value={`models.${type}.create`} />
-              </button>
-            )
-            : (
-              <button
-                className="btn-primary data-table-create-button"
-                onClick={() => onItemView({})}
-              >
-                <Translate value={`models.${type}.create`} />
-              </button>
-            )
+          <div className="data-table-create-btn-group">
+            {(creationFunction)
+              ? (
+                <button
+                  className="btn-primary data-table-create-btn"
+                  onClick={() => creationFunction()}
+                >
+                  <Translate value={`models.${type}.create`} />
+                </button>
+              )
+              : (
+                <button
+                  className="btn-primary data-table-create-btn"
+                  onClick={() => onItemView({})}
+                >
+                  <Translate value={`models.${type}.create`} />
+                </button>
+              )}
+          </div>
         )}
       </div>
     )

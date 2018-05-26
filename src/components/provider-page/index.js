@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ProviderType, providerFormat } from '../../types'
 import DataDetails from '../data-details'
-import DataTable from '../data-table'
+// import DataTable from '../data-table'
 import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
@@ -22,10 +22,10 @@ export default class Provider extends React.Component {
     const {
       createApiProvider,
       editing,
-      loading,
-      openProduct,
+      // loading,
+      // openProduct,
       toggleProvider,
-      products,
+      // products,
       selectedProvider,
       updateApiProvider,
     } = this.props
@@ -41,13 +41,13 @@ export default class Provider extends React.Component {
           type="providers"
           updateEntity={updateApiProvider}
         >
-          <DataTable
+          {/* <DataTable
             columns={['name', 'category', 'manufacturer']}
             data={products}
             loading={loading}
             onItemView={item => openProduct(item)}
             type="products"
-          />
+          /> */}
         </DataDetails>
       </PageContainer>
     )

@@ -144,13 +144,16 @@
             "title": "Provider"
         },
         "sales": {
+            "open": "Open sale",
+            "search": "Search a sale ...",
             "title": "Sale"
         },
         "shippings": {
             "create": "Create an shipping",
             "open": "Open shipping",
             "provider": "Provider",
-            "search": "Search an shipping ..."
+            "search": "Search an shipping ...",
+            "title": "Shipping"
         },
         "variants": {
             "barcode": "Barcode",
@@ -200,6 +203,10 @@
       "forgotten-password": "Forgotten password ?",
       "password": "Password",
       "sign-in": "Sign in"
+    },
+    "supported-langage": {
+      "english": "English",
+      "french": "French"
     },
     "toast": {
         "created": "%{entity} created !",

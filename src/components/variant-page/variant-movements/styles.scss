@@ -1,0 +1,136 @@
+@import '../../../constants/scss/colors';
+
+div.variant-movements-content {
+  color: $primary-text-color;
+
+  div.section-title {
+    color: $secondary-text-color;
+    font-size: 1.2rem;
+  }
+
+  div.variant-movements-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    div.variant-movements-table-header {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      font-size: 1.4rem;
+      border-bottom: 1px solid $grey-color;
+      height: 40px;
+
+      div.column {
+        text-align: left;
+
+        &:last-of-type {
+          text-align: right;
+        }
+      }
+    }
+
+    div.variant-movements-table-body {
+      font-size: 24px;
+
+      div.variant-movements-row {
+        align-items: center;
+        color: $primary-text-color;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.6rem;
+        justify-content: space-between;
+        opacity: 0.6;
+        margin: 0 -90px;
+        padding: 20px 90px;
+        position: relative;
+        transition: all 0.3s ease;
+        align-items: center;
+        border-bottom: 1px solid $grey-color;
+
+        div.data-row {
+          align-items: center;
+          color: $primary-text-color;
+          cursor: pointer;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+
+          div.column {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            text-align: left;
+
+            &:last-of-type {
+              text-align: right;
+            }
+          }
+
+          div.column-arrow {
+            position: absolute;
+            left: 15px;
+
+            i {
+              font-size: 2rem;
+            }
+          }
+
+          div.column-success {
+            color: $green-color;
+          }
+
+          div.column-danger {
+            color: $red-color;
+          }
+
+          div.column-primary {
+            color: $link-color;
+          }
+        }
+
+        .action {
+          display: none;
+          flex-direction: row;
+          justify-content: flex-end;;
+          width: 100%;
+        }
+
+        .link {
+          background: none;
+          border: none;
+          bottom: 0;
+          color: $primary-text-color;
+          cursor: pointer;
+          opacity: 0;
+          position: absolute;
+          right: 20px;
+          top: 0;
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          opacity: 1;
+
+          .link {
+            display: flex;
+            opacity: 1;
+          }
+        }
+
+        &.selected {
+          opacity: 1;
+          background-color: $secondary-white;
+
+          .action {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}

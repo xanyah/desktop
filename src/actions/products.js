@@ -9,7 +9,6 @@ import { I18n } from 'react-redux-i18n'
 import {
   getProducts as apiGetProducts,
   updateProduct as apiPatchProductParams,
-  searchProduct as apiSearchProduct,
   createProduct as apiPostProduct,
 } from '../utils/api-helper'
 
@@ -90,16 +89,4 @@ export const createApiProduct = (newProduct, newVariant) =>
           showErrorToast(I18n.t('toast.error'))
         })
     }
-  }
-
-export const searchApiProduct = query =>
-  (dispatch, currentState) => {
-    const state = currentState()
-    apiSearchProduct({query: query, storeId: state.stores.currentStore.id})
-      .then(({ data }) => {
-        dispatch(updateProductsField('products', data))
-      })
-      .catch(() => {
-        showErrorToast(I18n.t('toast.error'))
-      })
   }

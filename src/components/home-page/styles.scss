@@ -26,6 +26,18 @@
     h1 {
       color: $primary-white;
     }
+
+    .settings {
+
+      i {
+        font-size: 2rem;
+        color: $primary-white;
+
+        &:last-of-type{
+          margin-left: 1rem;
+        }
+      }
+    }
   }
 
   .links-container {

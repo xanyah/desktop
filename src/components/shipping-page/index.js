@@ -4,9 +4,18 @@ import { ShippingType, shippingFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 
+import { getShippingVariants } from '../../utils/api-helper'
+
 import './styles.scss'
 
 export default class Shipping extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      shippingVariants: [],
+    }
+  }
+
   componentWillMount() {
     this.props.setPageName(this.props.selectedShipping.name)
   }
@@ -15,9 +24,16 @@ export default class Shipping extends React.Component {
     this.props.setPageName('')
   }
 
+  componentDidMount() {
+    getShippingVariants({shippingId: this.props.selectedShipping.id})
+      .then(({ data }) => this.setState({
+        ...this.state,
+        shippingVariants: data,
+      }))
+  }
+
   render() {
     const {
-      createApiShipping,
       editing,
       toggleShipping,
       selectedShipping,
@@ -27,7 +43,6 @@ export default class Shipping extends React.Component {
       <PageContainer>
         <h1>{selectedShipping.name}</h1>
         <DataDetails
-          createEntity={createApiShipping}
           currentEntity={selectedShipping}
           editing={editing}
           formattedData={shippingFormat}
@@ -35,6 +50,30 @@ export default class Shipping extends React.Component {
           type="shippings"
           updateEntity={updateApiShipping}
         >
+          <div className="shipping-variants-table">
+            <div className="shipping-variants-table-header">
+              <div className="column column-product">Product</div>
+              <div className="column column-barcode">Barcode</div>
+              <div className="column column-quantity">Quantity</div>
+            </div>
+            <div className="shipping-variants-table-body">
+              {
+                this.state.shippingVariants.map(shippingVariant => (
+                  <div key={shippingVariant.id} className="shipping-variants-row">
+                    <div className="column column-product">
+                      {shippingVariant.variant.product.name}
+                    </div>
+                    <div className="column column-barcode">
+                      {shippingVariant.variant.barcode}
+                    </div>
+                    <div className="column column-quantity">
+                      {shippingVariant.quantity}
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </DataDetails>
       </PageContainer>
     )
@@ -42,7 +81,6 @@ export default class Shipping extends React.Component {
 }
 
 Shipping.propTypes = {
-  createApiShipping: PropTypes.func,
   editing: PropTypes.bool,
   selectedShipping: ShippingType,
   setPageName: PropTypes.func,
@@ -51,7 +89,6 @@ Shipping.propTypes = {
 }
 
 Shipping.defaultProps = {
-  createApiShipping: () => null,
   editing: false,
   selectedShipping: {},
   setPageName: () => null,

@@ -55,8 +55,6 @@ export const updateProduct = (productId, params) =>
   xanyahApi.patch(`products/${productId}`, decamelizeKeys(params))
 export const createProduct = newProduct =>
   xanyahApi.post('products', decamelizeKeys(newProduct))
-export const searchProduct = params =>
-  xanyahApi.get('products/search', decamelizeKeys({params}))
 
 // Inventories API Calls
 
@@ -87,11 +85,12 @@ export const createManufacturer = newManufacturer =>
 export const searchManufacturer = params =>
   xanyahApi.get('manufacturers/search', decamelizeKeys({params}))
 
-// Sale
+// Sales API Calls
 
 export const createSale = sale =>
   xanyahApi.post('sales', {sale})
-
+export const getSales = params =>
+  xanyahApi.get('sales', decamelizeKeys({params}))
 
 // Stores API Calls
 
@@ -127,10 +126,6 @@ export const searchOrder = params =>
 
 // Shippings API Calls
 
-// Variants
-
-export const getVariantByBarcode = barcode => xanyahApi.get(`variants/${barcode}/by_barcode`)
-
 export const getShippings = params =>
   xanyahApi.get('shippings', decamelizeKeys({params}))
 export const updateShipping = (shippingId, params) =>
@@ -138,8 +133,22 @@ export const updateShipping = (shippingId, params) =>
 export const createShipping = newShipping =>
   xanyahApi.post('shippings', decamelizeKeys(newShipping))
 
-// VAT Rates
+// Variants API Calls
+
+export const getVariantByBarcode = barcode => xanyahApi.get(`variants/${barcode}/by_barcode`)
+
+// VAT Rates API Calls
 
 export const getAllVatRates = () => xanyahApi.get('vat_rates')
 export const getVatRates = countryCode =>
   xanyahApi.get(`vat_rates/${countryCode}`)
+
+// Shippings Variants API Calls
+
+export const getShippingVariants = params =>
+  xanyahApi.get('shipping_variants', decamelizeKeys({params}))
+
+// Inventory Variants API Calls
+
+export const getInventoryVariants = params =>
+  xanyahApi.get('inventory_variants', decamelizeKeys({params}))
