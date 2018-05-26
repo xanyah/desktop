@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
 import swal from 'sweetalert'
 
@@ -87,16 +86,20 @@ export default class Account extends React.Component {
             this.handleUpdateFieldUser('lastname', value)}
         />
 
-        <Select
-          name="form-field-locale"
+
+        <FormAttribute
+          attribute="locale"
+          key="locale"
           value={updatedUser['locale']}
-          onChange={e =>
-            this.handleUpdateFieldUser('locale', e.value)}
+          model="account"
+          type="select"
+          onUpdate={(attribute, value) =>
+            this.handleUpdateFieldUser('locale', value)}
           options={supportedLangages}
         />
 
         <button
-          className="btn-primary submit"
+          className="btn-solid"
           type="submit"
           disabled={loading}
         >
@@ -164,7 +167,7 @@ export default class Account extends React.Component {
         />
 
         <button
-          className="btn-primary submit"
+          className="btn-solid"
           type="submit"
           disabled={loading}
         >
@@ -177,7 +180,7 @@ export default class Account extends React.Component {
   render() {
     return (
       <PageContainer>
-        <div className="account">
+        <div className="account-page">
           {this.renderUpdateUserForm()}
           {this.renderUpdatePasswordForm()}
         </div>

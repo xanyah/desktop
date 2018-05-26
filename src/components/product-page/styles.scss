@@ -1,24 +1,42 @@
-@import '../../constants/scss/_colors.scss';
+@import '../../constants/scss/colors';
+@import '../../constants/scss/sizes';
 
-.data-details-products {
-  .children {
-    .Collapsible__trigger > h1 {
-      border-bottom: 1px solid $primary-text-color;
+.product-page {
+  .data-details-products {
+    .children {
+      // sass-lint:disable class-name-format
+      .Collapsible__trigger > h1 {
+        color: $link-color;
+      }
+
+      .variant-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .row {
+          align-items: flex-start;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          min-height: 80px;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .variants {
+    margin: 0 0 - $horizontal-padding;
+
+    h1 {
+      color: $secondary-text-color;
+      font-size: 1rem;
+      font-weight: normal;
     }
 
-    .variant-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      .row {
-        min-height: 80px;
-        align-items: flex-start;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        width: 100%;
-      }
+    .data-table {
+      height: inherit;
     }
   }
 }

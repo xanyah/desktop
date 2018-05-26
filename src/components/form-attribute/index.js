@@ -21,7 +21,7 @@ import './styles.scss'
 // TODO: link in entity type to the concerned entity
 const FormAttribute = item => {
   return (
-    <div className="form-attribute">
+    <div className={item.inline ? 'form-attribute inline' : 'form-attribute'}>
       <label htmlFor={item.attribute}>
         <Translate value={`models.${item.model}.${item.attribute}`}/>
       </label>
@@ -67,6 +67,15 @@ const getFormElement = item => {
         value={item.value}
         onChange={e => item.onUpdate(item.attribute, e.value)}
         options={getTypeOptions()}
+      />
+    )
+  case 'select':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={e => item.onUpdate(item.attribute, e.value)}
+        options={item.options}
       />
     )
   case 'parent-category':

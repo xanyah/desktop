@@ -106,7 +106,7 @@ export default class Sale extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>{selectedSale.name}</h1>
+        <h1 className="data-details-title">{selectedSale.name}</h1>
         <DataDetails
           currentEntity={selectedSale}
           formattedData={saleFormat}

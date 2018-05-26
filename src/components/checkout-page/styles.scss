@@ -1,6 +1,6 @@
 @import '../../constants/scss/colors';
 
-#checkout-page {
+.checkout-page {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
     }
 
     input {
-      border: none;
+      border: 0;
       font-size: 2.2rem;
       font-weight: 500;
       width: 70%;
@@ -39,8 +39,8 @@
 
     button {
       height: 0;
-      width: 0;
       opacity: 0;
+      width: 0;
     }
   }
 
@@ -48,7 +48,7 @@
     max-height: 50vh;
     min-width: 750px;
     overflow-y: auto;
-    
+
     .sale-variant {
       border-bottom: 1px solid $grey-color;
       display: flex;
@@ -71,13 +71,13 @@
         width: 100%;
 
         ul {
+          list-style-type: none;
           margin: 0;
           padding: 0;
-          list-style-type: none;
 
           li {
             color: $secondary-text-color;
-            font-size: 0.875rem;
+            font-size: .875rem;
             margin: 5px 0;
 
             b {
@@ -132,9 +132,9 @@
         .variant-options {
           align-items: flex-end;
           bottom: 1rem;
-          position: absolute;
           display: flex;
           flex-direction: column;
+          position: absolute;
           right: 0;
 
           .variant-discount {
@@ -145,6 +145,7 @@
             margin: 20px 0;
             max-width: 100%;
 
+            // sass-lint:disable class-name-format
             .Select {
               min-width: 170px;
             }
@@ -159,7 +160,7 @@
           }
 
           button {
-            font-size: 0.875rem;
+            font-size: .875rem;
             padding: 0;
           }
         }
@@ -177,7 +178,7 @@
   }
 }
 
-#checkout-modal {
+.checkout-modal {
   min-width: 30vw;
 
   .price-promotion {
@@ -208,7 +209,8 @@
     margin-top: 1rem;
     padding: 1rem 0;
 
-    h1, h2 {
+    h1,
+    h2 {
       margin: 0;
     }
   }
@@ -221,22 +223,26 @@
     li {
       align-items: center;
       display: flex;
-      margin: 1rem 0;
       justify-content: space-between;
+      margin: 1rem 0;
 
       label {
         align-items: flex-start;
         display: flex;
         justify-content: flex-start;
 
-        input[type=checkbox] {
-          margin-right: 1rem;
+        input {
+          &[type='checkbox'] {
+            margin-right: 1rem;
+          }
         }
       }
 
-      input[type=number] {
-        max-width: 100px;
-        text-align: right;
+      input {
+        &[type='number'] {
+          max-width: 100px;
+          text-align: right;
+        }
       }
     }
   }

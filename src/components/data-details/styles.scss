@@ -1,18 +1,28 @@
+@import '../../constants/scss/colors';
+@import '../../constants/scss/sizes';
+
+.data-details-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 $horizontal-padding;
+}
+
 .data-details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 5rem;
+  padding: 0 $horizontal-padding;
 
   .info {
-    // display: flex;
     height: 100%;
 
     .row {
-      min-height: 80px;
       align-items: flex-start;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      min-height: 80px;
       width: 100%;
     }
   }
@@ -25,11 +35,29 @@
   }
 
   .btn-stand-alone {
-    justify-content: flex-end;
     align-self: flex-end;
+    justify-content: flex-end;
   }
 
   .children {
     margin-top: 10px;
   }
+}
+
+$shadow: rgba(0, 0, 0, .3);
+
+.action-buttons {
+  align-items: center;
+  background-color: $secondary-white;
+  bottom: 0;
+  box-shadow: 0 0 4px 0 $shadow;
+  display: flex;
+  flex-direction: row;
+  height: 5rem;
+  justify-content: flex-end;
+  left: 0;
+  padding: 0 $horizontal-padding;
+  position: fixed;
+  right: 0;
+  z-index: 10;
 }

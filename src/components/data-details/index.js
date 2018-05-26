@@ -53,36 +53,35 @@ export default class DataDetails extends React.Component {
               createEntity(selectedEntity)
             }}>
 
-            {formattedData.map((row, idx) => (
-              <div className="row" key={idx}>
-                { row.map(item => (
-                  (item.editable)
-                    &&
-                    <FormAttribute
-                      attribute={item.attribute}
-                      key={item.attribute}
-                      value={selectedEntity[item.attribute]}
-                      model={type}
-                      type={item.type}
-                      onUpdate={(attribute, value) =>
-                        this.handleUpdate(attribute, value)}
-                    />
-                ))}
-              </div>
-            ))}
+            {formattedData
+              .filter(row => row.filter(item => item.editable).length > 0)
+              .map((row, idx) => (
+                <div className="row" key={idx}>
+                  { row.map(item => (
+                    (item.editable)
+                      &&
+                      <FormAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={selectedEntity[item.attribute]}
+                        model={type}
+                        type={item.type}
+                        onUpdate={(attribute, value) =>
+                          this.handleUpdate(attribute, value)}
+                      />
+                  ))}
+                </div>))}
 
             { formChildren }
 
-            {
-              (
-                <button
-                  className="btn-link btn-stand-alone"
-                  key="btn-submit"
-                >
-                  <Translate value={'data-details.form.buttons.create'}/>
-                </button>
-              )
-            }
+            <div className="action-buttons">
+              {(<button
+                className="btn-primary"
+                key="btn-submit"
+              >
+                <Translate value={'data-details.form.buttons.create'}/>
+              </button>)}
+            </div>
           </form>
         </div>
         <div className="children">
@@ -114,59 +113,62 @@ export default class DataDetails extends React.Component {
               updateEntity(selectedEntity)
             }}>
 
-            {formattedData.map((row, idx) => (
-              <div className="row" key={idx}>
-                { row.map(item => (
-                  (item.editable && editing && editableEntity)
-                    ? <FormAttribute
-                      attribute={item.attribute}
-                      key={item.attribute}
-                      value={selectedEntity[item.attribute]}
-                      model={type}
-                      type={item.type}
-                      onUpdate={(attribute, value) =>
-                        this.handleUpdate(attribute, value)}
-                    />
-                    : <ItemAttribute
-                      attribute={item.attribute}
-                      key={item.attribute}
-                      value={selectedEntity[item.attribute]}
-                      model={type}
-                      type={item.type}
-                    />
-                ))}
-              </div>
-            ))}
-            {
-              (editableEntity) &&
-              ((editing)
-                ? (
-                  <div className="btn-group">
+            {formattedData
+              .filter(row => row.filter(item => item.editable).length > 0)
+              .map((row, idx) => (
+                <div className="row" key={idx}>
+                  { row.map(item => (
+                    (item.editable && editing && editableEntity)
+                      ? <FormAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={selectedEntity[item.attribute]}
+                        model={type}
+                        type={item.type}
+                        onUpdate={(attribute, value) =>
+                          this.handleUpdate(attribute, value)}
+                      />
+                      : <ItemAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={selectedEntity[item.attribute]}
+                        model={type}
+                        type={item.type}
+                      />
+                  ))}
+                </div>
+              ))}
+            <div className="action-buttons">
+              {(editableEntity) &&
+                ((editing)
+                  ? (
+                    <div className="btn-group">
+                      <button
+                        className="btn-cancel"
+                        key="btn-cancel"
+                        onClick={() => this.handleCancelUpdate(toggleEdit)}
+                      >
+                        <Translate value={'data-details.form.buttons.cancel'}/>
+                      </button>
+                      <button
+                        className="btn-primary"
+                        key="btn-submit"
+                        type="submit"
+                      >
+                        <Translate value={'data-details.form.buttons.submit'}/>
+                      </button>
+                    </div>
+                  )
+                  : (
                     <button
-                      className="btn-danger"
-                      key="btn-cancel"
-                      onClick={() => this.handleCancelUpdate(toggleEdit)}
+                      className="btn-primary"
+                      onClick={() => toggleEdit()}
                     >
-                      <Translate value={'data-details.form.buttons.cancel'}/>
+                      <Translate value={'data-details.form.buttons.edit'}/>
                     </button>
-                    <button
-                      className="btn-link"
-                      key="btn-submit"
-                      type="submit"
-                    >
-                      <Translate value={'data-details.form.buttons.submit'}/>
-                    </button>
-                  </div>
-                )
-                : (
-                  <button
-                    className="btn-link btn-stand-alone"
-                    onClick={() => toggleEdit()}
-                  >
-                    <Translate value={'data-details.form.buttons.edit'}/>
-                  </button>
-                ))
-            }
+                  ))
+              }
+            </div>
           </form>
         </div>
         <div className="children">

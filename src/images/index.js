@@ -1,4 +1,5 @@
 import background from './background.png'
+import logo from './logo.svg'
 
 import barcodeScanner from './categories/barcode-scanner.png'
 import box from './categories/box.png'
@@ -13,6 +14,7 @@ import warehouse from './categories/warehouse.png'
 
 export {
   background,
+  logo,
 
   barcodeScanner,
   box,

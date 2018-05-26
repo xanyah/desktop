@@ -1,28 +1,22 @@
-@import '../../../constants/scss/_colors.scss';
+@import '../../../constants/scss/colors';
 
-div.vat-rates {
-  display: flex;
-  flex-direction: row;
+.vat-rates {
+  color: $secondary-text-color;
+  font-size: .8rem;
+  margin-top: 1rem;
 
-  div.title {
-    color: $secondary-text-color;
-    font-weight: bold;
+  .label {
+    font-weight: 600;
   }
 
-  div.separator {
-    color: $secondary-text-color;
+  b {
+    color: $primary-text-color;
   }
+}
 
-  div.vat-rate {
-    display: flex;
-    flex-direction: row;
-
-    div.label {
-      color: $secondary-text-color;
-    }
-
-    div.rate {
-      color: $primary-text-color;
-    }
+.store-settings-form {
+  .btn-solid {
+    float: right;
+    margin-top: 2rem;
   }
 }

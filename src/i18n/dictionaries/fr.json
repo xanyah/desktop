@@ -1,224 +1,235 @@
 {
-    "account": {
-        "form": {
-            "first": {
-                "title": "Modification de vos informations personnelles"
-            },
-            "second": {
-                "title": "Modification du Mot de Passe"
-            }
-        }
-    },
-    "checkout": {
-        "add-promotion": "Ajouter une promotion",
-        "change": "Monnaie à rendre",
-        "left-to-pay": "Reste à facturer",
-        "remove-article": "Retirer l'article",
-        "reset-alert": {
-            "text": "La vente sera annulée et le stock ne sera pas affecté",
-            "title": "Êtes-vous sûr ?"
-        },
-        "total": "Total",
-        "type-barcode": "Saisir le code barre"
-    },
-    "data-details": {
-        "form": {
-            "buttons": {
-                "cancel": "Annuler",
-                "create": "Créer",
-                "edit": "Modifier",
-                "submit": "Valider"
-            }
-        }
-    },
-    "global": {
-        "back": "Retour",
-        "cancel": "Annuler",
-        "reset": "Remettre à zéro",
-        "validate": "Valider"
-    },
-    "home": {
-        "welcome": {
-            "afternoon": "Bonjour %{firstname} !",
-            "evening": "Bonsoir %{firstname} !",
-            "morning": "Bonjour %{firstname} !"
-        }
-    },
-    "home-link": {
-        "checkout": {
-            "subtitle": "Encaisser une vente",
-            "title": "Caisse"
-        },
-        "clients": {
-            "subtitle": "Gérer les clients",
-            "title": "Clients"
-        },
-        "inventories": {
-            "subtitle": "Gérer les inventaires",
-            "title": "Inventaires"
-        },
-        "manufacturers": {
-            "subtitle": "Gérer les fabricants",
-            "title": "Fabricants"
-        },
-        "orders": {
-            "subtitle": "Gérer les commandes",
-            "title": "Commandes"
-        },
-        "products": {
-            "subtitle": "Gérer les produits",
-            "title": "Produits"
-        },
-        "providers": {
-            "subtitle": "Gérer les fournisseurs",
-            "title": "Fournisseurs"
-        },
-        "shippings": {
-            "subtitle": "Gérer les livraisons",
-            "title": "Livraisons"
-        }
-    },
-    "models": {
-        "categories": {
-          "name": "Nom",
-          "tva": "TVA",
-          "category_id": "Sous-catégorie de ? (optionnel)",
-          "title": "Catégorie"
-        },
-        "clients": {
-            "address": "Adresse",
-            "create": "Créer un client",
-            "email": "Mail",
-            "firstname": "Prénom",
-            "lastname": "Nom",
-            "notes": "Notes",
-            "open": "Voir le client",
-            "phone": "Téléphone",
-            "search": "Rechercher un client ..."
-        },
-        "custom-attributes": {
-          "title": "Attibut Personnalisé"
-        },
-        "inventories": {
-            "create": "Créer un inventaire",
-            "createdAt": "Date de création",
-            "open": "Voir l'inventaire",
-            "search": "Rechercher un client...",
-            "title": "Inventaire"
-        },
-        "manufacturers": {
-            "create": "Créer un fabricant",
-            "createdAt": "Date de création",
-            "name": "Nom",
-            "notes": "Notes",
-            "open": "Voir le fabricant",
-            "productsCount": "Nombre de produits",
-            "search": "Rechercher un fabricant...",
-            "title": "Fabricant"
-        },
-        "orders": {
-            "create": "Créer une commande",
-            "open": "Voir la commande",
-            "search": "Rechercher une commande ...",
-            "status": "Statut"
-        },
-        "products": {
-            "category": "Catégorie",
-            "create": "Créer un produit",
-            "createdAt": "Date de création",
-            "manufacturer": "Fabricant",
-            "name": "Nom du produit",
-            "open": "Voir le produit",
-            "search": "Rechercher un produit...",
-            "title": "Produit",
-            "updatedAt": "Dernière mise à jour"
-        },
-        "providers": {
-            "create": "Créer un fournisseur",
-            "createdAt": "Date de création",
-            "name": "Nom",
-            "notes": "Notes",
-            "open": "Voir le fournisseur",
-            "search": "Rechercher un fournisseur...",
-            "shippingsCount": "Nombre de livraisons",
-            "title": "Fournisseur"
-        },
-        "sales": {
-            "open": "Voir la vente",
-            "search": "Rechercher une vente ...",
-            "title": "Vente"
-        },
-        "shippings": {
-            "create": "Créer une livraison",
-            "open": "Voir la livraison",
-            "provider": "Fournisseur",
-            "search": "Rechercher une livraison ...",
-            "title": "Livraison"
-        },
-        "variants": {
-            "barcode": "Code barre",
-            "buyingPrice": "Prix d'achat",
-            "create": "Créer un dérivé",
-            "open": "Voir le dérivé",
-            "provider": "Fournisseur",
-            "quantity": "Quantité",
-            "ratio": "Coefficient",
-            "search": "Rechercher un dérivé...",
-            "taxFreePrice": "Prix HT",
-            "title": "Dérivé",
-            "unitPrice": "Prix unitaire"
-        }
-    },
-    "password-helper": {
-        "tips": {
-            "length": "La longueur du mot de passe doit être supérieur à 8",
-            "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
-        }
-    },
-    "promotion-types": {
-        "flat_discount": "Remise (en €)",
-        "percent_discount": "Remise (en %)"
-    },
-    "routes": {
-        "account": "Mon compte",
-        "clients": "Clients",
-        "custom-attribute": "Attributs Personnalisés",
-        "inventories": "Inventaires",
-        "manufacturers": "Fabricants",
-        "orders": "Commandes",
-        "products": "Produits",
-        "providers": "Fournisseurs",
-        "settings": "Paramètres",
-        "shippings": "Livraisons"
-    },
-    "settings-page": {
-      "side-navigation": {
-        "categories": "Catégories",
-        "custom-attributes": "Attributs personalisés",
-        "store-settings": "Paramètres du magasin"
+  "account": {
+    "form": {
+      "first": {
+        "title": "Modification de vos informations personnelles"
+      },
+      "second": {
+        "title": "Modification du Mot de Passe"
       }
-    },
-    "sign-in-page": {
-      "email": "Adresse Mail",
-      "forgotten-password": "Mot de passe oublié ?",
-      "password": "Mot de passe",
-      "sign-in": "Connexion"
-    },
-    "supported-langage": {
-      "english": "Anglais",
-      "french": "Français"
-    },
-    "toast": {
-        "created": "%{entity} créé(e) !",
-        "error": "Une erreur s'est produite !",
-        "not-found": "%{entity} inexistant",
-        "updated": "Mis à jour"
-    },
-    "vat-rates": {
-      "parking_rate": "Parking",
-      "reduced_rate": "Réduit",
-      "reduced_rate_alt": "Intermédiaire",
-      "standard": "Normal",
-      "super_reduced_rate": "Super Réduit"
     }
+  },
+  "checkout": {
+    "add-promotion": "Ajouter une promotion",
+    "change": "Monnaie à rendre",
+    "left-to-pay": "Reste à facturer",
+    "remove-article": "Retirer l'article",
+    "reset-alert": {
+      "text": "La vente sera annulée et le stock ne sera pas affecté",
+      "title": "Êtes-vous sûr ?"
+    },
+    "total": "Total",
+    "type-barcode": "Saisir le code barre"
+  },
+  "data-details": {
+    "form": {
+      "buttons": {
+        "cancel": "Annuler",
+        "create": "Créer",
+        "edit": "Modifier",
+        "submit": "Valider"
+      }
+    }
+  },
+  "global": {
+    "back": "Retour",
+    "cancel": "Annuler",
+    "reset": "Remettre à zéro",
+    "validate": "Valider"
+  },
+  "home": {
+    "welcome": {
+      "afternoon": "Bonjour %{firstname} !",
+      "evening": "Bonsoir %{firstname} !",
+      "morning": "Bonjour %{firstname} !"
+    }
+  },
+  "home-link": {
+    "checkout": {
+      "subtitle": "Encaisser une vente",
+      "title": "Caisse"
+    },
+    "clients": {
+      "subtitle": "Gérer les clients",
+      "title": "Clients"
+    },
+    "inventories": {
+      "subtitle": "Gérer les inventaires",
+      "title": "Inventaires"
+    },
+    "manufacturers": {
+      "subtitle": "Gérer les fabricants",
+      "title": "Fabricants"
+    },
+    "orders": {
+      "subtitle": "Gérer les commandes",
+      "title": "Commandes"
+    },
+    "products": {
+      "subtitle": "Gérer les produits",
+      "title": "Produits"
+    },
+    "providers": {
+      "subtitle": "Gérer les fournisseurs",
+      "title": "Fournisseurs"
+    },
+    "shippings": {
+      "subtitle": "Gérer les livraisons",
+      "title": "Livraisons"
+    }
+  },
+  "models": {
+    "categories": {
+      "category_id": "Catégorie parent",
+      "create": "Créer une catégorie",
+      "name": "Nom",
+      "noData": "Pas encore de catégorie",
+      "title": "Catégorie",
+      "tva": "TVA"
+    },
+    "clients": {
+      "address": "Adresse",
+      "create": "Créer un client",
+      "email": "Mail",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "noData": "Pas encore de client",
+      "notes": "Notes",
+      "open": "Voir le client",
+      "phone": "Téléphone",
+      "search": "Rechercher un client ..."
+    },
+    "custom-attributes": {
+      "title": "Attibut Personnalisé"
+    },
+    "inventories": {
+      "create": "Créer un inventaire",
+      "createdAt": "Date de création",
+      "noData": "Pas encore d'inventaire",
+      "open": "Voir l'inventaire",
+      "search": "Rechercher un client...",
+      "title": "Inventaire"
+    },
+    "manufacturers": {
+      "create": "Créer un fabricant",
+      "createdAt": "Date de création",
+      "name": "Nom",
+      "noData": "Pas encore de fabricants",
+      "notes": "Notes",
+      "open": "Voir le fabricant",
+      "productsCount": "Nombre de produits",
+      "search": "Rechercher un fabricant...",
+      "title": "Fabricant"
+    },
+    "orders": {
+      "create": "Créer une commande",
+      "noData": "Pas encore de commandes",
+      "open": "Voir la commande",
+      "search": "Rechercher une commande ...",
+      "status": "Statut"
+    },
+    "products": {
+      "category": "Catégorie",
+      "create": "Créer un produit",
+      "createdAt": "Date de création",
+      "manufacturer": "Fabricant",
+      "name": "Nom du produit",
+      "noData": "Pas encore de produits",
+      "open": "Voir le produit",
+      "search": "Rechercher un produit...",
+      "title": "Produit",
+      "updatedAt": "Dernière mise à jour"
+    },
+    "providers": {
+      "create": "Créer un fournisseur",
+      "createdAt": "Date de création",
+      "name": "Nom",
+      "noData": "Pas encore de fournisseurs",
+      "notes": "Notes",
+      "open": "Voir le fournisseur",
+      "search": "Rechercher un fournisseur...",
+      "shippingsCount": "Nombre de livraisons",
+      "title": "Fournisseur"
+    },
+    "sales": {
+      "noData": "Pas encore de ventes",
+      "open": "Voir la vente",
+      "search": "Rechercher une vente ...",
+      "title": "Vente"
+    },
+    "shippings": {
+      "create": "Créer une livraison",
+      "noData": "Pas encore de livraisons",
+      "open": "Voir la livraison",
+      "provider": "Fournisseur",
+      "search": "Rechercher une livraison ...",
+      "title": "Livraison"
+    },
+    "variants": {
+      "barcode": "Code barre",
+      "buyingPrice": "Prix d'achat",
+      "create": "Créer un dérivé",
+      "noData": "Pas encore de variants",
+      "open": "Voir le dérivé",
+      "provider": "Fournisseur",
+      "quantity": "Quantité",
+      "ratio": "Coefficient",
+      "search": "Rechercher un dérivé...",
+      "taxFreePrice": "Prix HT",
+      "title": "Dérivé",
+      "unitPrice": "Prix unitaire"
+    }
+  },
+  "password-helper": {
+    "tips": {
+      "length": "La longueur du mot de passe doit être supérieur à 8",
+      "same-confirm": "Le nouveau mot de passe et sa confirmation ne correspondent pas"
+    }
+  },
+  "promotion-types": {
+    "flat_discount": "Remise (en €)",
+    "percent_discount": "Remise (en %)"
+  },
+  "routes": {
+    "account": "Mon compte",
+    "clients": "Clients",
+    "custom-attribute": "Attributs Personnalisés",
+    "inventories": "Inventaires",
+    "manufacturers": "Fabricants",
+    "orders": "Commandes",
+    "products": "Produits",
+    "providers": "Fournisseurs",
+    "settings": "Paramètres",
+    "shippings": "Livraisons"
+  },
+  "settings-page": {
+    "side-navigation": {
+      "categories": "Catégories",
+      "custom-attributes": "Attributs personalisés",
+      "store-settings": "Paramètres du magasin"
+    }
+  },
+  "sign-in-page": {
+    "email": "Adresse Mail",
+    "forgotten-password": "Mot de passe oublié ?",
+    "password": "Mot de passe",
+    "sign-in": "Connexion"
+  },
+  "supported-langage": {
+    "english": "Anglais",
+    "french": "Français"
+  },
+  "toast": {
+    "created": "%{entity} créé(e) !",
+    "error": "Une erreur s'est produite !",
+    "not-found": "%{entity} inexistant",
+    "updated": "Mis à jour"
+  },
+  "vat-rates": {
+    "parking_rate": "Parking",
+    "reduced_rate": "Réduit",
+    "reduced_rate_alt": "Intermédiaire",
+    "standard": "Normal",
+    "super_reduced_rate": "Super Réduit"
+  }
 }

@@ -43,46 +43,45 @@ export default class Categories extends React.Component {
           this.setState({newCategory: {}})
         }}>
 
-        <div>
-          <div className="row">
-            <FormAttribute
-              attribute="name"
-              key="name"
-              value={newCategory['name']}
-              model="categories"
-              type="string"
-              onUpdate={(attribute, value) =>
-                this.handleUpdateCategory(attribute, value)}
-            />
+        <FormAttribute
+          attribute="name"
+          inline
+          key="name"
+          value={newCategory['name']}
+          model="categories"
+          type="string"
+          onUpdate={(attribute, value) =>
+            this.handleUpdateCategory(attribute, value)}
+        />
 
-            <FormAttribute
-              attribute="tva"
-              key="tva"
-              value={newCategory['tva']}
-              model="categories"
-              type="vat-rates"
-              onUpdate={(attribute, value) =>
-                this.handleUpdateCategory(attribute, value)}
-            />
+        <FormAttribute
+          attribute="tva"
+          inline
+          key="tva"
+          value={newCategory['tva']}
+          model="categories"
+          type="vat-rates"
+          onUpdate={(attribute, value) =>
+            this.handleUpdateCategory(attribute, value)}
+        />
 
-            <FormAttribute
-              attribute="category_id"
-              key="category_id"
-              value={
-                (newCategory['category_id'])
-                  ? newCategory['category_id']
-                  : null
-              }
-              model="categories"
-              type="parent-category"
-              onUpdate={(attribute, value) =>
-                this.handleUpdateCategory(attribute, value)}
-            />
-          </div>
-        </div>
+        <FormAttribute
+          attribute="category_id"
+          inline
+          key="category_id"
+          value={
+            (newCategory['category_id'])
+              ? newCategory['category_id']
+              : null
+          }
+          model="categories"
+          type="parent-category"
+          onUpdate={(attribute, value) =>
+            this.handleUpdateCategory(attribute, value)}
+        />
 
-        <button className="btn-link btn-stand-alone" type="submit">
-          <Translate value='global.validate'/>
+        <button className="btn-solid" type="submit">
+          <Translate value="models.categories.create"/>
         </button>
       </form>
     )
@@ -139,8 +138,8 @@ export default class Categories extends React.Component {
   render() {
     return (
       <div className="categories-content">
-        {this.renderCategoriesList()}
         {this.renderCategoriesForm()}
+        {this.renderCategoriesList()}
       </div>
     )
   }

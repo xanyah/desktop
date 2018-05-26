@@ -1,224 +1,235 @@
 {
-    "account": {
-        "form": {
-            "first": {
-                "title": "Change your personal informations"
-            },
-            "second": {
-                "title": "Change your password"
-            }
-        }
-    },
-    "checkout": {
-        "add-promotion": "Add a promotion",
-        "change": "Change",
-        "left-to-pay": "Left to pay",
-        "remove-article": "Remove article",
-        "reset-alert": {
-            "text": "The sale will be canceled and the stock won't be affected with the changes",
-            "title": "Are you sure ?"
-        },
-        "total": "Total",
-        "type-barcode": "Type the product barcode"
-    },
-    "data-details": {
-        "form": {
-            "buttons": {
-                "cancel": "Cancel",
-                "create": "Create",
-                "edit": "Edit",
-                "submit": "Validate"
-            }
-        }
-    },
-    "global": {
-        "back": "Back",
-        "cancel": "Cancel",
-        "reset": "Reset",
-        "validate": "Validate"
-    },
-    "home": {
-        "welcome": {
-            "afternoon": "Good afternoon %{firstname} !",
-            "evening": "Good evening %{firstname} !",
-            "morning": "Good morning %{firstname} !"
-        }
-    },
-    "home-link": {
-        "checkout": {
-            "subtitle": "Cash a sale",
-            "title": "Checkout"
-        },
-        "clients": {
-            "subtitle": "Manage your clients",
-            "title": "Clients"
-        },
-        "inventories": {
-            "subtitle": "Manage your inventories",
-            "title": "Inventories"
-        },
-        "manufacturers": {
-            "subtitle": "Manage your manufacturers",
-            "title": "Manufacturers"
-        },
-        "orders": {
-            "subtitle": "Manage your orders",
-            "title": "Orders"
-        },
-        "products": {
-            "subtitle": "Manage your products",
-            "title": "Products"
-        },
-        "providers": {
-            "subtitle": "Manage your providers",
-            "title": "Providers"
-        },
-        "shippings": {
-            "subtitle": "Manage your shippings",
-            "title": "Shippings"
-        }
-    },
-    "models": {
-        "categories": {
-          "name": "Name",
-          "tva": "VAT",
-          "category_id": "Sub-category of ? (optional)",
-          "title": "Category"
-        },
-        "clients": {
-            "address": "Address",
-            "create": "Create a client",
-            "email": "Email",
-            "firstname": "Firstname",
-            "lastname": "Lastname",
-            "notes": "Notes",
-            "open": "Open client",
-            "phone": "Phone",
-            "search": "Search a client ..."
-        },
-        "custom-attributes": {
-          "title": "Custom Attribute"
-        },
-        "inventories": {
-            "create": "Create an inventory",
-            "createdAt": "Date of creation",
-            "open": "Open inventory",
-            "search": "Search an inventory...",
-            "title": "Inventory"
-        },
-        "manufacturers": {
-            "create": "Create a manufacturer",
-            "createdAt": "Date of creation",
-            "name": "Name",
-            "notes": "Notes",
-            "open": "Open manufacturer",
-            "productsCount": "Products number",
-            "search": "Search a manufacturer...",
-            "title": "Manufacturer"
-        },
-        "orders": {
-            "create": "Create an order",
-            "open": "Open order",
-            "search": "Search an order ...",
-            "status": "Status"
-        },
-        "products": {
-            "category": "Category",
-            "create": "Create a product",
-            "createdAt": "Date of creation",
-            "manufacturer": "Manufacturer",
-            "name": "Product name",
-            "open": "Open product",
-            "search": "Search a product...",
-            "title": "Product",
-            "updatedAt": "Date of last update"
-        },
-        "providers": {
-            "create": "Create a provider",
-            "createdAt": "Date of creation",
-            "name": "Name",
-            "notes": "Notes",
-            "open": "Open provider",
-            "search": "Search a provider...",
-            "shippingsCount": "Shippings number",
-            "title": "Provider"
-        },
-        "sales": {
-            "open": "Open sale",
-            "search": "Search a sale ...",
-            "title": "Sale"
-        },
-        "shippings": {
-            "create": "Create an shipping",
-            "open": "Open shipping",
-            "provider": "Provider",
-            "search": "Search an shipping ...",
-            "title": "Shipping"
-        },
-        "variants": {
-            "barcode": "Barcode",
-            "buyingPrice": "Buying Price",
-            "create": "Create a variant",
-            "open": "Open variant",
-            "provider": "Provider",
-            "quantity": "Quantity",
-            "ratio": "Ratio",
-            "search": "Search a variant...",
-            "taxFreePrice": "Tax Free Price",
-            "title": "Variant",
-            "unitPrice": "Unit price"
-        }
-    },
-    "password-helper": {
-        "tips": {
-            "length": "Minimum password lenght is 8",
-            "same-confirm": "Password does not match the confirm password"
-        }
-    },
-    "promotion-types": {
-        "flat_discount": "Discount (in €)",
-        "percent_discount": "Discount (in %)"
-    },
-    "routes": {
-        "account": "My account",
-        "clients": "Clients",
-        "custom-attribute": "Custom Attributes",
-        "inventories": "Inventories",
-        "manufacturers": "Manufacturers",
-        "orders": "Orders",
-        "products": "Products",
-        "providers": "Providers",
-        "settings": "Settings",
-        "shippings": "Shippings"
-    },
-    "settings-page": {
-      "side-navigation": {
-        "categories": "Categories",
-        "custom-attributes": "Custom Attributes",
-        "store-settings": "Store Settings"
+  "account": {
+    "form": {
+      "first": {
+        "title": "Change your personal informations"
+      },
+      "second": {
+        "title": "Change your password"
       }
-    },
-    "sign-in-page": {
-      "email": "Email",
-      "forgotten-password": "Forgotten password ?",
-      "password": "Password",
-      "sign-in": "Sign in"
-    },
-    "supported-langage": {
-      "english": "English",
-      "french": "French"
-    },
-    "toast": {
-        "created": "%{entity} created !",
-        "error": "An error has occured !",
-        "not-found": "%{entity} not found",
-        "updated": "Updated"
-    },
-    "vat-rates": {
-      "parking_rate": "Parking",
-      "reduced_rate": "Reduced",
-      "reduced_rate_alt": "Reduced Alt",
-      "standard": "Standard",
-      "super_reduced_rate": "Super Reduced"
     }
+  },
+  "checkout": {
+    "add-promotion": "Add a promotion",
+    "change": "Change",
+    "left-to-pay": "Left to pay",
+    "remove-article": "Remove article",
+    "reset-alert": {
+      "text": "The sale will be canceled and the stock won't be affected with the changes",
+      "title": "Are you sure ?"
+    },
+    "total": "Total",
+    "type-barcode": "Type the product barcode"
+  },
+  "data-details": {
+    "form": {
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "edit": "Edit",
+        "submit": "Validate"
+      }
+    }
+  },
+  "global": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "validate": "Validate"
+  },
+  "home": {
+    "welcome": {
+      "afternoon": "Good afternoon %{firstname} !",
+      "evening": "Good evening %{firstname} !",
+      "morning": "Good morning %{firstname} !"
+    }
+  },
+  "home-link": {
+    "checkout": {
+      "subtitle": "Cash a sale",
+      "title": "Checkout"
+    },
+    "clients": {
+      "subtitle": "Manage your clients",
+      "title": "Clients"
+    },
+    "inventories": {
+      "subtitle": "Manage your inventories",
+      "title": "Inventories"
+    },
+    "manufacturers": {
+      "subtitle": "Manage your manufacturers",
+      "title": "Manufacturers"
+    },
+    "orders": {
+      "subtitle": "Manage your orders",
+      "title": "Orders"
+    },
+    "products": {
+      "subtitle": "Manage your products",
+      "title": "Products"
+    },
+    "providers": {
+      "subtitle": "Manage your providers",
+      "title": "Providers"
+    },
+    "shippings": {
+      "subtitle": "Manage your shippings",
+      "title": "Shippings"
+    }
+  },
+  "models": {
+    "categories": {
+      "category_id": "Sub-category of ? (optional)",
+      "create": "Create a category",
+      "name": "Name",
+      "noData": "No categories yet",
+      "title": "Category",
+      "tva": "VAT"
+    },
+    "clients": {
+      "address": "Address",
+      "create": "Create a client",
+      "email": "Email",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "noData": "No clients yet",
+      "notes": "Notes",
+      "open": "Open client",
+      "phone": "Phone",
+      "search": "Search a client ..."
+    },
+    "custom-attributes": {
+      "title": "Custom Attribute"
+    },
+    "inventories": {
+      "create": "Create an inventory",
+      "createdAt": "Date of creation",
+      "noData": "No inventories yet",
+      "open": "Open inventory",
+      "search": "Search an inventory...",
+      "title": "Inventory"
+    },
+    "manufacturers": {
+      "create": "Create a manufacturer",
+      "createdAt": "Date of creation",
+      "name": "Name",
+      "noData": "No manufacturers yet",
+      "notes": "Notes",
+      "open": "Open manufacturer",
+      "productsCount": "Products number",
+      "search": "Search a manufacturer...",
+      "title": "Manufacturer"
+    },
+    "orders": {
+      "create": "Create an order",
+      "noData": "No orders yet",
+      "open": "Open order",
+      "search": "Search an order ...",
+      "status": "Status"
+    },
+    "products": {
+      "category": "Category",
+      "create": "Create a product",
+      "createdAt": "Date of creation",
+      "manufacturer": "Manufacturer",
+      "name": "Product name",
+      "noData": "No products yet",
+      "open": "Open product",
+      "search": "Search a product...",
+      "title": "Product",
+      "updatedAt": "Date of last update"
+    },
+    "providers": {
+      "create": "Create a provider",
+      "createdAt": "Date of creation",
+      "name": "Name",
+      "noData": "No providers yet",
+      "notes": "Notes",
+      "open": "Open provider",
+      "search": "Search a provider...",
+      "shippingsCount": "Shippings number",
+      "title": "Provider"
+    },
+    "sales": {
+      "noData": "No sales yet",
+      "open": "Open sale",
+      "search": "Search a sale ...",
+      "title": "Sale"
+    },
+    "shippings": {
+      "create": "Create an shipping",
+      "noData": "No shippings yet",
+      "open": "Open shipping",
+      "provider": "Provider",
+      "search": "Search an shipping ...",
+      "title": "Shipping"
+    },
+    "variants": {
+      "barcode": "Barcode",
+      "buyingPrice": "Buying Price",
+      "create": "Create a variant",
+      "noData": "No variants yet",
+      "open": "Open variant",
+      "provider": "Provider",
+      "quantity": "Quantity",
+      "ratio": "Ratio",
+      "search": "Search a variant...",
+      "taxFreePrice": "Tax Free Price",
+      "title": "Variant",
+      "unitPrice": "Unit price"
+    }
+  },
+  "password-helper": {
+    "tips": {
+      "length": "Minimum password lenght is 8",
+      "same-confirm": "Password does not match the confirm password"
+    }
+  },
+  "promotion-types": {
+    "flat_discount": "Discount (in €)",
+    "percent_discount": "Discount (in %)"
+  },
+  "routes": {
+    "account": "My account",
+    "clients": "Clients",
+    "custom-attribute": "Custom Attributes",
+    "inventories": "Inventories",
+    "manufacturers": "Manufacturers",
+    "orders": "Orders",
+    "products": "Products",
+    "providers": "Providers",
+    "settings": "Settings",
+    "shippings": "Shippings"
+  },
+  "settings-page": {
+    "side-navigation": {
+      "categories": "Categories",
+      "custom-attributes": "Custom Attributes",
+      "store-settings": "Store Settings"
+    }
+  },
+  "sign-in-page": {
+    "email": "Email",
+    "forgotten-password": "Forgotten password ?",
+    "password": "Password",
+    "sign-in": "Sign in"
+  },
+  "supported-langage": {
+    "english": "English",
+    "french": "French"
+  },
+  "toast": {
+    "created": "%{entity} created !",
+    "error": "An error has occured !",
+    "not-found": "%{entity} not found",
+    "updated": "Updated"
+  },
+  "vat-rates": {
+    "parking_rate": "Parking",
+    "reduced_rate": "Reduced",
+    "reduced_rate_alt": "Reduced Alt",
+    "standard": "Standard",
+    "super_reduced_rate": "Super Reduced"
+  }
 }

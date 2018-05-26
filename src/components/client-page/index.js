@@ -29,7 +29,7 @@ export default class Client extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>{selectedClient.firstname}</h1>
+        <h1 className="data-details-title">{selectedClient.firstname}</h1>
         <DataDetails
           createEntity={createApiClient}
           currentEntity={selectedClient}

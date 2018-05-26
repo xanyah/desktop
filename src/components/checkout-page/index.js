@@ -288,7 +288,7 @@ export default class Checkout extends React.Component {
     const change = salePayments.reduce((a, b) => a + parseFloat(b.total), 0) - this.getVariantsTotal()
     return (
       <PageContainer>
-        <div id="checkout-page">
+        <div className="checkout-page">
           <form onSubmit={e => this.onVariantSearch(e)}>
             <i className="im im-magnifier" />
             <Input
@@ -326,7 +326,7 @@ export default class Checkout extends React.Component {
           )}
         </div>
         <Modal displayed={displayedModal}>
-          <div id="checkout-modal">
+          <div className="checkout-modal">
             <Checkbox
               onChange={() => this.setState({ hasPromotion: !hasPromotion })}
               checked={hasPromotion}

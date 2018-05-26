@@ -1,21 +1,28 @@
+// sass-lint:disable no-url-protocols,no-url-domains
 @import '~normalize-scss/sass/normalize';
-@include normalize();
-@import '~toastedjs/src/sass/toast.scss';
+@include normalize;
+@import '~toastedjs/src/sass/toast';
 @import '~react-select/scss/default';
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import url('//fonts.googleapis.com/css?family=Poppins');
 @import 'libs/iconic-font/scss/iconmonstr-iconic-font';
 @import 'constants/scss/colors';
 
 // To prevent "Couldn't set selectedTextBackgroundColor from default ()"
-::selection { background: white; /* WebKit/Blink Browsers */ }
+::selection { background: $primary-white; }
 
-* {
-  font-family: Roboto, sans-serif;
+*,
+input {
+  font-family: Poppins, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: $primary-text-color;
+  font-weight: 500;
 }
 
 html {
@@ -24,9 +31,35 @@ html {
 
 button {
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
 
   &:hover {
-    opacity: 0.7;
+    opacity: .7;
+  }
+}
+
+// sass-lint:disable class-name-format
+.Select {
+  width: 300px;
+
+  .Select-control {
+    border: 0;
+    border-bottom: 1px solid $primary-text-color;
+    border-radius: 0;
+    margin-top: .6rem;
+
+    // sass-lint:disable no-important
+    * {
+      color: $primary-text-color !important;
+      font-size: 1.2rem;
+    }
+
+    .Select-value {
+      padding-left: 0;
+    }
+
+    .Select-multi-value-wrapper {
+      top: 1rem;
+    }
   }
 }

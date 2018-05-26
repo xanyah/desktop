@@ -1,18 +1,26 @@
-.content {
-  flex-direction: column;
+@import '../../constants/scss/sizes';
 
-  form#settings-page {
+.account-page {
+  display: flex;
+  flex-direction: row;
+  padding: 0 $horizontal-padding;
+
+  form {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
 
-  button.submit {
-    text-align: right;
+  button {
+    &.submit {
+      text-align: right;
+    }
   }
 
-  select.select-locale {
-    width: 60px;
-    margin-top: 40px;
+  select {
+    .select-locale {
+      margin-top: 40px;
+      width: 60px;
+    }
   }
 }

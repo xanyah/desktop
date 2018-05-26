@@ -1,8 +1,9 @@
-@import './_colors.scss';
+@import './colors';
 
+%btn,
 .btn {
   align-items: center;
-  border: 0px;
+  border: 0;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -11,7 +12,7 @@
   outline: 0;
   padding: 10px 20px;
   text-transform: capitalize;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
 
   .im {
     font-size: 1.4rem;
@@ -24,85 +25,104 @@
 }
 
 .btn-primary {
-  @extend .btn;
+  @extend %btn;
 
   background-color: transparent;
   color: $link-color;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: .4px;
   margin: 20px 0;
   padding: 0;
+  text-transform: uppercase;
 
   &:hover {
-    opacity: 0.7;
+    opacity: .7;
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: .3;
   }
 }
 
 .btn-danger {
-  @extend .btn;
+  @extend %btn;
 
   background-color: transparent;
   color: $red-color;
   font-size: 1rem;
 
   &:hover {
-    opacity: 0.7;
+    opacity: .7;
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: .3;
   }
 }
 
+$hover-green: rgba($green-color, .7);
+$disabled-green: rgba($green-color, .3);
+
 .btn-success {
-  @extend .btn;
+  @extend %btn;
 
   background-color: $green-color;
   color: $primary-white;
   font-size: 1.5rem;
 
   &:hover {
-  	background-color: rgba($green-color, 0.7);
+    background-color: $hover-green;
   }
 
   &:disabled {
-  	background-color: rgba($green-color, 0.3);
+    background-color: $disabled-green;
   }
 }
 
 .btn-link {
-  @extend .btn;
+  @extend %btn;
   background-color: transparent;
   color: $link-color;
   font-size: 1rem;
   text-decoration: underline;
 
   &:hover {
-    opacity: 0.7;
+    opacity: .7;
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: .3;
+  }
+}
+
+.btn-cancel {
+  @extend %btn;
+  background-color: transparent;
+  color: $secondary-text-color;
+  font-size: .8rem;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  &:disabled {
+    opacity: .3;
   }
 }
 
 .btn-solid {
-  @extend .btn;
+  @extend %btn;
   background-color: $blue-color;
   color: $primary-white;
   font-size: 1rem;
   text-transform: uppercase;
-  width: calc(100% - 20px);
 
   &:hover {
-    opacity: 0.8;
+    opacity: .8;
   }
 
   &:disabled {
-    opacity: 0.3;
+    opacity: .3;
   }
 }

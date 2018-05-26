@@ -1,11 +1,12 @@
 import React from 'react'
+import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
 
 import FormAttribute from '../../../containers/form-attribute'
 import { CustomAttributeType } from '../../../types'
-import DataTable from '../../data-table'
 
-import { Translate } from 'react-redux-i18n'
+
+import './styles.scss'
 
 export default class CustomAttribute extends React.Component {
   constructor(props) {
@@ -34,29 +35,30 @@ export default class CustomAttribute extends React.Component {
         onSubmit={e=> {
           e.preventDefault()
           createApiCustomAttribute(newCustomAttribute)
-        }}>
+        }}
+      >
 
-        <div className="row">
-          <FormAttribute
-            attribute="name"
-            key="name"
-            value={newCustomAttribute['name']}
-            model="custom_attributes"
-            type="string"
-            onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
-          />
+        <FormAttribute
+          attribute="name"
+          inline
+          key="name"
+          value={newCustomAttribute['name']}
+          model="custom_attributes"
+          type="string"
+          onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+        />
 
-          <FormAttribute
-            attribute="type"
-            key="type"
-            value={newCustomAttribute['type']}
-            model="custom_attributes"
-            type="type"
-            onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
-          />
-        </div>
+        <FormAttribute
+          attribute="type"
+          inline
+          key="type"
+          value={newCustomAttribute['type']}
+          model="custom_attributes"
+          type="type"
+          onUpdate={(attribute, value) => this.handleUpdate(attribute, value)}
+        />
 
-        <button className="btn-link btn-stand-alone" type="submit">
+        <button className="btn-solid" type="submit">
           <Translate value='global.validate'/>
         </button>
       </form>
@@ -64,26 +66,40 @@ export default class CustomAttribute extends React.Component {
   }
 
   renderCustomAttributesList() {
-    const { customAttributes, openCustomAttribute } = this.props
+    const { customAttributes } = this.props
     return (
       <div className="custom_attributes" key="table">
         <h1>Voir les attributs personnalisés</h1>
 
-        <DataTable
-          columns={['name', 'type']}
-          data={customAttributes}
-          loading={false}
-          onItemView={item => openCustomAttribute(item)}
-          type="custom_attributes"
-          creation={false}
-        />
+        <div className="custom-attribute-header">
+          <div className="name">
+            Nom
+          </div>
+          <div className="type">
+            Type
+          </div>
+        </div>
+        {customAttributes.map(customAttribute => (
+          <div className="custom-attribute">
+            <div className="name">
+              {customAttribute.name}
+            </div>
+            <div className="type">
+              {customAttribute.type}
+            </div>
+          </div>))}
 
       </div>
     )
   }
 
   render() {
-    return [this.renderCustomAttributesForm(), this.renderCustomAttributesList()]
+    return (<div className="custom-attributes">
+      {[
+        this.renderCustomAttributesForm(),
+        this.renderCustomAttributesList(),
+      ]}
+    </div>)
   }
 }
 
