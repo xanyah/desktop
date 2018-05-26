@@ -20,7 +20,9 @@
     margin-top: 15px;
     min-width: 300px;
 
-    &[type='text'] {
+    &[type='text'],
+    &[type='password'],
+    &[type='email'] {
       margin-top: 0;
     }
   }

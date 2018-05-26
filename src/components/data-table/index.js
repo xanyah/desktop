@@ -127,7 +127,8 @@ class DataTable extends React.Component {
                         {creation && (
                           <button
                             className="btn-solid"
-                            onClick={() => creationFunction()}
+                            onClick={() => creationFunction ? creationFunction() : onItemView({})}
+                            type="button"
                           >
                             <Translate value={`models.${type}.create`} />
                           </button>)}

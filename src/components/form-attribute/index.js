@@ -69,6 +69,15 @@ const getFormElement = item => {
         options={getTypeOptions()}
       />
     )
+  case 'select':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={e => item.onUpdate(item.attribute, e.value)}
+        options={item.options}
+      />
+    )
   case 'parent-category':
     return (
       <Select

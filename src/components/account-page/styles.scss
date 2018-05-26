@@ -1,7 +1,11 @@
-.content {
-  flex-direction: column;
+@import '../../constants/scss/sizes';
 
-  .account-page {
+.account-page {
+  display: flex;
+  flex-direction: row;
+  padding: 0 $horizontal-padding;
+
+  form {
     display: flex;
     flex-direction: column;
     width: 100%;
