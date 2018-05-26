@@ -96,21 +96,19 @@ class DataTable extends React.Component {
                         className={selected == row ? 'row selected' :  'row'}
                         onClick={() => this.setState({ selected: row })}
                       >
-                        <div className="data-row">
-                          {columns.map(column => (
-                            (column == 'status')
-                              ? (
-                                <div className={`column column-${column}`} key={idx + column}>
-                                  <div className={`sticker-${getStatusClass(row, type)}`}></div>
-                                </div>
-                              )
-                              : (
-                                <div className={`column column-${column}`} key={idx + column}>
-                                  {formatData(row[column], column)}
-                                </div>
-                              )
-                          ))}
-                        </div>
+                        {columns.map(column => (
+                          (column == 'status')
+                            ? (
+                              <div className={`column column-${column}`} key={idx + column}>
+                                <div className={`sticker-${getStatusClass(row, type)}`}></div>
+                              </div>
+                            )
+                            : (
+                              <div className={`column column-${column}`} key={idx + column}>
+                                {formatData(row[column], column)}
+                              </div>
+                            )
+                        ))}
                         <button
                           className="link"
                           onClick={() => onItemView(row)}
@@ -125,6 +123,7 @@ class DataTable extends React.Component {
                             <Translate value={`models.${type}.open`} />
                           </button>
                         </div>
+                        <div className="border" />
                       </div>
                     ))
                   )

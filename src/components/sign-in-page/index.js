@@ -5,6 +5,7 @@ import { Translate, I18n } from 'react-redux-i18n'
 import Input from '../input'
 
 import './styles.scss'
+import { logo } from '../../images'
 
 const SignIn = ({
   email,
@@ -14,6 +15,7 @@ const SignIn = ({
 }) => (
   <div key="sign-in" className="sign-in-page">
     <div className="container">
+      <img src={logo} className="logo" />
       <Input
         placeholder={I18n.t('sign-in-page.email')}
         type="email"

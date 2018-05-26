@@ -22,6 +22,23 @@
     flex-direction: column;
     justify-content: center;
     max-width: 25rem;
-    padding: 5rem 2.5rem;
+    padding: 5rem 2.5rem 2rem;
+  }
+
+  .logo {
+    height: 8rem;
+    margin-top: -9rem;
+    width: 8rem;
+  }
+
+  .btn-solid {
+    font-size: 1.2rem;
+    height: 50px;
+    margin-top: 1.4rem;
+  }
+
+  .btn-link {
+    font-size: 0.8rem;
+    margin-top: 1rem;
   }
 }

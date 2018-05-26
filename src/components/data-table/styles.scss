@@ -1,6 +1,8 @@
 @import '../../constants/scss/colors';
 @import '../../constants/scss/sticker';
 
+$horizontal-padding: 5.625rem;
+
 .data-table {
   max-height: calc(100vh - 88px);
   overflow-y: auto;
@@ -9,17 +11,23 @@
   justify-content: space-between;
 
   .header-row {
+    &::before, &::after {
+      content: '';
+      min-width: $horizontal-padding;
+    }
     align-items: center;
     color: $primary-text-color;
     display: flex;
     flex-direction: row;
     font-size: 1.2rem;
     font-weight: 500;
+    min-height: 3.25rem;
     justify-content: space-between;
-    margin: 0 -90px;
-    padding: 20px 90px;
 
     .column {
+      border-bottom: 0.5px solid $grey-color;
+      height: 3.25rem;
+      line-height: 3.25rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -27,7 +35,7 @@
     }
 
     .column-status {
-      width:4%;
+      width: 4%;
     }
   }
 
@@ -67,60 +75,63 @@
     overflow-y: auto;
 
     .row {
-      align-items: center;
-      border: 0.5px solid #EEEEEE;
+      align-items: flex-start;
       color: $primary-text-color;
       cursor: pointer;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       font-size: 1rem;
       justify-content: space-between;
       opacity: 0.7;
-      margin: 0 -90px;
-      padding: 40px 90px;
       position: relative;
       transition: all 0.3s ease;
 
+      &::before, &::after {
+        content: '';
+        min-width: $horizontal-padding;
+      }
+
+      .border {
+        background-color: $grey-color;
+        bottom: 0;
+        height: 0.5px;
+        left: $horizontal-padding;
+        position: absolute;
+        right: $horizontal-padding;
+      }
 
       .action {
         display: none;
-        flex-direction: row;
-        justify-content: flex-end;
+      }
+
+      .column {
+        overflow: hidden;
+        padding: 2.5rem 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         width: 100%;
       }
 
-      .data-row {
-        align-items: center;
-        color: $primary-text-color;
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-
-        .column {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          width: 100%;
-        }
-
-        .column-status {
-          width:4%;
-        }
+      .column-status {
+        width:4%;
       }
 
       .link {
+        align-items: center;
         background: none;
         border: none;
         bottom: 0;
         color: $primary-text-color;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
         opacity: 0;
         position: absolute;
-        right: 100px;
+        right: 0;
+        text-align: center;
         top: 0;
         transition: all 0.3s ease;
+        width: $horizontal-padding;
       }
 
       &:hover {
@@ -134,10 +145,14 @@
 
       &.selected {
         background-color: $secondary-white;
+        min-height: 8rem;
         opacity: 1;
 
         .action {
+          bottom: 0;
           display: flex;
+          position: absolute;
+          right: $horizontal-padding;
         }
 
         .link {
@@ -153,11 +168,17 @@
   }
 
   .data-table-create-btn-group {
-    border-top: 4px solid rgba(0,0,0,0.3);
+    align-items: center;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
     background-color: $secondary-white;
-    width: 100%;
-    .data-table-create-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-height: 5rem;
+    width: 100vw;
 
+    .data-table-create-btn {
+      margin-right: $horizontal-padding;
     }
   }
 }
