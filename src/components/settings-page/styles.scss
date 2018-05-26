@@ -1,9 +1,10 @@
 @import '../../constants/scss/colors';
 @import '../../constants/scss/inputs';
+@import '../../constants/scss/sizes';
 @import '../../constants/scss/buttons';
 
 .settings-page {
-  align-items: center;
+  align-items: space-between;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,24 +13,20 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-left: -45px;
-    padding: 0 10px;
-    width: 12rem;
+    justify-content: flex-start;
 
     button {
       background: none;
       border: 0;
-      border-radius: 10px;
+      border-radius: 0 1rem 1rem 0;
       color: $link-color;
       cursor: pointer;
-      font-size: 24px;
-      height: 62px;
+      font-size: 1rem;
       margin: 5px 0;
       outline: 0;
-      padding: 5px 0;
+      padding: 1rem 2rem;
       transition: all .3s ease;
-      width: 300px;
+      width: 100%;
 
       &:hover {
         background-color: $secondary-white;
@@ -40,5 +37,10 @@
         color: $primary-white;
       }
     }
+  }
+
+  .content {
+    overflow: auto;
+    padding: 0 $horizontal-padding 0 2rem;
   }
 }

@@ -21,7 +21,7 @@ import './styles.scss'
 // TODO: link in entity type to the concerned entity
 const FormAttribute = item => {
   return (
-    <div className="form-attribute">
+    <div className={item.inline ? 'form-attribute inline' : 'form-attribute'}>
       <label htmlFor={item.attribute}>
         <Translate value={`models.${item.model}.${item.attribute}`}/>
       </label>

@@ -44,3 +44,27 @@
     color: $secondary-text-color;
   }
 }
+
+textarea {
+  background-color: none;
+  border: 0;
+  border-bottom: 1px solid $primary-text-color;
+  color: $primary-text-color;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  outline: 0;
+  transition: all .3s ease;
+
+  &:empty {
+    border-bottom: 1px solid $secondary-text-color;
+  }
+
+  &:valid,
+  &:focus {
+    border-bottom: 1px solid $primary-text-color;
+  }
+
+  &::placeholder {
+    color: $secondary-text-color;
+  }
+}

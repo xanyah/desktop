@@ -15,7 +15,8 @@
     font-size: 1rem;
   }
 
-  > input {
+  > input,
+  > textarea {
     margin-top: 15px;
     min-width: 300px;
 
@@ -24,28 +25,40 @@
     }
   }
 
-  // sass-lint:disable class-name-format
-  .Select {
-    width: 300px;
+  &.inline {
+    font-size: 1rem;
+    margin-right: 1rem;
 
-    .Select-control {
-      border: 0;
-      border-bottom: 1px solid $primary-text-color;
-      border-radius: 0;
-      margin-top: .6rem;
+    label {
+      font-size: 0.6rem;
+    }
 
-      // sass-lint:disable no-important
-      * {
-        color: $primary-text-color !important;
-        font-size: 1.2rem;
-      }
+    input {
+      min-width: inherit;
+    }
 
-      .Select-value {
-        padding-left: 0;
-      }
-
-      .Select-multi-value-wrapper {
-        top: 1rem;
+    .Select {
+      width: inherit;
+    
+      .Select-control {
+        border: 0;
+        border-bottom: 1px solid $primary-text-color;
+        border-radius: 0;
+        margin-top: 0.5rem;
+    
+        // sass-lint:disable no-important
+        * {
+          color: $primary-text-color !important;
+          font-size: 1rem;
+        }
+    
+        .Select-value {
+          padding-left: 0;
+        }
+    
+        .Select-multi-value-wrapper {
+          top: 1rem;
+        }
       }
     }
   }

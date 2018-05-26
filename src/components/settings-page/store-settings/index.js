@@ -57,41 +57,17 @@ export default class StoreSettings extends React.Component {
 
     return (
       <div className="vat-rates">
-        <div className="title">TVA:</div>
-        <div className="vat-rate">
-          <div className="label">
-            <Translate value='vat-rates.standard'/>:&nbsp;
-          </div>
-          <div className="rate"> {standardRate} %</div>
-        </div>
-        <div className="separator"> - </div>
-        <div className="vat-rate">
-          <div className="label">
-            <Translate value='vat-rates.reduced_rate'/>:&nbsp;
-          </div>
-          <div className="rate"> {reducedRate} %</div>
-        </div>
-        <div className="separator"> - </div>
-        <div className="vat-rate">
-          <div className="label">
-            <Translate value='vat-rates.reduced_rate_alt'/>:&nbsp;
-          </div>
-          <div className="rate"> {reducedRateAlt} %</div>
-        </div>
-        <div className="separator"> - </div>
-        <div className="vat-rate">
-          <div className="label">
-            <Translate value='vat-rates.super_reduced_rate'/>:&nbsp;
-          </div>
-          <div className="rate"> {superReducedRate} %</div>
-        </div>
-        <div className="separator"> - </div>
-        <div className="vat-rate">
-          <div className="label">
-            <Translate value='vat-rates.parking_rate'/>:&nbsp;
-          </div>
-          <div className="rate"> {parkingRate} %</div>
-        </div>
+        <span className="label">TVA: </span>
+        <Translate value='vat-rates.standard'/>:&nbsp;
+        <b>{standardRate} %</b> -&nbsp;
+        <Translate value='vat-rates.reduced_rate'/>:&nbsp;
+        <b>{reducedRate} %</b> -&nbsp;
+        <Translate value='vat-rates.reduced_rate_alt'/>:&nbsp;
+        <b>{reducedRateAlt} %</b> -&nbsp;
+        <Translate value='vat-rates.super_reduced_rate'/>:&nbsp;
+        <b>{superReducedRate} %</b> -&nbsp;
+        <Translate value='vat-rates.parking_rate'/>:&nbsp;
+        <b>{parkingRate} %</b>
       </div>
     )
   }
@@ -145,7 +121,7 @@ export default class StoreSettings extends React.Component {
             {this.renderVatRatesCountry()}
           </div>
         </div>
-        <button className="btn-link btn-stand-alone" type="submit">
+        <button className="btn-solid" type="submit">
           <Translate value='global.validate'/>
         </button>
       </form>

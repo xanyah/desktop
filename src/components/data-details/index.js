@@ -53,36 +53,35 @@ export default class DataDetails extends React.Component {
               createEntity(selectedEntity)
             }}>
 
-            {formattedData.map((row, idx) => (
-              <div className="row" key={idx}>
-                { row.map(item => (
-                  (item.editable)
-                    &&
-                    <FormAttribute
-                      attribute={item.attribute}
-                      key={item.attribute}
-                      value={selectedEntity[item.attribute]}
-                      model={type}
-                      type={item.type}
-                      onUpdate={(attribute, value) =>
-                        this.handleUpdate(attribute, value)}
-                    />
-                ))}
-              </div>
-            ))}
+            {formattedData
+              .filter(row => row.filter(item => item.editable).length > 0)
+              .map((row, idx) => (
+                <div className="row" key={idx}>
+                  { row.map(item => (
+                    (item.editable)
+                      &&
+                      <FormAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={selectedEntity[item.attribute]}
+                        model={type}
+                        type={item.type}
+                        onUpdate={(attribute, value) =>
+                          this.handleUpdate(attribute, value)}
+                      />
+                  ))}
+                </div>))}
 
             { formChildren }
 
-            {
-              (
-                <button
-                  className="btn-link btn-stand-alone"
-                  key="btn-submit"
-                >
-                  <Translate value={'data-details.form.buttons.create'}/>
-                </button>
-              )
-            }
+            <div className="action-buttons">
+              {(<button
+                className="btn-primary"
+                key="btn-submit"
+              >
+                <Translate value={'data-details.form.buttons.create'}/>
+              </button>)}
+            </div>
           </form>
         </div>
         <div className="children">
@@ -114,29 +113,31 @@ export default class DataDetails extends React.Component {
               updateEntity(selectedEntity)
             }}>
 
-            {formattedData.map((row, idx) => (
-              <div className="row" key={idx}>
-                { row.map(item => (
-                  (item.editable && editing && editableEntity)
-                    ? <FormAttribute
-                      attribute={item.attribute}
-                      key={item.attribute}
-                      value={selectedEntity[item.attribute]}
-                      model={type}
-                      type={item.type}
-                      onUpdate={(attribute, value) =>
-                        this.handleUpdate(attribute, value)}
-                    />
-                    : <ItemAttribute
-                      attribute={item.attribute}
-                      key={item.attribute}
-                      value={selectedEntity[item.attribute]}
-                      model={type}
-                      type={item.type}
-                    />
-                ))}
-              </div>
-            ))}
+            {formattedData
+              .filter(row => row.filter(item => item.editable).length > 0)
+              .map((row, idx) => (
+                <div className="row" key={idx}>
+                  { row.map(item => (
+                    (item.editable && editing && editableEntity)
+                      ? <FormAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={selectedEntity[item.attribute]}
+                        model={type}
+                        type={item.type}
+                        onUpdate={(attribute, value) =>
+                          this.handleUpdate(attribute, value)}
+                      />
+                      : <ItemAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={selectedEntity[item.attribute]}
+                        model={type}
+                        type={item.type}
+                      />
+                  ))}
+                </div>
+              ))}
             <div className="action-buttons">
               {(editableEntity) &&
                 ((editing)

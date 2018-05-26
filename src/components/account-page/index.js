@@ -116,7 +116,7 @@ export default class Account extends React.Component {
 
     return (
       <form
-        className="settings-page"
+        className="account-page"
         onSubmit={e => {
           e.preventDefault()
           const passwordError = verifyPassword(
