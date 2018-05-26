@@ -42,20 +42,22 @@ export default class Product extends React.Component {
 
     return (
       <PageContainer>
-        <h1 className="data-details-title">{selectedProduct.name}</h1>
-        <DataDetails
-          currentEntity={selectedProduct}
-          editing={productEditing}
-          formattedData={productFormat}
-          toggleEdit={toggleProduct}
-          type="products"
-          updateEntity={updateApiProduct}
-        >
-          <div>
-            {this.renderVariantsForm()}
-            {this.renderVariantsTable()}
-          </div>
-        </DataDetails>
+        <div className="product-page">
+          <h1 className="data-details-title">{selectedProduct.name}</h1>
+          <DataDetails
+            currentEntity={selectedProduct}
+            editing={productEditing}
+            formattedData={productFormat}
+            toggleEdit={toggleProduct}
+            type="products"
+            updateEntity={updateApiProduct}
+          >
+            <div>
+              {this.renderVariantsTable()}
+              {this.renderVariantsForm()}
+            </div>
+          </DataDetails>
+        </div>
       </PageContainer>
     )
   }
@@ -64,7 +66,7 @@ export default class Product extends React.Component {
     const { openVariant, variants } = this.props
     return (
       <div className="variants">
-        <h1>Voir les dérivés de ce produit</h1>
+        <h1 className="data-details-title">Dérivés</h1>
 
         <DataTable
           columns={[
@@ -164,7 +166,7 @@ export default class Product extends React.Component {
     const { newVariant } = this.state
     const { createApiVariant, selectedProduct } = this.props
     return (
-      <Collapsible trigger={<h1>> Crée un nouveau dérivé</h1>}>
+      <Collapsible trigger={<h1> Créer un nouveau dérivé</h1>}>
         <form
           className="variant-form"
           onSubmit={e=> {
