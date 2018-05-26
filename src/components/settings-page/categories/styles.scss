@@ -1,18 +1,18 @@
-@import '../../../constants/scss/_colors.scss';
+@import '../../../constants/scss/colors';
 
-div.categories {
+.categories {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  div.parent-category {
+  .parent-category {
     color: $primary-text-color;
     margin-bottom: 10px;
 
-    div.children-categories-container {
+    .children-categories-container {
       margin-top: 10px;
 
-      div.children-category {
+      .children-category {
         color: $secondary-text-color;
         margin-left: 20px;
       }

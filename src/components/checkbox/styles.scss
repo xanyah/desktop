@@ -8,12 +8,14 @@
   flex-direction: row;
   justify-content: flex-start;
 
-  input[type=checkbox] {
-    display: none;
+  input {
+    &[type='checkbox'] {
+      display: none;
+    }
   }
 
   .im {
-    margin-right: 0.6rem;
+    margin-right: .6rem;
     margin-top: 2px;
   }
 }

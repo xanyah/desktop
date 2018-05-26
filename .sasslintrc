@@ -1,0 +1,12 @@
+{
+  "files": {
+    "include": "src/**/*.scss",
+    "ignore": [
+      "src/libs/**/*.scss"
+    ]
+  },
+  "rules": {
+    "no-transition-all": 0,
+    "nesting-depth": 0
+  }
+}

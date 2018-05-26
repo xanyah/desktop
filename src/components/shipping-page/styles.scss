@@ -6,11 +6,11 @@
   .shipping-variants-table {
     .shipping-variants-table-header {
       align-items: center;
+      border-bottom: 1px solid $grey-color;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      border-bottom: 1px solid $grey-color;
       font-size: 1.4rem;
+      justify-content: space-between;
 
       .column-product {
         flex: 2;
@@ -21,10 +21,10 @@
       }
 
       .column-quantity {
-        flex: 0.5;
+        flex: .5;
       }
 
-      div.column {
+      .column {
         text-align: left;
 
         &:last-of-type {
@@ -32,21 +32,21 @@
         }
       }
     }
+
     .shipping-variants-table-body {
       border-bottom: 1px solid $grey-color;
 
       .shipping-variants-row {
+        color: $primary-text-color;
+        cursor: pointer;
         display: flex;
         flex-direction: row;
-        cursor: pointer;
-        justify-content: space-between;
-        color: $primary-text-color;
-
         font-size: 1.6rem;
-        opacity: 0.6;
-        padding: 20px 0px;
+        justify-content: space-between;
+        opacity: .6;
+        padding: 20px 0;
         position: relative;
-        transition: all 0.3s ease;
+        transition: all .3s ease;
 
         .column-product {
           flex: 2;
@@ -57,10 +57,10 @@
         }
 
         .column-quantity {
-          flex: 0.5;
+          flex: .5;
         }
 
-        div.column {
+        .column {
           text-align: left;
 
           &:last-of-type {
@@ -70,22 +70,12 @@
 
         &:hover {
           opacity: 1;
-
-          // .link {
-          //   display: flex;
-          //   opacity: 1;
-          // }
         }
 
         &.selected {
-          opacity: 1;
           background-color: $secondary-white;
-
-          // .action {
-          //   display: flex;
-          // }
+          opacity: 1;
         }
-
       }
     }
   }

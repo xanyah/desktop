@@ -10,8 +10,10 @@
   right: 0;
   top: 0;
 
-  &:before {
-    background: rgba(0,0,0,0.3);
+  $background: rgba(0, 0, 0, .3);
+
+  &::before {
+    background: $background;
     bottom: 0;
     content: '';
     left: 0;

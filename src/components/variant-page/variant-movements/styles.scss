@@ -1,28 +1,28 @@
 @import '../../../constants/scss/colors';
 
-div.variant-movements-content {
+.variant-movements-content {
   color: $primary-text-color;
 
-  div.section-title {
+  .section-title {
     color: $secondary-text-color;
     font-size: 1.2rem;
   }
 
-  div.variant-movements-table {
+  .variant-movements-table {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    div.variant-movements-table-header {
+    .variant-movements-table-header {
       align-items: center;
+      border-bottom: 1px solid $grey-color;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
       font-size: 1.4rem;
-      border-bottom: 1px solid $grey-color;
       height: 40px;
+      justify-content: space-between;
 
-      div.column {
+      .column {
         text-align: left;
 
         &:last-of-type {
@@ -31,26 +31,25 @@ div.variant-movements-content {
       }
     }
 
-    div.variant-movements-table-body {
+    .variant-movements-table-body {
       font-size: 24px;
 
-      div.variant-movements-row {
+      .variant-movements-row {
         align-items: center;
+        border-bottom: 1px solid $grey-color;
         color: $primary-text-color;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         font-size: 1.6rem;
         justify-content: space-between;
-        opacity: 0.6;
         margin: 0 -90px;
+        opacity: .6;
         padding: 20px 90px;
         position: relative;
-        transition: all 0.3s ease;
-        align-items: center;
-        border-bottom: 1px solid $grey-color;
+        transition: all .3s ease;
 
-        div.data-row {
+        .data-row {
           align-items: center;
           color: $primary-text-color;
           cursor: pointer;
@@ -59,36 +58,36 @@ div.variant-movements-content {
           justify-content: space-between;
           width: 100%;
 
-          div.column {
+          .column {
             overflow: hidden;
+            text-align: left;
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 100%;
-            text-align: left;
 
             &:last-of-type {
               text-align: right;
             }
           }
 
-          div.column-arrow {
-            position: absolute;
+          .column-arrow {
             left: 15px;
+            position: absolute;
 
             i {
               font-size: 2rem;
             }
           }
 
-          div.column-success {
+          .column-success {
             color: $green-color;
           }
 
-          div.column-danger {
+          .column-danger {
             color: $red-color;
           }
 
-          div.column-primary {
+          .column-primary {
             color: $link-color;
           }
         }
@@ -96,13 +95,13 @@ div.variant-movements-content {
         .action {
           display: none;
           flex-direction: row;
-          justify-content: flex-end;;
+          justify-content: flex-end;
           width: 100%;
         }
 
         .link {
           background: none;
-          border: none;
+          border: 0;
           bottom: 0;
           color: $primary-text-color;
           cursor: pointer;
@@ -110,7 +109,7 @@ div.variant-movements-content {
           position: absolute;
           right: 20px;
           top: 0;
-          transition: all 0.3s ease;
+          transition: all .3s ease;
         }
 
         &:hover {
@@ -123,8 +122,8 @@ div.variant-movements-content {
         }
 
         &.selected {
-          opacity: 1;
           background-color: $secondary-white;
+          opacity: 1;
 
           .action {
             display: flex;

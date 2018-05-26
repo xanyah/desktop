@@ -1,7 +1,9 @@
-@import '../../constants/scss/_colors.scss';
+@import '../../constants/scss/colors';
+
 
 .data-details-products {
   .children {
+    // sass-lint:disable class-name-format
     .Collapsible__trigger > h1 {
       border-bottom: 1px solid $primary-text-color;
     }
@@ -12,11 +14,11 @@
       justify-content: space-between;
 
       .row {
-        min-height: 80px;
         align-items: flex-start;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+        min-height: 80px;
         width: 100%;
       }
     }

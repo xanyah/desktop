@@ -3,7 +3,7 @@
 
 .sign-in-page {
   align-items: center;
-  background: url(../../images/background.png);
+  background: url('../../images/background.png');
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
@@ -13,11 +13,13 @@
   justify-content: center;
   width: 100vw;
 
+  $shadow: rgba(255, 255, 255, .5);
+
   .container {
     align-items: center;
     background-color: $primary-white;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.5);
+    border-radius: .5rem;
+    box-shadow: 0 0 20px 0 $shadow;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,7 +40,7 @@
   }
 
   .btn-link {
-    font-size: 0.8rem;
+    font-size: .8rem;
     margin-top: 1rem;
   }
 }

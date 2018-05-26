@@ -1,23 +1,23 @@
-@import './_colors.scss';
+@import './colors';
 
-.sticker {
-  height: 15px;
-  width: 15px;
+%sticker {
   border-radius: 50%;
   display: inline-block;
+  height: 15px;
+  width: 15px;
 }
 
 .sticker-success {
-  @extend .sticker;
+  @extend %sticker;
   background-color: $green-status-color;
 }
 
 .sticker-warning {
-  @extend .sticker;
+  @extend %sticker;
   background-color: $orange-status-color;
 }
 
 .sticker-danger {
-  @extend .sticker;
+  @extend %sticker;
   background-color: $red-status-color;
 }

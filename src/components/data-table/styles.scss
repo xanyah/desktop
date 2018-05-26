@@ -4,28 +4,30 @@
 $horizontal-padding: 5.625rem;
 
 .data-table {
-  max-height: calc(100vh - 88px);
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-height: calc(100vh - 88px);
+  overflow-y: auto;
 
   .header-row {
-    &::before, &::after {
-      content: '';
-      min-width: $horizontal-padding;
-    }
     align-items: center;
     color: $primary-text-color;
     display: flex;
     flex-direction: row;
     font-size: 1.2rem;
     font-weight: 500;
-    min-height: 3.25rem;
     justify-content: space-between;
+    min-height: 3.25rem;
+
+    &::before,
+    &::after {
+      content: '';
+      min-width: $horizontal-padding;
+    }
 
     .column {
-      border-bottom: 0.5px solid $grey-color;
+      border-bottom: .5px solid $grey-color;
       height: 3.25rem;
       line-height: 3.25rem;
       overflow: hidden;
@@ -44,7 +46,7 @@ $horizontal-padding: 5.625rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 20px 0 40px 0;
+    margin: 20px 0 40px;
 
     .search-bar-content {
       align-items: center;
@@ -62,7 +64,7 @@ $horizontal-padding: 5.625rem;
       }
 
       input {
-        border: none;
+        border: 0;
         font-size: 2.2rem;
         font-weight: 500;
       }
@@ -82,11 +84,12 @@ $horizontal-padding: 5.625rem;
       flex-direction: row;
       font-size: 1rem;
       justify-content: space-between;
-      opacity: 0.7;
+      opacity: .7;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all .3s ease;
 
-      &::before, &::after {
+      &::before,
+      &::after {
         content: '';
         min-width: $horizontal-padding;
       }
@@ -94,7 +97,7 @@ $horizontal-padding: 5.625rem;
       .border {
         background-color: $grey-color;
         bottom: 0;
-        height: 0.5px;
+        height: .5px;
         left: $horizontal-padding;
         position: absolute;
         right: $horizontal-padding;
@@ -113,13 +116,13 @@ $horizontal-padding: 5.625rem;
       }
 
       .column-status {
-        width:4%;
+        width: 4%;
       }
 
       .link {
         align-items: center;
         background: none;
-        border: none;
+        border: 0;
         bottom: 0;
         color: $primary-text-color;
         cursor: pointer;
@@ -130,7 +133,7 @@ $horizontal-padding: 5.625rem;
         right: 0;
         text-align: center;
         top: 0;
-        transition: all 0.3s ease;
+        transition: all .3s ease;
         width: $horizontal-padding;
       }
 
@@ -167,10 +170,12 @@ $horizontal-padding: 5.625rem;
     text-align: center;
   }
 
+  $shadow: rgba(0, 0, 0, .3);
+
   .data-table-create-btn-group {
     align-items: center;
-    box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
     background-color: $secondary-white;
+    box-shadow: 0 0 4px 0 $shadow;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
