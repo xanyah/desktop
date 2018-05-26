@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Translate } from 'react-redux-i18n'
-import { browserHistory } from 'react-router'
-import { Link } from 'react-router-dom'
 
 import {
   getInventoryVariants,

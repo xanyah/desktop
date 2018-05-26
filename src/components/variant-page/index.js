@@ -64,7 +64,7 @@ export default class Variant extends React.Component {
       openInventory,
       openSale,
       openShipping,
-      selectedVariant
+      selectedVariant,
     } = this.props
     return (
       <VariantMovements

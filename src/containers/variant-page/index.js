@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
   openInventory: inventory => {
     dispatch(updateInventoryField('selectedInventory', inventory))
-    dispatch(push(`/inventories/${shipping.id}`))
+    dispatch(push(`/inventories/${inventory.id}`))
   },
   // openSale: sale => {
   //   dispatch(updateSaleField('selectedSale', sale))
