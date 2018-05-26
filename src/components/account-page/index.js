@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
 import swal from 'sweetalert'
 

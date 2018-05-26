@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import FormAttribute from '../../../containers/form-attribute'
 import { CustomAttributeType } from '../../../types'
-import DataTable from '../../data-table'
 
 
 import './styles.scss'
