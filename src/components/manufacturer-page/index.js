@@ -31,7 +31,7 @@ export default class Manufacturer extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>{selectedManufacturer.name}</h1>
+        <h1 className="data-details-title">{selectedManufacturer.name}</h1>
         <DataDetails
           createEntity={createApiManufacturer}
           currentEntity={selectedManufacturer}

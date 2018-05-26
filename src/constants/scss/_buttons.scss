@@ -30,9 +30,11 @@
   background-color: transparent;
   color: $link-color;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: .4px;
   margin: 20px 0;
   padding: 0;
+  text-transform: uppercase;
 
   &:hover {
     opacity: .7;
@@ -94,13 +96,27 @@ $disabled-green: rgba($green-color, .3);
   }
 }
 
+.btn-cancel {
+  @extend %btn;
+  background-color: transparent;
+  color: $secondary-text-color;
+  font-size: .8rem;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  &:disabled {
+    opacity: .3;
+  }
+}
+
 .btn-solid {
   @extend %btn;
   background-color: $blue-color;
   color: $primary-white;
   font-size: 1rem;
   text-transform: uppercase;
-  width: calc(100% - 20px);
 
   &:hover {
     opacity: .8;

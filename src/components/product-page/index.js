@@ -42,7 +42,7 @@ export default class Product extends React.Component {
 
     return (
       <PageContainer>
-        <h1>{selectedProduct.name}</h1>
+        <h1 className="data-details-title">{selectedProduct.name}</h1>
         <DataDetails
           currentEntity={selectedProduct}
           editing={productEditing}

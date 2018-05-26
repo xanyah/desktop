@@ -83,7 +83,8 @@
           "name": "Name",
           "tva": "VAT",
           "category_id": "Sub-category of ? (optional)",
-          "title": "Category"
+          "title": "Category",
+          "noData": "No categories yet"
         },
         "clients": {
             "address": "Address",
@@ -94,7 +95,8 @@
             "notes": "Notes",
             "open": "Open client",
             "phone": "Phone",
-            "search": "Search a client ..."
+            "search": "Search a client ...",
+            "noData": "No clients yet"
         },
         "custom-attributes": {
           "title": "Custom Attribute"
@@ -104,7 +106,8 @@
             "createdAt": "Date of creation",
             "open": "Open inventory",
             "search": "Search an inventory...",
-            "title": "Inventory"
+            "title": "Inventory",
+            "noData": "No inventories yet"
         },
         "manufacturers": {
             "create": "Create a manufacturer",
@@ -114,13 +117,15 @@
             "open": "Open manufacturer",
             "productsCount": "Products number",
             "search": "Search a manufacturer...",
-            "title": "Manufacturer"
+            "title": "Manufacturer",
+            "noData": "No manufacturers yet"
         },
         "orders": {
             "create": "Create an order",
             "open": "Open order",
             "search": "Search an order ...",
-            "status": "Status"
+            "status": "Status",
+            "noData": "No orders yet"
         },
         "products": {
             "category": "Category",
@@ -131,7 +136,8 @@
             "open": "Open product",
             "search": "Search a product...",
             "title": "Product",
-            "updatedAt": "Date of last update"
+            "updatedAt": "Date of last update",
+            "noData": "No products yet"
         },
         "providers": {
             "create": "Create a provider",
@@ -141,19 +147,22 @@
             "open": "Open provider",
             "search": "Search a provider...",
             "shippingsCount": "Shippings number",
-            "title": "Provider"
+            "title": "Provider",
+            "noData": "No providers yet"
         },
         "sales": {
             "open": "Open sale",
             "search": "Search a sale ...",
-            "title": "Sale"
+            "title": "Sale",
+            "noData": "No sales yet"
         },
         "shippings": {
             "create": "Create an shipping",
             "open": "Open shipping",
             "provider": "Provider",
             "search": "Search an shipping ...",
-            "title": "Shipping"
+            "title": "Shipping",
+            "noData": "No shippings yet"
         },
         "variants": {
             "barcode": "Barcode",
@@ -166,7 +175,8 @@
             "search": "Search a variant...",
             "taxFreePrice": "Tax Free Price",
             "title": "Variant",
-            "unitPrice": "Unit price"
+            "unitPrice": "Unit price",
+            "noData": "No variants yet"
         }
     },
     "password-helper": {

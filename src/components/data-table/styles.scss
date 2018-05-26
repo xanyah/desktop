@@ -1,13 +1,12 @@
 @import '../../constants/scss/colors';
+@import '../../constants/scss/sizes';
 @import '../../constants/scss/sticker';
-
-$horizontal-padding: 5.625rem;
 
 .data-table {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: calc(100vh - 88px);
+  justify-content: space-between;
   max-height: calc(100vh - 88px);
   overflow-y: hidden;
 
@@ -143,6 +142,7 @@ $horizontal-padding: 5.625rem;
         display: flex;
         justify-content: center;
         opacity: 0;
+        outline: 0;
         position: absolute;
         right: 0;
         text-align: center;
@@ -180,7 +180,24 @@ $horizontal-padding: 5.625rem;
     }
   }
 
+  .empty-state {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+
+    img {
+      height: 5rem;
+      opacity: .2;
+    }
+  }
+
   .sweet-loading {
+    align-items: center;
+    display: flex;
+    height: 12rem;
+    justify-content: center;
     text-align: center;
   }
 

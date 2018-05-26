@@ -20,11 +20,13 @@
     width: 100%;
 
     .image {
-      height: 80px;
       margin-left: 100px;
       margin-right: 40px;
+      max-height: 80px;
+      max-width: 80px;
+      min-height: 80px;
+      min-width: 80px;
       object-fit: contain;
-      width: 80px;
     }
 
     h2 {

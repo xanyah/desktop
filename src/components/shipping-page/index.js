@@ -41,7 +41,7 @@ export default class Shipping extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>{selectedShipping.name}</h1>
+        <h1 className="data-details-title">{selectedShipping.name}</h1>
         <DataDetails
           currentEntity={selectedShipping}
           editing={editing}

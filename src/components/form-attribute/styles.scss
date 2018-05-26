@@ -5,22 +5,48 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  font-size: 1.4rem;
   justify-content: flex-start;
+  margin: 2rem 0;
   width: 100%;
 
   label {
     color: $secondary-text-color;
     font-size: 1rem;
-    text-transform: uppercase;
   }
 
   > input {
     margin-top: 15px;
     min-width: 300px;
+
+    &[type='text'] {
+      margin-top: 0;
+    }
   }
 
   // sass-lint:disable class-name-format
   .Select {
     width: 300px;
+
+    .Select-control {
+      border: 0;
+      border-bottom: 1px solid $primary-text-color;
+      border-radius: 0;
+      margin-top: .6rem;
+
+      // sass-lint:disable no-important
+      * {
+        color: $primary-text-color !important;
+        font-size: 1.2rem;
+      }
+
+      .Select-value {
+        padding-left: 0;
+      }
+
+      .Select-multi-value-wrapper {
+        top: 1rem;
+      }
+    }
   }
 }

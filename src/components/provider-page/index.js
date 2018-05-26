@@ -31,7 +31,7 @@ export default class Provider extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>{selectedProvider.name}</h1>
+        <h1 className="data-details-title">{selectedProvider.name}</h1>
         <DataDetails
           createEntity={createApiProvider}
           currentEntity={selectedProvider}

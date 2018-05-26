@@ -23,7 +23,7 @@ export default class Inventory extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>Inventory Title</h1>
+        <h1 className="data-details-title">Inventory Title</h1>
         <DataDetails
           currentEntity={selectedInventory}
           editing={editing}

@@ -25,7 +25,7 @@ export default class Order extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1>{selectedOrder.name}</h1>
+        <h1 className="data-details-title">{selectedOrder.name}</h1>
         <DataDetails
           createEntity={createApiOrder}
           currentEntity={selectedOrder}

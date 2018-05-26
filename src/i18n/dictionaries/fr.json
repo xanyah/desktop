@@ -83,7 +83,8 @@
           "name": "Nom",
           "tva": "TVA",
           "category_id": "Sous-catégorie de ? (optionnel)",
-          "title": "Catégorie"
+          "title": "Catégorie",
+          "noData": "Pas encore de catégorie"
         },
         "clients": {
             "address": "Adresse",
@@ -94,7 +95,8 @@
             "notes": "Notes",
             "open": "Voir le client",
             "phone": "Téléphone",
-            "search": "Rechercher un client ..."
+            "search": "Rechercher un client ...",
+            "noData": "Pas encore de client"
         },
         "custom-attributes": {
           "title": "Attibut Personnalisé"
@@ -104,7 +106,8 @@
             "createdAt": "Date de création",
             "open": "Voir l'inventaire",
             "search": "Rechercher un client...",
-            "title": "Inventaire"
+            "title": "Inventaire",
+            "noData": "Pas encore d'inventaire"
         },
         "manufacturers": {
             "create": "Créer un fabricant",
@@ -114,13 +117,15 @@
             "open": "Voir le fabricant",
             "productsCount": "Nombre de produits",
             "search": "Rechercher un fabricant...",
-            "title": "Fabricant"
+            "title": "Fabricant",
+            "noData": "Pas encore de fabricants"
         },
         "orders": {
             "create": "Créer une commande",
             "open": "Voir la commande",
             "search": "Rechercher une commande ...",
-            "status": "Statut"
+            "status": "Statut",
+            "noData": "Pas encore de commandes"
         },
         "products": {
             "category": "Catégorie",
@@ -131,7 +136,8 @@
             "open": "Voir le produit",
             "search": "Rechercher un produit...",
             "title": "Produit",
-            "updatedAt": "Dernière mise à jour"
+            "updatedAt": "Dernière mise à jour",
+            "noData": "Pas encore de produits"
         },
         "providers": {
             "create": "Créer un fournisseur",
@@ -141,19 +147,22 @@
             "open": "Voir le fournisseur",
             "search": "Rechercher un fournisseur...",
             "shippingsCount": "Nombre de livraisons",
-            "title": "Fournisseur"
+            "title": "Fournisseur",
+            "noData": "Pas encore de fournisseurs"
         },
         "sales": {
             "open": "Voir la vente",
             "search": "Rechercher une vente ...",
-            "title": "Vente"
+            "title": "Vente",
+            "noData": "Pas encore de ventes"
         },
         "shippings": {
             "create": "Créer une livraison",
             "open": "Voir la livraison",
             "provider": "Fournisseur",
             "search": "Rechercher une livraison ...",
-            "title": "Livraison"
+            "title": "Livraison",
+            "noData": "Pas encore de livraisons"
         },
         "variants": {
             "barcode": "Code barre",
@@ -166,7 +175,8 @@
             "search": "Rechercher un dérivé...",
             "taxFreePrice": "Prix HT",
             "title": "Dérivé",
-            "unitPrice": "Prix unitaire"
+            "unitPrice": "Prix unitaire",
+            "noData": "Pas encore de variants"
         }
     },
     "password-helper": {

@@ -137,36 +137,37 @@ export default class DataDetails extends React.Component {
                 ))}
               </div>
             ))}
-            {
-              (editableEntity) &&
-              ((editing)
-                ? (
-                  <div className="btn-group">
+            <div className="action-buttons">
+              {(editableEntity) &&
+                ((editing)
+                  ? (
+                    <div className="btn-group">
+                      <button
+                        className="btn-cancel"
+                        key="btn-cancel"
+                        onClick={() => this.handleCancelUpdate(toggleEdit)}
+                      >
+                        <Translate value={'data-details.form.buttons.cancel'}/>
+                      </button>
+                      <button
+                        className="btn-primary"
+                        key="btn-submit"
+                        type="submit"
+                      >
+                        <Translate value={'data-details.form.buttons.submit'}/>
+                      </button>
+                    </div>
+                  )
+                  : (
                     <button
-                      className="btn-danger"
-                      key="btn-cancel"
-                      onClick={() => this.handleCancelUpdate(toggleEdit)}
+                      className="btn-primary"
+                      onClick={() => toggleEdit()}
                     >
-                      <Translate value={'data-details.form.buttons.cancel'}/>
+                      <Translate value={'data-details.form.buttons.edit'}/>
                     </button>
-                    <button
-                      className="btn-link"
-                      key="btn-submit"
-                      type="submit"
-                    >
-                      <Translate value={'data-details.form.buttons.submit'}/>
-                    </button>
-                  </div>
-                )
-                : (
-                  <button
-                    className="btn-link btn-stand-alone"
-                    onClick={() => toggleEdit()}
-                  >
-                    <Translate value={'data-details.form.buttons.edit'}/>
-                  </button>
-                ))
-            }
+                  ))
+              }
+            </div>
           </form>
         </div>
         <div className="children">

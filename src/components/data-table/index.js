@@ -10,6 +10,7 @@ import { I18n } from 'react-redux-i18n'
 import Input from '../input'
 
 import './styles.scss'
+import { logo } from '../../images'
 
 class DataTable extends React.Component {
   constructor(props) {
@@ -83,7 +84,7 @@ class DataTable extends React.Component {
                   </div>
                 )
                 : (
-                  (data.length)
+                  (data.length && data.length > 0)
                     ? (
                       data.map((row, idx) => (
                         <div
@@ -120,7 +121,17 @@ class DataTable extends React.Component {
                       ))
                     )
                     : (
-                      <div>No data found !</div>
+                      <div className="empty-state">
+                        <img src={logo} />
+                        <h1><Translate value={`models.${type}.noData`} /></h1>
+                        {creation && (
+                          <button
+                            className="btn-solid"
+                            onClick={() => creationFunction()}
+                          >
+                            <Translate value={`models.${type}.create`} />
+                          </button>)}
+                      </div>
                     )
                 )
             }
