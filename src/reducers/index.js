@@ -12,6 +12,7 @@ import manufacturers from './manufacturers'
 import orders from './orders'
 import products from './products'
 import providers from './providers'
+import sales from './sales'
 import settings from './settings'
 import shippings from './shippings'
 import stores from './stores'
@@ -30,6 +31,7 @@ export default combineReducers({
   products,
   providers,
   router,
+  sales,
   settings,
   shippings,
   stores,

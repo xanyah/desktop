@@ -5,7 +5,6 @@ import {
   getProducts,
   updateProductsField,
   getVariants,
-  searchApiProduct,
 } from '../../actions'
 
 const mapStateToProps = ({ products: { loading, products } }) => ({
@@ -23,7 +22,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getVariants(product.id))
     dispatch(push(`/products/${product.id}`))
   },
-  searchApiProduct: query => dispatch(searchApiProduct(query)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage)

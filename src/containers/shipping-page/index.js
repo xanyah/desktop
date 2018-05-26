@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import {
-  createApiShipping,
   getProducts,
   getVariants,
   updateGlobalField,
@@ -19,7 +18,6 @@ const mapStateToProps = ({ products: { loading, products }, shippings: { editing
 })
 
 const mapDispatchToProps = dispatch => ({
-  createApiShipping: newShipping => dispatch(createApiShipping(newShipping)),
   dispatch,
   getProducts: params => dispatch(getProducts(params)),
   openProduct: product => {

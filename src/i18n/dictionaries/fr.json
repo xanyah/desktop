@@ -144,6 +144,8 @@
             "title": "Fournisseur"
         },
         "sales": {
+            "open": "Voir la vente",
+            "search": "Rechercher une vente ...",
             "title": "Vente"
         },
         "shippings": {

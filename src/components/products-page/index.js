@@ -17,7 +17,6 @@ export default class Products extends React.Component {
       loading,
       openProduct,
       products,
-      searchApiProduct,
     } = this.props
     return (
       <PageContainer>
@@ -27,7 +26,6 @@ export default class Products extends React.Component {
           data={products}
           loading={loading}
           onItemView={item => openProduct(item)}
-          searchEntity={searchApiProduct}
           type="products"
         />
       </PageContainer>
@@ -41,7 +39,6 @@ Products.propTypes = {
   loading: PropTypes.bool,
   openProduct: PropTypes.func,
   products: PropTypes.arrayOf(ProductType),
-  searchApiProduct: PropTypes.func,
 }
 
 Products.defaultProps = {
@@ -50,5 +47,4 @@ Products.defaultProps = {
   loading: true,
   openProduct: () => null,
   products: [],
-  searchApiProduct: () => null,
 }

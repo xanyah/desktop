@@ -1,5 +1,4 @@
-// import { push } from 'react-router-redux'
-// import { browserHistory } from 'react-router'
+import { push } from 'react-router-redux'
 
 import {
   MANUFACTURERS_CREATE_MANUFACTURER,
@@ -82,14 +81,8 @@ export const createApiManufacturer = newManufacturer =>
           dispatch(createManufacturer(data))
           showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.manufacturers.title')}))
           // TODO: Redirect after creation
-          if(data.id) {
-            // dispatch(push(`/manufacturers/${data.id}`))
-            // dispatch(browserHistory.push(`/manufacturers/${data.id}`))
-          }
-          else {
-            // dispatch(push('/manufacturers'))
-            // dispatch(browserHistory.push('/manufacturers'))
-          }
+          dispatch(updateManufacturerField('editing', false))
+          dispatch(push('manufacturers'))
         })
         .catch(() => {
           showErrorToast(I18n.t('toast.error'))

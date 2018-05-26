@@ -144,6 +144,8 @@
             "title": "Provider"
         },
         "sales": {
+            "open": "Open sale",
+            "search": "Search a sale ...",
             "title": "Sale"
         },
         "shippings": {

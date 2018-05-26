@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { I18n } from 'react-redux-i18n'
 import Select from 'react-select'
 import Checkbox from '../checkbox'
+import { Link } from 'react-router-dom'
 import Input from '../input'
 import Modal from '../modal'
 import PageContainer from '../page-container'
@@ -401,6 +402,7 @@ export default class Checkout extends React.Component {
             </div>
           </div>
         </Modal>
+        <div><Link to="/sales">Sales</Link></div>
       </PageContainer>
     )
   }

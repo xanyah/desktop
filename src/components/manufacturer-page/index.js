@@ -41,13 +41,21 @@ export default class Manufacturer extends React.Component {
           type="manufacturers"
           updateEntity={updateApiManufacturer}
         >
-          <DataTable
-            columns={['name', 'category', 'manufacturer']}
-            data={products}
-            loading={loading}
-            onItemView={item => openProduct(item)}
-            type="products"
-          />
+          {
+            (selectedManufacturer.id)
+              ? (
+                <DataTable
+                  columns={['name', 'category', 'manufacturer']}
+                  data={products}
+                  loading={loading}
+                  onItemView={item => openProduct(item)}
+                  type="products"
+                />
+              )
+              : (
+                null
+              )
+          }
         </DataDetails>
       </PageContainer>
     )

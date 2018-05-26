@@ -33,6 +33,8 @@ import OrderPage from '../containers/order-page'
 import OrdersPage from '../containers/orders-page'
 import ShippingPage from '../containers/shipping-page'
 import ShippingsPage from '../containers/shippings-page'
+import SalePage from '../containers/sale-page'
+import SalesPage from '../containers/sales-page'
 
 export const routes = [
   {
@@ -242,5 +244,25 @@ export const routes = [
     inRouter: true,
     key: 'account',
     path: '/account',
+  },
+  {
+    component: SalesPage,
+    displayHome: false,
+    exact: true,
+    image: barcodeScanner,
+    inRouter: true,
+    key: 'sales',
+    path: '/sales',
+    strict: true,
+  },
+  {
+    component: SalePage,
+    displayHome: false,
+    exact: true,
+    image: barcodeScanner,
+    inRouter: true,
+    key: 'sales',
+    path: '/sales/:id',
+    strict: true,
   },
 ]

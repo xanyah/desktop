@@ -55,8 +55,6 @@ export const updateProduct = (productId, params) =>
   xanyahApi.patch(`products/${productId}`, decamelizeKeys(params))
 export const createProduct = newProduct =>
   xanyahApi.post('products', decamelizeKeys(newProduct))
-export const searchProduct = params =>
-  xanyahApi.get('products/search', decamelizeKeys({params}))
 
 // Inventories API Calls
 
@@ -87,13 +85,12 @@ export const createManufacturer = newManufacturer =>
 export const searchManufacturer = params =>
   xanyahApi.get('manufacturers/search', decamelizeKeys({params}))
 
-// Sale
+// Sales API Calls
 
 export const createSale = sale =>
   xanyahApi.post('sales', {sale})
 export const getSales = params =>
   xanyahApi.get('sales', decamelizeKeys({params}))
-
 
 // Stores API Calls
 
