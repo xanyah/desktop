@@ -125,7 +125,11 @@ const getSelect = item => {
             .find(entity => entity.id === e.value))
       }
       options={item[model].map(entity => ({
-        label: entity.name,
+        label: (entity.name)
+          ? entity.name
+          : (entity.firstname)
+            ? entity.firstname
+            : entity.id,
         value: entity.id,
       }))}
     />

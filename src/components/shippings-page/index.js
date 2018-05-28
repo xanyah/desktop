@@ -20,6 +20,7 @@ export default class Shippings extends React.Component {
     return (
       <PageContainer>
         <DataTable
+          creation={false}
           columns={['status', 'provider']}
           data={shippings}
           loading={loading}

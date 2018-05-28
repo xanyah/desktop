@@ -11,6 +11,7 @@ export default class Orders extends React.Component {
     this.props.getOrders()
   }
 
+  // TODO: Order Management (creation=false for the presentation to avoid bug)
   render() {
     const {
       searchApiOrder,
@@ -21,6 +22,7 @@ export default class Orders extends React.Component {
     return (
       <PageContainer>
         <DataTable
+          creation={false}
           columns={['status', 'id']}
           data={orders}
           loading={loading}
