@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { OrderType, orderFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
+import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
 
@@ -20,7 +21,7 @@ export default class Order extends React.Component {
 
     return (
       <div className="order-variants">
-        <label className="embed-table-title no-padding">Order Variants</label>
+        <label className="embed-table-title no-padding"><Translate value='models.orders.title'/> <Translate value='models.variants.title'/></label>
         <div className="embed-table no-padding">
           <div className="row header-row">
             <div className="column productName">

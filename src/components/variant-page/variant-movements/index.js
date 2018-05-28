@@ -70,12 +70,20 @@ export default class VariantMovements extends React.Component {
 
     return (
       <div className="variant-movements-content">
-        <div className="section-title">Mouvements de l'article</div>
+        <div className="section-title">
+          <Translate value='models.variants.variant-movements.title'/>
+        </div>
         <div className="variant-movements-table">
           <div className="variant-movements-table-header">
-            <div className="column">Type</div>
-            <div className="column">Date</div>
-            <div className="column">Quantity</div>
+            <div className="column">
+              <Translate value='models.variants.variant-movements.type'/>
+            </div>
+            <div className="column">
+              <Translate value='models.variants.variant-movements.date'/>
+            </div>
+            <div className="column">
+              <Translate value='models.variants.variant-movements.quantity'/>
+            </div>
           </div>
           <div className="variant-movements-table-body">
             {
@@ -104,7 +112,7 @@ export default class VariantMovements extends React.Component {
         onClick={() => this.setState({ selected: row })}>
         <div className="data-row">
           <div className="column-arrow column-primary"><i className="im im-arrow-right"></i></div>
-          <div className="column"><Translate value='models.inventories.open'/></div>
+          <div className="column"><Translate value='models.inventories.title'/></div>
           <div className="column">{formatData(row.createdAt)}</div>
           <div className="column column-primary">= {row.quantity}</div>
         </div>

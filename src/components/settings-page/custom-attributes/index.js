@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import FormAttribute from '../../../containers/form-attribute'
 import { CustomAttributeType } from '../../../types'
 
-
 import './styles.scss'
 
 export default class CustomAttribute extends React.Component {
@@ -69,14 +68,14 @@ export default class CustomAttribute extends React.Component {
     const { customAttributes } = this.props
     return (
       <div className="custom_attributes" key="table">
-        <h1>Voir les attributs personnalisés</h1>
+        <h1><Translate value='models.customAttributes.title'/></h1>
 
         <div className="custom-attribute-header">
           <div className="name">
-            Nom
+            <Translate value='models.customAttributes.name'/>
           </div>
           <div className="type">
-            Type
+            <Translate value='models.customAttributes.type'/>
           </div>
         </div>
         {customAttributes.map(customAttribute => (

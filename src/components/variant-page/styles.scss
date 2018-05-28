@@ -1,7 +1,15 @@
-.variant-form {
-  .row {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
+@import '../../constants/scss/colors';
+
+.data-details-variants {
+  .variant-form {
+    .row {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .Collapsible__trigger > h1 {
+    color: $link-color;
   }
 }

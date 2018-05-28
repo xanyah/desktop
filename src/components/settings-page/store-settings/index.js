@@ -57,7 +57,7 @@ export default class StoreSettings extends React.Component {
 
     return (
       <div className="vat-rates">
-        <span className="label">TVA: </span>
+        <span className="label"><Translate value='models.stores.vat'/>: </span>
         <Translate value='vat-rates.standard'/>:&nbsp;
         <b>{standardRate} %</b> -&nbsp;
         <Translate value='vat-rates.reduced_rate'/>:&nbsp;

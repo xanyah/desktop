@@ -99,8 +99,11 @@
       "phone": "Téléphone",
       "search": "Rechercher un client ..."
     },
-    "custom-attributes": {
-      "title": "Attibut Personnalisé"
+    "customAttributes": {
+      "create": "Créer un attribut personnalisé",
+      "name": "Nom",
+      "title": "Attribut Personnalisé",
+      "type": "Type"
     },
     "inventories": {
       "create": "Créer un inventaire",
@@ -108,7 +111,9 @@
       "noData": "Pas encore d'inventaire",
       "open": "Voir l'inventaire",
       "search": "Rechercher un client...",
-      "title": "Inventaire"
+      "title": "Inventaire",
+      "updatedAt": "Dernière mise à jour",
+      "lockedAt": "Bloqué à"
     },
     "manufacturers": {
       "create": "Créer un fabricant",
@@ -122,6 +127,7 @@
       "title": "Fabricant"
     },
     "orders": {
+      "client": "Client",
       "create": "Créer une commande",
       "noData": "Pas encore de commandes",
       "open": "Voir la commande",
@@ -154,16 +160,40 @@
     "sales": {
       "noData": "Pas encore de ventes",
       "open": "Voir la vente",
+      "salePaymentTitle": "Paiements",
+      "salePaymentTotal": "Total",
+      "salePaymentTypeDescription": "Description",
+      "salePaymentTypeName": "Méthode de paiement",
+      "shopkeeper": "Vendeur",
+      "saleVariantPromotion": "Promotion",
       "search": "Rechercher une vente ...",
-      "title": "Vente"
+      "title": "Vente",
+      "storeName": "Nom",
+      "storeCountry": "Pays",
+      "userFirstname": "Prénom",
+      "userLastname": "Nom",
+      "clientFirstname": "Prénom",
+      "clientLastname": "Nom",
+      "salePromotion": "Promotion",
+      "salePromotionAmount": "Montant",
+      "salePromotionType": "Type",
+      "totalPrice": "Prix Total"
     },
     "shippings": {
       "create": "Créer une livraison",
+      "createdAt": "Date de création",
       "noData": "Pas encore de livraisons",
       "open": "Voir la livraison",
       "provider": "Fournisseur",
       "search": "Rechercher une livraison ...",
       "title": "Livraison"
+    },
+    "stores": {
+      "address": "Addresse",
+      "name": "Nom",
+      "country": "Pays",
+      "vat": "TVA",
+      "title": "Boutique"
     },
     "variants": {
       "barcode": "Code barre",
@@ -171,13 +201,20 @@
       "create": "Créer un dérivé",
       "noData": "Pas encore de variants",
       "open": "Voir le dérivé",
+      "product": "Produit",
       "provider": "Fournisseur",
       "quantity": "Quantité",
       "ratio": "Coefficient",
       "search": "Rechercher un dérivé...",
-      "taxFreePrice": "Prix HT",
+      "taxFreePrice": "Prix Hors Taxe",
       "title": "Dérivé",
-      "unitPrice": "Prix unitaire"
+      "unitPrice": "Prix unitaire",
+      "variant-movements": {
+        "date": "Date",
+        "quantity": "Quantité",
+        "title": "Mouvements du dérivé",
+        "type": "Type"
+      }
     }
   },
   "password-helper": {

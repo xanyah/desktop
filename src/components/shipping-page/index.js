@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { ShippingType, shippingFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
+import { Translate } from 'react-redux-i18n'
 
 import { getShippingVariants } from '../../utils/api-helper'
 
@@ -36,9 +37,15 @@ export default class Shipping extends React.Component {
     return (
       <div className="shipping-variants-table">
         <div className="shipping-variants-table-header">
-          <div className="column column-product">Product</div>
-          <div className="column column-barcode">Barcode</div>
-          <div className="column column-quantity">Quantity</div>
+          <div className="column column-product">
+            <Translate value='models.products.title'/>
+          </div>
+          <div className="column column-barcode">
+            <Translate value='models.variants.barcode'/>
+          </div>
+          <div className="column column-quantity">
+            <Translate value='models.variants.quantity'/>
+          </div>
         </div>
         <div className="shipping-variants-table-body">
           {
