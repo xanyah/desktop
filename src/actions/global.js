@@ -12,6 +12,7 @@ import {
   getCustomAttributes,
   getOrders,
   getShippings,
+  getClients,
 } from '../utils/api-helper'
 
 import {
@@ -24,6 +25,7 @@ import {
   updateCustomAttributesField,
   updateOrderField,
   updateShippingField,
+  updateClientField,
 } from './index'
 
 export const updateGlobalField = (field, value) => ({
@@ -44,6 +46,7 @@ export const initialSync = () =>
       getCustomAttributes(),
       getOrders(),
       getShippings(),
+      getClients(),
     ]).then(([
       providersResponse,
       storesResponse,
@@ -54,6 +57,7 @@ export const initialSync = () =>
       customAttributesResponses,
       ordersResponses,
       shippingsResponses,
+      clientsResponses,
     ]) => {
       dispatch(updateProviderField(
         'providers', providersResponse.data
@@ -81,6 +85,9 @@ export const initialSync = () =>
       ))
       dispatch(updateShippingField(
         'shippings', shippingsResponses.data
+      ))
+      dispatch(updateClientField(
+        'clients', clientsResponses.data
       ))
       if (storesResponse.data.length > 0) {
         dispatch(updateStoresField(

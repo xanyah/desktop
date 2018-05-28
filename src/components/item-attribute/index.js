@@ -16,7 +16,9 @@ const ItemAttribute = ({ attribute, type, value, model }) => {
           <div id={attribute}>{
             (value.name)
               ? formatData(value.name)
-              : formatData(value.id)
+              : (value.firstname)
+                ? formatData(value.firstname)
+                : formatData(value.id)
           }
           </div>
         </div>

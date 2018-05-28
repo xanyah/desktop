@@ -167,7 +167,10 @@ class DataTable extends React.Component {
 DataTable.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.string),
   creation: PropTypes.bool,
-  creationFunction: PropTypes.func,
+  creationFunction: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.func,
+  ]),
   data: PropTypes.array,
   loading: PropTypes.bool,
   onItemView: PropTypes.func,
