@@ -32,6 +32,35 @@ export default class Shipping extends React.Component {
       }))
   }
 
+  renderShippingVariants() {
+    return (
+      <div className="shipping-variants-table">
+        <div className="shipping-variants-table-header">
+          <div className="column column-product">Product</div>
+          <div className="column column-barcode">Barcode</div>
+          <div className="column column-quantity">Quantity</div>
+        </div>
+        <div className="shipping-variants-table-body">
+          {
+            this.state.shippingVariants.map(shippingVariant => (
+              <div key={shippingVariant.id} className="shipping-variants-row">
+                <div className="column column-product">
+                  {shippingVariant.variant.product.name}
+                </div>
+                <div className="column column-barcode">
+                  {shippingVariant.variant.barcode}
+                </div>
+                <div className="column column-quantity">
+                  {shippingVariant.quantity}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const {
       editing,
@@ -50,30 +79,7 @@ export default class Shipping extends React.Component {
           type="shippings"
           updateEntity={updateApiShipping}
         >
-          <div className="shipping-variants-table">
-            <div className="shipping-variants-table-header">
-              <div className="column column-product">Product</div>
-              <div className="column column-barcode">Barcode</div>
-              <div className="column column-quantity">Quantity</div>
-            </div>
-            <div className="shipping-variants-table-body">
-              {
-                this.state.shippingVariants.map(shippingVariant => (
-                  <div key={shippingVariant.id} className="shipping-variants-row">
-                    <div className="column column-product">
-                      {shippingVariant.variant.product.name}
-                    </div>
-                    <div className="column column-barcode">
-                      {shippingVariant.variant.barcode}
-                    </div>
-                    <div className="column column-quantity">
-                      {shippingVariant.quantity}
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
+          {this.renderShippingVariants()}
         </DataDetails>
       </PageContainer>
     )
