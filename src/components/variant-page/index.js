@@ -102,7 +102,7 @@ export default class Variant extends React.Component {
     const { newVariantAttribute } = this.state
     const { createApiVariantAttribute, selectedVariant } = this.props
     return (
-      <Collapsible trigger={<h1>> Crée un nouveau attribut personnalisé</h1>}>
+      <Collapsible trigger={<h1>> Créer un nouvel attribut personnalisé</h1>}>
         <form
           className="variant-form"
           onSubmit={e=> {
@@ -134,11 +134,12 @@ export default class Variant extends React.Component {
               onUpdate={(attribute, value) =>
                 this.handleUpdateFieldNewVariantAttribute(attribute, value)}
             />
+
+            <button className="btn-solid">
+              <Translate value='global.validate'/>
+            </button>
           </div>
 
-          <button className="btn-link btn-stand-alone">
-            <Translate value='global.validate'/>
-          </button>
         </form>
       </Collapsible>
     )
