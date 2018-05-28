@@ -114,7 +114,6 @@ export default class DataDetails extends React.Component {
             }}>
 
             {formattedData
-              .filter(row => row.filter(item => item.editable).length > 0)
               .map((row, idx) => (
                 <div className="row" key={idx}>
                   { row.map(item => (
