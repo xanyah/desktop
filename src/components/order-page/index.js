@@ -15,6 +15,33 @@ export default class Order extends React.Component {
     this.props.setPageName('')
   }
 
+  renderOrderVariants() {
+    const { orderVariants } = this.props.selectedOrder
+
+    return (
+      <div className="order-variants">
+        <h3>Order Variants</h3>
+        <div className="row">
+          {
+            orderVariants.map(orderVariant => (
+              <div className="data-row" key={orderVariant.id}>
+                <div className="productName">
+                  {orderVariant.variant.barcode}
+                </div>
+                <div className="variantName">
+                  {orderVariant.variant.product.name}
+                </div>
+                <div className="quantity">
+                  {orderVariant.quantity}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const {
       createApiOrder,
@@ -35,6 +62,7 @@ export default class Order extends React.Component {
           type="orders"
           updateEntity={updateApiOrder}
         >
+          {this.renderOrderVariants()}
         </DataDetails>
       </PageContainer>
     )
