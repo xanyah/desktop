@@ -405,7 +405,7 @@ export default class Checkout extends React.Component {
         <div className="sales-history-link">
           <Link to="/sales">
             <i className="im im-history" />&nbsp;
-            <span>Historique des ventes</span>
+            <span><Translate value='models.sales.history'/></span>
           </Link>
         </div>
       </PageContainer>

@@ -25,13 +25,13 @@ export default class Order extends React.Component {
         <div className="embed-table no-padding">
           <div className="row header-row">
             <div className="column productName">
-              Barcode
+              <Translate value='models.variants.barcode'/>
             </div>
             <div className="column variantName">
-              Product name
+              <Translate value='models.products.name'/>
             </div>
             <div className="column quantity">
-              Quantity
+              <Translate value='models.variants.quantity'/>
             </div>
           </div>
           {orderVariants.map(orderVariant => (

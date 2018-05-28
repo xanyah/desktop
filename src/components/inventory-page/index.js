@@ -41,12 +41,14 @@ export default class Inventory extends React.Component {
         <div className="embed-table">
           <div className="row header-row">
             <div className="column">
-              Barcode
+              <Translate value='models.variants.barcode'/>
             </div>
             <div className="column">
-              Product name
+              <Translate value='models.products.title'/>
             </div>
-            <div className="column">Quantity</div>
+            <div className="column">
+              <Translate value='models.variants.quantity'/>
+            </div>
           </div>
           {
             inventoryVariants.map(inventoryVariant => (

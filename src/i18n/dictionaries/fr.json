@@ -177,7 +177,8 @@
       "salePromotion": "Promotion",
       "salePromotionAmount": "Montant",
       "salePromotionType": "Type",
-      "totalPrice": "Prix Total"
+      "totalPrice": "Prix Total",
+      "history": "Historique des ventes"
     },
     "shippings": {
       "create": "Créer une livraison",
