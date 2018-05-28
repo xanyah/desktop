@@ -101,7 +101,7 @@ export default class Categories extends React.Component {
       )
 
     if(!categories.length)
-      return <h3>Il n'y a aucune catégorie pour le moment !</h3>
+      return <h3><Translate value="models.categories.noData"/></h3>
     return (
       <div className='categories'>
         {

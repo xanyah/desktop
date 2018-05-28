@@ -4,6 +4,7 @@ import { SaleType } from '../../types'
 import ItemAttribute from '../item-attribute'
 import PageContainer from '../../containers/page-container'
 import { formatPrice } from '../../utils/data-helper'
+import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
 
@@ -25,7 +26,7 @@ export default class Sale extends React.Component {
 
     return (
       <div className="sale-payments">
-        <h3>Payments</h3>
+        <h3><Translate value='models.sales.salePaymentTitle'/></h3>
         { salePayments.map(salePayment => (
           <div className="sale-payments-content">
             {
@@ -70,13 +71,23 @@ export default class Sale extends React.Component {
 
     return (
       <div className="sale-variants">
-        <h3>Products</h3>
+        <h3><Translate value='models.products.title'/></h3>
         <div className="sale-variant-header">
-          <div className="product-name">product-name</div>
-          <div className="variant-barcode">variant-barcode</div>
-          <div className="quantity">quantity</div>
-          <div className="unit-price">unit-price</div>
-          <div className="promotion">promotion</div>
+          <div className="product-name">
+            <Translate value='models.products.name'/>
+          </div>
+          <div className="variant-barcode">
+            <Translate value='models.variants.barcode'/>
+          </div>
+          <div className="quantity">
+            <Translate value='models.variants.quantity'/>
+          </div>
+          <div className="unit-price">
+            <Translate value='models.variants.unitPrice'/>
+          </div>
+          <div className="promotion">
+            <Translate value='models.sales.saleVariantPromotion'/>
+          </div>
         </div>
         { saleVariants.map(saleVariant => (
           <div className="sale-variant">
@@ -99,7 +110,7 @@ export default class Sale extends React.Component {
         {
           (store) &&
           <div className="sale-store">
-            <h3>Store infos</h3>
+            <h3><Translate value='models.stores.title'/></h3>
             <div className="sale-store-content row">
               <ItemAttribute
                 attribute='storeName'
@@ -120,7 +131,7 @@ export default class Sale extends React.Component {
         {
           (user) &&
           <div className="sale-user">
-            <h3>Saler infos</h3>
+            <h3><Translate value='models.sales.shopkeeper'/></h3>
             <div className="sale-user-content row">
               <ItemAttribute
                 attribute='userFirstname'
@@ -141,7 +152,7 @@ export default class Sale extends React.Component {
         {
           (client) &&
           <div className="sale-client">
-            <h3>Client infos</h3>
+            <h3><Translate value='models.clients.title'/></h3>
             <div className="sale-client-content row">
               <ItemAttribute
                 attribute='clientFirstname'
@@ -162,7 +173,7 @@ export default class Sale extends React.Component {
         {
           (salePromotion) &&
           <div className="sale-promotion">
-            <h3>Sale Promotion infos</h3>
+            <h3><Translate value='models.sales.salePromotion'/></h3>
             <div className="sale-promotion-content row">
               <ItemAttribute
                 attribute='salePromotionAmount'

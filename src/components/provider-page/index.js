@@ -2,16 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ProviderType, providerFormat } from '../../types'
 import DataDetails from '../data-details'
-// import DataTable from '../data-table'
 import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
 
 export default class Provider extends React.Component {
   componentWillMount() {
-    const { setPageName, getProducts } = this.props
+    const { setPageName } = this.props
     setPageName(this.props.selectedProvider.name)
-    getProducts({'providerId': this.props.selectedProvider.id})
   }
 
   componentWillUnmount() {
@@ -22,10 +20,7 @@ export default class Provider extends React.Component {
     const {
       createApiProvider,
       editing,
-      // loading,
-      // openProduct,
       toggleProvider,
-      // products,
       selectedProvider,
       updateApiProvider,
     } = this.props
@@ -41,13 +36,6 @@ export default class Provider extends React.Component {
           type="providers"
           updateEntity={updateApiProvider}
         >
-          {/* <DataTable
-            columns={['name', 'category', 'manufacturer']}
-            data={products}
-            loading={loading}
-            onItemView={item => openProduct(item)}
-            type="products"
-          /> */}
         </DataDetails>
       </PageContainer>
     )
@@ -57,9 +45,6 @@ export default class Provider extends React.Component {
 Provider.propTypes = {
   createApiProvider: PropTypes.func,
   editing: PropTypes.bool,
-  getProducts: PropTypes.func,
-  loading: PropTypes.bool,
-  openProduct: PropTypes.func,
   products: PropTypes.func,
   selectedProvider: ProviderType,
   setPageName: PropTypes.func,
@@ -70,9 +55,6 @@ Provider.propTypes = {
 Provider.defaultProps = {
   createApiProvider: () => null,
   editing: false,
-  getProducts: () => {},
-  loading: false,
-  openProduct: () => {},
   products: () => {},
   selectedProvider: {},
   setPageName: () => null,

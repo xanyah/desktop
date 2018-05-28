@@ -1,7 +1,7 @@
 import React from 'react'
 import swal from 'sweetalert'
 import PropTypes from 'prop-types'
-import { I18n } from 'react-redux-i18n'
+import { I18n, Translate } from 'react-redux-i18n'
 import Select from 'react-select'
 import Checkbox from '../checkbox'
 import { Link } from 'react-router-dom'
@@ -402,7 +402,7 @@ export default class Checkout extends React.Component {
             </div>
           </div>
         </Modal>
-        <div><Link to="/sales">Sales</Link></div>
+        <div><Link to="/sales"><Translate value='models.sales.title'/></Link></div>
       </PageContainer>
     )
   }

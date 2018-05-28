@@ -99,8 +99,11 @@
       "phone": "Phone",
       "search": "Search a client ..."
     },
-    "custom-attributes": {
-      "title": "Custom Attribute"
+    "customAttributes": {
+      "create": "Create a custom attribute",
+      "name": "Name",
+      "title": "Custom Attribute",
+      "type": "Type"
     },
     "inventories": {
       "create": "Create an inventory",
@@ -108,7 +111,9 @@
       "noData": "No inventories yet",
       "open": "Open inventory",
       "search": "Search an inventory...",
-      "title": "Inventory"
+      "title": "Inventory",
+      "updatedAt": "Date of last update",
+      "lockedAt": "Locked At"
     },
     "manufacturers": {
       "create": "Create a manufacturer",
@@ -122,6 +127,7 @@
       "title": "Manufacturer"
     },
     "orders": {
+      "client": "Client",
       "create": "Create an order",
       "noData": "No orders yet",
       "open": "Open order",
@@ -154,16 +160,40 @@
     "sales": {
       "noData": "No sales yet",
       "open": "Open sale",
+      "salePaymentTitle": "Payments",
+      "salePaymentTotal": "Total",
+      "salePaymentTypeDescription": "Description",
+      "salePaymentTypeName": "Payment Type",
+      "shopkeeper": "Shopkeeper",
+      "saleVariantPromotion": "Promotion",
       "search": "Search a sale ...",
-      "title": "Sale"
+      "title": "Sale",
+      "storeName": "Name",
+      "storeCountry": "Country",
+      "userFirstname": "Firstname",
+      "userLastname": "Name",
+      "clientFirstname": "Firstname",
+      "clientLastname": "Name",
+      "salePromotion": "Promotion",
+      "salePromotionAmount": "Amount",
+      "salePromotionType": "Type",
+      "totalPrice": "Total Price"
     },
     "shippings": {
       "create": "Create an shipping",
+      "createdAt": "Date of creation",
       "noData": "No shippings yet",
       "open": "Open shipping",
       "provider": "Provider",
       "search": "Search an shipping ...",
       "title": "Shipping"
+    },
+    "stores": {
+      "address": "Address",
+      "name": "Name",
+      "country": "Country",
+      "vat": "VAT",
+      "title": "Store"
     },
     "variants": {
       "barcode": "Barcode",
@@ -171,13 +201,20 @@
       "create": "Create a variant",
       "noData": "No variants yet",
       "open": "Open variant",
+      "product": "Product",
       "provider": "Provider",
       "quantity": "Quantity",
       "ratio": "Ratio",
       "search": "Search a variant...",
       "taxFreePrice": "Tax Free Price",
       "title": "Variant",
-      "unitPrice": "Unit price"
+      "unitPrice": "Unit price",
+      "variant-movements": {
+        "date": "Date",
+        "quantity": "Quantity",
+        "title": "Variant Movements",
+        "type": "Type"
+      }
     }
   },
   "password-helper": {

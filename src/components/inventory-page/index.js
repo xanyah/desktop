@@ -4,6 +4,7 @@ import { InventoryType, inventoryFormat } from '../../types'
 import DataDetails from '../data-details'
 import PageContainer from '../../containers/page-container'
 import { getInventoryVariants } from '../../utils/api-helper'
+import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
 
@@ -36,7 +37,7 @@ export default class Inventory extends React.Component {
 
     return (
       <div className="inventory-variants">
-        <h3>Inventory Variants</h3>
+        <h3><Translate value='models.inventories.title'/> <Translate value='models.variants.title'/></h3>
         <div className="row">
           {
             inventoryVariants.map(inventoryVariant => (
@@ -64,7 +65,9 @@ export default class Inventory extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1 className="data-details-title">Inventory</h1>
+        <h1 className="data-details-title">
+          <Translate value='models.inventories.title'/>
+        </h1>
         <DataDetails
           currentEntity={selectedInventory}
           formattedData={inventoryFormat}
