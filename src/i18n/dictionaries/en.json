@@ -176,7 +176,6 @@
       "clientLastname": "Name",
       "salePromotion": "Promotion",
       "salePromotionAmount": "Amount",
-      "salePromotionType": "Type",
       "totalPrice": "Total Price",
       "history": "Sales History"
     },

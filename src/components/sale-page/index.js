@@ -95,7 +95,15 @@ export default class Sale extends React.Component {
             <div className="variant-barcode">{saleVariant.variant.barcode}</div>
             <div className="quantity">{saleVariant.quantity}</div>
             <div className="unit-price">{saleVariant.unitPrice}</div>
-            <div className="promotion">{saleVariant.saleVariantPromotion || '/'}</div>
+            <div className="promotion">
+              {
+                (saleVariant.saleVariantPromotion)
+                  ? (saleVariant.saleVariantPromotion.type == 'flat_discount')
+                    ? formatPrice(saleVariant.saleVariantPromotion.amount)
+                    : `${saleVariant.saleVariantPromotion.amount} %`
+                  : '/'
+              }
+            </div>
           </div>
         ))}
       </div>
@@ -178,14 +186,11 @@ export default class Sale extends React.Component {
               <ItemAttribute
                 attribute='salePromotionAmount'
                 key='salePromotionAmount'
-                value={salePromotion.amount}
-                type='text'
-              />
-
-              <ItemAttribute
-                attribute='salePromotionType'
-                key='salePromotionType'
-                value={salePromotion.type}
+                value={
+                  (salePromotion.type == 'flat_discount')
+                    ? formatPrice(salePromotion.amount)
+                    : `${salePromotion.amount} %`
+                }
                 type='text'
               />
             </div>
