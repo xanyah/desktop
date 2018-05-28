@@ -47,7 +47,9 @@ export default class Inventory extends React.Component {
                 <div className="variantName">
                   {inventoryVariant.variant.product.name}
                 </div>
-                <div className="quantity">{inventoryVariant.quantity}</div>
+                <div className="quantity">
+                  {inventoryVariant.quantity}
+                </div>
               </div>
             ))
           }
