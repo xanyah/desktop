@@ -36,20 +36,27 @@ export default class Inventory extends React.Component {
 
     return (
       <div className="inventory-variants">
-        <h3>Inventory Variants</h3>
-        <div className="row">
+        <label className="embed-table-title">Inventory Variants</label>
+        <div className="embed-table">
+          <div className="row header-row">
+            <div className="column">
+              Barcode
+            </div>
+            <div className="column">
+              Product name
+            </div>
+            <div className="column">Quantity</div>
+          </div>
           {
             inventoryVariants.map(inventoryVariant => (
-              <div className="data-row" key={inventoryVariant.id}>
-                <div className="productName">
+              <div className="row" key={inventoryVariant.id}>
+                <div className="column productName">
                   {inventoryVariant.variant.barcode}
                 </div>
-                <div className="variantName">
+                <div className="column variantName">
                   {inventoryVariant.variant.product.name}
                 </div>
-                <div className="quantity">
-                  {inventoryVariant.quantity}
-                </div>
+                <div className="column quantity">{inventoryVariant.quantity}</div>
               </div>
             ))
           }

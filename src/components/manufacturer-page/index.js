@@ -31,32 +31,34 @@ export default class Manufacturer extends React.Component {
     } = this.props
     return (
       <PageContainer>
-        <h1 className="data-details-title">{selectedManufacturer.name}</h1>
-        <DataDetails
-          createEntity={createApiManufacturer}
-          currentEntity={selectedManufacturer}
-          editing={editing}
-          formattedData={manufacturerFormat}
-          toggleEdit={toggleManufacturer}
-          type="manufacturers"
-          updateEntity={updateApiManufacturer}
-        >
-          {
-            (selectedManufacturer.id)
-              ? (
-                <DataTable
-                  columns={['name', 'category', 'manufacturer']}
-                  data={products}
-                  loading={loading}
-                  onItemView={item => openProduct(item)}
-                  type="products"
-                />
-              )
-              : (
-                null
-              )
-          }
-        </DataDetails>
+        <div className="manufacturer-page">
+          <h1 className="data-details-title">{selectedManufacturer.name}</h1>
+          <DataDetails
+            createEntity={createApiManufacturer}
+            currentEntity={selectedManufacturer}
+            editing={editing}
+            formattedData={manufacturerFormat}
+            toggleEdit={toggleManufacturer}
+            type="manufacturers"
+            updateEntity={updateApiManufacturer}
+          >
+            {
+              (selectedManufacturer.id)
+                ? (
+                  <DataTable
+                    columns={['name', 'category', 'manufacturer']}
+                    data={products}
+                    loading={loading}
+                    onItemView={item => openProduct(item)}
+                    type="products"
+                  />
+                )
+                : (
+                  null
+                )
+            }
+          </DataDetails>
+        </div>
       </PageContainer>
     )
   }

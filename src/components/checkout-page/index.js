@@ -402,7 +402,12 @@ export default class Checkout extends React.Component {
             </div>
           </div>
         </Modal>
-        <div><Link to="/sales">Sales</Link></div>
+        <div className="sales-history-link">
+          <Link to="/sales">
+            <i className="im im-history" />&nbsp;
+            <span>Historique des ventes</span>
+          </Link>
+        </div>
       </PageContainer>
     )
   }

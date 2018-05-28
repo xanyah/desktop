@@ -254,3 +254,33 @@
     justify-content: flex-end;
   }
 }
+
+.sales-history-link {
+  bottom: 0;
+  position: fixed;
+  left: 0;
+
+  a {
+    align-items: center;
+    color: $secondary-text-color;
+    display: flex;
+    font-size: 1.6rem;
+    padding: 2rem;
+    text-decoration: none;
+
+    .im {
+      font-size: 1.6rem;
+    }
+
+    span {
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+  
+    &:hover {
+      span {
+        opacity: 1;
+      }
+    }
+  }
+}

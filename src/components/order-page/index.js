@@ -20,23 +20,31 @@ export default class Order extends React.Component {
 
     return (
       <div className="order-variants">
-        <h3>Order Variants</h3>
-        <div className="row">
-          {
-            orderVariants.map(orderVariant => (
-              <div className="data-row" key={orderVariant.id}>
-                <div className="productName">
-                  {orderVariant.variant.barcode}
-                </div>
-                <div className="variantName">
-                  {orderVariant.variant.product.name}
-                </div>
-                <div className="quantity">
-                  {orderVariant.quantity}
-                </div>
+        <label className="embed-table-title no-padding">Order Variants</label>
+        <div className="embed-table no-padding">
+          <div className="row header-row">
+            <div className="column productName">
+              Barcode
+            </div>
+            <div className="column variantName">
+              Product name
+            </div>
+            <div className="column quantity">
+              Quantity
+            </div>
+          </div>
+          {orderVariants.map(orderVariant => (
+            <div className="row" key={orderVariant.id}>
+              <div className="column productName">
+                {orderVariant.variant.barcode}
               </div>
-            ))
-          }
+              <div className="column variantName">
+                {orderVariant.variant.product.name}
+              </div>
+              <div className="column quantity">
+                {orderVariant.quantity}
+              </div>
+            </div>))}
         </div>
       </div>
     )
