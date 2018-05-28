@@ -3,7 +3,7 @@ export const getStatusClass = (entity, model) => {
   case 'orders':
     switch(entity.status) {
     case 'canceled': return 'danger'
-    case 'pending': return 'orange'
+    case 'pending': return 'warning'
     case 'delivered': return 'success'
     default: return 'danger'
     }

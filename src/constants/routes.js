@@ -261,7 +261,7 @@ export const routes = [
     exact: true,
     image: barcodeScanner,
     inRouter: true,
-    key: 'sales',
+    key: 'sale',
     path: '/sales/:id',
     strict: true,
   },

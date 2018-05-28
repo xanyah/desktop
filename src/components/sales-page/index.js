@@ -21,6 +21,7 @@ export default class Sales extends React.Component {
       <PageContainer>
         <DataTable
           columns={['createdAt']}
+          creationFunction={false}
           data={sales}
           loading={loading}
           onItemView={item => openSale(item)}

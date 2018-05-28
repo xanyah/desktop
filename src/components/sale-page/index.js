@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { SaleType, saleFormat } from '../../types'
-import DataDetails from '../data-details'
+import { SaleType } from '../../types'
+import ItemAttribute from '../item-attribute'
 import PageContainer from '../../containers/page-container'
+import { formatPrice } from '../../utils/data-helper'
 
 import './styles.scss'
 
@@ -27,8 +28,34 @@ export default class Sale extends React.Component {
         <h3>Payments</h3>
         { salePayments.map(salePayment => (
           <div className="sale-payments-content">
-            <div>Total: {salePayment.total}</div>
-            <div>Type: {salePayment.paymentType.name} - {salePayment.paymentType.description}</div>
+            {
+              salePayment.total &&
+              <ItemAttribute
+                attribute='salePaymentTotal'
+                key='salePaymentTotal'
+                value={formatPrice(salePayment.total)}
+                type='text'
+              />
+            }
+            {
+              salePayment.paymentType &&
+              (
+                <div className="sale-payments-type">
+                  <ItemAttribute
+                    attribute='salePaymentTypeName'
+                    key='salePaymentTypeName'
+                    value={salePayment.paymentType.name}
+                    type='text'
+                  />
+                  <ItemAttribute
+                    attribute='salePaymentTypeDescription'
+                    key='salePaymentTypeDescription'
+                    value={salePayment.paymentType.description}
+                    type='text'
+                  />
+                </div>
+              )
+            }
           </div>
         ))}
       </div>
@@ -46,10 +73,43 @@ export default class Sale extends React.Component {
         <h3>Products</h3>
         { saleVariants.map(saleVariant => (
           <div className="sale-variants-content">
-            <div>Product: {saleVariant.variant.name}</div>
-            <div>Quantity: {saleVariant.quantity}</div>
-            <div>Unit Price: {saleVariant.unitPrice}</div>
-            <div>Promotion: {saleVariant.saleVariantPromotion}</div>
+            <ItemAttribute
+              attribute='saleProductName'
+              key='saleProductName'
+              value={saleVariant.variant.product.name}
+              type='text'
+            />
+
+            <ItemAttribute
+              attribute='saleVariantBarcode'
+              key='saleVariantBarcode'
+              value={saleVariant.variant.barcode}
+              type='text'
+            />
+
+            <ItemAttribute
+              attribute='saleVariantQuantity'
+              key='saleVariantQuantity'
+              value={saleVariant.quantity}
+              type='text'
+            />
+
+            <ItemAttribute
+              attribute='saleVariantUnitPrice'
+              key='saleVariantUnitPrice'
+              value={formatPrice(saleVariant.unitPrice)}
+              type='text'
+            />
+
+            {
+              saleVariant.saleVariantPromotion &&
+              <ItemAttribute
+                attribute='saleVariantPromotion'
+                key='saleVariantPromotion'
+                value={saleVariant.saleVariantPromotion}
+                type='text'
+              />
+            }
           </div>
         ))}
       </div>
@@ -65,33 +125,97 @@ export default class Sale extends React.Component {
           (store) &&
           <div className="sale-store">
             <h3>Store infos</h3>
-            <div className="sale-store-content">{store.name} - {store.country}</div>
+            <div className="sale-store-content">
+              <ItemAttribute
+                attribute='storeName'
+                key='storeName'
+                value={store.name}
+                type='text'
+              />
+
+              <ItemAttribute
+                attribute='storeCountry'
+                key='storeCountry'
+                value={store.country}
+                type='text'
+              />
+            </div>
           </div>
         }
         {
           (user) &&
           <div className="sale-user">
             <h3>Saler infos</h3>
-            <div className="sale-user-content">{user.firstname} {user.lastname}</div>
+            <div className="sale-user-content">
+              <ItemAttribute
+                attribute='userFirstname'
+                key='userFirstname'
+                value={user.firstname}
+                type='text'
+              />
+
+              <ItemAttribute
+                attribute='userLastname'
+                key='userLastname'
+                value={user.lastname}
+                type='text'
+              />
+            </div>
           </div>
         }
         {
           (client) &&
           <div className="sale-client">
             <h3>Client infos</h3>
-            <div className="sale-client-content">Client: {client.firstname} {client.lastname}</div>
+            <div className="sale-client-content">
+              <ItemAttribute
+                attribute='clientFirstname'
+                key='clientFirstname'
+                value={client.firstname}
+                type='text'
+              />
+
+              <ItemAttribute
+                attribute='clientLastname'
+                key='clientLastname'
+                value={client.lastname}
+                type='text'
+              />
+            </div>
           </div>
         }
         {
           (salePromotion) &&
           <div className="sale-promotion">
-            <div className="sale-promotion-content">Sale Promotion: {salePromotion}</div>
+            <h3>Sale Promotion infos</h3>
+            <div className="sale-promotion-content">
+              <ItemAttribute
+                attribute='salePromotionAmount'
+                key='salePromotionAmount'
+                value={salePromotion.amount}
+                type='text'
+              />
+
+              <ItemAttribute
+                attribute='salePromotionType'
+                key='salePromotionType'
+                value={salePromotion.type}
+                type='text'
+              />
+            </div>
           </div>
         }
         {
           (totalPrice) &&
           <div className="sale-total-price">
-            <div className="sale-total-price-content">Total Price: {totalPrice}</div>
+            <div className="sale-total-price-content">
+              <ItemAttribute
+                attribute='totalPrice'
+                key='totalPrice'
+                value={formatPrice(totalPrice)}
+                type='text'
+              />
+            </div>
           </div>
         }
         {this.renderSalePayments()}
@@ -107,13 +231,7 @@ export default class Sale extends React.Component {
     return (
       <PageContainer>
         <h1 className="data-details-title">{selectedSale.name}</h1>
-        <DataDetails
-          currentEntity={selectedSale}
-          formattedData={saleFormat}
-          type="sales"
-        >
-          {this.renderSaleInfos()}
-        </DataDetails>
+        {this.renderSaleInfos()}
       </PageContainer>
     )
   }

@@ -102,7 +102,7 @@ export default class Variant extends React.Component {
     const { newVariantAttribute } = this.state
     const { createApiVariantAttribute, selectedVariant } = this.props
     return (
-      <Collapsible trigger={<h1>> Crée un nouveau dérivé</h1>}>
+      <Collapsible trigger={<h1>> Crée un nouveau attribut personnalisé</h1>}>
         <form
           className="variant-form"
           onSubmit={e=> {
