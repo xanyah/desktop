@@ -1,3 +1,7 @@
-.data-details-manufacturers {
-  margin: 0 90px;
+@import '../../constants/scss/sizes';
+
+.manufacturer-page {
+  .data-table-products {
+    margin: 0 0 - $horizontal-padding;
+  }
 }

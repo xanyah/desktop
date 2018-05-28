@@ -1,0 +1,43 @@
+@import './colors';
+@import './sizes';
+
+.embed-table-title {
+  color: $secondary-text-color;
+  font-size: 1rem;
+  padding: 0 $horizontal-padding;
+
+  &.no-padding {
+    padding: 0;
+  }
+}
+
+.embed-table {
+  padding: 0 $horizontal-padding;
+
+  &.no-padding {
+    padding: 0;
+  }
+
+  .row {
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &.header-row {
+      font-size: .8rem;
+      text-transform: uppercase;
+
+      .column {
+        font-size: .8rem;
+      }
+    }
+
+    .column {
+      color: $primary-text-color;
+      font-size: 1rem;
+      padding: 2rem 0;
+    }
+  }
+}
