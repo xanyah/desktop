@@ -71,45 +71,20 @@ export default class Sale extends React.Component {
     return (
       <div className="sale-variants">
         <h3>Products</h3>
+        <div className="sale-variant-header">
+          <div className="product-name">product-name</div>
+          <div className="variant-barcode">variant-barcode</div>
+          <div className="quantity">quantity</div>
+          <div className="unit-price">unit-price</div>
+          <div className="promotion">promotion</div>
+        </div>
         { saleVariants.map(saleVariant => (
-          <div className="sale-variants-content">
-            <ItemAttribute
-              attribute='saleProductName'
-              key='saleProductName'
-              value={saleVariant.variant.product.name}
-              type='text'
-            />
-
-            <ItemAttribute
-              attribute='saleVariantBarcode'
-              key='saleVariantBarcode'
-              value={saleVariant.variant.barcode}
-              type='text'
-            />
-
-            <ItemAttribute
-              attribute='saleVariantQuantity'
-              key='saleVariantQuantity'
-              value={saleVariant.quantity}
-              type='text'
-            />
-
-            <ItemAttribute
-              attribute='saleVariantUnitPrice'
-              key='saleVariantUnitPrice'
-              value={formatPrice(saleVariant.unitPrice)}
-              type='text'
-            />
-
-            {
-              saleVariant.saleVariantPromotion &&
-              <ItemAttribute
-                attribute='saleVariantPromotion'
-                key='saleVariantPromotion'
-                value={saleVariant.saleVariantPromotion}
-                type='text'
-              />
-            }
+          <div className="sale-variant">
+            <div className="product-name">{saleVariant.variant.product.name}</div>
+            <div className="variant-barcode">{saleVariant.variant.barcode}</div>
+            <div className="quantity">{saleVariant.quantity}</div>
+            <div className="unit-price">{saleVariant.unitPrice}</div>
+            <div className="promotion">{saleVariant.saleVariantPromotion || '/'}</div>
           </div>
         ))}
       </div>
@@ -125,7 +100,7 @@ export default class Sale extends React.Component {
           (store) &&
           <div className="sale-store">
             <h3>Store infos</h3>
-            <div className="sale-store-content">
+            <div className="sale-store-content row">
               <ItemAttribute
                 attribute='storeName'
                 key='storeName'
@@ -146,7 +121,7 @@ export default class Sale extends React.Component {
           (user) &&
           <div className="sale-user">
             <h3>Saler infos</h3>
-            <div className="sale-user-content">
+            <div className="sale-user-content row">
               <ItemAttribute
                 attribute='userFirstname'
                 key='userFirstname'
@@ -167,7 +142,7 @@ export default class Sale extends React.Component {
           (client) &&
           <div className="sale-client">
             <h3>Client infos</h3>
-            <div className="sale-client-content">
+            <div className="sale-client-content row">
               <ItemAttribute
                 attribute='clientFirstname'
                 key='clientFirstname'
@@ -188,7 +163,7 @@ export default class Sale extends React.Component {
           (salePromotion) &&
           <div className="sale-promotion">
             <h3>Sale Promotion infos</h3>
-            <div className="sale-promotion-content">
+            <div className="sale-promotion-content row">
               <ItemAttribute
                 attribute='salePromotionAmount'
                 key='salePromotionAmount'
@@ -208,7 +183,7 @@ export default class Sale extends React.Component {
         {
           (totalPrice) &&
           <div className="sale-total-price">
-            <div className="sale-total-price-content">
+            <div className="sale-total-price-content row">
               <ItemAttribute
                 attribute='totalPrice'
                 key='totalPrice'

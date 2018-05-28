@@ -112,7 +112,7 @@ export default class VariantMovements extends React.Component {
           className="link"
           onClick={() => { openInventory(row) }}
         >
-          ->
+          <i className="im im-arrow-right" />
         </button>
         <div className="action">
           <button
@@ -148,7 +148,7 @@ export default class VariantMovements extends React.Component {
           className="link"
           onClick={() => { openSale(row) }}
         >
-          ->
+          <i className="im im-arrow-right" />
         </button>
         <div className="action">
           <button
@@ -181,7 +181,7 @@ export default class VariantMovements extends React.Component {
           className="link"
           onClick={() => { openShipping(row) }}
         >
-          ->
+          <i className="im im-arrow-right" />
         </button>
         <div className="action">
           <button
