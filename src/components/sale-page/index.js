@@ -36,6 +36,7 @@ export default class Sale extends React.Component {
                 key='salePaymentTotal'
                 value={formatPrice(salePayment.total)}
                 type='text'
+                model="sales"
               />
             }
             {
@@ -47,12 +48,14 @@ export default class Sale extends React.Component {
                     key='salePaymentTypeName'
                     value={salePayment.paymentType.name}
                     type='text'
+                    model="sales"
                   />
                   <ItemAttribute
                     attribute='salePaymentTypeDescription'
                     key='salePaymentTypeDescription'
                     value={salePayment.paymentType.description}
                     type='text'
+                    model="sales"
                   />
                 </div>
               )
@@ -125,6 +128,7 @@ export default class Sale extends React.Component {
                 key='storeName'
                 value={store.name}
                 type='text'
+                model="sales"
               />
 
               <ItemAttribute
@@ -132,6 +136,7 @@ export default class Sale extends React.Component {
                 key='storeCountry'
                 value={store.country}
                 type='text'
+                model="sales"
               />
             </div>
           </div>
@@ -146,6 +151,7 @@ export default class Sale extends React.Component {
                 key='userFirstname'
                 value={user.firstname}
                 type='text'
+                model="sales"
               />
 
               <ItemAttribute
@@ -153,6 +159,7 @@ export default class Sale extends React.Component {
                 key='userLastname'
                 value={user.lastname}
                 type='text'
+                model="sales"
               />
             </div>
           </div>
@@ -167,6 +174,7 @@ export default class Sale extends React.Component {
                 key='clientFirstname'
                 value={client.firstname}
                 type='text'
+                model="sales"
               />
 
               <ItemAttribute
@@ -174,6 +182,7 @@ export default class Sale extends React.Component {
                 key='clientLastname'
                 value={client.lastname}
                 type='text'
+                model="sales"
               />
             </div>
           </div>
@@ -192,6 +201,7 @@ export default class Sale extends React.Component {
                     : `${salePromotion.amount} %`
                 }
                 type='text'
+                model="sales"
               />
             </div>
           </div>
@@ -205,6 +215,7 @@ export default class Sale extends React.Component {
                 key='totalPrice'
                 value={formatPrice(totalPrice)}
                 type='text'
+                model="sales"
               />
             </div>
           </div>
