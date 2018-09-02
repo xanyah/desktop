@@ -152,3 +152,8 @@ export const getShippingVariants = params =>
 
 export const getInventoryVariants = params =>
   xanyahApi.get('inventory_variants', decamelizeKeys({params}))
+
+// Files Import API Calls
+
+export const postFileImports = params =>
+  xanyahApi.post('file_imports', params)

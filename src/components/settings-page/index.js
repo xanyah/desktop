@@ -6,6 +6,7 @@ import PageContainer from '../page-container'
 import CustomAttribute from './custom-attributes'
 import Categories from './categories'
 import StoreSettings from './store-settings'
+import ImportFiles from './import-files'
 import { StoreType, CategoryType, CustomAttributeType } from '../../types'
 
 import './styles.scss'
@@ -25,6 +26,10 @@ export default class Settings extends React.Component {
       {
         key: 'custom-attributes',
         render: () => this.renderCustomAttributes(),
+      },
+      {
+        key: 'import-files',
+        render: () => this.renderImportFiles(),
       },
     ]
   }
@@ -80,6 +85,10 @@ export default class Settings extends React.Component {
       getCustomAttributes={getCustomAttributes}
       openCustomAttribute={openCustomAttribute}
     />
+  }
+
+  renderImportFiles(){
+    return <ImportFiles/>
   }
 
   render() {
