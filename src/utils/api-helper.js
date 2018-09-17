@@ -156,4 +156,4 @@ export const getInventoryVariants = params =>
 // Files Import API Calls
 
 export const postFileImports = params =>
-  xanyahApi.post('file_imports', params)
+  xanyahApi.post('file_imports', params, { headers: { 'Content-Type': 'multipart/form-data' }})

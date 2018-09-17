@@ -6,7 +6,7 @@ const fs = require('fs')
 // dialog module
 const {dialog} = require('electron').remote
 
-export const test = () => {
+export const test = storeId => {
 
   dialog.showOpenDialog((fileNames) => {
     // fileNames is an array that contains all the selected
@@ -24,7 +24,7 @@ export const test = () => {
       let blob = new Blob([data], {type : 'text/csv'})
       let form = new FormData()
       form.append('file', blob)
-      form.append('store_id', 'c23ab528-8151-461c-897a-776a9365e77c')
+      form.append('store_id', storeId)
 
       // console.log(form)
       postFileImports(form)
