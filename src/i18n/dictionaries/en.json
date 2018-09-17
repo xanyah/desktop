@@ -12,6 +12,7 @@
   "checkout": {
     "add-promotion": "Add a promotion",
     "change": "Change",
+    "end_sale": "Save sale",
     "left-to-pay": "Left to pay",
     "remove-article": "Remove article",
     "reset-alert": {

@@ -12,6 +12,7 @@
   "checkout": {
     "add-promotion": "Ajouter une promotion",
     "change": "Monnaie à rendre",
+    "end_sale": "Terminer la vente",
     "left-to-pay": "Reste à facturer",
     "remove-article": "Retirer l'article",
     "reset-alert": {

@@ -321,7 +321,9 @@ export default class Checkout extends React.Component {
                 <i className="im im-x-mark" />
                 {I18n.t('global.reset')}
               </button>
-              <button className="btn btn-primary" onClick={() => this.setState({displayedModal: true})}>end</button>
+              <button className="btn btn-primary" onClick={() => this.setState({displayedModal: true})}>
+                {I18n.t('checkout.end_sale')}
+              </button>
             </div>
           )}
         </div>
