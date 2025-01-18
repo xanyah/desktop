@@ -7,7 +7,7 @@ export const useStores = (filters) => useQuery({
 })
 
 export const useCurrentStore = () => {
-  const {data} = useStores({})
+  const { data } = useStores({})
 
   if (data?.data.length) {
     return data.data[0]

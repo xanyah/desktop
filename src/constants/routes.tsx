@@ -1,3 +1,8 @@
+import AccountPage from '../components/account-page'
+import CheckoutPage from '../components/checkout-page'
+import CreateProductPage from '../components/create-product-page'
+import CustomAttributePage from '../components/custom-attribute-page'
+import VariantPage from '../components/variant-page'
 import {
   barcodeScanner,
   box,
@@ -11,13 +16,6 @@ import {
   warehouse,
 } from '../images'
 
-import AccountPage from '../containers/account-page'
-import CheckoutPage from '../containers/checkout-page'
-import CustomAttributePage from '../containers/custom-attribute-page'
-import ClientPage from '../containers/client-page'
-import ClientsPage from '../containers/clients-page'
-import CreateProductPage from '../containers/create-product-page'
-import VariantPage from '../containers/variant-page'
 
 import {
   Home as HomePage,
@@ -37,6 +35,8 @@ import {
   Shipping as ShippingPage,
   Shippings as ShippingsPage,
   Settings as SettingsPage,
+  Clients as ClientsPage,
+  Client as ClientPage,
 } from '../routes'
 
 export const routes = [
