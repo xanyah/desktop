@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import InventoriesPage from '../../components/inventories-page'
 import { getInventories, updateInventoriesField } from '../../actions'
 
@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
   getInventories: () => dispatch(getInventories()),
   openInventory: inventory => {
     dispatch(updateInventoriesField('selectedInventory', inventory))
-    dispatch(push(`/inventories/${inventory.id}`))
+    // dispatch(push(`/inventories/${inventory.id}`))
   },
 })
 

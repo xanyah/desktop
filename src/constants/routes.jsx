@@ -38,7 +38,7 @@ import SalesPage from '../containers/sales-page'
 
 export const routes = [
   {
-    component: CheckoutPage,
+    element: <CheckoutPage />,
     displayHome: true,
     exact: true,
     image: barcodeScanner,
@@ -48,7 +48,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ProductsPage,
+    element: <ProductsPage />,
     displayHome: true,
     exact: true,
     image: warehouse,
@@ -58,7 +58,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ProductPage,
+    element: <ProductPage />,
     displayHome: false,
     exact: true,
     image: warehouse,
@@ -68,7 +68,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: CreateProductPage,
+    element: <CreateProductPage />,
     displayHome: false,
     exact: true,
     image: warehouse,
@@ -78,7 +78,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: VariantPage,
+    element: <VariantPage />,
     displayHome: false,
     exact: true,
     image: warehouse,
@@ -88,7 +88,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ShippingsPage,
+    element: <ShippingsPage />,
     displayHome: true,
     exact: true,
     image: clipboard,
@@ -98,7 +98,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ShippingPage,
+    element: <ShippingPage />,
     displayHome: false,
     exact: true,
     image: clipboard,
@@ -108,7 +108,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: OrdersPage,
+    element: <OrdersPage />,
     displayHome: true,
     exact: true,
     image: delivery,
@@ -118,7 +118,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: OrderPage,
+    element: <OrderPage />,
     displayHome: false,
     exact: true,
     image: delivery,
@@ -128,7 +128,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: InventoriesPage,
+    element: <InventoriesPage />,
     displayHome: true,
     exact: true,
     image: list,
@@ -138,7 +138,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: InventoryPage,
+    element: <InventoryPage />,
     displayHome: false,
     exact: true,
     image: list,
@@ -148,7 +148,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ClientsPage,
+    element: <ClientsPage />,
     displayHome: true,
     exact: true,
     image: users,
@@ -158,7 +158,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ClientPage,
+    element: <ClientPage />,
     displayHome: false,
     exact: true,
     image: users,
@@ -168,7 +168,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ProvidersPage,
+    element: <ProvidersPage />,
     displayHome: true,
     exact: true,
     image: deliveryTruck,
@@ -178,7 +178,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ProviderPage,
+    element: <ProviderPage />,
     displayHome: false,
     exact: true,
     image: deliveryTruck,
@@ -188,7 +188,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ManufacturersPage,
+    element: <ManufacturersPage />,
     displayHome: true,
     exact: true,
     image: box,
@@ -198,7 +198,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: ManufacturerPage,
+    element: <ManufacturerPage />,
     displayHome: false,
     exact: true,
     image: box,
@@ -208,19 +208,19 @@ export const routes = [
     strict: true,
   },
   {
-    component: SignInPage,
+    element: <SignInPage />,
     displayHome: false,
     inRouter: true,
     path: '/sign-in',
   },
   {
-    component: HomePage,
+    element: <HomePage />,
     displayHome: false,
     inRouter: true,
     path: '/home',
   },
   {
-    component: SettingsPage,
+    element: <SettingsPage />,
     displayHome: false,
     exact: true,
     image: settings,
@@ -229,7 +229,7 @@ export const routes = [
     path: '/settings',
   },
   {
-    component: CustomAttributePage,
+    element: <CustomAttributePage />,
     displayHome: false,
     exact: true,
     image: settings,
@@ -238,7 +238,7 @@ export const routes = [
     path: '/settings/custom-attributes/:id',
   },
   {
-    component: AccountPage,
+    element: <AccountPage />,
     displayHome: false,
     image: flag,
     inRouter: true,
@@ -246,7 +246,7 @@ export const routes = [
     path: '/account',
   },
   {
-    component: SalesPage,
+    element: <SalesPage />,
     displayHome: false,
     exact: true,
     image: barcodeScanner,
@@ -256,7 +256,7 @@ export const routes = [
     strict: true,
   },
   {
-    component: SalePage,
+    element: <SalePage />,
     displayHome: false,
     exact: true,
     image: barcodeScanner,

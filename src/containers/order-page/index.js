@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import {
   createApiOrder,
   getProducts,
@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
   openProduct: product => {
     dispatch(updateProductsField('selectedProduct', product))
     dispatch(getVariants(product.id))
-    dispatch(push(`/products/${product.id}`))
+    // dispatch(push(`/products/${product.id}`))
   },
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
   updateApiOrder: updatedOrder => {

@@ -1,8 +1,8 @@
 // sass-lint:disable no-url-protocols,no-url-domains
-@import '~normalize-scss/sass/normalize';
+@import 'normalize-scss/sass/normalize';
 @include normalize;
-@import '~toastedjs/src/sass/toast';
-@import '~react-select/scss/default';
+@import 'toastedjs/src/sass/toast';
+@import 'react-select/scss/default';
 @import url('//fonts.googleapis.com/css?family=Poppins');
 @import 'libs/iconic-font/scss/iconmonstr-iconic-font';
 @import 'constants/scss/colors';

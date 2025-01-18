@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import ProductsPage from '../../components/products-page'
 import {
   getProducts,
@@ -15,12 +15,12 @@ const mapStateToProps = ({ products: { loading, products } }) => ({
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
   goToProductCreationPage: () => {
-    dispatch(push('/product/new'))
+    // dispatch(push('/product/new'))
   },
   openProduct: product => {
     dispatch(updateProductsField('selectedProduct', product))
     dispatch(getVariants(product.id))
-    dispatch(push(`/products/${product.id}`))
+    // dispatch(push(`/products/${product.id}`))
   },
 })
 

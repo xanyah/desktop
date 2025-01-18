@@ -1,7 +1,6 @@
 import React from 'react'
 import { Translate } from 'react-redux-i18n'
-import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { getCurrentRoute, getParentRoute } from '../../utils/router-helper'
 
@@ -12,8 +11,8 @@ const PageContainer = ({
   children,
   currentNavigationStep,
   footerElements,
-  location,
 }) => {
+  const location = useLocation()
   const currentRoute = getCurrentRoute(location.pathname)
   const parentRoute = getParentRoute(location.pathname)
 
@@ -56,18 +55,16 @@ const PageContainer = ({
   )
 }
 
-export default withRouter(PageContainer)
+export default PageContainer
 
 PageContainer.propTypes = {
   children: PropTypes.element,
   currentNavigationStep: PropTypes.string,
   footerElements: PropTypes.element,
-  location: PropTypes.object,
 }
 
 PageContainer.defaultProps = {
   children: null,
   currentNavigationStep: '',
   footerElements: null,
-  location: {},
 }

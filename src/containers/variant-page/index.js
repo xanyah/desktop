@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import VariantPage from '../../components/variant-page'
 import {
   createApiVariantAttribute,
-  updateInventoryField,
+  // updateInventoryField,
   // updateSaleField,
   updateShippingField,
   updateGlobalField,
@@ -35,8 +35,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(createApiVariantAttribute(newVariantAttribute)),
   dispatch,
   openInventory: inventory => {
-    dispatch(updateInventoryField('selectedInventory', inventory))
-    dispatch(push(`/inventories/${inventory.id}`))
+    // dispatch(updateInventoryField('selectedInventory', inventory))
+    // dispatch(push(`/inventories/${inventory.id}`))
   },
   // openSale: sale => {
   //   dispatch(updateSaleField('selectedSale', sale))
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
   // },
   openShipping: shipping => {
     dispatch(updateShippingField('selectedShipping', shipping))
-    dispatch(push(`/shippings/${shipping.id}`))
+    // dispatch(push(`/shippings/${shipping.id}`))
   },
   setPageName: name =>
     dispatch(updateGlobalField('currentNavigationStep', name)),

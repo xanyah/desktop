@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import {
   createApiCategory,
   createApiCustomAttribute,
@@ -35,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
   getVatRates: countryCode => dispatch(getVatRates(countryCode)),
   openCustomAttribute: customAttribute => {
     dispatch(updateCustomAttributesField('selectedCustomAttribute', customAttribute))
-    dispatch(push(`/settings/custom-attributes/${customAttribute.id}`))
+    // dispatch(push(`/settings/custom-attributes/${customAttribute.id}`))
   },
   updateApiStore: updatedStore => dispatch(updateApiStore(updatedStore)),
   updateField: (field, value) => dispatch(updateSettingsField(field, value)),

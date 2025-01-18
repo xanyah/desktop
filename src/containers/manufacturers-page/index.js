@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import ManufacturersPage from '../../components/manufacturers-page'
 import {
   getManufacturers,
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
   getManufacturers: () => dispatch(getManufacturers()),
   openManufacturer: manufacturer => {
     dispatch(updateManufacturerField('selectedManufacturer', manufacturer))
-    dispatch(push(`/manufacturers/${manufacturer.id}`))
+    // dispatch(push(`/manufacturers/${manufacturer.id}`))
   },
   searchApiManufacturer: query => dispatch(searchApiManufacturer(query)),
 })

@@ -1,12 +1,12 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
-import thunk from 'redux-thunk'
+// import { routerMiddleware } from 'react-router-redux'
+import {thunk} from 'redux-thunk'
 import logger from 'redux-logger'
 
 import history from '../history'
 import reducers from '../reducers'
 
-const router = routerMiddleware(history)
+// const router = routerMiddleware(history)
 
 const configureStore = () =>
   createStore(
@@ -14,7 +14,7 @@ const configureStore = () =>
     {},
     compose(
       applyMiddleware(logger),
-      applyMiddleware(router),
+      // applyMiddleware(router),
       applyMiddleware(thunk),
     )
   )

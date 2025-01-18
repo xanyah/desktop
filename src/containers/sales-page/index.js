@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import SalesPage from '../../components/sales-page'
 import { getSales, updateSaleField } from '../../actions'
 
@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
   getSales: () => dispatch(getSales()),
   openSale: sale => {
     dispatch(updateSaleField('selectedSale', sale))
-    dispatch(push(`/sales/${sale.id}`))
+    // dispatch(push(`/sales/${sale.id}`))
   },
 })
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import { signIn, updateAuthField } from '../../actions'
 import SignInPage from '../../components/sign-in-page'
 
@@ -29,7 +29,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   signIn: () => dispatchProps.dispatch(signIn(
     stateProps.email,
     stateProps.password,
-    () => dispatchProps.dispatch(push('/home'))
+    () => {
+      window.location = '/home'
+      // dispatchProps.dispatch(push('/home'))
+    }
   )),
 })
 

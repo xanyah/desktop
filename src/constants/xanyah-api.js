@@ -13,7 +13,7 @@ const authHeaders = [
 ]
 
 export const xanyahApi = axios.create({
-  baseURL: 'https://xanyah-staging.herokuapp.com/',
+  baseURL: 'https://xanyah-api.osc-fr1.scalingo.io/',
   timeout: 5000,
 })
 

@@ -12,7 +12,8 @@ const SignIn = ({
   password,
   signIn,
   updateField,
-}) => (
+}) => {
+  return (
   <div key="sign-in" className="sign-in-page">
     <div className="container">
       <img src={logo} className="logo" />
@@ -37,6 +38,7 @@ const SignIn = ({
     </div>
   </div>
 )
+}
 
 SignIn.propTypes = {
   email: PropTypes.string,

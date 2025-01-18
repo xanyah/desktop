@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import ProductPage from '../../components/product-page'
 import {
   createApiProduct,
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
   openVariant: variant => {
     dispatch(updateProductsField('selectedVariant', variant))
-    dispatch(push(`/products/${variant.product.id}/${variant.id}`))
+    // dispatch(push(`/products/${variant.product.id}/${variant.id}`))
   },
   setPageName: name => dispatch(updateGlobalField('currentNavigationStep', name)),
   updateApiProduct: updatedProduct => {
