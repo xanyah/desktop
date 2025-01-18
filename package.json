@@ -65,6 +65,7 @@
     "@storybook/addons": "^3.4.2",
     "@storybook/react": "^3.4.2",
     "@tauri-apps/cli": "^2.2.5",
+    "@types/lodash": "^4.17.14",
     "@types/humps": "^2.0.6",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
