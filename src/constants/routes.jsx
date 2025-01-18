@@ -28,8 +28,6 @@ import OrderPage from '../containers/order-page'
 import OrdersPage from '../containers/orders-page'
 import ShippingPage from '../containers/shipping-page'
 import ShippingsPage from '../containers/shippings-page'
-import SalePage from '../containers/sale-page'
-import SalesPage from '../containers/sales-page'
 
 import {
   SignIn as SignInPage,
@@ -37,6 +35,8 @@ import {
   Manufacturers as ManufacturersPage,
   Provider as ProviderPage,
   Providers as ProvidersPage,
+  Sales as SalesPage,
+  Sale as SalePage,
 } from '../routes'
 
 export const routes = [

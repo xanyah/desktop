@@ -1,4 +1,5 @@
 export * from './manufacturers'
 export * from './products'
 export * from './providers'
+export * from './sales'
 export * from './stores'
