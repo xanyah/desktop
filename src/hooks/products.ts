@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { getManufacturers, getProducts, searchManufacturer } from "../api";
+import { useQuery } from '@tanstack/react-query'
+import { getProducts } from '../api'
 
 export const useProducts = (filters) => useQuery({
+  queryFn: () => getProducts(filters),
   queryKey: ['products', filters],
-  queryFn: () => getProducts(filters)
 })

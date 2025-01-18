@@ -12,7 +12,7 @@ const Manufacturers = () => {
   const { data: manufacturersData, isLoading } = useManufacturers()
   const { data: searchedManufacturersData, isLoading: isSearchLoading } = useSearchedManufacturers({
     query: searchedQuery,
-    storeId: currentStore?.id
+    storeId: currentStore?.id,
   })
   const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ const Manufacturers = () => {
     <PageContainer>
       <DataTable
         columns={['name', 'notes', 'productsCount']}
-        data={!!searchedQuery ? searchedManufacturersData?.data : manufacturersData?.data}
+        data={searchedQuery ? searchedManufacturersData?.data : manufacturersData?.data}
         loading={isLoading || isSearchLoading}
         onItemView={item => navigate(`/manufacturers/${item.id}`)}
         type="manufacturers"

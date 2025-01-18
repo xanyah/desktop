@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { getStores } from "../api";
+import { useQuery } from '@tanstack/react-query'
+import { getStores } from '../api'
 
 export const useStores = (filters) => useQuery({
+  queryFn: () => getStores(filters),
   queryKey: ['stores', filters],
-  queryFn: () => getStores(filters)
 })
 
 export const useCurrentStore = () => {

@@ -27,7 +27,7 @@ const Manufacturer = () => {
       navigate(`/manufacturers/${data.data.id}`)
       setIsEditing(false)
       showSuccessToast(I18n.t('toast.created', { entity: I18n.t('models.manufacturers.title') }))
-    }
+    },
   })
 
   const { mutate: updateApiManufacturer } = useMutation({
@@ -35,7 +35,7 @@ const Manufacturer = () => {
     onSuccess: () => {
       setIsEditing(false)
       showSuccessToast(I18n.t('toast.updated'))
-    }
+    },
   })
 
   return (

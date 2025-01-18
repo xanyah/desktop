@@ -1,3 +1,5 @@
-export { default as SignIn } from './sign-in'
-export { default as Manufacturers } from './manufacturers'
 export { default as Manufacturer } from './manufacturer'
+export { default as Manufacturers } from './manufacturers'
+export { default as Provider } from './provider'
+export { default as Providers } from './providers'
+export { default as SignIn } from './sign-in'

@@ -1,5 +1,5 @@
-import { decamelizeKeys } from "humps"
-import { xanyahApi } from "../constants"
+import { decamelizeKeys } from 'humps'
+import { xanyahApi } from '../constants'
 
 export const getProducts = params =>
   xanyahApi.get('products', decamelizeKeys({params}))

@@ -3,12 +3,10 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  useNavigate,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import {
   loadTranslations,
-  setLocale,
   syncTranslationWithStore,
 } from 'react-redux-i18n'
 
@@ -47,22 +45,22 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          {routes
-            .filter(route => route.inRouter)
-            .map(route =>
-              <Route
-                element={route.element}
-                key={route.path}
-                exact={route.exact}
-                path={route.path}
-                strict={route.strict}
-              />)}
-        </Routes>
-      </BrowserRouter>
-    </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            {routes
+              .filter(route => route.inRouter)
+              .map(route =>
+                <Route
+                  element={route.element}
+                  key={route.path}
+                  exact={route.exact}
+                  path={route.path}
+                  strict={route.strict}
+                />)}
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </QueryClientProvider>
   )
 }

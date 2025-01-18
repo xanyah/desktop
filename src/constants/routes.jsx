@@ -18,8 +18,6 @@ import CheckoutPage from '../containers/checkout-page'
 import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
 import ClientsPage from '../containers/clients-page'
-import ProviderPage from '../containers/provider-page'
-import ProvidersPage from '../containers/providers-page'
 import InventoryPage from '../containers/inventory-page'
 import InventoriesPage from '../containers/inventories-page'
 import ProductPage from '../containers/product-page'
@@ -37,6 +35,8 @@ import {
   SignIn as SignInPage,
   Manufacturer as ManufacturerPage,
   Manufacturers as ManufacturersPage,
+  Provider as ProviderPage,
+  Providers as ProvidersPage,
 } from '../routes'
 
 export const routes = [

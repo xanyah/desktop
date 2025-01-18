@@ -10,20 +10,20 @@ import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 type SignInForm = {
-  email: string
+  email: string,
   password: string
 }
 
 const SignIn = () => {
   const navigate = useNavigate()
   const {handleSubmit, control} = useForm<SignInForm>({
-    defaultValues: {email: '', password: ''}
+    defaultValues: {email: '', password: ''},
   })
 
   const onSubmit = handleSubmit(async ({email, password}) => {
     try {
-       signIn({email, password})
-       navigate('/home')
+      signIn({email, password})
+      navigate('/home')
     } catch(err) {}
   })
 

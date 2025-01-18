@@ -11,7 +11,7 @@ import './styles.scss'
 
 // TODO: ItemAttribute type entity => add link to the entity !!!
 const DataDetails = ({
-  children,
+  children = null,
   createEntity,
   currentEntity,
   editing,
