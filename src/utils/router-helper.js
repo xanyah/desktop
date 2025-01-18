@@ -3,7 +3,7 @@ import { routes } from '../constants'
 
 export const getCurrentRoute = pathname =>
   routes.find(route =>
-    route.path && matchPath(pathname, route) && route.image)
+    route.path && matchPath(route, pathname) && route.image)
 
 export const getParentRoute = pathname => {
   const splitRoute = pathname.split('/')

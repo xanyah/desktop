@@ -14,7 +14,6 @@ import {
 import AccountPage from '../containers/account-page'
 import HomePage from '../containers/home-page'
 import SettingsPage from '../containers/settings-page'
-import SignInPage from '../containers/sign-in-page'
 import CheckoutPage from '../containers/checkout-page'
 import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
@@ -22,7 +21,6 @@ import ClientsPage from '../containers/clients-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
 import ManufacturerPage from '../containers/manufacturer-page'
-import ManufacturersPage from '../containers/manufacturers-page'
 import InventoryPage from '../containers/inventory-page'
 import InventoriesPage from '../containers/inventories-page'
 import ProductPage from '../containers/product-page'
@@ -35,6 +33,11 @@ import ShippingPage from '../containers/shipping-page'
 import ShippingsPage from '../containers/shippings-page'
 import SalePage from '../containers/sale-page'
 import SalesPage from '../containers/sales-page'
+
+import {
+  SignIn as SignInPage,
+  Manufacturers as ManufacturersPage,
+} from '../routes'
 
 export const routes = [
   {

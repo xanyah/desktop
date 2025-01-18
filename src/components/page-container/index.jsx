@@ -34,7 +34,7 @@ const PageContainer = ({
             ]}
           {currentRoute
             && <div className="breadcrumb">
-              {currentNavigationStep.length > 0
+              {currentNavigationStep && currentNavigationStep.length > 0
                 ? currentNavigationStep
                 : <Translate value={`routes.${currentRoute.key}`} />}
             </div>}

@@ -14,16 +14,16 @@ import {
 
 // import { ipcRenderer } from 'electron'
 
-import history from './history'
 import store from './store'
 
 import translations from './i18n'
 
 import { initialSync, validateToken } from './actions'
 
-import { routes } from './constants'
+import { queryClient, routes } from './constants'
 
 import './app.scss'
+import { QueryClientProvider } from '@tanstack/react-query'
 
 const App = () => {
   useEffect(() => {
@@ -45,10 +45,8 @@ const App = () => {
     ))
   }, [])
 
-  console.log(routes
-    .filter(route => route.inRouter))
-
   return (
+    <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
@@ -65,6 +63,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </Provider>
+    </QueryClientProvider>
   )
 }
 
