@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import ItemAttribute from '../item-attribute'
 import FormAttribute from '../../containers/form-attribute'
@@ -10,39 +10,36 @@ import { isEditableEntity } from '../../utils/entity-helper'
 import './styles.scss'
 
 // TODO: ItemAttribute type entity => add link to the entity !!!
-export default class DataDetails extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedEntity: props.currentEntity,
-    }
-  }
+const DataDetails = ({
+  children,
+  createEntity,
+  currentEntity,
+  editing,
+  formattedData,
+  formChildren = null,
+  toggleEdit,
+  type,
+  updateEntity,
+}) => {
+  const [selectedEntity, setSelectedEntity] = useState(currentEntity)
 
-  handleUpdate(attribute, value) {
-    this.setState({
-      selectedEntity: {
-        ...this.state.selectedEntity,
-        [attribute]: value,
-      },
+  useEffect(() => {
+    setSelectedEntity(currentEntity)
+  }, [currentEntity])
+
+  const handleUpdate = (attribute, value) => {
+    setSelectedEntity({
+      ...selectedEntity,
+      [attribute]: value,
     })
   }
 
-  handleCancelUpdate(toggleEdit) {
-    this.setState({selectedEntity: this.props.currentEntity})
+  const handleCancelUpdate = (toggleEdit) => {
+    setSelectedEntity(currentEntity)
     toggleEdit()
   }
 
-  renderCreate() {
-    const {
-      children,
-      createEntity,
-      formattedData,
-      formChildren,
-      toggleEdit,
-      type,
-    } = this.props
-    const { selectedEntity } = this.state
-
+  const renderCreate = () => {
     return (
       <div className={`data-details data-details-${type}`}>
         <div className="info">
@@ -57,29 +54,29 @@ export default class DataDetails extends React.Component {
               .filter(row => row.filter(item => item.editable).length > 0)
               .map((row, idx) => (
                 <div className="row" key={idx}>
-                  { row.map(item => (
+                  {row.map(item => (
                     (item.editable)
-                      &&
-                      <FormAttribute
-                        attribute={item.attribute}
-                        key={item.attribute}
-                        value={selectedEntity[item.attribute]}
-                        model={type}
-                        type={item.type}
-                        onUpdate={(attribute, value) =>
-                          this.handleUpdate(attribute, value)}
-                      />
+                    &&
+                    <FormAttribute
+                      attribute={item.attribute}
+                      key={item.attribute}
+                      value={selectedEntity ? selectedEntity[item.attribute] : undefined}
+                      model={type}
+                      type={item.type}
+                      onUpdate={(attribute, value) =>
+                        handleUpdate(attribute, value)}
+                    />
                   ))}
                 </div>))}
 
-            { formChildren }
+            {formChildren}
 
             <div className="action-buttons">
               {(<button
                 className="btn-primary"
                 key="btn-submit"
               >
-                <Translate value={'data-details.form.buttons.create'}/>
+                <Translate value={'data-details.form.buttons.create'} />
               </button>)}
             </div>
           </form>
@@ -91,16 +88,7 @@ export default class DataDetails extends React.Component {
     )
   }
 
-  renderUpdate() {
-    const {
-      children,
-      editing,
-      formattedData,
-      toggleEdit,
-      type,
-      updateEntity,
-    } = this.props
-    const { selectedEntity } = this.state
+  const renderUpdate = () => {
     const editableEntity = isEditableEntity(formattedData)
 
     return (
@@ -116,21 +104,21 @@ export default class DataDetails extends React.Component {
             {formattedData
               .map((row, idx) => (
                 <div className="row" key={idx}>
-                  { row.map(item => (
+                  {row.map(item => (
                     (item.editable && editing && editableEntity)
                       ? <FormAttribute
                         attribute={item.attribute}
                         key={item.attribute}
-                        value={selectedEntity[item.attribute]}
+                        value={selectedEntity ? selectedEntity[item.attribute] : undefined}
                         model={type}
                         type={item.type}
                         onUpdate={(attribute, value) =>
-                          this.handleUpdate(attribute, value)}
+                          handleUpdate(attribute, value)}
                       />
                       : <ItemAttribute
                         attribute={item.attribute}
                         key={item.attribute}
-                        value={selectedEntity[item.attribute]}
+                        value={selectedEntity ? selectedEntity[item.attribute] : undefined}
                         model={type}
                         type={item.type}
                       />
@@ -145,16 +133,16 @@ export default class DataDetails extends React.Component {
                       <button
                         className="btn-cancel"
                         key="btn-cancel"
-                        onClick={() => this.handleCancelUpdate(toggleEdit)}
+                        onClick={() => handleCancelUpdate(toggleEdit)}
                       >
-                        <Translate value={'data-details.form.buttons.cancel'}/>
+                        <Translate value={'data-details.form.buttons.cancel'} />
                       </button>
                       <button
                         className="btn-primary"
                         key="btn-submit"
                         type="submit"
                       >
-                        <Translate value={'data-details.form.buttons.submit'}/>
+                        <Translate value={'data-details.form.buttons.submit'} />
                       </button>
                     </div>
                   )
@@ -163,7 +151,7 @@ export default class DataDetails extends React.Component {
                       className="btn-primary"
                       onClick={() => toggleEdit()}
                     >
-                      <Translate value={'data-details.form.buttons.edit'}/>
+                      <Translate value={'data-details.form.buttons.edit'} />
                     </button>
                   ))
               }
@@ -177,41 +165,9 @@ export default class DataDetails extends React.Component {
     )
   }
 
-  render() {
-    return this.state.selectedEntity.id
-      ? this.renderUpdate()
-      : this.renderCreate()
-  }
+  return selectedEntity?.id
+    ? renderUpdate()
+    : renderCreate()
 }
 
-DataDetails.propTypes = {
-  children: PropTypes.element,
-  createEntity: PropTypes.func,
-  currentEntity: PropTypes.object,
-  editing: PropTypes.bool,
-  formChildren: PropTypes.element,
-  formattedData: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.objectOf({
-        attribute: PropTypes.string,
-        editable: PropTypes.bool,
-        type: PropTypes.string,
-      })
-    )
-  ),
-  toggleEdit: PropTypes.func,
-  type: PropTypes.string,
-  updateEntity: PropTypes.func,
-}
-
-DataDetails.defaultProps = {
-  children: null,
-  createEntity: () => null,
-  currentEntity: {},
-  editing: false,
-  formChildren: null,
-  formattedData: [],
-  toggleEdit: () => null,
-  type: '',
-  updateEntity: () => null,
-}
+export default DataDetails

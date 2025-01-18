@@ -20,7 +20,6 @@ import ClientPage from '../containers/client-page'
 import ClientsPage from '../containers/clients-page'
 import ProviderPage from '../containers/provider-page'
 import ProvidersPage from '../containers/providers-page'
-import ManufacturerPage from '../containers/manufacturer-page'
 import InventoryPage from '../containers/inventory-page'
 import InventoriesPage from '../containers/inventories-page'
 import ProductPage from '../containers/product-page'
@@ -36,6 +35,7 @@ import SalesPage from '../containers/sales-page'
 
 import {
   SignIn as SignInPage,
+  Manufacturer as ManufacturerPage,
   Manufacturers as ManufacturersPage,
 } from '../routes'
 
