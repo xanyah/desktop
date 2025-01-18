@@ -4,6 +4,10 @@ import { decamelizeKeys } from 'humps'
 export const getClients = (params) =>
   xanyahApi.get<Client[]>('clients', decamelizeKeys({ params }))
 
+export const getClient = (clientId) =>
+  xanyahApi.get<Client>(`clients/${clientId}`)
+
+
 export const searchClient = (params) =>
   xanyahApi.get<Client[]>('clients/search', decamelizeKeys({ params }))
 
