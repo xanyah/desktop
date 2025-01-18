@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Translate } from 'react-redux-i18n'
 import { PulseLoader } from 'react-spinners'
@@ -8,39 +8,35 @@ import { CategoryType } from '../../../types'
 import { secondaryTextColor } from '../../../constants'
 
 import './styles.scss'
+import { useCategories, useCurrentStore } from '../../../hooks'
+import { useMutation } from '@tanstack/react-query'
+import { createCategory } from '../../../api'
 
-export default class Categories extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      newCategory: {},
-    }
-  }
+const Categories = () => {
+  const store = useCurrentStore()
+  const {data: categoriesData, isLoading} = useCategories({storeId: store.id})
+  const [newCategory, setNewCategory] = useState({})
 
-  componentDidMount() {
-    this.props.getCategories()
-  }
+  const {mutate} = useMutation({
+    mutationFn: () => createCategory({...newCategory, storeId: store.id}),
+    onSuccess: () => setNewCategory({})
+  })
 
-  handleUpdateCategory(attribute, value) {
-    this.setState({
-      newCategory: {
-        ...this.state.newCategory,
+  const handleUpdateCategory = (attribute, value) => {
+    setNewCategory(oldVersion => ({
+        ...oldVersion,
         [attribute]: value,
-      },
-    })
+      }))
   }
 
-  renderCategoriesForm() {
-    const { createApiCategory } = this.props
-    const { newCategory } = this.state
+  const renderCategoriesForm = () => {
     return (
       <form
         className="category-form"
         key="form"
         onSubmit={e=> {
           e.preventDefault()
-          createApiCategory(newCategory)
-          this.setState({newCategory: {}})
+          mutate()
         }}>
 
         <FormAttribute
@@ -51,7 +47,7 @@ export default class Categories extends React.Component {
           model="categories"
           type="string"
           onUpdate={(attribute, value) =>
-            this.handleUpdateCategory(attribute, value)}
+            handleUpdateCategory(attribute, value)}
         />
 
         <FormAttribute
@@ -62,7 +58,7 @@ export default class Categories extends React.Component {
           model="categories"
           type="vat-rates"
           onUpdate={(attribute, value) =>
-            this.handleUpdateCategory(attribute, value)}
+            handleUpdateCategory(attribute, value)}
         />
 
         <FormAttribute
@@ -77,7 +73,7 @@ export default class Categories extends React.Component {
           model="categories"
           type="parent-category"
           onUpdate={(attribute, value) =>
-            this.handleUpdateCategory(attribute, value)}
+            handleUpdateCategory(attribute, value)}
         />
 
         <button className="btn-solid" type="submit">
@@ -87,25 +83,24 @@ export default class Categories extends React.Component {
     )
   }
 
-  renderCategoriesList() {
-    const { categories, loading } = this.props
+  const renderCategoriesList = () => {
 
-    if(loading)
+    if(isLoading)
       return (
         <div className='sweet-loading'>
           <PulseLoader
             color={secondaryTextColor}
-            loading={loading}
+            loading={isLoading}
           />
         </div>
       )
 
-    if(!categories.length)
+    if(!categoriesData?.data.length)
       return <h3><Translate value="models.categories.noData"/></h3>
     return (
       <div className='categories'>
         {
-          categories.map((category) => {
+          categoriesData?.data.map((category) => {
             if(!category.children)
               return (
                 <h1 key={category.id}>Error To Correct !</h1>
@@ -135,26 +130,12 @@ export default class Categories extends React.Component {
     )
   }
 
-  render() {
     return (
       <div className="categories-content">
-        {this.renderCategoriesForm()}
-        {this.renderCategoriesList()}
+        {renderCategoriesForm()}
+        {renderCategoriesList()}
       </div>
     )
-  }
 }
 
-Categories.propTypes = {
-  categories: PropTypes.arrayOf(CategoryType),
-  createApiCategory: PropTypes.func,
-  getCategories: PropTypes.func,
-  loading: PropTypes.bool,
-}
-
-Categories.defaultProps = {
-  categories: [],
-  createApiCategory: () => null,
-  getCategories: () => null,
-  loading: false,
-}
+export default Categories

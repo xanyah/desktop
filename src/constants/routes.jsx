@@ -13,7 +13,6 @@ import {
 
 import AccountPage from '../containers/account-page'
 import HomePage from '../containers/home-page'
-import SettingsPage from '../containers/settings-page'
 import CheckoutPage from '../containers/checkout-page'
 import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
@@ -37,6 +36,7 @@ import {
   Providers as ProvidersPage,
   Sales as SalesPage,
   Sale as SalePage,
+  Settings as SettingsPage,
 } from '../routes'
 
 export const routes = [
