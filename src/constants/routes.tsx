@@ -16,7 +16,6 @@ import {
   warehouse,
 } from '../images'
 
-
 import {
   Home as HomePage,
   SignIn as SignInPage,
