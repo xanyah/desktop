@@ -24,3 +24,5 @@ export const getVariantByBarcode = barcode => xanyahApi.get(`variants/${barcode}
 
 export const getShippingVariants = params =>
   xanyahApi.get('shipping_variants', decamelizeKeys({params}))
+export const getShippingVariant = id =>
+  xanyahApi.get(`shipping_variants/${id}`)

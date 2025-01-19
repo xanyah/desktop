@@ -25,8 +25,6 @@ import CreateProductPage from '../containers/create-product-page'
 import VariantPage from '../containers/variant-page'
 import OrderPage from '../containers/order-page'
 import OrdersPage from '../containers/orders-page'
-import ShippingPage from '../containers/shipping-page'
-import ShippingsPage from '../containers/shippings-page'
 
 import {
   SignIn as SignInPage,
@@ -36,6 +34,8 @@ import {
   Providers as ProvidersPage,
   Sales as SalesPage,
   Sale as SalePage,
+  Shipping as ShippingPage,
+  Shippings as ShippingsPage,
   Settings as SettingsPage,
 } from '../routes'
 
