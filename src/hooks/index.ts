@@ -1,6 +1,7 @@
 export * from './categories'
 export * from './custom-attributes'
 export * from './manufacturers'
+export * from './orders'
 export * from './products'
 export * from './providers'
 export * from './sales'

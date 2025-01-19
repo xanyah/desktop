@@ -1,5 +1,7 @@
 export { default as Manufacturer } from './manufacturer'
 export { default as Manufacturers } from './manufacturers'
+export { default as Order } from './order'
+export { default as Orders } from './orders'
 export { default as Provider } from './provider'
 export { default as Providers } from './providers'
 export { default as Sale } from './sale'

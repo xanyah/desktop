@@ -23,13 +23,13 @@ import ProductPage from '../containers/product-page'
 import ProductsPage from '../containers/products-page'
 import CreateProductPage from '../containers/create-product-page'
 import VariantPage from '../containers/variant-page'
-import OrderPage from '../containers/order-page'
-import OrdersPage from '../containers/orders-page'
 
 import {
   SignIn as SignInPage,
   Manufacturer as ManufacturerPage,
   Manufacturers as ManufacturersPage,
+  Order as OrderPage,
+  Orders as OrdersPage,
   Provider as ProviderPage,
   Providers as ProvidersPage,
   Sales as SalesPage,
