@@ -7,8 +7,8 @@ import importPlugin from 'eslint-plugin-import';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ['src/**/*.{js,mjs,cjs,ts,jsx,tsx}']},
-  {languageOptions: { globals: globals.browser }},
+  { files: ['src/**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
@@ -16,6 +16,13 @@ export default [
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 0,
+      'import/no-unused-modules': [
+        'error',
+        {
+          // missingExports: true,
+          unusedExports: true
+        }
+      ],
       'react/react-in-jsx-scope': 0,
     },
     settings: {

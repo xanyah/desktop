@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
 import ItemAttribute from '../item-attribute'
 import FormAttribute from '../../containers/form-attribute'
 

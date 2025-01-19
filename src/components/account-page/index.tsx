@@ -126,7 +126,7 @@ export default class Account extends React.Component {
             updatedPassword['passwordConfirmation'],
           )
           if(passwordError) {
-            var messageError = errorHandler[passwordError]
+            const messageError = errorHandler[passwordError]
 
             swal({
               button: true,

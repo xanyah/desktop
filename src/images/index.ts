@@ -1,4 +1,4 @@
-import background from './background.png'
+// import background from './background.png'
 import logo from './logo.svg'
 
 import barcodeScanner from './categories/barcode-scanner.png'
@@ -13,7 +13,7 @@ import users from './categories/users.png'
 import warehouse from './categories/warehouse.png'
 
 export {
-  background,
+  // background,
   logo,
 
   barcodeScanner,

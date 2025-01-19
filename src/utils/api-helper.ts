@@ -7,14 +7,15 @@ export const validateToken = () =>
 export const signIn = params =>
   xanyahApi.post('auth/sign_in', decamelizeKeys(params))
 
-// Clients API Calls
-
 export const getClients = params =>
   xanyahApi.get('clients', decamelizeKeys({params}))
+
 export const updateClient = (clientId, params) =>
   xanyahApi.patch(`clients/${clientId}`, decamelizeKeys(params))
+
 export const createClient = newClient =>
   xanyahApi.post('clients', decamelizeKeys(newClient))
+
 export const searchClient = params =>
   xanyahApi.get('clients/search', decamelizeKeys({params}))
 
@@ -22,8 +23,10 @@ export const searchClient = params =>
 
 export const getCustomAttributes = params =>
   xanyahApi.get('custom_attributes', decamelizeKeys({params}))
+
 export const updateCustomAttribute = (customAttributeId, params) =>
   xanyahApi.patch(`custom_attributes/${customAttributeId}`, decamelizeKeys(params))
+
 export const createCustomAttribute = newCustomAttribute =>
   xanyahApi.post('custom_attributes', decamelizeKeys(newCustomAttribute))
 

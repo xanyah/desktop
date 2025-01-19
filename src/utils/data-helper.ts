@@ -18,7 +18,7 @@ export const formatData = (data, column) => {
 
 export const formatPrice = price => `${(price || 0).toFixed(2)} €`
 
-export const isOfDateType = attribute =>
+const isOfDateType = attribute =>
   [
     'createdAt',
     'updatedAt',

@@ -113,7 +113,7 @@ const getSelect = item => {
     return null
   }
 
-  let model = getModel(item.attribute)
+  const model = getModel(item.attribute)
 
   return (
     <Select

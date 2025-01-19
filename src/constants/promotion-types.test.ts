@@ -1,4 +1,4 @@
-const promotionTypes = require('./promotion-types')
+import * as promotionTypes from './promotion-types'
 
 test('flatPromotionType', () => {
   expect(promotionTypes.flatPromotionType.calculatePrice(20, 3)).toBe(17)
