@@ -62,6 +62,7 @@
     "@storybook/addon-links": "^3.4.2",
     "@storybook/addons": "^3.4.2",
     "@storybook/react": "^3.4.2",
+    "@tauri-apps/cli": "^2.2.5",
     "@types/humps": "^2.0.6",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
@@ -110,8 +111,7 @@
     "dev": "vite dev",
     "lint": "eslint 'src/**/*.ts{,x}'",
     "lint:fix": "eslint 'src/**/*.ts{,x}' --fix",
-    "package": "ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true yarn build && electron-builder --mac --linux --win",
-    "prod": "webpack --config webpack.build.config.js && electron --noDevServer .",
+    "package": "tauri build",
     "storybook": "start-storybook -p 6006",
     "test": "jest"
   },
