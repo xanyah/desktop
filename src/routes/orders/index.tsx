@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { OrderType } from '../../types'
+import { useState } from 'react'
 
 import './styles.scss'
 import { useCurrentStore } from '../../hooks'

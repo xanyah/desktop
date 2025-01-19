@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getCategories, getCustomAttributes } from '../api'
+import { getCustomAttributes } from '../api'
 
 export const useCustomAttributes = (filters) => useQuery({
   queryFn: () => getCustomAttributes(filters),

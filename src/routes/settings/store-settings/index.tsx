@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
 
@@ -47,7 +46,7 @@ const StoreSettings = () => {
       reducedRateAlt,
       superReducedRate,
       parkingRate,
-    } = vatRatesData?.data
+    } = (vatRatesData?.data || {})
 
     return (
       <div className="vat-rates">

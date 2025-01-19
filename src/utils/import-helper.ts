@@ -1,12 +1,10 @@
-import {postFileImports} from './api-helper'
-
 //File System Module
 // TODO: Check if we can use import instead of require
 // const fs = require('fs')
 // dialog module
 // const {dialog} = require('electron').remote
 
-export const test = storeId => {
+export const test = () => {
 
   // dialog.showOpenDialog((fileNames) => {
   //   // fileNames is an array that contains all the selected

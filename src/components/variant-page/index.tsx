@@ -88,6 +88,7 @@ export default class Variant extends React.Component {
       return selectedVariant.variantAttributes.map(variantAttribute => {
         return (
           <DataDetails
+            key={variantAttribute.id}
             currentEntity={variantAttribute}
             editing={false}
             formattedData={variantAttributeFormat}

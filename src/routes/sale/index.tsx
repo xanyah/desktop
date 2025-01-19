@@ -12,16 +12,11 @@ const Sale = () => {
   const { data: saleData } = useSale(id)
 
   const renderSalePayments = () => {
-    const { salePayments } = saleData?.data
-
-    if (!salePayments)
-      return null
-
     return (
       <div className="sale-payments">
         <h3><Translate value='models.sales.salePaymentTitle' /></h3>
-        {salePayments.map(salePayment => (
-          <div className="sale-payments-content">
+        {saleData?.data?.salePayments?.map(salePayment => (
+          <div key={salePayment.id} className="sale-payments-content">
             {
               salePayment.total &&
               <ItemAttribute
@@ -60,11 +55,6 @@ const Sale = () => {
   }
 
   const renderSaleVariants = () => {
-    const { saleVariants } = saleData?.data
-
-    if (!saleVariants)
-      return null
-
     return (
       <div className="sale-variants">
         <h3><Translate value='models.products.title' /></h3>
@@ -85,8 +75,8 @@ const Sale = () => {
             <Translate value='models.sales.saleVariantPromotion' />
           </div>
         </div>
-        {saleVariants.map(saleVariant => (
-          <div className="sale-variant">
+        {saleData?.data?.saleVariants?.map(saleVariant => (
+          <div className="sale-variant" key={saleVariant.id}>
             <div className="product-name">{saleVariant.variant.product.name}</div>
             <div className="variant-barcode">{saleVariant.variant.barcode}</div>
             <div className="quantity">{saleVariant.quantity}</div>
@@ -107,7 +97,7 @@ const Sale = () => {
   }
 
   const renderSaleInfos = () => {
-    const { store, user, client, salePromotion, totalPrice } = saleData?.data
+    const { store, user, client, salePromotion, totalPrice } = (saleData?.data || {})
 
     return (
       <div className="sale-informations">

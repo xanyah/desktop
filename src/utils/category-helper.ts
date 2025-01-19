@@ -16,7 +16,7 @@ export const getParentCategoriesList = categories => {
   if(!categories)
     return []
 
-  let parentCategories = []
+  const parentCategories: any[] = []
 
   categories
     .filter(category => category.categoryId === null)

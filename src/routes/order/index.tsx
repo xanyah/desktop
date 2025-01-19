@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { OrderType, orderFormat } from '../../types'
+import { useState } from 'react'
+import { orderFormat } from '../../types'
 import PageContainer from '../../containers/page-container'
 import { I18n, Translate } from 'react-redux-i18n'
 

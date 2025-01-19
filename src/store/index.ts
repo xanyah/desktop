@@ -3,7 +3,6 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import {thunk} from 'redux-thunk'
 import logger from 'redux-logger'
 
-import history from '../history'
 import reducers from '../reducers'
 
 // const router = routerMiddleware(history)

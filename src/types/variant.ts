@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { ProductType, ProviderType } from './index.js'
+import { ProviderType } from './provider'
+import { ProductType } from './product'
 
 export const VariantType = {
   barcode: PropTypes.string,

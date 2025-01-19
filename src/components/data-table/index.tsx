@@ -1,12 +1,11 @@
 import React from 'react'
-import { Translate } from 'react-redux-i18n'
+import { I18n, Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
 import { PulseLoader } from 'react-spinners'
 
 import { formatData } from '../../utils/data-helper'
 import { getStatusClass } from '../../utils/status-helper'
 import { secondaryTextColor } from '../../constants'
-import { I18n } from 'react-redux-i18n'
 import Input from '../input'
 
 import './styles.scss'

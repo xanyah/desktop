@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react'
-import PropTypes from 'prop-types'
 import { Translate, I18n } from 'react-redux-i18n'
 import {Controller, useForm} from 'react-hook-form'
 
@@ -24,7 +22,9 @@ const SignIn = () => {
     try {
       signIn({email, password})
       navigate('/home')
-    } catch(err) {}
+    } catch(err) {
+      console.error(err)
+    }
   })
 
   return (
@@ -37,7 +37,7 @@ const SignIn = () => {
           rules={{
             required: true,
           }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               placeholder={I18n.t('sign-in-page.email')}
               type="email"
@@ -52,7 +52,7 @@ const SignIn = () => {
           rules={{
             required: true,
           }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               placeholder={I18n.t('sign-in-page.password')}
               type="password"

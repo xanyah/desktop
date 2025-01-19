@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useState } from 'react'
 import { Translate } from 'react-redux-i18n'
 import { PulseLoader } from 'react-spinners'
 
 import FormAttribute from '../../../containers/form-attribute'
-import { CategoryType } from '../../../types'
 import { secondaryTextColor } from '../../../constants'
 
 import './styles.scss'

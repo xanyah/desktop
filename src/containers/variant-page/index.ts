@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
   createApiVariantAttribute: newVariantAttribute =>
     dispatch(createApiVariantAttribute(newVariantAttribute)),
   dispatch,
-  openInventory: inventory => {
+  openInventory: () => {
     // dispatch(updateInventoryField('selectedInventory', inventory))
     // dispatch(push(`/inventories/${inventory.id}`))
   },

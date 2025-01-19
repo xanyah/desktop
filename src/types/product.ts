@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ManufacturerType  } from './index.js'
+import { ManufacturerType  } from './manufacturer'
 
 export const ProductType = {
   categoryId: PropTypes.string,

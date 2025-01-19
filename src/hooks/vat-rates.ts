@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getSale, getSales, getVatRates } from '../api'
+import { getVatRates } from '../api'
 
 export const useVatRates = (filters) => useQuery({
   queryFn: () => getVatRates(filters),

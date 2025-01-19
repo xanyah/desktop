@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Translate } from 'react-redux-i18n'
-import PropTypes from 'prop-types'
 
 import FormAttribute from '../../../containers/form-attribute'
-import { CustomAttributeType } from '../../../types'
 
 import './styles.scss'
 import { useMutation } from '@tanstack/react-query'
@@ -78,7 +76,7 @@ const CustomAttributes = () => {
           </div>
         </div>
         {customAttributesData?.data.map(customAttribute => (
-          <div className="custom-attribute">
+          <div className="custom-attribute" key={customAttribute.name}>
             <div className="name">
               {customAttribute.name}
             </div>

@@ -4,12 +4,11 @@ import { I18n } from 'react-redux-i18n'
 import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
-import { useProvider, useProducts, useCurrentStore } from '../../hooks'
+import { useProvider, useCurrentStore } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { createProvider, updateProvider } from '../../api'
 import { showSuccessToast } from '../../utils/notification-helper'
-import DataTable from '../../components/data-table'
 import DataDetails from '../../components/data-details'
 
 const Provider = () => {
@@ -18,7 +17,6 @@ const Provider = () => {
   const store = useCurrentStore()
   const { id } = useParams()
   const { data: providerData } = useProvider(id)
-  const { data: productsData, isLoading: isLoadingProducts } = useProducts({ providerId: id })
 
   const { mutate: createApiProvider } = useMutation({
     mutationFn: (newData: any) => createProvider({...newData, storeId: store?.id}),

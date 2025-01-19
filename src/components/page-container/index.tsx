@@ -30,7 +30,7 @@ const PageContainer = ({
               >
                 <Translate value={`routes.${parentRoute.key}`} />
               </Link>,
-              <span key="arrow" className="arrow">></span>,
+              <span key="arrow" className="arrow">{'>'}</span>,
             ]}
           {currentRoute
             && <div className="breadcrumb">
