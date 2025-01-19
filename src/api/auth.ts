@@ -2,7 +2,7 @@ import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 
 export const validateToken = () =>
-  xanyahApi.get('auth/validate_token')
+  xanyahApi.get<AuthToken>('auth/validate_token')
 
 export const signIn = params =>
   xanyahApi.post('auth/sign_in', decamelizeKeys(params))

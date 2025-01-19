@@ -1,20 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
-import PropTypes from 'prop-types'
-
-import HomeLink from '../home-link'
-
 import { routes } from '../../constants'
 import { getGreetingTime } from '../../utils/date-helper'
-
 import './styles.scss'
+import { useCurrentToken } from '../../hooks'
+import HomeLink from '../../components/home-link'
 
-const Home = ({ firstname }) => (
+const Home = () => {
+  const token = useCurrentToken()
+  return (
   <div key="home" className="home-page">
     <div className="header">
       <h1>
-        <Translate value={`home.welcome.${getGreetingTime()}`} firstname={firstname} />
+        <Translate value={`home.welcome.${getGreetingTime()}`} firstname={token.data?.data.data.firstname} />
       </h1>
       <div className="settings">
         <Link to="/account"><i className="im im-user-settings"></i></Link>
@@ -33,13 +32,6 @@ const Home = ({ firstname }) => (
     </div>
   </div>
 )
-
-Home.propTypes = {
-  firstname: PropTypes.string,
-}
-
-Home.defaultProps = {
-  firstname: '',
 }
 
 export default Home

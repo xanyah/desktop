@@ -12,7 +12,6 @@ import {
 } from '../images'
 
 import AccountPage from '../containers/account-page'
-import HomePage from '../containers/home-page'
 import CheckoutPage from '../containers/checkout-page'
 import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
@@ -21,6 +20,7 @@ import CreateProductPage from '../containers/create-product-page'
 import VariantPage from '../containers/variant-page'
 
 import {
+  Home as HomePage,
   SignIn as SignInPage,
   Manufacturer as ManufacturerPage,
   Manufacturers as ManufacturersPage,
