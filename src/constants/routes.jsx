@@ -17,8 +17,6 @@ import CheckoutPage from '../containers/checkout-page'
 import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
 import ClientsPage from '../containers/clients-page'
-import InventoryPage from '../containers/inventory-page'
-import InventoriesPage from '../containers/inventories-page'
 import ProductPage from '../containers/product-page'
 import ProductsPage from '../containers/products-page'
 import CreateProductPage from '../containers/create-product-page'
@@ -32,6 +30,8 @@ import {
   Orders as OrdersPage,
   Provider as ProviderPage,
   Providers as ProvidersPage,
+  Inventory as InventoryPage,
+  Inventories as InventoriesPage,
   Sales as SalesPage,
   Sale as SalePage,
   Shipping as ShippingPage,
