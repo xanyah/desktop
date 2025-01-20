@@ -1,7 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
 import { Translate } from 'react-redux-i18n'
-import PropTypes from 'prop-types'
 import Input from '../input'
 
 import {
@@ -15,6 +14,7 @@ import {
 } from '../../utils/category-helper'
 
 import './styles.scss'
+import { map } from 'lodash'
 
 //TODO add checkbox / Vat Rates ? / Parent Category ? Sofiane
 //TODO: formatPrice on Price
@@ -45,7 +45,6 @@ const getFormElement = item => {
       <Input
         onChange={e => item.onUpdate(item.attribute, e.target.value)}
         value={item.value}
-        name={item.attribute}
         type="number"
       />
     )
@@ -54,7 +53,6 @@ const getFormElement = item => {
       <Input
         onChange={e => item.onUpdate(item.attribute, e.target.value)}
         value={item.value}
-        name={item.attribute}
         type="text"
       />
     )
@@ -92,7 +90,6 @@ const getFormElement = item => {
       <Input
         onChange={e => item.onUpdate(item.attribute, e.target.value)}
         value={item.value}
-        name={item.attribute}
         type="password"
       />
     )
@@ -118,37 +115,19 @@ const getSelect = item => {
   return (
     <Select
       name={item.attribute}
-      value={item.value.id}
-      onChange={
-        e => item
-          .onUpdate(item.attribute, item[model]
-            .find(entity => entity.id === e.value))
+      value={item.value?.id}
+      onChange={(e: any) =>
+        model && item.onUpdate(
+          item.attribute,
+          item[model].find((entity: any) => entity.id === e.value)
+        )
       }
-      options={item[model].map(entity => ({
-        label: (entity.name)
-          ? entity.name
-          : (entity.firstname)
-            ? entity.firstname
-            : entity.id,
+      options={model ? map(item[model]((entity: any) => ({
+        label: entity.name ? entity.name : entity.firstname ? entity.firstname : entity.id,
         value: entity.id,
-      }))}
+      }))) : []}
     />
-  )
-}
+  );
+};
 
-FormAttribute.propTypes = {
-  attribute: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-}
-
-FormAttribute.defaultProps = {
-  attribute: '',
-  type: '',
-  value: '',
-}
-
-export default FormAttribute
+export default FormAttribute;

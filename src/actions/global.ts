@@ -25,7 +25,6 @@ import {
   updateCustomAttributesField,
   updateOrderField,
   updateShippingField,
-  updateClientField,
 } from './index'
 
 export const updateGlobalField = (field, value) => ({
@@ -85,9 +84,6 @@ export const initialSync = () =>
       ))
       dispatch(updateShippingField(
         'shippings', shippingsResponses.data
-      ))
-      dispatch(updateClientField(
-        'clients', clientsResponses.data
       ))
       if (storesResponse.data.length > 0) {
         dispatch(updateStoresField(

@@ -1,7 +1,6 @@
 export * from './account'
 export * from './auth'
 export * from './categories'
-export * from './clients'
 export * from './custom-attributes'
 export * from './global'
 export * from './inventories'

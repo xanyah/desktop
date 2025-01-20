@@ -1,0 +1,1 @@
+export { default as FormAttribute } from './form-attribute'

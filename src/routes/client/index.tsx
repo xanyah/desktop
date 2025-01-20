@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { clientFormat } from '../../types'
 import { I18n } from 'react-redux-i18n'
 import PageContainer from '../../containers/page-container'
 
@@ -10,6 +9,7 @@ import { useCurrentStore } from '../../hooks/stores'
 import { useMutation } from '@tanstack/react-query'
 import { createClient, updateClient } from '../../api'
 import { showSuccessToast } from '../../utils/notification-helper'
+import { clientFormat } from './config'
 import DataDetails from '../../components/data-details'
 
 const Client = () => {
@@ -47,7 +47,7 @@ const Client = () => {
           editing={isEditing}
           formattedData={clientFormat}
           toggleEdit={() => setIsEditing(!isEditing)}
-          type="manufacturers"
+          type="clients"
           updateEntity={updateApiClient}
         />
       </div>
