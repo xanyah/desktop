@@ -1,15 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { getStores } from '../api'
+import { isEmpty } from 'lodash'
 
-export const useStores = (filters) => useQuery({
-  queryFn: () => getStores(filters),
-  queryKey: ['stores', filters],
+export const useCurrentStore = () => useQuery({
+  queryFn: () => getStores().then((response) => {
+    const storesData = response.data
+    if (!isEmpty(storesData)) {
+      return storesData[0]
+    }
+  }),
+  queryKey: ['stores'],
 })
 
-export const useCurrentStore = () => {
-  const { data } = useStores({})
-
-  if (data?.data.length) {
-    return data.data[0]
-  }
-}

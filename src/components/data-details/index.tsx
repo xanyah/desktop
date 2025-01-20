@@ -1,12 +1,32 @@
-import React, { useEffect } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import React, { useEffect, ReactNode } from 'react'
+import { useForm, Controller, RegisterOptions } from 'react-hook-form'
 import ItemAttribute from '../item-attribute'
 import { FormAttribute } from '../../components'
 import { Translate } from 'react-redux-i18n'
 import { isEditableEntity } from '../../utils/entity-helper'
 import './styles.scss'
+import { filter, forEach, get, reduce } from 'lodash'
 
-const DataDetails = ({
+interface FormattedDataItem {
+  attribute: string
+  editable: boolean
+  type: string
+  validation?: RegisterOptions
+}
+
+interface DataDetailsProps {
+  children?: ReactNode
+  createEntity: (data: any) => void
+  currentEntity?: any
+  editing: boolean
+  formattedData: FormattedDataItem[][]
+  formChildren?: ReactNode
+  toggleEdit: () => void
+  type: string
+  updateEntity: (data: any) => void
+}
+
+const DataDetails: React.FC<DataDetailsProps> = ({
   children,
   createEntity,
   currentEntity,
@@ -17,21 +37,26 @@ const DataDetails = ({
   type,
   updateEntity,
 }) => {
-  const {
-    control,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    defaultValues: currentEntity || {},
-  })
+  const { control, handleSubmit, reset } = useForm()
 
   useEffect(() => {
-    reset(currentEntity || {})
-  }, [currentEntity, reset])
+    const defaultValues = reduce(
+      formattedData,
+      (acc, row) => {
+        forEach(row, (item) => {
+          if (item.editable) {
+            acc[item.attribute] = get(currentEntity, item.attribute, '')
+          }
+        })
+        return acc
+      },
+      {} as Record<string, any>
+    )
 
-  const onSubmit = (data) => {
+    reset(defaultValues)
+  }, [currentEntity, reset, formattedData])
+
+  const onSubmit = (data: any) => {
     if (currentEntity?.id) {
       updateEntity(data)
     } else {
@@ -50,33 +75,39 @@ const DataDetails = ({
       <div className={`data-details data-details-${type}`}>
         <div className="info">
           <form onSubmit={handleSubmit(onSubmit)}>
-            {formattedData
-              .filter((row) => row.filter((item) => item.editable).length > 0)
-              .map((row, idx) => (
-                <div className="row" key={idx}>
-                  {row.map((item) => (
+            {filter(
+              formattedData,
+              (row) => row.filter((item) => item.editable).length > 0
+            ).map((row, idx) => (
+              <div className="row" key={idx}>
+                {row.map(
+                  (item) =>
                     item.editable && (
                       <Controller
                         key={item.attribute}
                         name={item.attribute}
                         control={control}
-                        defaultValue={currentEntity ? currentEntity[item.attribute] : undefined}
+                        defaultValue={
+                          currentEntity
+                            ? currentEntity[item.attribute]
+                            : undefined
+                        }
                         rules={item.validation || {}}
-                        render={({ field }) => (
+                        render={({ field, fieldState }) => (
                           <FormAttribute
                             attribute={item.attribute}
                             value={field.value}
                             model={type}
                             type={item.type}
-                            onUpdate={(attribute, value) => setValue(attribute, value)}
-                            error={errors[item.attribute]?.message}
+                            onUpdate={field.onChange}
+                            error={fieldState.error?.message}
                           />
                         )}
                       />
                     )
-                  ))}
-                </div>
-              ))}
+                )}
+              </div>
+            ))}
 
             {formChildren}
 
@@ -87,9 +118,7 @@ const DataDetails = ({
             </div>
           </form>
         </div>
-        <div className="children">
-          {children}
-        </div>
+        <div className="children">{children}</div>
       </div>
     )
   }
@@ -103,22 +132,26 @@ const DataDetails = ({
           <form onSubmit={handleSubmit(onSubmit)}>
             {formattedData.map((row, idx) => (
               <div className="row" key={idx}>
-                {row.map((item) => (
+                {row.map((item) =>
                   item.editable && editing && editableEntity ? (
                     <Controller
                       key={item.attribute}
                       name={item.attribute}
                       control={control}
-                      defaultValue={currentEntity ? currentEntity[item.attribute] : undefined}
+                      defaultValue={
+                        currentEntity
+                          ? currentEntity[item.attribute]
+                          : undefined
+                      }
                       rules={item.validation || {}}
-                      render={({ field }) => (
+                      render={({ field, fieldState }) => (
                         <FormAttribute
                           attribute={item.attribute}
                           value={field.value}
                           model={type}
                           type={item.type}
-                          onUpdate={(attribute, value) => setValue(attribute, value)}
-                          error={errors[item.attribute]?.message}
+                          onUpdate={field.onChange}
+                          error={fieldState.error?.message}
                         />
                       )}
                     />
@@ -126,17 +159,21 @@ const DataDetails = ({
                     <ItemAttribute
                       attribute={item.attribute}
                       key={item.attribute}
-                      value={currentEntity ? currentEntity[item.attribute] : undefined}
+                      value={
+                        currentEntity
+                          ? currentEntity[item.attribute]
+                          : undefined
+                      }
                       model={type}
                       type={item.type}
                     />
                   )
-                ))}
+                )}
               </div>
             ))}
             <div className="action-buttons">
-              {editableEntity && (
-                editing ? (
+              {editableEntity &&
+                (editing ? (
                   <div className="btn-group">
                     <button
                       className="btn-cancel"
@@ -145,10 +182,7 @@ const DataDetails = ({
                     >
                       <Translate value={'data-details.form.buttons.cancel'} />
                     </button>
-                    <button
-                      className="btn-primary"
-                      type="submit"
-                    >
+                    <button className="btn-primary" type="submit">
                       <Translate value={'data-details.form.buttons.submit'} />
                     </button>
                   </div>
@@ -160,14 +194,11 @@ const DataDetails = ({
                   >
                     <Translate value={'data-details.form.buttons.edit'} />
                   </button>
-                )
-              )}
+                ))}
             </div>
           </form>
         </div>
-        <div className="children">
-          {children}
-        </div>
+        <div className="children">{children}</div>
       </div>
     )
   }

@@ -10,10 +10,11 @@ const Clients = () => {
   const currentStore = useCurrentStore()
   const [searchedQuery, setSearchedQuery] = useState('')
   const { data: clientsData, isLoading } = useClients()
-  const { data: searchedClientsData, isLoading: isSearchLoading } = useSearchedClients({
-    query: searchedQuery,
-    storeId: currentStore?.id,
-  })
+  const { data: searchedClientsData, isLoading: isSearchLoading } =
+    useSearchedClients({
+      query: searchedQuery,
+      storeId: currentStore?.id,
+    })
   const navigate = useNavigate()
 
   return (
@@ -22,7 +23,7 @@ const Clients = () => {
         columns={['firstname', 'lastname']}
         data={searchedQuery ? searchedClientsData?.data : clientsData?.data}
         loading={isLoading || isSearchLoading}
-        onItemView={item => navigate(`/clients/${item.id}`)}
+        onItemView={(item: Client) => navigate(`/clients/${item.id}`)}
         type="clients"
         searchEntity={setSearchedQuery}
       />

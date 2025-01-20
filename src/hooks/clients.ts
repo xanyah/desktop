@@ -14,7 +14,8 @@ export const useSearchedClients = (searchQuery) => useQuery({
 })
 
 
-export const useClient = (id) => useQuery({
+export const useClient = (id?: Client['id']) => useQuery({
   queryFn: () => getClient(id),
   queryKey: ['clients', { id }],
+  enabled: !!id
 })
