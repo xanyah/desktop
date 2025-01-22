@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
+import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -13,6 +14,12 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   importPlugin.flatConfigs.recommended,
+  {
+    plugins: {
+      "react-hooks": eslintPluginReactHooks,
+    },
+    rules: { ...eslintPluginReactHooks.configs.recommended.rules },
+  },
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 0,

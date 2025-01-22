@@ -1,3 +1,4 @@
+export { default as Account } from './account'
 export { default as Home } from './home'
 export { default as Inventories } from './inventories'
 export { default as Inventory } from './inventory'
