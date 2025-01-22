@@ -5,5 +5,4 @@ type Manufacturer = {
   updatedAt: string,
   name: string,
   notes: string,
-  storeId: string,
 }

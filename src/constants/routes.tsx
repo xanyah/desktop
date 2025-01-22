@@ -11,7 +11,6 @@ import {
   warehouse,
 } from '../images'
 
-import CheckoutPage from '../containers/checkout-page'
 import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
 import ClientsPage from '../containers/clients-page'
@@ -20,6 +19,7 @@ import VariantPage from '../containers/variant-page'
 
 import {
   Account as AccountPage,
+  Checkout as CheckoutPage,
   Home as HomePage,
   SignIn as SignInPage,
   Manufacturer as ManufacturerPage,

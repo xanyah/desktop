@@ -2,10 +2,10 @@ import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 
 export const getInventories = params =>
-  xanyahApi.get('inventories', decamelizeKeys({params}))
+  xanyahApi.get<Inventory[]>('inventories', decamelizeKeys({params}))
 
 export const getInventory = id =>
-  xanyahApi.get(`inventories/${id}`)
+  xanyahApi.get<Inventory>(`inventories/${id}`)
 
 export const getInventoryVariants = params =>
-  xanyahApi.get('inventory_variants', decamelizeKeys({params}))
+  xanyahApi.get<InventoryVariant[]>('inventory_variants', decamelizeKeys({params}))

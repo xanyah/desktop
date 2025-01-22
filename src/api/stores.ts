@@ -3,6 +3,7 @@ import { decamelizeKeys } from 'humps'
 
 
 export const getStores = params =>
-  xanyahApi.get('stores', decamelizeKeys({params}))
+  xanyahApi.get<Store[]>('stores', decamelizeKeys({params}))
+
 export const updateStore = (storeId, params) =>
-  xanyahApi.patch(`stores/${storeId}`, decamelizeKeys(params))
+  xanyahApi.patch<Store>(`stores/${storeId}`, decamelizeKeys(params))

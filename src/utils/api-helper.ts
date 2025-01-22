@@ -59,8 +59,6 @@ export const createProduct = newProduct =>
 export const getInventories = params =>
   xanyahApi.get('inventories', decamelizeKeys({params}))
 
-export const getPaymentTypes = params => xanyahApi.get('payment_types', { params: decamelizeKeys(params)})
-
 // Providers API Calls
 
 export const getProviders = params =>
