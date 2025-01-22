@@ -1,0 +1,49 @@
+name: Static Analysis
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .node-version
+        cache: yarn
+
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+
+    - name: Run ESLint
+      run: yarn lint
+
+  typescript:
+    name: Typescript
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .node-version
+        cache: yarn
+
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+
+    - name: Run Typescript
+      run: yarn tsc
