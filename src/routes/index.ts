@@ -1,5 +1,6 @@
 export { default as Account } from './account'
 export { default as Checkout } from './checkout'
+export { default as CustomAttribute } from './custom-attribute'
 export { default as Home } from './home'
 export { default as Inventories } from './inventories'
 export { default as Inventory } from './inventory'

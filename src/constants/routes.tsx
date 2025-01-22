@@ -11,7 +11,6 @@ import {
   warehouse,
 } from '../images'
 
-import CustomAttributePage from '../containers/custom-attribute-page'
 import ClientPage from '../containers/client-page'
 import ClientsPage from '../containers/clients-page'
 import CreateProductPage from '../containers/create-product-page'
@@ -20,6 +19,7 @@ import VariantPage from '../containers/variant-page'
 import {
   Account as AccountPage,
   Checkout as CheckoutPage,
+  CustomAttribute as CustomAttributePage,
   Home as HomePage,
   SignIn as SignInPage,
   Manufacturer as ManufacturerPage,
@@ -51,6 +51,16 @@ export const routes = [
     strict: true,
   },
   {
+    element: <CreateProductPage />,
+    displayHome: false,
+    exact: true,
+    image: warehouse,
+    inRouter: true,
+    key: 'product',
+    path: '/product/new',
+    strict: true,
+  },
+  {
     element: <ProductsPage />,
     displayHome: true,
     exact: true,
@@ -68,16 +78,6 @@ export const routes = [
     inRouter: true,
     key: 'product',
     path: '/products/:id',
-    strict: true,
-  },
-  {
-    element: <CreateProductPage />,
-    displayHome: false,
-    exact: true,
-    image: warehouse,
-    inRouter: true,
-    key: 'product',
-    path: '/product/new',
     strict: true,
   },
   {

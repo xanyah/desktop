@@ -101,7 +101,7 @@ const Categories = () => {
           categoriesData?.data.map((category) => {
             if(!category.children)
               return (
-                <h1 key={category.id}>Error To Correct !</h1>
+                <h1 key={category.id}>{category.name}</h1>
               )
             else
               return (!category.children.length)

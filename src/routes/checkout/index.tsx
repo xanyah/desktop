@@ -240,7 +240,7 @@ const Checkout = () => {
             ))}
         />}
     </li>)
-  }, [salePayments])
+  }, [salePayments, getVariantsTotal])
 
     const change = salePayments.reduce((a, b) => a + parseFloat(b.total), 0) - getVariantsTotal()
     return (
