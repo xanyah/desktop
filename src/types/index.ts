@@ -1,5 +1,4 @@
 export * from './category'
-export * from './client'
 export * from './custom-attribute'
 export * from './inventory'
 export * from './manufacturer'

@@ -1,3 +1,5 @@
+import CreateProductPage from '../components/create-product-page'
+import VariantPage from '../components/variant-page'
 import {
   barcodeScanner,
   box,
@@ -10,11 +12,6 @@ import {
   users,
   warehouse,
 } from '../images'
-
-import ClientPage from '../containers/client-page'
-import ClientsPage from '../containers/clients-page'
-import CreateProductPage from '../containers/create-product-page'
-import VariantPage from '../containers/variant-page'
 
 import {
   Account as AccountPage,
@@ -37,6 +34,8 @@ import {
   Shipping as ShippingPage,
   Shippings as ShippingsPage,
   Settings as SettingsPage,
+  Clients as ClientsPage,
+  Client as ClientPage,
 } from '../routes'
 
 export const routes = [

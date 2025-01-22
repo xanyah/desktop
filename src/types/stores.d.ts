@@ -1,9 +1,8 @@
 type Store = {
-  id: string
-  name: string
-  key: string
-  address: string
-  country: Country
-  createdAt: string
-  updatedAt: string
+  address: string,
+  country: Country,
+  id: string,
+  key: string,
+  name: string,
+  notes: string,
 }

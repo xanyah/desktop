@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import FormAttribute from '../../components/form-attribute'
+import {FormAttribute} from '../../components'
 
 const mapStateToProps = ({
   categories: { categories },

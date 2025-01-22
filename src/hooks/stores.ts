@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { getStores } from '../api'
+import { isEmpty } from 'lodash'
 
-export const useStores = (filters) => useQuery({
-  queryFn: () => getStores(filters),
-  queryKey: ['stores', filters],
+const useStores = params => useQuery({
+  queryFn: () => getStores(params),
+  queryKey: ['stores', params],
 })
 
 export const useCurrentStore = () => {
