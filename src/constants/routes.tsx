@@ -1,7 +1,4 @@
-import AccountPage from '../components/account-page'
-import CheckoutPage from '../components/checkout-page'
 import CreateProductPage from '../components/create-product-page'
-import CustomAttributePage from '../components/custom-attribute-page'
 import VariantPage from '../components/variant-page'
 import {
   barcodeScanner,
