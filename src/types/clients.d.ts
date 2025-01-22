@@ -1,5 +1,3 @@
-
-
 type Client = {
   id: string;
   address: string;
@@ -14,4 +12,4 @@ type ClientPayloadUpdate = Omit<Client, 'store'> & {
   storeId: string;
 };
 
-type ClientPayloadCreate = Omit<ClientPayloadUpdate, 'id'> 
+type ClientPayloadCreate = Omit<ClientPayloadUpdate, 'id'>

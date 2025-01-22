@@ -1,6 +1,6 @@
 type Store = {
   address: string,
-  country: string,
+  country: Country,
   id: string,
   key: string,
   name: string,

@@ -1,20 +1,14 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import swal from 'sweetalert'
-import PropTypes from 'prop-types'
 import { I18n, Translate } from 'react-redux-i18n'
 import Select from 'react-select'
-import Checkbox from '../checkbox'
 import { Link } from 'react-router-dom'
-import Input from '../input'
-import Modal from '../modal'
-import PageContainer from '../page-container'
 
 import './styles.scss'
 
 import promotionTypes from '../../constants/promotion-types'
 import {
   createSale,
-  getPaymentTypes,
   getVariantByBarcode,
 } from '../../utils/api-helper'
 import {
@@ -26,117 +20,98 @@ import {
   showErrorToast,
   showSuccessToast,
 } from '../../utils/notification-helper'
+import { useCurrentStore, usePaymentTypes } from '../../hooks'
+import Input from '../../components/input'
+import Checkbox from '../../components/checkbox'
+import PageContainer from '../../containers/page-container'
+import Modal from '../../components/modal'
 
-const initialState = {
-  displayedModal: false,
-  hasPromotion: false,
-  salePayments: [],
-  salePromotion: {},
-  saleVariants: [],
-  variantBarcode: '',
-}
 
-export default class Checkout extends React.Component {
-  constructor(props) {
-    super(props)
+const Checkout = () => {
+  const currentStore = useCurrentStore()
+  const {data: paymentTypesData} = usePaymentTypes({storeId: currentStore?.id})
+  const [displayedModal, setDisplayedModal] = useState(false)
+  const [hasPromotion, setHasPromotion] = useState(false)
+  const [salePayments, setSalePayments] = useState<any[]>([])
+  const [salePromotion, setSalePromotion] = useState<any>()
+  const [saleVariants, setSaleVariants] = useState<any[]>([])
+  const [variantBarcode, setVariantBarcode] = useState('')
 
-    this.state = {
-      ...initialState,
-      paymentTypes: [],
-    }
-  }
+  const resetSale = useCallback(() => {
+    setDisplayedModal(false)
+  setHasPromotion(false)
+  setSalePayments([])
+  setSalePromotion(undefined)
+  setSaleVariants([])
+  setVariantBarcode('')
+  }, [])
 
-  componentDidMount() {
-    const { storeId } = this.props
-    getPaymentTypes({ storeId })
-      .then(({ data }) => this.setState({ paymentTypes: data }))
-  }
-
-  resetSale() {
-    this.setState({
-      ...initialState,
-    })
-  }
-
-  onVariantSearch(e) {
+  const onVariantSearch = useCallback((e) => {
     e.preventDefault()
-    const { saleVariants, variantBarcode } = this.state
+
     getVariantByBarcode(variantBarcode)
       .then(({ data }) => {
         const variant = saleVariants.find(v => v.variant.id === data.id)
         // If variant already exists, we just increment the quantity
         if (variant) {
-          this.setState({
-            saleVariants: saleVariants.map(v => v.variant.id === data.id
-              ? { ...v, quantity: v.quantity + 1 } : v),
-            variantBarcode: '',
-          })
-        } else {
-          this.setState({
-            saleVariants: [
-              ...saleVariants,
-              { quantity: 1, variant: data },
-            ],
-            variantBarcode: '',
-          })
-        }
+          setSaleVariants(saleVariants.map(v => v.variant.id === data.id
+              ? { ...v, quantity: v.quantity + 1 } : v))
+            } else {
+              setSaleVariants([
+                ...saleVariants,
+                { quantity: 1, variant: data },
+              ])
+            }
+            setVariantBarcode('')
       })
-      .catch(() => this.setState({ variantBarcode: '' },
-        () => showErrorToast(I18n.t('toast.not-found', { entity: I18n.t('models.products.title')}))))
-  }
+      .catch(() => {
+        setVariantBarcode( '' )
+        showErrorToast(I18n.t('toast.not-found', { entity: I18n.t('models.products.title')}))
+      })
+  }, [saleVariants, variantBarcode])
 
-  updateQuantity(variantId, quantity) {
-    this.setState({
-      saleVariants: this.state.saleVariants.map(saleVariant => saleVariant.variant.id === variantId
+  const updateQuantity = useCallback((variantId, quantity) => {
+    setSaleVariants(oldSaleVariants => oldSaleVariants.map(saleVariant => saleVariant.variant.id === variantId
         ? {
           ...saleVariant,
           quantity: quantity && quantity > 0 ? quantity : 0,
-        } : saleVariant),
-    })
-  }
+        } : saleVariant))
+    }, [])
 
-  removeVariant(variantId) {
-    this.setState({
-      saleVariants: this.state.saleVariants.filter(saleVariant => saleVariant.variant.id !== variantId),
-    })
-  }
+  const removeVariant = useCallback((variantId) => {
+    setSaleVariants(oldSaleVariants =>
+      oldSaleVariants.filter(saleVariant => saleVariant.variant.id !== variantId))
+  }, [])
 
-  addVariantPromotion(variantId) {
-    this.setState({
-      saleVariants: this.state.saleVariants.map(saleVariant => saleVariant.variant.id === variantId
+  const addVariantPromotion = useCallback((variantId) => {
+    setSaleVariants(oldSaleVariants =>
+      oldSaleVariants.map(saleVariant => saleVariant.variant.id === variantId
         ? {
           ...saleVariant,
           saleVariantPromotion: {
             amount: 0,
             type: promotionTypes[0],
           },
-        } : saleVariant),
-    })
-  }
+        } : saleVariant))
+  }, [])
 
-  getVariantsTotal() {
-    return getSaleVariantsTotal(this.state.saleVariants)
-  }
+  const getVariantsTotal = useCallback(() => {
+    return getSaleVariantsTotal(saleVariants)
+  }, [saleVariants])
 
-  getTotal() {
-    return getSaleTotal(this.state)
-  }
+  const getTotal = useCallback(() => {
+    return getSaleTotal({salePromotion, saleVariants})
+  }, [saleVariants, salePromotion])
 
-  validateSale() {
-    const { storeId } = this.props
-    const {
-      salePayments,
-      salePromotion,
-      saleVariants,
-    } = this.state
+  const validateSale = useCallback(() => {
     createSale({
       salePayments: salePayments.map(salePayment => ({
         paymentTypeId: salePayment.paymentType.id,
         total: salePayment.total,
       })),
-      salePromotion: salePromotion.type
+      salePromotion: salePromotion?.type
         ? ({
-          amount: salePromotion.amount,
+          amountCents: salePromotion.amountCents,
           type: salePromotion.type.key,
         })
         : null,
@@ -151,16 +126,15 @@ export default class Checkout extends React.Component {
         unitPrice: saleVariant.variant.price,
         variantId: saleVariant.variant.id,
       })),
-      storeId,
-      totalPrice: this.getTotal(),
+      storeId: currentStore?.id,
+      totalPrice: getTotal(),
     }).then(() => {
-      this.resetSale()
+      resetSale()
       showSuccessToast(I18n.t('toast.created', {entity: I18n.t('models.sales.title')}))
     })
-  }
+  }, [currentStore, getTotal, resetSale, salePayments, salePromotion, saleVariants])
 
-  renderVariant({ saleVariantPromotion, quantity, variant: { id, product, provider, price } }) {
-    const { saleVariants } = this.state
+  const renderVariant = useCallback(({ saleVariantPromotion, quantity, variant: { id, product, provider, price } }) => {
     return <div className="sale-variant" key={id}>
       <div className="variant-infos">
         <h5>{product.name}</h5>
@@ -171,11 +145,11 @@ export default class Checkout extends React.Component {
         </ul>
       </div>
       <div className="variant-quantity">
-        <button onClick={() => this.updateQuantity(id, quantity - 1)}>
+        <button onClick={() => updateQuantity(id, quantity - 1)}>
           <i className="im im-minus" />
         </button>
-        <Input type="text" onChange={e => this.updateQuantity(id, parseInt(e.target.value))} value={quantity} />
-        <button onClick={() => this.updateQuantity(id, quantity + 1)}>
+        <Input type="text" onChange={e => updateQuantity(id, parseInt(e.target.value))} value={quantity} />
+        <button onClick={() => updateQuantity(id, quantity + 1)}>
           <i className="im im-plus" />
         </button>
       </div>
@@ -190,70 +164,64 @@ export default class Checkout extends React.Component {
             ? (
               <div className="variant-discount">
                 <Select
-                  clearable={false}
+                  isClearable={false}
                   value={saleVariantPromotion.type.key}
                   options={promotionTypes.map(({ key }) => ({
                     label: I18n.t(`promotion-types.${key}`),
                     value: key,
                   }))}
-                  onChange={({ value }) => this.setState({
-                    saleVariants: saleVariants.map(saleVariant => saleVariant.variant.id === id
+                  onChange={({ value }) => setSaleVariants(saleVariants.map(saleVariant => saleVariant.variant.id === id
                       ? {
                         ...saleVariant,
                         saleVariantPromotion: {
                           ...saleVariant.saleVariantPromotion,
                           type: promotionTypes.find(({ key }) => key === value),
                         },
-                      } : saleVariant)})}
+                      } : saleVariant))}
                 />
                 <Input
                   type="number"
                   step="any"
                   value={saleVariantPromotion.amount}
-                  onChange={e => this.setState({
-                    saleVariants: saleVariants.map(saleVariant => saleVariant.variant.id === id
+                  onChange={e => setSaleVariants(saleVariants.map(saleVariant => saleVariant.variant.id === id
                       ? {
                         ...saleVariant,
                         saleVariantPromotion: {
                           ...saleVariant.saleVariantPromotion,
                           amount: parseInt(e.target.value, 10),
                         },
-                      } : saleVariant)})}
+                      } : saleVariant))}
                 />
               </div>
             )
-            : (<button className="btn btn-primary" onClick={() => this.addVariantPromotion(id)}>
+            : (<button className="btn btn-primary" onClick={() => addVariantPromotion(id)}>
               {I18n.t('checkout.add-promotion')}
             </button>)}
-          <button className="btn btn-danger" onClick={() => this.removeVariant(id)}>
+          <button className="btn btn-danger" onClick={() => removeVariant(id)}>
             {I18n.t('checkout.remove-article')}
           </button>
         </div>
       </div>
     </div>
-  }
+  }, [addVariantPromotion, removeVariant, saleVariants, updateQuantity])
 
-  renderPaymentType(paymentType) {
-    const { salePayments } = this.state
+  const renderPaymentType = useCallback((paymentType) => {
     const selectedSalePayment = salePayments.find(salePayment =>
       salePayment.paymentType.id === paymentType.id)
+
     return (<li key={paymentType.id}>
       <Checkbox
         checked={!!selectedSalePayment}
         onChange={() => selectedSalePayment
-          ? this.setState({
-            salePayments: salePayments.filter(salePayment =>
-              salePayment.paymentType.id !== paymentType.id),
-          })
-          : this.setState({
-            salePayments: [
+          ? setSalePayments(salePayments.filter(salePayment =>
+              salePayment.paymentType.id !== paymentType.id))
+          : setSalePayments([
               ...salePayments,
               {
                 paymentType,
-                total: salePayments.length < 1 ? this.getVariantsTotal() : 0,
+                total: salePayments.length < 1 ? getVariantsTotal() : 0,
               },
-            ],
-          })}
+            ])}
       >
         {paymentType.name}
       </Checkbox>
@@ -262,46 +230,35 @@ export default class Checkout extends React.Component {
           type="number"
           step="any"
           value={selectedSalePayment.total}
-          onChange={e => this.setState({
-            salePayments: salePayments.map(salePayment =>
+          onChange={e => setSalePayments(salePayments.map(salePayment =>
               salePayment.paymentType.id === paymentType.id
                 ? {
                   paymentType,
                   total: e.target.value,
                 }
                 : salePayment
-            )})}
+            ))}
         />}
     </li>)
-  }
+  }, [salePayments, getVariantsTotal])
 
-  render() {
-    const {
-      displayedModal,
-      hasPromotion,
-      paymentTypes,
-      salePayments,
-      salePromotion,
-      saleVariants,
-      variantBarcode,
-    } = this.state
-    const change = salePayments.reduce((a, b) => a + parseFloat(b.total), 0) - this.getVariantsTotal()
+    const change = salePayments.reduce((a, b) => a + parseFloat(b.total), 0) - getVariantsTotal()
     return (
       <PageContainer>
         <div className="checkout-page">
-          <form onSubmit={e => this.onVariantSearch(e)}>
+          <form onSubmit={e => onVariantSearch(e)}>
             <i className="im im-magnifier" />
             <Input
               type="text"
               placeholder={`${I18n.t('checkout.type-barcode')}...`}
-              onChange={e => this.setState({ variantBarcode: e.target.value })}
+              onChange={e => setVariantBarcode(e.target.value)}
               value={variantBarcode}
             />
             <button type="submit" />
-            <h3>{formatPrice(this.getVariantsTotal())}</h3>
+            <h3>{formatPrice(getVariantsTotal())}</h3>
           </form>
           <div className="sale-variants">
-            {saleVariants.map(variant => this.renderVariant(variant))}
+            {saleVariants.map(variant => renderVariant(variant))}
           </div>
           {saleVariants.length > 0 && (
             <div className="buttons-container">
@@ -315,13 +272,13 @@ export default class Checkout extends React.Component {
                 })
                   .then((willDelete) => {
                     if (willDelete) {
-                      this.resetSale()
+                      resetSale()
                     }
                   })}>
                 <i className="im im-x-mark" />
                 {I18n.t('global.reset')}
               </button>
-              <button className="btn btn-primary" onClick={() => this.setState({displayedModal: true})}>
+              <button className="btn btn-primary" onClick={() => setDisplayedModal(true)}>
                 {I18n.t('checkout.end_sale')}
               </button>
             </div>
@@ -330,7 +287,7 @@ export default class Checkout extends React.Component {
         <Modal displayed={displayedModal}>
           <div className="checkout-modal">
             <Checkbox
-              onChange={() => this.setState({ hasPromotion: !hasPromotion })}
+              onChange={() => setHasPromotion(!hasPromotion)}
               checked={hasPromotion}
             >
               {I18n.t('checkout.add-promotion')}
@@ -344,29 +301,26 @@ export default class Checkout extends React.Component {
                     label: I18n.t(`promotion-types.${key}`),
                     value: key,
                   }))}
-                  onChange={props => this.setState(props
+                  onChange={props => setSalePromotion(props
                     ? ({
-                      salePromotion: {
                         ...salePromotion,
-                        type: promotionTypes.find(({ key }) => key === props.value),
-                      }})
-                    : ({salePromotion: {}}))}
+                        type: promotionTypes.find(({ key }) => key === props.value),})
+                    : ({}))}
                 />
                 {salePromotion.type &&
                   <Input
                     type="number"
                     step="any"
                     value={salePromotion.amount}
-                    onChange={e => this.setState({
-                      salePromotion: {
+                    onChange={e => setSalePromotion({
                         ...salePromotion,
                         amount: parseInt(e.target.value, 10),
-                      }})}
+                      })}
                   />}
               </div>)}
             <div className="price-title">
               <h1>{I18n.t('checkout.total')}</h1>
-              <h2>{formatPrice(this.getTotal())}</h2>
+              <h2>{formatPrice(getTotal())}</h2>
             </div>
             {change < 0 && (
               <div className="price-title">
@@ -375,8 +329,8 @@ export default class Checkout extends React.Component {
               </div>)}
             <div>
               <ul>
-                {paymentTypes.map(paymentType =>
-                  this.renderPaymentType(paymentType))}
+                {paymentTypesData?.data.map(paymentType =>
+                  renderPaymentType(paymentType))}
               </ul>
             </div>
             {change > 0 && (
@@ -390,14 +344,14 @@ export default class Checkout extends React.Component {
             >
               <button
                 className="btn btn-link"
-                onClick={() => this.setState({displayedModal: false})}
+                onClick={() => setDisplayedModal(false)}
               >
                 {I18n.t('global.cancel')}
               </button>
               <button
                 className="btn btn-primary"
-                onClick={() => this.validateSale()}
-                disabled={salePayments.reduce((a, b) => a + parseFloat(b.total), 0) < this.getVariantsTotal()}
+                onClick={() => validateSale()}
+                disabled={salePayments.reduce((a, b) => a + parseFloat(b.total), 0) < getVariantsTotal()}
               >
                 {I18n.t('global.validate')}
               </button>
@@ -412,9 +366,6 @@ export default class Checkout extends React.Component {
         </div>
       </PageContainer>
     )
-  }
 }
 
-Checkout.propTypes = {
-  storeId: PropTypes.string.isRequired,
-}
+export default Checkout

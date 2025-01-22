@@ -2,16 +2,18 @@ import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 
 export const getProviders = params =>
-  xanyahApi.get('providers', decamelizeKeys({params}))
+  xanyahApi.get<Provider[]>('providers', decamelizeKeys({params}))
 
 export const getProvider = (providerId) =>
-  xanyahApi.get(`providers/${providerId}`)
+  xanyahApi.get<Provider>(`providers/${providerId}`)
 
 export const updateProvider = (providerId, params) =>
-  xanyahApi.patch(`providers/${providerId}`, decamelizeKeys(params))
+  xanyahApi.patch<Provider>(`providers/${providerId}`, decamelizeKeys(params))
 
 export const createProvider = newProvider =>
-  xanyahApi.post('providers', decamelizeKeys(newProvider))
+  xanyahApi.post<Provider>('providers', decamelizeKeys(newProvider))
 
+
+/** @deprecated */
 export const searchProvider = params =>
   xanyahApi.get('providers/search', decamelizeKeys({params}))

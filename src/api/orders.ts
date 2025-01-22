@@ -3,16 +3,17 @@ import { decamelizeKeys } from 'humps'
 
 
 export const getOrders = params =>
-  xanyahApi.get('orders', decamelizeKeys({params}))
+  xanyahApi.get<Order[]>('orders', decamelizeKeys({params}))
 
 export const getOrder = (orderId) =>
-  xanyahApi.get(`orders/${orderId}`)
+  xanyahApi.get<Order>(`orders/${orderId}`)
 
 export const updateOrder = (orderId, params) =>
-  xanyahApi.patch(`orders/${orderId}`, decamelizeKeys(params))
+  xanyahApi.patch<Order>(`orders/${orderId}`, decamelizeKeys(params))
 
 export const createOrder = newOrder =>
-  xanyahApi.post('orders', decamelizeKeys(newOrder))
+  xanyahApi.post<Order>('orders', decamelizeKeys(newOrder))
 
+/** @deprecated */
 export const searchOrder = params =>
-  xanyahApi.get('orders/search', decamelizeKeys({params}))
+  xanyahApi.get<Order[]>('orders/search', decamelizeKeys({params}))

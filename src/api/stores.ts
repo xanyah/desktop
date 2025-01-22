@@ -3,9 +3,8 @@ import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 
 
-export const getStores = (): Promise<AxiosResponse<Store[]>> =>
-  xanyahApi.get('stores', decamelizeKeys({}))
-
+export const getStores = params =>
+  xanyahApi.get<Store[]>('stores', decamelizeKeys({params}))
 
 export const updateStore = (storeId, params) =>
-  xanyahApi.patch(`stores/${storeId}`, decamelizeKeys(params))
+  xanyahApi.patch<Store>(`stores/${storeId}`, decamelizeKeys(params))
