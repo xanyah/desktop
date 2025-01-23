@@ -40,9 +40,9 @@
   },
   "home": {
     "welcome": {
-      "afternoon": "Bonjour %{firstname} !",
-      "evening": "Bonsoir %{firstname} !",
-      "morning": "Bonjour %{firstname} !"
+      "afternoon": "Bonjour {{firstname}} !",
+      "evening": "Bonsoir {{firstname}} !",
+      "morning": "Bonjour {{firstname}} !"
     }
   },
   "home-link": {
@@ -231,14 +231,21 @@
   "routes": {
     "account": "Mon compte",
     "clients": "Clients",
+    "client": "Client",
     "custom-attribute": "Attributs Personnalisés",
     "inventories": "Inventaires",
+    "inventory": "Inventaire",
     "manufacturers": "Fabricants",
+    "manufacturer": "Fabricant",
     "orders": "Commandes",
+    "order": "Commande",
     "products": "Produits",
+    "product": "Produit",
     "providers": "Fournisseurs",
+    "provider": "Fournisseur",
     "settings": "Paramètres",
-    "shippings": "Livraisons"
+    "shippings": "Livraisons",
+    "shipping": "Livraison"
   },
   "settings-page": {
     "side-navigation": {
@@ -258,9 +265,9 @@
     "french": "Français"
   },
   "toast": {
-    "created": "%{entity} créé(e) !",
+    "created": "{{entity}} créé(e) !",
     "error": "Une erreur s'est produite !",
-    "not-found": "%{entity} inexistant",
+    "not-found": "{{entity}} inexistant",
     "updated": "Mis à jour"
   },
   "vat-rates": {

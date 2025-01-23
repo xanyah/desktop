@@ -1,39 +1,43 @@
-import { useState } from 'react'
-import { providerFormat } from '../../types'
-import { I18n } from 'react-redux-i18n'
-import PageContainer from '../../containers/page-container'
+import { useState } from "react";
+import { providerFormat } from "../../types";
+import PageContainer from "../../containers/page-container";
 
-import './styles.scss'
-import { useProvider, useCurrentStore } from '../../hooks'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
-import { createProvider, updateProvider } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
-import DataDetails from '../../components/data-details'
+import "./styles.scss";
+import { useProvider, useCurrentStore } from "../../hooks";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { createProvider, updateProvider } from "../../api";
+import { showSuccessToast } from "../../utils/notification-helper";
+import DataDetails from "../../components/data-details";
+import { useTranslation } from "react-i18next";
 
 const Provider = () => {
-  const navigate = useNavigate()
-  const [isEditing, setIsEditing] = useState(false)
-  const store = useCurrentStore()
-  const { id } = useParams()
-  const { data: providerData } = useProvider(id)
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+  const store = useCurrentStore();
+  const { id } = useParams();
+  const { data: providerData } = useProvider(id);
 
   const { mutate: createApiProvider } = useMutation({
-    mutationFn: (newData: any) => createProvider({...newData, storeId: store?.id}),
+    mutationFn: (newData: any) =>
+      createProvider({ ...newData, storeId: store?.id }),
     onSuccess: (data) => {
-      navigate(`/providers/${data.data.id}`)
-      setIsEditing(false)
-      showSuccessToast(I18n.t('toast.created', { entity: I18n.t('models.providers.title') }))
+      navigate(`/providers/${data.data.id}`);
+      setIsEditing(false);
+      showSuccessToast(
+        t("toast.created", { entity: t("models.providers.title") })
+      );
     },
-  })
+  });
 
   const { mutate: updateApiProvider } = useMutation({
-    mutationFn: newData => updateProvider(id, newData),
+    mutationFn: (newData) => updateProvider(id, newData),
     onSuccess: () => {
-      setIsEditing(false)
-      showSuccessToast(I18n.t('toast.updated'))
+      setIsEditing(false);
+      showSuccessToast(t("toast.updated"));
     },
-  })
+  });
 
   return (
     <PageContainer>
@@ -50,7 +54,7 @@ const Provider = () => {
         />
       </div>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default Provider
+export default Provider;

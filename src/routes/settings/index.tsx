@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Translate } from 'react-redux-i18n'
 
 import CustomAttribute from './custom-attributes'
 import Categories from './categories'
@@ -8,6 +7,7 @@ import ImportFiles from './import-files'
 
 import './styles.scss'
 import PageContainer from '../../containers/page-container'
+import { Trans } from 'react-i18next'
 
 const Settings = () => {
   const renderStoreSettings = () => {
@@ -51,6 +51,8 @@ const Settings = () => {
     [steps, currentStepKey]
   )
 
+  console.log(steps)
+
   return (
     <PageContainer>
       <div className="settings-page">
@@ -61,7 +63,7 @@ const Settings = () => {
               key={s.key}
               onClick={() => setCurrentStepKey(s.key)}
             >
-              <Translate value={`settings-page.side-navigation.${s.key}`} />
+              <Trans i18nKey={`settings-page.side-navigation.${s.key}`} />
             </button>
           ))}
         </div>

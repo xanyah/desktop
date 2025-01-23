@@ -1,44 +1,42 @@
-import { useEffect, useState } from 'react'
-import Select from 'react-select'
-import { Translate } from 'react-redux-i18n'
+import { useEffect, useState } from "react";
+import Select from "react-select";
 
-import FormAttribute from '../../../containers/form-attribute'
-import { countryList } from '../../../utils/country-helper'
+import FormAttribute from "../../../containers/form-attribute";
+import { countryList } from "../../../utils/country-helper";
 
-import './styles.scss'
-import { useCurrentStore, useVatRates } from '../../../hooks'
-import { useMutation } from '@tanstack/react-query'
-import { updateStore } from '../../../api'
+import "./styles.scss";
+import { useCurrentStore, useVatRates } from "../../../hooks";
+import { useMutation } from "@tanstack/react-query";
+import { updateStore } from "../../../api";
+import { Trans } from "react-i18next";
 
 const StoreSettings = () => {
-  const currentStore = useCurrentStore()
+  const currentStore = useCurrentStore();
   const [updatedStore, setUpdatedStore] = useState({
-    address: '',
-    country: '',
-    name: '',
-  })
+    address: "",
+    country: "",
+    name: "",
+  });
 
-  const { data: vatRatesData } = useVatRates(updatedStore?.country)
+  const { data: vatRatesData } = useVatRates(updatedStore?.country);
 
   const { mutate } = useMutation({
-    mutationFn: () => updateStore(currentStore?.id, updatedStore)
-  })
+    mutationFn: () => updateStore(currentStore?.id, updatedStore),
+  });
 
   useEffect(() => {
-    setUpdatedStore(currentStore)
-  }, [setUpdatedStore, currentStore])
-
+    setUpdatedStore(currentStore);
+  }, [setUpdatedStore, currentStore]);
 
   const handleUpdateStore = (attribute, value) => {
-    setUpdatedStore(oldValue => ({
+    setUpdatedStore((oldValue) => ({
       ...oldValue,
       [attribute]: value,
-    }))
-  }
+    }));
+  };
 
   const renderVatRatesCountry = () => {
-    if (!vatRatesData?.data)
-      return null
+    if (!vatRatesData?.data) return null;
 
     const {
       standardRate,
@@ -46,32 +44,40 @@ const StoreSettings = () => {
       reducedRateAlt,
       superReducedRate,
       parkingRate,
-    } = (vatRatesData?.data || {})
+    } = vatRatesData?.data || {};
 
     return (
       <div className="vat-rates">
-        <span className="label"><Translate value='models.stores.vat' />: </span>
-        <Translate value='vat-rates.standard' />:&nbsp;
+        <span className="label">
+          <Trans i18nKey="models.stores.vat" />:{" "}
+        </span>
+        <Trans i18nKey="vat-rates.standard" />
+        :&nbsp;
         <b>{standardRate} %</b> -&nbsp;
-        <Translate value='vat-rates.reduced_rate' />:&nbsp;
+        <Trans i18nKey="vat-rates.reduced_rate" />
+        :&nbsp;
         <b>{reducedRate} %</b> -&nbsp;
-        <Translate value='vat-rates.reduced_rate_alt' />:&nbsp;
+        <Trans i18nKey="vat-rates.reduced_rate_alt" />
+        :&nbsp;
         <b>{reducedRateAlt} %</b> -&nbsp;
-        <Translate value='vat-rates.super_reduced_rate' />:&nbsp;
+        <Trans i18nKey="vat-rates.super_reduced_rate" />
+        :&nbsp;
         <b>{superReducedRate} %</b> -&nbsp;
-        <Translate value='vat-rates.parking_rate' />:&nbsp;
+        <Trans i18nKey="vat-rates.parking_rate" />
+        :&nbsp;
         <b>{parkingRate} %</b>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <form
       className="store-settings-form"
-      onSubmit={e => {
-        e.preventDefault()
-        mutate()
-      }}>
+      onSubmit={(e) => {
+        e.preventDefault();
+        mutate();
+      }}
+    >
       <div>
         <div className="row">
           <FormAttribute
@@ -80,9 +86,7 @@ const StoreSettings = () => {
             value={updatedStore?.name}
             model="stores"
             type="string"
-            onUpdate={
-              (attribute, value) => handleUpdateStore(attribute, value)
-            }
+            onUpdate={(attribute, value) => handleUpdateStore(attribute, value)}
           />
         </div>
         <div className="row">
@@ -92,26 +96,26 @@ const StoreSettings = () => {
             value={updatedStore?.address}
             model="stores"
             type="string"
-            onUpdate={
-              (attribute, value) => handleUpdateStore(attribute, value)
-            }
+            onUpdate={(attribute, value) => handleUpdateStore(attribute, value)}
           />
         </div>
         <div className="row">
           <Select
             name="form-field-name"
-            value={countryList?.find(country => country.value === updatedStore?.country)}
-            onChange={e => handleUpdateStore('country', e)}
+            value={countryList?.find(
+              (country) => country.value === updatedStore?.country
+            )}
+            onChange={(e) => handleUpdateStore("country", e)}
             options={countryList as any}
           />
           {renderVatRatesCountry()}
         </div>
       </div>
       <button className="btn-solid" type="submit">
-        <Translate value='global.validate' />
+        <Trans i18nKey="global.validate" />
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default StoreSettings
+export default StoreSettings;
