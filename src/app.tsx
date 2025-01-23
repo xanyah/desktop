@@ -1,14 +1,10 @@
 import React, {useEffect} from 'react'
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import {
   loadTranslations,
   syncTranslationWithStore,
 } from 'react-redux-i18n'
+import './index.css'
 
 // import { ipcRenderer } from 'electron'
 
@@ -22,6 +18,7 @@ import { queryClient, routes } from './constants'
 
 import './app.scss'
 import { QueryClientProvider } from '@tanstack/react-query'
+import Router from './routes'
 
 const App = () => {
   useEffect(() => {
@@ -31,7 +28,7 @@ const App = () => {
     store.dispatch(validateToken(
       () => {
         store.dispatch(initialSync())
-        if (window.location.pathname !== '/home') {
+        if (window.location.pathname === '/sign-in') {
           window.location = '/home'
         }
       },
@@ -46,20 +43,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            {routes
-              .filter(route => route.inRouter)
-              .map(route =>
-                <Route
-                  element={route.element}
-                  key={route.path}
-                  exact={route.exact}
-                  path={route.path}
-                  strict={route.strict}
-                />)}
-          </Routes>
-        </BrowserRouter>
+        <Router />
       </Provider>
     </QueryClientProvider>
   )
