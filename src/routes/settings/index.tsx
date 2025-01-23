@@ -51,6 +51,8 @@ const Settings = () => {
     [steps, currentStepKey]
   )
 
+  console.log(steps)
+
   return (
     <PageContainer>
       <div className="settings-page">
