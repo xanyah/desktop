@@ -1,6 +1,4 @@
-import { useState } from "react";
-import PageContainer from "../../containers/page-container";
-
+import { useState } from 'react'
 import "./styles.scss";
 import { useClient } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
@@ -57,7 +55,6 @@ const Client = () => {
   });
 
   return (
-    <PageContainer>
       <div className="client-page">
         {clientData && (
           <h1 className="data-details-title">{`${clientData?.data.firstname} ${clientData?.data.lastname}`}</h1>
@@ -72,8 +69,7 @@ const Client = () => {
           updateEntity={updateApiClient}
         />
       </div>
-    </PageContainer>
-  );
-};
+  )
+}
 
 export default Client;

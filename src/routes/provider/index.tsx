@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { providerFormat } from "../../types";
-import PageContainer from "../../containers/page-container";
+import { useState } from 'react'
+import { providerFormat } from '../../types'
 
 import "./styles.scss";
 import { useProvider, useCurrentStore } from "../../hooks";
@@ -40,7 +39,6 @@ const Provider = () => {
   });
 
   return (
-    <PageContainer>
       <div className="provider-page">
         <h1 className="data-details-title">{providerData?.data.name}</h1>
         <DataDetails
@@ -53,8 +51,7 @@ const Provider = () => {
           updateEntity={updateApiProvider}
         />
       </div>
-    </PageContainer>
-  );
-};
+  )
+}
 
 export default Provider;

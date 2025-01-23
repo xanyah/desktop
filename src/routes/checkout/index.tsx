@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
-import swal from "sweetalert";
-import Select from "react-select";
-import { Link } from "react-router-dom";
+import { useCallback, useState } from 'react'
+import swal from 'sweetalert'
+import Select from 'react-select'
+import { Link } from 'react-router-dom'
 
 import "./styles.scss";
 
@@ -15,12 +15,11 @@ import {
 import {
   showErrorToast,
   showSuccessToast,
-} from "../../utils/notification-helper";
-import { useCurrentStore, usePaymentTypes } from "../../hooks";
-import Input from "../../components/input";
-import Checkbox from "../../components/checkbox";
-import PageContainer from "../../containers/page-container";
-import Modal from "../../components/modal";
+} from '../../utils/notification-helper'
+import { useCurrentStore, usePaymentTypes } from '../../hooks'
+import Input from '../../components/input'
+import Checkbox from '../../components/checkbox'
+import Modal from '../../components/modal'
 import { Trans, useTranslation } from "react-i18next";
 
 const Checkout = () => {
@@ -335,7 +334,7 @@ const Checkout = () => {
     salePayments.reduce((a, b) => a + parseFloat(b.total), 0) -
     getVariantsTotal();
   return (
-    <PageContainer>
+    <>
       <div className="checkout-page">
         <form onSubmit={(e) => onVariantSearch(e)}>
           <i className="im im-magnifier" />
@@ -478,7 +477,7 @@ const Checkout = () => {
           </span>
         </Link>
       </div>
-    </PageContainer>
+    </>
   );
 };
 

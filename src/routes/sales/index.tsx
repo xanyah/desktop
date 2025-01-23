@@ -1,26 +1,45 @@
-import './styles.scss'
+import { Link } from 'react-router-dom'
 import { useCurrentStore, useSales } from '../../hooks'
-import { useNavigate } from 'react-router-dom'
-import PageContainer from '../../containers/page-container'
-import DataTable from '../../components/data-table'
+import { TableWithSearch } from '@/components'
+import { useMemo } from 'react'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { formatPrice } from '@/helpers/price'
 
 const Sales = () => {
-  const navigate = useNavigate()
+  useBreadCrumbContext([{ label: 'Sales' }])
   const currentStore = useCurrentStore()
-  const { data: salesData, isLoading } = useSales({ storeId: currentStore?.id })
+  const { data, isLoading } = useSales({
+    'q[storeIdEq]': currentStore?.id
+  })
+
+  const columnHelper = createColumnHelper<Sale>()
+
+  const columns = useMemo(() => ([
+    columnHelper.accessor('createdAt', {
+      header: 'Date of creation',
+      cell: (props) => <Link className='underline' to={`/sales/${props.row.original.id}`}>{props.getValue()}</Link>
+    }),
+    columnHelper.accessor('totalAmountCents', {
+      header: 'Date of creation',
+      cell: (props) => <span>{formatPrice(props.getValue(), props.row.original.totalAmountCurrency)}</span>
+    }),
+    columnHelper.accessor(row => `${row.user.firstname} ${row.user.lastname}`, {
+      id: 'fullname',
+      header: 'User',
+      cell: (props) => <Link className='underline' to={`/users/${props.row.original.user.id}`}>{props.getValue()}</Link>
+    }),
+  ]) as ColumnDef<Sale>[], [columnHelper])
 
   return (
-    <PageContainer>
-      <DataTable
-        columns={['createdAt']}
-        creationFunction={false}
-        data={salesData?.data}
-        loading={isLoading}
-        onItemView={item => navigate(`/sales/${item.id}`)}
-        type="Sales"
-      />
-    </PageContainer>
+    <TableWithSearch
+      searchPlaceholder="Search a sale"
+      isLoading={isLoading}
+      columns={columns}
+      data={data?.data}
+    />
   )
+
 }
 
 export default Sales

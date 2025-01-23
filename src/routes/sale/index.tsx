@@ -1,4 +1,3 @@
-import PageContainer from "../../containers/page-container";
 import { formatPrice } from "../../utils/data-helper";
 
 import "./styles.scss";
@@ -215,11 +214,11 @@ const Sale = () => {
 
   const selectedSale = saleData?.data;
   return (
-    <PageContainer>
+    <>
       <h1 className="data-details-title">{selectedSale?.name}</h1>
       {selectedSale && renderSaleInfos()}
-    </PageContainer>
-  );
-};
+    </>
+  )
+}
 
 export default Sale;

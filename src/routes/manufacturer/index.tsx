@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { manufacturerFormat } from '../../types'
-import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
 import { useManufacturer, useProducts } from '../../hooks'
@@ -40,7 +39,6 @@ const Manufacturer = () => {
   })
 
   return (
-    <PageContainer>
       <div className="manufacturer-page">
         <h1 className="data-details-title">{manufacturerData?.data.name}</h1>
         <DataDetails
@@ -69,7 +67,6 @@ const Manufacturer = () => {
           }
         </DataDetails>
       </div>
-    </PageContainer>
   )
 }
 

@@ -6,7 +6,6 @@ import StoreSettings from './store-settings'
 import ImportFiles from './import-files'
 
 import './styles.scss'
-import PageContainer from '../../containers/page-container'
 import { Trans } from 'react-i18next'
 
 const Settings = () => {
@@ -54,7 +53,6 @@ const Settings = () => {
   console.log(steps)
 
   return (
-    <PageContainer>
       <div className="settings-page">
         <div className="side-navigation">
           {steps.map(s => (
@@ -71,7 +69,6 @@ const Settings = () => {
           {currentStep ? currentStep.render() : null}
         </div>
       </div>
-    </PageContainer>
   )
 }
 

@@ -1,12 +1,11 @@
 import { useCallback, useEffect } from "react";
 import { supportedLangages } from "../../utils/i18n-helper";
 
-import "./styles.scss";
-import { useCurrentToken } from "../../hooks";
-import { Controller, useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { updateUserParams } from "../../api";
-import PageContainer from "../../containers/page-container";
+import './styles.scss'
+import { useCurrentToken } from '../../hooks'
+import { Controller, useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
+import { updateUserParams } from '../../api'
 import { find, pick } from "lodash";
 import { Trans, useTranslation } from "react-i18next";
 import { FormAttribute } from "../../components";
@@ -177,13 +176,11 @@ const Account = () => {
   ]);
 
   return (
-    <PageContainer>
       <div className="account-page">
         {renderUpdateUserForm()}
         {renderUpdatePasswordForm()}
       </div>
-    </PageContainer>
-  );
-};
+  )
+}
 
 export default Account;

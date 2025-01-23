@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { customAttributeFormat } from "../../types";
-import PageContainer from "../../containers/page-container";
+import { useState } from 'react'
+import { customAttributeFormat } from '../../types'
 
 import "./styles.scss";
 import { createCustomAttribute, updateCustomAttribute } from "../../api";
@@ -40,19 +39,17 @@ const CustomAttribute = () => {
     },
   });
 
-  return (
-    <PageContainer>
-      <DataDetails
-        createEntity={createApiCustomAttribute}
-        currentEntity={customAttributeData?.data}
-        editing={isEditing}
-        formattedData={customAttributeFormat}
-        toggleEdit={() => setIsEditing(!isEditing)}
-        type="custom-attributes"
-        updateEntity={updateApiCustomAttribute}
-      ></DataDetails>
-    </PageContainer>
-  );
-};
+    return (
+        <DataDetails
+          createEntity={createApiCustomAttribute}
+          currentEntity={customAttributeData?.data}
+          editing={isEditing}
+          formattedData={customAttributeFormat}
+          toggleEdit={() => setIsEditing(!isEditing)}
+          type="custom-attributes"
+          updateEntity={updateApiCustomAttribute}
+        ></DataDetails>
+    )
+  }
 
 export default CustomAttribute;

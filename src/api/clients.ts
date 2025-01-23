@@ -2,7 +2,7 @@ import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 
 export const getClients = params =>
-  xanyahApi.get<Client[]>('clients', decamelizeKeys({params}))
+  xanyahApi.get<Client[]>('v2/clients', decamelizeKeys({params}))
 
 export const getClient = (clientId) =>
   xanyahApi.get<Client>(`clients/${clientId}`)

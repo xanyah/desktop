@@ -3,7 +3,7 @@ import { decamelizeKeys } from 'humps'
 
 
 export const getOrders = params =>
-  xanyahApi.get<Order[]>('orders', decamelizeKeys({params}))
+  xanyahApi.get<Order[]>('v2/orders', decamelizeKeys({params}))
 
 export const getOrder = (orderId) =>
   xanyahApi.get<Order>(`orders/${orderId}`)

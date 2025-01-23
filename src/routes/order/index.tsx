@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { orderFormat } from "../../types";
-import PageContainer from "../../containers/page-container";
+import { useState } from 'react'
+import { orderFormat } from '../../types'
 
 import "./styles.scss";
 import { useCurrentStore, useOrder } from "../../hooks";
@@ -76,22 +75,22 @@ const Order = () => {
     );
   };
 
-  return (
-    <PageContainer>
-      <h1 className="data-details-title">{orderData?.data?.name}</h1>
-      <DataDetails
-        createEntity={createApiOrder}
-        currentEntity={orderData?.data}
-        editing={isEditing}
-        formattedData={orderFormat}
-        toggleEdit={() => setIsEditing(!isEditing)}
-        type="orders"
-        updateEntity={updateApiOrder}
-      >
-        {renderOrderVariants()}
-      </DataDetails>
-    </PageContainer>
-  );
-};
+    return (
+      <>
+        <h1 className="data-details-title">{orderData?.data?.name}</h1>
+        <DataDetails
+          createEntity={createApiOrder}
+          currentEntity={orderData?.data}
+          editing={isEditing}
+          formattedData={orderFormat}
+          toggleEdit={() => setIsEditing(!isEditing)}
+          type="orders"
+          updateEntity={updateApiOrder}
+        >
+          {renderOrderVariants()}
+        </DataDetails>
+      </>
+    )
+}
 
 export default Order;

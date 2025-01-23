@@ -2,8 +2,8 @@ import { useState } from "react";
 import Collapsible from "react-collapsible";
 import { Trans, useTranslation } from "react-i18next";
 
-import { productFormat } from "../../types";
-import PageContainer from "../../containers/page-container";
+import { productFormat } from '../../types'
+
 import FormAttribute from "../../containers/form-attribute";
 
 import "./styles.scss";
@@ -180,7 +180,6 @@ const Product = () => {
   };
 
   return (
-    <PageContainer>
       <div className="product-page">
         <h1 className="data-details-title">{productData?.data?.name}</h1>
         <DataDetails
@@ -197,8 +196,7 @@ const Product = () => {
           </div>
         </DataDetails>
       </div>
-    </PageContainer>
-  );
-};
+  )
+}
 
 export default Product;

@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import { useClients, useSearchedClients } from '../../hooks'
-import { useNavigate } from 'react-router-dom'
-import PageContainer from '../../containers/page-container'
-import DataTable from '../../components/data-table'
-import './styles.scss'
-import { useCurrentStore } from '../../hooks/stores'
+import { useCurrentStore, useClients } from '../../hooks'
+import { TableWithSearch } from '@/components'
+import { useMemo, useState } from 'react'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 
 const Clients = () => {
+  useBreadCrumbContext([{ label: 'Clients' }])
   const currentStore = useCurrentStore()
-  const [searchedQuery, setSearchedQuery] = useState('')
-  const { data: clientsData, isLoading } = useClients()
-  const { data: searchedClientsData, isLoading: isSearchLoading } =
-    useSearchedClients({
-      query: searchedQuery,
-      storeId: currentStore?.id,
-    })
-  const navigate = useNavigate()
+  const [searchQuery, setSearchQuery] = useState('')
+  const { data, isLoading } = useClients({
+    'q[firstnameOrLastnameCont]': searchQuery,
+    'q[toreIdEq]': currentStore?.id
+  })
+
+  const columnHelper = createColumnHelper<Client>()
+
+  const columns = useMemo(() => ([
+    columnHelper.accessor('firstname', {
+      header: 'Firstname'
+    }),
+    columnHelper.accessor('lastname', {
+      header: 'Lastname',
+    }),
+  ]) as ColumnDef<Client>[], [columnHelper])
 
   return (
-    <PageContainer>
-      <DataTable
-        columns={['firstname', 'lastname']}
-        data={searchedQuery ? searchedClientsData?.data : clientsData?.data}
-        loading={isLoading || isSearchLoading}
-        onItemView={(item: Client) => navigate(`/clients/${item.id}`)}
-        type="clients"
-        searchEntity={setSearchedQuery}
-      />
-    </PageContainer>
+    <TableWithSearch
+      searchPlaceholder="Search a client"
+      onSearchQueryChange={setSearchQuery}
+      searchQuery={searchQuery}
+      isLoading={isLoading}
+      createUrl={'/clients/new'}
+      createLabel={'Create a client'}
+      columns={columns}
+      data={data?.data}
+    />
   )
+
 }
 
 export default Clients

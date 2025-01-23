@@ -2,10 +2,10 @@ import { decamelizeKeys } from 'humps'
 import { xanyahApi } from '../constants'
 
 export const getProducts = params =>
-  xanyahApi.get<Product[]>('products', decamelizeKeys({params}))
+  xanyahApi.get<Product[]>('v2/products', decamelizeKeys({params}))
 
 export const getProduct = (productId) =>
-  xanyahApi.get<Product>(`products/${productId}`)
+  xanyahApi.get<Product>(`v2/products/${productId}`)
 
 export const updateProduct = (productId, params) =>
   xanyahApi.patch<Product>(`products/${productId}`, decamelizeKeys(params))

@@ -1,32 +1,44 @@
-import { useState } from 'react'
-import './styles.scss'
-import DataTable from '../../components/data-table'
-import PageContainer from '../../containers/page-container'
-import { useProviders, useSearchedProviders, useCurrentStore } from '../../hooks'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useCurrentStore, useProviders } from '../../hooks'
+import { TableWithSearch } from '@/components'
+import { useMemo, useState } from 'react'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 
 const Providers = () => {
+  useBreadCrumbContext([{ label: 'Providers' }])
   const currentStore = useCurrentStore()
-  const [searchedQuery, setSearchedQuery] = useState('')
-  const { data: providersData, isLoading } = useProviders()
-  const { data: searchedProvidersData, isLoading: isSearchLoading } = useSearchedProviders({
-    query: searchedQuery,
-    storeId: currentStore?.id,
+  const [searchQuery, setSearchQuery] = useState('')
+  const { data, isLoading } = useProviders({
+    'q[nameOrNotesCont]': searchQuery,
+    'q[storeIdEq]': currentStore?.id
   })
-  const navigate = useNavigate()
 
-    return (
-      <PageContainer>
-        <DataTable
-          columns={['name', 'notes', 'shippingsCount']}
-          data={searchedQuery ? searchedProvidersData?.data : providersData?.data}
-          loading={isLoading || isSearchLoading}
-          onItemView={item => navigate(`/providers/${item.id}`)}
-          type="providers"
-          searchEntity={setSearchedQuery}
-        />
-      </PageContainer>
-    )
+  const columnHelper = createColumnHelper<Provider>()
+
+  const columns = useMemo(() => ([
+    columnHelper.accessor('name', {
+      header: 'Name',
+      cell: (props) => <Link className='underline' to={`/providers/${props.row.original.id}`}>{props.getValue()}</Link>
+    }),
+    columnHelper.accessor('shippingsCount', {
+      header: '# of shippings',
+    }),
+  ]) as ColumnDef<Provider>[], [columnHelper])
+
+  return (
+    <TableWithSearch
+      searchPlaceholder="Search a provider"
+      onSearchQueryChange={setSearchQuery}
+      searchQuery={searchQuery}
+      isLoading={isLoading}
+      createUrl={'/providers/new'}
+      createLabel={'Create a provider'}
+      columns={columns}
+      data={data?.data}
+    />
+  )
+
 }
 
 export default Providers

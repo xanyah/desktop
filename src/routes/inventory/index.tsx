@@ -1,5 +1,4 @@
 import { inventoryFormat } from '../../types'
-import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
 import { useParams } from 'react-router-dom'
@@ -47,17 +46,14 @@ const Inventory = () => {
   }
 
   return (
-    <PageContainer>
-      <h1 className="data-details-title">
-        <Trans i18nKey='models.inventories.title' />
-      </h1>
+    <>
       <DataDetails
         currentEntity={inventoryData?.data}
         formattedData={inventoryFormat}
         type="inventories"
       />
       {renderInventoryVariants()}
-    </PageContainer>
+      </>
   )
 }
 
