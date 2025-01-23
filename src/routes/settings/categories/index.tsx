@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Translate } from 'react-redux-i18n'
 import { PulseLoader } from 'react-spinners'
 
 import FormAttribute from '../../../containers/form-attribute'
@@ -9,6 +8,7 @@ import './styles.scss'
 import { useCategories, useCurrentStore } from '../../../hooks'
 import { useMutation } from '@tanstack/react-query'
 import { createCategory } from '../../../api'
+import { Trans } from 'react-i18next'
 
 const Categories = () => {
   const store = useCurrentStore()
@@ -75,7 +75,7 @@ const Categories = () => {
         />
 
         <button className="btn-solid" type="submit">
-          <Translate value="models.categories.create"/>
+          <Trans i18nKey="models.categories.create"/>
         </button>
       </form>
     )
@@ -94,7 +94,7 @@ const Categories = () => {
       )
 
     if(!categoriesData?.data.length)
-      return <h3><Translate value="models.categories.noData"/></h3>
+      return <h3><Trans i18nKey="models.categories.noData"/></h3>
     return (
       <div className='categories'>
         {

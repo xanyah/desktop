@@ -2,7 +2,7 @@ import React, { useEffect, ReactNode } from 'react'
 import { useForm, Controller, RegisterOptions } from 'react-hook-form'
 import ItemAttribute from '../item-attribute'
 import { FormAttribute } from '../../components'
-import { Translate } from 'react-redux-i18n'
+import { Trans } from 'react-i18next';
 import { isEditableEntity } from '../../utils/entity-helper'
 import './styles.scss'
 import { filter, forEach, get, reduce } from 'lodash'
@@ -113,7 +113,7 @@ const DataDetails: React.FC<DataDetailsProps> = ({
 
             <div className="action-buttons">
               <button className="btn-primary" type="submit">
-                <Translate value={'data-details.form.buttons.create'} />
+                <Trans i18nKey={'data-details.form.buttons.create'} />
               </button>
             </div>
           </form>
@@ -180,10 +180,10 @@ const DataDetails: React.FC<DataDetailsProps> = ({
                       type="button"
                       onClick={onCancel}
                     >
-                      <Translate value={'data-details.form.buttons.cancel'} />
+                      <Trans i18nKey={'data-details.form.buttons.cancel'} />
                     </button>
                     <button className="btn-primary" type="submit">
-                      <Translate value={'data-details.form.buttons.submit'} />
+                      <Trans i18nKey={'data-details.form.buttons.submit'} />
                     </button>
                   </div>
                 ) : (
@@ -192,7 +192,7 @@ const DataDetails: React.FC<DataDetailsProps> = ({
                     type="button"
                     onClick={() => toggleEdit()}
                   >
-                    <Translate value={'data-details.form.buttons.edit'} />
+                    <Trans i18nKey={'data-details.form.buttons.edit'} />
                   </button>
                 ))}
             </div>

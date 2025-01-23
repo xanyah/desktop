@@ -1,75 +1,78 @@
-import React from 'react'
-import Select from 'react-select'
-import { Translate } from 'react-redux-i18n'
-import Input from '../input'
+import React from "react";
+import Select from "react-select";
+import Input from "../input";
 
 import {
   isOfEntityType,
   getModel,
   getTypeOptions,
-} from '../../utils/data-helper'
+} from "../../utils/data-helper";
 import {
   getParentCategoriesList,
   getVatRatesOptions,
-} from '../../utils/category-helper'
+} from "../../utils/category-helper";
 
-import './styles.scss'
-import { map } from 'lodash'
+import "./styles.scss";
+import { map } from "lodash";
+import { Trans, useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
 interface Item {
-  attribute: string
-  error?: string
-  model: string
-  onUpdate: (value: string) => void
-  type: string
-  value: string
-  inline?: boolean
+  attribute: string;
+  error?: string;
+  model: string;
+  onUpdate: (value: string) => void;
+  type: string;
+  value: string;
+  inline?: boolean;
 }
 
 //TODO add checkbox / Vat Rates ? / Parent Category ? Sofiane
 //TODO: formatPrice on Price
 //TODO: link in entity type to the concerned entity
 const FormAttribute = (item: Item) => {
+  const { t } = useTranslation();
+
   return (
-    <div className={item.inline ? 'form-attribute inline' : 'form-attribute'}>
+    <div className={item.inline ? "form-attribute inline" : "form-attribute"}>
       <label htmlFor={item.attribute}>
-        <Translate value={`models.${item.model}.${item.attribute}`} />
+        <Trans i18nKey={`models.${item.model}.${item.attribute}`} />
       </label>
-      {getFormElement(item)}
+      {getFormElement(item, t)}
       {item.error && <div className="error-message">{item.error}</div>}
     </div>
-  )
-}
+  );
+};
 
-const getFormElement = (item) => {
+const getFormElement = (item, t: TFunction) => {
   switch (item.type) {
-    case 'textarea':
+    case "textarea":
       return (
         <textarea
           onChange={(e) => item.onUpdate(e.target.value)}
           value={item.value}
           name={item.attribute}
         ></textarea>
-      )
-    case 'number':
+      );
+    case "number":
       return (
         <Input
           onChange={(e) => item.onUpdate(e.target.value)}
           value={item.value}
           type="number"
         />
-      )
-    case 'string':
+      );
+    case "string":
       return (
         <Input
           onChange={(e) => item.onUpdate(e.target.value)}
           value={item.value}
           type="text"
         />
-      )
-    case 'entity':
-      return getSelect(item)
-    case 'type':
+      );
+    case "entity":
+      return getSelect(item);
+    case "type":
       return (
         <Select
           name={item.attribute}
@@ -77,8 +80,8 @@ const getFormElement = (item) => {
           onChange={(e) => item.onUpdate(e.value)}
           options={getTypeOptions()}
         />
-      )
-    case 'select':
+      );
+    case "select":
       return (
         <Select
           name={item.attribute}
@@ -86,42 +89,42 @@ const getFormElement = (item) => {
           onChange={(e) => item.onUpdate(e.value)}
           options={item.options}
         />
-      )
-    case 'parent-category':
+      );
+    case "parent-category":
       return (
         <Select
           name={item.attribute}
           value={item.value}
           onChange={(e) => item.onUpdate(e.value)}
-          options={getParentCategoriesList(item['categories'])}
+          options={getParentCategoriesList(item["categories"])}
         />
-      )
-    case 'password':
+      );
+    case "password":
       return (
         <Input
           onChange={(e) => item.onUpdate(e.target.value)}
           value={item.value}
           type="password"
         />
-      )
-    case 'vat-rates':
+      );
+    case "vat-rates":
       return (
         <Select
           name={item.attribute}
           value={item.value}
           onChange={(e) => item.onUpdate(e.value)}
-          options={getVatRatesOptions()}
+          options={getVatRatesOptions(t)}
         />
-      )
+      );
   }
-}
+};
 
 const getSelect = (item: Item) => {
   if (!isOfEntityType(item.attribute)) {
-    return null
+    return null;
   }
 
-  const model = getModel(item.attribute)
+  const model = getModel(item.attribute);
 
   return (
     <Select
@@ -146,7 +149,7 @@ const getSelect = (item: Item) => {
           : []
       }
     />
-  )
-}
+  );
+};
 
-export default FormAttribute
+export default FormAttribute;

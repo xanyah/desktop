@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import PageContainer from '../../containers/page-container'
-import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
 import { useShipping, useShippingVariants } from '../../hooks'
@@ -9,6 +8,7 @@ import { shippingFormat } from '../../types'
 import { useMutation } from '@tanstack/react-query'
 import { updateShipping } from '../../api'
 import DataDetails from '../../components/data-details'
+import { Trans } from 'react-i18next'
 
 const Shipping = () => {
   const {id} = useParams()
@@ -26,13 +26,13 @@ const Shipping = () => {
       <div className="shipping-variants-table">
         <div className="shipping-variants-table-header">
           <div className="column column-product">
-            <Translate value='models.products.title'/>
+            <Trans i18nKey='models.products.title'/>
           </div>
           <div className="column column-barcode">
-            <Translate value='models.variants.barcode'/>
+            <Trans i18nKey='models.variants.barcode'/>
           </div>
           <div className="column column-quantity">
-            <Translate value='models.variants.quantity'/>
+            <Trans i18nKey='models.variants.quantity'/>
           </div>
         </div>
         <div className="shipping-variants-table-body">

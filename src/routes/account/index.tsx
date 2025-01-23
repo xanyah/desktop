@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from 'react'
-import { Translate } from 'react-redux-i18n'
 import { supportedLangages } from '../../utils/i18n-helper'
 import FormAttribute from '../../containers/form-attribute'
 
@@ -10,6 +9,7 @@ import { useMutation } from '@tanstack/react-query'
 import { updateUserParams } from '../../api'
 import PageContainer from '../../containers/page-container'
 import { pick } from 'lodash'
+import { Trans } from 'react-i18next'
 
 type UserFormProps = {
   firstname: string
@@ -44,7 +44,7 @@ const Account = () => {
       <form
         onSubmit={handleUserFormSubmit(onUserSubmit)}
       >
-        <h2><Translate value='account.form.first.title' /></h2>
+        <h2><Trans i18nKey='account.form.first.title' /></h2>
 
         <Controller
           control={userFormControl}
@@ -98,7 +98,7 @@ const Account = () => {
           type="submit"
           disabled={userSubmitIsLoading}
         >
-          <Translate value='global.validate' />
+          <Trans i18nKe='global.validate' />
         </button>
       </form>
     )
@@ -109,7 +109,7 @@ const Account = () => {
       <form
         onSubmit={handlePasswordFormSubmit(onUserSubmit)}
       >
-        <h2><Translate value='account.form.second.title' /></h2>
+        <h2><Trans i18nKe='account.form.second.title' /></h2>
 
 
         <Controller
@@ -146,7 +146,7 @@ const Account = () => {
           type="submit"
           disabled={userSubmitIsLoading}
         >
-          <Translate value='global.validate' />
+          <Trans i18nKe='global.validate' />
         </button>
       </form>
     )

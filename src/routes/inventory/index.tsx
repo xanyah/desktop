@@ -1,11 +1,11 @@
 import { inventoryFormat } from '../../types'
 import PageContainer from '../../containers/page-container'
-import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
 import { useParams } from 'react-router-dom'
 import { useInventory, useInventoryVariants } from '../../hooks'
 import DataDetails from '../../components/data-details'
+import { Trans } from 'react-i18next'
 
 const Inventory = () => {
   const { id } = useParams()
@@ -19,13 +19,13 @@ const Inventory = () => {
         <div className="embed-table">
           <div className="row header-row">
             <div className="column">
-              <Translate value='models.variants.barcode' />
+              <Trans i18nKey='models.variants.barcode' />
             </div>
             <div className="column">
-              <Translate value='models.products.title' />
+              <Trans i18nKey='models.products.title' />
             </div>
             <div className="column">
-              <Translate value='models.variants.quantity' />
+              <Trans i18nKey='models.variants.quantity' />
             </div>
           </div>
           {
@@ -49,7 +49,7 @@ const Inventory = () => {
   return (
     <PageContainer>
       <h1 className="data-details-title">
-        <Translate value='models.inventories.title' />
+        <Trans i18nKey='models.inventories.title' />
       </h1>
       <DataDetails
         currentEntity={inventoryData?.data}
