@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
 import { routes } from '../../constants'

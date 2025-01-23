@@ -4,7 +4,6 @@ import Collapsible from 'react-collapsible'
 import { Translate } from 'react-redux-i18n'
 
 import DataDetails from '../data-details'
-import PageContainer from '../../containers/page-container'
 import FormAttribute from '../../containers/form-attribute'
 import { variantFormat, variantAttributeFormat, VariantType } from '../../types'
 import VariantMovements from './variant-movements'
@@ -40,7 +39,6 @@ export default class Variant extends React.Component {
       updateApiVariant,
     } = this.props
     return (
-      <PageContainer>
         <DataDetails
           currentEntity={selectedVariant}
           editing={variantEditing}
@@ -55,7 +53,6 @@ export default class Variant extends React.Component {
             {this.renderVariantMovements()}
           </div>
         </DataDetails>
-      </PageContainer>
     )
   }
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { providerFormat } from '../../types'
 import { I18n } from 'react-redux-i18n'
-import PageContainer from '../../containers/page-container'
+
 
 import './styles.scss'
 import { useProvider, useCurrentStore } from '../../hooks'
@@ -36,7 +36,6 @@ const Provider = () => {
   })
 
   return (
-    <PageContainer>
       <div className="provider-page">
         <h1 className="data-details-title">{providerData?.data.name}</h1>
         <DataDetails
@@ -49,7 +48,6 @@ const Provider = () => {
           updateEntity={updateApiProvider}
         />
       </div>
-    </PageContainer>
   )
 }
 

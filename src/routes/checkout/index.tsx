@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import swal from 'sweetalert'
 import { I18n, Translate } from 'react-redux-i18n'
 import Select from 'react-select'
@@ -23,7 +23,6 @@ import {
 import { useCurrentStore, usePaymentTypes } from '../../hooks'
 import Input from '../../components/input'
 import Checkbox from '../../components/checkbox'
-import PageContainer from '../../containers/page-container'
 import Modal from '../../components/modal'
 
 
@@ -243,8 +242,7 @@ const Checkout = () => {
   }, [salePayments, getVariantsTotal])
 
     const change = salePayments.reduce((a, b) => a + parseFloat(b.total), 0) - getVariantsTotal()
-    return (
-      <PageContainer>
+    return (<>
         <div className="checkout-page">
           <form onSubmit={e => onVariantSearch(e)}>
             <i className="im im-magnifier" />
@@ -364,7 +362,7 @@ const Checkout = () => {
             <span><Translate value='models.sales.history'/></span>
           </Link>
         </div>
-      </PageContainer>
+        </>
     )
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PageContainer from '../../containers/page-container'
+
 import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
@@ -57,7 +57,7 @@ const Shipping = () => {
   }
 
     return (
-      <PageContainer>
+      <>
         <h1 className="data-details-title">{shippingData?.data?.name}</h1>
         <DataDetails
           currentEntity={shippingData?.data}
@@ -69,7 +69,7 @@ const Shipping = () => {
         >
           {renderShippingVariants()}
         </DataDetails>
-      </PageContainer>
+      </>
     )
 }
 

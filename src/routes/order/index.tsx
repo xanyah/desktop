@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { orderFormat } from '../../types'
-import PageContainer from '../../containers/page-container'
+
 import { I18n, Translate } from 'react-redux-i18n'
 
 import './styles.scss'
@@ -72,7 +72,7 @@ const Order = () => {
   }
 
     return (
-      <PageContainer>
+      <>
         <h1 className="data-details-title">{orderData?.data?.name}</h1>
         <DataDetails
           createEntity={createApiOrder}
@@ -85,7 +85,7 @@ const Order = () => {
         >
           {renderOrderVariants()}
         </DataDetails>
-      </PageContainer>
+      </>
     )
 }
 

@@ -1,15 +1,6 @@
 import CreateProductPage from '../components/create-product-page'
 import VariantPage from '../components/variant-page'
 import {
-  barcodeScanner,
-  box,
-  clipboard,
-  delivery,
-  deliveryTruck,
-  flag,
-  list,
-  settings,
-  users,
   warehouse,
 } from '../images'
 

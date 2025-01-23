@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FormAttribute from '../../containers/form-attribute'
-import PageContainer from '../../containers/page-container'
 
 
 import { productFormat } from '../../types'
@@ -110,7 +109,6 @@ export default class CreateProduct extends React.Component {
     const { newProduct, newVariant } = this.state
 
     return (
-      <PageContainer>
         <div className={`data-details data-details-${type}`}>
           <div className="info">
             <form
@@ -155,7 +153,6 @@ export default class CreateProduct extends React.Component {
             {children}
           </div>
         </div>
-      </PageContainer>
     )
   }
 }

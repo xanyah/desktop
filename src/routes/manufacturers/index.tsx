@@ -1,33 +1,44 @@
-import { useState } from 'react'
-import { useManufacturers, useSearchedManufacturers } from '../../hooks'
-import { useNavigate } from 'react-router-dom'
-import PageContainer from '../../containers/page-container'
-import DataTable from '../../components/data-table'
-import './styles.scss'
-import { useCurrentStore } from '../../hooks/stores'
+import { Link } from 'react-router-dom'
+import { useCurrentStore, useManufacturers } from '../../hooks'
+import { TableWithSearch } from '@/components'
+import { useMemo, useState } from 'react'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 
 const Manufacturers = () => {
+  useBreadCrumbContext([{ label: 'Manufacturers' }])
   const currentStore = useCurrentStore()
-  const [searchedQuery, setSearchedQuery] = useState('')
-  const { data: manufacturersData, isLoading } = useManufacturers()
-  const { data: searchedManufacturersData, isLoading: isSearchLoading } = useSearchedManufacturers({
-    query: searchedQuery,
-    storeId: currentStore?.id,
+  const [searchQuery, setSearchQuery] = useState('')
+  const { data, isLoading } = useManufacturers({
+    'q[nameOrNotesCont]': searchQuery,
+    'q[storeIdEq]': currentStore?.id
   })
-  const navigate = useNavigate()
+
+  const columnHelper = createColumnHelper<Manufacturer>()
+
+  const columns = useMemo(() => ([
+    columnHelper.accessor('name', {
+      header: 'Name',
+      cell: (props) => <Link className='underline' to={`/manufacturers/${props.row.original.id}`}>{props.getValue()}</Link>
+    }),
+    columnHelper.accessor('productsCount', {
+      header: '# of products',
+    }),
+  ]) as ColumnDef<Manufacturer>[], [columnHelper])
 
   return (
-    <PageContainer>
-      <DataTable
-        columns={['name', 'notes', 'productsCount']}
-        data={searchedQuery ? searchedManufacturersData?.data : manufacturersData?.data}
-        loading={isLoading || isSearchLoading}
-        onItemView={item => navigate(`/manufacturers/${item.id}`)}
-        type="manufacturers"
-        searchEntity={setSearchedQuery}
-      />
-    </PageContainer>
+    <TableWithSearch
+      searchPlaceholder="Search a manufacturer"
+      onSearchQueryChange={setSearchQuery}
+      searchQuery={searchQuery}
+      isLoading={isLoading}
+      createUrl={'/manufacturers/new'}
+      createLabel={'Create a manufacturer'}
+      columns={columns}
+      data={data?.data}
+    />
   )
+
 }
 
 export default Manufacturers

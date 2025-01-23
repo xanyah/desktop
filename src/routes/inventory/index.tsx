@@ -1,5 +1,5 @@
 import { inventoryFormat } from '../../types'
-import PageContainer from '../../containers/page-container'
+
 import { Translate } from 'react-redux-i18n'
 
 import './styles.scss'
@@ -47,17 +47,14 @@ const Inventory = () => {
   }
 
   return (
-    <PageContainer>
-      <h1 className="data-details-title">
-        <Translate value='models.inventories.title' />
-      </h1>
+    <>
       <DataDetails
         currentEntity={inventoryData?.data}
         formattedData={inventoryFormat}
         type="inventories"
       />
       {renderInventoryVariants()}
-    </PageContainer>
+      </>
   )
 }
 

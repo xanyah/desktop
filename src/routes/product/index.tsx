@@ -3,7 +3,7 @@ import Collapsible from 'react-collapsible'
 import { I18n, Translate } from 'react-redux-i18n'
 
 import { productFormat } from '../../types'
-import PageContainer from '../../containers/page-container'
+
 import FormAttribute from '../../containers/form-attribute'
 
 import './styles.scss'
@@ -169,7 +169,6 @@ const Product = () => {
   }
 
   return (
-    <PageContainer>
       <div className="product-page">
         <h1 className="data-details-title">{productData?.data?.name}</h1>
         <DataDetails
@@ -186,7 +185,6 @@ const Product = () => {
           </div>
         </DataDetails>
       </div>
-    </PageContainer>
   )
 }
 

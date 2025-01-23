@@ -15,6 +15,9 @@ export const createVariantAttribute = newVariantAttribute =>
 export const getVariants = params =>
   xanyahApi.get<Variant[]>('variants', decamelizeKeys({params}))
 
+export const getVariantsV2= params =>
+  xanyahApi.get<Variant[]>('v2/variants', decamelizeKeys({params}))
+
 export const updateVariant = (variantId, params) =>
   xanyahApi.patch<Variant>(`variants/${variantId}`, decamelizeKeys(params))
 

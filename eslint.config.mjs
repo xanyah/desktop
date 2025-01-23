@@ -4,6 +4,7 @@ import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -31,6 +32,7 @@ export default [
         }
       ],
       'react/react-in-jsx-scope': 0,
+      'react/prop-types': 0,
     },
     settings: {
       'import/extensions': [
@@ -41,6 +43,9 @@ export default [
         '@typescript-eslint/parser': ['.ts', '.tsx'],
       },
       'import/resolver': {
+        typescript: {
+          project: './'
+        },
         node: {
           extensions: ['.js', '.jsx', '.ts', '.tsx']
         }

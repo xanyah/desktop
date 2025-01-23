@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { customAttributeFormat } from '../../types'
-import PageContainer from '../../containers/page-container'
+
 
 import './styles.scss'
 import { createCustomAttribute, updateCustomAttribute } from '../../api'
@@ -37,7 +37,6 @@ const CustomAttribute = () => {
   })
 
     return (
-      <PageContainer>
         <DataDetails
           createEntity={createApiCustomAttribute}
           currentEntity={customAttributeData?.data}
@@ -47,7 +46,6 @@ const CustomAttribute = () => {
           type="custom-attributes"
           updateEntity={updateApiCustomAttribute}
         ></DataDetails>
-      </PageContainer>
     )
   }
 

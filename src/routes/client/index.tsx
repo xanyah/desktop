@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { I18n } from 'react-redux-i18n'
-import PageContainer from '../../containers/page-container'
 
 import './styles.scss'
 import { useClient } from '../../hooks'
@@ -56,7 +55,6 @@ const Client = () => {
   })
 
   return (
-    <PageContainer>
       <div className="client-page">
         {clientData && (
           <h1 className="data-details-title">{`${clientData?.data.firstname} ${clientData?.data.lastname}`}</h1>
@@ -71,7 +69,6 @@ const Client = () => {
           updateEntity={updateApiClient}
         />
       </div>
-    </PageContainer>
   )
 }
 

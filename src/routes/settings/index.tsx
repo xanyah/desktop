@@ -7,7 +7,7 @@ import StoreSettings from './store-settings'
 import ImportFiles from './import-files'
 
 import './styles.scss'
-import PageContainer from '../../containers/page-container'
+
 
 const Settings = () => {
   const renderStoreSettings = () => {
@@ -52,7 +52,6 @@ const Settings = () => {
   )
 
   return (
-    <PageContainer>
       <div className="settings-page">
         <div className="side-navigation">
           {steps.map(s => (
@@ -69,7 +68,6 @@ const Settings = () => {
           {currentStep ? currentStep.render() : null}
         </div>
       </div>
-    </PageContainer>
   )
 }
 

@@ -8,7 +8,6 @@ import { useCurrentToken } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { updateUserParams } from '../../api'
-import PageContainer from '../../containers/page-container'
 import { pick } from 'lodash'
 
 type UserFormProps = {
@@ -153,12 +152,10 @@ const Account = () => {
   }, [handlePasswordFormSubmit, onUserSubmit, passwordFormControl, userSubmitIsLoading])
 
   return (
-    <PageContainer>
       <div className="account-page">
         {renderUpdateUserForm()}
         {renderUpdatePasswordForm()}
       </div>
-    </PageContainer>
   )
 }
 

@@ -3,7 +3,7 @@ import { decamelizeKeys } from 'humps'
 
 
 export const getManufacturers = params =>
-  xanyahApi.get<Manufacturer[]>('manufacturers', decamelizeKeys({params}))
+  xanyahApi.get<Manufacturer[]>('v2/manufacturers', decamelizeKeys({params}))
 
 export const getManufacturer = (manufacturerId) =>
   xanyahApi.get<Manufacturer>(`manufacturers/${manufacturerId}`)

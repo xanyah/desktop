@@ -8,6 +8,6 @@ type Order = {
   id: string
   status: 'pending' | 'delivered' | 'cancelled'
   createdAt: string
-  // client: Client
+  client: Client
   orderVariants: OrderVariant[]
 }

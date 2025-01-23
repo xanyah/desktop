@@ -2,7 +2,7 @@ import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 
 export const getProviders = params =>
-  xanyahApi.get<Provider[]>('providers', decamelizeKeys({params}))
+  xanyahApi.get<Provider[]>('v2/providers', decamelizeKeys({params}))
 
 export const getProvider = (providerId) =>
   xanyahApi.get<Provider>(`providers/${providerId}`)
