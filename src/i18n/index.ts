@@ -1,7 +1,11 @@
-import en from './dictionaries/en.json'
-import fr from './dictionaries/fr.json'
+import i18n from 'i18n';
+import dictionaries from './locales';
 
-export default {
-  en,
-  fr,
-}
+i18n.configure({
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+    staticCatalog: dictionaries, // Utilisez vos dictionnaires ici
+    objectNotation: true,
+});
+
+export default i18n;
