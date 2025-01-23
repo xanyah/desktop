@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "react-select";
+import Select  from "react-select";
 import Input from "../input";
 
 import {
@@ -17,14 +17,20 @@ import { map } from "lodash";
 import { Trans, useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 interface Item {
   attribute: string;
   error?: string;
   model: string;
   onUpdate: (value: string) => void;
   type: string;
-  value: string;
+  value: any;
   inline?: boolean;
+  options?: Option[];
 }
 
 //TODO add checkbox / Vat Rates ? / Parent Category ? Sofiane
