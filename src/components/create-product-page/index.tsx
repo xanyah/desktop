@@ -2,20 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FormAttribute from '../../containers/form-attribute'
 
+import { productFormat } from "../../types";
 
-import { productFormat } from '../../types'
-
-import { Translate } from 'react-redux-i18n'
-
-import './styles.scss'
+import "./styles.scss";
+import { Trans } from "react-i18next";
 
 export default class CreateProduct extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       newProduct: {},
       newVariant: {},
-    }
+    };
   }
 
   handleUpdateProduct(attribute, value) {
@@ -24,7 +22,7 @@ export default class CreateProduct extends React.Component {
         ...this.state.newProduct,
         [attribute]: value,
       },
-    })
+    });
   }
 
   handleUpdateVariant(attribute, value) {
@@ -33,11 +31,11 @@ export default class CreateProduct extends React.Component {
         ...this.state.newVariant,
         [attribute]: value,
       },
-    })
+    });
   }
 
   getVariantsFormAttribute() {
-    const { newVariant } = this.state
+    const { newVariant } = this.state;
 
     return (
       <div>
@@ -45,21 +43,23 @@ export default class CreateProduct extends React.Component {
           <FormAttribute
             attribute="provider"
             key="provider"
-            value={newVariant['provider']}
+            value={newVariant["provider"]}
             model="variants"
             type="entity"
             onUpdate={(attribute, value) =>
-              this.handleUpdateVariant(attribute, value)}
+              this.handleUpdateVariant(attribute, value)
+            }
           />
 
           <FormAttribute
             attribute="buyingPrice"
             key="buyingPrice"
-            value={newVariant['buyingPrice']}
+            value={newVariant["buyingPrice"]}
             model="variants"
             type="number"
             onUpdate={(attribute, value) =>
-              this.handleUpdateVariant(attribute, value)}
+              this.handleUpdateVariant(attribute, value)
+            }
           />
         </div>
 
@@ -67,21 +67,23 @@ export default class CreateProduct extends React.Component {
           <FormAttribute
             attribute="originalBarcode"
             key="originalBarcode"
-            value={newVariant['originalBarcode']}
+            value={newVariant["originalBarcode"]}
             model="variants"
             type="string"
             onUpdate={(attribute, value) =>
-              this.handleUpdateVariant(attribute, value)}
+              this.handleUpdateVariant(attribute, value)
+            }
           />
 
           <FormAttribute
             attribute="ratio"
             key="ratio"
-            value={newVariant['ratio']}
+            value={newVariant["ratio"]}
             model="variants"
             type="number"
             onUpdate={(attribute, value) =>
-              this.handleUpdateVariant(attribute, value)}
+              this.handleUpdateVariant(attribute, value)
+            }
           />
         </div>
 
@@ -89,69 +91,61 @@ export default class CreateProduct extends React.Component {
           <FormAttribute
             attribute="taxFreePrice"
             key="taxFreePrice"
-            value={newVariant['taxFreePrice']}
+            value={newVariant["taxFreePrice"]}
             model="variants"
             type="number"
             onUpdate={(attribute, value) =>
-              this.handleUpdateVariant(attribute, value)}
+              this.handleUpdateVariant(attribute, value)
+            }
           />
         </div>
       </div>
-    )
+    );
   }
 
   render() {
-    const {
-      children,
-      createApiProduct,
-      type,
-    } = this.props
-    const { newProduct, newVariant } = this.state
+    const { children, createApiProduct, type } = this.props;
+    const { newProduct, newVariant } = this.state;
 
     return (
         <div className={`data-details data-details-${type}`}>
           <div className="info">
             <form
-              onSubmit={e => {
-                e.preventDefault()
-                createApiProduct(newProduct, newVariant)
-              }}>
-
+              onSubmit={(e) => {
+                e.preventDefault();
+                createApiProduct(newProduct, newVariant);
+              }}
+            >
               {productFormat.map((row, idx) => (
                 <div className="row" key={idx}>
-                  { row.map(item => (
-                    (item.editable)
-                      &&
-                      <FormAttribute
-                        attribute={item.attribute}
-                        key={item.attribute}
-                        value={newProduct[item.attribute]}
-                        model="products"
-                        type={item.type}
-                        onUpdate={(attribute, value) =>
-                          this.handleUpdateProduct(attribute, value)}
-                      />
-                  ))}
+                  {row.map(
+                    (item) =>
+                      item.editable && (
+                        <FormAttribute
+                          attribute={item.attribute}
+                          key={item.attribute}
+                          value={newProduct[item.attribute]}
+                          model="products"
+                          type={item.type}
+                          onUpdate={(attribute, value) =>
+                            this.handleUpdateProduct(attribute, value)
+                          }
+                        />
+                      )
+                  )}
                 </div>
               ))}
 
-              { this.getVariantsFormAttribute() }
+              {this.getVariantsFormAttribute()}
 
               {
-                (
-                  <button
-                    className="btn-link btn-stand-alone"
-                    key="btn-submit"
-                  >
-                    <Translate value={'data-details.form.buttons.create'}/>
-                  </button>
-                )
+                <button className="btn-link btn-stand-alone" key="btn-submit">
+                  <Trans i18nKey={"data-details.form.buttons.create"} />
+                </button>
               }
             </form>
           </div>
-          <div className="children">
-            {children}
-          </div>
+          <div className="children">{children}</div>
         </div>
     )
   }
@@ -175,7 +169,7 @@ CreateProduct.propTypes = {
   toggleEdit: PropTypes.func,
   type: PropTypes.string,
   updateEntity: PropTypes.func,
-}
+};
 
 CreateProduct.defaultProps = {
   children: null,
@@ -185,6 +179,6 @@ CreateProduct.defaultProps = {
   formChildren: null,
   formattedData: [],
   toggleEdit: () => null,
-  type: '',
+  type: "",
   updateEntity: () => null,
-}
+};

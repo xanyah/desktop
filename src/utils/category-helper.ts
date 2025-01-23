@@ -1,4 +1,4 @@
-import { I18n } from 'react-redux-i18n'
+import { TFunction } from "i18next"
 
 export const orderCategories = categories => {
   if(!categories)
@@ -28,26 +28,26 @@ export const getParentCategoriesList = categories => {
 }
 
 
-export const getVatRatesOptions = () => {
+export const getVatRatesOptions = (t: TFunction) => {
   return [
     {
-      label: I18n.t('vat-rates.standard'),
+      label: t('vat-rates.standard'),
       value: 'standard_rate',
     },
     {
-      label: I18n.t('vat-rates.reduced_rate'),
+      label: t('vat-rates.reduced_rate'),
       value: 'reduced_rate',
     },
     {
-      label: I18n.t('vat-rates.reduced_rate_alt'),
+      label: t('vat-rates.reduced_rate_alt'),
       value: 'reduced_rate_alt',
     },
     {
-      label: I18n.t('vat-rates.super_reduced_rate'),
+      label: t('vat-rates.super_reduced_rate'),
       value: 'super_reduced_rate',
     },
     {
-      label: I18n.t('vat-rates.parking_rate'),
+      label: t('vat-rates.parking_rate'),
       value: 'parking_rate',
     },
   ]

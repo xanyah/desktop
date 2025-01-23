@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Translate } from 'react-redux-i18n'
 
 import {
   getInventoryVariants,
@@ -11,6 +10,7 @@ import {
 import { formatData } from '../../../utils/data-helper'
 
 import './styles.scss'
+import { Trans } from 'react-i18next'
 
 export default class VariantMovements extends React.Component {
   constructor(props) {
@@ -71,18 +71,18 @@ export default class VariantMovements extends React.Component {
     return (
       <div className="variant-movements-content">
         <div className="section-title">
-          <Translate value='models.variants.variant-movements.title'/>
+          <Trans i18nKey='models.variants.variant-movements.title'/>
         </div>
         <div className="variant-movements-table">
           <div className="variant-movements-table-header">
             <div className="column">
-              <Translate value='models.variants.variant-movements.type'/>
+              <Trans i18nKey='models.variants.variant-movements.type'/>
             </div>
             <div className="column">
-              <Translate value='models.variants.variant-movements.date'/>
+              <Trans i18nKey='models.variants.variant-movements.date'/>
             </div>
             <div className="column">
-              <Translate value='models.variants.variant-movements.quantity'/>
+              <Trans i18nKey='models.variants.variant-movements.quantity'/>
             </div>
           </div>
           <div className="variant-movements-table-body">
@@ -112,7 +112,7 @@ export default class VariantMovements extends React.Component {
         onClick={() => this.setState({ selected: row })}>
         <div className="data-row">
           <div className="column-arrow column-primary"><i className="im im-arrow-right"></i></div>
-          <div className="column"><Translate value='models.inventories.title'/></div>
+          <div className="column"><Trans i18nKey='models.inventories.title'/></div>
           <div className="column">{formatData(row.createdAt)}</div>
           <div className="column column-primary">= {row.quantity}</div>
         </div>
@@ -127,7 +127,7 @@ export default class VariantMovements extends React.Component {
             className="btn-primary"
             onClick={() => { openInventory(row) }}
           >
-            <Translate value='models.inventories.open' />
+            <Trans i18nKey='models.inventories.open' />
           </button>
         </div>
       </div>
@@ -148,7 +148,7 @@ export default class VariantMovements extends React.Component {
         onClick={() => this.setState({ selected: row })}>
         <div className="data-row">
           <div className="column-arrow column-danger"><i className="im im-arrow-left"></i></div>
-          <div className="column"><Translate value='models.sales.title'/></div>
+          <div className="column"><Trans i18nKey='models.sales.title'/></div>
           <div className="column">{formatData(row.createdAt)}</div>
           <div className="column column-danger">- {row.saleVariants[0].quantity}</div>
         </div>
@@ -163,7 +163,7 @@ export default class VariantMovements extends React.Component {
             className="btn-primary"
             onClick={() => { openSale(row) }}
           >
-            <Translate value='models.sales.open' />
+            <Trans i18nKey='models.sales.open' />
           </button>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default class VariantMovements extends React.Component {
         onClick={() => this.setState({ selected: row })}>
         <div className="data-row">
           <div className="column-arrow column-success"><i className="im im-arrow-right"></i></div>
-          <div className="column"><Translate value='models.shippings.title'/></div>
+          <div className="column"><Trans i18nKey='models.shippings.title'/></div>
           <div className="column">{formatData(row.createdAt)}</div>
           <div className="column column-success">+ {row.quantity}</div>
         </div>

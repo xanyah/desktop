@@ -1,9 +1,9 @@
 import React from 'react'
-import { Translate } from 'react-redux-i18n'
 import PropTypes from 'prop-types'
 import { formatData } from '../../utils/data-helper'
 
 import './styles.scss'
+import { Trans } from 'react-i18next'
 
 const ItemAttribute = ({ attribute, type, value, model }) => {
   return (
@@ -11,7 +11,7 @@ const ItemAttribute = ({ attribute, type, value, model }) => {
       ? (
         <div className="item-attribute">
           <label htmlFor={attribute}>
-            <Translate value={`models.${model}.${attribute}`}/>
+            <Trans i18nKey={`models.${model}.${attribute}`}/>
           </label>
           <div id={attribute}>{
             (value.name)
@@ -26,7 +26,7 @@ const ItemAttribute = ({ attribute, type, value, model }) => {
       : (
         <div className="item-attribute">
           <label htmlFor={attribute}>
-            <Translate value={`models.${model}.${attribute}`} />
+            <Trans i18nKey={`models.${model}.${attribute}`} />
           </label>
           <div id={attribute}>{formatData(value)}</div>
         </div>

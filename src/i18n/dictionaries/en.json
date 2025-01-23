@@ -40,9 +40,9 @@
   },
   "home": {
     "welcome": {
-      "afternoon": "Good afternoon %{firstname} !",
-      "evening": "Good evening %{firstname} !",
-      "morning": "Good morning %{firstname} !"
+      "afternoon": "Good afternoon {{firstname}} !",
+      "evening": "Good evening {{firstname}} !",
+      "morning": "Good morning {{firstname}} !"
     }
   },
   "home-link": {
@@ -231,14 +231,21 @@
   "routes": {
     "account": "My account",
     "clients": "Clients",
+    "client": "Client",
     "custom-attribute": "Custom Attributes",
     "inventories": "Inventories",
+    "inventory": "Inventory",
     "manufacturers": "Manufacturers",
+    "manufacturer": "Manufacturer",
     "orders": "Orders",
+    "order": "Order",
     "products": "Products",
+    "product": "Product",
     "providers": "Providers",
+    "provider": "Provider",
     "settings": "Settings",
-    "shippings": "Shippings"
+    "shippings": "Shippings",
+    "shipping": "Shipping"
   },
   "settings-page": {
     "side-navigation": {

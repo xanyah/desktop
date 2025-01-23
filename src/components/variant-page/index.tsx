@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Collapsible from 'react-collapsible'
-import { Translate } from 'react-redux-i18n'
 
 import DataDetails from '../data-details'
 import FormAttribute from '../../containers/form-attribute'
@@ -9,6 +8,7 @@ import { variantFormat, variantAttributeFormat, VariantType } from '../../types'
 import VariantMovements from './variant-movements'
 
 import './styles.scss'
+import { Trans } from 'react-i18next'
 
 export default class Variant extends React.Component {
   componentWillMount() {
@@ -100,7 +100,7 @@ export default class Variant extends React.Component {
     const { newVariantAttribute } = this.state
     const { createApiVariantAttribute, selectedVariant } = this.props
     return (
-      <Collapsible trigger={<h1><Translate value='models.customAttributes.create'/></h1>}>
+      <Collapsible trigger={<h1><Trans i18nKey='models.customAttributes.create'/></h1>}>
         <form
           className="variant-form"
           onSubmit={e=> {
@@ -134,7 +134,7 @@ export default class Variant extends React.Component {
             />
 
             <button className="btn-solid">
-              <Translate value='global.validate'/>
+              <Trans i18nKey='global.validate'/>
             </button>
           </div>
 

@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux'
-import { i18nReducer as i18n } from 'react-redux-i18n'
-// import { routerReducer as router } from 'react-router-redux'
 
 import auth from './auth'
 import categories from './categories'
@@ -24,7 +22,6 @@ export default combineReducers({
   clients,
   customAttributes,
   global,
-  i18n,
   inventories,
   manufacturers,
   orders,

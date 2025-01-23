@@ -1,12 +1,12 @@
-import { I18n } from 'react-redux-i18n'
+import { TFunction } from "i18next"
 
-export const supportedLangages = [
+export const supportedLangages = (t:TFunction)=> [
   {
-    label: I18n.t('supported-langage.french'),
+    label: t('supported-langage.french'),
     value: 'fr',
   },
   {
-    label: I18n.t('supported-langage.english'),
+    label: t('supported-langage.english'),
     value: 'en',
   },
 ]

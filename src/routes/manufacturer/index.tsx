@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { manufacturerFormat } from '../../types'
-import { I18n } from 'react-redux-i18n'
-
 
 import './styles.scss'
 import { useManufacturer, useProducts } from '../../hooks'
@@ -12,8 +10,10 @@ import { createManufacturer, updateManufacturer } from '../../api'
 import { showSuccessToast } from '../../utils/notification-helper'
 import DataTable from '../../components/data-table'
 import DataDetails from '../../components/data-details'
+import { useTranslation } from 'react-i18next'
 
 const Manufacturer = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const store = useCurrentStore()
@@ -26,7 +26,7 @@ const Manufacturer = () => {
     onSuccess: (data) => {
       navigate(`/manufacturers/${data.data.id}`)
       setIsEditing(false)
-      showSuccessToast(I18n.t('toast.created', { entity: I18n.t('models.manufacturers.title') }))
+      showSuccessToast(t('toast.created', { entity: t('models.manufacturers.title') }))
     },
   })
 
@@ -34,7 +34,7 @@ const Manufacturer = () => {
     mutationFn: newData => updateManufacturer(id, newData),
     onSuccess: () => {
       setIsEditing(false)
-      showSuccessToast(I18n.t('toast.updated'))
+      showSuccessToast(t('toast.updated'))
     },
   })
 
