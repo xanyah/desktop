@@ -10,10 +10,14 @@ const Products = () => {
   useBreadCrumbContext([{ label: 'Products' }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
-  const { data, isLoading } = useVariants({
+  const [page, setPage] = useState(1)
+  const { data, isLoading,  } = useVariants({
     'q[barcodeOrOriginalBarcodeOrProductNameCont]': searchQuery,
-    'q[productStoreIdEq]': currentStore?.id
+    'q[productStoreIdEq]': currentStore?.id,
+    'page': page,
   })
+
+  console.log(data?.headers)
 
   const columnHelper = createColumnHelper<Variant>()
 
@@ -50,6 +54,9 @@ const Products = () => {
     <TableWithSearch
       searchPlaceholder="Search a product"
       onSearchQueryChange={setSearchQuery}
+      currentPage={page}
+      totalPages={10}
+      onPageChange={setPage}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl={'/products/new'}

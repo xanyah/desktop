@@ -25,14 +25,14 @@ const Online = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             {map(breadcrumb, element => (
-              <>
+              <div className="flex items-center gap-2.5" key={element.label}>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
               {element.url
                 ? <BreadcrumbLink to={element.url}>{element.label}</BreadcrumbLink>
                 : <BreadcrumbPage>{element.label}</BreadcrumbPage>}
               </BreadcrumbItem>
-              </>
+              </div>
             ))}
           </BreadcrumbList>
         </Breadcrumb>
