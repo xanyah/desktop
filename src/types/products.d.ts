@@ -1,8 +1,18 @@
 type Product = {
-  id: string
+  id: string,
   name: string
-  createdAt: string
-  updatedAt: string
   category?: Category
   manufacturer?: Manufacturer
+  createdAt: string
+  updatedAt: string
+  sku: string
+  upc: string
+  buyingAmountCents: number
+  buyingAmountCurrency: string
+  taxFreeAmountCents: number
+  taxFreeAmountCurrency: string
+  quantity: number
+  provider?: Provider
+  amountCents: number
+  amountCurrency: string
 }

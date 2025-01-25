@@ -117,6 +117,8 @@ const Account = () => {
       </form>
     );
   }, [
+    i18n,
+    t,
     handleUserFormSubmit,
     onUserSubmit,
     userFormControl,

@@ -1,17 +1,17 @@
 type Shipping = {
   id: string
-  shippingVariantsCount: number
+  shippingProductsCount: number
   lockedAt: string
   createdAt: string
   updatedAt: string
   provider: Provider
 }
 
-type ShippingVariant = {
+type ShippingProduct = {
   id: string
   quantity: number
   createdAt: string
   updatedAt: string
-  variant: Variant
+  product: Product
   shipping: Shipping
 }

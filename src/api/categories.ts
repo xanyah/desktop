@@ -3,7 +3,10 @@ import { decamelizeKeys } from 'humps'
 
 
 export const getCategories = params =>
-  xanyahApi.get<Category[]>('categories', decamelizeKeys({params}))
+  xanyahApi.get<Category[]>('v2/categories', decamelizeKeys({params}))
+
+export const getCategory = (categoryId) =>
+  xanyahApi.get<Category>(`v2/categories/${categoryId}`)
 
 export const updateCategory = (categoryId, params) =>
   xanyahApi.patch<Category>(`categories/${categoryId}`, decamelizeKeys(params))

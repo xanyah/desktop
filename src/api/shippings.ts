@@ -13,8 +13,8 @@ export const updateShipping = (shippingId, params) =>
 export const createShipping = newShipping =>
   xanyahApi.post<Shipping>('shippings', decamelizeKeys(newShipping))
 
-export const getShippingVariants = params =>
-  xanyahApi.get<ShippingVariant[]>('shipping_variants', decamelizeKeys({params}))
+export const getShippingProducts = params =>
+  xanyahApi.get<ShippingProduct[]>('shipping_products', decamelizeKeys({params}))
 
-export const getShippingVariant = id =>
-  xanyahApi.get<ShippingVariant>(`shipping_variants/${id}`)
+export const getShippingProduct = id =>
+  xanyahApi.get<ShippingProduct>(`shipping_products/${id}`)

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { getProducts, getVariants } from '../api'
+import { getProduct, getProducts } from '../api'
+import { validate } from 'uuid'
 
 export const useProducts = (filters) => useQuery({
   queryFn: () => getProducts(filters),
@@ -7,11 +8,7 @@ export const useProducts = (filters) => useQuery({
 })
 
 export const useProduct = (id) => useQuery({
-  queryFn: () => getProducts(id),
+  queryFn: () => getProduct(id),
+  enabled: validate(id),
   queryKey: ['products', {id}],
-})
-
-export const useProductVariants = filters => useQuery({
-  queryFn: () => getVariants(filters),
-  queryKey: ['productVariants', filters]
 })

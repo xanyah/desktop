@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getShipping, getShippings, getShippingVariant, getShippingVariants } from '../api'
+import { getShipping, getShippings, getShippingProduct, getShippingProducts } from '../api'
 
 export const useShippings = (filters) => useQuery({
   queryFn: () => getShippings(filters),
@@ -11,12 +11,12 @@ export const useShipping = (id) => useQuery({
   queryKey: ['shippings', {id}],
 })
 
-export const useShippingVariants = (filters) => useQuery({
-  queryFn: () => getShippingVariants(filters),
-  queryKey: ['shippingVariants', filters],
+export const useShippingProducts = (filters) => useQuery({
+  queryFn: () => getShippingProducts(filters),
+  queryKey: ['shippingProducts', filters],
 })
 
-export const useShippingVariant = (id) => useQuery({
-  queryFn: () => getShippingVariant(id),
-  queryKey: ['shippingVariants', {id}],
+export const useShippingProduct = (id) => useQuery({
+  queryFn: () => getShippingProduct(id),
+  queryKey: ['shippingProducts', {id}],
 })

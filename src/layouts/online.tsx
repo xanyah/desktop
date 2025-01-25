@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { BreadCrumbContext } from "@/contexts"
 import { map } from "lodash"
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { Outlet } from "react-router-dom"
 
 const Online = () => {
@@ -25,14 +25,14 @@ const Online = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             {map(breadcrumb, element => (
-              <>
+              <Fragment key={element.label}>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
               {element.url
                 ? <BreadcrumbLink to={element.url}>{element.label}</BreadcrumbLink>
                 : <BreadcrumbPage>{element.label}</BreadcrumbPage>}
               </BreadcrumbItem>
-              </>
+              </Fragment>
             ))}
           </BreadcrumbList>
         </Breadcrumb>

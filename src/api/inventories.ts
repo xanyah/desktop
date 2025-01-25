@@ -7,5 +7,5 @@ export const getInventories = params =>
 export const getInventory = id =>
   xanyahApi.get<Inventory>(`inventories/${id}`)
 
-export const getInventoryVariants = params =>
-  xanyahApi.get<InventoryVariant[]>('inventory_variants', decamelizeKeys({params}))
+export const getInventoryProducts = params =>
+  xanyahApi.get<InventoryProduct[]>('inventory_products', decamelizeKeys({params}))
