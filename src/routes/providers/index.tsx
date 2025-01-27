@@ -9,22 +9,34 @@ const Providers = () => {
   useBreadCrumbContext([{ label: 'Providers' }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
+  const [page, setPage] = useState(1)
   const { data, isLoading } = useProviders({
     'q[nameOrNotesCont]': searchQuery,
-    'q[storeIdEq]': currentStore?.id
+    'q[storeIdEq]': currentStore?.id,
   })
 
   const columnHelper = createColumnHelper<Provider>()
 
-  const columns = useMemo(() => ([
-    columnHelper.accessor('name', {
-      header: 'Name',
-      cell: (props) => <Link className='underline' to={`/providers/${props.row.original.id}`}>{props.getValue()}</Link>
-    }),
-    columnHelper.accessor('shippingsCount', {
-      header: '# of shippings',
-    }),
-  ]) as ColumnDef<Provider>[], [columnHelper])
+  const columns = useMemo(
+    () =>
+      [
+        columnHelper.accessor('name', {
+          header: 'Name',
+          cell: (props) => (
+            <Link
+              className="underline"
+              to={`/providers/${props.row.original.id}`}
+            >
+              {props.getValue()}
+            </Link>
+          ),
+        }),
+        columnHelper.accessor('shippingsCount', {
+          header: '# of shippings',
+        }),
+      ] as ColumnDef<Provider>[],
+    [columnHelper]
+  )
 
   return (
     <TableWithSearch
@@ -36,9 +48,11 @@ const Providers = () => {
       createLabel={'Create a provider'}
       columns={columns}
       data={data?.data}
+      currentPage={page}
+      totalPages={data?.headers['total-pages']}
+      onPageChange={setPage}
     />
   )
-
 }
 
 export default Providers
