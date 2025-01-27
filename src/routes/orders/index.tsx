@@ -7,40 +7,63 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { Badge, BadgeProps } from '@/components/ui/badge'
 
 const badgeVariants: Record<Order['status'], BadgeProps['variant']> = {
-  'cancelled': 'destructive',
-  'delivered': 'secondary',
-  'pending': 'default'
+  cancelled: 'destructive',
+  delivered: 'secondary',
+  pending: 'default',
 }
 
 const Orders = () => {
   useBreadCrumbContext([{ label: 'Orders' }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
+  const [page, setPage] = useState(1)
   const { data, isLoading } = useOrders({
     'q[clientFirstnameOrClientLastnameCont]': searchQuery,
-    'q[storeIdEq]': currentStore?.id
+    'q[storeIdEq]': currentStore?.id,
   })
 
   const columnHelper = createColumnHelper<Order>()
 
-  const columns = useMemo(() => ([
-    columnHelper.accessor('status', {
-      header: 'Statut',
-      cell: (props) => <Badge variant={badgeVariants[props.getValue()]}>{props.getValue()}</Badge>
-    }),
-    columnHelper.accessor('id', {
-      header: 'ID',
-      cell: (props) => <Link className='underline' to={`/orders/${props.getValue()}`}>{props.getValue()}</Link>
-    }),
-    columnHelper.accessor(row => `${row.client.firstname} ${row.client.lastname}`, {
-      id: 'fullname',
-      header: 'Client',
-      cell: (props) => <Link className='underline' to={`/clients/${props.row.original.client.id}`}>{props.getValue()}</Link>
-    }),
-    columnHelper.accessor('createdAt', {
-      header: 'Creation date',
-    }),
-  ]) as ColumnDef<Order>[], [columnHelper])
+  const columns = useMemo(
+    () =>
+      [
+        columnHelper.accessor('status', {
+          header: 'Statut',
+          cell: (props) => (
+            <Badge variant={badgeVariants[props.getValue()]}>
+              {props.getValue()}
+            </Badge>
+          ),
+        }),
+        columnHelper.accessor('id', {
+          header: 'ID',
+          cell: (props) => (
+            <Link className="underline" to={`/orders/${props.getValue()}`}>
+              {props.getValue()}
+            </Link>
+          ),
+        }),
+        columnHelper.accessor(
+          (row) => `${row.client.firstname} ${row.client.lastname}`,
+          {
+            id: 'fullname',
+            header: 'Client',
+            cell: (props) => (
+              <Link
+                className="underline"
+                to={`/clients/${props.row.original.client.id}`}
+              >
+                {props.getValue()}
+              </Link>
+            ),
+          }
+        ),
+        columnHelper.accessor('createdAt', {
+          header: 'Creation date',
+        }),
+      ] as ColumnDef<Order>[],
+    [columnHelper]
+  )
 
   return (
     <TableWithSearch
@@ -52,9 +75,11 @@ const Orders = () => {
       createLabel={'Create an order'}
       columns={columns}
       data={data?.data}
+      currentPage={page}
+      totalPages={data?.headers['total-pages']}
+      onPageChange={setPage}
     />
   )
-
 }
 
 export default Orders

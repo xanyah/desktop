@@ -8,21 +8,27 @@ const Clients = () => {
   useBreadCrumbContext([{ label: 'Clients' }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
+  const [page, setPage] = useState(1)
+
   const { data, isLoading } = useClients({
     'q[firstnameOrLastnameCont]': searchQuery,
-    'q[toreIdEq]': currentStore?.id
+    'q[toreIdEq]': currentStore?.id,
   })
 
   const columnHelper = createColumnHelper<Client>()
 
-  const columns = useMemo(() => ([
-    columnHelper.accessor('firstname', {
-      header: 'Firstname'
-    }),
-    columnHelper.accessor('lastname', {
-      header: 'Lastname',
-    }),
-  ]) as ColumnDef<Client>[], [columnHelper])
+  const columns = useMemo(
+    () =>
+      [
+        columnHelper.accessor('firstname', {
+          header: 'Firstname',
+        }),
+        columnHelper.accessor('lastname', {
+          header: 'Lastname',
+        }),
+      ] as ColumnDef<Client>[],
+    [columnHelper]
+  )
 
   return (
     <TableWithSearch
@@ -34,9 +40,11 @@ const Clients = () => {
       createLabel={'Create a client'}
       columns={columns}
       data={data?.data}
+      currentPage={page}
+      totalPages={data?.headers['total-pages']}
+      onPageChange={setPage}
     />
   )
-
 }
 
 export default Clients

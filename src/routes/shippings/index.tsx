@@ -9,26 +9,42 @@ const Shippings = () => {
   useBreadCrumbContext([{ label: 'Shippings' }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
+  const [page, setPage] = useState(1)
   const { data, isLoading } = useShippings({
     'q[providerNameCont]': searchQuery,
-    'q[storeIdEq]': currentStore?.id
+    'q[storeIdEq]': currentStore?.id,
   })
 
   const columnHelper = createColumnHelper<Shipping>()
 
-  const columns = useMemo(() => ([
-    columnHelper.accessor('id', {
-      header: 'ID',
-      cell: (props) => <Link className='underline' to={`/shippings/${props.getValue()}`}>{props.getValue()}</Link>
-    }),
-    columnHelper.accessor('provider.name', {
-      header: 'Provider',
-      cell: (props) => <Link className='underline' to={`/providers/${props.row.original.provider.id}`}>{props.getValue()}</Link>
-    }),
-    columnHelper.accessor('createdAt', {
-      header: 'Creation date',
-    }),
-  ]) as ColumnDef<Shipping>[], [columnHelper])
+  const columns = useMemo(
+    () =>
+      [
+        columnHelper.accessor('id', {
+          header: 'ID',
+          cell: (props) => (
+            <Link className="underline" to={`/shippings/${props.getValue()}`}>
+              {props.getValue()}
+            </Link>
+          ),
+        }),
+        columnHelper.accessor('provider.name', {
+          header: 'Provider',
+          cell: (props) => (
+            <Link
+              className="underline"
+              to={`/providers/${props.row.original.provider.id}`}
+            >
+              {props.getValue()}
+            </Link>
+          ),
+        }),
+        columnHelper.accessor('createdAt', {
+          header: 'Creation date',
+        }),
+      ] as ColumnDef<Shipping>[],
+    [columnHelper]
+  )
 
   return (
     <TableWithSearch
@@ -40,9 +56,11 @@ const Shippings = () => {
       createLabel={'Create a shipping'}
       columns={columns}
       data={data?.data}
+      currentPage={page}
+      totalPages={data?.headers['total-pages']}
+      onPageChange={setPage}
     />
   )
-
 }
 
 export default Shippings
