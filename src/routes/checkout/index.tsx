@@ -72,7 +72,7 @@ const Checkout = () => {
           );
         });
     },
-    [saleVariants, variantBarcode]
+    [saleVariants, variantBarcode, t]
   );
 
   const updateQuantity = useCallback((variantId, quantity) => {
@@ -150,6 +150,7 @@ const Checkout = () => {
       showSuccessToast(t("toast.created", { entity: t("models.sales.title") }));
     });
   }, [
+    t,
     currentStore,
     getTotal,
     resetSale,
@@ -273,7 +274,7 @@ const Checkout = () => {
         </div>
       );
     },
-    [addVariantPromotion, removeVariant, saleVariants, updateQuantity]
+    [addVariantPromotion, removeVariant, saleVariants, updateQuantity, t]
   );
 
   const renderPaymentType = useCallback(

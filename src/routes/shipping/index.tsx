@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import './styles.scss'
-import { useShipping, useShippingVariants } from '../../hooks'
+import { useShipping, useShippingProducts } from '../../hooks'
 import { useParams } from 'react-router-dom'
 import { shippingFormat } from '../../types'
 import { useMutation } from '@tanstack/react-query'
@@ -13,7 +13,7 @@ const Shipping = () => {
   const {id} = useParams()
   const [isEditing, setIsEditing] = useState(false)
   const {data: shippingData} = useShipping(id)
-  const {data: shippingVariantsData} = useShippingVariants({shippingId: id})
+  const {data: shippingVariantsData} = useShippingProducts({shippingId: id})
 
   const {mutate} = useMutation({
     mutationFn: data => updateShipping(id, data),

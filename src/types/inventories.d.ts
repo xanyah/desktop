@@ -1,9 +1,9 @@
-type InventoryVariant = {
+type InventoryProduct = {
   id: string
   quantity: number
   createdAt: string
   updatedAt: string
-  variant: Variant
+  product: Product
 }
 
 type Inventory = {
