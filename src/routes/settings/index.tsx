@@ -5,7 +5,7 @@ import Categories from './categories'
 import StoreSettings from './store-settings'
 import ImportFiles from './import-files'
 
-import './styles.scss'
+
 import { Trans } from 'react-i18next'
 
 const Settings = () => {

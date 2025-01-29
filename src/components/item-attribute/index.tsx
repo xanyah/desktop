@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { formatData } from '../../utils/data-helper'
 
-import './styles.scss'
+
 import { Trans } from 'react-i18next'
 
 const ItemAttribute = ({ attribute, type, value, model }) => {

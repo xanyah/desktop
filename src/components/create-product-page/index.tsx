@@ -4,7 +4,7 @@ import FormAttribute from '../../containers/form-attribute'
 
 import { productFormat } from "../../types";
 
-import "./styles.scss";
+
 import { Trans } from "react-i18next";
 
 export default class CreateProduct extends React.Component {

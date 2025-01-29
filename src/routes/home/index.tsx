@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { routes } from '../../constants'
 import { getGreetingTime } from '../../utils/date-helper'
-import './styles.scss'
+
 import { useCurrentToken } from '../../hooks'
 import HomeLink from '../../components/home-link'
 import { Trans } from "react-i18next";

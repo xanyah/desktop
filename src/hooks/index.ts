@@ -1,5 +1,6 @@
 export * from './auth'
 export * from './categories'
+export * from './current-user'
 export * from './custom-attributes'
 export * from './manufacturers'
 export * from './inventories'

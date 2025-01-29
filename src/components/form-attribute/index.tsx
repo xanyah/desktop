@@ -12,7 +12,7 @@ import {
   getVatRatesOptions,
 } from "../../utils/category-helper";
 
-import "./styles.scss";
+
 import { map } from "lodash";
 import { Trans, useTranslation } from "react-i18next";
 import { TFunction } from "i18next";

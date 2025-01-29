@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import './styles.scss'
+
 import { useShipping, useShippingProducts } from '../../hooks'
 import { useParams } from 'react-router-dom'
 import { shippingFormat } from '../../types'

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProductForm from './form'
-import "./styles.scss";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useCurrentStore, useProduct } from "../../hooks";
 import { createProduct, updateProduct } from "../../api";

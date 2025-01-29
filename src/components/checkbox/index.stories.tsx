@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import '../../app.scss'
 import Checkbox from './'
 
 storiesOf('Checkbox', module)

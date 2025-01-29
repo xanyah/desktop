@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.scss'
+
 
 //TODO add eye icon  on password type to set visible or not password input
 const Input = ({ className, onChange, placeholder, type, value }) => (

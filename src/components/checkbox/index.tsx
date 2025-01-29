@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.scss'
+
 
 const Checkbox = ({ children, checked, onChange }) => (
   <label className="input-checkbox">

@@ -5,7 +5,7 @@ import { formatData } from "../../utils/data-helper";
 import { getStatusClass } from "../../utils/status-helper";
 import { secondaryTextColor } from "../../constants";
 import Input from "../input";
-import "./styles.scss";
+
 import { logo } from "../../images";
 import { Trans, useTranslation } from "react-i18next";
 

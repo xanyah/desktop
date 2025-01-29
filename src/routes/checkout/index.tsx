@@ -3,7 +3,7 @@ import swal from 'sweetalert'
 import Select from 'react-select'
 import { Link } from 'react-router-dom'
 
-import "./styles.scss";
+
 
 import promotionTypes from "../../constants/promotion-types";
 import { createSale, getVariantByBarcode } from "../../utils/api-helper";

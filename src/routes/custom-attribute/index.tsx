@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { customAttributeFormat } from '../../types'
 
-import "./styles.scss";
+
 import { createCustomAttribute, updateCustomAttribute } from "../../api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";

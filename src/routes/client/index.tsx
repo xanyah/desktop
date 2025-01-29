@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import "./styles.scss";
+
 import { useClient } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCurrentStore } from "../../hooks/stores";

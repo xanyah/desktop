@@ -1,6 +1,6 @@
 import { inventoryFormat } from '../../types'
 
-import './styles.scss'
+
 import { useParams } from 'react-router-dom'
 import { useInventory, useInventoryProducts } from '../../hooks'
 import DataDetails from '../../components/data-details'

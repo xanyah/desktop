@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { providerFormat } from '../../types'
 
-import "./styles.scss";
+
 import { useProvider, useCurrentStore } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";

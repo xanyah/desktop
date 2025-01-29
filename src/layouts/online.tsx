@@ -14,12 +14,21 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar'
 import { BreadCrumbContext } from '@/contexts'
+import { useCurrentUser } from '@/hooks'
 import { map } from 'lodash'
-import { Fragment, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Fragment, useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const Online = () => {
+  const {isLoading, isError} = useCurrentUser()
+  const navigate = useNavigate()
   const [breadcrumb, setBreadcrumb] = useState<BreadCrumbElement[]>([])
+
+  useEffect(() => {
+    if (!isLoading && isError) {
+      navigate("/sign-in")
+    }
+  }, [isLoading, isError])
 
   return (
     <SidebarProvider>

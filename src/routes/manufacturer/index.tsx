@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { manufacturerFormat } from '../../types'
 
-import './styles.scss'
+
 import { useManufacturer, useProducts } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useCurrentStore } from '../../hooks/stores'

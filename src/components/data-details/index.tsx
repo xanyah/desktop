@@ -4,7 +4,7 @@ import ItemAttribute from '../item-attribute'
 import { FormAttribute } from '../../components'
 import { Trans } from 'react-i18next';
 import { isEditableEntity } from '../../utils/entity-helper'
-import './styles.scss'
+
 import { filter, forEach, get, reduce } from 'lodash'
 
 interface FormattedDataItem {
