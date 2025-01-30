@@ -6,6 +6,7 @@ import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { InputText } from '@/components'
 
 type SignInForm = {
   email: string

@@ -5,7 +5,7 @@ import ApiDataSelect from '../api-data-select'
 
 type CategorySelectProps = {
   onChange: (newValue?: Category['id']) => void
-  value: Category['id']
+  value?: Category['id']
   label?: string
   error?: string
 }
