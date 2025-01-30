@@ -3,54 +3,52 @@ import swal from 'sweetalert'
 import Select from 'react-select'
 import { Link } from 'react-router-dom'
 
-
-
-import promotionTypes from "../../constants/promotion-types";
-import { createSale, getVariantByBarcode } from "../../utils/api-helper";
+import promotionTypes from '../../constants/promotion-types'
+import { createSale, getVariantByBarcode } from '../../utils/api-helper'
 import {
   formatPrice,
   getSaleVariantsTotal,
   getSaleTotal,
-} from "../../utils/data-helper";
+} from '../../utils/data-helper'
 import {
   showErrorToast,
   showSuccessToast,
 } from '../../utils/notification-helper'
 import { useCurrentStore, usePaymentTypes } from '../../hooks'
-import Input from '../../components/input'
 import Checkbox from '../../components/checkbox'
 import Modal from '../../components/modal'
-import { Trans, useTranslation } from "react-i18next";
+import { Trans, useTranslation } from 'react-i18next'
+import { InputText } from '@/components'
 
 const Checkout = () => {
-  const currentStore = useCurrentStore();
+  const currentStore = useCurrentStore()
   const { data: paymentTypesData } = usePaymentTypes({
     storeId: currentStore?.id,
-  });
-  const [displayedModal, setDisplayedModal] = useState(false);
-  const [hasPromotion, setHasPromotion] = useState(false);
-  const [salePayments, setSalePayments] = useState<any[]>([]);
-  const [salePromotion, setSalePromotion] = useState<any>();
-  const [saleVariants, setSaleVariants] = useState<any[]>([]);
-  const [variantBarcode, setVariantBarcode] = useState("");
-  const { t } = useTranslation();
+  })
+  const [displayedModal, setDisplayedModal] = useState(false)
+  const [hasPromotion, setHasPromotion] = useState(false)
+  const [salePayments, setSalePayments] = useState<any[]>([])
+  const [salePromotion, setSalePromotion] = useState<any>()
+  const [saleVariants, setSaleVariants] = useState<any[]>([])
+  const [variantBarcode, setVariantBarcode] = useState('')
+  const { t } = useTranslation()
 
   const resetSale = useCallback(() => {
-    setDisplayedModal(false);
-    setHasPromotion(false);
-    setSalePayments([]);
-    setSalePromotion(undefined);
-    setSaleVariants([]);
-    setVariantBarcode("");
-  }, []);
+    setDisplayedModal(false)
+    setHasPromotion(false)
+    setSalePayments([])
+    setSalePromotion(undefined)
+    setSaleVariants([])
+    setVariantBarcode('')
+  }, [])
 
   const onVariantSearch = useCallback(
     (e) => {
-      e.preventDefault();
+      e.preventDefault()
 
       getVariantByBarcode(variantBarcode)
         .then(({ data }) => {
-          const variant = saleVariants.find((v) => v.variant.id === data.id);
+          const variant = saleVariants.find((v) => v.variant.id === data.id)
           // If variant already exists, we just increment the quantity
           if (variant) {
             setSaleVariants(
@@ -59,21 +57,21 @@ const Checkout = () => {
                   ? { ...v, quantity: v.quantity + 1 }
                   : v
               )
-            );
+            )
           } else {
-            setSaleVariants([...saleVariants, { quantity: 1, variant: data }]);
+            setSaleVariants([...saleVariants, { quantity: 1, variant: data }])
           }
-          setVariantBarcode("");
+          setVariantBarcode('')
         })
         .catch(() => {
-          setVariantBarcode("");
+          setVariantBarcode('')
           showErrorToast(
-            t("toast.not-found", { entity: t("models.products.title") })
-          );
-        });
+            t('toast.not-found', { entity: t('models.products.title') })
+          )
+        })
     },
     [saleVariants, variantBarcode, t]
-  );
+  )
 
   const updateQuantity = useCallback((variantId, quantity) => {
     setSaleVariants((oldSaleVariants) =>
@@ -85,16 +83,16 @@ const Checkout = () => {
             }
           : saleVariant
       )
-    );
-  }, []);
+    )
+  }, [])
 
   const removeVariant = useCallback((variantId) => {
     setSaleVariants((oldSaleVariants) =>
       oldSaleVariants.filter(
         (saleVariant) => saleVariant.variant.id !== variantId
       )
-    );
-  }, []);
+    )
+  }, [])
 
   const addVariantPromotion = useCallback((variantId) => {
     setSaleVariants((oldSaleVariants) =>
@@ -109,16 +107,16 @@ const Checkout = () => {
             }
           : saleVariant
       )
-    );
-  }, []);
+    )
+  }, [])
 
   const getVariantsTotal = useCallback(() => {
-    return getSaleVariantsTotal(saleVariants);
-  }, [saleVariants]);
+    return getSaleVariantsTotal(saleVariants)
+  }, [saleVariants])
 
   const getTotal = useCallback(() => {
-    return getSaleTotal({ salePromotion, saleVariants });
-  }, [saleVariants, salePromotion]);
+    return getSaleTotal({ salePromotion, saleVariants })
+  }, [saleVariants, salePromotion])
 
   const validateSale = useCallback(() => {
     createSale({
@@ -146,9 +144,9 @@ const Checkout = () => {
       storeId: currentStore?.id,
       totalPrice: getTotal(),
     }).then(() => {
-      resetSale();
-      showSuccessToast(t("toast.created", { entity: t("models.sales.title") }));
-    });
+      resetSale()
+      showSuccessToast(t('toast.created', { entity: t('models.sales.title') }))
+    })
   }, [
     t,
     currentStore,
@@ -157,7 +155,7 @@ const Checkout = () => {
     salePayments,
     salePromotion,
     saleVariants,
-  ]);
+  ])
 
   const renderVariant = useCallback(
     ({
@@ -171,14 +169,14 @@ const Checkout = () => {
             <h5>{product.name}</h5>
             <ul>
               <li>
-                <b>{t("models.manufacturers.title")}:</b>{" "}
+                <b>{t('models.manufacturers.title')}:</b>{' '}
                 {product.manufacturer.name}
               </li>
               <li>
-                <b>{t("models.providers.title")}:</b> {provider.name}
+                <b>{t('models.providers.title')}:</b> {provider.name}
               </li>
               <li>
-                <b>{t("models.variants.unitPrice")}:</b> {formatPrice(price)}
+                <b>{t('models.variants.unitPrice')}:</b> {formatPrice(price)}
               </li>
             </ul>
           </div>
@@ -186,7 +184,7 @@ const Checkout = () => {
             <button onClick={() => updateQuantity(id, quantity - 1)}>
               <i className="im im-minus" />
             </button>
-            <Input
+            <InputText
               type="text"
               onChange={(e) => updateQuantity(id, parseInt(e.target.value))}
               value={quantity}
@@ -234,7 +232,7 @@ const Checkout = () => {
                       )
                     }
                   />
-                  <Input
+                  <InputText
                     type="number"
                     step="any"
                     value={saleVariantPromotion.amount}
@@ -260,28 +258,28 @@ const Checkout = () => {
                   className="btn btn-primary"
                   onClick={() => addVariantPromotion(id)}
                 >
-                  {t("checkout.add-promotion")}
+                  {t('checkout.add-promotion')}
                 </button>
               )}
               <button
                 className="btn btn-danger"
                 onClick={() => removeVariant(id)}
               >
-                {t("checkout.remove-article")}
+                {t('checkout.remove-article')}
               </button>
             </div>
           </div>
         </div>
-      );
+      )
     },
     [addVariantPromotion, removeVariant, saleVariants, updateQuantity, t]
-  );
+  )
 
   const renderPaymentType = useCallback(
     (paymentType) => {
       const selectedSalePayment = salePayments.find(
         (salePayment) => salePayment.paymentType.id === paymentType.id
-      );
+      )
 
       return (
         <li key={paymentType.id}>
@@ -307,7 +305,7 @@ const Checkout = () => {
             {paymentType.name}
           </Checkbox>
           {selectedSalePayment && (
-            <Input
+            <InputText
               type="number"
               step="any"
               value={selectedSalePayment.total}
@@ -326,22 +324,22 @@ const Checkout = () => {
             />
           )}
         </li>
-      );
+      )
     },
     [salePayments, getVariantsTotal]
-  );
+  )
 
   const change =
     salePayments.reduce((a, b) => a + parseFloat(b.total), 0) -
-    getVariantsTotal();
+    getVariantsTotal()
   return (
     <>
       <div className="checkout-page">
         <form onSubmit={(e) => onVariantSearch(e)}>
           <i className="im im-magnifier" />
-          <Input
+          <InputText
             type="text"
-            placeholder={`${t("checkout.type-barcode")}...`}
+            placeholder={`${t('checkout.type-barcode')}...`}
             onChange={(e) => setVariantBarcode(e.target.value)}
             value={variantBarcode}
           />
@@ -359,24 +357,24 @@ const Checkout = () => {
                 swal({
                   buttons: true,
                   dangerMode: true,
-                  icon: "warning",
-                  text: t("checkout.reset-alert.text"),
-                  title: t("checkout.reset-alert.title"),
+                  icon: 'warning',
+                  text: t('checkout.reset-alert.text'),
+                  title: t('checkout.reset-alert.title'),
                 }).then((willDelete) => {
                   if (willDelete) {
-                    resetSale();
+                    resetSale()
                   }
                 })
               }
             >
               <i className="im im-x-mark" />
-              {t("global.reset")}
+              {t('global.reset')}
             </button>
             <button
               className="btn btn-primary"
               onClick={() => setDisplayedModal(true)}
             >
-              {t("checkout.end_sale")}
+              {t('checkout.end_sale')}
             </button>
           </div>
         )}
@@ -387,7 +385,7 @@ const Checkout = () => {
             onChange={() => setHasPromotion(!hasPromotion)}
             checked={hasPromotion}
           >
-            {t("checkout.add-promotion")}
+            {t('checkout.add-promotion')}
           </Checkbox>
           {hasPromotion && (
             <div className="price-promotion">
@@ -412,7 +410,7 @@ const Checkout = () => {
                 }
               />
               {salePromotion.type && (
-                <Input
+                <InputText
                   type="number"
                   step="any"
                   value={salePromotion.amount}
@@ -427,12 +425,12 @@ const Checkout = () => {
             </div>
           )}
           <div className="price-title">
-            <h1>{t("checkout.total")}</h1>
+            <h1>{t('checkout.total')}</h1>
             <h2>{formatPrice(getTotal())}</h2>
           </div>
           {change < 0 && (
             <div className="price-title">
-              <h3>{t("checkout.left-to-pay")}</h3>
+              <h3>{t('checkout.left-to-pay')}</h3>
               <h4>{formatPrice(-change)}</h4>
             </div>
           )}
@@ -445,7 +443,7 @@ const Checkout = () => {
           </div>
           {change > 0 && (
             <div className="price-title">
-              <h3>{t("checkout.change")}</h3>
+              <h3>{t('checkout.change')}</h3>
               <h4>{formatPrice(change)}</h4>
             </div>
           )}
@@ -454,7 +452,7 @@ const Checkout = () => {
               className="btn btn-link"
               onClick={() => setDisplayedModal(false)}
             >
-              {t("global.cancel")}
+              {t('global.cancel')}
             </button>
             <button
               className="btn btn-primary"
@@ -464,7 +462,7 @@ const Checkout = () => {
                 getVariantsTotal()
               }
             >
-              {t("global.validate")}
+              {t('global.validate')}
             </button>
           </div>
         </div>
@@ -479,7 +477,7 @@ const Checkout = () => {
         </Link>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout

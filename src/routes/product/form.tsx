@@ -1,33 +1,26 @@
-import { CategorySelect, ManufacturerSelect, ProviderSelect } from "@/components"
-import CurrencyInput from 'react-currency-input-field';
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Controller, useForm } from "react-hook-form"
-import { z } from "zod"
-import { useCurrentStore } from "@/hooks";
-import { useEffect } from "react";
-import { toNumber } from "lodash";
-
-const formSchema = z.object({
-  name: z.string(),
-  categoryId: z.string(),
-  manufacturerId: z.string(),
-  storeId: z.string(),
-  amount: z.number(),
-  buyingAmount: z.number(),
-  taxFreeAmount: z.number(),
-  providerId: z.string(),
-  sku: z.string(),
-  upc: z.string(),
-})
+import {
+  Button,
+  CategorySelect,
+  InputText,
+  ManufacturerSelect,
+} from '@/components'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useForm } from 'react-hook-form'
+import { useCurrentStore } from '@/hooks'
+import { useEffect } from 'react'
+import { formSchema, formSchemaType } from './config'
+import { toNumber } from 'lodash'
+import { StyledForm, StyledInputsGroup } from './styles'
+import { Euro } from 'lucide-react'
 
 type ProductFormProps = {
-  initialValues?: Partial<z.infer<typeof formSchema>>
-  onSubmit: (values: z.infer<typeof formSchema>) => void
+  initialValues?: Partial<formSchemaType>
+  onSubmit: (values: formSchemaType) => void
 }
 
 const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
   const store = useCurrentStore()
-  const { register, handleSubmit, control, setValue, reset } = useForm<z.infer<typeof formSchema>>({
+  const { handleSubmit, control, setValue, reset } = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
   })
@@ -38,97 +31,145 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
 
   useEffect(() => {
     if (store) {
-      setValue("storeId", store?.id)
+      setValue('storeId', store?.id)
     }
   }, [store, setValue])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-      <input {...register('storeId')} type="hidden" />
-      <input
-        {...register('name')}
-        placeholder="name"
-        type="text"
-        name="name"
-      />
-      <input
-        {...register('sku')}
-        placeholder="sku"
-        type="text"
-        name="sku"
-      />
-      <input
-        {...register('upc')}
-        placeholder="upc"
-        type="text"
-        name="upc"
-      />
-      <Controller
-        control={control}
-        name="categoryId"
-        render={({ field: { onChange, value } }) => (
-          <CategorySelect onChange={onChange} value={value} />
-        )}
-      />
-      <Controller
-        control={control}
-        name="manufacturerId"
-        render={({ field: { onChange, value } }) => (
-          <ManufacturerSelect onChange={onChange} value={value} />
-        )}
-      />
-      <Controller
-        control={control}
-        name="providerId"
-        render={({ field: { onChange, value } }) => (
-          <ProviderSelect onChange={onChange} value={value} />
-        )}
-      />
-      <Controller
-        control={control}
-        name="buyingAmount"
-        render={({ field: { onChange, value } }) => (
-          <CurrencyInput
-            placeholder="Buying Amount"
-            decimalsLimit={2}
-            groupSeparator=" "
-            decimalSeparator=","
-            value={value}
-            suffix="€"
-            onValueChange={newValue => onChange(toNumber(newValue))}
-          />)}
-      />
-      <Controller
-        control={control}
-        name="taxFreeAmount"
-        render={({ field: { onChange, value } }) => (
-          <CurrencyInput
-            placeholder="Tax Free Amount"
-            decimalsLimit={2}
-            groupSeparator=" "
-            decimalSeparator=","
-            value={value}
-            suffix="€"
-            onValueChange={newValue => onChange(toNumber(newValue))}
-          />)}
-      />
-      <Controller
-        control={control}
-        name="amount"
-        render={({ field: { onChange, value } }) => (
-          // TODO: Should be tax_free amount * category.vat_rate
-          <CurrencyInput
-            placeholder="Amount"
-            decimalsLimit={2}
-            groupSeparator=" "
-            decimalSeparator=","
-            value={value}
-            suffix="€"
-            onValueChange={newValue => onChange(toNumber(newValue))}
-          />)}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledInputsGroup>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="name"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="name"
+              type="text"
+              label="name"
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="sku"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="sku"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="sku"
+              type="text"
+              label="sku"
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="upc"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="upc"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="upc"
+              type="text"
+              label="Upc"
+            />
+          )}
+        />
+      </StyledInputsGroup>
+
+      <StyledInputsGroup>
+        <Controller
+          control={control}
+          name="categoryId"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <CategorySelect
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label="Categories"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="manufacturerId"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <ManufacturerSelect
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label="Manufacturers"
+            />
+          )}
+        />
+      </StyledInputsGroup>
+
+      <StyledInputsGroup>
+        <Controller
+          control={control}
+          name="buyingAmount"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              icon={<Euro />}
+              id="buyingAmount"
+              step="0.1"
+              type="number"
+              placeholder="Buying Amount"
+              label="Buying Amount"
+              value={value}
+              onChange={(e) => onChange(toNumber(e.target.value))}
+              error={error?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="taxFreeAmount"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              icon={<Euro />}
+              id="taxFreeAmount"
+              step="0.1"
+              type="number"
+              label="Tax Free Amount"
+              placeholder="Tax Free Amount"
+              value={value}
+              onChange={(e) => onChange(toNumber(e.target.value))}
+              error={error?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="amount"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            // TODO: Should be tax_free amount * category.vat_rate
+            <InputText
+              icon={<Euro />}
+              id="amount"
+              step="0.1"
+              type="number"
+              placeholder="Amount"
+              label="Amount"
+              value={value}
+              onChange={(e) => onChange(toNumber(e.target.value))}
+              error={error?.message}
+            />
+          )}
+        />
+      </StyledInputsGroup>
+      <Button type="submit">Submit</Button>
+    </StyledForm>
   )
 }
 

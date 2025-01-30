@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { PulseLoader } from "react-spinners";
-import { formatData } from "../../utils/data-helper";
-import { getStatusClass } from "../../utils/status-helper";
-import { secondaryTextColor } from "../../constants";
-import Input from "../input";
-
-import { logo } from "../../images";
-import { Trans, useTranslation } from "react-i18next";
+import { useState } from 'react'
+import PropTypes from 'prop-types'
+import { PulseLoader } from 'react-spinners'
+import { formatData } from '../../utils/data-helper'
+import { getStatusClass } from '../../utils/status-helper'
+import { secondaryTextColor } from '../../constants'
+import { logo } from '../../images'
+import { Trans, useTranslation } from 'react-i18next'
+import { InputText } from '../ui'
 
 const DataTable = ({
   data,
@@ -19,14 +18,14 @@ const DataTable = ({
   searchEntity,
   type,
 }) => {
-  const [searchEntityQuery, setSearchEntityQuery] = useState("");
-  const [selected, setSelected] = useState(null);
-  const { t } = useTranslation();
+  const [searchEntityQuery, setSearchEntityQuery] = useState('')
+  const [selected, setSelected] = useState(null)
+  const { t } = useTranslation()
 
   const handleSearchEntity = (query) => {
-    setSearchEntityQuery(query);
-    searchEntity(query);
-  };
+    setSearchEntityQuery(query)
+    searchEntity(query)
+  }
 
   return (
     <div className={`data-table data-table-${type}`}>
@@ -35,7 +34,7 @@ const DataTable = ({
           <div className="search-bar">
             <div className="search-bar-content">
               <i className="im im-magnifier" />
-              <Input
+              <InputText
                 className="search-input input-search"
                 type="text"
                 placeholder={t(`models.${type}.search`)}
@@ -48,7 +47,7 @@ const DataTable = ({
         <div className="header-row">
           {columns.map(
             (column) =>
-              column !== "status" && (
+              column !== 'status' && (
                 <div className={`column column-${column}`} key={column}>
                   <Trans i18nKey={`models.${type}.${column}`} />
                 </div>
@@ -64,12 +63,12 @@ const DataTable = ({
             data.map((row, idx) => (
               <div
                 key={idx}
-                className={selected === row ? "row selected" : "row"}
+                className={selected === row ? 'row selected' : 'row'}
                 onClick={() => setSelected(row)}
               >
                 {columns.map(
                   (column) =>
-                    column !== "status" && (
+                    column !== 'status' && (
                       <div
                         className={`column column-${column}`}
                         key={idx + column}
@@ -78,7 +77,7 @@ const DataTable = ({
                       </div>
                     )
                 )}
-                {columns.includes("status") && (
+                {columns.includes('status') && (
                   <div className="status">
                     <div
                       className={`sticker-${getStatusClass(row, type)}`}
@@ -140,8 +139,8 @@ const DataTable = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 DataTable.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.string),
@@ -152,7 +151,7 @@ DataTable.propTypes = {
   onItemView: PropTypes.func,
   searchEntity: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   type: PropTypes.string,
-};
+}
 
 DataTable.defaultProps = {
   columns: [],
@@ -162,7 +161,7 @@ DataTable.defaultProps = {
   loading: false,
   onItemView: () => null,
   searchEntity: false,
-  type: "",
-};
+  type: '',
+}
 
-export default DataTable;
+export default DataTable

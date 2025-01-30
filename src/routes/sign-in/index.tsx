@@ -1,42 +1,44 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm } from 'react-hook-form'
 
-
-import { logo } from "../../images";
-import Input from "../../components/input";
-import { signIn } from "../../api";
-import { useNavigate } from "react-router-dom";
-import { Trans, useTranslation } from "react-i18next";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { logo } from '../../images'
+import Input from '../../components/input'
+import { signIn } from '../../api'
+import { useNavigate } from 'react-router-dom'
+import { Trans, useTranslation } from 'react-i18next'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 type SignInForm = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 const SignIn = () => {
   const queryClient = useQueryClient()
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { t } = useTranslation()
+  const navigate = useNavigate()
   const { handleSubmit, control } = useForm<SignInForm>({
-    defaultValues: { email: "", password: "" },
-  });
+    defaultValues: { email: '', password: '' },
+  })
 
-  const {mutate} = useMutation({
+  const { mutate } = useMutation({
     mutationFn: signIn,
-    onSuccess: (data)=> {
-      localStorage.setItem(`Xanyah:Bearer`, `${data.data.tokenType} ${data.data.accessToken}`)
-      queryClient.invalidateQueries({queryKey: ['currentUser']})
-      navigate("/")
-    }
+    onSuccess: (data) => {
+      localStorage.setItem(
+        `Xanyah:Bearer`,
+        `${data.data.tokenType} ${data.data.accessToken}`
+      )
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+      navigate('/')
+    },
   })
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     try {
-      mutate({ username: email, password, grantType: "password" });
+      mutate({ username: email, password, grantType: 'password' })
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  });
+  })
 
   return (
     <form key="sign-in" className="sign-in-page" onSubmit={onSubmit}>
@@ -49,8 +51,8 @@ const SignIn = () => {
             required: true,
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              placeholder={t("sign-in-page.email")}
+            <InputText
+              placeholder={t('sign-in-page.email')}
               type="email"
               value={value}
               onChange={onChange}
@@ -64,8 +66,8 @@ const SignIn = () => {
             required: true,
           }}
           render={({ field: { onChange, value } }) => (
-            <Input
-              placeholder={t("sign-in-page.password")}
+            <InputText
+              placeholder={t('sign-in-page.password')}
               type="password"
               value={value}
               onChange={onChange}
@@ -81,7 +83,7 @@ const SignIn = () => {
         </button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn
