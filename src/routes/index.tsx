@@ -42,7 +42,8 @@ const Router = () => {
       <Route path="home" element={<Home />} />
       <Route path="inventories" element={<Inventories />} />
       <Route path="inventorys/:id" element={<Inventory />} />
-      <Route path="manufacturers/:id" element={<Manufacturer />} />
+      <Route path="manufacturers/:id/edit" element={<Manufacturer />} />
+      <Route path="manufacturers/new" element={<Manufacturer />} />
       <Route path="manufacturers" element={<Manufacturers />} />
       <Route path="orders/:id" element={<Order />} />
       <Route path="orders" element={<Orders />} />

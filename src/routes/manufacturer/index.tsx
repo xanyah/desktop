@@ -1,73 +1,111 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { manufacturerFormat } from '../../types'
 
 
-import { useManufacturer, useProducts } from '../../hooks'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useCurrentStore } from '../../hooks/stores'
-import { useMutation } from '@tanstack/react-query'
-import { createManufacturer, updateManufacturer } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
-import DataTable from '../../components/data-table'
-import DataDetails from '../../components/data-details'
-import { useTranslation } from 'react-i18next'
+import { useManufacturer, useCurrentStore } from "../../hooks";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createManufacturer, updateManufacturer } from "../../api";
+import { showSuccessToast } from "../../utils/notification-helper";
+import { useTranslation } from "react-i18next";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { manufacturerSchema, manufacturerSchemaType } from './config';
+import { Controller, useForm } from 'react-hook-form';
+import { FormContainer, FormSection, InputText } from '@/components';
+import { useBreadCrumbContext } from '@/contexts/breadcrumb';
 
 const Manufacturer = () => {
+  const queryClient = useQueryClient()
   const { t } = useTranslation();
-  const navigate = useNavigate()
-  const [isEditing, setIsEditing] = useState(false)
-  const store = useCurrentStore()
-  const { id } = useParams()
-  const { data: manufacturerData } = useManufacturer(id)
-  const { data: productsData, isLoading: isLoadingProducts } = useProducts({ manufacturerId: id })
+  const navigate = useNavigate();
+  const store = useCurrentStore();
+  const { id } = useParams();
+  const { data: manufacturerData } = useManufacturer(id);
+  const { handleSubmit, control, reset, formState: {errors} } = useForm<manufacturerSchemaType>({
+    resolver: zodResolver(manufacturerSchema),
+    defaultValues: {},
+  })
+
+  useBreadCrumbContext([
+    { label: 'Manufacturers', url: '/manufacturers'},
+    { label: manufacturerData?.data ? manufacturerData?.data.name : 'New manufacturer'},
+  ])
 
   const { mutate: createApiManufacturer } = useMutation({
-    mutationFn: (newData: any) => createManufacturer({...newData, storeId: store?.id}),
+    mutationFn: (newData: manufacturerSchemaType) =>
+      createManufacturer({ ...newData, storeId: store?.id }),
     onSuccess: (data) => {
-      navigate(`/manufacturers/${data.data.id}`)
-      setIsEditing(false)
-      showSuccessToast(t('toast.created', { entity: t('models.manufacturers.title') }))
+      queryClient.setQueryData(['manufacturers', {id}], data)
+      navigate(`/manufacturers/${data.data.id}/edit`);
+      showSuccessToast(
+        t("toast.created", { entity: t("models.manufacturers.title") })
+      );
     },
-  })
+  });
 
   const { mutate: updateApiManufacturer } = useMutation({
-    mutationFn: newData => updateManufacturer(id, newData),
-    onSuccess: () => {
-      setIsEditing(false)
-      showSuccessToast(t('toast.updated'))
+    mutationFn: (newData: manufacturerSchemaType) => updateManufacturer(id, newData),
+    onSuccess: (data) => {
+      queryClient.setQueryData(['manufacturers', {id}], data)
+      showSuccessToast(t("toast.updated"));
     },
-  })
+  });
+
+  const onSubmit = useCallback((data: manufacturerSchemaType) => {
+    console.log('onSubmit')
+    if (id) {
+      return updateApiManufacturer(data)
+    }
+    return createApiManufacturer(data)
+  }, [id, updateApiManufacturer, createApiManufacturer])
+
+
+  useEffect(() => {
+    reset(manufacturerData?.data)
+  }, [manufacturerData, reset])
 
   return (
-      <div className="manufacturer-page">
-        <h1 className="data-details-title">{manufacturerData?.data.name}</h1>
-        <DataDetails
-          createEntity={createApiManufacturer}
-          currentEntity={manufacturerData?.data}
-          editing={isEditing}
-          formattedData={manufacturerFormat}
-          toggleEdit={() => setIsEditing(!isEditing)}
-          type="manufacturers"
-          updateEntity={updateApiManufacturer}
-        >
-          {
-            (manufacturerData?.data.id)
-              ? (
-                <DataTable
-                  columns={['name', 'category', 'manufacturer']}
-                  data={productsData?.data}
-                  loading={isLoadingProducts}
-                  onItemView={item => navigate(`/products/${item.id}`)}
-                  type="products"
-                />
-              )
-              : (
-                null
-              )
-          }
-        </DataDetails>
-      </div>
+    <FormContainer
+      title="Fournisseur"
+      subtitle="Saisissez ici les informations de votre fournisseur"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormSection
+        title="Informations générales"
+      >
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="name"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="name"
+              type="text"
+              label="name"
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="notes"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Notes"
+              type="text"
+              label="Notes"
+            />
+          )}
+        />
+      </FormSection>
+    </FormContainer>
   )
 }
 
-export default Manufacturer
+export default Manufacturer;

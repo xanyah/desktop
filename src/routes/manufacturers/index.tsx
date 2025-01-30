@@ -26,14 +26,11 @@ const Manufacturers = () => {
           cell: (props) => (
             <Link
               className="underline"
-              to={`/manufacturers/${props.row.original.id}`}
+              to={`/manufacturers/${props.row.original.id}/edit`}
             >
               {props.getValue()}
             </Link>
           ),
-        }),
-        columnHelper.accessor('productsCount', {
-          header: '# of products',
         }),
       ] as ColumnDef<Manufacturer>[],
     [columnHelper]
