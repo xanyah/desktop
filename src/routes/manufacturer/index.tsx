@@ -73,21 +73,37 @@ const Manufacturer = () => {
       <FormSection
         title="Informations générales"
       >
-        <Controller
-          control={control}
-          name="name"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              id="name"
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder="name"
-              type="text"
-              label="name"
-            />
-          )}
-        />
+      <Controller
+        control={control}
+        name="name"
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <InputText
+            id="name"
+            error={error?.message}
+            onChange={onChange}
+            value={value}
+            placeholder="name"
+            type="text"
+            label="name"
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="code"
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <InputText
+            id="code"
+            error={error?.message}
+            onChange={onChange}
+            value={value}
+            placeholder="Code"
+            type="text"
+            hint="Un code permettant d'identifier le fabricant (souvent les 4 premières lettres du fabricant)"
+            label="Code"
+          />
+        )}
+      />
 
         <Controller
           control={control}
