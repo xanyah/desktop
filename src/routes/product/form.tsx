@@ -13,7 +13,6 @@ import { useEffect } from 'react'
 import { formSchema, formSchemaType } from './config'
 import { toNumber } from 'lodash'
 import { Euro } from 'lucide-react'
-import { StyledForm } from './styles'
 
 type ProductFormProps = {
   initialValues?: Partial<formSchemaType>

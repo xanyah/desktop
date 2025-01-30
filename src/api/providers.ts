@@ -8,10 +8,10 @@ export const getProvider = (providerId) =>
   xanyahApi.get<Provider>(`v2/providers/${providerId}`)
 
 export const updateProvider = (providerId, params) =>
-  xanyahApi.patch<Provider>(`providers/${providerId}`, decamelizeKeys(params))
+  xanyahApi.patch<Provider>(`v2/providers/${providerId}`, decamelizeKeys(params))
 
 export const createProvider = newProvider =>
-  xanyahApi.post<Provider>('providers', decamelizeKeys(newProvider))
+  xanyahApi.post<Provider>('v2/providers', decamelizeKeys(newProvider))
 
 
 /** @deprecated */

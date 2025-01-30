@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react"
+import { Calendar, Truck } from "lucide-react"
 import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 
 // Menu items.
@@ -34,7 +34,7 @@ const items = [
     url: '/clients',
   },
   {
-    icon: Calendar,
+    icon: Truck,
     title: 'Providers',
     url: '/providers',
   },
