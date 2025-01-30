@@ -5,7 +5,7 @@ export const getProviders = params =>
   xanyahApi.get<Provider[]>('v2/providers', decamelizeKeys({params}))
 
 export const getProvider = (providerId) =>
-  xanyahApi.get<Provider>(`providers/${providerId}`)
+  xanyahApi.get<Provider>(`v2/providers/${providerId}`)
 
 export const updateProvider = (providerId, params) =>
   xanyahApi.patch<Provider>(`providers/${providerId}`, decamelizeKeys(params))

@@ -4,7 +4,7 @@ import { PulseLoader } from 'react-spinners'
 import FormAttribute from '../../../containers/form-attribute'
 import { secondaryTextColor } from '../../../constants'
 
-import './styles.scss'
+
 import { useCategories, useCurrentStore } from '../../../hooks'
 import { useMutation } from '@tanstack/react-query'
 import { createCategory } from '../../../api'

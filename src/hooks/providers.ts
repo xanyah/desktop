@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { getProvider, getProviders, searchProvider } from '../api'
+import { validate } from 'uuid'
 
 export const useProviders = (params) => useQuery({
   queryFn: () => getProviders(params),
@@ -8,6 +9,7 @@ export const useProviders = (params) => useQuery({
 
 export const useProvider = (id) => useQuery({
   queryFn: () => getProvider(id),
+  enabled: validate(id),
   queryKey: ['providers', {id}],
 })
 

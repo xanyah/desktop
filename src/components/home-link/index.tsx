@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import "./styles.scss";
+
 import { Trans } from "react-i18next";
 
 const HomeLink = ({ image, string, url }) => (

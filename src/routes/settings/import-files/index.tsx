@@ -1,4 +1,4 @@
-import './styles.scss'
+
 
 import {test} from '../../../utils/import-helper'
 import { useCurrentStore } from '../../../hooks'

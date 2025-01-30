@@ -1,202 +1,93 @@
-import { useState } from "react";
-import Collapsible from "react-collapsible";
-import { Trans, useTranslation } from "react-i18next";
-
-import { productFormat } from '../../types'
-
-import FormAttribute from "../../containers/form-attribute";
-
-import "./styles.scss";
-import { useNavigate, useParams } from "react-router-dom";
-import { useProduct, useProductVariants } from "../../hooks";
-import { createVariant, updateProduct } from "../../api";
-import { useMutation } from "@tanstack/react-query";
-import { showSuccessToast } from "../../utils/notification-helper";
-import DataDetails from "../../components/data-details";
-import DataTable from "../../components/data-table";
+import { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import ProductForm from './form'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useCurrentStore, useProduct } from '../../hooks'
+import { createProduct, updateProduct } from '../../api'
+import { useMutation } from '@tanstack/react-query'
+import { showSuccessToast } from '../../utils/notification-helper'
+import { validate } from 'uuid'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { formSchemaType } from './config'
 
 const Product = () => {
-  const { t } = useTranslation();
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [newVariant, setNewVariant] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
-  const { data: productData } = useProduct(id);
-  const { data: variantsData } = useProductVariants({ productId: id });
+  const store = useCurrentStore()
+  const { t } = useTranslation()
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [isEditing, setIsEditing] = useState(id === 'new')
+  const { data: productData } = useProduct(id)
+  useBreadCrumbContext([
+    { label: 'Products', url: '/products' },
+    { label: productData?.data?.name || 'New product' },
+  ])
 
-  const { mutate: createApiVariant } = useMutation({
-    mutationFn: (newData: any) => createVariant({ ...newData, productId: id }),
+  const { mutate: createApiProduct } = useMutation({
+    mutationFn: (newData: formSchemaType) => createProduct(newData),
     onSuccess: (data) => {
-      navigate(`/manufacturers/${data.data.id}`);
-      setIsEditing(false);
-      showSuccessToast(
-        t("toast.created", { entity: t("models.manufacturers.title") })
-      );
+      setIsEditing(false)
+      navigate(`/products/${data.data.id}`)
+      showSuccessToast(t('toast.created'))
     },
-  });
+  })
 
   const { mutate: updateApiProduct } = useMutation({
-    mutationFn: (newData) => updateProduct(id, newData),
+    mutationFn: (newData: formSchemaType) => updateProduct(id, newData),
     onSuccess: () => {
-      setIsEditing(false);
-      showSuccessToast(t("toast.updated"));
+      setIsEditing(false)
+      showSuccessToast(t('toast.updated'))
     },
-  });
+  })
 
-  const handleUpdateFieldNewVariant = (attribute, value) => {
-    setNewVariant((oldValue) => ({
-      ...oldValue,
-      [attribute]: value,
-    }));
-  };
+  const onSubmit = useCallback(
+    (data: formSchemaType) => {
+      if (validate(id)) {
+        updateApiProduct(data)
+      } else {
+        createApiProduct(data)
+      }
+    },
+    [id, updateApiProduct, createApiProduct]
+  )
 
-  const renderVariantsTable = () => {
+  if (isEditing) {
     return (
-      <div className="variants">
-        <h1 className="data-details-title">
-          <Trans i18nKey="models.variants.title" />
-        </h1>
-
-        <DataTable
-          columns={[
-            "barcode",
-            "buyingPrice",
-            "provider",
-            "quantity",
-            "ratio",
-            "taxFreePrice",
-          ]}
-          data={variantsData?.data}
-          loading={false}
-          onItemView={(item) => navigate(`/variants/${item.id}`)}
-          type="variants"
-          creation={false}
-        />
-      </div>
-    );
-  };
-
-  const getVariantsFormAttribute = () => {
-    return (
-      <div>
-        <div className="row">
-          <FormAttribute
-            attribute="provider"
-            key="provider"
-            value={newVariant["provider"]}
-            model="variants"
-            type="entity"
-            onUpdate={(attribute, value) =>
-              handleUpdateFieldNewVariant(attribute, value)
-            }
-          />
-
-          <FormAttribute
-            attribute="buyingPrice"
-            key="buyingPrice"
-            value={newVariant["buyingPrice"]}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) =>
-              handleUpdateFieldNewVariant(attribute, value)
-            }
-          />
-        </div>
-
-        <div className="row">
-          <FormAttribute
-            attribute="originalBarcode"
-            key="originalBarcode"
-            value={newVariant["originalBarcode"]}
-            model="variants"
-            type="string"
-            onUpdate={(attribute, value) =>
-              handleUpdateFieldNewVariant(attribute, value)
-            }
-          />
-
-          <FormAttribute
-            attribute="quantity"
-            key="quantity"
-            value={newVariant["quantity"]}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) =>
-              handleUpdateFieldNewVariant(attribute, value)
-            }
-          />
-        </div>
-
-        <div className="row">
-          <FormAttribute
-            attribute="ratio"
-            key="ratio"
-            value={newVariant["ratio"]}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) =>
-              handleUpdateFieldNewVariant(attribute, value)
-            }
-          />
-
-          <FormAttribute
-            attribute="taxFreePrice"
-            key="taxFreePrice"
-            value={newVariant["taxFreePrice"]}
-            model="variants"
-            type="number"
-            onUpdate={(attribute, value) =>
-              handleUpdateFieldNewVariant(attribute, value)
-            }
-          />
-        </div>
-      </div>
-    );
-  };
-
-  const renderVariantsForm = () => {
-    return (
-      <Collapsible
-        trigger={
-          <h1>
-            <Trans i18nKey="models.variants.create" />
-          </h1>
+      <ProductForm
+        initialValues={
+          productData?.data
+            ? {
+                ...productData?.data,
+                categoryId: productData?.data?.category?.id,
+                manufacturerId: productData?.data?.manufacturer?.id,
+                storeId: store?.id,
+                buyingAmount: productData?.data?.buyingAmountCents / 100,
+                taxFreeAmount: productData?.data?.taxFreeAmountCents / 100,
+                amount: productData?.data?.amountCents / 100,
+              }
+            : undefined
         }
-      >
-        <form
-          className="variant-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            createApiVariant({ ...newVariant, productId: id });
-          }}
-        >
-          {getVariantsFormAttribute()}
-          <button className="btn-link btn-stand-alone">
-            <Trans i18nKey="global.validate" />
-          </button>
-        </form>
-      </Collapsible>
-    );
-  };
+        onSubmit={onSubmit}
+      />
+    )
+  }
 
   return (
-      <div className="product-page">
-        <h1 className="data-details-title">{productData?.data?.name}</h1>
-        <DataDetails
+    <div className="product-page">
+      <h1 className="data-details-title">{productData?.data?.name}</h1>
+      <button type="button" onClick={() => setIsEditing(true)}>
+        Edit
+      </button>
+      {/* <DataDetails
           currentEntity={productData?.data}
           editing={isEditing}
           formattedData={productFormat}
           toggleEdit={() => setIsEditing(!isEditing)}
           type="products"
           updateEntity={updateApiProduct}
-        >
-          <div>
-            {renderVariantsTable()}
-            {renderVariantsForm()}
-          </div>
-        </DataDetails>
-      </div>
+        ><></>
+        </DataDetails> */}
+    </div>
   )
 }
 
-export default Product;
+export default Product

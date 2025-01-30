@@ -4,7 +4,7 @@ import Select from "react-select";
 import FormAttribute from "../../../containers/form-attribute";
 import { countryList } from "../../../utils/country-helper";
 
-import "./styles.scss";
+
 import { useCurrentStore, useVatRates } from "../../../hooks";
 import { useMutation } from "@tanstack/react-query";
 import { updateStore } from "../../../api";

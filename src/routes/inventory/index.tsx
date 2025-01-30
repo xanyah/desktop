@@ -1,40 +1,40 @@
 import { inventoryFormat } from '../../types'
 
-import './styles.scss'
+
 import { useParams } from 'react-router-dom'
-import { useInventory, useInventoryVariants } from '../../hooks'
+import { useInventory, useInventoryProducts } from '../../hooks'
 import DataDetails from '../../components/data-details'
 import { Trans } from 'react-i18next'
 
 const Inventory = () => {
   const { id } = useParams()
   const { data: inventoryData } = useInventory(id)
-  const { data: inventoryVariantsData } = useInventoryVariants({ inventoryId: id })
+  const { data: inventoryProductsData } = useInventoryProducts({ inventoryId: id })
 
-  const renderInventoryVariants = () => {
+  const renderInventoryProducts = () => {
     return (
-      <div className="inventory-variants">
-        <label className="embed-table-title">Inventory Variants</label>
+      <div className="inventory-products">
+        <label className="embed-table-title">Inventory Products</label>
         <div className="embed-table">
           <div className="row header-row">
             <div className="column">
-              <Trans i18nKey='models.variants.barcode' />
+              <Trans i18nKey='models.products.barcode' />
             </div>
             <div className="column">
               <Trans i18nKey='models.products.title' />
             </div>
             <div className="column">
-              <Trans i18nKey='models.variants.quantity' />
+              <Trans i18nKey='models.products.quantity' />
             </div>
           </div>
           {
-            inventoryVariantsData?.data?.map(inventoryVariant => (
+            inventoryProductsData?.data?.map(inventoryVariant => (
               <div className="row" key={inventoryVariant.id}>
                 <div className="column productName">
-                  {inventoryVariant.variant.barcode}
+                  {inventoryVariant.product.sku}
                 </div>
-                <div className="column variantName">
-                  {inventoryVariant.variant.product.name}
+                <div className="column productName">
+                  {inventoryVariant.product.name}
                 </div>
                 <div className="column quantity">{inventoryVariant.quantity}</div>
               </div>
@@ -52,7 +52,7 @@ const Inventory = () => {
         formattedData={inventoryFormat}
         type="inventories"
       />
-      {renderInventoryVariants()}
+      {renderInventoryProducts()}
       </>
   )
 }

@@ -7,7 +7,6 @@ import "./i18n";
 
 import { queryClient } from "./constants";
 
-import "./app.scss";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Router from './routes';
 

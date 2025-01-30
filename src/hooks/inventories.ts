@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getInventory, getInventories, getInventoryVariants } from '../api'
+import { getInventory, getInventories, getInventoryProducts } from '../api'
 
 export const useInventories = (params) => useQuery({
   queryFn: () => getInventories(params),
@@ -11,7 +11,7 @@ export const useInventory = (id) => useQuery({
 })
 
 
-export const useInventoryVariants = (filters) => useQuery({
-  queryFn: () => getInventoryVariants(filters),
-  queryKey: ['inventoryVariants', filters],
+export const useInventoryProducts = (filters) => useQuery({
+  queryFn: () => getInventoryProducts(filters),
+  queryKey: ['inventoryProducts', filters],
 })

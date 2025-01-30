@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components"
 
 interface Props {
-    $variantStyle: string
+  $variantStyle: string
 }
 
 export const StyledButton = tw.button<Props>`
@@ -24,5 +24,5 @@ export const StyledButton = tw.button<Props>`
   [&_svg]:size-4
   [&_svg]:shrink-0
 
-  ${(p) => ` ${p.$variantStyle}`}
+  ${(p) => `${p.$variantStyle}`}
 `;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { supportedLangages } from "../../utils/i18n-helper";
 
-import './styles.scss'
+
 import { useCurrentToken } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
@@ -117,6 +117,8 @@ const Account = () => {
       </form>
     );
   }, [
+    i18n,
+    t,
     handleUserFormSubmit,
     onUserSubmit,
     userFormControl,

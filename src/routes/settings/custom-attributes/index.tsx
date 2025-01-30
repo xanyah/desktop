@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import FormAttribute from "../../../containers/form-attribute";
 
-import "./styles.scss";
+
 import { useMutation } from "@tanstack/react-query";
 import { createCustomAttribute } from "../../../api";
 import { useCurrentStore, useCustomAttributes } from "../../../hooks";

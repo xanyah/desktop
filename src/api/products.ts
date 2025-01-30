@@ -8,7 +8,7 @@ export const getProduct = (productId) =>
   xanyahApi.get<Product>(`v2/products/${productId}`)
 
 export const updateProduct = (productId, params) =>
-  xanyahApi.patch<Product>(`products/${productId}`, decamelizeKeys(params))
+  xanyahApi.patch<Product>(`v2/products/${productId}`, decamelizeKeys(params))
 
 export const createProduct = newProduct =>
-  xanyahApi.post<Product>('products', decamelizeKeys(newProduct))
+  xanyahApi.post<Product>('v2/products', decamelizeKeys(newProduct))

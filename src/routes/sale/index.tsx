@@ -1,6 +1,6 @@
 import { formatPrice } from "../../utils/data-helper";
 
-import "./styles.scss";
+
 import { useSale } from "../../hooks";
 import { useParams } from "react-router-dom";
 import ItemAttribute from "../../components/item-attribute";

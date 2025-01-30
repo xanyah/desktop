@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { orderFormat } from '../../types'
 
-import "./styles.scss";
+
 import { useCurrentStore, useOrder } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import DataDetails from "../../components/data-details";

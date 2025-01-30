@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { getCurrentRoute, getParentRoute } from "../../utils/router-helper";
 
-import "./styles.scss";
+
 import { Trans } from "react-i18next";
 
 const PageContainer = ({ children, currentNavigationStep, footerElements }) => {

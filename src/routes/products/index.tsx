@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useCurrentStore, useVariants } from '../../hooks'
+import { useCurrentStore, useProducts } from '../../hooks'
 import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
@@ -11,37 +11,32 @@ const Products = () => {
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
-  const { data, isLoading } = useVariants({
-    'q[barcodeOrOriginalBarcodeOrProductNameCont]': searchQuery,
-    'q[productStoreIdEq]': currentStore?.id,
+  const { data, isLoading } = useProducts({
+    'q[nameOrSkuOrUpcCont]': searchQuery,
+    'q[storeIdEq]': currentStore?.id,
     page: page,
   })
 
-  const columnHelper = createColumnHelper<Variant>()
+  const columnHelper = createColumnHelper<Product>()
 
   const columns = useMemo(
     () =>
       [
-        columnHelper.accessor('originalBarcode', {
-          header: 'Barcode',
+        columnHelper.accessor('sku', {
+          header: 'SKU',
         }),
-        columnHelper.accessor('product.name', {
+        columnHelper.accessor('upc', {
+          header: 'UPC',
+        }),
+        columnHelper.accessor('name', {
           header: 'Name',
-          cell: (props) => (
-            <Link
-              className="underline"
-              to={`/variants/${props.row.original.id}`}
-            >
-              {props.getValue()}
-            </Link>
-          ),
         }),
-        columnHelper.accessor('product.category.name', {
+        columnHelper.accessor('category.name', {
           header: 'Category',
           cell: (props) => (
             <Link
               className="underline"
-              to={`/categories/${props.row.original.product.category?.id}`}
+              to={`/categories/${props.row.original.category?.id}`}
             >
               {props.getValue()}
             </Link>
@@ -58,12 +53,12 @@ const Products = () => {
             </Link>
           ),
         }),
-        columnHelper.accessor('product.manufacturer.name', {
+        columnHelper.accessor('manufacturer.name', {
           header: 'Manufacturer',
           cell: (props) => (
             <Link
               className="underline"
-              to={`/manufacturers/${props.row.original.product.manufacturer?.id}`}
+              to={`/manufacturers/${props.row.original.manufacturer?.id}`}
             >
               {props.getValue()}
             </Link>
@@ -80,7 +75,7 @@ const Products = () => {
             </span>
           ),
         }),
-      ] as ColumnDef<Variant>[],
+      ] as ColumnDef<Product>[],
     [columnHelper]
   )
 

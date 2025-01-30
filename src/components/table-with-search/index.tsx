@@ -1,11 +1,10 @@
 import { Loader, Plus } from 'lucide-react'
-import { Input } from '../ui/input'
 import { Link } from 'react-router-dom'
 import DataTableNew from '../data-table-new'
 import { ColumnDef } from '@tanstack/react-table'
 import Pagination from '../pagination'
 import { isUndefined } from 'lodash'
-import { Button } from '../ui'
+import { Button, InputText } from '../ui'
 
 type TableWithSearchProps<TData, TValue> = {
   searchPlaceholder: string
@@ -38,7 +37,7 @@ const TableWithSearch = <TData, TValue>({
     <div className="flex flex-row items-center gap-4 justify-between">
       <div className="flex flex-row items-center gap-4">
         {!isUndefined(searchQuery) && onSearchQueryChange && (
-          <Input
+          <InputText
             type="search"
             placeholder={searchPlaceholder}
             onChange={(e) => onSearchQueryChange(e.target.value)}
