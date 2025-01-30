@@ -1,7 +1,11 @@
 import tw from "tailwind-styled-components";
 
 export const StyledForm = tw.form`
-  space-y-8
+  gap-8
+  flex
+  flex-col
+  max-w-2xl
+  w-full
 `;
 
 

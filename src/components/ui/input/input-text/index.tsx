@@ -7,10 +7,11 @@ interface Props extends React.ComponentProps<'input'> {
   label?: string
   error?: string
   icon?: React.ReactNode
+  hint?: string,
 }
 
 const InputText = forwardRef<HTMLInputElement, Props>(
-  ({ id, label, error, icon, ...props }, ref) => {
+  ({ id, label, error, icon, hint, ...props }, ref) => {
     return (
       <StyledInputContainer>
         {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
@@ -21,6 +22,7 @@ const InputText = forwardRef<HTMLInputElement, Props>(
         </StyledInputIconContainer>
 
         {error && <StyledError>{error}</StyledError>}
+        {hint && <p className="text-small">{hint}</p>}
       </StyledInputContainer>
     )
   }

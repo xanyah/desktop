@@ -9,6 +9,7 @@ export const formSchema = z.object({
     buyingAmount: z.number(),
     taxFreeAmount: z.number(),
     sku: z.string(),
+    manufacturerSku: z.string(),
     upc: z.string(),
 })
 

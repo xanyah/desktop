@@ -59,10 +59,7 @@ const Online = () => {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <main
-          className="flex flex-1 flex-col gap-4 p-4 mx-auto w-full"
-          style={{ maxWidth: 'calc(1280px - var(--sidebar-width))' }}
-        >
+        <main className="flex flex-1 flex-col gap-4 p-8 mx-auto w-full">
           <BreadCrumbContext.Provider value={setBreadcrumb}>
             <Outlet />
           </BreadCrumbContext.Provider>

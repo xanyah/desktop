@@ -1,6 +1,8 @@
 import {
   Button,
   CategorySelect,
+  FormContainer,
+  FormSection,
   InputText,
   ManufacturerSelect,
 } from '@/components'
@@ -10,8 +12,8 @@ import { useCurrentStore } from '@/hooks'
 import { useEffect } from 'react'
 import { formSchema, formSchemaType } from './config'
 import { toNumber } from 'lodash'
-import { StyledForm, StyledInputsGroup } from './styles'
 import { Euro } from 'lucide-react'
+import { StyledForm } from './styles'
 
 type ProductFormProps = {
   initialValues?: Partial<formSchemaType>
@@ -36,8 +38,14 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
   }, [store, setValue])
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <StyledInputsGroup>
+    <FormContainer
+      title="Nouveau produit"
+      subtitle="Saisissez ici les informations de votre produit"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormSection
+        title="Informations générales"
+      >
         <Controller
           control={control}
           name="name"
@@ -54,40 +62,6 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
           )}
         />
 
-        <Controller
-          control={control}
-          name="sku"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              id="sku"
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder="sku"
-              type="text"
-              label="sku"
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="upc"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              id="upc"
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder="upc"
-              type="text"
-              label="Upc"
-            />
-          )}
-        />
-      </StyledInputsGroup>
-
-      <StyledInputsGroup>
         <Controller
           control={control}
           name="categoryId"
@@ -112,9 +86,67 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
             />
           )}
         />
-      </StyledInputsGroup>
+      </FormSection>
 
-      <StyledInputsGroup>
+      <FormSection
+        title="Logistique"
+      >
+        <Controller
+          control={control}
+          name="manufacturerSku"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="sku"
+              hint="Le code fabricant du produit"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="sku"
+              type="text"
+              label="sku"
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="upc"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="upc"
+              hint="Le code barre original du produit"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="upc"
+              type="text"
+              label="Upc"
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="sku"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              id="sku"
+              hint="Le code barre personnalisé de votre produit (peut être le même que l'UPC)"
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="sku"
+              type="text"
+              label="sku"
+            />
+          )}
+        />
+      </FormSection>
+
+
+      <FormSection
+        title="Tarification"
+      >
         <Controller
           control={control}
           name="buyingAmount"
@@ -167,9 +199,8 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
             />
           )}
         />
-      </StyledInputsGroup>
-      <Button type="submit">Submit</Button>
-    </StyledForm>
+      </FormSection>
+    </FormContainer>
   )
 }
 

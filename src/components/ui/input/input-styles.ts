@@ -2,7 +2,9 @@ import tw from "tailwind-styled-components";
 
 export const StyledInputContainer = tw.div`
  w-full
- space-y-2
+ gap-2
+ flex
+ flex-col
 `;
 
 export const StyledLabel = tw.label`
@@ -15,6 +17,6 @@ export const StyledLabel = tw.label`
 
 export const StyledError = tw.p`
  text-[0.8rem]
- font-medium 
+ font-medium
  text-destructive
 `;
