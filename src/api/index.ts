@@ -1,6 +1,6 @@
 export * from './auth'
 export * from './categories'
-export * from './clients'
+export * from './customers'
 export * from './custom-attributes'
 export * from './file-imports'
 export * from './inventories'

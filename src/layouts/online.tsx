@@ -28,7 +28,7 @@ const Online = () => {
     if (!isLoading && isError) {
       navigate("/sign-in")
     }
-  }, [isLoading, isError])
+  }, [isLoading, isError, navigate])
 
   return (
     <SidebarProvider>

@@ -22,12 +22,11 @@ import Provider from './provider'
 import Providers from './providers'
 import Sale from './sale'
 import Sales from './sales'
-import Settings from './settings'
 import Shipping from './shipping'
 import Shippings from './shippings'
 import SignIn from './sign-in'
-import Clients from './clients'
-import Client from './client'
+import Customers from './customers'
+import Customer from './customer'
 import { OfflineLayout, OnlineLayout } from '../layouts'
 
 const Router = () => {
@@ -61,8 +60,9 @@ const Router = () => {
           <Route path="categories" element={<Categories />} />
           <Route path="shipping" element={<Shipping />} />
           <Route path="shippings" element={<Shippings />} />
-          <Route path="clients" element={<Clients />} />
-          <Route path="clients/:id" element={<Client />} />
+          <Route path="customers" element={<Customers />} />
+          <Route path="customers/:id/edit" element={<Customer />} />
+          <Route path="customers/new" element={<Customer />} />
         </Route>
       </Routes>
     </BrowserRouter>

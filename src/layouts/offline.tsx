@@ -10,7 +10,7 @@ const Offline = () => {
     if (!isLoading && isSuccess) {
       navigate("/")
     }
-  }, [isLoading, isSuccess])
+  }, [isLoading, isSuccess, navigate])
 
   return <Outlet />
 }

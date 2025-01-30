@@ -1,7 +1,6 @@
 import { Controller, useForm } from 'react-hook-form'
 
 import { logo } from '../../images'
-import Input from '../../components/input'
 import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'

@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCategory, updateCategory } from "../../api";
 import { showSuccessToast } from "../../utils/notification-helper";
-import DataDetails from "../../components/data-details";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { categorySchema, categorySchemaType } from './config';

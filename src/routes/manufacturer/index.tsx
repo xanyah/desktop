@@ -1,7 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
-import { manufacturerFormat } from '../../types'
-
-
+import { useCallback, useEffect } from 'react'
 import { useManufacturer, useCurrentStore } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,7 +18,7 @@ const Manufacturer = () => {
   const store = useCurrentStore();
   const { id } = useParams();
   const { data: manufacturerData } = useManufacturer(id);
-  const { handleSubmit, control, reset, formState: {errors} } = useForm<manufacturerSchemaType>({
+  const { handleSubmit, control, reset } = useForm<manufacturerSchemaType>({
     resolver: zodResolver(manufacturerSchema),
     defaultValues: {},
   })
