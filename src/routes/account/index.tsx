@@ -6,6 +6,7 @@ import { updateUserParams } from '../../api'
 import {  pick } from "lodash";
 import { Button,  FormContainer, FormSection, InputText } from "../../components";
 import { useBreadCrumbContext } from "@/contexts/breadcrumb";
+import { useTranslation } from "react-i18next";
 
 type UserFormProps = {
   firstname: string;
@@ -19,8 +20,9 @@ type PasswordFormProps = {
 };
 
 const Account = () => {
+  const {t} = useTranslation()
   useBreadCrumbContext([
-    {label: 'Mon compte'}
+    {label: t('account.pageTitle')}
   ])
   const queryClient = useQueryClient()
   const { data: currentUserData } = useCurrentUser();
@@ -66,9 +68,9 @@ const Account = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Votre prénom"
+              placeholder={t('account.firstnamePlaceholder')}
               type="text"
-              label="Prénom"
+              label={t('account.firstnameLabel')}
             />
           )}
         />
@@ -80,9 +82,9 @@ const Account = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Votre nom de famille"
+              placeholder={t('account.lastnamePlaceholder')}
               type="text"
-              label="Nom de famille"
+              label={t('account.lastnameLabel')}
             />
           )}
         />
@@ -92,11 +94,12 @@ const Account = () => {
           type="submit"
           disabled={userSubmitIsLoading}
         >
-          Valider
+          {t('global.save')}
         </Button>
       </form>
     );
   }, [
+    t,
     handleUserFormSubmit,
     onUserSubmit,
     userFormControl,
@@ -114,24 +117,24 @@ const Account = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Votre nouveau mot de passe"
+              placeholder={t('account.passwordPlaceholder')}
               type="password"
-              label="Mot de passe"
+              label={t('account.passwordLabel')}
             />
           )}
         />
 
         <Controller
           control={passwordFormControl}
-          name="password"
+          name="confirmPassword"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <InputText
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Confirmation de votre nouveau mot de passe"
+              placeholder={t('account.passwordConfirmationPlaceholder')}
               type="password"
-              label="Confirmation"
+              label={t('account.passwordConfirmationLabel')}
             />
           )}
         />
@@ -140,11 +143,12 @@ const Account = () => {
           type="submit"
           disabled={userSubmitIsLoading}
         >
-          Valider
+          {t('global.save')}
         </Button>
       </form>
     );
   }, [
+    t,
     handlePasswordFormSubmit,
     onUserSubmit,
     passwordFormControl,
@@ -154,13 +158,13 @@ const Account = () => {
   return (
     <FormContainer
       isNotForm
-      title="Mon compte"
-      subtitle="Mettez-ici à jour les données de votre compte">
-      <FormSection
-        title="Informations générales">
+      title={t('account.pageTitle')}
+      subtitle={t('account.pageSubtitle')}
+    >
+      <FormSection title={t('account.generalInformations')}>
         {renderUpdateUserForm()}
       </FormSection>
-      <FormSection title="Sécurité">
+      <FormSection title={t('account.security')}>
         {renderUpdatePasswordForm()}
       </FormSection>
     </FormContainer>

@@ -8,25 +8,25 @@ import { useTranslation } from "react-i18next";
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import DataTable from '@/components/data-table-new';
 import { Button, ShowContainer, ShowSection } from '@/components';
-import { DateTime } from 'luxon';
 import { customerFullname } from '@/helpers/customer';
 import { useBreadCrumbContext } from '@/contexts/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { orderBadgeVariants } from '@/constants/orders';
 import { AxiosResponse } from 'axios';
 import { uuidNumber } from '@/helpers/uuid';
+import { formatLongDatetime } from '@/helpers/dates';
 
 const Order = () => {
+  const {t } = useTranslation()
   const queryClient = useQueryClient()
   const { id } = useParams();
   const { data: orderData } = useOrder(id);
   const { data: orderProductsData } = useOrderProducts({
     'q[orderIdEq]': id
   })
-  const { t } = useTranslation();
   useBreadCrumbContext([
-    { label: 'Commandes', url: '/orders' },
-    { label: `Commande ${uuidNumber(orderData?.data.id)}` },
+    { label: t('orders.pageTitle'), url: '/orders' },
+    { label: t('order.pageTitle', {orderNumber: uuidNumber(orderData?.data.id)}) },
   ])
 
   const onSuccess = useCallback(() => {
@@ -52,7 +52,7 @@ const Order = () => {
     () =>
       [
         columnHelper.accessor('product.name', {
-          header: 'Name',
+          header: t('order.productTable.name'),
           cell: (props) => (
             <Link
               className="underline"
@@ -63,51 +63,51 @@ const Order = () => {
           ),
         }),
         columnHelper.accessor('quantity', {
-          header: 'Quantité',
+          header: t('order.productTable.quantity'),
         }),
       ] as ColumnDef<OrderProduct>[],
-    [columnHelper]
+    [t,columnHelper]
   )
 
   const renderActionButtons = useCallback(() => {
     switch(orderData?.data.state) {
     case 'delivered':
       return <>
-        <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
-        <Button onClick={() => withdrawApiOrder()}>Commande retirée</Button>
+        <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
+        <Button onClick={() => withdrawApiOrder()}>{t('order.withdraw')}</Button>
       </>
     case 'ordered':
       return <>
-        <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
-        <Button onClick={() => deliverApiOrder()}>Commande reçue</Button>
+        <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
+        <Button onClick={() => deliverApiOrder()}>{t('order.deliver')}</Button>
       </>
     case 'pending':
       return <>
-        <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
-        <Button onClick={() => orderApiOrder()}>Commande envoyée</Button>
+        <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
+        <Button onClick={() => orderApiOrder()}>{t('order.order')}</Button>
       </>
     case 'cancelled':
     case 'withdrawn':
       return null
     }
-  }, [orderData, cancelApiOrder, deliverApiOrder, orderApiOrder, withdrawApiOrder])
+  }, [t,orderData, cancelApiOrder, deliverApiOrder, orderApiOrder, withdrawApiOrder])
 
   if (!orderData?.data) {
     return null
   }
 
   return <ShowContainer
-    title={`Commande ${uuidNumber(orderData?.data.id)}`}
-    subtitle={orderData?.data && `Commande passée le ${DateTime.fromISO(orderData?.data.createdAt).toLocaleString()}`}
+    title={t('order.pageTitle', {orderNumber: uuidNumber(orderData.data.id)})}
+    subtitle={t('order.pageTitle', {orderDate: formatLongDatetime(orderData.data.createdAt)})}
     button={orderData?.data && (
       <div className="flex flex-row gap-4 items-center">
         <Badge variant={orderBadgeVariants[orderData?.data.state]}>
-          {orderData?.data.state}
+          {t(`order.states.${orderData?.data.state}`)}
         </Badge>
         {renderActionButtons()}
       </div>)}
   >
-    <ShowSection title="Client">
+    <ShowSection title={t('order.customer')}>
       <div className="flex flex-col gap-2">
         <p>{customerFullname(orderData.data.customer)}</p>
         <p>{orderData.data.customer.address}</p>
@@ -115,7 +115,7 @@ const Order = () => {
         <a href={`tel:${orderData.data.customer.phone}`}>{orderData.data.customer.phone}</a>
       </div>
     </ShowSection>
-    <ShowSection title="Produits de la commande">
+    <ShowSection title={t('order.products')}>
       <DataTable data={orderProductsData?.data || []} columns={columns} />
     </ShowSection>
   </ShowContainer>

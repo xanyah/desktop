@@ -1,5 +1,3 @@
-export * from './category'
-export * from './custom-attribute'
 export * from './inventory'
 export * from './manufacturer'
 export * from './order'

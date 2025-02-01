@@ -1,5 +1,6 @@
 import { DOMAttributes } from "react"
 import { Button } from "../ui"
+import { useTranslation } from "react-i18next"
 
 type FormContainerProps =  & {
   title: string
@@ -17,6 +18,7 @@ const FormContainer = ({
   isNotForm = false,
   ...formProps
 }: FormContainerProps) => {
+  const {t} = useTranslation()
   const Component: any = isNotForm ? 'div' : 'form'
 
   return <Component {...formProps} className="flex flex-col gap-8 max-w-2xl">
@@ -26,7 +28,7 @@ const FormContainer = ({
     </div>
     {children}
 
-    {!isNotForm && <Button className="self-end" type="submit">Valider</Button>}
+    {!isNotForm && <Button className="self-end" type="submit">{t('global.save')}</Button>}
   </Component>
 }
 

@@ -4,9 +4,11 @@ import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { useTranslation } from 'react-i18next'
 
 const Categories = () => {
-  useBreadCrumbContext([{ label: 'Categories' }])
+  const {t} = useTranslation()
+  useBreadCrumbContext([{ label: t('categories.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
@@ -23,7 +25,7 @@ const Categories = () => {
     () =>
       [
         columnHelper.accessor('name', {
-          header: 'Name',
+          header: t('categories.table.name'),
           cell: (props) => (
             <Link
               className="underline"
@@ -34,24 +36,24 @@ const Categories = () => {
           ),
         }),
         columnHelper.accessor('category.name', {
-          header: 'Catégorie parente',
+          header: t('categories.table.parentCategory'),
         }),
         columnHelper.accessor('vatRate.ratePercentCents', {
-          header: 'Taux de taxe',
+          header: t('categories.table.vat'),
           cell: props => props.getValue() ? `${props.getValue() / 100}%` : ''
         }),
       ] as ColumnDef<Category>[],
-    [columnHelper]
+    [t,columnHelper]
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder="Search a category"
+      searchPlaceholder={t('categories.searchPlaceholder')}
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl={'/categories/new'}
-      createLabel={'Create a category'}
+      createLabel={t('categories.createButtonLabel')}
       columns={columns}
       data={data?.data}
       currentPage={page}

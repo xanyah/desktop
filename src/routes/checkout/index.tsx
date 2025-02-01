@@ -12,12 +12,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createSale } from "@/api"
 import { useNavigate } from "react-router-dom"
 import { useCurrentStore } from "@/hooks"
+import { useTranslation } from "react-i18next"
 
 const Checkout = () => {
+  const {t} = useTranslation()
   const store = useCurrentStore()
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-  useBreadCrumbContext([{ label: 'Encaissement' }])
+  useBreadCrumbContext([{ label: t('checkout.pageTitle') }])
   const form = useForm<CheckoutSchemaType>({
     resolver: zodResolver(checkoutSchema)
   })
@@ -37,22 +39,22 @@ const Checkout = () => {
   return (
     <FormProvider {...form}>
       <FormContainer
-        title="Encaissement"
-        subtitle="Saisissez ici les données de votre encaissement"
+        title={t('checkout.pageTitle')}
+        subtitle={t('checkout.pageSubtitle')}
         isNotForm
       >
-        <FormSection title="Produits">
+        <FormSection title={t('checkout.products')}>
           <ProductSearch />
           <Products />
         </FormSection>
-        <FormSection title="Total & Remises">
+        <FormSection title={t('checkout.price')}>
           <Price />
         </FormSection>
-        <FormSection title="Paiement">
+        <FormSection title={t('checkout.payment')}>
           <Payment />
         </FormSection>
         <Button className="self-end" onClick={form.handleSubmit(onSubmit)}>
-          Valider la vente
+          {t('checkout.validateButton')}
         </Button>
       </FormContainer>
     </FormProvider>)

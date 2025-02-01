@@ -1,280 +1,249 @@
 {
   "account": {
-    "form": {
-      "first": {
-        "title": "Change your personal informations"
-      },
-      "second": {
-        "title": "Change your password"
-      }
+    "firstnameLabel": "First name",
+    "firstnamePlaceholder": "Your first name",
+    "generalInformations": "General information",
+    "lastnameLabel": "Surname",
+    "lastnamePlaceholder": "Your family name",
+    "pageSubtitle": "Update your account data",
+    "pageTitle": "My account",
+    "passwordConfirmationLabel": "Confirmation",
+    "passwordConfirmationPlaceholder": "Confirmation of your new password",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your new password",
+    "security": "Security"
+  },
+  "categories": {
+    "createButtonLabel": "Create a category",
+    "pageTitle": "Categories",
+    "searchPlaceholder": "Search for a category ...",
+    "table": {
+      "name": "Category name",
+      "parentCategory": "Parent category",
+      "vat": "VAT"
     }
   },
-  "checkout": {
-    "add-promotion": "Add a promotion",
-    "change": "Change",
-    "end_sale": "Save sale",
-    "left-to-pay": "Left to pay",
-    "remove-article": "Remove article",
-    "reset-alert": {
-      "text": "The sale will be canceled and the stock won't be affected with the changes",
-      "title": "Are you sure ?"
-    },
-    "total": "Total",
-    "type-barcode": "Type the product barcode"
+  "category": {
+    "generalInformations": "General information",
+    "nameLabel": "Name",
+    "namePlaceholder": "Category name",
+    "newCategoryPageTitle": "New category",
+    "pageSubtitle": "Enter here the information in your category",
+    "parentCategoryLabel": "Parent category",
+    "vatLabel": "VAT"
   },
-  "data-details": {
-    "form": {
-      "buttons": {
-        "cancel": "Cancel",
-        "create": "Create",
-        "edit": "Edit",
-        "submit": "Validate"
-      }
+  "checkout": {
+    "customPaymentAddButton": "Add a payment method",
+    "customPaymentUnattributedNegative": "There is {{ amount }} too much",
+    "customPaymentUnattributedPositive": "He's staying {{ amount }} to be distributed",
+    "flatPromotionLabel": "Amount",
+    "pageSubtitle": "Enter the data of your collection here",
+    "pageTitle": "Collection",
+    "payment": "Payment",
+    "paymentMethodOtherButton": "Other",
+    "percentPromotionLabel": "Percentage",
+    "price": "Total & Discounts",
+    "products": "Items",
+    "promotionAddButton": "Add a discount",
+    "promotionAmountLabel": "Amount",
+    "promotionAmountPlaceholder": "Promotion",
+    "searchButton": "To research",
+    "searchPlaceholder": "Barcode or article manufacturer code",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "validateButton": "Validate the sale"
+  },
+  "customAttribute": {
+    "generalInformations": "General information",
+    "nameLabel": "Name",
+    "namePlaceholder": "Personalized attribute name",
+    "newPageTitle": "New personalized attribute",
+    "pageSubtitle": "Personalized attributes make it possible to add attributes to the products",
+    "typeLabel": "Attribute type"
+  },
+  "customAttributes": {
+    "createButtonLabel": "Create a personalized attribute",
+    "pageTitle": "Personalized attributes",
+    "searchPlaceholder": "Search for a personalized attribute ...",
+    "table": {
+      "name": "Personalized attribute name",
+      "type": "Kind"
+    }
+  },
+  "customer": {
+    "addressLabel": "Mailing address",
+    "addressPlaceholder": "Customer postal address",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Customer email",
+    "firstnameLabel": "First name",
+    "firstnamePlaceholder": "Customer's first name",
+    "generalInformations": "General information",
+    "lastnameLabel": "Surname",
+    "lastnamePlaceholder": "Customer surname",
+    "newPageTitle": "New customer",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Client notes",
+    "pageSubtitle": "Enter your customer information here",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "Customer phone number"
+  },
+  "customers": {
+    "createButtonLabel": "Create a customer",
+    "pageTitle": "Customers",
+    "searchPlaceholder": "Search for a client ...",
+    "table": {
+      "email": "E-mail address",
+      "name": "Client name",
+      "phone": "Phone"
     }
   },
   "global": {
-    "back": "Back",
     "cancel": "Cancel",
-    "reset": "Reset",
-    "validate": "Validate"
+    "loading": "Loading in progress ...",
+    "save": "Save"
   },
-  "home": {
-    "welcome": {
-      "afternoon": "Good afternoon {{firstname}} !",
-      "evening": "Good evening {{firstname}} !",
-      "morning": "Good morning {{firstname}} !"
+  "inventories": {
+    "pageTitle": "Inventories"
+  },
+  "manufacturer": {
+    "codeHint": "A code to identify the manufacturer (often the first 4 letters of the manufacturer)",
+    "codeLabel": "Code",
+    "codePlaceholder": "Manufacturer's code",
+    "generalInformations": "General information",
+    "nameLabel": "Name",
+    "namePlaceholder": "Manufacturer's name",
+    "newPageTitle": "New manufacturer",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Notes on the manufacturer",
+    "pageSubtitle": "Enter here the information from your manufacturer"
+  },
+  "manufacturers": {
+    "createButtonLabel": "Create a manufacturer",
+    "pageTitle": "Manufacturers",
+    "searchPlaceholder": "Search for a manufacturer ...",
+    "table": {
+      "code": "Code",
+      "name": "Manufacturer's name"
     }
   },
-  "home-link": {
-    "checkout": {
-      "subtitle": "Cash a sale",
-      "title": "Checkout"
+  "order": {
+    "cancel": "Cancel the order",
+    "customer": "Customer",
+    "deliver": "Order received",
+    "order": "Order sent",
+    "pageSubtitle": "Order placed on {{ orderDate }}",
+    "pageTitle": "Order {{ orderNumber }}",
+    "productTable": {
+      "name": "Article name",
+      "quantity": "Quantity"
     },
-    "clients": {
-      "subtitle": "Manage your clients",
-      "title": "Clients"
+    "products": "Order articles",
+    "states": {
+      "cancelled": "Canceled",
+      "delivered": "Received",
+      "ordered": "Ordered",
+      "pending": "On hold",
+      "withdrawn": "Withdrawn"
     },
-    "inventories": {
-      "subtitle": "Manage your inventories",
-      "title": "Inventories"
-    },
-    "manufacturers": {
-      "subtitle": "Manage your manufacturers",
-      "title": "Manufacturers"
-    },
-    "orders": {
-      "subtitle": "Manage your orders",
-      "title": "Orders"
-    },
-    "products": {
-      "subtitle": "Manage your products",
-      "title": "Products"
-    },
-    "providers": {
-      "subtitle": "Manage your providers",
-      "title": "Providers"
-    },
-    "shippings": {
-      "subtitle": "Manage your shippings",
-      "title": "Shippings"
+    "withdraw": "Command withdrawn"
+  },
+  "orderNew": {
+    "customerLabel": "Select a customer ...",
+    "generalInformations": "General information",
+    "pageSubtitle": "Enter here the data of your new customer order",
+    "pageTitle": "New order",
+    "productLabel": "Select a product ..."
+  },
+  "orders": {
+    "createButtonLabel": "Create an order",
+    "pageTitle": "Orders",
+    "searchPlaceholder": "Search for an order ...",
+    "table": {
+      "createdAt": "Date of creation",
+      "customer": "Customer",
+      "id": "Order number",
+      "state": "Status",
+      "updatedAt": "Last update"
     }
   },
-  "models": {
-    "categories": {
-      "category_id": "Sub-category of ? (optional)",
-      "create": "Create a category",
-      "name": "Name",
-      "noData": "No categories yet",
-      "title": "Category",
-      "tva": "VAT"
-    },
-    "clients": {
-      "address": "Address",
-      "create": "Create a client",
-      "email": "Email",
-      "firstname": "Firstname",
-      "lastname": "Lastname",
-      "noData": "No clients yet",
-      "notes": "Notes",
-      "open": "Open client",
-      "phone": "Phone",
-      "search": "Search a client ..."
-    },
-    "customAttributes": {
-      "create": "Create a custom attribute",
-      "name": "Name",
-      "title": "Custom Attribute",
-      "type": "Type"
-    },
-    "inventories": {
-      "create": "Create an inventory",
-      "createdAt": "Date of creation",
-      "noData": "No inventories yet",
-      "open": "Open inventory",
-      "search": "Search an inventory...",
-      "title": "Inventory",
-      "updatedAt": "Date of last update",
-      "lockedAt": "Locked At"
-    },
-    "manufacturers": {
-      "create": "Create a manufacturer",
-      "createdAt": "Date of creation",
-      "name": "Name",
-      "noData": "No manufacturers yet",
-      "notes": "Notes",
-      "open": "Open manufacturer",
-      "productsCount": "Products number",
-      "search": "Search a manufacturer...",
-      "title": "Manufacturer"
-    },
-    "orders": {
-      "client": "Client",
-      "create": "Create an order",
-      "noData": "No orders yet",
-      "open": "Open order",
-      "search": "Search an order ...",
-      "status": "Status"
-    },
-    "products": {
-      "category": "Category",
-      "create": "Create a product",
-      "createdAt": "Date of creation",
-      "manufacturer": "Manufacturer",
-      "name": "Product name",
-      "noData": "No products yet",
-      "open": "Open product",
-      "search": "Search a product...",
-      "title": "Product",
-      "updatedAt": "Date of last update"
-    },
-    "providers": {
-      "create": "Create a provider",
-      "createdAt": "Date of creation",
-      "name": "Name",
-      "noData": "No providers yet",
-      "notes": "Notes",
-      "open": "Open provider",
-      "search": "Search a provider...",
-      "shippingsCount": "Shippings number",
-      "title": "Provider"
-    },
-    "sales": {
-      "noData": "No sales yet",
-      "open": "Open sale",
-      "salePaymentTitle": "Payments",
-      "salePaymentTotal": "Total",
-      "salePaymentTypeDescription": "Description",
-      "salePaymentTypeName": "Payment Type",
-      "shopkeeper": "Shopkeeper",
-      "saleVariantPromotion": "Promotion",
-      "search": "Search a sale ...",
-      "title": "Sale",
-      "storeName": "Name",
-      "storeCountry": "Country",
-      "userFirstname": "Firstname",
-      "userLastname": "Name",
-      "clientFirstname": "Firstname",
-      "clientLastname": "Name",
-      "salePromotion": "Promotion",
-      "salePromotionAmount": "Amount",
-      "totalPrice": "Total Price",
-      "history": "Sales History"
-    },
-    "shippings": {
-      "create": "Create an shipping",
-      "createdAt": "Date of creation",
-      "noData": "No shippings yet",
-      "open": "Open shipping",
-      "provider": "Provider",
-      "search": "Search an shipping ...",
-      "title": "Shipping"
-    },
-    "stores": {
-      "address": "Address",
-      "name": "Name",
-      "country": "Country",
-      "vat": "VAT",
-      "title": "Store"
-    },
-    "variants": {
-      "barcode": "Barcode",
-      "buyingPrice": "Buying Price",
-      "create": "Create a variant",
-      "noData": "No variants yet",
-      "open": "Open variant",
-      "product": "Product",
-      "provider": "Provider",
-      "quantity": "Quantity",
-      "ratio": "Ratio",
-      "search": "Search a variant...",
-      "taxFreePrice": "Tax Free Price",
-      "title": "Variant",
-      "unitPrice": "Unit price",
-      "variant-movements": {
-        "date": "Date",
-        "quantity": "Quantity",
-        "title": "Variant Movements",
-        "type": "Type"
-      }
+  "products": {
+    "pageTitle": "Inventories"
+  },
+  "provider": {
+    "generalInformations": "General information",
+    "nameLabel": "Name",
+    "namePlaceholder": "Supplier name",
+    "newPageTitle": "New supplier",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Notes on the supplier",
+    "pageSubtitle": "Enter here the information from your supplier"
+  },
+  "providers": {
+    "createButtonLabel": "Create a supplier",
+    "pageTitle": "Manufacturers",
+    "searchPlaceholder": "Search for a supplier ...",
+    "table": {
+      "name": "Supplier name"
     }
   },
-  "password-helper": {
-    "tips": {
-      "length": "Minimum password lenght is 8",
-      "same-confirm": "Password does not match the confirm password"
+  "sale": {
+    "amount": "Sale",
+    "generalInformations": "General information",
+    "pageSubtitle": "Sale made on {{ saleDate }}",
+    "pageTitle": "Sale {{ saleNumber }}",
+    "products": "Items sold",
+    "user": "Seller"
+  },
+  "sales": {
+    "pageTitle": "Sales",
+    "searchPlaceholder": "Search for a sale ...",
+    "table": {
+      "amount": "Amount",
+      "createdAt": "Date of sale",
+      "id": "Sale number",
+      "user": "Seller"
     }
   },
-  "promotion-types": {
-    "flat_discount": "Discount (in €)",
-    "percent_discount": "Discount (in %)"
+  "shipping": {
+    "cancel": "Cancel delivery",
+    "customer": "Customer",
+    "pageSubtitle": "Order placed on {{ shippingDate }}",
+    "pageTitle": "Order {{ shippingNumber }}",
+    "productTable": {
+      "name": "Article name",
+      "quantity": "Quantity"
+    },
+    "products": "Delivery items",
+    "states": {
+      "cancelled": "Canceled",
+      "pending": "On hold",
+      "validated": "Validated"
+    },
+    "validate": "To validate"
   },
-  "routes": {
+  "shippingNew": {
+    "customerLabel": "Select a customer ...",
+    "generalInformations": "General information",
+    "pageSubtitle": "Enter the data from your new customer delivery here",
+    "pageTitle": "New delivery",
+    "productLabel": "Select a product ..."
+  },
+  "shippings": {
+    "createButtonLabel": "Create a delivery",
+    "pageTitle": "Deliveries",
+    "searchPlaceholder": "Search a delivery ...",
+    "table": {
+      "createdAt": "Date of creation",
+      "id": "Delivery number",
+      "provider": "Supplier",
+      "state": "Status",
+      "updatedAt": "Last update"
+    }
+  },
+  "sidebar": {
     "account": "My account",
-    "clients": "Clients",
-    "client": "Client",
-    "custom-attribute": "Custom Attributes",
-    "inventories": "Inventories",
-    "inventory": "Inventory",
-    "manufacturers": "Manufacturers",
-    "manufacturer": "Manufacturer",
-    "orders": "Orders",
-    "order": "Order",
-    "products": "Products",
-    "product": "Product",
-    "providers": "Providers",
-    "provider": "Provider",
-    "settings": "Settings",
-    "shippings": "Shippings",
-    "shipping": "Shipping"
-  },
-  "settings-page": {
-    "side-navigation": {
-      "categories": "Categories",
-      "custom-attributes": "Custom Attributes",
-      "store-settings": "Store Settings"
-    }
-  },
-  "sign-in-page": {
-    "email": "Email",
-    "forgotten-password": "Forgotten password ?",
-    "password": "Password",
-    "sign-in": "Sign in"
-  },
-  "supported-langage": {
-    "english": "English",
-    "french": "French"
-  },
-  "toast": {
-    "created": "%{entity} created !",
-    "error": "An error has occured !",
-    "not-found": "%{entity} not found",
-    "updated": "Updated"
-  },
-  "vat-rates": {
-    "parking_rate": "Parking",
-    "reduced_rate": "Reduced",
-    "reduced_rate_alt": "Reduced Alt",
-    "standard": "Standard",
-    "super_reduced_rate": "Super Reduced"
+    "settings": "Parameters",
+    "stock": "Stock & supply",
+    "store": "My shop"
   }
 }

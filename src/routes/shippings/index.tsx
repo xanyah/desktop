@@ -8,9 +8,11 @@ import { formatLongDatetime } from '@/helpers/dates'
 import { Badge } from '@/components/ui/badge'
 import { orderBadgeVariants } from '@/constants/orders'
 import { uuidNumber } from '@/helpers/uuid'
+import { useTranslation } from 'react-i18next'
 
 const Shippings = () => {
-  useBreadCrumbContext([{ label: 'Shippings' }])
+  const {t} = useTranslation()
+  useBreadCrumbContext([{ label: t('shippings.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
@@ -26,7 +28,7 @@ const Shippings = () => {
     () =>
       [
         columnHelper.accessor('id', {
-          header: 'Numéro',
+          header: t('shippings.table.id'),
           cell: (props) => (
             <Link className="underline" to={`/shippings/${props.getValue()}`}>
               {uuidNumber(props.getValue())}
@@ -34,7 +36,7 @@ const Shippings = () => {
           ),
         }),
         columnHelper.accessor('provider.name', {
-          header: 'Fournisseur',
+          header: t('shippings.table.provider'),
           cell: (props) => (
             <Link
               className="underline"
@@ -45,33 +47,33 @@ const Shippings = () => {
           ),
         }),
         columnHelper.accessor('state', {
-          header: 'Statut',
+          header: t('shippings.table.state'),
           cell: (props) => (
             <Badge variant={orderBadgeVariants[props.getValue()]}>
-              {props.getValue()}
+              {t(`shipping.states.${props.getValue()}`)}
             </Badge>
           ),
         }),
         columnHelper.accessor('createdAt', {
-          header: 'Date de création',
+          header: t('shippings.table.createdAt'),
           cell: props => formatLongDatetime(props.getValue())
         }),
         columnHelper.accessor('updatedAt', {
-          header: 'Dernière mise à jour',
+          header: t('shippings.table.updatedAt'),
           cell: props => formatLongDatetime(props.getValue())
         }),
       ] as ColumnDef<Shipping>[],
-    [columnHelper]
+    [columnHelper, t]
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder="Search a shipping"
+      searchPlaceholder={t('shippings.searchPlaceholder')}
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl={'/shippings/new'}
-      createLabel={'Create a shipping'}
+      createLabel={t('shippings.createButtonLabel')}
       columns={columns}
       data={data?.data}
       currentPage={page}

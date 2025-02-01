@@ -25,9 +25,17 @@ const Products = () => {
       [
         columnHelper.accessor('sku', {
           header: 'SKU',
+          cell: (props) => (
+            <Link
+              className="underline"
+              to={`/products/${props.row.original.id}/edit`}
+            >
+              {props.getValue()}
+            </Link>
+          ),
         }),
-        columnHelper.accessor('upc', {
-          header: 'UPC',
+        columnHelper.accessor('manufacturerSku', {
+          header: 'Code fabricant',
         }),
         columnHelper.accessor('name', {
           header: 'Name',
@@ -37,7 +45,7 @@ const Products = () => {
           cell: (props) => (
             <Link
               className="underline"
-              to={`/categories/${props.row.original.category?.id}`}
+              to={`/categories/${props.row.original.category?.id}/edit`}
             >
               {props.getValue()}
             </Link>
@@ -48,7 +56,7 @@ const Products = () => {
           cell: (props) => (
             <Link
               className="underline"
-              to={`/manufacturers/${props.row.original.manufacturer?.id}`}
+              to={`/manufacturers/${props.row.original.manufacturer?.id}/edit`}
             >
               {props.getValue()}
             </Link>

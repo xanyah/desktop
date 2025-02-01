@@ -8,12 +8,12 @@ import { useTranslation } from "react-i18next";
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import DataTable from '@/components/data-table-new';
 import { Button, ShowContainer, ShowSection } from '@/components';
-import { DateTime } from 'luxon';
 import { useBreadCrumbContext } from '@/contexts/breadcrumb';
 import { Badge } from '@/components/ui/badge';
 import { shippingBadgeVariants } from '@/constants/shippings';
 import { AxiosResponse } from 'axios';
 import { uuidNumber } from '@/helpers/uuid';
+import { formatLongDatetime } from '@/helpers/dates';
 
 const Shipping = () => {
   const queryClient = useQueryClient()
@@ -24,8 +24,8 @@ const Shipping = () => {
   })
   const { t } = useTranslation();
   useBreadCrumbContext([
-    { label: 'Commandes', url: '/shippings' },
-    { label: `Commande ${uuidNumber(shippingData?.data.id)}` },
+    { label: t('shippings.pageTitle'), url: '/shippings' },
+    { label: t('shippings.pageTitle', {shippingNumber: uuidNumber(shippingData?.data.id)})},
   ])
 
   const onSuccess = useCallback(() => {
@@ -49,7 +49,7 @@ const Shipping = () => {
     () =>
       [
         columnHelper.accessor('product.name', {
-          header: 'Name',
+          header: t('shipping.productTable.name'),
           cell: (props) => (
             <Link
               className="underline"
@@ -60,47 +60,47 @@ const Shipping = () => {
           ),
         }),
         columnHelper.accessor('quantity', {
-          header: 'Quantité',
+          header: t('shipping.productTable.quantity'),
         }),
       ] as ColumnDef<ShippingProduct>[],
-    [columnHelper]
+    [t,columnHelper]
   )
 
   const renderActionButtons = useCallback(() => {
     switch(shippingData?.data.state) {
     case 'pending':
       return <>
-        <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
-        <Button onClick={() => validateApiShipping()}>Valider</Button>
+        <Button variant="ghost" onClick={() => cancelApiShipping()}>{t('shipping.cancel')}</Button>
+        <Button onClick={() => validateApiShipping()}>{t('shipping.validate')}</Button>
       </>
     case 'cancelled':
-      return <Button onClick={() => validateApiShipping()}>Valider</Button>
+      return <Button onClick={() => validateApiShipping()}>{t('shipping.validate')}</Button>
     case 'validated':
-      return <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
+      return <Button variant="ghost" onClick={() => cancelApiShipping()}>{t('shipping.cancel')}</Button>
     }
-  }, [shippingData, cancelApiShipping, validateApiShipping])
+  }, [t,shippingData, cancelApiShipping, validateApiShipping])
 
   if (!shippingData?.data) {
     return null
   }
 
   return <ShowContainer
-    title={`Commande ${uuidNumber(shippingData?.data.id)}`}
-    subtitle={shippingData?.data && `Commande passée le ${DateTime.fromISO(shippingData?.data.createdAt).toLocaleString()}`}
+    title={t('shippings.pageTitle', {shippingNumber: uuidNumber(shippingData?.data.id)})}
+    subtitle={t('shippings.pageSubtitle', {shippingDate: formatLongDatetime(shippingData?.data.createdAt)})}
     button={shippingData?.data && (
       <div className="flex flex-row gap-4 items-center">
         <Badge variant={shippingBadgeVariants[shippingData?.data.state]}>
-          {shippingData?.data.state}
+          {t(`shipping.states.${shippingData?.data.state}`)}
         </Badge>
         {renderActionButtons()}
       </div>)}
   >
-    <ShowSection title="Client">
+    <ShowSection title={t('shipping.customer')}>
       <div className="flex flex-col gap-2">
         <p>{shippingData.data.provider.name}</p>
       </div>
     </ShowSection>
-    <ShowSection title="Produits de la commande">
+    <ShowSection title={t('shipping.products')}>
       <DataTable data={shippingProductsData?.data || []} columns={columns} />
     </ShowSection>
   </ShowContainer>

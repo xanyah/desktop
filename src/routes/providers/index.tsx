@@ -4,9 +4,11 @@ import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { useTranslation } from 'react-i18next'
 
 const Providers = () => {
-  useBreadCrumbContext([{ label: 'Providers' }])
+  const {t} = useTranslation()
+  useBreadCrumbContext([{ label: t('providers.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
@@ -23,7 +25,7 @@ const Providers = () => {
     () =>
       [
         columnHelper.accessor('name', {
-          header: 'Name',
+          header: t('providers.table.name'),
           cell: (props) => (
             <Link
               className="underline"
@@ -34,17 +36,17 @@ const Providers = () => {
           ),
         }),
       ] as ColumnDef<Provider>[],
-    [columnHelper]
+    [t,columnHelper]
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder="Search a provider"
+      searchPlaceholder={t('providers.searchPlaceholder')}
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl={'/providers/new'}
-      createLabel={'Create a provider'}
+      createLabel={t('providers.createButtonLabel')}
       columns={columns}
       data={data?.data}
       currentPage={page}

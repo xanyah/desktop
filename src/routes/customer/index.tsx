@@ -24,12 +24,12 @@ const Customer = () => {
   })
 
   const pageTitle = useMemo(
-    () => customerData?.data ? `${customerData?.data.firstname} ${customerData?.data.lastname}` : 'New customer',
-    [customerData]
+    () => customerData?.data ? `${customerData?.data.firstname} ${customerData?.data.lastname}` : t('customer.newPageTitle'),
+    [t,customerData]
   )
 
   useBreadCrumbContext([
-    { label: 'Customers', url: '/customers'},
+    { label: t('customers.pageTitle'), url: '/customers'},
     { label: pageTitle},
   ])
 
@@ -68,11 +68,11 @@ const Customer = () => {
   return (
     <FormContainer
       title={pageTitle}
-      subtitle="Saisissez ici les informations de votre client"
+      subtitle={t('customer.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormSection
-        title="Informations générales"
+        title={t('customer.generalInformations')}
       >
         <Controller
           control={control}
@@ -82,9 +82,9 @@ const Customer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Prénom du client"
+              placeholder={t('customer.firstnamePlaceholder')}
               type="text"
-              label="Prénom"
+              label={t('customer.firstnameLabel')}
             />
           )}
         />
@@ -96,9 +96,9 @@ const Customer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Nom de famille du client"
+              placeholder={t('customer.lastnamePlaceholder')}
               type="text"
-              label="Nom de famille"
+              label={t('customer.lastnameLabel')}
             />
           )}
         />
@@ -110,9 +110,9 @@ const Customer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Numéro de téléphone du client"
+              placeholder={t('customer.phonePlaceholder')}
               type="text"
-              label="Numéro de téléphone"
+              label={t('customer.phoneLabel')}
             />
           )}
         />
@@ -124,9 +124,9 @@ const Customer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Adresse email du client"
+              placeholder={t('customer.emailPlaceholder')}
               type="text"
-              label="Adresse email"
+              label={t('customer.emailLabel')}
             />
           )}
         />
@@ -138,9 +138,9 @@ const Customer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Adresse postale du client"
+              placeholder={t('customer.addressPlaceholder')}
               type="text"
-              label="Adresse postale"
+              label={t('customer.addressLabel')}
             />
           )}
         />
@@ -153,9 +153,9 @@ const Customer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Notes"
+              placeholder={t('customer.notesPlaceholder')}
               type="text"
-              label="Notes"
+              label={t('customer.notesLabel')}
             />
           )}
         />
