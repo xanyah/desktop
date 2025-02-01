@@ -51,8 +51,8 @@ const ProductSearch = () => {
   }, [addProduct, store])
 
   return <form className="flex flex-row gap-4" onSubmit={onSubmit}>
-    <InputText name="query" placeholder={t('searchPlaceholder')} />
-    <Button variant="outline" type="submit">{t('searchButton')}</Button>
+    <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
+    <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
   </form>
 }
 
