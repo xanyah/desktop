@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const ImageSchema = z.union([
-  z.instanceof(File), // Accepte un fichier (File)
-  z.object({          // Accepte un objet avec name et signed_id
+  z.instanceof(File),
+  z.object({
     name: z.string(),
     signed_id: z.string(),
   }),
