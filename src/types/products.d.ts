@@ -15,4 +15,11 @@ type Product = {
   quantity: number
   amountCents: number
   amountCurrency: string
+  images: {
+    large: string,
+    medium: string,
+    open_graph: string,
+    thumbnail: string,
+    signed_id: string,
+  }
 }

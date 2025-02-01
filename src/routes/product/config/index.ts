@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+const ImageSchema = z.union([
+  z.instanceof(File), // Accepte un fichier (File)
+  z.object({          // Accepte un objet avec name et signed_id
+    name: z.string(),
+    signed_id: z.string(),
+  }),
+]);
+
 export const formSchema = z.object({
   name: z.string(),
   categoryId: z.string(),
@@ -11,6 +19,7 @@ export const formSchema = z.object({
   sku: z.string(),
   manufacturerSku: z.string(),
   upc: z.string(),
+  images: z.array(ImageSchema).optional(),
 })
 
 

@@ -2,6 +2,7 @@ import {
   CategorySelect,
   FormContainer,
   FormSection,
+  InputFile,
   InputText,
   ManufacturerSelect,
 } from '@/components'
@@ -39,11 +40,9 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
     <FormContainer
       title="Nouveau produit"
       subtitle="Saisissez ici les informations de votre produit"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, (err) => console.log(err))}
     >
-      <FormSection
-        title="Informations générales"
-      >
+      <FormSection title="Informations générales">
         <Controller
           control={control}
           name="name"
@@ -84,11 +83,23 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
             />
           )}
         />
+
+        <Controller
+          control={control}
+          name="images"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputFile
+              label="Images"
+              error={error?.message}
+              id="file-upload"
+              onFilesChange={onChange}
+              value={value}
+            />
+          )}
+        />
       </FormSection>
 
-      <FormSection
-        title="Logistique"
-      >
+      <FormSection title="Logistique">
         <Controller
           control={control}
           name="manufacturerSku"
@@ -141,10 +152,7 @@ const ProductForm = ({ initialValues, onSubmit }: ProductFormProps) => {
         />
       </FormSection>
 
-
-      <FormSection
-        title="Tarification"
-      >
+      <FormSection title="Tarification">
         <Controller
           control={control}
           name="buyingAmount"
