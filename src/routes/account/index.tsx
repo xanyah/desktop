@@ -1,14 +1,12 @@
 import { useCallback, useEffect } from "react";
-import { supportedLangages } from "../../utils/i18n-helper";
-
-
-import { useCurrentToken } from '../../hooks'
+import { useCurrentUser } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateUserParams } from '../../api'
-import { find, pick } from "lodash";
-import { Trans, useTranslation } from "react-i18next";
-import { FormAttribute } from "../../components";
+import {  pick } from "lodash";
+import { useTranslation } from "react-i18next";
+import { Button,  FormContainer, FormSection, InputText } from "../../components";
+import { useBreadCrumbContext } from "@/contexts/breadcrumb";
 
 type UserFormProps = {
   firstname: string;
@@ -22,13 +20,18 @@ type PasswordFormProps = {
 };
 
 const Account = () => {
+  useBreadCrumbContext([
+    {label: 'Mon compte'}
+  ])
+  const queryClient = useQueryClient()
   const { t, i18n } = useTranslation();
-  const { data: tokenData } = useCurrentToken();
+  const { data: currentUserData } = useCurrentUser();
   const {
     control: userFormControl,
     handleSubmit: handleUserFormSubmit,
     reset,
   } = useForm<UserFormProps>();
+
   const {
     control: passwordFormControl,
     handleSubmit: handlePasswordFormSubmit,
@@ -37,6 +40,9 @@ const Account = () => {
   const { mutate: updateApiUser, isPending: userSubmitIsLoading } = useMutation(
     {
       mutationFn: updateUserParams,
+      onSuccess: () => {
+        queryClient.invalidateQueries({queryKey: ['currentUser']})
+      }
     }
   );
 
@@ -48,77 +54,51 @@ const Account = () => {
   );
 
   useEffect(() => {
-    reset(pick(tokenData?.data.data, ["firstname", "lastname", "locale"]));
-  }, [tokenData, reset]);
+    reset(pick(currentUserData?.data, ["firstname", "lastname", "locale"]));
+  }, [currentUserData, reset]);
 
   const renderUpdateUserForm = useCallback(() => {
     return (
-      <form onSubmit={handleUserFormSubmit(onUserSubmit)}>
-        <h2>
-          <Trans i18nKey="account.form.first.title" />
-        </h2>
-
+      <form className="flex flex-col gap-8" onSubmit={handleUserFormSubmit(onUserSubmit)}>
         <Controller
           control={userFormControl}
-          render={({ field: { onChange, value } }) => (
-            <FormAttribute
-              attribute="firstname"
-              key="firstname"
-              value={value}
-              model="account"
-              type="string"
-              onUpdate={(value) => onChange(value)}
-            />
-          )}
           name="firstname"
-        />
-
-        <Controller
-          control={userFormControl}
-          render={({ field: { onChange, value } }) => (
-            <FormAttribute
-              attribute="lastname"
-              key="lastname"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
               value={value}
-              model="account"
-              type="string"
-              onUpdate={(value) => onChange(value)}
+              placeholder="Votre prénom"
+              type="text"
+              label="Prénom"
             />
           )}
-          name="lastname"
         />
-
         <Controller
           control={userFormControl}
-          render={({ field: { onChange, value } }) => (
-            <FormAttribute
-              attribute="locale"
-              key="locale"
-              value={find(supportedLangages(t), (opt) => opt.value === value)}
-              model="account"
-              type="select"
-              onUpdate={(value) => {
-                i18n.changeLanguage(value);
-                onChange(value);
-              }}
-              options={supportedLangages(t)}
+          name="lastname"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Votre nom de famille"
+              type="text"
+              label="Nom de famille"
             />
           )}
-          name="locale"
         />
 
-        <button
-          className="btn-solid"
+        <Button
+          className="self-end"
           type="submit"
           disabled={userSubmitIsLoading}
         >
-          <Trans i18nKey="global.validate" />
-        </button>
+          Valider
+        </Button>
       </form>
     );
   }, [
-    i18n,
-    t,
     handleUserFormSubmit,
     onUserSubmit,
     userFormControl,
@@ -127,47 +107,43 @@ const Account = () => {
 
   const renderUpdatePasswordForm = useCallback(() => {
     return (
-      <form onSubmit={handlePasswordFormSubmit(onUserSubmit)}>
-        <h2>
-          <Trans i18nKey="account.form.second.title" />
-        </h2>
-
+      <form className="flex flex-col gap-8" onSubmit={handlePasswordFormSubmit(onUserSubmit)}>
         <Controller
           control={passwordFormControl}
-          render={({ field: { onChange, value } }) => (
-            <FormAttribute
-              attribute="password"
-              key="password"
-              value={value}
-              model="account"
-              type="password"
-              onUpdate={(value) => onChange(value)}
-            />
-          )}
           name="password"
-        />
-
-        <Controller
-          control={passwordFormControl}
-          render={({ field: { onChange, value } }) => (
-            <FormAttribute
-              attribute="confirmPassword"
-              key="confirmPassword"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
               value={value}
-              model="account"
+              placeholder="Votre nouveau mot de passe"
               type="password"
-              onUpdate={(value) => onChange(value)}
+              label="Mot de passe"
             />
           )}
-          name="confirmPassword"
         />
-        <button
-          className="btn-solid"
+
+<Controller
+          control={passwordFormControl}
+          name="password"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Confirmation de votre nouveau mot de passe"
+              type="password"
+              label="Confirmation"
+            />
+          )}
+        />
+        <Button
+          className="self-end"
           type="submit"
           disabled={userSubmitIsLoading}
         >
-          <Trans i18nKey="global.validate" />
-        </button>
+          Valider
+        </Button>
       </form>
     );
   }, [
@@ -178,10 +154,18 @@ const Account = () => {
   ]);
 
   return (
-      <div className="account-page">
+    <FormContainer
+    isNotForm
+    title="Mon compte"
+    subtitle="Mettez-ici à jour les données de votre compte">
+      <FormSection
+      title="Informations générales">
         {renderUpdateUserForm()}
+        </FormSection>
+        <FormSection title="Sécurité">
         {renderUpdatePasswordForm()}
-      </div>
+        </FormSection>
+        </FormContainer>
   )
 }
 
