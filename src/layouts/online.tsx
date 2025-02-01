@@ -40,7 +40,7 @@ const Online = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink to="/">Home</BreadcrumbLink>
+                <BreadcrumbLink to="/">Accueil</BreadcrumbLink>
               </BreadcrumbItem>
               {map(breadcrumb, (element) => (
                 <Fragment key={element.label}>

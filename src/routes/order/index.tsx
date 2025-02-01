@@ -31,7 +31,7 @@ const Order = () => {
   const onSuccess = useCallback(() => {
     showSuccessToast(t("toast.updated"));
     queryClient.invalidateQueries({ queryKey: ['orders', { id }] })
-  }, [id, queryClient])
+  }, [t, id, queryClient])
 
   const useChangeOrderStatus = useCallback((mutationFn: (storeId?: Store['id']) => Promise<AxiosResponse<Order, any>>) => {
     return useMutation({

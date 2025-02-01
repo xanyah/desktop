@@ -1,70 +1,80 @@
-import { Blend, Calendar, Coins, Factory, Group, ScanBarcode, Truck, User, Users } from "lucide-react"
+import { Blend, Calendar, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Truck, User, Users } from "lucide-react"
 import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 
 const items = [
   {
-    label: 'Your store',
+    label: 'Boutique',
     items: [
       {
         icon: Coins,
-        title: 'Checkout',
+        title: 'Caisse',
         url: '/checkout',
       },
       {
-        icon: Blend,
-        title: 'Products',
-        url: '/products',
-      },
-      {
-        icon: Truck,
-        title: 'Shippings',
-        url: '/shippings',
-      },
-      {
-        icon: Calendar,
-        title: 'Orders',
-        url: '/orders',
-      },
-      {
-        icon: ScanBarcode,
-        title: 'Inventories',
-        url: '/inventories',
-      },
-      {
         icon: Users,
-        title: 'Customers',
+        title: 'Clients',
         url: '/customers',
       },
       {
-        icon: Truck,
-        title: 'Providers',
-        url: '/providers',
+        icon: NotebookText,
+        title: 'Commandes',
+        url: '/orders',
       },
       {
-        icon: Factory,
-        title: 'Manufacturers',
-        url: '/manufacturers',
-      },
-      {
-        icon: Calendar,
-        title: 'Sales',
+        icon: ChartLine,
+        title: 'Ventes',
         url: '/sales',
       },
     ]
   },
   {
-    label: 'Settings',
+    label: 'Stock',
+    items: [
+      {
+        icon: Blend,
+        title: 'Articles',
+        url: '/products',
+      },
+      {
+        icon: ScanBarcode,
+        title: 'Inventaires',
+        url: '/inventories',
+      },
+      {
+        icon: Truck,
+        title: 'Livraisons',
+        url: '/shippings',
+      },
+    ]
+  },
+  {
+    label: 'Paramètres',
+    items: [
+      {
+        icon: Group,
+        title: 'Catégories',
+        url: "/categories"
+      },
+      {
+        icon: Factory,
+        title: 'Fabricants',
+        url: '/manufacturers',
+      },
+      {
+        icon: Truck,
+        title: 'Fournisseurs',
+        url: '/providers',
+      },
+    ]
+  },
+  {
+    label: 'Mon compte',
     items: [
       {
         icon: User,
-        title: 'Account',
+        title: 'Paramètres',
         url: '/account',
       },
-      {
-        icon: Group,
-        title: 'Categories',
-        url: "/categories"
-      }
     ]
   }
 ]

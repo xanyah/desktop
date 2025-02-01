@@ -10,5 +10,5 @@ export const getCurrentUser = () =>
 export const signIn = params =>
   xanyahApi.post<AuthToken>('oauth/token', decamelizeKeys(params))
 
-export const updateUserParams = params =>
-  xanyahApi.patch('v2/current_user', decamelizeKeys(params))
+export const updateUserParams = (user) =>
+  xanyahApi.patch('v2/current_user', decamelizeKeys({user}))
