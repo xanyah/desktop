@@ -15,6 +15,7 @@ const Customers = () => {
     page,
     'q[firstnameOrLastnameOrPhoneOrEmailOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': ['firstname', 'lastname']
   })
 
   const columnHelper = createColumnHelper<Customer>()

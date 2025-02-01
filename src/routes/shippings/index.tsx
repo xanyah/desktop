@@ -4,6 +4,10 @@ import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { formatLongDatetime } from '@/helpers/dates'
+import { Badge } from '@/components/ui/badge'
+import { orderBadgeVariants } from '@/constants/orders'
+import { uuidNumber } from '@/helpers/uuid'
 
 const Shippings = () => {
   useBreadCrumbContext([{ label: 'Shippings' }])
@@ -12,7 +16,7 @@ const Shippings = () => {
   const [page, setPage] = useState(1)
   const { data, isLoading } = useShippings({
     page,
-    'q[providerNameCont]': searchQuery,
+    'q[idOrProviderNameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
   })
 
@@ -22,26 +26,39 @@ const Shippings = () => {
     () =>
       [
         columnHelper.accessor('id', {
-          header: 'ID',
+          header: 'Numéro',
           cell: (props) => (
             <Link className="underline" to={`/shippings/${props.getValue()}`}>
-              {props.getValue()}
+              {uuidNumber(props.getValue())}
             </Link>
           ),
         }),
         columnHelper.accessor('provider.name', {
-          header: 'Provider',
+          header: 'Fournisseur',
           cell: (props) => (
             <Link
               className="underline"
-              to={`/providers/${props.row.original.provider.id}`}
+              to={`/providers/${props.row.original.provider.id}/edit`}
             >
               {props.getValue()}
             </Link>
           ),
         }),
+        columnHelper.accessor('state', {
+          header: 'Statut',
+          cell: (props) => (
+            <Badge variant={orderBadgeVariants[props.getValue()]}>
+              {props.getValue()}
+            </Badge>
+          ),
+        }),
         columnHelper.accessor('createdAt', {
-          header: 'Creation date',
+          header: 'Date de création',
+          cell: props => formatLongDatetime(props.getValue())
+        }),
+        columnHelper.accessor('updatedAt', {
+          header: 'Dernière mise à jour',
+          cell: props => formatLongDatetime(props.getValue())
         }),
       ] as ColumnDef<Shipping>[],
     [columnHelper]

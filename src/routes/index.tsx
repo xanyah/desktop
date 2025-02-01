@@ -5,15 +5,17 @@ import {
   Routes,
 } from 'react-router-dom'
 import Account from './account'
+import Categories from './categories'
+import Category from './category'
 import Checkout from './checkout'
 import CustomAttribute from './custom-attribute'
+import Customer from './customer'
+import Customers from './customers'
 import Home from './home'
 import Inventories from './inventories'
 import Inventory from './inventory'
 import Manufacturer from './manufacturer'
 import Manufacturers from './manufacturers'
-import Category from './category'
-import Categories from './categories'
 import Order from './order'
 import OrderNew from './order-new'
 import Orders from './orders'
@@ -24,10 +26,9 @@ import Providers from './providers'
 import Sale from './sale'
 import Sales from './sales'
 import Shipping from './shipping'
+import ShippingNew from './shipping-new'
 import Shippings from './shippings'
 import SignIn from './sign-in'
-import Customers from './customers'
-import Customer from './customer'
 import { OfflineLayout, OnlineLayout } from '../layouts'
 
 const Router = () => {
@@ -39,32 +40,33 @@ const Router = () => {
         </Route>
         <Route element={<OnlineLayout />}>
           <Route path="account" element={<Account />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="custom-attributes/:id" element={<CustomAttribute />} />
-          <Route path="home" element={<Home />} />
-          <Route path="inventories" element={<Inventories />} />
-          <Route path="inventorys/:id" element={<Inventory />} />
-          <Route path="manufacturers/:id/edit" element={<Manufacturer />} />
-          <Route path="manufacturers/new" element={<Manufacturer />} />
-          <Route path="manufacturers" element={<Manufacturers />} />
-          <Route path="orders/:id" element={<Order />} />
-          <Route path="orders/new" element={<OrderNew />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="products/:id" element={<Product />} />
-          <Route path="products" element={<Products />} />
-          <Route path="providers/:id/edit" element={<Provider />} />
-          <Route path="providers/new" element={<Provider />} />
-          <Route path="providers" element={<Providers />} />
-          <Route path="sales/:id" element={<Sale />} />
-          <Route path="sales" element={<Sales />} />
+          <Route path="categories" element={<Categories />} />
           <Route path="categories/:id/edit" element={<Category />} />
           <Route path="categories/new" element={<Category />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="shipping" element={<Shipping />} />
-          <Route path="shippings" element={<Shippings />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="custom-attributes/:id" element={<CustomAttribute />} />
           <Route path="customers" element={<Customers />} />
           <Route path="customers/:id/edit" element={<Customer />} />
           <Route path="customers/new" element={<Customer />} />
+          <Route path="home" element={<Home />} />
+          <Route path="inventories" element={<Inventories />} />
+          <Route path="inventorys/:id" element={<Inventory />} />
+          <Route path="manufacturers" element={<Manufacturers />} />
+          <Route path="manufacturers/:id/edit" element={<Manufacturer />} />
+          <Route path="manufacturers/new" element={<Manufacturer />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="orders/:id" element={<Order />} />
+          <Route path="orders/new" element={<OrderNew />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<Product />} />
+          <Route path="providers" element={<Providers />} />
+          <Route path="providers/:id/edit" element={<Provider />} />
+          <Route path="providers/new" element={<Provider />} />
+          <Route path="sales" element={<Sales />} />
+          <Route path="sales/:id" element={<Sale />} />
+          <Route path="shippings" element={<Shippings />} />
+          <Route path="shippings/:id" element={<Shipping />} />
+          <Route path="shippings/new" element={<ShippingNew />} />
         </Route>
       </Routes>
     </BrowserRouter>

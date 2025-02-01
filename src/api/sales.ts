@@ -9,4 +9,10 @@ export const getSales = params =>
   xanyahApi.get<Sale[]>('v2/sales', decamelizeKeys({params}))
 
 export const getSale = id =>
-  xanyahApi.get<Sale>(`sales/${id}`)
+  xanyahApi.get<Sale>(`v2/sales/${id}`)
+
+export const getSaleProducts = params =>
+  xanyahApi.get<SaleProduct[]>('v2/sale_products', decamelizeKeys({params}))
+
+export const getSalePayments = params =>
+  xanyahApi.get<SalePayment[]>('v2/sale_payments', decamelizeKeys({params}))

@@ -157,6 +157,10 @@
     @apply text-xl font-medium;
   }
 
+  h3 {
+    @apply font-semibold;
+  }
+
   .text-small {
     @apply text-xs text-neutral-500;
   }

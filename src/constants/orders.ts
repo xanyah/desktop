@@ -8,6 +8,3 @@ export const orderBadgeVariants: Record<Order['state'], BadgeProps['variant']> =
   ordered: 'default',
   withdrawn: 'secondary'
 }
-
-export const orderNumber = (order?: Order) =>
-  head(split(order?.id, '-'))

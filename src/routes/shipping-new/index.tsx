@@ -2,10 +2,10 @@ import { useCallback } from 'react'
 import { useCurrentStore } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { createOrder } from "../../api";
+import { createShipping } from "../../api";
 import { showSuccessToast } from "../../utils/notification-helper";
 import { useTranslation } from "react-i18next";
-import { CheckoutProductCard, CustomerSelect, FormContainer, FormSection } from '@/components';
+import { CheckoutProductCard, ProviderSelect, FormContainer, FormSection } from '@/components';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,20 +13,18 @@ import ProductSelect from '@/components/product-select';
 import { findIndex, map } from 'lodash';
 
 const formSchema = z.object({
-  customerId: z.string(),
-  orderProductsAttributes: z.array(
+  providerId: z.string(),
+  shippingProductsAttributes: z.array(
     z.object({
       productId: z.string(),
       quantity: z.number(),
-      amountCents: z.number().optional(),
-      amountCurrency: z.literal('EUR').optional(),
     })
-  ).min(1)
+  )
 })
 
 type FormType = z.infer<typeof formSchema>
 
-const Order = () => {
+const Shipping = () => {
   const navigate = useNavigate();
   const store = useCurrentStore();
   const { t } = useTranslation();
@@ -35,23 +33,23 @@ const Order = () => {
   })
   const { fields, append, update, remove } = useFieldArray({
     control,
-    name: 'orderProductsAttributes',
+    name: 'shippingProductsAttributes',
   });
 
-  const { mutate: createApiOrder } = useMutation({
+  const { mutate: createApiShipping } = useMutation({
     mutationFn: (newData: any) =>
-      createOrder({ ...newData, storeId: store?.id }),
+      createShipping({ ...newData, storeId: store?.id }),
     onSuccess: (data) => {
-      navigate(`/orders/${data.data.id}`);
+      navigate(`/shippings/${data.data.id}`);
       showSuccessToast(
-        t("toast.created", { entity: t("models.orders.title") })
+        t("toast.created", { entity: t("models.shippings.title") })
       );
     },
   });
 
   const onSubmit = useCallback((data: FormType) => {
-    createApiOrder({ ...data, storeId: store?.id })
-  }, [store, createApiOrder])
+    createApiShipping({ ...data, storeId: store?.id })
+  }, [store, createApiShipping])
 
   const onProductSelect = useCallback((newProductId?: Product['id']) => {
     if (!newProductId) { return }
@@ -70,15 +68,15 @@ const Order = () => {
 
   return (
     <FormContainer
-      title="Nouvelle commande"
-      subtitle="Saisissez ici les données de votre nouvelle commande client"
+      title="Nouvelle livraison"
+      subtitle="Saisissez ici les données de votre nouvelle livraison"
       onSubmit={handleSubmit(onSubmit)}>
       <FormSection title="Informations générales">
         <Controller
           control={control}
-          name="customerId"
+          name="providerId"
           render={({ field: { onChange, value } }) => (
-            <CustomerSelect
+            <ProviderSelect
               onChange={onChange}
               value={value}
             />
@@ -89,6 +87,7 @@ const Order = () => {
         />
         {map(fields, (field, index) => (
           <CheckoutProductCard
+          withoutPrice
           productId={field.productId}
           quantity={field.quantity}
             key={field.productId}
@@ -101,4 +100,4 @@ const Order = () => {
   )
 }
 
-export default Order;
+export default Shipping;

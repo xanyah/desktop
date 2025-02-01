@@ -5,14 +5,18 @@ import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { formatPrice } from '@/helpers/price'
+import { uuidNumber } from '@/helpers/uuid'
+import { formatLongDatetime } from '@/helpers/dates'
 
 const Sales = () => {
   useBreadCrumbContext([{ label: 'Sales' }])
+  const [searchQuery, setSearchQuery] = useState('')
   const currentStore = useCurrentStore()
   const [page, setPage] = useState(1)
 
   const { data, isLoading } = useSales({
     page,
+    'q[userFirstnameOrUserLastnameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
   })
 
@@ -21,16 +25,14 @@ const Sales = () => {
   const columns = useMemo(
     () =>
       [
-        columnHelper.accessor('createdAt', {
-          header: 'Date of creation',
-          cell: (props) => (
-            <Link className="underline" to={`/sales/${props.row.original.id}`}>
-              {props.getValue()}
+        columnHelper.accessor('id', {
+          header: 'Numéro',
+          cell: props => <Link className="underline" to={`/sales/${props.getValue()}`}>
+              {uuidNumber(props.getValue())}
             </Link>
-          ),
         }),
         columnHelper.accessor('totalAmountCents', {
-          header: 'Date of creation',
+          header: 'Total',
           cell: (props) => (
             <span>
               {formatPrice(
@@ -55,6 +57,10 @@ const Sales = () => {
             ),
           }
         ),
+        columnHelper.accessor('createdAt', {
+          header: 'Date of creation',
+          cell: (props) => formatLongDatetime(props.getValue()),
+        }),
       ] as ColumnDef<Sale>[],
     [columnHelper]
   )
@@ -62,6 +68,8 @@ const Sales = () => {
   return (
     <TableWithSearch
       searchPlaceholder="Search a sale"
+      onSearchQueryChange={setSearchQuery}
+      searchQuery={searchQuery}
       isLoading={isLoading}
       columns={columns}
       data={data?.data}

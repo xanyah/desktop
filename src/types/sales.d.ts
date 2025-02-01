@@ -5,13 +5,12 @@ type SaleVariantPromotion = {
   amountCurrency: string
 }
 
-type SaleVariant = {
+type SaleProduct = {
   id: string,
   quantity: number
   amountCents: number
   amountCurrency: string
-  variant: Variant
-  saleVariantPromotion?: SaleVariantPromotion
+  product: Product
 }
 
 type SalePromotion = {

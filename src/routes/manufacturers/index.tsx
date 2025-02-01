@@ -15,6 +15,7 @@ const Manufacturers = () => {
     page,
     'q[nameOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': 'name'
   })
 
   const columnHelper = createColumnHelper<Manufacturer>()
