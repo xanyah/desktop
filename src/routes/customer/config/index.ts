@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 export const customerSchema = z.object({
-    firstname: z.string(),
-    lastname: z.string(),
-    email: z.string().optional(),
-    notes: z.string().optional(),
-    address: z.string().optional(),
-    phone: z.string().optional(),
+  firstname: z.string(),
+  lastname: z.string(),
+  email: z.string().optional(),
+  notes: z.string().optional(),
+  address: z.string().optional(),
+  phone: z.string().optional(),
 })
 
 

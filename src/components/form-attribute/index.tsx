@@ -51,76 +51,76 @@ const FormAttribute = (item: Item) => {
 
 const getFormElement = (item, t: TFunction) => {
   switch (item.type) {
-    case 'textarea':
-      return (
-        <textarea
-          onChange={(e) => item.onUpdate(e.target.value)}
-          value={item.value}
-          name={item.attribute}
-        ></textarea>
-      )
-    case 'number':
-      return (
-        <InputText
-          onChange={(e) => item.onUpdate(e.target.value)}
-          value={item.value}
-          type="number"
-        />
-      )
-    case 'string':
-      return (
-        <InputText
-          onChange={(e) => item.onUpdate(e.target.value)}
-          value={item.value}
-          type="text"
-        />
-      )
-    case 'entity':
-      return getSelect(item)
-    case 'type':
-      return (
-        <Select
-          name={item.attribute}
-          value={item.value}
-          onChange={(e) => item.onUpdate(e.value)}
-          options={getTypeOptions()}
-        />
-      )
-    case 'select':
-      return (
-        <Select
-          name={item.attribute}
-          value={item.value}
-          onChange={(e) => item.onUpdate(e.value)}
-          options={item.options}
-        />
-      )
-    case 'parent-category':
-      return (
-        <Select
-          name={item.attribute}
-          value={item.value}
-          onChange={(e) => item.onUpdate(e.value)}
-          options={getParentCategoriesList(item['categories'])}
-        />
-      )
-    case 'password':
-      return (
-        <InputText
-          onChange={(e) => item.onUpdate(e.target.value)}
-          value={item.value}
-          type="password"
-        />
-      )
-    case 'vat-rates':
-      return (
-        <Select
-          name={item.attribute}
-          value={item.value}
-          onChange={(e) => item.onUpdate(e.value)}
-          options={getVatRatesOptions(t)}
-        />
-      )
+  case 'textarea':
+    return (
+      <textarea
+        onChange={(e) => item.onUpdate(e.target.value)}
+        value={item.value}
+        name={item.attribute}
+      ></textarea>
+    )
+  case 'number':
+    return (
+      <InputText
+        onChange={(e) => item.onUpdate(e.target.value)}
+        value={item.value}
+        type="number"
+      />
+    )
+  case 'string':
+    return (
+      <InputText
+        onChange={(e) => item.onUpdate(e.target.value)}
+        value={item.value}
+        type="text"
+      />
+    )
+  case 'entity':
+    return getSelect(item)
+  case 'type':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={(e) => item.onUpdate(e.value)}
+        options={getTypeOptions()}
+      />
+    )
+  case 'select':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={(e) => item.onUpdate(e.value)}
+        options={item.options}
+      />
+    )
+  case 'parent-category':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={(e) => item.onUpdate(e.value)}
+        options={getParentCategoriesList(item['categories'])}
+      />
+    )
+  case 'password':
+    return (
+      <InputText
+        onChange={(e) => item.onUpdate(e.target.value)}
+        value={item.value}
+        type="password"
+      />
+    )
+  case 'vat-rates':
+    return (
+      <Select
+        name={item.attribute}
+        value={item.value}
+        onChange={(e) => item.onUpdate(e.value)}
+        options={getVatRatesOptions(t)}
+      />
+    )
   }
 }
 
@@ -142,15 +142,15 @@ const getSelect = (item: Item) => {
       options={
         model
           ? map(
-              item[model]((entity: any) => ({
-                label: entity.name
-                  ? entity.name
-                  : entity.firstname
+            item[model]((entity: any) => ({
+              label: entity.name
+                ? entity.name
+                : entity.firstname
                   ? entity.firstname
                   : entity.id,
-                value: entity.id,
-              }))
-            )
+              value: entity.id,
+            }))
+          )
           : []
       }
     />

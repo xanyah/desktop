@@ -28,8 +28,8 @@ const Sales = () => {
         columnHelper.accessor('id', {
           header: 'Numéro',
           cell: props => <Link className="underline" to={`/sales/${props.getValue()}`}>
-              {uuidNumber(props.getValue())}
-            </Link>
+            {uuidNumber(props.getValue())}
+          </Link>
         }),
         columnHelper.accessor('totalAmountCents', {
           header: 'Total',

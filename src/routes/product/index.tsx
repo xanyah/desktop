@@ -56,14 +56,14 @@ const Product = () => {
         initialValues={
           productData?.data
             ? {
-                ...productData?.data,
-                categoryId: productData?.data?.category?.id,
-                manufacturerId: productData?.data?.manufacturer?.id,
-                storeId: store?.id,
-                buyingAmount: productData?.data?.buyingAmountCents / 100,
-                taxFreeAmount: productData?.data?.taxFreeAmountCents / 100,
-                amount: productData?.data?.amountCents / 100,
-              }
+              ...productData?.data,
+              categoryId: productData?.data?.category?.id,
+              manufacturerId: productData?.data?.manufacturer?.id,
+              storeId: store?.id,
+              buyingAmount: productData?.data?.buyingAmountCents / 100,
+              taxFreeAmount: productData?.data?.taxFreeAmountCents / 100,
+              amount: productData?.data?.amountCents / 100,
+            }
             : undefined
         }
         onSubmit={onSubmit}

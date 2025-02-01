@@ -53,7 +53,7 @@ const Inventory = () => {
         type="inventories"
       />
       {renderInventoryProducts()}
-      </>
+    </>
   )
 }
 

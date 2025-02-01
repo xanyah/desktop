@@ -68,15 +68,15 @@ const Shipping = () => {
 
   const renderActionButtons = useCallback(() => {
     switch(shippingData?.data.state) {
-          case 'pending':
-            return <>
-            <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
-            <Button onClick={() => validateApiShipping()}>Valider</Button>
-            </>
-      case 'cancelled':
-        return <Button onClick={() => validateApiShipping()}>Valider</Button>
-      case 'validated':
-        return <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
+    case 'pending':
+      return <>
+        <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
+        <Button onClick={() => validateApiShipping()}>Valider</Button>
+      </>
+    case 'cancelled':
+      return <Button onClick={() => validateApiShipping()}>Valider</Button>
+    case 'validated':
+      return <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
     }
   }, [shippingData, cancelApiShipping, validateApiShipping])
 

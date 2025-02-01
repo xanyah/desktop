@@ -1,6 +1,6 @@
 import { useCurrentStore, useCustomer } from '@/hooks'
 import { useCallback } from 'react'
-import { getCategories, getCustomers } from '@/api'
+import {  getCustomers } from '@/api'
 import ApiDataSelect from '../api-data-select'
 import { customerFullname } from '@/helpers/customer'
 

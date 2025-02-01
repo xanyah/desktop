@@ -20,6 +20,7 @@ export const StyledButton = tw.button<Props>`
   disabled:pointer-events-none
   disabled:opacity-50
   h-9 px-4 py-2
+  cursor-pointer
   [&_svg]:pointer-events-none
   [&_svg]:size-4
   [&_svg]:shrink-0

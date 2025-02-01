@@ -94,11 +94,11 @@ const Category = () => {
           name="vatRateId"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <VatRateSelect
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            label="Catégorie de taxe"
-          />
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label="Catégorie de taxe"
+            />
           )}
         />
 
@@ -107,11 +107,11 @@ const Category = () => {
           name="categoryId"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <CategorySelect
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            label="Catégorie parente"
-          />
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label="Catégorie parente"
+            />
           )}
         />
       </FormSection>

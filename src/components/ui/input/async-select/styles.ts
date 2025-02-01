@@ -21,42 +21,42 @@ export const StyledAsyncSelect = tw(AsyncSelect)`
 `;
 
 export const style = {
-    control: (provided) => ({
-        ...provided,
-        border: 'none',
-        boxShadow: 'none',
-        backgroundColor: 'transparent',
-    }),
-    option: (provided, state) => ({
-        ...provided,
-        backgroundColor: state.isSelected
-            ? 'hsl(var(--accent))'
-            : 'transparent',
-        color: state.isSelected
-            ? 'hsl(var(--accent-foreground))'
-            : 'hsl(var(--foreground))',
-        '&:hover': {
-            backgroundColor: 'hsl(var(--accent))',
-            color: 'hsl(var(--accent-foreground))',
-        },
-    }),
-    menu: (provided) => ({
-        ...provided,
-        backgroundColor: 'hsl(var(--popover))',
-        border: '1px solid hsl(var(--border))',
-        borderRadius: '0.375rem',
-        boxShadow: '0 0 0 1px hsl(var(--border))',
-    }),
-    singleValue: (provided) => ({
-        ...provided,
-        color: 'hsl(var(--foreground))',
-    }),
-    placeholder: (provided) => ({
-        ...provided,
-        color: 'hsl(var(--muted-foreground))',
-    }),
-    input: (provided) => ({
-        ...provided,
-        color: 'hsl(var(--foreground))',
-    }),
+  control: (provided) => ({
+    ...provided,
+    border: 'none',
+    boxShadow: 'none',
+    backgroundColor: 'transparent',
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected
+      ? 'hsl(var(--accent))'
+      : 'transparent',
+    color: state.isSelected
+      ? 'hsl(var(--accent-foreground))'
+      : 'hsl(var(--foreground))',
+    '&:hover': {
+      backgroundColor: 'hsl(var(--accent))',
+      color: 'hsl(var(--accent-foreground))',
+    },
+  }),
+  menu: (provided) => ({
+    ...provided,
+    backgroundColor: 'hsl(var(--popover))',
+    border: '1px solid hsl(var(--border))',
+    borderRadius: '0.375rem',
+    boxShadow: '0 0 0 1px hsl(var(--border))',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'hsl(var(--foreground))',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: 'hsl(var(--muted-foreground))',
+  }),
+  input: (provided) => ({
+    ...provided,
+    color: 'hsl(var(--foreground))',
+  }),
 }

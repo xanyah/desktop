@@ -108,45 +108,45 @@ export default class CreateProduct extends React.Component {
     const { newProduct, newVariant } = this.state;
 
     return (
-        <div className={`data-details data-details-${type}`}>
-          <div className="info">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                createApiProduct(newProduct, newVariant);
-              }}
-            >
-              {productFormat.map((row, idx) => (
-                <div className="row" key={idx}>
-                  {row.map(
-                    (item) =>
-                      item.editable && (
-                        <FormAttribute
-                          attribute={item.attribute}
-                          key={item.attribute}
-                          value={newProduct[item.attribute]}
-                          model="products"
-                          type={item.type}
-                          onUpdate={(attribute, value) =>
-                            this.handleUpdateProduct(attribute, value)
-                          }
-                        />
-                      )
-                  )}
-                </div>
-              ))}
+      <div className={`data-details data-details-${type}`}>
+        <div className="info">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              createApiProduct(newProduct, newVariant);
+            }}
+          >
+            {productFormat.map((row, idx) => (
+              <div className="row" key={idx}>
+                {row.map(
+                  (item) =>
+                    item.editable && (
+                      <FormAttribute
+                        attribute={item.attribute}
+                        key={item.attribute}
+                        value={newProduct[item.attribute]}
+                        model="products"
+                        type={item.type}
+                        onUpdate={(attribute, value) =>
+                          this.handleUpdateProduct(attribute, value)
+                        }
+                      />
+                    )
+                )}
+              </div>
+            ))}
 
-              {this.getVariantsFormAttribute()}
+            {this.getVariantsFormAttribute()}
 
-              {
-                <button className="btn-link btn-stand-alone" key="btn-submit">
-                  <Trans i18nKey={"data-details.form.buttons.create"} />
-                </button>
-              }
-            </form>
-          </div>
-          <div className="children">{children}</div>
+            {
+              <button className="btn-link btn-stand-alone" key="btn-submit">
+                <Trans i18nKey={"data-details.form.buttons.create"} />
+              </button>
+            }
+          </form>
         </div>
+        <div className="children">{children}</div>
+      </div>
     )
   }
 }

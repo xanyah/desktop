@@ -25,8 +25,8 @@ const Customer = () => {
 
   const pageTitle = useMemo(
     () => customerData?.data ? `${customerData?.data.firstname} ${customerData?.data.lastname}` : 'New customer',
-  [customerData]
-)
+    [customerData]
+  )
 
   useBreadCrumbContext([
     { label: 'Customers', url: '/customers'},
@@ -54,7 +54,6 @@ const Customer = () => {
   });
 
   const onSubmit = useCallback((data: customerSchemaType) => {
-    console.log('onSubmit')
     if (id) {
       return updateApiCustomer(data)
     }
@@ -75,76 +74,76 @@ const Customer = () => {
       <FormSection
         title="Informations générales"
       >
-      <Controller
-        control={control}
-        name="firstname"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <InputText
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            placeholder="Prénom du client"
-            type="text"
-            label="Prénom"
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="lastname"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <InputText
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            placeholder="Nom de famille du client"
-            type="text"
-            label="Nom de famille"
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="phone"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <InputText
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            placeholder="Numéro de téléphone du client"
-            type="text"
-            label="Numéro de téléphone"
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="email"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <InputText
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            placeholder="Adresse email du client"
-            type="text"
-            label="Adresse email"
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="address"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <InputText
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            placeholder="Adresse postale du client"
-            type="text"
-            label="Adresse postale"
-          />
-        )}
-      />
+        <Controller
+          control={control}
+          name="firstname"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Prénom du client"
+              type="text"
+              label="Prénom"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="lastname"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Nom de famille du client"
+              type="text"
+              label="Nom de famille"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="phone"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Numéro de téléphone du client"
+              type="text"
+              label="Numéro de téléphone"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Adresse email du client"
+              type="text"
+              label="Adresse email"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="address"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              placeholder="Adresse postale du client"
+              type="text"
+              label="Adresse postale"
+            />
+          )}
+        />
 
         <Controller
           control={control}
