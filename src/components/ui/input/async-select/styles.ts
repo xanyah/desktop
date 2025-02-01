@@ -12,7 +12,7 @@ export const StyledAsyncSelect = tw(AsyncSelect)`
   shadow-sm 
   ring-offset-background 
   placeholder:text-muted-foreground 
-  focus:outline-none 
+  focus:outline-hidden 
   focus:ring-1 
   focus:ring-ring 
   disabled:cursor-not-allowed 

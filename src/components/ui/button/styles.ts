@@ -14,7 +14,7 @@ export const StyledButton = tw.button<Props>`
   text-sm
   font-medium
   transition-colors
-  focus-visible:outline-none
+  focus-visible:outline-hidden
   focus-visible:ring-1
   focus-visible:ring-ring
   disabled:pointer-events-none
