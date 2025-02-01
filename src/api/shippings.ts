@@ -8,13 +8,19 @@ export const getShipping = (shippingId) =>
   xanyahApi.get<Shipping>(`v2/shippings/${shippingId}`)
 
 export const updateShipping = (shippingId, params) =>
-  xanyahApi.patch<Shipping>(`shippings/${shippingId}`, decamelizeKeys(params))
+  xanyahApi.patch<Shipping>(`v2/shippings/${shippingId}`, decamelizeKeys(params))
+
+export const validateShipping = (shippingId) =>
+  xanyahApi.patch<Shipping>(`v2/shippings/${shippingId}/validate`)
+
+export const cancelShipping = (shippingId) =>
+  xanyahApi.patch<Shipping>(`v2/shippings/${shippingId}/cancel`)
 
 export const createShipping = newShipping =>
-  xanyahApi.post<Shipping>('shippings', decamelizeKeys(newShipping))
+  xanyahApi.post<Shipping>('v2/shippings', decamelizeKeys(newShipping))
 
 export const getShippingProducts = params =>
-  xanyahApi.get<ShippingProduct[]>('shipping_products', decamelizeKeys({params}))
+  xanyahApi.get<ShippingProduct[]>('v2/shipping_products', decamelizeKeys({params}))
 
 export const getShippingProduct = id =>
-  xanyahApi.get<ShippingProduct>(`shipping_products/${id}`)
+  xanyahApi.get<ShippingProduct>(`v2/shipping_products/${id}`)

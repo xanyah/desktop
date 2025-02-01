@@ -14,6 +14,7 @@ const Products = () => {
   const { data, isLoading } = useProducts({
     'q[nameOrSkuOrUpcCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': ['name', 'manufacturers.name'],
     page: page,
   })
 
@@ -37,17 +38,6 @@ const Products = () => {
             <Link
               className="underline"
               to={`/categories/${props.row.original.category?.id}`}
-            >
-              {props.getValue()}
-            </Link>
-          ),
-        }),
-        columnHelper.accessor('provider.name', {
-          header: 'Provider',
-          cell: (props) => (
-            <Link
-              className="underline"
-              to={`/providers/${props.row.original.provider?.id}`}
             >
               {props.getValue()}
             </Link>

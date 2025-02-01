@@ -5,9 +5,11 @@ import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { Badge } from '@/components/ui/badge'
-import { orderBadgeVariants, orderNumber } from '@/constants/orders'
+import { orderBadgeVariants } from '@/constants/orders'
 import { customerFullname } from '@/helpers/customer'
 import { DateTime } from 'luxon'
+import { formatLongDatetime } from '@/helpers/dates'
+import { uuidNumber } from '@/helpers/uuid'
 
 const Orders = () => {
   useBreadCrumbContext([{ label: 'Orders' }])
@@ -30,7 +32,7 @@ const Orders = () => {
           header: 'Numéro',
           cell: (props) => (
             <Link className="underline" to={`/orders/${props.getValue()}`}>
-              {orderNumber(props.row.original)}
+              {uuidNumber(props.getValue())}
             </Link>
           ),
         }),
@@ -59,11 +61,11 @@ const Orders = () => {
         }),
         columnHelper.accessor('createdAt', {
           header: 'Creation date',
-          cell: (props) => DateTime.fromISO(props.getValue()).setLocale('fr-FR').toFormat('ff')
+          cell: (props) => formatLongDatetime(props.getValue())
         }),
         columnHelper.accessor('updatedAt', {
           header: 'Dernière mise à jour',
-          cell: (props) => DateTime.fromISO(props.getValue()).setLocale('fr-FR').toFormat('ff')
+          cell: (props) => formatLongDatetime(props.getValue())
         }),
       ] as ColumnDef<Order>[],
     [columnHelper]

@@ -1,75 +1,109 @@
-import { useState } from 'react'
-
-
-import { useShipping, useShippingProducts } from '../../hooks'
-import { useParams } from 'react-router-dom'
-import { shippingFormat } from '../../types'
-import { useMutation } from '@tanstack/react-query'
-import { updateShipping } from '../../api'
-import DataDetails from '../../components/data-details'
-import { Trans } from 'react-i18next'
+import { useCallback, useMemo } from 'react'
+import { useShipping, useShippingProducts } from "../../hooks";
+import { Link, useParams } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { cancelShipping, validateShipping } from "../../api";
+import { showSuccessToast } from "../../utils/notification-helper";
+import { useTranslation } from "react-i18next";
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
+import DataTable from '@/components/data-table-new';
+import { Button, ShowContainer, ShowSection } from '@/components';
+import { DateTime } from 'luxon';
+import { useBreadCrumbContext } from '@/contexts/breadcrumb';
+import { Badge } from '@/components/ui/badge';
+import { shippingBadgeVariants } from '@/constants/shippings';
+import { AxiosResponse } from 'axios';
+import { uuidNumber } from '@/helpers/uuid';
 
 const Shipping = () => {
-  const {id} = useParams()
-  const [isEditing, setIsEditing] = useState(false)
-  const {data: shippingData} = useShipping(id)
-  const {data: shippingVariantsData} = useShippingProducts({shippingId: id})
-
-  const {mutate} = useMutation({
-    mutationFn: data => updateShipping(id, data),
-    onSuccess: () => setIsEditing(false)
+  const queryClient = useQueryClient()
+  const { id } = useParams();
+  const { data: shippingData } = useShipping(id);
+  const { data: shippingProductsData } = useShippingProducts({
+    'q[shippingIdEq]': id
   })
+  const { t } = useTranslation();
+  useBreadCrumbContext([
+    { label: 'Commandes', url: '/shippings' },
+    { label: `Commande ${uuidNumber(shippingData?.data.id)}` },
+  ])
 
-  const renderShippingVariants = () => {
-    return (
-      <div className="shipping-variants-table">
-        <div className="shipping-variants-table-header">
-          <div className="column column-product">
-            <Trans i18nKey='models.products.title'/>
-          </div>
-          <div className="column column-barcode">
-            <Trans i18nKey='models.variants.barcode'/>
-          </div>
-          <div className="column column-quantity">
-            <Trans i18nKey='models.variants.quantity'/>
-          </div>
-        </div>
-        <div className="shipping-variants-table-body">
-          {
-            shippingVariantsData?.data.map(shippingVariant => (
-              <div key={shippingVariant.id} className="shipping-variants-row">
-                <div className="column column-product">
-                  {shippingVariant.variant.product.name}
-                </div>
-                <div className="column column-barcode">
-                  {shippingVariant.variant.barcode}
-                </div>
-                <div className="column column-quantity">
-                  {shippingVariant.quantity}
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    )
+  const onSuccess = useCallback(() => {
+    showSuccessToast(t("toast.updated"));
+    queryClient.invalidateQueries({ queryKey: ['shippings', { id }] })
+  }, [t, id, queryClient])
+
+  const useChangeShippingStatus = useCallback((mutationFn: (storeId?: Store['id']) => Promise<AxiosResponse<Shipping, any>>) => {
+    return useMutation({
+      mutationFn: () => mutationFn(id),
+      onSuccess,
+    });
+  }, [id, onSuccess])
+
+  const { mutate: cancelApiShipping } = useChangeShippingStatus(cancelShipping);
+  const { mutate: validateApiShipping } = useChangeShippingStatus(validateShipping);
+
+  const columnHelper = createColumnHelper<ShippingProduct>()
+
+  const columns = useMemo(
+    () =>
+      [
+        columnHelper.accessor('product.name', {
+          header: 'Name',
+          cell: (props) => (
+            <Link
+              className="underline"
+              to={`/products/${props.row.original.product.id}/edit`}
+            >
+              {props.getValue()}
+            </Link>
+          ),
+        }),
+        columnHelper.accessor('quantity', {
+          header: 'Quantité',
+        }),
+      ] as ColumnDef<ShippingProduct>[],
+    [columnHelper]
+  )
+
+  const renderActionButtons = useCallback(() => {
+    switch(shippingData?.data.state) {
+          case 'pending':
+            return <>
+            <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
+            <Button onClick={() => validateApiShipping()}>Valider</Button>
+            </>
+      case 'cancelled':
+        return <Button onClick={() => validateApiShipping()}>Valider</Button>
+      case 'validated':
+        return <Button variant="ghost" onClick={() => cancelApiShipping()}>Cancel</Button>
+    }
+  }, [shippingData, cancelApiShipping, validateApiShipping])
+
+  if (!shippingData?.data) {
+    return null
   }
 
-    return (
-      <>
-        <h1 className="data-details-title">{shippingData?.data?.name}</h1>
-        <DataDetails
-          currentEntity={shippingData?.data}
-          editing={isEditing}
-          formattedData={shippingFormat}
-          toggleEdit={() => setIsEditing(!isEditing)}
-          type="shippings"
-          updateEntity={mutate}
-        >
-          {renderShippingVariants()}
-        </DataDetails>
-      </>
-    )
+  return <ShowContainer
+    title={`Commande ${uuidNumber(shippingData?.data.id)}`}
+    subtitle={shippingData?.data && `Commande passée le ${DateTime.fromISO(shippingData?.data.createdAt).toLocaleString()}`}
+    button={shippingData?.data && (
+      <div className="flex flex-row gap-4 items-center">
+        <Badge variant={shippingBadgeVariants[shippingData?.data.state]}>
+          {shippingData?.data.state}
+        </Badge>
+        {renderActionButtons()}
+      </div>)}
+  >
+    <ShowSection title="Client">
+      <div className="flex flex-col gap-2">
+        <p>{shippingData.data.provider.name}</p>
+      </div>
+    </ShowSection>
+    <ShowSection title="Produits de la commande">
+      <DataTable data={shippingProductsData?.data || []} columns={columns} />
+    </ShowSection>
+  </ShowContainer>
 }
 
-export default Shipping
+export default Shipping;

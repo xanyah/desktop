@@ -12,8 +12,9 @@ import { DateTime } from 'luxon';
 import { customerFullname } from '@/helpers/customer';
 import { useBreadCrumbContext } from '@/contexts/breadcrumb';
 import { Badge } from '@/components/ui/badge';
-import { orderBadgeVariants, orderNumber } from '@/constants/orders';
+import { orderBadgeVariants } from '@/constants/orders';
 import { AxiosResponse } from 'axios';
+import { uuidNumber } from '@/helpers/uuid';
 
 const Order = () => {
   const queryClient = useQueryClient()
@@ -25,7 +26,7 @@ const Order = () => {
   const { t } = useTranslation();
   useBreadCrumbContext([
     { label: 'Commandes', url: '/orders' },
-    { label: `Commande ${orderNumber(orderData?.data)}` },
+    { label: `Commande ${uuidNumber(orderData?.data.id)}` },
   ])
 
   const onSuccess = useCallback(() => {
@@ -96,7 +97,7 @@ const Order = () => {
   }
 
   return <ShowContainer
-    title={`Commande ${orderNumber(orderData?.data)}`}
+    title={`Commande ${uuidNumber(orderData?.data.id)}`}
     subtitle={orderData?.data && `Commande passée le ${DateTime.fromISO(orderData?.data.createdAt).toLocaleString()}`}
     button={orderData?.data && (
       <div className="flex flex-row gap-4 items-center">

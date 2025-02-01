@@ -14,6 +14,7 @@ const Providers = () => {
     page,
     'q[nameOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': 'name'
   })
 
   const columnHelper = createColumnHelper<Provider>()

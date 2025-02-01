@@ -5,13 +5,14 @@ import { X } from "lucide-react"
 import { toNumber } from "lodash"
 
 type CheckoutProductCardProps = {
+  onQuantityUpdate: (newQuantity: number) => void
+  onRemove: () => void
   productId: string
   quantity: number
-  onRemove: () => void
-  onQuantityUpdate: (newQuantity: number) => void
+  withoutPrice?: boolean
 }
 
-const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate }: CheckoutProductCardProps) => {
+const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate, withoutPrice }: CheckoutProductCardProps) => {
   const { data, isLoading } = useProduct(productId)
 
   if (isLoading || !data?.data) {
@@ -23,7 +24,7 @@ const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate }
   return <div className="flex flex-row items-center justify-between gap-4">
     <div className="flex flex-col flex-1">
       <h4>{product.name}</h4>
-      <p>{formatPrice(product.amountCents, product.amountCurrency)}</p>
+      <p>{withoutPrice ? product.manufacturerSku : formatPrice(product.amountCents, product.amountCurrency)}</p>
     </div>
     <div className="w-24">
       <InputText
@@ -31,7 +32,7 @@ const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate }
         onChange={(e) => onQuantityUpdate(toNumber(e.target.value))}
       />
     </div>
-    <p>{formatPrice(product.amountCents * quantity, product.amountCurrency)}</p>
+    {!withoutPrice && <p>{formatPrice(product.amountCents * quantity, product.amountCurrency)}</p>}
     <Button variant="ghost" onClick={onRemove}><X /></Button>
   </div>
 }

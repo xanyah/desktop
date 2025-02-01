@@ -1,7 +1,8 @@
 type Shipping = {
   id: string
-  shippingProductsCount: number
-  lockedAt: string
+  state: 'pending' | 'validated' | 'cancelled'
+  validatedAt: string
+  cancelledAt: string
   createdAt: string
   updatedAt: string
   provider: Provider
