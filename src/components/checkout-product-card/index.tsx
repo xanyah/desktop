@@ -3,6 +3,7 @@ import { useProduct } from "@/hooks"
 import { Button, InputText } from "../ui"
 import { X } from "lucide-react"
 import { toNumber } from "lodash"
+import { useTranslation } from "react-i18next"
 
 type CheckoutProductCardProps = {
   onQuantityUpdate: (newQuantity: number) => void
@@ -13,10 +14,11 @@ type CheckoutProductCardProps = {
 }
 
 const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate, withoutPrice }: CheckoutProductCardProps) => {
+  const {t} = useTranslation()
   const { data, isLoading } = useProduct(productId)
 
   if (isLoading || !data?.data) {
-    return <p>Loading...</p>
+    return <p>{t('global.loading')}</p>
   }
 
   const product = data.data

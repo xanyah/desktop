@@ -1,78 +1,85 @@
-import { Blend, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Truck, User, Users } from "lucide-react"
+import { Blend, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Sparkles, Truck, User, Users } from "lucide-react"
 import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+import { Link, NavLink } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const items = [
   {
-    label: 'Boutique',
+    i18nKey: 'sidebar.store',
     items: [
       {
         icon: Coins,
-        title: 'Caisse',
+        i18nKey: 'checkout.pageTitle',
         url: '/checkout',
       },
       {
         icon: Users,
-        title: 'Clients',
+        i18nKey: 'customers.pageTitle',
         url: '/customers',
       },
       {
         icon: NotebookText,
-        title: 'Commandes',
+        i18nKey: 'orders.pageTitle',
         url: '/orders',
       },
       {
         icon: ChartLine,
-        title: 'Ventes',
+        i18nKey: 'sales.pageTitle',
         url: '/sales',
       },
     ]
   },
   {
-    label: 'Stock',
+    i18nKey: 'sidebar.stock',
     items: [
       {
         icon: Blend,
-        title: 'Articles',
+        i18nKey: 'products.pageTitle',
         url: '/products',
       },
       {
+        icon: Factory,
+        i18nKey: 'manufacturers.pageTitle',
+        url: '/manufacturers',
+      },
+      {
+        icon: Truck,
+        i18nKey: 'providers.pageTitle',
+        url: '/providers',
+      },
+      {
         icon: ScanBarcode,
-        title: 'Inventaires',
+        i18nKey: 'inventories.pageTitle',
         url: '/inventories',
       },
       {
         icon: Truck,
-        title: 'Livraisons',
+        i18nKey: 'shippings.pageTitle',
         url: '/shippings',
       },
     ]
   },
   {
-    label: 'Paramètres',
+    i18nKey: 'sidebar.settings',
     items: [
       {
+        icon: Sparkles,
+        i18nKey: 'customAttributes.pageTitle',
+        url: '/custom-attributes'
+      },
+      {
         icon: Group,
-        title: 'Catégories',
+        i18nKey: 'categories.pageTitle',
         url: "/categories"
-      },
-      {
-        icon: Factory,
-        title: 'Fabricants',
-        url: '/manufacturers',
-      },
-      {
-        icon: Truck,
-        title: 'Fournisseurs',
-        url: '/providers',
       },
     ]
   },
   {
-    label: 'Mon compte',
+    i18nKey: 'sidebar.account',
     items: [
       {
         icon: User,
-        title: 'Paramètres',
+        i18nKey: 'account.pageTitle',
         url: '/account',
       },
     ]
@@ -80,21 +87,22 @@ const items = [
 ]
 
 const Sidebar = () => {
+  const {t} = useTranslation()
   return (
     <ShadSidebar>
       <SidebarContent>
         {items.map((group) => (
-          <SidebarGroup key={group.label}>
-            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+          <SidebarGroup key={group.i18nKey}>
+            <SidebarGroupLabel>{t(group.i18nKey)}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map(item => (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item.i18nKey}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url}>
+                      <NavLink to={item.url}>
                         <item.icon />
-                        <span>{item.title}</span>
-                      </a>
+                        <span>{t(item.i18nKey)}</span>
+                      </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>))}
               </SidebarMenu>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect} from 'react'
+import { useCallback, useEffect, useMemo} from 'react'
 import { useCategory, useCurrentStore } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -22,9 +22,13 @@ const Category = () => {
     resolver: zodResolver(categorySchema),
     defaultValues: {},
   })
+  const pageTitle = useMemo(
+    () => categoryData?.data ? categoryData?.data.name : t('category.newCategoryPageTitle'),
+    [t,categoryData]
+  )
   useBreadCrumbContext([
-    { label: 'Categories', url: '/categories'},
-    { label: categoryData?.data ? categoryData?.data.name : 'New category'},
+    { label: t('categories.pageTitle'), url: '/categories'},
+    { label: pageTitle},
   ])
 
   const { mutate: createApiCategory } = useMutation({
@@ -67,12 +71,12 @@ const Category = () => {
 
   return (
     <FormContainer
-      title="Catégorie"
-      subtitle="Saisissez ici les informations de votre catégorie"
+      title={pageTitle}
+      subtitle={t('category.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormSection
-        title="Informations générales"
+        title={t('category.generalInformations')}
       >
         <Controller
           control={control}
@@ -82,9 +86,9 @@ const Category = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Nom de la catégorie"
+              placeholder={t('category.namePlaceholder')}
               type="text"
-              label="Nom"
+              label={t('category.nameLabel')}
             />
           )}
         />
@@ -97,7 +101,7 @@ const Category = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              label="Catégorie de taxe"
+              label={t('category.vatLabel')}
             />
           )}
         />
@@ -110,7 +114,7 @@ const Category = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              label="Catégorie parente"
+              label={t('category.parentCategoryLabel')}
             />
           )}
         />

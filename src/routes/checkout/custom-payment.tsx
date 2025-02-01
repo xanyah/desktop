@@ -5,9 +5,11 @@ import { CheckoutSchemaType } from "./schema"
 import { Button, InputText, PaymentTypeSelect } from "@/components"
 import { Controller, useFieldArray, useFormContext } from "react-hook-form"
 import { formatPrice } from "@/helpers/price"
+import { useTranslation } from "react-i18next"
 
 
 const CustomPayment = () => {
+  const {t} = useTranslation()
   const {totalAmountCents}=useCheckoutAmounts()
   const { control, watch } = useFormContext<CheckoutSchemaType>()
   const { fields, append, remove } = useFieldArray<CheckoutSchemaType, "salePaymentsAttributes", "id">({
@@ -46,14 +48,20 @@ const CustomPayment = () => {
       <div><Euro /></div>
       <Button variant="ghost" onClick={() => remove(index)}><X /></Button>
     </div>))}
-    {unattributed > 0 && <p className="text-red-500 text-center">Il reste {formatPrice(unattributed, 'EUR')} à distribuer</p>}
-    {unattributed < 0 && <p className="text-red-500 text-center">Il y a {formatPrice(unattributed, 'EUR')} en trop</p>}
+    {unattributed > 0 && (
+      <p className="text-red-500 text-center">
+        {t('checkout.customPaymentUnattributedPositive', {amount:formatPrice(unattributed, 'EUR')})}
+      </p>)}
+    {unattributed < 0 && (
+      <p className="text-red-500 text-center">
+        {t('checkout.customPaymentUnattributedNegative', {amount:formatPrice(unattributed, 'EUR')})}
+      </p>)}
     <Button
       className="self-center"
       variant="ghost"
       onClick={() => append({ paymentTypeId: head(data?.data)?.id as string, totalAmountCents: 0, totalAmountCurrency: 'EUR' })}
     >
-        Ajouter un moyen de paiement
+      {t('checkout.customPaymentAddButton')}
     </Button>
   </>
 }

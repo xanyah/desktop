@@ -5,14 +5,16 @@ import { CheckoutSchemaType } from "./schema"
 import {  Button, InputText } from "@/components"
 import { Controller,  useFormContext } from "react-hook-form"
 import { useCallback, useMemo } from "react"
+import { useTranslation } from "react-i18next"
 
 const Promotion = () => {
+  const {t} = useTranslation()
   const { watch, control, setValue } = useFormContext<CheckoutSchemaType>()
 
   const options = useMemo(() => ([
-    { label: 'Montant', value: 'flat_discount' },
-    { label: 'Pourcentage', value: 'percent_discount' },
-  ]), [])
+    { label: t('checkout.flatPromotionLabel'), value: 'flat_discount' },
+    { label: t('checkout.percentPromotionLabel'), value: 'percent_discount' },
+  ]), [t])
   const promotionType = watch('salePromotionAttributes.type')
 
   const renderSpecificPromotionFields = useCallback(() => {
@@ -27,7 +29,8 @@ const Promotion = () => {
               type="number"
               value={value}
               onChange={onChange}
-              placeholder="Montant de la promotion"
+              label={t('checkout.promotionAmountLabel')}
+              placeholder={t('checkout.promotionAmountPlaceholder')}
             />)}
         />
         <div className="text-right"><Euro /></div>
@@ -42,7 +45,8 @@ const Promotion = () => {
               type="number"
               value={value}
               onChange={onChange}
-              placeholder="Montant de la promotion"
+              label={t('checkout.promotionAmountLabel')}
+              placeholder={t('checkout.promotionAmountPlaceholder')}
             />)}
         />
         <div className="text-right">
@@ -50,7 +54,7 @@ const Promotion = () => {
         </div>
       </>
     }
-  }, [promotionType, control])
+  }, [t,promotionType, control])
 
 
   if (!promotionType) {
@@ -61,8 +65,9 @@ const Promotion = () => {
             amountCents: 0,
             amountCurrency: 'EUR',
             type: 'flat_discount'
-          })}>
-      Ajouter une remise
+          })}
+      >
+        {t('checkout.promotionAddButton')}
       </Button>
     </div>
   }

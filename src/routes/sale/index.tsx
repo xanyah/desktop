@@ -6,27 +6,29 @@ import SaleProducts from "./products";
 import SaleInfos from "./infos";
 import { formatLongDatetime } from "@/helpers/dates";
 import { useBreadCrumbContext } from "@/contexts/breadcrumb";
+import { useTranslation } from "react-i18next";
 
 const Sale = () => {
+  const {t} = useTranslation()
   const {id} = useParams()
   const {data: saleData} = useSale(id)
   useBreadCrumbContext([
-    { label: 'Ventes', url: '/sales' },
-    { label: `Vente ${uuidNumber(saleData?.data.id)}` }
+    { label: t('sales.pageTitle'), url: '/sales' },
+    { label: t('sale.pageTitle', {saleNumber: uuidNumber(saleData?.data.id)}) }
   ])
   if (!saleData) {
     return null
   }
   return (
     <ShowContainer
-      title={`Vente ${uuidNumber(saleData?.data.id)}`}
-      subtitle={`Vente effectuée le ${formatLongDatetime(saleData?.data.createdAt)}`}
+      title={t('sale.pageTitle', {saleNumber: uuidNumber(saleData?.data.id)})}
+      subtitle={t('sale.pageSubtitle', {saleDate: formatLongDatetime(saleData?.data.createdAt)})}
     >
-      <ShowSection title="Informations générales">
+      <ShowSection title={t('sale.generalInformations')}>
         <SaleInfos sale={saleData?.data} />
       </ShowSection>
 
-      <ShowSection title="Produits">
+      <ShowSection title={t('sale.products')}>
         <SaleProducts sale={saleData?.data} />
       </ShowSection>
     </ShowContainer>

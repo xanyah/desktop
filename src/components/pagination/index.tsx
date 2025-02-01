@@ -1,5 +1,5 @@
 import { each, map, range } from 'lodash'
-import { Fragment } from 'react'
+import { Fragment, useMemo } from 'react'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { PaginationContainer, PaginationItem } from './styles'
 
@@ -19,7 +19,7 @@ const Pagination = ({
   const handleNext = () =>
     currentPage < totalPages && onPageChange(currentPage + 1)
 
-  const getPageNumbers = () => {
+  const pageNumbers = useMemo(() => {
     const pages = [1]
 
     if (currentPage > 3) pages.push(-1)
@@ -37,7 +37,7 @@ const Pagination = ({
     if (totalPages > 1) pages.push(totalPages)
 
     return pages
-  }
+  }, [currentPage, totalPages])
 
   return (
     <PaginationContainer>
@@ -45,7 +45,7 @@ const Pagination = ({
         <ChevronLeft />
       </PaginationItem>
 
-      {map(getPageNumbers(), (page, index) => (
+      {map(pageNumbers, (page, index) => (
         <Fragment key={index}>
           {page === -1 ? (
             <PaginationItem $isEllipsis>

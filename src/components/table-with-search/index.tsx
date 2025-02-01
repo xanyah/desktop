@@ -42,7 +42,7 @@ const TableWithSearch = <TData, TValue>({
               placeholder={searchPlaceholder}
               onChange={(e) => onSearchQueryChange(e.target.value)}
               value={searchQuery}
-              className="max-w-sm"
+              className="w-xs"
             />
           )}
           {isLoading && <Loader className="animate-spin" />}

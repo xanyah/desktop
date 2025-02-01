@@ -1,6 +1,7 @@
 
 import {
   BrowserRouter,
+  Navigate,
   Route,
   Routes,
 } from 'react-router-dom'
@@ -9,6 +10,7 @@ import Categories from './categories'
 import Category from './category'
 import Checkout from './checkout'
 import CustomAttribute from './custom-attribute'
+import CustomAttributes from './custom-attributes'
 import Customer from './customer'
 import Customers from './customers'
 import Inventories from './inventories'
@@ -38,12 +40,15 @@ const Router = () => {
           <Route path="sign-in" element={<SignIn />} />
         </Route>
         <Route element={<OnlineLayout />}>
+          <Route  path="" element={<Navigate to="/checkout" />} />
           <Route path="account" element={<Account />} />
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:id/edit" element={<Category />} />
           <Route path="categories/new" element={<Category />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="custom-attributes/:id" element={<CustomAttribute />} />
+          <Route path="custom-attributes/new" element={<CustomAttribute />} />
+          <Route path="custom-attributes/:id/edit" element={<CustomAttribute />} />
+          <Route path="custom-attributes" element={<CustomAttributes />} />
           <Route path="customers" element={<Customers />} />
           <Route path="customers/:id/edit" element={<Customer />} />
           <Route path="customers/new" element={<Customer />} />
@@ -56,7 +61,7 @@ const Router = () => {
           <Route path="orders/:id" element={<Order />} />
           <Route path="orders/new" element={<OrderNew />} />
           <Route path="products" element={<Products />} />
-          <Route path="products/:id" element={<Product />} />
+          <Route path="products/:id/edit" element={<Product />} />
           <Route path="providers" element={<Providers />} />
           <Route path="providers/:id/edit" element={<Provider />} />
           <Route path="providers/new" element={<Provider />} />
@@ -65,6 +70,7 @@ const Router = () => {
           <Route path="shippings" element={<Shippings />} />
           <Route path="shippings/:id" element={<Shipping />} />
           <Route path="shippings/new" element={<ShippingNew />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </BrowserRouter>

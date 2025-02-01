@@ -5,8 +5,10 @@ import { Button, InputText } from "@/components"
 import { FormEventHandler, useCallback } from "react"
 import { useCurrentStore } from "@/hooks"
 import { getProducts } from "@/api"
+import { useTranslation } from "react-i18next"
 
 const ProductSearch = () => {
+  const {t} = useTranslation()
   const store = useCurrentStore()
   const { watch, setValue } = useFormContext<CheckoutSchemaType>()
 
@@ -49,8 +51,8 @@ const ProductSearch = () => {
   }, [addProduct, store])
 
   return <form className="flex flex-row gap-4" onSubmit={onSubmit}>
-    <InputText name="query" placeholder="Code barre ou code fabricant de l'article" />
-    <Button variant="outline" type="submit">Submit</Button>
+    <InputText name="query" placeholder={t('searchPlaceholder')} />
+    <Button variant="outline" type="submit">{t('searchButton')}</Button>
   </form>
 }
 

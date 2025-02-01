@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ProductSelect from '@/components/product-select';
 import { findIndex, map } from 'lodash';
+import { useBreadCrumbContext } from '@/contexts/breadcrumb';
 
 const formSchema = z.object({
   customerId: z.string(),
@@ -33,6 +34,10 @@ const Order = () => {
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(formSchema)
   })
+  useBreadCrumbContext([
+    {label: t('orders.pageTitle'), 'url': '/orders'},
+    {label: t('orderNew.pageTitle')}
+  ])
   const { fields, append, update, remove } = useFieldArray({
     control,
     name: 'orderProductsAttributes',
@@ -70,10 +75,10 @@ const Order = () => {
 
   return (
     <FormContainer
-      title="Nouvelle commande"
-      subtitle="Saisissez ici les données de votre nouvelle commande client"
+      title={t('orderNew.pageTitle')}
+      subtitle={t('orderNew.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}>
-      <FormSection title="Informations générales">
+      <FormSection title={t('orderNew.generalInformations')}>
         <Controller
           control={control}
           name="customerId"
@@ -81,11 +86,13 @@ const Order = () => {
             <CustomerSelect
               onChange={onChange}
               value={value}
+              label={t('orderNew.customerLabel')}
             />
           )}
         />
         <ProductSelect
           onChange={onProductSelect}
+          label={t('orderNew.productLabel')}
         />
         {map(fields, (field, index) => (
           <CheckoutProductCard

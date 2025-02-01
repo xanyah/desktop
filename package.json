@@ -31,6 +31,7 @@
     "dinero.js": "^2.0.0-alpha.14",
     "humps": "^2.0.1",
     "i18next": "^24.2.1",
+    "i18next-browser-languagedetector": "^8.0.2",
     "lodash": "^4.17.21",
     "lucide-react": "^0.474.0",
     "luxon": "^3.5.0",

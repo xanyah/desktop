@@ -1,4 +1,4 @@
-import { useCallback, useEffect} from 'react'
+import { useCallback, useEffect, useMemo} from 'react'
 
 
 import { useProvider, useCurrentStore } from "../../hooks";
@@ -24,9 +24,13 @@ const Provider = () => {
     resolver: zodResolver(providerSchema),
     defaultValues: {},
   })
+  const pageTitle = useMemo(
+    () => providerData?.data ? providerData?.data.name : t('provider.newPageTitle'),
+    [t,providerData]
+  )
   useBreadCrumbContext([
-    { label: 'Providers', url: '/providers'},
-    { label: providerData?.data ? providerData?.data.name : 'New provider'},
+    { label: t('providers.pageTitle'), url: '/providers'},
+    { label: pageTitle},
   ])
 
   const { mutate: createApiProvider } = useMutation({
@@ -63,25 +67,24 @@ const Provider = () => {
 
   return (
     <FormContainer
-      title="Fournisseur"
-      subtitle="Saisissez ici les informations de votre fournisseur"
+      title={pageTitle}
+      subtitle={t('providers.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormSection
-        title="Informations générales"
+        title={t('providers.generalInformations')}
       >
         <Controller
           control={control}
           name="name"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <InputText
-              id="name"
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="name"
+              placeholder={t('providers.namePlaceholder')}
               type="text"
-              label="name"
+              label={t('providers.nameLabel')}
             />
           )}
         />
@@ -91,13 +94,12 @@ const Provider = () => {
           name="notes"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <InputText
-              id="name"
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="name"
+              placeholder={t('providers.notesPlaceholder')}
               type="text"
-              label="name"
+              label={t('providers.notesLabel')}
             />
           )}
         />

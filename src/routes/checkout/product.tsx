@@ -4,6 +4,7 @@ import { X } from "lucide-react"
 import { toNumber } from "lodash"
 import { CheckoutSchemaType } from "./schema"
 import { Button, InputText } from "@/components"
+import { useTranslation } from "react-i18next"
 
 type ProductProps = {
   saleProduct: CheckoutSchemaType['saleProductsAttributes'][0]
@@ -13,10 +14,11 @@ type ProductProps = {
 }
 
 const Product = ({  onRemove, quantity, onQuantityUpdate, saleProduct }: ProductProps) => {
+  const {t} = useTranslation()
   const { data, isLoading } = useProduct(saleProduct.productId)
 
   if (isLoading || !data?.data) {
-    return <p>Loading...</p>
+    return <p>{t('global.loading')}</p>
   }
 
   const product = data.data

@@ -7,9 +7,11 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { formatPrice } from '@/helpers/price'
 import { uuidNumber } from '@/helpers/uuid'
 import { formatLongDatetime } from '@/helpers/dates'
+import { useTranslation } from 'react-i18next'
 
 const Sales = () => {
-  useBreadCrumbContext([{ label: 'Sales' }])
+  const {t} = useTranslation()
+  useBreadCrumbContext([{ label: t('sales.pageTitle') }])
   const [searchQuery, setSearchQuery] = useState('')
   const currentStore = useCurrentStore()
   const [page, setPage] = useState(1)
@@ -18,6 +20,7 @@ const Sales = () => {
     page,
     'q[userFirstnameOrUserLastnameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': 'created_at desc'
   })
 
   const columnHelper = createColumnHelper<Sale>()
@@ -26,13 +29,13 @@ const Sales = () => {
     () =>
       [
         columnHelper.accessor('id', {
-          header: 'Numéro',
+          header: t('sales.table.id'),
           cell: props => <Link className="underline" to={`/sales/${props.getValue()}`}>
             {uuidNumber(props.getValue())}
           </Link>
         }),
         columnHelper.accessor('totalAmountCents', {
-          header: 'Total',
+          header: t('sales.table.amount'),
           cell: (props) => (
             <span>
               {formatPrice(
@@ -46,7 +49,7 @@ const Sales = () => {
           (row) => `${row.user.firstname} ${row.user.lastname}`,
           {
             id: 'fullname',
-            header: 'User',
+            header: t('sales.table.user'),
             cell: (props) => (
               <Link
                 className="underline"
@@ -58,16 +61,16 @@ const Sales = () => {
           }
         ),
         columnHelper.accessor('createdAt', {
-          header: 'Date of creation',
+          header: t('sales.table.createdAt'),
           cell: (props) => formatLongDatetime(props.getValue()),
         }),
       ] as ColumnDef<Sale>[],
-    [columnHelper]
+    [t,columnHelper]
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder="Search a sale"
+      searchPlaceholder={t('sales.searchPlaceholder')}
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}

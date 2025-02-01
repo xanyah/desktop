@@ -1,56 +1,55 @@
 import { Link } from 'react-router-dom'
-import { useCurrentStore, useManufacturers } from '../../hooks'
+import { useCurrentStore, useCustomAttributes } from '../../hooks'
 import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 
-const Manufacturers = () => {
+const CustomAttributes = () => {
   const {t} = useTranslation()
-  useBreadCrumbContext([{ label: t('manufacturers.pageTitle') }])
+  useBreadCrumbContext([{ label: t('customAttributes.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
-
-  const { data, isLoading } = useManufacturers({
+  const { data, isLoading } = useCustomAttributes({
     page,
-    'q[nameOrNotesCont]': searchQuery,
+    'q[nameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': 'name'
+    'q[s]': ['name']
   })
 
-  const columnHelper = createColumnHelper<Manufacturer>()
+  const columnHelper = createColumnHelper<CustomAttribute>()
 
   const columns = useMemo(
     () =>
       [
         columnHelper.accessor('name', {
-          header: t('manufacturers.table.name'),
+          header: t('customAttributes.table.name'),
           cell: (props) => (
             <Link
               className="underline"
-              to={`/manufacturers/${props.row.original.id}/edit`}
+              to={`/custom-attributes/${props.row.original.id}/edit`}
             >
               {props.getValue()}
             </Link>
           ),
         }),
-        columnHelper.accessor('code', {
-          header: t('manufacturers.table.code'),
+        columnHelper.accessor('type', {
+          header: t('customAttributes.table.type'),
         }),
-      ] as ColumnDef<Manufacturer>[],
+      ] as ColumnDef<CustomAttribute>[],
     [t,columnHelper]
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder={t('manufacturers.searchPlaceholder')}
+      searchPlaceholder={t('customAttributes.searchPlaceholder')}
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/manufacturers/new'}
-      createLabel={t('manufacturers.createButtonLabel')}
+      createUrl={'/custom-attributes/new'}
+      createLabel={t('customAttributes.createButtonLabel')}
       columns={columns}
       data={data?.data}
       currentPage={page}
@@ -60,4 +59,4 @@ const Manufacturers = () => {
   )
 }
 
-export default Manufacturers
+export default CustomAttributes

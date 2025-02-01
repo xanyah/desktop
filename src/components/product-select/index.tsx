@@ -37,7 +37,7 @@ const ProductSelect = ({
       value={value}
       useRecordHook={useProduct}
       getRecordValue={(record: Product) => record.id}
-      getRecordLabel={(record: Product) => `${record.name} - ${record.manufacturerCode}`}
+      getRecordLabel={(record: Product) => `${record.name} - ${record.manufacturerSku}`}
       getFilteredRecords={getFilteredRecords}
     />
   )

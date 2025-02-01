@@ -5,8 +5,10 @@ import { Button } from "@/components"
 import {useFormContext } from "react-hook-form"
 import { useCallback, useState } from "react"
 import CustomPayment from "./custom-payment"
+import { useTranslation } from "react-i18next"
 
 const Payment = () => {
+  const {t} = useTranslation()
   const store = useCurrentStore()
   const [other, setOther] = useState(false)
   const { setValue, watch } = useFormContext<CheckoutSchemaType>()
@@ -40,7 +42,7 @@ const Payment = () => {
         onClick={() => setOther(true)}
         variant={other ? 'primary' : 'outline'}
       >
-        Autre
+        {t('checkout.paymentMethodOtherButton')}
       </Button>
     </div>
     {other && <CustomPayment />}

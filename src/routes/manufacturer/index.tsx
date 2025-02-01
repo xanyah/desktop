@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useManufacturer, useCurrentStore } from "../../hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -23,9 +23,14 @@ const Manufacturer = () => {
     defaultValues: {},
   })
 
+  const pageTitle = useMemo(
+    () => manufacturerData?.data ? manufacturerData?.data.name : t('manufacturer.newPageTitle'),
+    [t,manufacturerData]
+  )
+
   useBreadCrumbContext([
-    { label: 'Manufacturers', url: '/manufacturers'},
-    { label: manufacturerData?.data ? manufacturerData?.data.name : 'New manufacturer'},
+    { label: t('manufacturers.pageTitle'), url: '/manufacturers'},
+    { label:pageTitle },
   ])
 
   const { mutate: createApiManufacturer } = useMutation({
@@ -62,12 +67,12 @@ const Manufacturer = () => {
 
   return (
     <FormContainer
-      title="Fournisseur"
-      subtitle="Saisissez ici les informations de votre fournisseur"
+      title={pageTitle}
+      subtitle={t('manufacturer.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormSection
-        title="Informations générales"
+        title={t('manufacturer.generalInformations')}
       >
         <Controller
           control={control}
@@ -78,9 +83,9 @@ const Manufacturer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="name"
+              placeholder={t('manufacturer.namePlaceholder')}
               type="text"
-              label="name"
+              label={t('manufacturer.nameLabel')}
             />
           )}
         />
@@ -93,10 +98,10 @@ const Manufacturer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Code"
+              placeholder={t('manufacturer.codePlaceholder')}
               type="text"
-              hint="Un code permettant d'identifier le fabricant (souvent les 4 premières lettres du fabricant)"
-              label="Code"
+              hint={t('manufacturer.codeHint')}
+              label={t('manufacturer.codeLabel')}
             />
           )}
         />
@@ -109,9 +114,9 @@ const Manufacturer = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder="Notes"
+              placeholder={t('manufacturer.notesPlaceholder')}
               type="text"
-              label="Notes"
+              label={t('manufacturer.notesPlaceholder')}
             />
           )}
         />
