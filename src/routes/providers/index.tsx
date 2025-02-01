@@ -11,6 +11,7 @@ const Providers = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
   const { data, isLoading } = useProviders({
+    page,
     'q[nameOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
   })

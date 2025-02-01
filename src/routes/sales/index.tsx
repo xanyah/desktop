@@ -12,6 +12,7 @@ const Sales = () => {
   const [page, setPage] = useState(1)
 
   const { data, isLoading } = useSales({
+    page,
     'q[storeIdEq]': currentStore?.id,
   })
 

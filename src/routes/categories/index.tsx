@@ -11,6 +11,7 @@ const Categories = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
   const { data, isLoading } = useCategories({
+    page,
     'q[nameOrCategoryNameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
     'q[s]': ['name']
