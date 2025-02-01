@@ -25,16 +25,16 @@ export const PaginationItem = tw.li`
     border-input
     shadow-sm
     `
-    }
+}
 
     ${(p) => p.$disabled && `
     pointer-events-none
     opacity-50
     `
-    }
+}
 
     ${(p) => p.$isEllipsis && `
     pointer-events-none
     `
-    }
+}
 `

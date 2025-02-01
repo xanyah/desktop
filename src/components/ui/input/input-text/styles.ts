@@ -23,7 +23,7 @@ focus:border-gray-400
   ${(p) => p.$hasIcon && `
     pr-5
     `
-  }
+}
 `;
 
 

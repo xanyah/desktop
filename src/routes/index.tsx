@@ -11,7 +11,6 @@ import Checkout from './checkout'
 import CustomAttribute from './custom-attribute'
 import Customer from './customer'
 import Customers from './customers'
-import Home from './home'
 import Inventories from './inventories'
 import Inventory from './inventory'
 import Manufacturer from './manufacturer'
@@ -48,9 +47,8 @@ const Router = () => {
           <Route path="customers" element={<Customers />} />
           <Route path="customers/:id/edit" element={<Customer />} />
           <Route path="customers/new" element={<Customer />} />
-          <Route path="home" element={<Home />} />
           <Route path="inventories" element={<Inventories />} />
-          <Route path="inventorys/:id" element={<Inventory />} />
+          <Route path="inventories/:id" element={<Inventory />} />
           <Route path="manufacturers" element={<Manufacturers />} />
           <Route path="manufacturers/:id/edit" element={<Manufacturer />} />
           <Route path="manufacturers/new" element={<Manufacturer />} />

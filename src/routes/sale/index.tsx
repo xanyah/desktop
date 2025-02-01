@@ -1,4 +1,4 @@
-import { useCurrentStore, useSale } from "../../hooks";
+import { useSale } from "../../hooks";
 import { useParams } from "react-router-dom";
 import { uuidNumber } from "@/helpers/uuid";
 import { ShowContainer, ShowSection } from "@/components";
@@ -8,28 +8,27 @@ import { formatLongDatetime } from "@/helpers/dates";
 import { useBreadCrumbContext } from "@/contexts/breadcrumb";
 
 const Sale = () => {
-  const store = useCurrentStore()
-  const { id } = useParams();
-  const { data: saleData } = useSale(id);
+  const {id} = useParams()
+  const {data: saleData} = useSale(id)
   useBreadCrumbContext([
-    {label: 'Ventes', url: '/sales'},
-    {label: `Vente ${uuidNumber(saleData?.data.id)}`}
+    { label: 'Ventes', url: '/sales' },
+    { label: `Vente ${uuidNumber(saleData?.data.id)}` }
   ])
   if (!saleData) {
     return null
   }
   return (
     <ShowContainer
-    title={`Vente ${uuidNumber(saleData?.data.id)}`}
-    subtitle={`Vente effectuée le ${formatLongDatetime(saleData?.data.createdAt)}`}
+      title={`Vente ${uuidNumber(saleData?.data.id)}`}
+      subtitle={`Vente effectuée le ${formatLongDatetime(saleData?.data.createdAt)}`}
     >
-        <ShowSection title="Informations générales">
+      <ShowSection title="Informations générales">
         <SaleInfos sale={saleData?.data} />
-        </ShowSection>
+      </ShowSection>
 
-        <ShowSection title="Produits">
+      <ShowSection title="Produits">
         <SaleProducts sale={saleData?.data} />
-        </ShowSection>
+      </ShowSection>
     </ShowContainer>
   )
 }

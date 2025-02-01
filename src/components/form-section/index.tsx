@@ -7,7 +7,7 @@ const FormSection = ({title, children}: FormSectionProps) => {
   return <div className="flex flex-col gap-4">
     <h2>{title}</h2>
     <div className="flex flex-col gap-8">
-    {children}
+      {children}
     </div>
   </div>
 }

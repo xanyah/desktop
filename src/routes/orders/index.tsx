@@ -7,7 +7,6 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { Badge } from '@/components/ui/badge'
 import { orderBadgeVariants } from '@/constants/orders'
 import { customerFullname } from '@/helpers/customer'
-import { DateTime } from 'luxon'
 import { formatLongDatetime } from '@/helpers/dates'
 import { uuidNumber } from '@/helpers/uuid'
 

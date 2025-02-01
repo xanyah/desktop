@@ -19,12 +19,12 @@ const ProviderSelect = ({onChange, value}: ProviderSelectProps) => {
   }, [store])
 
   return <ApiDataSelect
-  onChange={onChange}
-  value={value}
-  useRecordHook={useProvider}
-  getRecordValue={(record: Provider) => record.id}
-  getRecordLabel={(record: Provider) => record.name}
-  getFilteredRecords={getFilteredRecords}
+    onChange={onChange}
+    value={value}
+    useRecordHook={useProvider}
+    getRecordValue={(record: Provider) => record.id}
+    getRecordLabel={(record: Provider) => record.name}
+    getFilteredRecords={getFilteredRecords}
   />
 }
 

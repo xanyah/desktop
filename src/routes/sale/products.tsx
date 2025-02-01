@@ -11,9 +11,9 @@ const SaleProducts = ({sale}: SaleProductsProps) => {
     'q[saleIdEq]': sale.id,
   })
 
-    return map(saleProductsData?.data, (saleProduct) => (
-      <SaleProductCard saleProduct={saleProduct} key={saleProduct.id} />
-      ));
+  return map(saleProductsData?.data, (saleProduct) => (
+    <SaleProductCard saleProduct={saleProduct} key={saleProduct.id} />
+  ));
 }
 
 export default SaleProducts;

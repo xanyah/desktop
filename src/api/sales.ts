@@ -3,7 +3,7 @@ import { decamelizeKeys } from 'humps'
 
 
 export const createSale = sale =>
-  xanyahApi.post<Sale>('sales', {sale})
+  xanyahApi.post<Sale>('v2/sales', decamelizeKeys({sale}))
 
 export const getSales = params =>
   xanyahApi.get<Sale[]>('v2/sales', decamelizeKeys({params}))

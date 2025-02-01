@@ -39,17 +39,17 @@ const CustomAttribute = () => {
     },
   });
 
-    return (
-        <DataDetails
-          createEntity={createApiCustomAttribute}
-          currentEntity={customAttributeData?.data}
-          editing={isEditing}
-          formattedData={customAttributeFormat}
-          toggleEdit={() => setIsEditing(!isEditing)}
-          type="custom-attributes"
-          updateEntity={updateApiCustomAttribute}
-        ></DataDetails>
-    )
-  }
+  return (
+    <DataDetails
+      createEntity={createApiCustomAttribute}
+      currentEntity={customAttributeData?.data}
+      editing={isEditing}
+      formattedData={customAttributeFormat}
+      toggleEdit={() => setIsEditing(!isEditing)}
+      type="custom-attributes"
+      updateEntity={updateApiCustomAttribute}
+    ></DataDetails>
+  )
+}
 
 export default CustomAttribute;

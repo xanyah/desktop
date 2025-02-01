@@ -24,6 +24,8 @@ export default [
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 0,
+      'indent': ['error', 2],
+      'import/named': 0,
       'import/no-unused-modules': [
         'error',
         {

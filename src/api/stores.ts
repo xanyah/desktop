@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios'
 import { xanyahApi } from '../constants'
 import { decamelizeKeys } from 'humps'
 

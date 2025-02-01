@@ -1,4 +1,4 @@
-import { Blend, Calendar, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Truck, User, Users } from "lucide-react"
+import { Blend, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Truck, User, Users } from "lucide-react"
 import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 
 const items = [

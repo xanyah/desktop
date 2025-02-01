@@ -89,12 +89,12 @@ const Order = () => {
         />
         {map(fields, (field, index) => (
           <CheckoutProductCard
-          productId={field.productId}
-          quantity={field.quantity}
+            productId={field.productId}
+            quantity={field.quantity}
             key={field.productId}
             onRemove={() => remove(index)}
             onQuantityUpdate={(newQuantity) => update(index, {...field, quantity: newQuantity})}
-            />
+          />
         ))}
       </FormSection>
     </FormContainer>

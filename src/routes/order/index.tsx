@@ -71,24 +71,24 @@ const Order = () => {
 
   const renderActionButtons = useCallback(() => {
     switch(orderData?.data.state) {
-      case 'delivered':
-        return <>
+    case 'delivered':
+      return <>
         <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
         <Button onClick={() => withdrawApiOrder()}>Commande retirée</Button>
-        </>
-        case 'ordered':
-          return <>
-          <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
-          <Button onClick={() => deliverApiOrder()}>Commande reçue</Button>
-          </>
-          case 'pending':
-            return <>
-            <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
-            <Button onClick={() => orderApiOrder()}>Commande envoyée</Button>
-            </>
-      case 'cancelled':
-      case 'withdrawn':
-        return null
+      </>
+    case 'ordered':
+      return <>
+        <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
+        <Button onClick={() => deliverApiOrder()}>Commande reçue</Button>
+      </>
+    case 'pending':
+      return <>
+        <Button variant="ghost" onClick={() => cancelApiOrder()}>Cancel</Button>
+        <Button onClick={() => orderApiOrder()}>Commande envoyée</Button>
+      </>
+    case 'cancelled':
+    case 'withdrawn':
+      return null
     }
   }, [orderData, cancelApiOrder, deliverApiOrder, orderApiOrder, withdrawApiOrder])
 

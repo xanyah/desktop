@@ -87,13 +87,13 @@ const Shipping = () => {
         />
         {map(fields, (field, index) => (
           <CheckoutProductCard
-          withoutPrice
-          productId={field.productId}
-          quantity={field.quantity}
+            withoutPrice
+            productId={field.productId}
+            quantity={field.quantity}
             key={field.productId}
             onRemove={() => remove(index)}
             onQuantityUpdate={(newQuantity) => update(index, {...field, quantity: newQuantity})}
-            />
+          />
         ))}
       </FormSection>
     </FormContainer>

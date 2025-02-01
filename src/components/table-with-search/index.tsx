@@ -33,41 +33,41 @@ const TableWithSearch = <TData, TValue>({
   currentPage,
   onPageChange,
 }: TableWithSearchProps<TData, TValue>) => (
-  <div className="flex flex-1 flex-col items-stretch gap-4">
-    <div className="flex flex-row items-center gap-4 justify-between">
-      <div className="flex flex-row items-center gap-4">
-        {!isUndefined(searchQuery) && onSearchQueryChange && (
-          <InputText
-            type="search"
-            placeholder={searchPlaceholder}
-            onChange={(e) => onSearchQueryChange(e.target.value)}
-            value={searchQuery}
-            className="max-w-sm"
-          />
-        )}
-        {isLoading && <Loader className="animate-spin" />}
-      </div>
+    <div className="flex flex-1 flex-col items-stretch gap-4">
+      <div className="flex flex-row items-center gap-4 justify-between">
+        <div className="flex flex-row items-center gap-4">
+          {!isUndefined(searchQuery) && onSearchQueryChange && (
+            <InputText
+              type="search"
+              placeholder={searchPlaceholder}
+              onChange={(e) => onSearchQueryChange(e.target.value)}
+              value={searchQuery}
+              className="max-w-sm"
+            />
+          )}
+          {isLoading && <Loader className="animate-spin" />}
+        </div>
 
-      {createUrl && createLabel && (
-        <Button>
-          <Link className="flex items-center gap-2" to={createUrl}>
-            <Plus />
-            {createLabel}
-          </Link>
-        </Button>
+        {createUrl && createLabel && (
+          <Button>
+            <Link className="flex items-center gap-2" to={createUrl}>
+              <Plus />
+              {createLabel}
+            </Link>
+          </Button>
+        )}
+      </div>
+      <DataTableNew data={data || []} columns={columns} />
+      {totalPages && currentPage && onPageChange && (
+        <div className="flex justify-center mt-6">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
+        </div>
       )}
     </div>
-    <DataTableNew data={data || []} columns={columns} />
-    {totalPages && currentPage && onPageChange && (
-      <div className="flex justify-center mt-6">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-        />
-      </div>
-    )}
-  </div>
-)
+  )
 
 export default TableWithSearch

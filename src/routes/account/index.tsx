@@ -4,7 +4,6 @@ import { Controller, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateUserParams } from '../../api'
 import {  pick } from "lodash";
-import { useTranslation } from "react-i18next";
 import { Button,  FormContainer, FormSection, InputText } from "../../components";
 import { useBreadCrumbContext } from "@/contexts/breadcrumb";
 
@@ -24,7 +23,6 @@ const Account = () => {
     {label: 'Mon compte'}
   ])
   const queryClient = useQueryClient()
-  const { t, i18n } = useTranslation();
   const { data: currentUserData } = useCurrentUser();
   const {
     control: userFormControl,
@@ -123,7 +121,7 @@ const Account = () => {
           )}
         />
 
-<Controller
+        <Controller
           control={passwordFormControl}
           name="password"
           render={({ field: { onChange, value }, fieldState: { error } }) => (
@@ -155,17 +153,17 @@ const Account = () => {
 
   return (
     <FormContainer
-    isNotForm
-    title="Mon compte"
-    subtitle="Mettez-ici à jour les données de votre compte">
+      isNotForm
+      title="Mon compte"
+      subtitle="Mettez-ici à jour les données de votre compte">
       <FormSection
-      title="Informations générales">
+        title="Informations générales">
         {renderUpdateUserForm()}
-        </FormSection>
-        <FormSection title="Sécurité">
+      </FormSection>
+      <FormSection title="Sécurité">
         {renderUpdatePasswordForm()}
-        </FormSection>
-        </FormContainer>
+      </FormSection>
+    </FormContainer>
   )
 }
 
