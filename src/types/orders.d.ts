@@ -1,13 +1,21 @@
-type OrderVariant = {
+type OrderProduct = {
   id: string
   quantity: number
-  variant: Variant
+  product: Product
 }
 
 type Order = {
   id: string
-  status: 'pending' | 'delivered' | 'cancelled'
+  state: 'pending'
+  | 'delivered'
+  | 'ordered'
+  | 'withdrawn'
+  | 'cancelled'
   createdAt: string
-  client: Client
-  orderVariants: OrderVariant[]
+  updatedAt: string
+  deliveredAt: string|null
+  orderedAt: string|null
+  withdrawnAt: string|null
+  cancelledAt: string|null
+  customer: Customer
 }

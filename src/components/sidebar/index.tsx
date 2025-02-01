@@ -1,4 +1,4 @@
-import { Calendar, Factory, Group, Truck, Users } from "lucide-react"
+import { Blend, Calendar, Coins, Factory, Group, ScanBarcode, Truck, User, Users } from "lucide-react"
 import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 
 const items = [
@@ -6,17 +6,17 @@ const items = [
     label: 'Your store',
     items: [
       {
-        icon: Calendar,
+        icon: Coins,
         title: 'Checkout',
         url: '/checkout',
       },
       {
-        icon: Calendar,
+        icon: Blend,
         title: 'Products',
         url: '/products',
       },
       {
-        icon: Calendar,
+        icon: Truck,
         title: 'Shippings',
         url: '/shippings',
       },
@@ -26,14 +26,14 @@ const items = [
         url: '/orders',
       },
       {
-        icon: Calendar,
+        icon: ScanBarcode,
         title: 'Inventories',
         url: '/inventories',
       },
       {
         icon: Users,
         title: 'Customers',
-        url: '/clients',
+        url: '/customers',
       },
       {
         icon: Truck,
@@ -47,16 +47,6 @@ const items = [
       },
       {
         icon: Calendar,
-        title: 'Settings',
-        url: '/settings',
-      },
-      {
-        icon: Calendar,
-        title: 'Account',
-        url: '/account',
-      },
-      {
-        icon: Calendar,
         title: 'Sales',
         url: '/sales',
       },
@@ -65,6 +55,11 @@ const items = [
   {
     label: 'Settings',
     items: [
+      {
+        icon: User,
+        title: 'Account',
+        url: '/account',
+      },
       {
         icon: Group,
         title: 'Categories',
@@ -79,7 +74,7 @@ const Sidebar = () => {
     <ShadSidebar>
       <SidebarContent>
         {items.map((group) => (
-          <SidebarGroup>
+          <SidebarGroup key={group.label}>
             <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>

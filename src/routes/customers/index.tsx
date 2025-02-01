@@ -12,6 +12,7 @@ const Customers = () => {
   const [page, setPage] = useState(1)
 
   const { data, isLoading } = useCustomers({
+    page,
     'q[firstnameOrLastnameOrPhoneOrEmailOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
   })

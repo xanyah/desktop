@@ -4,13 +4,10 @@ import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { Badge, BadgeProps } from '@/components/ui/badge'
-
-const badgeVariants: Record<Order['status'], BadgeProps['variant']> = {
-  cancelled: 'destructive',
-  delivered: 'secondary',
-  pending: 'default',
-}
+import { Badge } from '@/components/ui/badge'
+import { orderBadgeVariants, orderNumber } from '@/constants/orders'
+import { customerFullname } from '@/helpers/customer'
+import { DateTime } from 'luxon'
 
 const Orders = () => {
   useBreadCrumbContext([{ label: 'Orders' }])
@@ -18,8 +15,10 @@ const Orders = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
   const { data, isLoading } = useOrders({
+    page,
     'q[clientFirstnameOrClientLastnameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': 'created_at desc'
   })
 
   const columnHelper = createColumnHelper<Order>()
@@ -27,39 +26,44 @@ const Orders = () => {
   const columns = useMemo(
     () =>
       [
-        columnHelper.accessor('status', {
-          header: 'Statut',
-          cell: (props) => (
-            <Badge variant={badgeVariants[props.getValue()]}>
-              {props.getValue()}
-            </Badge>
-          ),
-        }),
         columnHelper.accessor('id', {
-          header: 'ID',
+          header: 'Numéro',
           cell: (props) => (
             <Link className="underline" to={`/orders/${props.getValue()}`}>
-              {props.getValue()}
+              {orderNumber(props.row.original)}
             </Link>
           ),
         }),
         columnHelper.accessor(
-          (row) => `${row.client.firstname} ${row.client.lastname}`,
+          (row) => customerFullname(row.customer),
           {
             id: 'fullname',
             header: 'Client',
             cell: (props) => (
               <Link
                 className="underline"
-                to={`/clients/${props.row.original.client.id}`}
+                to={`/customers/${props.row.original.customer.id}/edit`}
               >
                 {props.getValue()}
               </Link>
             ),
           }
         ),
+        columnHelper.accessor('state', {
+          header: 'Statut',
+          cell: (props) => (
+            <Badge variant={orderBadgeVariants[props.getValue()]}>
+              {props.getValue()}
+            </Badge>
+          ),
+        }),
         columnHelper.accessor('createdAt', {
           header: 'Creation date',
+          cell: (props) => DateTime.fromISO(props.getValue()).setLocale('fr-FR').toFormat('ff')
+        }),
+        columnHelper.accessor('updatedAt', {
+          header: 'Dernière mise à jour',
+          cell: (props) => DateTime.fromISO(props.getValue()).setLocale('fr-FR').toFormat('ff')
         }),
       ] as ColumnDef<Order>[],
     [columnHelper]

@@ -12,6 +12,7 @@ const Manufacturers = () => {
   const [page, setPage] = useState(1)
 
   const { data, isLoading } = useManufacturers({
+    page,
     'q[nameOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
   })

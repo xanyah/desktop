@@ -7,6 +7,7 @@ type Product = {
   updatedAt: string
   sku: string
   upc: string
+  manufacturerCode: string
   buyingAmountCents: number
   buyingAmountCurrency: string
   taxFreeAmountCents: number

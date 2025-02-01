@@ -15,6 +15,7 @@ import Manufacturers from './manufacturers'
 import Category from './category'
 import Categories from './categories'
 import Order from './order'
+import OrderNew from './order-new'
 import Orders from './orders'
 import Product from './product'
 import Products from './products'
@@ -47,6 +48,7 @@ const Router = () => {
           <Route path="manufacturers/new" element={<Manufacturer />} />
           <Route path="manufacturers" element={<Manufacturers />} />
           <Route path="orders/:id" element={<Order />} />
+          <Route path="orders/new" element={<OrderNew />} />
           <Route path="orders" element={<Orders />} />
           <Route path="products/:id" element={<Product />} />
           <Route path="products" element={<Products />} />

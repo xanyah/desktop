@@ -11,6 +11,7 @@ const Shippings = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
   const { data, isLoading } = useShippings({
+    page,
     'q[providerNameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
   })
