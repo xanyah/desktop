@@ -1,9 +1,8 @@
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { useCurrentStore } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { createOrder } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
 import { useTranslation } from 'react-i18next'
 import { CheckoutProductCard, CustomerSelect, FormContainer, FormSection } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
@@ -12,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import ProductSelect from '@/components/product-select'
 import { findIndex, map } from 'lodash'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
   customerId: z.string(),
@@ -31,6 +31,7 @@ const Order = () => {
   const navigate = useNavigate()
   const store = useCurrentStore()
   const { t } = useTranslation()
+  const toastId = useRef<string>(null)
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(formSchema),
   })
@@ -48,9 +49,13 @@ const Order = () => {
       createOrder({ ...newData, storeId: store?.id }),
     onSuccess: (data) => {
       navigate(`/orders/${data.data.id}`)
-      showSuccessToast(
-        t('toast.created', { entity: t('models.orders.title') }),
-      )
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    },
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 

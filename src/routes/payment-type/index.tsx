@@ -1,20 +1,21 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { usePaymentType, useCurrentStore } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createPaymentType, updatePaymentType } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
 import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { paymentTypeSchema, paymentTypeSchemaType } from './config'
 import { Controller, useForm } from 'react-hook-form'
 import { FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import toast from 'react-hot-toast'
 
 const PaymentType = () => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const toastId = useRef<string>(null)
   const store = useCurrentStore()
   const { id } = useParams()
   const { data: paymentTypeData } = usePaymentType(id)
@@ -37,9 +38,12 @@ const PaymentType = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(['paymentTypes', { id }], data)
       navigate(`/payment-types/${data.data.id}/edit`)
-      showSuccessToast(
-        t('toast.created', { entity: t('models.paymentTypes.title') }),
-      )
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    }, onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
@@ -47,7 +51,12 @@ const PaymentType = () => {
     mutationFn: (newData: paymentTypeSchemaType) => updatePaymentType(id, newData),
     onSuccess: (data) => {
       queryClient.setQueryData(['paymentTypes', { id }], data)
-      showSuccessToast(t('toast.updated'))
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    }, onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 

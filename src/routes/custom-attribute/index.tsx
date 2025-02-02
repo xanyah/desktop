@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useCustomAttribute, useCurrentStore } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createCustomAttribute, updateCustomAttribute } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
 import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
@@ -12,6 +11,7 @@ import { FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { z } from '../../constants/zod'
 import { find } from 'lodash'
+import toast from 'react-hot-toast'
 
 const customAttributeSchema = z.object({
   name: z.string(),
@@ -31,6 +31,7 @@ const CustomAttribute = () => {
     resolver: zodResolver(customAttributeSchema),
     defaultValues: {},
   })
+  const toastId = useRef<string>(null)
   const pageTitle = useMemo(
     () => customAttributeData?.data ? customAttributeData?.data.name : t('customAttribute.newPageTitle'),
     [t, customAttributeData],
@@ -49,20 +50,30 @@ const CustomAttribute = () => {
   const { mutate: createApiCustomAttribute } = useMutation({
     mutationFn: (newData: CustomAttributeSchemaType) =>
       createCustomAttribute({ ...newData, storeId: store?.id }),
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(['customAttributes', { id }], data)
       navigate(`/custom-attributes/${data.data.id}/edit`)
-      showSuccessToast(
-        t('toast.created', { entity: t('models.customAttributes.title') }),
-      )
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
   const { mutate: updateApiCustomAttribute } = useMutation({
     mutationFn: (newData: CustomAttributeSchemaType) => updateCustomAttribute(id, newData),
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(['customAttributes', { id }], data)
-      showSuccessToast(t('toast.updated'))
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 

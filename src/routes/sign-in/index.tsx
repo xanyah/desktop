@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FormContainer, InputText } from '@/components'
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
+import toast from 'react-hot-toast'
 
 interface SignInForm {
   username: string
@@ -15,21 +16,27 @@ const SignIn = () => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const toastId = useRef<string>(null)
   const { handleSubmit, control, setError } = useForm<SignInForm>({
     defaultValues: { username: '', password: '' },
   })
 
   const { mutate } = useMutation({
     mutationFn: signIn,
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
       localStorage.setItem(
         `Xanyah:Bearer`,
         `${data.data.tokenType} ${data.data.accessToken}`,
       )
+      toast.success(t('signIn.successToast'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
       navigate('/')
     },
     onError: () => {
+      toast.error(t('signIn.errorToast'), { id: toastId?.current || undefined })
       setError('username', { type: 'custom', message: t('signIn.invalidCredentials') })
       setError('password', { type: 'custom', message: t('signIn.invalidCredentials') })
     },

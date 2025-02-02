@@ -1,9 +1,8 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { useShipping, useShippingProducts } from '../../hooks'
 import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cancelShipping, validateShipping } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
 import { useTranslation } from 'react-i18next'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import DataTable from '@/components/data-table-new'
@@ -14,6 +13,7 @@ import { shippingBadgeVariants } from '@/constants/shippings'
 import { AxiosResponse } from 'axios'
 import { uuidNumber } from '@/helpers/uuid'
 import { formatLongDatetime } from '@/helpers/dates'
+import toast from 'react-hot-toast'
 
 const Shipping = () => {
   const queryClient = useQueryClient()
@@ -22,23 +22,28 @@ const Shipping = () => {
   const { data: shippingProductsData } = useShippingProducts({
     'q[shippingIdEq]': id,
   })
+  const toastId = useRef<string>(null)
   const { t } = useTranslation()
   useBreadCrumbContext([
     { label: t('shippings.pageTitle'), url: '/shippings' },
-    { label: t('shippings.pageTitle', { shippingNumber: uuidNumber(shippingData?.data.id) }) },
+    { label: t('shipping.pageTitle', { shippingNumber: uuidNumber(shippingData?.data.id) }) },
   ])
-
-  const onSuccess = useCallback(() => {
-    showSuccessToast(t('toast.updated'))
-    queryClient.invalidateQueries({ queryKey: ['shippings', { id }] })
-  }, [t, id, queryClient])
 
   const useChangeShippingStatus = useCallback((mutationFn: (storeId?: Store['id']) => Promise<AxiosResponse<Shipping, any>>) => {
     return useMutation({
       mutationFn: () => mutationFn(id),
-      onSuccess,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['shippings', { id }] })
+        toast.success(t('global.saved'), { id: toastId?.current || undefined })
+      },
+      onMutate: () => {
+        toastId.current = toast.loading(t('global.loading'))
+      },
+      onError: () => {
+        toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      },
     })
-  }, [id, onSuccess])
+  }, [id])
 
   const { mutate: cancelApiShipping } = useChangeShippingStatus(cancelShipping)
   const { mutate: validateApiShipping } = useChangeShippingStatus(validateShipping)
@@ -88,8 +93,8 @@ const Shipping = () => {
 
   return (
     <ShowContainer
-      title={t('shippings.pageTitle', { shippingNumber: uuidNumber(shippingData?.data.id) })}
-      subtitle={t('shippings.pageSubtitle', { shippingDate: formatLongDatetime(shippingData?.data.createdAt) })}
+      title={t('shipping.pageTitle', { shippingNumber: uuidNumber(shippingData?.data.id) })}
+      subtitle={t('shipping.pageSubtitle', { shippingDate: formatLongDatetime(shippingData?.data.createdAt) })}
       button={shippingData?.data && (
         <div className="flex flex-row gap-4 items-center">
           <Badge variant={shippingBadgeVariants[shippingData?.data.state]}>

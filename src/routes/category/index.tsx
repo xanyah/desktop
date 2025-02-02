@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useCategory, useCurrentStore } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createCategory, updateCategory } from '../../api'
-import { showSuccessToast } from '../../utils/notification-helper'
 import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { categorySchema, categorySchemaType } from './config'
 import { Controller, useForm } from 'react-hook-form'
 import { CategorySelect, FormContainer, FormSection, InputText, VatRateSelect } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import toast from 'react-hot-toast'
 
 const Category = () => {
   const queryClient = useQueryClient()
@@ -22,6 +22,7 @@ const Category = () => {
     resolver: zodResolver(categorySchema),
     defaultValues: {},
   })
+  const toastId = useRef<string>(null)
   const pageTitle = useMemo(
     () => categoryData?.data ? categoryData?.data.name : t('category.newCategoryPageTitle'),
     [t, categoryData],
@@ -34,20 +35,30 @@ const Category = () => {
   const { mutate: createApiCategory } = useMutation({
     mutationFn: (newData: categorySchemaType) =>
       createCategory({ ...newData, storeId: store?.id }),
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.setQueryData(['categories', { id }], data)
       navigate(`/categories/${data.data.id}/edit`)
-      showSuccessToast(
-        t('toast.created', { entity: t('models.categories.title') }),
-      )
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
   const { mutate: updateApiCategory } = useMutation({
     mutationFn: (newData: categorySchemaType) => updateCategory(id, newData),
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.setQueryData(['categories', { id }], data)
-      showSuccessToast(t('toast.updated'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
