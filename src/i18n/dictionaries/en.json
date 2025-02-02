@@ -168,6 +168,24 @@
       "updatedAt": "Last update"
     }
   },
+  "paymentType": {
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Description of the payment method",
+    "generalInformations": "General information",
+    "nameLabel": "Name",
+    "namePlaceholder": "Name of the payment method",
+    "newPageTitle": "New payment method ",
+    "pageSubtitle": "Enter the data from your payment method here"
+  },
+  "paymentTypes": {
+    "createButtonLabel": "Create a payment method",
+    "pageTitle": "Payment methods",
+    "searchPlaceholder": "Search a payment method...",
+    "table": {
+      "description": "Description",
+      "name": "Payment method name"
+    }
+  },
   "product": {
     "amountHint": "The price including tax corresponds to the final price which will be paid by the customer",
     "amountLabel": "Price TTC",
@@ -222,7 +240,7 @@
   },
   "providers": {
     "createButtonLabel": "Create a supplier",
-    "pageTitle": "Manufacturers",
+    "pageTitle": "Supplier",
     "searchPlaceholder": "Search for a supplier ...",
     "table": {
       "name": "Supplier name"
