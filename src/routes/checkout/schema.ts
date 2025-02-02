@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from '../../constants/zod'
 
 export const checkoutSchema = z.object({
   customerId: z.string().optional(),

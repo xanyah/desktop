@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from '../../../constants/zod'
 
 export const providerSchema = z.object({
   name: z.string(),

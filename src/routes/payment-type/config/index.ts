@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from '../../../constants/zod'
 
 export const paymentTypeSchema = z.object({
   name: z.string(),
