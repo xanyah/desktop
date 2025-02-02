@@ -33,7 +33,10 @@ const CustomAttribute = () => {
   })
   const toastId = useRef<string>(null)
   const pageTitle = useMemo(
-    () => customAttributeData?.data ? customAttributeData?.data.name : t('customAttribute.newPageTitle'),
+    () =>
+      customAttributeData?.data
+        ? customAttributeData?.data.name
+        : t('customAttribute.newPageTitle'),
     [t, customAttributeData],
   )
 
@@ -42,10 +45,13 @@ const CustomAttribute = () => {
     { label: pageTitle },
   ])
 
-  const types = useMemo(() => [
-    { label: 'Nombre', value: 'number' },
-    { label: 'Texte', value: 'text' },
-  ], [])
+  const types = useMemo(
+    () => [
+      { label: 'Nombre', value: 'number' },
+      { label: 'Texte', value: 'text' },
+    ],
+    [],
+  )
 
   const { mutate: createApiCustomAttribute } = useMutation({
     mutationFn: (newData: CustomAttributeSchemaType) =>
@@ -53,36 +59,44 @@ const CustomAttribute = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       queryClient.setQueryData(['customAttributes', { id }], data)
       navigate(`/custom-attributes/${data.data.id}/edit`)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
   const { mutate: updateApiCustomAttribute } = useMutation({
-    mutationFn: (newData: CustomAttributeSchemaType) => updateCustomAttribute(id, newData),
+    mutationFn: (newData: CustomAttributeSchemaType) =>
+      updateCustomAttribute(id, newData),
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       queryClient.setQueryData(['customAttributes', { id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
-  const onSubmit = useCallback((data: CustomAttributeSchemaType) => {
-    if (id) {
-      return updateApiCustomAttribute(data)
-    }
-    return createApiCustomAttribute(data)
-  }, [id, updateApiCustomAttribute, createApiCustomAttribute])
+  const onSubmit = useCallback(
+    (data: CustomAttributeSchemaType) => {
+      if (id) {
+        return updateApiCustomAttribute(data)
+      }
+      return createApiCustomAttribute(data)
+    },
+    [id, updateApiCustomAttribute, createApiCustomAttribute],
+  )
 
   useEffect(() => {
     if (customAttributeData?.data) {
@@ -96,9 +110,7 @@ const CustomAttribute = () => {
       subtitle={t('customAttribute.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <FormSection
-        title={t('customAttribute.generalInformations')}
-      >
+      <FormSection title={t('customAttribute.generalInformations')}>
         <Controller
           control={control}
           name="name"

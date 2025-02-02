@@ -28,7 +28,5 @@ export const useCurrentStoreRole = () => {
     'q[userIdEq]': currentUserData?.data.id,
   })
 
-  console.log(currentStore, data?.data)
-
   return find(data?.data, { storeId: currentStore?.id })?.role
 }
