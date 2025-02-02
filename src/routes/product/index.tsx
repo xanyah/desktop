@@ -10,7 +10,14 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { formSchema, formSchemaType } from './config'
 import { forOwn, isEmpty, map, toNumber } from 'lodash'
 import { decamelize } from 'humps'
-import { CategorySelect, FormContainer, FormSection, InputFile, InputText, ManufacturerSelect } from '@/components'
+import {
+  CategorySelect,
+  FormContainer,
+  FormSection,
+  InputFile,
+  InputText,
+  ManufacturerSelect,
+} from '@/components'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Euro } from 'lucide-react'
@@ -33,21 +40,26 @@ const Product = () => {
     { label: t('products.pageTitle'), url: '/products' },
     { label: pageTitle },
   ])
-  const initialValues = useMemo(() => (productData?.data
-    ? {
-        ...productData?.data,
-        categoryId: productData?.data?.category?.id,
-        manufacturerId: productData?.data?.manufacturer?.id,
-        storeId: store?.id,
-        buyingAmount: productData?.data?.buyingAmountCents / 100,
-        taxFreeAmount: productData?.data?.taxFreeAmountCents / 100,
-        amount: productData?.data?.amountCents / 100,
-        images: map(productData?.data?.images, image => ({
-          name: image.large.split('/').pop(),
-          signed_id: image.signedId,
-        })),
-      }
-    : undefined), [productData, store])
+  const initialValues = useMemo(
+    () =>
+      productData?.data
+        ? {
+            ...productData?.data,
+            categoryId: productData?.data?.category?.id,
+            manufacturerId: productData?.data?.manufacturer?.id,
+            storeId: store?.id,
+            buyingAmount: productData?.data?.buyingAmountCents / 100,
+            taxFreeAmount: productData?.data?.taxFreeAmountCents / 100,
+            amount: productData?.data?.amountCents / 100,
+            images: map(productData?.data?.images, image => ({
+              name: image.large.split('/').pop(),
+              signed_id: image.signedId,
+              thumbnail: image.thumbnail,
+            })),
+          }
+        : undefined,
+    [productData, store],
+  )
 
   const { mutate: createApiProduct } = useMutation({
     mutationFn: (newData: FormData) => createProduct(newData),

@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-} from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Account from './account'
 import Categories from './categories'
 import Category from './category'
@@ -47,8 +42,16 @@ const Router = () => {
           <Route path="categories/:id/edit" element={<Category />} />
           <Route path="categories/new" element={<Category />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="custom-attributes/new" element={<CustomAttribute />} />
+          <Route
+            path="custom-attributes/:id/edit"
+            element={<CustomAttribute />}
+          />
           <Route path="custom-attributes" element={<CustomAttributes />} />
-          <Route path="custom-attributes/:id/edit" element={<CustomAttribute />} />
+          <Route
+            path="custom-attributes/:id/edit"
+            element={<CustomAttribute />}
+          />
           <Route path="custom-attributes/new" element={<CustomAttribute />} />
           <Route path="customers" element={<Customers />} />
           <Route path="customers/:id/edit" element={<Customer />} />
@@ -65,6 +68,7 @@ const Router = () => {
           <Route path="payment-types/:id/edit" element={<PaymentType />} />
           <Route path="payment-types/new" element={<PaymentType />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/new" element={<Product />} />
           <Route path="products/:id/edit" element={<Product />} />
           <Route path="products/new" element={<Product />} />
           <Route path="providers" element={<Providers />} />

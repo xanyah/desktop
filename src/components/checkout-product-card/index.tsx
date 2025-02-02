@@ -1,9 +1,10 @@
 import { formatPrice } from '@/helpers/price'
 import { useProduct } from '@/hooks'
-import { Button, InputText } from '../ui'
 import { X } from 'lucide-react'
 import { toNumber } from 'lodash'
 import { useTranslation } from 'react-i18next'
+import { InputText } from '../input'
+import Button from '../button'
 
 interface CheckoutProductCardProps {
   onQuantityUpdate: (newQuantity: number) => void
@@ -13,7 +14,13 @@ interface CheckoutProductCardProps {
   withoutPrice?: boolean
 }
 
-const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate, withoutPrice }: CheckoutProductCardProps) => {
+const CheckoutProductCard = ({
+  productId,
+  onRemove,
+  quantity,
+  onQuantityUpdate,
+  withoutPrice,
+}: CheckoutProductCardProps) => {
   const { t } = useTranslation()
   const { data, isLoading } = useProduct(productId)
 
@@ -27,7 +34,11 @@ const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate, 
     <div className="flex flex-row items-center justify-between gap-4">
       <div className="flex flex-col flex-1">
         <h4>{product.name}</h4>
-        <p>{withoutPrice ? product.manufacturerSku : formatPrice(product.amountCents, product.amountCurrency)}</p>
+        <p>
+          {withoutPrice
+            ? product.manufacturerSku
+            : formatPrice(product.amountCents, product.amountCurrency)}
+        </p>
       </div>
       <div className="w-24">
         <InputText
@@ -35,8 +46,14 @@ const CheckoutProductCard = ({ productId, onRemove, quantity, onQuantityUpdate, 
           onChange={e => onQuantityUpdate(toNumber(e.target.value))}
         />
       </div>
-      {!withoutPrice && <p>{formatPrice(product.amountCents * quantity, product.amountCurrency)}</p>}
-      <Button variant="ghost" onClick={onRemove}><X /></Button>
+      {!withoutPrice && (
+        <p>
+          {formatPrice(product.amountCents * quantity, product.amountCurrency)}
+        </p>
+      )}
+      <Button variant="ghost" onClick={onRemove}>
+        <X />
+      </Button>
     </div>
   )
 }

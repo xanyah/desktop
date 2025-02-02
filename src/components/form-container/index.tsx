@@ -1,17 +1,20 @@
 import { DOMAttributes, ReactNode } from 'react'
-import { Button } from '../ui'
 import { useTranslation } from 'react-i18next'
+import Button from '../button'
 
-type FormContainerProps = & {
+type FormContainerProps = {
   title: string
   subtitle?: string
   submitButtonLabel?: string
   button?: ReactNode
-} & ((DOMAttributes<HTMLFormElement> & {
-  isNotForm?: false
-}) | (DOMAttributes<HTMLDivElement> & {
-  isNotForm: true
-}))
+} & (
+  | (DOMAttributes<HTMLFormElement> & {
+    isNotForm?: false
+  })
+  | (DOMAttributes<HTMLDivElement> & {
+    isNotForm: true
+  })
+)
 
 const FormContainer = ({
   title,
@@ -36,7 +39,11 @@ const FormContainer = ({
       </div>
       {children}
 
-      {!isNotForm && <Button className="self-end" type="submit">{submitButtonLabel || t('global.save')}</Button>}
+      {!isNotForm && (
+        <Button className="self-end" type="submit">
+          {submitButtonLabel || t('global.save')}
+        </Button>
+      )}
     </Component>
   )
 }

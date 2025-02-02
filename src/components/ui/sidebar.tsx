@@ -14,8 +14,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import Button from './button'
-import { InputText } from './input'
+import Button from '../button'
+import { InputText } from '../input'
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state'
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -90,9 +90,7 @@ const SidebarProvider = React.forwardRef<
 
         // Helper to toggle the sidebar.
         const toggleSidebar = React.useCallback(() => {
-          return isMobile
-            ? setOpenMobile(open => !open)
-            : setOpen(open => !open)
+          return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open)
         }, [isMobile, setOpen, setOpenMobile])
 
         // Adds a keyboard shortcut to toggle the sidebar.
@@ -125,7 +123,15 @@ const SidebarProvider = React.forwardRef<
             setOpenMobile,
             toggleSidebar,
           }),
-          [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar],
+          [
+            state,
+            open,
+            setOpen,
+            isMobile,
+            openMobile,
+            setOpenMobile,
+            toggleSidebar,
+          ],
         )
 
         return (

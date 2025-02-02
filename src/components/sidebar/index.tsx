@@ -103,25 +103,26 @@ const Sidebar = () => {
       <SidebarContent>
         {items.map(group => (
           group.disabled
-          ? null
-          : (
-          <SidebarGroup key={group.label}>
-            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {map(sortBy(group.items, 'label'), item => (
-                  <SidebarMenuItem key={item.label}>
-                    <SidebarMenuButton asChild>
-                      <NavLink to={item.url}>
-                        <item.icon />
-                        <span>{item.label}</span>
-                      </NavLink>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>)))}
+            ? null
+            : (
+                <SidebarGroup key={group.label}>
+                  <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {map(sortBy(group.items, 'label'), item => (
+                        <SidebarMenuItem key={item.label}>
+                          <SidebarMenuButton asChild>
+                            <NavLink to={item.url}>
+                              <item.icon />
+                              <span>{item.label}</span>
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ))}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              )))}
       </SidebarContent>
     </ShadSidebar>
   )

@@ -4,7 +4,8 @@ import DataTableNew from '../data-table-new'
 import { ColumnDef } from '@tanstack/react-table'
 import Pagination from '../pagination'
 import { isUndefined } from 'lodash'
-import { Button, InputText } from '../ui'
+import { InputText } from '../input'
+import Button from '../button'
 
 interface TableWithSearchProps<TData, TValue> {
   searchPlaceholder: string

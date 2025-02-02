@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { map } from 'lodash'
 import { UseQueryResult } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { AsyncReactSelect } from '../ui'
+import { AsyncReactSelect } from '../input'
 
 interface ApiDataSelectProps {
   onChange: (newValue?: string) => void
