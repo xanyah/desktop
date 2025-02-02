@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FormContainer, InputText } from '@/components'
 import { useCallback, useRef } from 'react'
 import toast from 'react-hot-toast'
+import { usePrinters } from '@/hooks'
 
 interface SignInForm {
   username: string
@@ -45,6 +46,10 @@ const SignIn = () => {
   const onSubmit = useCallback((data) => {
     mutate({ ...data, grantType: 'password' })
   }, [mutate])
+
+
+  const {data, refetch} = usePrinters()
+  console.log('data', data)
 
   return (
     <div className="min-h-screen flex flex-col items-stretch justify-center w-full p-8">
