@@ -1,36 +1,36 @@
 import { useCallback, useMemo } from 'react'
-import { useOrder, useOrderProducts } from "../../hooks";
-import { Link, useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { cancelOrder, deliverOrder, orderOrder, withdrawOrder } from "../../api";
-import { showSuccessToast } from "../../utils/notification-helper";
-import { useTranslation } from "react-i18next";
-import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
-import DataTable from '@/components/data-table-new';
-import { Button, ShowContainer, ShowSection } from '@/components';
-import { customerFullname } from '@/helpers/customer';
-import { useBreadCrumbContext } from '@/contexts/breadcrumb';
-import { Badge } from '@/components/ui/badge';
-import { orderBadgeVariants } from '@/constants/orders';
-import { AxiosResponse } from 'axios';
-import { uuidNumber } from '@/helpers/uuid';
-import { formatLongDatetime } from '@/helpers/dates';
+import { useOrder, useOrderProducts } from '../../hooks'
+import { Link, useParams } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { cancelOrder, deliverOrder, orderOrder, withdrawOrder } from '../../api'
+import { showSuccessToast } from '../../utils/notification-helper'
+import { useTranslation } from 'react-i18next'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import DataTable from '@/components/data-table-new'
+import { Button, ShowContainer, ShowSection } from '@/components'
+import { customerFullname } from '@/helpers/customer'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { Badge } from '@/components/ui/badge'
+import { orderBadgeVariants } from '@/constants/orders'
+import { AxiosResponse } from 'axios'
+import { uuidNumber } from '@/helpers/uuid'
+import { formatLongDatetime } from '@/helpers/dates'
 
 const Order = () => {
-  const {t } = useTranslation()
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
-  const { id } = useParams();
-  const { data: orderData } = useOrder(id);
+  const { id } = useParams()
+  const { data: orderData } = useOrder(id)
   const { data: orderProductsData } = useOrderProducts({
-    'q[orderIdEq]': id
+    'q[orderIdEq]': id,
   })
   useBreadCrumbContext([
     { label: t('orders.pageTitle'), url: '/orders' },
-    { label: t('order.pageTitle', {orderNumber: uuidNumber(orderData?.data.id)}) },
+    { label: t('order.pageTitle', { orderNumber: uuidNumber(orderData?.data.id) }) },
   ])
 
   const onSuccess = useCallback(() => {
-    showSuccessToast(t("toast.updated"));
+    showSuccessToast(t('toast.updated'))
     queryClient.invalidateQueries({ queryKey: ['orders', { id }] })
   }, [t, id, queryClient])
 
@@ -38,13 +38,13 @@ const Order = () => {
     return useMutation({
       mutationFn: () => mutationFn(id),
       onSuccess,
-    });
+    })
   }, [id, onSuccess])
 
-  const { mutate: cancelApiOrder } = useChangeOrderStatus(cancelOrder);
-  const { mutate: orderApiOrder } = useChangeOrderStatus(orderOrder);
-  const { mutate: withdrawApiOrder } = useChangeOrderStatus(withdrawOrder);
-  const { mutate: deliverApiOrder } = useChangeOrderStatus(deliverOrder);
+  const { mutate: cancelApiOrder } = useChangeOrderStatus(cancelOrder)
+  const { mutate: orderApiOrder } = useChangeOrderStatus(orderOrder)
+  const { mutate: withdrawApiOrder } = useChangeOrderStatus(withdrawOrder)
+  const { mutate: deliverApiOrder } = useChangeOrderStatus(deliverOrder)
 
   const columnHelper = createColumnHelper<OrderProduct>()
 
@@ -53,7 +53,7 @@ const Order = () => {
       [
         columnHelper.accessor('product.name', {
           header: t('order.productTable.name'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/products/${props.row.original.product.id}/edit`}
@@ -66,59 +66,68 @@ const Order = () => {
           header: t('order.productTable.quantity'),
         }),
       ] as ColumnDef<OrderProduct>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   const renderActionButtons = useCallback(() => {
-    switch(orderData?.data.state) {
-    case 'delivered':
-      return <>
-        <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
-        <Button onClick={() => withdrawApiOrder()}>{t('order.withdraw')}</Button>
-      </>
-    case 'ordered':
-      return <>
-        <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
-        <Button onClick={() => deliverApiOrder()}>{t('order.deliver')}</Button>
-      </>
-    case 'pending':
-      return <>
-        <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
-        <Button onClick={() => orderApiOrder()}>{t('order.order')}</Button>
-      </>
-    case 'cancelled':
-    case 'withdrawn':
-      return null
+    switch (orderData?.data.state) {
+      case 'delivered':
+        return (
+          <>
+            <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
+            <Button onClick={() => withdrawApiOrder()}>{t('order.withdraw')}</Button>
+          </>
+        )
+      case 'ordered':
+        return (
+          <>
+            <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
+            <Button onClick={() => deliverApiOrder()}>{t('order.deliver')}</Button>
+          </>
+        )
+      case 'pending':
+        return (
+          <>
+            <Button variant="ghost" onClick={() => cancelApiOrder()}>{t('order.cancel')}</Button>
+            <Button onClick={() => orderApiOrder()}>{t('order.order')}</Button>
+          </>
+        )
+      case 'cancelled':
+      case 'withdrawn':
+        return null
     }
-  }, [t,orderData, cancelApiOrder, deliverApiOrder, orderApiOrder, withdrawApiOrder])
+  }, [t, orderData, cancelApiOrder, deliverApiOrder, orderApiOrder, withdrawApiOrder])
 
   if (!orderData?.data) {
     return null
   }
 
-  return <ShowContainer
-    title={t('order.pageTitle', {orderNumber: uuidNumber(orderData.data.id)})}
-    subtitle={t('order.pageTitle', {orderDate: formatLongDatetime(orderData.data.createdAt)})}
-    button={orderData?.data && (
-      <div className="flex flex-row gap-4 items-center">
-        <Badge variant={orderBadgeVariants[orderData?.data.state]}>
-          {t(`order.states.${orderData?.data.state}`)}
-        </Badge>
-        {renderActionButtons()}
-      </div>)}
-  >
-    <ShowSection title={t('order.customer')}>
-      <div className="flex flex-col gap-2">
-        <p>{customerFullname(orderData.data.customer)}</p>
-        <p>{orderData.data.customer.address}</p>
-        <a href={`mailto:${orderData.data.customer.email}`}>{orderData.data.customer.email}</a>
-        <a href={`tel:${orderData.data.customer.phone}`}>{orderData.data.customer.phone}</a>
-      </div>
-    </ShowSection>
-    <ShowSection title={t('order.products')}>
-      <DataTable data={orderProductsData?.data || []} columns={columns} />
-    </ShowSection>
-  </ShowContainer>
+  return (
+    <ShowContainer
+      title={t('order.pageTitle', { orderNumber: uuidNumber(orderData.data.id) })}
+      subtitle={t('order.pageTitle', { orderDate: formatLongDatetime(orderData.data.createdAt) })}
+      button={orderData?.data && (
+        <div className="flex flex-row gap-4 items-center">
+          <Badge variant={orderBadgeVariants[orderData?.data.state]}>
+            {t(`order.states.${orderData?.data.state}`)}
+          </Badge>
+          {renderActionButtons()}
+        </div>
+      )}
+    >
+      <ShowSection title={t('order.customer')}>
+        <div className="flex flex-col gap-2">
+          <p>{customerFullname(orderData.data.customer)}</p>
+          <p>{orderData.data.customer.address}</p>
+          <a href={`mailto:${orderData.data.customer.email}`}>{orderData.data.customer.email}</a>
+          <a href={`tel:${orderData.data.customer.phone}`}>{orderData.data.customer.phone}</a>
+        </div>
+      </ShowSection>
+      <ShowSection title={t('order.products')}>
+        <DataTable data={orderProductsData?.data || []} columns={columns} />
+      </ShowSection>
+    </ShowContainer>
+  )
 }
 
-export default Order;
+export default Order

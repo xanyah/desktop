@@ -1,5 +1,5 @@
 import { each, map, range } from 'lodash'
-import { Fragment, useMemo } from 'react'
+import { Fragment, useCallback, useMemo } from 'react'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { PaginationContainer, PaginationItem } from './styles'
 
@@ -14,10 +14,17 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
-  if (totalPages <= 1) return null
-  const handlePrevious = () => currentPage > 1 && onPageChange(currentPage - 1)
-  const handleNext = () =>
-    currentPage < totalPages && onPageChange(currentPage + 1)
+  const handlePrevious = useCallback(() => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1)
+    }
+  }, [currentPage, onPageChange])
+
+  const handleNext = useCallback(() => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1)
+    }
+  }, [currentPage, onPageChange, totalPages])
 
   const pageNumbers = useMemo(() => {
     const pages = [1]
@@ -27,9 +34,9 @@ const Pagination = ({
     each(
       range(
         Math.max(2, currentPage - 1),
-        Math.min(totalPages, currentPage + 2)
+        Math.min(totalPages, currentPage + 2),
       ),
-      (i) => pages.push(i)
+      i => pages.push(i),
     )
 
     if (currentPage < totalPages - 2) pages.push(-1)
@@ -39,6 +46,10 @@ const Pagination = ({
     return pages
   }, [currentPage, totalPages])
 
+  if (totalPages <= 1) {
+    return null
+  }
+
   return (
     <PaginationContainer>
       <PaginationItem onClick={handlePrevious} $disabled={currentPage === 1}>
@@ -47,18 +58,20 @@ const Pagination = ({
 
       {map(pageNumbers, (page, index) => (
         <Fragment key={index}>
-          {page === -1 ? (
-            <PaginationItem $isEllipsis>
-              <MoreHorizontal />
-            </PaginationItem>
-          ) : (
-            <PaginationItem
-              $isActive={page === currentPage}
-              onClick={() => onPageChange(page)}
-            >
-              {page}
-            </PaginationItem>
-          )}
+          {page === -1
+            ? (
+                <PaginationItem $isEllipsis>
+                  <MoreHorizontal />
+                </PaginationItem>
+              )
+            : (
+                <PaginationItem
+                  $isActive={page === currentPage}
+                  onClick={() => onPageChange(page)}
+                >
+                  {page}
+                </PaginationItem>
+              )}
         </Fragment>
       ))}
       <PaginationItem

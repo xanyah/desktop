@@ -1,4 +1,4 @@
-type Provider = {
+interface Provider {
   id: string
   createdAt: string
   updatedAt: string

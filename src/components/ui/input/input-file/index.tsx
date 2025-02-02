@@ -15,9 +15,9 @@ interface Props {
   icon?: React.ReactNode
   hint?: string
   onFilesChange?: (
-    files: (File | { name: string; signed_id: string })[] | null
+    files: (File | { name: string, signed_id: string })[] | null
   ) => void
-  value?: (File | { name: string; signed_id: string })[]
+  value?: (File | { name: string, signed_id: string })[]
 }
 
 const InputFile = forwardRef<HTMLInputElement, Props>(
@@ -33,7 +33,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(
       value = [],
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newFiles = e.target.files
@@ -89,7 +89,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(
         {hint && <p className="text-small">{hint}</p>}
       </StyledInputContainer>
     )
-  }
+  },
 )
 
 InputFile.displayName = 'InputFile'

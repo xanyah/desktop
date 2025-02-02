@@ -7,7 +7,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { InputText } from '@/components'
 
-type SignInForm = {
+interface SignInForm {
   email: string
   password: string
 }
@@ -25,7 +25,7 @@ const SignIn = () => {
     onSuccess: (data) => {
       localStorage.setItem(
         `Xanyah:Bearer`,
-        `${data.data.tokenType} ${data.data.accessToken}`
+        `${data.data.tokenType} ${data.data.accessToken}`,
       )
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
       navigate('/')
@@ -35,7 +35,8 @@ const SignIn = () => {
   const onSubmit = handleSubmit(async ({ email, password }) => {
     try {
       mutate({ username: email, password, grantType: 'password' })
-    } catch (err) {
+    }
+    catch (err) {
       console.error(err)
     }
   })

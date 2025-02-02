@@ -11,7 +11,7 @@ export const useOrderProducts = (params = {}) => useQuery({
   queryKey: ['orderProducts', params],
 })
 
-export const useOrder = (id) => useQuery({
+export const useOrder = id => useQuery({
   queryFn: () => getOrder(id),
-  queryKey: ['orders', {id}],
+  queryKey: ['orders', { id }],
 })

@@ -1,4 +1,4 @@
-type Shipping = {
+interface Shipping {
   id: string
   state: 'pending' | 'validated' | 'cancelled'
   validatedAt: string
@@ -8,7 +8,7 @@ type Shipping = {
   provider: Provider
 }
 
-type ShippingProduct = {
+interface ShippingProduct {
   id: string
   quantity: number
   createdAt: string

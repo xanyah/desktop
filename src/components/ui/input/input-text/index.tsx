@@ -7,7 +7,7 @@ interface Props extends React.ComponentProps<'input'> {
   label?: string
   error?: string
   icon?: React.ReactNode
-  hint?: string,
+  hint?: string
 }
 
 const InputText = forwardRef<HTMLInputElement, Props>(
@@ -25,7 +25,7 @@ const InputText = forwardRef<HTMLInputElement, Props>(
         {hint && <p className="text-small">{hint}</p>}
       </StyledInputContainer>
     )
-  }
+  },
 )
 
 InputText.displayName = 'InputText'

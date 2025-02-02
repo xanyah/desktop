@@ -1,9 +1,9 @@
-import { useCurrentStore, useVatRate,  } from '@/hooks'
+import { useCurrentStore, useVatRate } from '@/hooks'
 import { useCallback } from 'react'
 import { getVatRates } from '@/api'
 import ApiDataSelect from '../api-data-select'
 
-type VatRateSelectProps = {
+interface VatRateSelectProps {
   onChange: (newValue?: VatRate['id']) => void
   value?: VatRate['id']
   label?: string
@@ -23,10 +23,10 @@ const VatRateSelect = ({
       return getVatRates({
         'q[storeIdEq]': store?.id,
         'q[countryNameCont]': searchQuery,
-        'q[s]': 'rate_percent_cents'
+        'q[s]': 'rate_percent_cents',
       })
     },
-    [store]
+    [store],
   )
 
   return (

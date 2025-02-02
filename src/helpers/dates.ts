@@ -1,5 +1,5 @@
-import { isString } from "lodash";
-import { DateTime } from "luxon";
+import { isString } from 'lodash'
+import { DateTime } from 'luxon'
 
 const stringOrDateTime = (date: DateTime | string) => {
   if (isString(date)) {

@@ -20,13 +20,13 @@ import { Fragment, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const Online = () => {
-  const {isLoading, isError} = useCurrentUser()
+  const { isLoading, isError } = useCurrentUser()
   const navigate = useNavigate()
   const [breadcrumb, setBreadcrumb] = useState<BreadCrumbElement[]>([])
 
   useEffect(() => {
     if (!isLoading && isError) {
-      navigate("/sign-in")
+      navigate('/sign-in')
     }
   }, [isLoading, isError, navigate])
 
@@ -42,17 +42,19 @@ const Online = () => {
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink to="/">Accueil</BreadcrumbLink>
               </BreadcrumbItem>
-              {map(breadcrumb, (element) => (
+              {map(breadcrumb, element => (
                 <Fragment key={element.label}>
                   <BreadcrumbSeparator className="hidden md:block" />
                   <BreadcrumbItem>
-                    {element.url ? (
-                      <BreadcrumbLink to={element.url}>
-                        {element.label}
-                      </BreadcrumbLink>
-                    ) : (
-                      <BreadcrumbPage>{element.label}</BreadcrumbPage>
-                    )}
+                    {element.url
+                      ? (
+                          <BreadcrumbLink to={element.url}>
+                            {element.label}
+                          </BreadcrumbLink>
+                        )
+                      : (
+                          <BreadcrumbPage>{element.label}</BreadcrumbPage>
+                        )}
                   </BreadcrumbItem>
                 </Fragment>
               ))}

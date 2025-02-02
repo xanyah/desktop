@@ -1,5 +1,5 @@
-import { last } from "lodash";
-import { createContext, useContext, useEffect } from "react";
+import { last } from 'lodash'
+import { createContext, useContext, useEffect } from 'react'
 
 const BreadCrumbContext = createContext<React.Dispatch<React.SetStateAction<BreadCrumbElement[]>>>(() => {})
 

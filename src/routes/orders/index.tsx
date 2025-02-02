@@ -12,7 +12,7 @@ import { uuidNumber } from '@/helpers/uuid'
 import { useTranslation } from 'react-i18next'
 
 const Orders = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('orders.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -21,7 +21,7 @@ const Orders = () => {
     page,
     'q[clientFirstnameOrClientLastnameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': 'created_at desc'
+    'q[s]': 'created_at desc',
   })
 
   const columnHelper = createColumnHelper<Order>()
@@ -31,18 +31,18 @@ const Orders = () => {
       [
         columnHelper.accessor('id', {
           header: t('orders.table.id'),
-          cell: (props) => (
+          cell: props => (
             <Link className="underline" to={`/orders/${props.getValue()}`}>
               {uuidNumber(props.getValue())}
             </Link>
           ),
         }),
         columnHelper.accessor(
-          (row) => customerFullname(row.customer),
+          row => customerFullname(row.customer),
           {
             id: 'fullname',
             header: t('orders.table.customer'),
-            cell: (props) => (
+            cell: props => (
               <Link
                 className="underline"
                 to={`/customers/${props.row.original.customer.id}/edit`}
@@ -50,11 +50,11 @@ const Orders = () => {
                 {props.getValue()}
               </Link>
             ),
-          }
+          },
         ),
         columnHelper.accessor('state', {
           header: t('orders.table.state'),
-          cell: (props) => (
+          cell: props => (
             <Badge variant={orderBadgeVariants[props.getValue()]}>
               {t(`order.states.${props.getValue()}`)}
             </Badge>
@@ -62,14 +62,14 @@ const Orders = () => {
         }),
         columnHelper.accessor('createdAt', {
           header: t('orders.table.createdAt'),
-          cell: (props) => formatLongDatetime(props.getValue())
+          cell: props => formatLongDatetime(props.getValue()),
         }),
         columnHelper.accessor('updatedAt', {
           header: t('orders.table.updatedAt'),
-          cell: (props) => formatLongDatetime(props.getValue())
+          cell: props => formatLongDatetime(props.getValue()),
         }),
       ] as ColumnDef<Order>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   return (
@@ -78,7 +78,7 @@ const Orders = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/orders/new'}
+      createUrl="/orders/new"
       createLabel={t('orders.createButtonLabel')}
       columns={columns}
       data={data?.data}

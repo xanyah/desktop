@@ -7,7 +7,7 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 
 const CustomAttributes = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('customAttributes.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -16,7 +16,7 @@ const CustomAttributes = () => {
     page,
     'q[nameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': ['name']
+    'q[s]': ['name'],
   })
 
   const columnHelper = createColumnHelper<CustomAttribute>()
@@ -26,7 +26,7 @@ const CustomAttributes = () => {
       [
         columnHelper.accessor('name', {
           header: t('customAttributes.table.name'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/custom-attributes/${props.row.original.id}/edit`}
@@ -39,7 +39,7 @@ const CustomAttributes = () => {
           header: t('customAttributes.table.type'),
         }),
       ] as ColumnDef<CustomAttribute>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   return (
@@ -48,7 +48,7 @@ const CustomAttributes = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/custom-attributes/new'}
+      createUrl="/custom-attributes/new"
       createLabel={t('customAttributes.createButtonLabel')}
       columns={columns}
       data={data?.data}

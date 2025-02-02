@@ -1,57 +1,44 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
 import importPlugin from 'eslint-plugin-import';
-import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+import stylistic from '@stylistic/eslint-plugin'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ['src/**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  pluginReact.configs.flat['jsx-runtime'],
+  stylistic.configs.customize({
+    flat: true, // required for flat config
+  }),
   importPlugin.flatConfigs.recommended,
-  {
-    plugins: {
-      "react-hooks": eslintPluginReactHooks,
-    },
-    rules: { ...eslintPluginReactHooks.configs.recommended.rules },
-  },
+  importPlugin.flatConfigs.errors,
+  importPlugin.flatConfigs.warnings,
+  importPlugin.flatConfigs.typescript,
   {
     rules: {
-      '@typescript-eslint/no-explicit-any': 0,
-      'indent': ['error', 2],
-      'import/named': 0,
-      'import/no-unused-modules': [
-        'error',
-        {
-          // missingExports: true,
-          unusedExports: true
-        }
-      ],
-      'react/react-in-jsx-scope': 0,
+      'react/no-unknown-property': 0,
       'react/prop-types': 0,
+      '@typescript-eslint/no-explicit-any': 0,
+      'import/namespace': 0,
     },
+  },
+  {
     settings: {
-      'import/extensions': [
-        '.ts',
-        '.tsx'
-      ],
-      'import/parsers': {
-        '@typescript-eslint/parser': ['.ts', '.tsx'],
-      },
-      'import/resolver': {
+      "import/resolver": {
         typescript: {
-          project: './'
+          alwaysTryTypes: true,
+          project: './',
         },
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx']
-        }
-      }
-    }
+        node: true,
+      },
+    },
   }
 ];

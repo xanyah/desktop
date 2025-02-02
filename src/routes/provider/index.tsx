@@ -1,57 +1,56 @@
-import { useCallback, useEffect, useMemo} from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 
-
-import { useProvider, useCurrentStore } from "../../hooks";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProvider, updateProvider } from "../../api";
-import { showSuccessToast } from "../../utils/notification-helper";
-import { useTranslation } from "react-i18next";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { providerSchema, providerSchemaType } from './config';
-import { Controller, useForm } from 'react-hook-form';
-import { FormContainer, FormSection, InputText } from '@/components';
-import { useBreadCrumbContext } from '@/contexts/breadcrumb';
+import { useProvider, useCurrentStore } from '../../hooks'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createProvider, updateProvider } from '../../api'
+import { showSuccessToast } from '../../utils/notification-helper'
+import { useTranslation } from 'react-i18next'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { providerSchema, providerSchemaType } from './config'
+import { Controller, useForm } from 'react-hook-form'
+import { FormContainer, FormSection, InputText } from '@/components'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 
 const Provider = () => {
   const queryClient = useQueryClient()
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const store = useCurrentStore();
-  const { id } = useParams();
-  const { data: providerData } = useProvider(id);
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const store = useCurrentStore()
+  const { id } = useParams()
+  const { data: providerData } = useProvider(id)
   const { handleSubmit, control, reset } = useForm<providerSchemaType>({
     resolver: zodResolver(providerSchema),
     defaultValues: {},
   })
   const pageTitle = useMemo(
     () => providerData?.data ? providerData?.data.name : t('provider.newPageTitle'),
-    [t,providerData]
+    [t, providerData],
   )
   useBreadCrumbContext([
-    { label: t('providers.pageTitle'), url: '/providers'},
-    { label: pageTitle},
+    { label: t('providers.pageTitle'), url: '/providers' },
+    { label: pageTitle },
   ])
 
   const { mutate: createApiProvider } = useMutation({
     mutationFn: (newData: providerSchemaType) =>
       createProvider({ ...newData, storeId: store?.id }),
     onSuccess: (data) => {
-      queryClient.setQueryData(['providers', {id}], data)
-      navigate(`/providers/${data.data.id}/edit`);
+      queryClient.setQueryData(['providers', { id }], data)
+      navigate(`/providers/${data.data.id}/edit`)
       showSuccessToast(
-        t("toast.created", { entity: t("models.providers.title") })
-      );
+        t('toast.created', { entity: t('models.providers.title') }),
+      )
     },
-  });
+  })
 
   const { mutate: updateApiProvider } = useMutation({
     mutationFn: (newData: providerSchemaType) => updateProvider(id, newData),
     onSuccess: (data) => {
-      queryClient.setQueryData(['providers', {id}], data)
-      showSuccessToast(t("toast.updated"));
+      queryClient.setQueryData(['providers', { id }], data)
+      showSuccessToast(t('toast.updated'))
     },
-  });
+  })
 
   const onSubmit = useCallback((data: providerSchemaType) => {
     if (id) {
@@ -59,7 +58,6 @@ const Provider = () => {
     }
     return createApiProvider(data)
   }, [id, updateApiProvider, createApiProvider])
-
 
   useEffect(() => {
     reset(providerData?.data)
@@ -108,4 +106,4 @@ const Provider = () => {
   )
 }
 
-export default Provider;
+export default Provider

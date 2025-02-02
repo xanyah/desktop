@@ -7,7 +7,7 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 
 const Providers = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('providers.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -16,7 +16,7 @@ const Providers = () => {
     page,
     'q[nameOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': 'name'
+    'q[s]': 'name',
   })
 
   const columnHelper = createColumnHelper<Provider>()
@@ -26,7 +26,7 @@ const Providers = () => {
       [
         columnHelper.accessor('name', {
           header: t('providers.table.name'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/providers/${props.row.original.id}/edit`}
@@ -36,7 +36,7 @@ const Providers = () => {
           ),
         }),
       ] as ColumnDef<Provider>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   return (
@@ -45,7 +45,7 @@ const Providers = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/providers/new'}
+      createUrl="/providers/new"
       createLabel={t('providers.createButtonLabel')}
       columns={columns}
       data={data?.data}

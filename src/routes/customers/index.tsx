@@ -7,7 +7,7 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 
 const Customers = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('customers.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -17,7 +17,7 @@ const Customers = () => {
     page,
     'q[firstnameOrLastnameOrPhoneOrEmailOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': ['firstname', 'lastname']
+    'q[s]': ['firstname', 'lastname'],
   })
 
   const columnHelper = createColumnHelper<Customer>()
@@ -27,7 +27,7 @@ const Customers = () => {
       [
         columnHelper.accessor(item => `${item.firstname} ${item.lastname}`, {
           header: t('customers.table.name'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/customers/${props.row.original.id}/edit`}
@@ -36,10 +36,10 @@ const Customers = () => {
             </Link>
           ),
         }),
-        columnHelper.accessor('phone', { header: t('customers.table.phone')}),
-        columnHelper.accessor('email', { header: t('customers.table.email')}),
+        columnHelper.accessor('phone', { header: t('customers.table.phone') }),
+        columnHelper.accessor('email', { header: t('customers.table.email') }),
       ] as ColumnDef<Customer>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   return (
@@ -48,7 +48,7 @@ const Customers = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/customers/new'}
+      createUrl="/customers/new"
       createLabel={t('customers.createButtonLabel')}
       columns={columns}
       data={data?.data}

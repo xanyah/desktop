@@ -11,7 +11,7 @@ import { uuidNumber } from '@/helpers/uuid'
 import { useTranslation } from 'react-i18next'
 
 const Shippings = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('shippings.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -29,7 +29,7 @@ const Shippings = () => {
       [
         columnHelper.accessor('id', {
           header: t('shippings.table.id'),
-          cell: (props) => (
+          cell: props => (
             <Link className="underline" to={`/shippings/${props.getValue()}`}>
               {uuidNumber(props.getValue())}
             </Link>
@@ -37,7 +37,7 @@ const Shippings = () => {
         }),
         columnHelper.accessor('provider.name', {
           header: t('shippings.table.provider'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/providers/${props.row.original.provider.id}/edit`}
@@ -48,7 +48,7 @@ const Shippings = () => {
         }),
         columnHelper.accessor('state', {
           header: t('shippings.table.state'),
-          cell: (props) => (
+          cell: props => (
             <Badge variant={orderBadgeVariants[props.getValue()]}>
               {t(`shipping.states.${props.getValue()}`)}
             </Badge>
@@ -56,14 +56,14 @@ const Shippings = () => {
         }),
         columnHelper.accessor('createdAt', {
           header: t('shippings.table.createdAt'),
-          cell: props => formatLongDatetime(props.getValue())
+          cell: props => formatLongDatetime(props.getValue()),
         }),
         columnHelper.accessor('updatedAt', {
           header: t('shippings.table.updatedAt'),
-          cell: props => formatLongDatetime(props.getValue())
+          cell: props => formatLongDatetime(props.getValue()),
         }),
       ] as ColumnDef<Shipping>[],
-    [columnHelper, t]
+    [columnHelper, t],
   )
 
   return (
@@ -72,7 +72,7 @@ const Shippings = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/shippings/new'}
+      createUrl="/shippings/new"
       createLabel={t('shippings.createButtonLabel')}
       columns={columns}
       data={data?.data}

@@ -1,5 +1,5 @@
-import AsyncSelect from "react-select/async";
-import tw from "tailwind-styled-components";
+import AsyncSelect from 'react-select/async'
+import tw from 'tailwind-styled-components'
 
 export const StyledAsyncSelect = tw(AsyncSelect)`
   w-full
@@ -18,10 +18,10 @@ export const StyledAsyncSelect = tw(AsyncSelect)`
   disabled:cursor-not-allowed 
   disabled:opacity-50 
   [&>span]:line-clamp-1
-`;
+`
 
 export const style = {
-  control: (provided) => ({
+  control: provided => ({
     ...provided,
     border: 'none',
     boxShadow: 'none',
@@ -29,10 +29,10 @@ export const style = {
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isSelected
+    'backgroundColor': state.isSelected
       ? 'hsl(var(--accent))'
       : 'transparent',
-    color: state.isSelected
+    'color': state.isSelected
       ? 'hsl(var(--accent-foreground))'
       : 'hsl(var(--foreground))',
     '&:hover': {
@@ -40,22 +40,22 @@ export const style = {
       color: 'hsl(var(--accent-foreground))',
     },
   }),
-  menu: (provided) => ({
+  menu: provided => ({
     ...provided,
     backgroundColor: 'hsl(var(--popover))',
     border: '1px solid hsl(var(--border))',
     borderRadius: '0.375rem',
     boxShadow: '0 0 0 1px hsl(var(--border))',
   }),
-  singleValue: (provided) => ({
+  singleValue: provided => ({
     ...provided,
     color: 'hsl(var(--foreground))',
   }),
-  placeholder: (provided) => ({
+  placeholder: provided => ({
     ...provided,
     color: 'hsl(var(--muted-foreground))',
   }),
-  input: (provided) => ({
+  input: provided => ({
     ...provided,
     color: 'hsl(var(--foreground))',
   }),

@@ -9,7 +9,7 @@ export const StoreType = {
   notes: PropTypes.string,
 }
 
-export const formatStore = (store) => ({
+export const formatStore = store => ({
   ...store,
   address: store.address.trim(),
   name: store.name.trim(),

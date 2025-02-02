@@ -1,4 +1,4 @@
-type InventoryProduct = {
+interface InventoryProduct {
   id: string
   quantity: number
   createdAt: string
@@ -6,7 +6,7 @@ type InventoryProduct = {
   product: Product
 }
 
-type Inventory = {
+interface Inventory {
   id: string
   lockedAt: string
   createdAt: string

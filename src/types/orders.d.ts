@@ -1,21 +1,21 @@
-type OrderProduct = {
+interface OrderProduct {
   id: string
   quantity: number
   product: Product
 }
 
-type Order = {
+interface Order {
   id: string
   state: 'pending'
-  | 'delivered'
-  | 'ordered'
-  | 'withdrawn'
-  | 'cancelled'
+    | 'delivered'
+    | 'ordered'
+    | 'withdrawn'
+    | 'cancelled'
   createdAt: string
   updatedAt: string
-  deliveredAt: string|null
-  orderedAt: string|null
-  withdrawnAt: string|null
-  cancelledAt: string|null
+  deliveredAt: string | null
+  orderedAt: string | null
+  withdrawnAt: string | null
+  cancelledAt: string | null
   customer: Customer
 }

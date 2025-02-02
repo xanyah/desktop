@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { getProducts } from '@/api'
 import ApiDataSelect from '../api-data-select'
 
-type ProductSelectProps = {
+interface ProductSelectProps {
   onChange: (newValue?: Product['id']) => void
   value?: Product['id']
   label?: string
@@ -23,10 +23,10 @@ const ProductSelect = ({
       return getProducts({
         'q[storeIdEq]': store?.id,
         'q[nameOrSkuOrManufacturerSkuOrUpcCont]': searchQuery,
-        'q[s]': ['name']
+        'q[s]': ['name'],
       })
     },
-    [store]
+    [store],
   )
 
   return (

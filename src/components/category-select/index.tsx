@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { getCategories } from '@/api'
 import ApiDataSelect from '../api-data-select'
 
-type CategorySelectProps = {
+interface CategorySelectProps {
   onChange: (newValue?: Category['id']) => void
   value?: Category['id']
   label?: string
@@ -25,7 +25,7 @@ const CategorySelect = ({
         'q[nameCont]': searchQuery,
       })
     },
-    [store]
+    [store],
   )
 
   return (

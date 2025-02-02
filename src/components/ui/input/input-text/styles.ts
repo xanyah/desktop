@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components'
 
 export const StyledInput = tw.input`
   flex
@@ -20,16 +20,15 @@ focus:border-gray-400
   disabled:opacity-50
   md:text-sm
 
-  ${(p) => p.$hasIcon && `
+  ${p => p.$hasIcon && `
     pr-5
     `
-}
-`;
-
+  }
+`
 
 export const StyledInputIconContainer = tw.div`
   relative
-`;
+`
 
 export const IconContainer = tw.div`
   absolute
@@ -41,4 +40,4 @@ export const IconContainer = tw.div`
   flex
   items-center
   pointer-events-none
-`;
+`

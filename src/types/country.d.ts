@@ -1,4 +1,4 @@
-type Country = {
+interface Country {
   id: string
   code: string
   name: string

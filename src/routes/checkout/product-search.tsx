@@ -1,14 +1,14 @@
-import { useFormContext } from "react-hook-form"
-import { CheckoutSchemaType } from "./schema"
-import { findIndex, head, size } from "lodash"
-import { Button, InputText } from "@/components"
-import { FormEventHandler, useCallback } from "react"
-import { useCurrentStore } from "@/hooks"
-import { getProducts } from "@/api"
-import { useTranslation } from "react-i18next"
+import { useFormContext } from 'react-hook-form'
+import { CheckoutSchemaType } from './schema'
+import { findIndex, head, size } from 'lodash'
+import { Button, InputText } from '@/components'
+import { FormEventHandler, useCallback } from 'react'
+import { useCurrentStore } from '@/hooks'
+import { getProducts } from '@/api'
+import { useTranslation } from 'react-i18next'
 
 const ProductSearch = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const store = useCurrentStore()
   const { watch, setValue } = useFormContext<CheckoutSchemaType>()
 
@@ -20,7 +20,8 @@ const ProductSearch = () => {
       setValue(
         `saleProductsAttributes.${existingProductIndex}.quantity`,
         saleProductsAttributes[existingProductIndex].quantity + 1)
-    } else {
+    }
+    else {
       setValue(
         `saleProductsAttributes.${size(saleProductsAttributes)}`,
         {
@@ -29,7 +30,7 @@ const ProductSearch = () => {
           amountCents: product.amountCents,
           amountCurrency: product.amountCurrency,
           productId: product.id,
-          quantity: 1
+          quantity: 1,
         })
     }
   }, [setValue, watch])
@@ -45,15 +46,18 @@ const ProductSearch = () => {
         addProduct(head(data) as Product);
         (e.target as HTMLFormElement).reset()
       }
-    } catch (err) {
+    }
+    catch (err) {
       console.error(err)
     }
   }, [addProduct, store])
 
-  return <form className="flex flex-row gap-4" onSubmit={onSubmit}>
-    <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
-    <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
-  </form>
+  return (
+    <form className="flex flex-row gap-4" onSubmit={onSubmit}>
+      <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
+      <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
+    </form>
+  )
 }
 
 export default ProductSearch

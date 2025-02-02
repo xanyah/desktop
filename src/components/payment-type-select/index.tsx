@@ -1,9 +1,9 @@
-import { useCurrentStore, usePaymentType,  } from '@/hooks'
+import { useCurrentStore, usePaymentType } from '@/hooks'
 import { useCallback } from 'react'
 import { getPaymentTypes } from '@/api'
 import ApiDataSelect from '../api-data-select'
 
-type PaymentTypeSelectProps = {
+interface PaymentTypeSelectProps {
   onChange: (newValue?: PaymentType['id']) => void
   value?: PaymentType['id']
   label?: string
@@ -23,10 +23,10 @@ const PaymentTypeSelect = ({
       return getPaymentTypes({
         'q[storeIdEq]': store?.id,
         'q[countryNameCont]': searchQuery,
-        'q[s]': 'rate_percent_cents'
+        'q[s]': 'rate_percent_cents',
       })
     },
-    [store]
+    [store],
   )
 
   return (

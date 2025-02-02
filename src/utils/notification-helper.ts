@@ -1,8 +1,6 @@
 import Toasted from 'toastedjs'
 
-
-
-export const showSuccessToast = text => {
+export const showSuccessToast = (text) => {
   const toasted = new Toasted({
     duration: 3000,
     position: 'bottom-right',
