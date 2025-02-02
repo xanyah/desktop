@@ -10,7 +10,7 @@ import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
 import { FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { z } from 'zod'
+import { z } from '../../constants/zod'
 import { find } from 'lodash'
 
 const customAttributeSchema = z.object({

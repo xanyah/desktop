@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from '../../../constants/zod'
 
 export const categorySchema = z.object({
   name: z.string(),

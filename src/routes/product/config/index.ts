@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from '../../../constants/zod'
 
 const ImageSchema = z.union([
   z.instanceof(File),

@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from '../../../constants/zod'
 
 export const customerSchema = z.object({
   firstname: z.string(),
