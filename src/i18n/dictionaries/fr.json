@@ -11,7 +11,8 @@
     "passwordConfirmationPlaceholder": "Confirmation de votre nouveau mot de passe",
     "passwordLabel": "Mot de passe",
     "passwordPlaceholder": "Votre nouveau mot de passe",
-    "security": "Sécurité"
+    "security": "Sécurité",
+    "signOut": "Déconnexion"
   },
   "categories": {
     "createButtonLabel": "Créer une catégorie",
@@ -286,5 +287,14 @@
     "settings": "Paramètres",
     "stock": "Stock & Approvisionnement",
     "store": "Ma boutique"
+  },
+  "signIn": {
+    "emailLabel": "Adresse email",
+    "emailPlaceholder": "Votre adresse email",
+    "invalidCredentials": "Identifiants invalides",
+    "pageTitle": "Connexion",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "Votre mot de passe",
+    "signInButton": "Me connecter"
   }
 }

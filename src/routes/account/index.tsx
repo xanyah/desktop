@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react'
-import { useCurrentUser } from '../../hooks'
+import { useCurrentToken, useCurrentUser } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { updateUserParams } from '../../api'
+import { signOut as apiSignout, updateUserParams } from '../../api'
 import { pick } from 'lodash'
 import { Button, FormContainer, FormSection, InputText } from '../../components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
@@ -26,22 +26,33 @@ const Account = () => {
   ])
   const queryClient = useQueryClient()
   const { data: currentUserData } = useCurrentUser()
+  const { data: currentTokenData } = useCurrentToken()
   const {
     control: userFormControl,
     handleSubmit: handleUserFormSubmit,
     reset,
-  } = useForm<UserFormProps>()
+  } = useForm<UserFormProps>({ defaultValues: { firstname: '', lastname: '' } })
 
   const {
     control: passwordFormControl,
     handleSubmit: handlePasswordFormSubmit,
-  } = useForm<PasswordFormProps>()
+  } = useForm<PasswordFormProps>({ defaultValues: { password: '', confirmPassword: '' } })
 
   const { mutate: updateApiUser, isPending: userSubmitIsLoading } = useMutation(
     {
       mutationFn: updateUserParams,
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+      },
+    },
+  )
+
+  const { mutate: signOut } = useMutation(
+    {
+      mutationFn: () => apiSignout({ token: currentTokenData }),
+      onSuccess: () => {
+        localStorage.clear()
+        queryClient.getQueryCache().clear()
       },
     },
   )
@@ -160,6 +171,11 @@ const Account = () => {
       isNotForm
       title={t('account.pageTitle')}
       subtitle={t('account.pageSubtitle')}
+      button={(
+        <Button type="button" variant="outline" onClick={() => signOut()}>
+          {t('account.signOut')}
+        </Button>
+      )}
     >
       <FormSection title={t('account.generalInformations')}>
         {renderUpdateUserForm()}

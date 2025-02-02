@@ -1,14 +1,13 @@
 import { Controller, useForm } from 'react-hook-form'
-
-import { logo } from '../../images'
 import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { InputText } from '@/components'
+import { FormContainer, InputText } from '@/components'
+import { useCallback } from 'react'
 
 interface SignInForm {
-  email: string
+  username: string
   password: string
 }
 
@@ -16,8 +15,8 @@ const SignIn = () => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { handleSubmit, control } = useForm<SignInForm>({
-    defaultValues: { email: '', password: '' },
+  const { handleSubmit, control, setError } = useForm<SignInForm>({
+    defaultValues: { username: '', password: '' },
   })
 
   const { mutate } = useMutation({
@@ -30,60 +29,59 @@ const SignIn = () => {
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
       navigate('/')
     },
+    onError: () => {
+      setError('username', { type: 'custom', message: t('signIn.invalidCredentials') })
+      setError('password', { type: 'custom', message: t('signIn.invalidCredentials') })
+    },
   })
 
-  const onSubmit = handleSubmit(async ({ email, password }) => {
-    try {
-      mutate({ username: email, password, grantType: 'password' })
-    }
-    catch (err) {
-      console.error(err)
-    }
-  })
+  const onSubmit = useCallback((data) => {
+    mutate({ ...data, grantType: 'password' })
+  }, [mutate])
 
   return (
-    <form key="sign-in" className="sign-in-page" onSubmit={onSubmit}>
-      <div className="container">
-        <img src={logo} className="logo" />
-
+    <div className="min-h-screen flex flex-col items-stretch justify-center w-full p-8">
+      <FormContainer
+        onSubmit={handleSubmit(onSubmit)}
+        title={t('signIn.pageTitle')}
+        submitButtonLabel={t('signIn.signInButton')}
+      >
         <Controller
           control={control}
           rules={{
             required: true,
           }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <InputText
-              placeholder={t('sign-in-page.email')}
+              placeholder={t('signIn.emailPlaceholder')}
+              label={t('signIn.emailLabel')}
               type="email"
               value={value}
               onChange={onChange}
+              error={error?.message}
             />
           )}
-          name="email"
+          name="username"
         />
         <Controller
           control={control}
           rules={{
             required: true,
           }}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <InputText
-              placeholder={t('sign-in-page.password')}
+              placeholder={t('signIn.passwordPlaceholder')}
+              label={t('signIn.passwordLabel')}
               type="password"
               value={value}
               onChange={onChange}
+              error={error?.message}
             />
           )}
           name="password"
         />
-        <button className="btn-solid" onClick={signIn} type="submit">
-          {t('sign-in-page.sign-in')}
-        </button>
-        <button className="btn-link" type="button">
-          {t('sign-in-page.forgotten-password')}
-        </button>
-      </div>
-    </form>
+      </FormContainer>
+    </div>
   )
 }
 

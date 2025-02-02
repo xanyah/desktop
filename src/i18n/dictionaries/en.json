@@ -11,7 +11,8 @@
     "passwordConfirmationPlaceholder": "Confirmation of your new password",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Your new password",
-    "security": "Security"
+    "security": "Security",
+    "signOut": "Sign out"
   },
   "categories": {
     "createButtonLabel": "Create a category",
@@ -286,5 +287,14 @@
     "settings": "Parameters",
     "stock": "Stock & supply",
     "store": "My shop"
+  },
+  "signIn": {
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your email address",
+    "invalidCredentials": "Invalid credentials",
+    "pageTitle": "Sign in",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "signInButton": "Sign in"
   }
 }
