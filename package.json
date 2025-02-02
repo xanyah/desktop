@@ -59,6 +59,7 @@
     "@tauri-apps/cli": "^2.2.5",
     "@types/humps": "^2.0.6",
     "@types/i18n": "^0.13.12",
+    "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.15",
     "@types/luxon": "^3.4.2",
     "@types/node": "^22.10.7",

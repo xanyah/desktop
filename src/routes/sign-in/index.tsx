@@ -77,10 +77,10 @@ const SignIn = () => {
           name="password"
         />
         <button className="btn-solid" onClick={signIn} type="submit">
-          <Trans i18nKey="sign-in-page.sign-in" />
+          {t("sign-in-page.sign-in")}
         </button>
         <button className="btn-link" type="button">
-          <Trans i18nKey="sign-in-page.forgotten-password" />
+          {t("sign-in-page.forgotten-password")}
         </button>
       </div>
     </form>
