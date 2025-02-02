@@ -6,6 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: keyof typeof variants
 }
 
+// eslint-disable-next-line react/display-name
 const Button = forwardRef(({ variant = 'primary', children, ...props }: ButtonProps, ref) => {
   return (
     <StyledButton ref={ref} $variantStyle={variants[variant]} {...props}>

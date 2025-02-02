@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { logo } from '../../images'
 import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { InputText } from '@/components'
 
@@ -77,10 +77,10 @@ const SignIn = () => {
           name="password"
         />
         <button className="btn-solid" onClick={signIn} type="submit">
-          {t("sign-in-page.sign-in")}
+          {t('sign-in-page.sign-in')}
         </button>
         <button className="btn-link" type="button">
-          {t("sign-in-page.forgotten-password")}
+          {t('sign-in-page.forgotten-password')}
         </button>
       </div>
     </form>
