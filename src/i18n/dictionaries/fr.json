@@ -100,6 +100,7 @@
   },
   "global": {
     "cancel": "Annuler",
+    "confirm": "Confirmer",
     "edit": "Éditer",
     "loading": "Chargement en cours...",
     "save": "Enregistrer",
@@ -216,6 +217,8 @@
     "taxFreeAmountPlaceholder": "Prix hors taxes de l'article",
     "upcHint": "L'UPC est le code barre d'origine de l'article",
     "upcLabel": "UPC",
+    "deleteImageTitle": "Confirmation de suppression",
+    "deleteImageDescription": "Êtes-vous sûr de vouloir supprimer cette image?",
     "upcPlaceholder": "UPC de l'article"
   },
   "products": {

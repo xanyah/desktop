@@ -71,7 +71,9 @@ const Product = () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
@@ -85,7 +87,9 @@ const Product = () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
@@ -99,23 +103,20 @@ const Product = () => {
       })
 
       if (!isEmpty(data.images) && data.images) {
-        data.images.forEach((item) => {
+        data.images.forEach(item => {
           if (item instanceof File) {
             formData.append('product[images][]', item)
-          }
-          else if (item.signed_id) {
+          } else if (item.signed_id) {
             formData.append('product[images][]', item.signed_id)
           }
         })
-      }
-      else {
+      } else {
         formData.append('product[images][]', '')
       }
 
       if (validate(id)) {
         updateApiProduct(formData)
-      }
-      else {
+      } else {
         createApiProduct(formData)
       }
     },
@@ -136,7 +137,7 @@ const Product = () => {
     <FormContainer
       title={pageTitle}
       subtitle={t('product.pageSubtitle')}
-      onSubmit={handleSubmit(onSubmit, err => console.log(err))}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <FormSection title={t('product.generalInformations')}>
         <Controller

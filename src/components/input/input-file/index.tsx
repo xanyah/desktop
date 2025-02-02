@@ -14,6 +14,7 @@ import {
   ImageContainer,
   ImagePreview,
 } from './styles'
+import { useTranslation } from 'react-i18next'
 
 interface Image {
   name: string
@@ -47,6 +48,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(
     },
     ref,
   ) => {
+    const { t } = useTranslation()
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
     const handleFileChange = useCallback(
@@ -116,17 +118,19 @@ const InputFile = forwardRef<HTMLInputElement, Props>(
         <Dialog
           open={selectedIndex !== null}
           onClose={() => setSelectedIndex(null)}
-          title="Confirmation"
-          footer={(
+          title={t('product.deleteImageTitle')}
+          footer={
             <>
               <Button variant="outline" onClick={() => setSelectedIndex(null)}>
-                Annuler
+                {t('global.cancel')}
               </Button>
-              <Button onClick={handleRemoveFileConfirm}>Confirmer</Button>
+              <Button onClick={handleRemoveFileConfirm}>
+                {t('global.confirm')}
+              </Button>
             </>
-          )}
+          }
         >
-          Êtes-vous sûr de vouloir supprimer cette image?
+          {t('product.deleteImageDescription')}
         </Dialog>
       </StyledInputContainer>
     )
