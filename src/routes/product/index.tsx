@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useCurrentStore, useProduct } from '../../hooks'
@@ -21,6 +21,7 @@ import {
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Euro } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 const Product = () => {
   const store = useCurrentStore()
@@ -30,6 +31,7 @@ const Product = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {},
   })
+  const toastId = useRef<string>(null)
   const { data: productData } = useProduct(id)
   const pageTitle = useMemo(
     () => productData?.data?.name || t('product.newPageTitle'),
@@ -64,15 +66,27 @@ const Product = () => {
   const { mutate: createApiProduct } = useMutation({
     mutationFn: (newData: FormData) => createProduct(newData),
     onSuccess: () => {
-      showSuccessToast(t('toast.created'))
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    },
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
   const { mutate: updateApiProduct } = useMutation({
     mutationFn: (newData: FormData) => updateProduct(id, newData),
     onSuccess: () => {
-      showSuccessToast(t('toast.updated'))
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['products', { id }] })
+    },
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
@@ -175,7 +189,7 @@ const Product = () => {
               error={error?.message}
               id="file-upload"
               onFilesChange={onChange}
-              value={value}
+              value={value as any}
             />
           )}
         />

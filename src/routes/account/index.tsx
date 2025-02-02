@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useCurrentToken, useCurrentUser } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -7,6 +7,7 @@ import { pick } from 'lodash'
 import { Button, FormContainer, FormSection, InputText } from '../../components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
+import toast from 'react-hot-toast'
 
 interface UserFormProps {
   firstname: string
@@ -27,6 +28,7 @@ const Account = () => {
   const queryClient = useQueryClient()
   const { data: currentUserData } = useCurrentUser()
   const { data: currentTokenData } = useCurrentToken()
+  const toastId = useRef<string>(null)
   const {
     control: userFormControl,
     handleSubmit: handleUserFormSubmit,
@@ -41,19 +43,33 @@ const Account = () => {
   const { mutate: updateApiUser, isPending: userSubmitIsLoading } = useMutation(
     {
       mutationFn: updateUserParams,
+      onMutate: () => {
+        toastId.current = toast.loading(t('global.loading'))
+      },
       onSuccess: () => {
+        toast.success(t('global.saved'), {id: toastId?.current || undefined})
         queryClient.invalidateQueries({ queryKey: ['currentUser'] })
       },
+      onError: () => {
+        toast.success(t('global.savingError'), {id: toastId?.current || undefined})
+      }
     },
   )
 
   const { mutate: signOut } = useMutation(
     {
       mutationFn: () => apiSignout({ token: currentTokenData }),
+      onMutate: () => {
+        toastId.current = toast.loading(t('global.loading'))
+      },
       onSuccess: () => {
+        toast.success(t('global.saved'), {id: toastId?.current || undefined})
         localStorage.clear()
         queryClient.getQueryCache().clear()
       },
+      onError: () => {
+        toast.error(t('global.savingError'), {id: toastId?.current || undefined})
+      }
     },
   )
 

@@ -102,7 +102,10 @@
     "cancel": "Annuler",
     "edit": "Éditer",
     "loading": "Chargement en cours...",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "saving": "Enregistrement en cours...",
+    "savingError": "Erreur lors de l'enregistrement"
   },
   "inventories": {
     "pageTitle": "Inventaires"
@@ -309,10 +312,12 @@
   "signIn": {
     "emailLabel": "Adresse email",
     "emailPlaceholder": "Votre adresse email",
+    "errorToast": "Connexion impossible",
     "invalidCredentials": "Identifiants invalides",
     "pageTitle": "Connexion",
     "passwordLabel": "Mot de passe",
     "passwordPlaceholder": "Votre mot de passe",
-    "signInButton": "Me connecter"
+    "signInButton": "Me connecter",
+    "successToast": "Vous êtes bien connecté"
   }
 }

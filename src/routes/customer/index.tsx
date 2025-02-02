@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useCustomer, useCurrentStore } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -10,6 +10,7 @@ import { customerSchema, customerSchemaType } from './config'
 import { Controller, useForm } from 'react-hook-form'
 import { FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import toast from 'react-hot-toast'
 
 const Customer = () => {
   const queryClient = useQueryClient()
@@ -17,6 +18,7 @@ const Customer = () => {
   const navigate = useNavigate()
   const store = useCurrentStore()
   const { id } = useParams()
+    const toastId = useRef<string>(null)
   const { data: customerData } = useCustomer(id)
   const { handleSubmit, control, reset } = useForm<customerSchemaType>({
     resolver: zodResolver(customerSchema),
@@ -36,21 +38,31 @@ const Customer = () => {
   const { mutate: createApiCustomer } = useMutation({
     mutationFn: (newData: customerSchemaType) =>
       createCustomer({ ...newData, storeId: store?.id }),
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(['customers', { id }], data)
       navigate(`/customers/${data.data.id}/edit`)
-      showSuccessToast(
-        t('toast.created', { entity: t('models.customers.title') }),
-      )
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+    }
   })
 
   const { mutate: updateApiCustomer } = useMutation({
     mutationFn: (newData: customerSchemaType) => updateCustomer(id, newData),
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(['customers', { id }], data)
-      showSuccessToast(t('toast.updated'))
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+    }
   })
 
   const onSubmit = useCallback((data: customerSchemaType) => {

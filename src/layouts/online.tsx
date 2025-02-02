@@ -17,6 +17,7 @@ import { BreadCrumbContext } from '@/contexts'
 import { useCurrentUser } from '@/hooks'
 import { map } from 'lodash'
 import { Fragment, useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const Online = () => {
@@ -66,6 +67,7 @@ const Online = () => {
             <Outlet />
           </BreadCrumbContext.Provider>
         </main>
+        <Toaster position="bottom-right" />
       </SidebarInset>
     </SidebarProvider>
   )

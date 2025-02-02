@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 
 import { useProvider, useCurrentStore } from '../../hooks'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -11,10 +11,12 @@ import { providerSchema, providerSchemaType } from './config'
 import { Controller, useForm } from 'react-hook-form'
 import { FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import toast from 'react-hot-toast'
 
 const Provider = () => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
+  const toastId = useRef<string>(null)
   const navigate = useNavigate()
   const store = useCurrentStore()
   const { id } = useParams()
@@ -38,9 +40,13 @@ const Provider = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(['providers', { id }], data)
       navigate(`/providers/${data.data.id}/edit`)
-      showSuccessToast(
-        t('toast.created', { entity: t('models.providers.title') }),
-      )
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    },
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
@@ -48,7 +54,13 @@ const Provider = () => {
     mutationFn: (newData: providerSchemaType) => updateProvider(id, newData),
     onSuccess: (data) => {
       queryClient.setQueryData(['providers', { id }], data)
-      showSuccessToast(t('toast.updated'))
+      toast.success(t('global.saved'), { id: toastId?.current || undefined })
+    },
+    onMutate: () => {
+      toastId.current = toast.loading(t('global.loading'))
+    },
+    onError: () => {
+      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
     },
   })
 
@@ -66,11 +78,11 @@ const Provider = () => {
   return (
     <FormContainer
       title={pageTitle}
-      subtitle={t('providers.pageSubtitle')}
+      subtitle={t('provider.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
     >
       <FormSection
-        title={t('providers.generalInformations')}
+        title={t('provider.generalInformations')}
       >
         <Controller
           control={control}
@@ -80,9 +92,9 @@ const Provider = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder={t('providers.namePlaceholder')}
+              placeholder={t('provider.namePlaceholder')}
               type="text"
-              label={t('providers.nameLabel')}
+              label={t('provider.nameLabel')}
             />
           )}
         />
@@ -95,9 +107,9 @@ const Provider = () => {
               error={error?.message}
               onChange={onChange}
               value={value}
-              placeholder={t('providers.notesPlaceholder')}
+              placeholder={t('provider.notesPlaceholder')}
               type="text"
-              label={t('providers.notesLabel')}
+              label={t('provider.notesLabel')}
             />
           )}
         />

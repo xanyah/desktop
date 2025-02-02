@@ -102,7 +102,10 @@
     "cancel": "Cancel",
     "edit": "Edit",
     "loading": "Loading in progress ...",
-    "save": "Save"
+    "save": "Save",
+    "saved": "Saved",
+    "saving": "Saving...",
+    "savingError": "Error while saving"
   },
   "inventories": {
     "pageTitle": "Inventories"
@@ -309,10 +312,12 @@
   "signIn": {
     "emailLabel": "Email",
     "emailPlaceholder": "Your email address",
+    "errorToast": "Error while signing in",
     "invalidCredentials": "Invalid credentials",
     "pageTitle": "Sign in",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Your password",
-    "signInButton": "Sign in"
+    "signInButton": "Sign in",
+    "successToast": "You have been signed in"
   }
 }

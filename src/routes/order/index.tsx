@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { useOrder, useOrderProducts } from '../../hooks'
 import { Link, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -15,6 +15,7 @@ import { orderBadgeVariants } from '@/constants/orders'
 import { AxiosResponse } from 'axios'
 import { uuidNumber } from '@/helpers/uuid'
 import { formatLongDatetime } from '@/helpers/dates'
+import toast from 'react-hot-toast'
 
 const Order = () => {
   const { t } = useTranslation()
@@ -24,22 +25,27 @@ const Order = () => {
   const { data: orderProductsData } = useOrderProducts({
     'q[orderIdEq]': id,
   })
+  const toastId = useRef<string>(null)
   useBreadCrumbContext([
     { label: t('orders.pageTitle'), url: '/orders' },
     { label: t('order.pageTitle', { orderNumber: uuidNumber(orderData?.data.id) }) },
   ])
 
-  const onSuccess = useCallback(() => {
-    showSuccessToast(t('toast.updated'))
-    queryClient.invalidateQueries({ queryKey: ['orders', { id }] })
-  }, [t, id, queryClient])
-
   const useChangeOrderStatus = useCallback((mutationFn: (storeId?: Store['id']) => Promise<AxiosResponse<Order, any>>) => {
     return useMutation({
       mutationFn: () => mutationFn(id),
-      onSuccess,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['orders', { id }] })
+        toast.success(t('global.saved'), { id: toastId?.current || undefined })
+      },
+      onMutate: () => {
+        toastId.current = toast.loading(t('global.loading'))
+      },
+      onError: () => {
+        toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      },
     })
-  }, [id, onSuccess])
+  }, [id])
 
   const { mutate: cancelApiOrder } = useChangeOrderStatus(cancelOrder)
   const { mutate: orderApiOrder } = useChangeOrderStatus(orderOrder)
