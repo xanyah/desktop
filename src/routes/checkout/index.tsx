@@ -38,7 +38,7 @@ const Checkout = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const onSubmit = useCallback((data: CheckoutSchemaType) => {

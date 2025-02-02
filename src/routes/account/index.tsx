@@ -47,12 +47,12 @@ const Account = () => {
         toastId.current = toast.loading(t('global.loading'))
       },
       onSuccess: () => {
-        toast.success(t('global.saved'), {id: toastId?.current || undefined})
+        toast.success(t('global.saved'), { id: toastId?.current || undefined })
         queryClient.invalidateQueries({ queryKey: ['currentUser'] })
       },
       onError: () => {
-        toast.success(t('global.savingError'), {id: toastId?.current || undefined})
-      }
+        toast.success(t('global.savingError'), { id: toastId?.current || undefined })
+      },
     },
   )
 
@@ -63,13 +63,13 @@ const Account = () => {
         toastId.current = toast.loading(t('global.loading'))
       },
       onSuccess: () => {
-        toast.success(t('global.saved'), {id: toastId?.current || undefined})
+        toast.success(t('global.saved'), { id: toastId?.current || undefined })
         localStorage.clear()
         queryClient.getQueryCache().clear()
       },
       onError: () => {
-        toast.error(t('global.savingError'), {id: toastId?.current || undefined})
-      }
+        toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      },
     },
   )
 

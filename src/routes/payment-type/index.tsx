@@ -39,7 +39,7 @@ const PaymentType = () => {
       queryClient.setQueryData(['paymentTypes', { id }], data)
       navigate(`/payment-types/${data.data.id}/edit`)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
-    },onMutate: () => {
+    }, onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onError: () => {
@@ -52,7 +52,7 @@ const PaymentType = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(['paymentTypes', { id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
-    },onMutate: () => {
+    }, onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onError: () => {

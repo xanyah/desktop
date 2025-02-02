@@ -17,7 +17,7 @@ const Customer = () => {
   const navigate = useNavigate()
   const store = useCurrentStore()
   const { id } = useParams()
-    const toastId = useRef<string>(null)
+  const toastId = useRef<string>(null)
   const { data: customerData } = useCustomer(id)
   const { handleSubmit, control, reset } = useForm<customerSchemaType>({
     resolver: zodResolver(customerSchema),
@@ -47,7 +47,7 @@ const Customer = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const { mutate: updateApiCustomer } = useMutation({
@@ -61,7 +61,7 @@ const Customer = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const onSubmit = useCallback((data: customerSchemaType) => {

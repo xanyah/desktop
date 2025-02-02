@@ -37,7 +37,7 @@ const Manufacturer = () => {
   const { mutate: createApiManufacturer } = useMutation({
     mutationFn: (newData: manufacturerSchemaType) =>
       createManufacturer({ ...newData, storeId: store?.id }),
-      onMutate: () => {
+    onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onSuccess: (data) => {
@@ -47,12 +47,12 @@ const Manufacturer = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const { mutate: updateApiManufacturer } = useMutation({
     mutationFn: (newData: manufacturerSchemaType) => updateManufacturer(id, newData),
-      onMutate: () => {
+    onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onSuccess: (data) => {
@@ -61,7 +61,7 @@ const Manufacturer = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const onSubmit = useCallback((data: manufacturerSchemaType) => {

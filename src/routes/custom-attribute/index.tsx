@@ -60,7 +60,7 @@ const CustomAttribute = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const { mutate: updateApiCustomAttribute } = useMutation({
@@ -74,7 +74,7 @@ const CustomAttribute = () => {
     },
     onError: () => {
       toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-    }
+    },
   })
 
   const onSubmit = useCallback((data: CustomAttributeSchemaType) => {
