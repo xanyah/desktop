@@ -1,10 +1,3 @@
-import Toasted from 'toastedjs'
-
 export const showSuccessToast = (text) => {
-  const toasted = new Toasted({
-    duration: 3000,
-    position: 'bottom-right',
-    type: 'success',
-  })
-  toasted.show(text)
+  console.log(text)
 }
