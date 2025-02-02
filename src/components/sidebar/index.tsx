@@ -1,115 +1,127 @@
-import { Blend, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Sparkles, Truck, User, Users } from 'lucide-react'
+import { Blend, ChartLine, Coins, CreditCard, Factory, Group, NotebookText, ScanBarcode, Sparkles, Truck, User, Users } from 'lucide-react'
 import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
-const items = [
-  {
-    i18nKey: 'sidebar.store',
-    items: [
-      {
-        icon: Coins,
-        i18nKey: 'checkout.pageTitle',
-        url: '/checkout',
-      },
-      {
-        icon: Users,
-        i18nKey: 'customers.pageTitle',
-        url: '/customers',
-      },
-      {
-        icon: NotebookText,
-        i18nKey: 'orders.pageTitle',
-        url: '/orders',
-      },
-      {
-        icon: ChartLine,
-        i18nKey: 'sales.pageTitle',
-        url: '/sales',
-      },
-    ],
-  },
-  {
-    i18nKey: 'sidebar.stock',
-    items: [
-      {
-        icon: Blend,
-        i18nKey: 'products.pageTitle',
-        url: '/products',
-      },
-      {
-        icon: Factory,
-        i18nKey: 'manufacturers.pageTitle',
-        url: '/manufacturers',
-      },
-      {
-        icon: Truck,
-        i18nKey: 'providers.pageTitle',
-        url: '/providers',
-      },
-      {
-        icon: ScanBarcode,
-        i18nKey: 'inventories.pageTitle',
-        url: '/inventories',
-      },
-      {
-        icon: Truck,
-        i18nKey: 'shippings.pageTitle',
-        url: '/shippings',
-      },
-    ],
-  },
-  {
-    i18nKey: 'sidebar.settings',
-    items: [
-      {
-        icon: Sparkles,
-        i18nKey: 'customAttributes.pageTitle',
-        url: '/custom-attributes',
-      },
-      {
-        icon: Group,
-        i18nKey: 'categories.pageTitle',
-        url: '/categories',
-      },
-    ],
-  },
-  {
-    i18nKey: 'sidebar.account',
-    items: [
-      {
-        icon: User,
-        i18nKey: 'account.pageTitle',
-        url: '/account',
-      },
-    ],
-  },
-]
+import { useMemo } from 'react'
+import { useCurrentStoreRole } from '@/hooks'
+import { map, sortBy } from 'lodash'
 
 const Sidebar = () => {
   const { t } = useTranslation()
+  const role = useCurrentStoreRole()
+  const items = useMemo(() => [
+    {
+      label: t('sidebar.store'),
+      items: [
+        {
+          icon: Coins,
+          label: t('checkout.pageTitle'),
+          url: '/checkout',
+        },
+        {
+          icon: Users,
+          label: t('customers.pageTitle'),
+          url: '/customers',
+        },
+        {
+          icon: NotebookText,
+          label: t('orders.pageTitle'),
+          url: '/orders',
+        },
+        {
+          icon: ChartLine,
+          label: t('sales.pageTitle'),
+          url: '/sales',
+        },
+      ],
+    },
+    {
+      label: t('sidebar.stock'),
+      items: [
+        {
+          icon: Blend,
+          label: t('products.pageTitle'),
+          url: '/products',
+        },
+        {
+          icon: Factory,
+          label: t('manufacturers.pageTitle'),
+          url: '/manufacturers',
+        },
+        {
+          icon: Truck,
+          label: t('providers.pageTitle'),
+          url: '/providers',
+        },
+        {
+          icon: ScanBarcode,
+          label: t('inventories.pageTitle'),
+          url: '/inventories',
+        },
+        {
+          icon: Truck,
+          label: t('shippings.pageTitle'),
+          url: '/shippings',
+        },
+      ],
+    },
+    {
+      label: t('sidebar.settings'),
+      disabled: role === 'regular',
+      items: [
+        {
+          icon: Sparkles,
+          label: t('customAttributes.pageTitle'),
+          url: '/custom-attributes',
+        },
+        {
+          icon: Group,
+          label: t('categories.pageTitle'),
+          url: '/categories',
+        },
+        {
+          icon: CreditCard,
+          label: t('paymentTypes.pageTitle'),
+          url: '/payment-types',
+        },
+      ],
+    },
+    {
+      label: t('sidebar.account'),
+      items: [
+        {
+          icon: User,
+          label: t('account.pageTitle'),
+          url: '/account',
+        },
+      ],
+    },
+  ], [role, t])
+
   return (
     <ShadSidebar>
       <SidebarContent>
         {items.map(group => (
-          <SidebarGroup key={group.i18nKey}>
-            <SidebarGroupLabel>{t(group.i18nKey)}</SidebarGroupLabel>
+          group.disabled
+          ? null
+          : (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {group.items.map(item => (
-                  <SidebarMenuItem key={item.i18nKey}>
+                {map(sortBy(group.items, 'label'), item => (
+                  <SidebarMenuItem key={item.label}>
                     <SidebarMenuButton asChild>
                       <NavLink to={item.url}>
                         <item.icon />
-                        <span>{t(item.i18nKey)}</span>
+                        <span>{item.label}</span>
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+          </SidebarGroup>)))}
       </SidebarContent>
     </ShadSidebar>
   )

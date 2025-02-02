@@ -296,5 +296,24 @@
     "passwordLabel": "Mot de passe",
     "passwordPlaceholder": "Votre mot de passe",
     "signInButton": "Me connecter"
+  },
+
+  "paymentTypes": {
+    "createButtonLabel": "Créer une moyen de paiement",
+    "pageTitle": "Moyens de paiement",
+    "searchPlaceholder": "Rechercher un moyen de paiement...",
+    "table": {
+      "name": "Nom du moyen de paiement",
+      "description": "Description"
+    }
+  },
+  "paymentType": {
+    "generalInformations": "Informations générales",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Nom du moyen de paiement",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Description du moyen de paiement",
+    "newPageTitle": "Nouveau moyen de paiement",
+    "pageSubtitle": "Saisissez ici les informations de votre moyen de paiement"
   }
 }
