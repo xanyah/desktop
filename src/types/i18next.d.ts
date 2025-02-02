@@ -1,10 +1,10 @@
-import "i18next";
+import 'i18next'
 // import all namespaces (for the default language, only)
-import fr from "../i18n/dictionaries/fr.json";
+import fr from '../i18n/dictionaries/fr.json'
 
-declare module "i18next" {
+declare module 'i18next' {
   interface CustomTypeOptions {
-    defaultNS: string;
-    resources: typeof fr;
+    defaultNS: string
+    resources: typeof fr
   }
 }

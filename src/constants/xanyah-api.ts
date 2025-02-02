@@ -10,8 +10,8 @@ export const xanyahApi = axios.create({
 })
 
 xanyahApi.interceptors.request.use(
-  config => {
-    config.headers["Authorization"] = localStorage.getItem(`Xanyah:Bearer`)
+  (config) => {
+    config.headers['Authorization'] = localStorage.getItem(`Xanyah:Bearer`)
 
     if (config.headers['Content-Type'] === 'application/json') {
       config.data = decamelizeKeys(config.data)
@@ -23,7 +23,7 @@ xanyahApi.interceptors.request.use(
   error => Promise.reject(error))
 
 xanyahApi.interceptors.response.use(
-  response => {
+  (response) => {
     response.data = camelizeKeys(response.data)
     return response
   },

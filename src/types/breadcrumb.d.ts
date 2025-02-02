@@ -1,4 +1,4 @@
-type BreadCrumbElement = {
+interface BreadCrumbElement {
   url?: string
   label: string
 }

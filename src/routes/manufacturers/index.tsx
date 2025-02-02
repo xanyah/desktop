@@ -7,7 +7,7 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 
 const Manufacturers = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('manufacturers.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -17,7 +17,7 @@ const Manufacturers = () => {
     page,
     'q[nameOrNotesCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': 'name'
+    'q[s]': 'name',
   })
 
   const columnHelper = createColumnHelper<Manufacturer>()
@@ -27,7 +27,7 @@ const Manufacturers = () => {
       [
         columnHelper.accessor('name', {
           header: t('manufacturers.table.name'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/manufacturers/${props.row.original.id}/edit`}
@@ -40,7 +40,7 @@ const Manufacturers = () => {
           header: t('manufacturers.table.code'),
         }),
       ] as ColumnDef<Manufacturer>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   return (
@@ -49,7 +49,7 @@ const Manufacturers = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/manufacturers/new'}
+      createUrl="/manufacturers/new"
       createLabel={t('manufacturers.createButtonLabel')}
       columns={columns}
       data={data?.data}

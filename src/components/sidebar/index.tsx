@@ -1,7 +1,7 @@
-import { Blend, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Sparkles, Truck, User, Users } from "lucide-react"
-import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
-import { Link, NavLink } from "react-router-dom"
-import { useTranslation } from "react-i18next"
+import { Blend, ChartLine, Coins, Factory, Group, NotebookText, ScanBarcode, Sparkles, Truck, User, Users } from 'lucide-react'
+import { Sidebar as ShadSidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
+import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const items = [
   {
@@ -27,7 +27,7 @@ const items = [
         i18nKey: 'sales.pageTitle',
         url: '/sales',
       },
-    ]
+    ],
   },
   {
     i18nKey: 'sidebar.stock',
@@ -57,7 +57,7 @@ const items = [
         i18nKey: 'shippings.pageTitle',
         url: '/shippings',
       },
-    ]
+    ],
   },
   {
     i18nKey: 'sidebar.settings',
@@ -65,14 +65,14 @@ const items = [
       {
         icon: Sparkles,
         i18nKey: 'customAttributes.pageTitle',
-        url: '/custom-attributes'
+        url: '/custom-attributes',
       },
       {
         icon: Group,
         i18nKey: 'categories.pageTitle',
-        url: "/categories"
+        url: '/categories',
       },
-    ]
+    ],
   },
   {
     i18nKey: 'sidebar.account',
@@ -82,16 +82,16 @@ const items = [
         i18nKey: 'account.pageTitle',
         url: '/account',
       },
-    ]
-  }
+    ],
+  },
 ]
 
 const Sidebar = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <ShadSidebar>
       <SidebarContent>
-        {items.map((group) => (
+        {items.map(group => (
           <SidebarGroup key={group.i18nKey}>
             <SidebarGroupLabel>{t(group.i18nKey)}</SidebarGroupLabel>
             <SidebarGroupContent>
@@ -104,10 +104,12 @@ const Sidebar = () => {
                         <span>{t(item.i18nKey)}</span>
                       </NavLink>
                     </SidebarMenuButton>
-                  </SidebarMenuItem>))}
+                  </SidebarMenuItem>
+                ))}
               </SidebarMenu>
             </SidebarGroupContent>
-          </SidebarGroup>))}
+          </SidebarGroup>
+        ))}
       </SidebarContent>
     </ShadSidebar>
   )

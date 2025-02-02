@@ -22,16 +22,18 @@ const Inventories = () => {
       [
         columnHelper.accessor('lockedAt', {
           header: 'Statut',
-          cell: (props) =>
-            props.getValue() ? (
-              <Badge variant="outline">Locked</Badge>
-            ) : (
-              <Badge variant="default">Open</Badge>
-            ),
+          cell: props =>
+            props.getValue()
+              ? (
+                  <Badge variant="outline">Locked</Badge>
+                )
+              : (
+                  <Badge variant="default">Open</Badge>
+                ),
         }),
         columnHelper.accessor('id', {
           header: 'ID',
-          cell: (props) => (
+          cell: props => (
             <Link className="underline" to={`/orders/${props.getValue()}`}>
               {props.getValue()}
             </Link>
@@ -41,7 +43,7 @@ const Inventories = () => {
           header: 'Creation date',
         }),
       ] as ColumnDef<Inventory>[],
-    [columnHelper]
+    [columnHelper],
   )
 
   return (

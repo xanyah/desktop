@@ -7,7 +7,7 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 
 const Categories = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('categories.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
@@ -16,7 +16,7 @@ const Categories = () => {
     page,
     'q[nameOrCategoryNameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
-    'q[s]': ['name']
+    'q[s]': ['name'],
   })
 
   const columnHelper = createColumnHelper<Category>()
@@ -26,7 +26,7 @@ const Categories = () => {
       [
         columnHelper.accessor('name', {
           header: t('categories.table.name'),
-          cell: (props) => (
+          cell: props => (
             <Link
               className="underline"
               to={`/categories/${props.row.original.id}/edit`}
@@ -40,10 +40,10 @@ const Categories = () => {
         }),
         columnHelper.accessor('vatRate.ratePercentCents', {
           header: t('categories.table.vat'),
-          cell: props => props.getValue() ? `${props.getValue() / 100}%` : ''
+          cell: props => props.getValue() ? `${props.getValue() / 100}%` : '',
         }),
       ] as ColumnDef<Category>[],
-    [t,columnHelper]
+    [t, columnHelper],
   )
 
   return (
@@ -52,7 +52,7 @@ const Categories = () => {
       onSearchQueryChange={setSearchQuery}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/categories/new'}
+      createUrl="/categories/new"
       createLabel={t('categories.createButtonLabel')}
       columns={columns}
       data={data?.data}

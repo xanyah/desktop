@@ -3,7 +3,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from '@tanstack/react-table';
+} from '@tanstack/react-table'
 
 import {
   Table,
@@ -12,12 +12,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { map, size } from 'lodash';
+} from '@/components/ui/table'
+import { map, size } from 'lodash'
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
 function DataTable<TData, TValue>({
@@ -28,52 +28,54 @@ function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  });
+  })
 
   return (
     <div className="rounded-md border">
       <Table>
         <TableHeader>
-          {map(table.getHeaderGroups(), (headerGroup) => (
+          {map(table.getHeaderGroups(), headerGroup => (
             <TableRow key={headerGroup.id}>
-              {map(headerGroup.headers, (header) => (
+              {map(headerGroup.headers, header => (
                 <TableHead key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                 </TableHead>
               ))}
             </TableRow>
           ))}
         </TableHeader>
         <TableBody>
-          {size(table.getRowModel().rows) ? (
-            map(table.getRowModel().rows, (row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
-                {map(row.getVisibleCells(), (cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          {size(table.getRowModel().rows)
+            ? (
+                map(table.getRowModel().rows, row => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                  >
+                    {map(row.getVisibleCells(), cell => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              )
+            : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No results.
                   </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
+                </TableRow>
+              )}
         </TableBody>
       </Table>
     </div>
-  );
+  )
 }
 
-export default DataTable;
+export default DataTable

@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter,
   Navigate,
@@ -40,7 +39,7 @@ const Router = () => {
           <Route path="sign-in" element={<SignIn />} />
         </Route>
         <Route element={<OnlineLayout />}>
-          <Route  path="" element={<Navigate to="/checkout" />} />
+          <Route path="" element={<Navigate to="/checkout" />} />
           <Route path="account" element={<Account />} />
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:id/edit" element={<Category />} />

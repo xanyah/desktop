@@ -1,4 +1,4 @@
-type Category = {
+interface Category {
   id: string
   name: string
   category?: Category

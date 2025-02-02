@@ -4,7 +4,7 @@ import { UseQueryResult } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import { AsyncReactSelect } from '../ui'
 
-type ApiDataSelectProps = {
+interface ApiDataSelectProps {
   onChange: (newValue?: string) => void
   value?: string
   useRecordHook: (recordId?: string) => UseQueryResult<AxiosResponse<any>>
@@ -34,7 +34,7 @@ const ApiDataSelect = ({
         label: getRecordLabel(record),
       }
     },
-    [getRecordLabel, getRecordValue]
+    [getRecordLabel, getRecordValue],
   )
 
   const selectValue = useMemo(() => {
@@ -49,14 +49,14 @@ const ApiDataSelect = ({
       const { data } = await getFilteredRecords(inputValue)
       return map(data, formatRecord)
     },
-    [getFilteredRecords, formatRecord]
+    [getFilteredRecords, formatRecord],
   )
 
   return (
     <AsyncReactSelect
       cacheOptions
       defaultOptions
-      onChange={(item) => onChange(item?.value)}
+      onChange={item => onChange(item?.value)}
       value={selectValue}
       loadOptions={loadOptions}
       label={label}

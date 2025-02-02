@@ -10,5 +10,5 @@ export const usePaymentTypes = (filters = {}) => useQuery({
 export const usePaymentType = (id?: string) => useQuery({
   queryFn: () => getPaymentType(id),
   enabled: validate(id),
-  queryKey: ['paymentTypes', {id}],
+  queryKey: ['paymentTypes', { id }],
 })

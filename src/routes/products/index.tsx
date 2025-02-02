@@ -5,9 +5,11 @@ import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatPrice } from '@/helpers/price'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { useTranslation } from 'react-i18next'
 
 const Products = () => {
-  useBreadCrumbContext([{ label: 'Products' }])
+  const { t } = useTranslation()
+  useBreadCrumbContext([{ label: t('products.pageTitle') }])
   const currentStore = useCurrentStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [page, setPage] = useState(1)
@@ -15,7 +17,7 @@ const Products = () => {
     'q[nameOrSkuOrUpcCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
     'q[s]': ['name', 'manufacturers.name'],
-    page: page,
+    'page': page,
   })
 
   const columnHelper = createColumnHelper<Product>()
@@ -24,8 +26,8 @@ const Products = () => {
     () =>
       [
         columnHelper.accessor('sku', {
-          header: 'SKU',
-          cell: (props) => (
+          header: t('products.table.sku'),
+          cell: props => (
             <Link
               className="underline"
               to={`/products/${props.row.original.id}/edit`}
@@ -35,14 +37,14 @@ const Products = () => {
           ),
         }),
         columnHelper.accessor('manufacturerSku', {
-          header: 'Code fabricant',
+          header: t('products.table.manufacturerSku'),
         }),
         columnHelper.accessor('name', {
-          header: 'Name',
+          header: t('products.table.name'),
         }),
         columnHelper.accessor('category.name', {
-          header: 'Category',
-          cell: (props) => (
+          header: t('products.table.category'),
+          cell: props => (
             <Link
               className="underline"
               to={`/categories/${props.row.original.category?.id}/edit`}
@@ -52,8 +54,8 @@ const Products = () => {
           ),
         }),
         columnHelper.accessor('manufacturer.name', {
-          header: 'Manufacturer',
-          cell: (props) => (
+          header: t('products.table.manufacturer'),
+          cell: props => (
             <Link
               className="underline"
               to={`/manufacturers/${props.row.original.manufacturer?.id}/edit`}
@@ -63,31 +65,31 @@ const Products = () => {
           ),
         }),
         columnHelper.accessor('quantity', {
-          header: 'Quantity',
+          header: t('products.table.quantity'),
         }),
         columnHelper.accessor('amountCents', {
-          header: 'Price',
-          cell: (props) => (
+          header: t('products.table.amount'),
+          cell: props => (
             <span>
               {formatPrice(props.getValue(), props.row.original.amountCurrency)}
             </span>
           ),
         }),
       ] as ColumnDef<Product>[],
-    [columnHelper]
+    [t, columnHelper],
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder="Search a product"
+      searchPlaceholder={t('products.searchPlaceholder')}
       onSearchQueryChange={setSearchQuery}
       currentPage={page}
       totalPages={data?.headers['total-pages']}
       onPageChange={setPage}
       searchQuery={searchQuery}
       isLoading={isLoading}
-      createUrl={'/products/new'}
-      createLabel={'Create a product'}
+      createUrl="/products/new"
+      createLabel={t('products.createButtonLabel')}
       columns={columns}
       data={data?.data}
     />

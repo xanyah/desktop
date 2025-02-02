@@ -99,6 +99,7 @@
   },
   "global": {
     "cancel": "Cancel",
+    "edit": "Edit",
     "loading": "Loading in progress ...",
     "save": "Save"
   },
@@ -166,8 +167,48 @@
       "updatedAt": "Last update"
     }
   },
+  "product": {
+    "amountHint": "The price including tax corresponds to the final price which will be paid by the customer",
+    "amountLabel": "Price TTC",
+    "amountPlaceholder": "Price TTC of the article",
+    "buyingAmountHint": "The purchase price of the item is the price from which it was purchased from the supplier",
+    "buyingAmountLabel": "Purchase price",
+    "buyingAmountPlaceholder": "Article purchase price",
+    "categoryLabel": "Category",
+    "generalInformations": "General information",
+    "imagesLabel": "Images",
+    "logistics": "Logistics",
+    "manufacturerLabel": "Manufacturer",
+    "manufacturerSkuHint": "The manufacturer code is a code generally composed of the first 4 letters of the manufacturer's name and then the article identifier",
+    "manufacturerSkuLabel": "Manufacturer code",
+    "manufacturerSkuPlaceholder": "Article manufacturer code",
+    "nameLabel": "Name",
+    "namePlaceholder": "Article name",
+    "newPageTitle": "New article",
+    "pageSubtitle": "Enter here the information of your product",
+    "skuHint": "SKU is a barcode specific to the store to identify the article",
+    "skuLabel": "SKU",
+    "skuPlaceholder": "SKU of the article",
+    "taxFreeAmountHint": "The price excluding taxes is the price of the item before applying VAT",
+    "taxFreeAmountLabel": "Price excluding taxes",
+    "taxFreeAmountPlaceholder": "Price excluding taxes of the article",
+    "upcHint": "The UPC is the original barcode of the article",
+    "upcLabel": "UPC",
+    "upcPlaceholder": "UPC of the article"
+  },
   "products": {
-    "pageTitle": "Inventories"
+    "createButtonLabel": "Create an article",
+    "pageTitle": "Items",
+    "searchPlaceholder": "Search for an article ...",
+    "table": {
+      "amount": "Amount",
+      "category": "Category",
+      "manufacturer": "Manufacturer",
+      "manufacturerSku": "Manufacturer code",
+      "name": "Article name",
+      "quantity": "Quantity",
+      "sku": "Barcode"
+    }
   },
   "provider": {
     "generalInformations": "General information",

@@ -1,5 +1,5 @@
-type VatRate = {
+interface VatRate {
   id: string
-  ratePercentCents: number,
+  ratePercentCents: number
   country: Country
 }

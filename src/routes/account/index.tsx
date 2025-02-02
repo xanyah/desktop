@@ -1,61 +1,61 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from 'react'
 import { useCurrentUser } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateUserParams } from '../../api'
-import {  pick } from "lodash";
-import { Button,  FormContainer, FormSection, InputText } from "../../components";
-import { useBreadCrumbContext } from "@/contexts/breadcrumb";
-import { useTranslation } from "react-i18next";
+import { pick } from 'lodash'
+import { Button, FormContainer, FormSection, InputText } from '../../components'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { useTranslation } from 'react-i18next'
 
-type UserFormProps = {
-  firstname: string;
-  lastname: string;
-  locale: string;
-};
+interface UserFormProps {
+  firstname: string
+  lastname: string
+  locale: string
+}
 
-type PasswordFormProps = {
-  password: string;
-  confirmPassword: string;
-};
+interface PasswordFormProps {
+  password: string
+  confirmPassword: string
+}
 
 const Account = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   useBreadCrumbContext([
-    {label: t('account.pageTitle')}
+    { label: t('account.pageTitle') },
   ])
   const queryClient = useQueryClient()
-  const { data: currentUserData } = useCurrentUser();
+  const { data: currentUserData } = useCurrentUser()
   const {
     control: userFormControl,
     handleSubmit: handleUserFormSubmit,
     reset,
-  } = useForm<UserFormProps>();
+  } = useForm<UserFormProps>()
 
   const {
     control: passwordFormControl,
     handleSubmit: handlePasswordFormSubmit,
-  } = useForm<PasswordFormProps>();
+  } = useForm<PasswordFormProps>()
 
   const { mutate: updateApiUser, isPending: userSubmitIsLoading } = useMutation(
     {
       mutationFn: updateUserParams,
       onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['currentUser']})
-      }
-    }
-  );
+        queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+      },
+    },
+  )
 
   const onUserSubmit = useCallback(
     (data: UserFormProps | PasswordFormProps) => {
-      updateApiUser(data);
+      updateApiUser(data)
     },
-    [updateApiUser]
-  );
+    [updateApiUser],
+  )
 
   useEffect(() => {
-    reset(pick(currentUserData?.data, ["firstname", "lastname", "locale"]));
-  }, [currentUserData, reset]);
+    reset(pick(currentUserData?.data, ['firstname', 'lastname', 'locale']))
+  }, [currentUserData, reset])
 
   const renderUpdateUserForm = useCallback(() => {
     return (
@@ -97,14 +97,14 @@ const Account = () => {
           {t('global.save')}
         </Button>
       </form>
-    );
+    )
   }, [
     t,
     handleUserFormSubmit,
     onUserSubmit,
     userFormControl,
     userSubmitIsLoading,
-  ]);
+  ])
 
   const renderUpdatePasswordForm = useCallback(() => {
     return (
@@ -146,14 +146,14 @@ const Account = () => {
           {t('global.save')}
         </Button>
       </form>
-    );
+    )
   }, [
     t,
     handlePasswordFormSubmit,
     onUserSubmit,
     passwordFormControl,
     userSubmitIsLoading,
-  ]);
+  ])
 
   return (
     <FormContainer
@@ -171,4 +171,4 @@ const Account = () => {
   )
 }
 
-export default Account;
+export default Account

@@ -99,6 +99,7 @@
   },
   "global": {
     "cancel": "Annuler",
+    "edit": "Éditer",
     "loading": "Chargement en cours...",
     "save": "Enregistrer"
   },
@@ -166,8 +167,48 @@
       "updatedAt": "Dernière mise à jour"
     }
   },
+  "product": {
+    "amountHint": "Le prix TTC correspond au prix final qui sera payé par le client",
+    "amountLabel": "Prix TTC",
+    "amountPlaceholder": "Prix TTC de l'article",
+    "buyingAmountHint": "Le prix d'achat de l'article est le prix auquel il a été acheté au fournisseur",
+    "buyingAmountLabel": "Prix d'achat",
+    "buyingAmountPlaceholder": "Prix d'achat de l'article",
+    "categoryLabel": "Catégorie",
+    "generalInformations": "Informations générales",
+    "imagesLabel": "Images",
+    "logistics": "Logistique",
+    "manufacturerLabel": "Fabricant",
+    "manufacturerSkuHint": "Le code fabricant est un code généralement composé des 4 premières lettres du nom du fabricant puis de l'identifiant de l'article",
+    "manufacturerSkuLabel": "Code fabricant",
+    "manufacturerSkuPlaceholder": "Code fabricant de l'article",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Nom de l'article",
+    "newPageTitle": "Nouvel article",
+    "pageSubtitle": "Saisissez ici les informations de votre produit",
+    "skuHint": "Le SKU est un code barre spécifique à la boutique pour identifier l'article",
+    "skuLabel": "SKU",
+    "skuPlaceholder": "SKU de l'article",
+    "taxFreeAmountHint": "Le prix hors taxes est le prix de l'article avant l'application de la TVA",
+    "taxFreeAmountLabel": "Prix hors taxes",
+    "taxFreeAmountPlaceholder": "Prix hors taxes de l'article",
+    "upcHint": "L'UPC est le code barre d'origine de l'article",
+    "upcLabel": "UPC",
+    "upcPlaceholder": "UPC de l'article"
+  },
   "products": {
-    "pageTitle": "Articles"
+    "createButtonLabel": "Créer un article",
+    "pageTitle": "Articles",
+    "searchPlaceholder": "Rechercher un article...",
+    "table": {
+      "amount": "Montant",
+      "category": "Catégorie",
+      "manufacturer": "Fabricant",
+      "manufacturerSku": "Code fabricant",
+      "name": "Nom de l'article",
+      "quantity": "Quantité",
+      "sku": "Code barre"
+    }
   },
   "provider": {
     "generalInformations": "Informations générales",

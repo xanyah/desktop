@@ -1,7 +1,6 @@
 export { default as CategorySelect } from './category-select'
 export { default as CheckoutProductCard } from './checkout-product-card'
 export { default as CustomerSelect } from './customer-select'
-export { default as FormAttribute } from './form-attribute'
 export { default as FormContainer } from './form-container'
 export { default as FormSection } from './form-section'
 export { default as ManufacturerSelect } from './manufacturer-select'

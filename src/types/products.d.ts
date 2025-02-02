@@ -1,5 +1,5 @@
-type Product = {
-  id: string,
+interface Product {
+  id: string
   name: string
   category?: Category
   manufacturer?: Manufacturer
@@ -15,4 +15,11 @@ type Product = {
   quantity: number
   amountCents: number
   amountCurrency: string
+  images: {
+    large: string
+    medium: string
+    openGraph: string
+    thumbnail: string
+    signedId: string
+  }[]
 }

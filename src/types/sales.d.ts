@@ -1,39 +1,39 @@
-type SaleVariantPromotion = {
+interface SaleVariantPromotion {
   id: string
   type: string
   amountCents: number
   amountCurrency: string
 }
 
-type SaleProduct = {
-  id: string,
+interface SaleProduct {
+  id: string
   quantity: number
   amountCents: number
   amountCurrency: string
   product: Product
 }
 
-type SalePromotion = {
+interface SalePromotion {
   id: string
   type: string
   amountCents: number
   amountCurrency: string
 }
 
-type PaymentType = {
+interface PaymentType {
   id: string
   name: string
   description: string
 }
 
-type SalePayment = {
+interface SalePayment {
   id: string
   totalAmountCents: number
   totalAmountCurrency: string
   paymentType?: PaymentType
 }
 
-type Sale = {
+interface Sale {
   id: string
   totalAmountCents: number
   totalAmountCurrency: string

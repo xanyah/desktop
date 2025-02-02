@@ -1,10 +1,10 @@
 import { useCurrentStore, useCustomer } from '@/hooks'
 import { useCallback } from 'react'
-import {  getCustomers } from '@/api'
+import { getCustomers } from '@/api'
 import ApiDataSelect from '../api-data-select'
 import { customerFullname } from '@/helpers/customer'
 
-type CustomerSelectProps = {
+interface CustomerSelectProps {
   onChange: (newValue?: Customer['id']) => void
   value?: Customer['id']
   label?: string
@@ -24,10 +24,10 @@ const CustomerSelect = ({
       return getCustomers({
         'q[storeIdEq]': store?.id,
         'q[firstnameOrLastnameOrEmailOrPhoneCont]': searchQuery,
-        'q[s]': ['firstname', 'lastname']
+        'q[s]': ['firstname', 'lastname'],
       })
     },
-    [store]
+    [store],
   )
 
   return (

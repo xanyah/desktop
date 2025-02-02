@@ -1,5 +1,4 @@
-import tw from "tailwind-styled-components"
-
+import tw from 'tailwind-styled-components'
 
 export const PaginationContainer = tw.ul`
     flex
@@ -20,21 +19,21 @@ export const PaginationItem = tw.li`
     rounded-md
     cursor-pointer
 
-    ${(p) => p.$isActive && `
+    ${p => p.$isActive && `
     border
     border-input
     shadow-sm
     `
-}
+    }
 
-    ${(p) => p.$disabled && `
+    ${p => p.$disabled && `
     pointer-events-none
     opacity-50
     `
-}
+    }
 
-    ${(p) => p.$isEllipsis && `
+    ${p => p.$isEllipsis && `
     pointer-events-none
     `
-}
+    }
 `

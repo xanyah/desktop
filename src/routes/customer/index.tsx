@@ -1,23 +1,23 @@
 import { useCallback, useEffect, useMemo } from 'react'
-import { useCustomer, useCurrentStore } from "../../hooks";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCustomer, updateCustomer } from "../../api";
-import { showSuccessToast } from "../../utils/notification-helper";
-import { useTranslation } from "react-i18next";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { customerSchema, customerSchemaType } from './config';
-import { Controller, useForm } from 'react-hook-form';
-import { FormContainer, FormSection, InputText } from '@/components';
-import { useBreadCrumbContext } from '@/contexts/breadcrumb';
+import { useCustomer, useCurrentStore } from '../../hooks'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createCustomer, updateCustomer } from '../../api'
+import { showSuccessToast } from '../../utils/notification-helper'
+import { useTranslation } from 'react-i18next'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { customerSchema, customerSchemaType } from './config'
+import { Controller, useForm } from 'react-hook-form'
+import { FormContainer, FormSection, InputText } from '@/components'
+import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 
 const Customer = () => {
   const queryClient = useQueryClient()
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const store = useCurrentStore();
-  const { id } = useParams();
-  const { data: customerData } = useCustomer(id);
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const store = useCurrentStore()
+  const { id } = useParams()
+  const { data: customerData } = useCustomer(id)
   const { handleSubmit, control, reset } = useForm<customerSchemaType>({
     resolver: zodResolver(customerSchema),
     defaultValues: {},
@@ -25,33 +25,33 @@ const Customer = () => {
 
   const pageTitle = useMemo(
     () => customerData?.data ? `${customerData?.data.firstname} ${customerData?.data.lastname}` : t('customer.newPageTitle'),
-    [t,customerData]
+    [t, customerData],
   )
 
   useBreadCrumbContext([
-    { label: t('customers.pageTitle'), url: '/customers'},
-    { label: pageTitle},
+    { label: t('customers.pageTitle'), url: '/customers' },
+    { label: pageTitle },
   ])
 
   const { mutate: createApiCustomer } = useMutation({
     mutationFn: (newData: customerSchemaType) =>
       createCustomer({ ...newData, storeId: store?.id }),
     onSuccess: (data) => {
-      queryClient.setQueryData(['customers', {id}], data)
-      navigate(`/customers/${data.data.id}/edit`);
+      queryClient.setQueryData(['customers', { id }], data)
+      navigate(`/customers/${data.data.id}/edit`)
       showSuccessToast(
-        t("toast.created", { entity: t("models.customers.title") })
-      );
+        t('toast.created', { entity: t('models.customers.title') }),
+      )
     },
-  });
+  })
 
   const { mutate: updateApiCustomer } = useMutation({
     mutationFn: (newData: customerSchemaType) => updateCustomer(id, newData),
     onSuccess: (data) => {
-      queryClient.setQueryData(['customers', {id}], data)
-      showSuccessToast(t("toast.updated"));
+      queryClient.setQueryData(['customers', { id }], data)
+      showSuccessToast(t('toast.updated'))
     },
-  });
+  })
 
   const onSubmit = useCallback((data: customerSchemaType) => {
     if (id) {
@@ -59,7 +59,6 @@ const Customer = () => {
     }
     return createApiCustomer(data)
   }, [id, updateApiCustomer, createApiCustomer])
-
 
   useEffect(() => {
     reset(customerData?.data)
@@ -164,4 +163,4 @@ const Customer = () => {
   )
 }
 
-export default Customer;
+export default Customer
