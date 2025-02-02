@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useCurrentStore, useShippings } from '../../hooks'
-import { TableWithSearch } from '@/components'
+import { TableWithSearch, Badge } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { formatLongDatetime } from '@/helpers/dates'
-import { Badge } from '@/components/ui/badge'
+
 import { orderBadgeVariants } from '@/constants/orders'
 import { uuidNumber } from '@/helpers/uuid'
 import { useTranslation } from 'react-i18next'

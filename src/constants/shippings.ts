@@ -1,4 +1,4 @@
-import { BadgeProps } from '@/components/ui/badge'
+import { BadgeProps } from '@/components'
 
 export const shippingBadgeVariants: Record<Shipping['state'], BadgeProps['variant']> = {
   cancelled: 'destructive',
