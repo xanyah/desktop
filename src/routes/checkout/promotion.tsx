@@ -79,7 +79,7 @@ const Promotion = () => {
 
   return (
     <>
-      <div className="col-span-2">
+      <div className="col-span-2 self-end">
         <Controller
           control={control}
           name="salePromotionAttributes.type"
