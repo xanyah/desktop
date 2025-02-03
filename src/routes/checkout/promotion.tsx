@@ -46,12 +46,12 @@ const Promotion = () => {
             render={({ field: { value, onChange }, fieldState: { error } }) => (
               <InputText
                 icon={<Percent />}
-                step="0.1"
+                step="1"
                 type="number"
                 label={t('checkout.promotionAmountLabel')}
                 placeholder={t('checkout.promotionAmountPlaceholder')}
                 value={value}
-                onChange={e => onChange(toNumber(e.target.value))}
+                onChange={e => onChange(e.target.value)}
                 error={error?.message}
               />
             )}
