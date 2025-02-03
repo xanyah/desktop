@@ -15,11 +15,13 @@ const ProviderSelect = ({ onChange, value }: ProviderSelectProps) => {
     return getProviders({
       'q[storeIdEq]': store?.id,
       'q[nameOrNoteCont]': searchQuery,
+      'q[s]': 'name',
     })
   }, [store])
 
   return (
     <ApiDataSelect
+      key={store?.id}
       onChange={onChange}
       value={value}
       useRecordHook={useProvider}

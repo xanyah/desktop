@@ -23,6 +23,7 @@ const ManufacturerSelect = ({
       return getManufacturers({
         'q[storeIdEq]': store?.id,
         'q[nameOrNoteCont]': searchQuery,
+        'q[s]': 'name',
       })
     },
     [store],
@@ -30,6 +31,7 @@ const ManufacturerSelect = ({
 
   return (
     <ApiDataSelect
+      key={store?.id}
       label={label}
       error={error}
       onChange={onChange}

@@ -31,6 +31,7 @@ const ProductSelect = ({
 
   return (
     <ApiDataSelect
+      key={store?.id}
       error={error}
       label={label}
       onChange={onChange}

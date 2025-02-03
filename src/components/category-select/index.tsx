@@ -23,6 +23,7 @@ const CategorySelect = ({
       return getCategories({
         'q[storeIdEq]': store?.id,
         'q[nameCont]': searchQuery,
+        'q[s]': 'name',
       })
     },
     [store],
@@ -30,6 +31,7 @@ const CategorySelect = ({
 
   return (
     <ApiDataSelect
+      key={store?.id}
       error={error}
       label={label}
       onChange={onChange}

@@ -1,5 +1,5 @@
 import { Euro, Percent } from 'lucide-react'
-import { find } from 'lodash'
+import { find, toNumber } from 'lodash'
 import Select from 'react-select'
 import { CheckoutSchemaType } from './schema'
 import { Button, InputText } from '@/components'
@@ -21,43 +21,41 @@ const Promotion = () => {
     switch (promotionType) {
       case 'flat_discount':
         return (
-          <>
-            <Controller
-              control={control}
-              name="salePromotionAttributes.amountCents"
-              render={({ field: { value, onChange } }) => (
-                <InputText
-                  type="number"
-                  value={value}
-                  onChange={onChange}
-                  label={t('checkout.promotionAmountLabel')}
-                  placeholder={t('checkout.promotionAmountPlaceholder')}
-                />
-              )}
-            />
-            <div className="text-right"><Euro /></div>
-          </>
+          <Controller
+            control={control}
+            name="salePromotionAttributes.amountCents"
+            render={({ field: { value, onChange }, fieldState: { error } }) => (
+              <InputText
+                icon={<Euro />}
+                step="0.1"
+                type="number"
+                label={t('checkout.promotionAmountLabel')}
+                placeholder={t('checkout.promotionAmountPlaceholder')}
+                value={(value || 0) / 100}
+                onChange={e => onChange(toNumber(e.target.value) * 100)}
+                error={error?.message}
+              />
+            )}
+          />
         )
       case 'percent_discount':
         return (
-          <>
-            <Controller
-              control={control}
-              name="salePromotionAttributes.amountCents"
-              render={({ field: { value, onChange } }) => (
-                <InputText
-                  type="number"
-                  value={value}
-                  onChange={onChange}
-                  label={t('checkout.promotionAmountLabel')}
-                  placeholder={t('checkout.promotionAmountPlaceholder')}
-                />
-              )}
-            />
-            <div className="text-right">
-              <Percent />
-            </div>
-          </>
+          <Controller
+            control={control}
+            name="salePromotionAttributes.amountCents"
+            render={({ field: { value, onChange }, fieldState: { error } }) => (
+              <InputText
+                icon={<Percent />}
+                step="0.1"
+                type="number"
+                label={t('checkout.promotionAmountLabel')}
+                placeholder={t('checkout.promotionAmountPlaceholder')}
+                value={value}
+                onChange={e => onChange(toNumber(e.target.value))}
+                error={error?.message}
+              />
+            )}
+          />
         )
     }
   }, [t, promotionType, control])

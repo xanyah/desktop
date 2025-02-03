@@ -119,7 +119,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(
           open={selectedIndex !== null}
           onClose={() => setSelectedIndex(null)}
           title={t('product.deleteImageTitle')}
-          footer={
+          footer={(
             <>
               <Button variant="outline" onClick={() => setSelectedIndex(null)}>
                 {t('global.cancel')}
@@ -128,7 +128,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(
                 {t('global.confirm')}
               </Button>
             </>
-          }
+          )}
         >
           {t('product.deleteImageDescription')}
         </Dialog>

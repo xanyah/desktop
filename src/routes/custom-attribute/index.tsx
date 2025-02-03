@@ -59,7 +59,7 @@ const CustomAttribute = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       queryClient.setQueryData(['customAttributes', { id }], data)
       navigate(`/custom-attributes/${data.data.id}/edit`)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
@@ -77,7 +77,7 @@ const CustomAttribute = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       queryClient.setQueryData(['customAttributes', { id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
