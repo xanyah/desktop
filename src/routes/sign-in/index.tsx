@@ -3,7 +3,7 @@ import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { FormContainer, InputText } from '@/components'
+import { Button, FormContainer, InputText } from '@/components'
 import { useCallback, useRef } from 'react'
 import toast from 'react-hot-toast'
 import { usePrinters } from '@/hooks'
@@ -47,12 +47,12 @@ const SignIn = () => {
     mutate({ ...data, grantType: 'password' })
   }, [mutate])
 
-
-  const {data, refetch} = usePrinters()
+  const { data, refetch } = usePrinters()
   console.log('data', data)
 
   return (
     <div className="min-h-screen flex flex-col items-stretch justify-center w-full p-8">
+      <Button onClick={() => refetch()}>refetch</Button>
       <FormContainer
         onSubmit={handleSubmit(onSubmit)}
         title={t('signIn.pageTitle')}
