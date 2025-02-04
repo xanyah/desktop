@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useCurrentStore, useOrders } from '../../hooks'
-import { TableWithSearch } from '@/components'
+import { TableWithSearch, Badge } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { Badge } from '@/components/ui/badge'
+
 import { orderBadgeVariants } from '@/constants/orders'
 import { customerFullname } from '@/helpers/customer'
 import { formatLongDatetime } from '@/helpers/dates'
@@ -37,21 +37,18 @@ const Orders = () => {
             </Link>
           ),
         }),
-        columnHelper.accessor(
-          row => customerFullname(row.customer),
-          {
-            id: 'fullname',
-            header: t('orders.table.customer'),
-            cell: props => (
-              <Link
-                className="underline"
-                to={`/customers/${props.row.original.customer.id}/edit`}
-              >
-                {props.getValue()}
-              </Link>
-            ),
-          },
-        ),
+        columnHelper.accessor(row => customerFullname(row.customer), {
+          id: 'fullname',
+          header: t('orders.table.customer'),
+          cell: props => (
+            <Link
+              className="underline"
+              to={`/customers/${props.row.original.customer.id}/edit`}
+            >
+              {props.getValue()}
+            </Link>
+          ),
+        }),
         columnHelper.accessor('state', {
           header: t('orders.table.state'),
           cell: props => (

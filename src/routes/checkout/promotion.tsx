@@ -51,7 +51,7 @@ const Promotion = () => {
                 label={t('checkout.promotionAmountLabel')}
                 placeholder={t('checkout.promotionAmountPlaceholder')}
                 value={value}
-                onChange={e => onChange(e.target.value)}
+                onChange={e => onChange(toNumber(e.target.value))}
                 error={error?.message}
               />
             )}

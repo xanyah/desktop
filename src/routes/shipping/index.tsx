@@ -6,9 +6,9 @@ import { cancelShipping, validateShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import DataTable from '@/components/data-table-new'
-import { Button, ShowContainer, ShowSection } from '@/components'
+import { Button, ShowContainer, ShowSection, Badge } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { Badge } from '@/components/ui/badge'
+
 import { shippingBadgeVariants } from '@/constants/shippings'
 import { AxiosResponse } from 'axios'
 import { uuidNumber } from '@/helpers/uuid'
@@ -26,27 +26,43 @@ const Shipping = () => {
   const { t } = useTranslation()
   useBreadCrumbContext([
     { label: t('shippings.pageTitle'), url: '/shippings' },
-    { label: t('shipping.pageTitle', { shippingNumber: uuidNumber(shippingData?.data.id) }) },
+    {
+      label: t('shipping.pageTitle', {
+        shippingNumber: uuidNumber(shippingData?.data.id),
+      }),
+    },
   ])
 
-  const useChangeShippingStatus = useCallback((mutationFn: (storeId?: Store['id']) => Promise<AxiosResponse<Shipping, any>>) => {
-    return useMutation({
-      mutationFn: () => mutationFn(id),
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['shippings', { id }] })
-        toast.success(t('global.saved'), { id: toastId?.current || undefined })
-      },
-      onMutate: () => {
-        toastId.current = toast.loading(t('global.loading'))
-      },
-      onError: () => {
-        toast.error(t('global.savingError'), { id: toastId?.current || undefined })
-      },
-    })
-  }, [id])
+  const useChangeShippingStatus = useCallback(
+    (
+      mutationFn: (
+        storeId?: Store['id'],
+      ) => Promise<AxiosResponse<Shipping, any>>,
+    ) => {
+      return useMutation({
+        mutationFn: () => mutationFn(id),
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['shippings', { id }] })
+          toast.success(t('global.saved'), {
+            id: toastId?.current || undefined,
+          })
+        },
+        onMutate: () => {
+          toastId.current = toast.loading(t('global.loading'))
+        },
+        onError: () => {
+          toast.error(t('global.savingError'), {
+            id: toastId?.current || undefined,
+          })
+        },
+      })
+    },
+    [id],
+  )
 
   const { mutate: cancelApiShipping } = useChangeShippingStatus(cancelShipping)
-  const { mutate: validateApiShipping } = useChangeShippingStatus(validateShipping)
+  const { mutate: validateApiShipping }
+    = useChangeShippingStatus(validateShipping)
 
   const columnHelper = createColumnHelper<ShippingProduct>()
 
@@ -76,14 +92,26 @@ const Shipping = () => {
       case 'pending':
         return (
           <>
-            <Button variant="ghost" onClick={() => cancelApiShipping()}>{t('shipping.cancel')}</Button>
-            <Button onClick={() => validateApiShipping()}>{t('shipping.validate')}</Button>
+            <Button variant="ghost" onClick={() => cancelApiShipping()}>
+              {t('shipping.cancel')}
+            </Button>
+            <Button onClick={() => validateApiShipping()}>
+              {t('shipping.validate')}
+            </Button>
           </>
         )
       case 'cancelled':
-        return <Button onClick={() => validateApiShipping()}>{t('shipping.validate')}</Button>
+        return (
+          <Button onClick={() => validateApiShipping()}>
+            {t('shipping.validate')}
+          </Button>
+        )
       case 'validated':
-        return <Button variant="ghost" onClick={() => cancelApiShipping()}>{t('shipping.cancel')}</Button>
+        return (
+          <Button variant="ghost" onClick={() => cancelApiShipping()}>
+            {t('shipping.cancel')}
+          </Button>
+        )
     }
   }, [t, shippingData, cancelApiShipping, validateApiShipping])
 
@@ -93,16 +121,22 @@ const Shipping = () => {
 
   return (
     <ShowContainer
-      title={t('shipping.pageTitle', { shippingNumber: uuidNumber(shippingData?.data.id) })}
-      subtitle={t('shipping.pageSubtitle', { shippingDate: formatLongDatetime(shippingData?.data.createdAt) })}
-      button={shippingData?.data && (
-        <div className="flex flex-row gap-4 items-center">
-          <Badge variant={shippingBadgeVariants[shippingData?.data.state]}>
-            {t(`shipping.states.${shippingData?.data.state}`)}
-          </Badge>
-          {renderActionButtons()}
-        </div>
-      )}
+      title={t('shipping.pageTitle', {
+        shippingNumber: uuidNumber(shippingData?.data.id),
+      })}
+      subtitle={t('shipping.pageSubtitle', {
+        shippingDate: formatLongDatetime(shippingData?.data.createdAt),
+      })}
+      button={
+        shippingData?.data && (
+          <div className="flex flex-row gap-4 items-center">
+            <Badge variant={shippingBadgeVariants[shippingData?.data.state]}>
+              {t(`shipping.states.${shippingData?.data.state}`)}
+            </Badge>
+            {renderActionButtons()}
+          </div>
+        )
+      }
     >
       <ShowSection title={t('shipping.customer')}>
         <div className="flex flex-col gap-2">

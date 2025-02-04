@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useCurrentStore, useInventories } from '../../hooks'
-import { TableWithSearch } from '@/components'
+import { Badge, TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { Badge } from '@/components/ui/badge'
 
 const Inventories = () => {
   useBreadCrumbContext([{ label: 'Inventories' }])
