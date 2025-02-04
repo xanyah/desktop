@@ -58,6 +58,7 @@ const Settings = () => {
       },
     ], {
       id: printer.value,
+      remove_temp: true,
       page_size: {
         width: 300, // unit px
         height: 400,
