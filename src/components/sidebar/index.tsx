@@ -17,9 +17,11 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
   return (
     <StyledSidebar $isOpen={isOpen}>
       {items.map(group =>
-        group.disabled ? null : (
-          <SidebarGroup key={group.label} group={group} />
-        ),
+        group.disabled
+          ? null
+          : (
+              <SidebarGroup key={group.label} group={group} />
+            ),
       )}
     </StyledSidebar>
   )
