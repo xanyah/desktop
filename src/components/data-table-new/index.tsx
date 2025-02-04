@@ -5,15 +5,17 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 import { map, size } from 'lodash'
+import {
+  StyledTable,
+  StyledTableBody,
+  StyledTableBorder,
+  StyledTableCell,
+  StyledTableContainer,
+  StyledTableHead,
+  StyledTableHeader,
+  StyledTableRow,
+} from './styles'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -31,50 +33,58 @@ function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {map(table.getHeaderGroups(), headerGroup => (
-            <TableRow key={headerGroup.id}>
-              {map(headerGroup.headers, header => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {size(table.getRowModel().rows)
-            ? (
-                map(table.getRowModel().rows, row => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && 'selected'}
-                  >
-                    {map(row.getVisibleCells(), cell => (
-                      <TableCell key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              )
-            : (
-                <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
-                    No results.
-                  </TableCell>
-                </TableRow>
-              )}
-        </TableBody>
-      </Table>
-    </div>
+    <StyledTableContainer>
+      <StyledTableBorder>
+        <StyledTable>
+          <StyledTableHeader>
+            {map(table.getHeaderGroups(), headerGroup => (
+              <StyledTableRow key={headerGroup.id}>
+                {map(headerGroup.headers, header => (
+                  <StyledTableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </StyledTableHead>
+                ))}
+              </StyledTableRow>
+            ))}
+          </StyledTableHeader>
+          <StyledTableBody>
+            {size(table.getRowModel().rows)
+              ? (
+                  map(table.getRowModel().rows, row => (
+                    <StyledTableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && 'selected'}
+                    >
+                      {map(row.getVisibleCells(), cell => (
+                        <StyledTableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </StyledTableCell>
+                      ))}
+                    </StyledTableRow>
+                  ))
+                )
+              : (
+                  <StyledTableRow>
+                    <StyledTableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      No results.
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )}
+          </StyledTableBody>
+        </StyledTable>
+      </StyledTableBorder>
+    </StyledTableContainer>
   )
 }
 
