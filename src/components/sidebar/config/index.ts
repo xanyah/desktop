@@ -1,3 +1,4 @@
+import { isTauri } from '@/helpers/tauri'
 import { TFunction } from 'i18next'
 import {
   Blend,
@@ -88,6 +89,12 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
         icon: CreditCard,
         label: t('paymentTypes.pageTitle'),
         url: '/payment-types',
+      },
+      {
+        icon: CreditCard,
+        label: 'PARAMETRES',
+        url: '/settings',
+        disabled: !isTauri,
       },
     ],
   },

@@ -27,6 +27,7 @@ import ShippingNew from './shipping-new'
 import Shippings from './shippings'
 import SignIn from './sign-in'
 import { OfflineLayout, OnlineLayout } from '../layouts'
+import Settings from './settings'
 
 const Router = () => {
   return (
@@ -76,6 +77,7 @@ const Router = () => {
           <Route path="providers/new" element={<Provider />} />
           <Route path="sales" element={<Sales />} />
           <Route path="sales/:id" element={<Sale />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="shippings" element={<Shippings />} />
           <Route path="shippings/:id" element={<Shipping />} />
           <Route path="shippings/new" element={<ShippingNew />} />
