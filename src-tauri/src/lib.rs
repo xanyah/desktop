@@ -58,7 +58,7 @@ fn get_printers() -> Vec<serde_json::Value> {
 
 #[tauri::command]
 fn print_text() {
-  let my_printer = printers_get_printer_by_name("HP Color LaserJet Pro MFP M177fw");
+  let my_printer = printers_get_printer_by_name("EPSON TM-T88IV ReceiptE4");
   my_printer.unwrap().print("test".as_bytes(), Some("My Job"));
 
 }
