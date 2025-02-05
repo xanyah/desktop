@@ -48,17 +48,26 @@ fn get_default_printer() -> Value {
 }
 
 #[tauri::command]
-fn get_printers() -> impl Iterator<Item = serde_json::Value> {
-  return printers_get_printers().iter().map(|x| format_printer(Some(x.to_owned())));
+fn get_printers() -> Vec<serde_json::Value> {
+    printers_get_printers()
+        .iter()
+        .map(|x| format_printer(Some(x.to_owned())))
+        .collect()
+}
+
+
+#[tauri::command]
+fn print_text() {
+  let my_printer = printers_get_default_printer();
+  my_printer.unwrap().print("test".as_bytes(), Some("My Job"));
+
 }
 
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![get_printer_by_name])
-    .invoke_handler(tauri::generate_handler![get_default_printer])
-    .invoke_handler(tauri::generate_handler![get_printers])
+    .invoke_handler(tauri::generate_handler![get_printer_by_name,get_default_printer,get_printers])
     .setup(|app| {
       if cfg!(debug_assertions) {
         app.handle().plugin(
