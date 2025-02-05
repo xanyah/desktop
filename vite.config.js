@@ -20,7 +20,6 @@ export default defineConfig({
     port: 5173,
   },
   envPrefix: ['VITE_', 'TAURI_ENV_*'],
-  plugins: [react()],
   build: {
     target:
       process.env.TAURI_ENV_PLATFORM == 'windows'

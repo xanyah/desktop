@@ -26,7 +26,7 @@ const Settings = () => {
 
   const fetchPrinters = async () => {
     try {
-      const response: Printer[] = await invoke('get_printers')
+      const response: Printer[] = await invoke('list_devices_new')
       console.log(response)
     } catch (error) {
       console.error('Erreur lors de la récupération des imprimantes :', error)
