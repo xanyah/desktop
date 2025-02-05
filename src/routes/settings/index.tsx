@@ -49,7 +49,8 @@ const Settings = () => {
     >
       <FormSection title={t('account.generalInformations')}>
         <Select options={options} onChange={setPrinter} value={printer} />
-        <Button onClick={fetchPrinters}>Test</Button>
+        <Button onClick={fetchPrinters}>fetch</Button>
+        <Button onClick={handlePrint}>print</Button>
       </FormSection>
     </FormContainer>
   )

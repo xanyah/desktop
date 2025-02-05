@@ -58,7 +58,7 @@ fn get_printers() -> Vec<serde_json::Value> {
 
 #[tauri::command]
 fn print_text() {
-  let my_printer = printers_get_default_printer();
+  let my_printer = printers_get_printer_by_name("HP Color LaserJet Pro MFP M177fw");
   my_printer.unwrap().print("test".as_bytes(), Some("My Job"));
 
 }
@@ -67,7 +67,12 @@ fn print_text() {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![get_printer_by_name,get_default_printer,get_printers])
+    .invoke_handler(tauri::generate_handler![
+      get_printer_by_name,
+      get_default_printer,
+      get_printers,
+      print_text
+    ])
     .setup(|app| {
       if cfg!(debug_assertions) {
         app.handle().plugin(
