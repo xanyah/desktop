@@ -1,4 +1,5 @@
 use escpos::driver::NativeUsbDriver;
+use escpos::driver::UsbDriver;
 use escpos::printer::Printer as EscPosPrinter;
 use escpos::printer_options::PrinterOptions;
 use escpos::errors::Result;
@@ -141,16 +142,17 @@ fn print_rust_text()-> Result<()> {
     }
 
     println!("Test");
-    let driver_result = NativeUsbDriver::open(
+    let driver_result = UsbDriver::open(
         0x04b8,
         0x0202,
+        None
     );
 
     println!("Test 22");
 
     let driver = match driver_result {
         Ok(file) => file,
-        Err(error) => panic!("Problem opening the file: {error:?}"),
+        Err(error) => panic!("{error:?}"),
     };
     println!("Test 2");
 
