@@ -116,30 +116,19 @@ fn print_rust_text()-> Result<()> {
 
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
-    for device in rusb::devices().unwrap().iter() {
-        let device_desc = device.device_descriptor().unwrap();
-
-
-        // let vendor_name = match Vendor::from_id(device_desc.vendor_id()) {
-        //     Some(vendor) => vendor.name(),
-        //     None => "Unknown vendor",
-        // };
-
-        let product_name =
-            match UsbIdsDevice::from_vid_pid(device_desc.vendor_id(), device_desc.product_id()) {
-                Some(product) => product.name(),
-                None => "Unknown product",
-            };
-
+    for device in nusb::list_devices().unwrap() {
         println!(
-            "Bus: {:03} Device: {:03} VID: {:04x} PID: {:04x}, Name: {}",
+            "Bus: {:03} address: {:03} VID: {:04x} PID: {:04x} Manufacturer: {} Product: {} S/N: {}",
             device.bus_number(),
-            device.address(),
-            device_desc.vendor_id(),
-            device_desc.product_id(),
-            product_name
+            device.device_address(),
+            device.vendor_id(),
+            device.product_id(),
+            device.manufacturer_string().unwrap_or_default(),
+            device.product_string().unwrap_or_default(),
+            device.serial_number().unwrap_or_default(),
         );
     }
+
 
     println!("Test");
     let driver_result = UsbDriver::open(
@@ -156,11 +145,11 @@ fn print_rust_text()-> Result<()> {
     };
     println!("Test 2");
 
-    EscPosPrinter::new(driver, Protocol::default(), Some(PrinterOptions::default()))
-         .debug_mode(Some(DebugMode::Dec))
-         .init()?
-         .writeln("Native USB test")?
-         .print_cut()?;
+    // EscPosPrinter::new(driver, Protocol::default(), Some(PrinterOptions::default()))
+    //      .debug_mode(Some(DebugMode::Dec))
+    //      .init()?
+    //      .writeln("Native USB test")?
+    //      .print_cut()?;
         //  .smoothing(true)?
         //  .bold(true)?
         //  .underline(UnderlineMode::Single)?
