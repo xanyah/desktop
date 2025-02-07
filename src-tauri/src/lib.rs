@@ -122,17 +122,19 @@ fn print_rust_text()-> Result<()> {
          None,
     );
 
+    println!("Test 22");
+
     let driver = match driver_result {
         Ok(file) => file,
         Err(error) => panic!("Problem opening the file: {error:?}"),
     };
     println!("Test 2");
 
-    // EscPosPrinter::new(driver, Protocol::default(), Some(PrinterOptions::default()))
-    //      .debug_mode(Some(DebugMode::Dec))
-    //      .init()?
-    //      .writeln("Native USB test")?
-    //      .print_cut()?;
+    EscPosPrinter::new(driver, Protocol::default(), Some(PrinterOptions::default()))
+         .debug_mode(Some(DebugMode::Dec))
+         .init()?
+         .writeln("Native USB test")?
+         .print_cut()?;
         //  .smoothing(true)?
         //  .bold(true)?
         //  .underline(UnderlineMode::Single)?
@@ -155,7 +157,7 @@ fn print_rust_text()-> Result<()> {
 
 #[tauri::command]
 fn print_text() {
-    print_rust_text();
+    let _ = print_rust_text();
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
