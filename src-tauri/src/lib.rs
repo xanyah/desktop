@@ -106,17 +106,17 @@ fn list_devices_new() -> Vec<serde_json::Value> {
 }
 
 #[tauri::command]
-fn print_text(vendor_id, product_id) {
+fn print_text() {
     // let my_printer = printers_get_printer_by_name("EPSON TM-T88IV ReceiptE4");
     // my_printer.unwrap().print("test".as_bytes(), Some("My Job"));
 
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
-    let driver = UsbDriver::open(
-        vendor_id,
-        product_id,
-        None,
-    )?;
+    // let driver = UsbDriver::open(
+    //     // vendor_id,
+    //     // product_id,
+    //     None,
+    // )?;
 
     // Printer::new(driver, Protocol::default(), Some(PrinterOptions::default()))
     //     .debug_mode(Some(DebugMode::Dec))
