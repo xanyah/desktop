@@ -1,5 +1,8 @@
 use escpos::driver::*;
+use escpos::printer::Printer as EscPosPrinter;
 use escpos::printer_options::PrinterOptions;
+use escpos::errors::PrinterError;
+use escpos::errors::Result;
 use escpos::utils::*;
 use printers::common::base::printer::Printer;
 use printers::common::base::printer::PrinterState;
@@ -105,37 +108,49 @@ fn list_devices_new() -> Vec<serde_json::Value> {
         .collect();
 }
 
-#[tauri::command]
-fn print_text() {
+
+fn print_rust_text()-> Result<()> {
     // let my_printer = printers_get_printer_by_name("EPSON TM-T88IV ReceiptE4");
     // my_printer.unwrap().print("test".as_bytes(), Some("My Job"));
 
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
+    println!("Test");
     // let driver = UsbDriver::open(
-    //     // vendor_id,
-    //     // product_id,
-    //     None,
+    //     1208 as u16,
+    //     514 as u16,
+    //      None,
     // )?;
+    println!("Test 2");
 
-    // Printer::new(driver, Protocol::default(), Some(PrinterOptions::default()))
-    //     .debug_mode(Some(DebugMode::Dec))
-    //     .init()?
-    //     .smoothing(true)?
-    //     .bold(true)?
-    //     .underline(UnderlineMode::Single)?
-    //     .writeln("Bold underline")?
-    //     .justify(JustifyMode::CENTER)?
-    //     .reverse(true)?
-    //     .bold(false)?
-    //     .writeln("Hello world - Reverse")?
-    //     .feed()?
-    //     .justify(JustifyMode::RIGHT)?
-    //     .reverse(false)?
-    //     .underline(UnderlineMode::None)?
-    //     .size(2, 3)?
-    //     .writeln("Hello world - Normal")?
-    //     .print_cut()?;
+    // EscPosPrinter::new(driver, Protocol::default(), Some(PrinterOptions::default()))
+    //      .debug_mode(Some(DebugMode::Dec))
+    //      .init()?
+    //      .writeln("Native USB test")?
+    //      .print_cut()?;
+        //  .smoothing(true)?
+        //  .bold(true)?
+        //  .underline(UnderlineMode::Single)?
+        //  .writeln("Bold underline")?
+        //  .justify(JustifyMode::CENTER)?
+        //  .reverse(true)?
+        //  .bold(false)?
+        //  .writeln("Hello world - Reverse")?
+        //  .feed()?
+        //  .justify(JustifyMode::RIGHT)?
+        //  .reverse(false)?
+        //  .underline(UnderlineMode::None)?
+        //  .size(2, 3)?
+        //  .writeln("Hello world - Normal")?
+        //  .print_cut();
+
+        println!("Test 3");
+         Ok(())
+}
+
+#[tauri::command]
+fn print_text() {
+    print_rust_text();
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
