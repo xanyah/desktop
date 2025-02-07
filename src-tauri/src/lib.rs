@@ -116,11 +116,16 @@ fn print_rust_text()-> Result<()> {
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
     println!("Test");
-    // let driver = UsbDriver::open(
-    //     1208 as u16,
-    //     514 as u16,
-    //      None,
-    // )?;
+    let driver_result = UsbDriver::open(
+        1208 as u16,
+        514 as u16,
+         None,
+    );
+
+    let driver = match driver_result {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {error:?}"),
+    };
     println!("Test 2");
 
     // EscPosPrinter::new(driver, Protocol::default(), Some(PrinterOptions::default()))
