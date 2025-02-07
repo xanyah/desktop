@@ -1,16 +1,9 @@
 import path from 'path'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
+import { PosPrinter } from 'electron-pos-printer'
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
-// The built directory structure
-//
-// ├─┬ dist
-// │ ├─┬ electron
-// │ │ ├── main.js
-// │ │ └── preload.js
-// │ ├── index.html
-// │ ├── ...other-static-files-from-public
-// │
+
 process.env.DIST = path.join(__dirname, '../dist')
 process.env.VITE_PUBLIC = app.isPackaged
   ? process.env.DIST
@@ -28,22 +21,38 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'logo.svg'),
     webPreferences: {
       preload: path.join(__dirname, './preload.js'),
+      contextIsolation: true,
+      enableRemoteModule: false,
     },
   })
 
-  // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', (new Date).toLocaleString())
+    win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
   if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL)
     win.webContents.openDevTools()
-  } else {
-    // win.loadFile('dist/index.html')
+  }
+  else {
     win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
 }
+
+ipcMain.handle('get-printers', async () => {
+  if (!win) throw new Error('win not available')
+  return win.webContents.getPrintersAsync()
+})
+
+ipcMain.handle('print', async (event, data, options) => {
+  try {
+    await PosPrinter.print(data, options)
+    return 'Impression réussie'
+  }
+  catch (error) {
+    throw new Error(`Erreur lors de l'impression: ${error.message}`)
+  }
+})
 
 app.on('window-all-closed', () => {
   app.quit()

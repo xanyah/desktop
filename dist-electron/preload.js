@@ -20,6 +20,10 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   // You can expose other APTs you need here.
   // ...
 });
+electron.contextBridge.exposeInMainWorld("electronAPI", {
+  getPrinters: () => electron.ipcRenderer.invoke("get-printers"),
+  print: (data, options) => electron.ipcRenderer.invoke("print", data, options)
+});
 function domReady(condition = ["complete", "interactive"]) {
   return new Promise((resolve) => {
     if (condition.includes(document.readyState)) {

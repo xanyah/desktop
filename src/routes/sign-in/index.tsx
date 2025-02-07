@@ -27,25 +27,36 @@ const SignIn = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       localStorage.setItem(
         `Xanyah:Bearer`,
         `${data.data.tokenType} ${data.data.accessToken}`,
       )
-      toast.success(t('signIn.successToast'), { id: toastId?.current || undefined })
+      toast.success(t('signIn.successToast'), {
+        id: toastId?.current || undefined,
+      })
       queryClient.invalidateQueries({ queryKey: ['currentUser'] })
       navigate('/')
     },
     onError: () => {
       toast.error(t('signIn.errorToast'), { id: toastId?.current || undefined })
-      setError('username', { type: 'custom', message: t('signIn.invalidCredentials') })
-      setError('password', { type: 'custom', message: t('signIn.invalidCredentials') })
+      setError('username', {
+        type: 'custom',
+        message: t('signIn.invalidCredentials'),
+      })
+      setError('password', {
+        type: 'custom',
+        message: t('signIn.invalidCredentials'),
+      })
     },
   })
 
-  const onSubmit = useCallback((data) => {
-    mutate({ ...data, grantType: 'password' })
-  }, [mutate])
+  const onSubmit = useCallback(
+    data => {
+      mutate({ ...data, grantType: 'password' })
+    },
+    [mutate],
+  )
 
   const print = useCallback(() => {
     // PosPrinter.print([{
@@ -63,15 +74,11 @@ const SignIn = () => {
     //   });
   }, [])
 
-  useEffect(() => {
-    window.webContents.getPrintersAsync()
-      .then(console.log)
-      .catch(console.error)
-  })
-
   return (
     <div className="min-h-screen flex flex-col items-stretch justify-center w-full p-8">
-      <Button type="button" onClick={print}>Print</Button>
+      <Button type="button" onClick={print}>
+        Print
+      </Button>
       <FormContainer
         onSubmit={handleSubmit(onSubmit)}
         title={t('signIn.pageTitle')}

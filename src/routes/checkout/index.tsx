@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom'
 import { useCurrentStore } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
+import PrinterList from './printer-list'
+import PrintComponent from './printer'
 
 const Checkout = () => {
   const { t } = useTranslation()
@@ -31,19 +33,24 @@ const Checkout = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['sales'] })
       navigate(`/sales/${data.data.id}`)
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
-  const onSubmit = useCallback((data: CheckoutSchemaType) => {
-    mutate({ ...data, storeId: store?.id })
-  }, [mutate, store])
+  const onSubmit = useCallback(
+    (data: CheckoutSchemaType) => {
+      mutate({ ...data, storeId: store?.id })
+    },
+    [mutate, store],
+  )
 
   return (
     <FormProvider {...form}>
@@ -66,6 +73,8 @@ const Checkout = () => {
           {t('checkout.validateButton')}
         </Button>
       </FormContainer>
+      <PrinterList />
+      <PrintComponent />
     </FormProvider>
   )
 }

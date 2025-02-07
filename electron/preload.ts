@@ -23,6 +23,12 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   // ...
 })
 
+contextBridge.exposeInMainWorld('electronAPI', {
+  getPrinters: () => ipcRenderer.invoke('get-printers'),
+  print: (data, options) => ipcRenderer.invoke('print', data, options),
+
+})
+
 // --------- Preload scripts loading ---------
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise((resolve) => {
