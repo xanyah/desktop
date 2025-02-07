@@ -1,8 +1,8 @@
-use escpos::driver::*;
+use escpos::driver::NativeUsbDriver;
 use escpos::printer::Printer as EscPosPrinter;
 use escpos::printer_options::PrinterOptions;
-use escpos::errors::PrinterError;
 use escpos::errors::Result;
+use nusb;
 use escpos::utils::*;
 use printers::common::base::printer::Printer;
 use printers::common::base::printer::PrinterState;
@@ -115,11 +115,23 @@ fn print_rust_text()-> Result<()> {
 
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
+    for device in nusb::list_devices().unwrap() {
+        println!(
+            "Bus: {:03} address: {:03} VID: {:04x} PID: {:04x} Manufacturer: {} Product: {} S/N: {}",
+            device.bus_number(),
+            device.device_address(),
+            device.vendor_id(),
+            device.product_id(),
+            device.manufacturer_string().unwrap_or_default(),
+            device.product_string().unwrap_or_default(),
+            device.serial_number().unwrap_or_default(),
+        );
+    }
+
     println!("Test");
     let driver_result = NativeUsbDriver::open(
         1208 as u16,
         514 as u16,
-        None,
     );
 
     println!("Test 22");

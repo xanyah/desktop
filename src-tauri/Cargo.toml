@@ -25,6 +25,7 @@ tauri = { version = "2.2.3", features = [] }
 tauri-plugin-log = "2.0.0-rc"
 tauri-plugin-printer = { git = "https://github.com/catfo435/tauri-plugin-printer.git", version = "0.1.0" }
 printers = "2.1.2"
-escpos = { version = "0.13.1", features = ["serial_port", "usb"] }
+escpos = { version = "0.13.1", features = ["native_usb", "serial_port", "usb"] }
 rusb = "0.9.4"
 usb-ids = "1.2025.1"
+nusb = "0.1.12"
