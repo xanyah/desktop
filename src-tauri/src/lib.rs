@@ -118,12 +118,25 @@ fn print_rust_text()-> Result<()> {
     for device in rusb::devices().unwrap().iter() {
         let device_desc = device.device_descriptor().unwrap();
 
+
+        // let vendor_name = match Vendor::from_id(device_desc.vendor_id()) {
+        //     Some(vendor) => vendor.name(),
+        //     None => "Unknown vendor",
+        // };
+
+        let product_name =
+            match UsbIdsDevice::from_vid_pid(device_desc.vendor_id(), device_desc.product_id()) {
+                Some(product) => product.name(),
+                None => "Unknown product",
+            };
+
         println!(
-            "Bus: {:03} Device: {:03} VID: {:04x} PID: {:04x}",
+            "Bus: {:03} Device: {:03} VID: {:04x} PID: {:04x}, Name: {}",
             device.bus_number(),
             device.address(),
             device_desc.vendor_id(),
             device_desc.product_id(),
+            product_name
         );
     }
 
