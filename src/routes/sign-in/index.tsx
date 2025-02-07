@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, FormContainer, InputText } from '@/components'
 import { useCallback, useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
-const { PosPrinter } = require('electron').remote.require("electron-pos-printer");
+// const { PosPrinter } = require('electron').remote.require("electron-pos-printer");
 
 interface SignInForm {
   username: string
@@ -48,19 +48,19 @@ const SignIn = () => {
   }, [mutate])
 
   const print = useCallback(() => {
-    PosPrinter.print([{
-      type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
-      value: 'SAMPLE HEADING',
-      style: { fontWeight: "700", textAlign: 'center', fontSize: "24px" }
-    }, {
-      type: 'text',                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table'
-      value: 'Secondary text',
-      style: { textDecoration: "underline", fontSize: "10px", textAlign: "center", color: "red" }
-    }])
-      .then(console.log)
-      .catch((error) => {
-        console.error(error);
-      });
+    // PosPrinter.print([{
+    //   type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+    //   value: 'SAMPLE HEADING',
+    //   style: { fontWeight: "700", textAlign: 'center', fontSize: "24px" }
+    // }, {
+    //   type: 'text',                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table'
+    //   value: 'Secondary text',
+    //   style: { textDecoration: "underline", fontSize: "10px", textAlign: "center", color: "red" }
+    // }])
+    //   .then(console.log)
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }, [])
 
   useEffect(() => {
