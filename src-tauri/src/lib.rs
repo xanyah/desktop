@@ -116,10 +116,10 @@ fn print_rust_text()-> Result<()> {
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
     println!("Test");
-    let driver_result = UsbDriver::open(
+    let driver_result = NativeUsbDriver::open(
         1208 as u16,
         514 as u16,
-         None,
+        None,
     );
 
     println!("Test 22");
