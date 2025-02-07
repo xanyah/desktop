@@ -1,22 +1,22 @@
 use escpos::driver::NativeUsbDriver;
 use escpos::driver::UsbDriver;
+use escpos::errors::Result;
 use escpos::printer::Printer as EscPosPrinter;
 use escpos::printer_options::PrinterOptions;
-use escpos::errors::Result;
-use rusb;
 use escpos::utils::*;
 use printers::common::base::printer::Printer;
 use printers::common::base::printer::PrinterState;
 use printers::get_default_printer as printers_get_default_printer;
 use printers::get_printer_by_name as printers_get_printer_by_name;
 use printers::get_printers as printers_get_printers;
+use rusb;
 use rusb::Device;
 use rusb::GlobalContext;
 use serde_json::json;
 use serde_json::Value;
-use usb_ids::Vendor;
-use usb_ids::FromId;
 use usb_ids::Device as UsbIdsDevice;
+use usb_ids::FromId;
+use usb_ids::Vendor;
 
 fn format_printer_state(printer_state: PrinterState) -> String {
     return match printer_state {
@@ -80,15 +80,15 @@ fn format_new_printer(device: Device<GlobalContext>) -> Value {
     let device_desc = device.device_descriptor().unwrap();
 
     let vendor_name = match Vendor::from_id(device_desc.vendor_id()) {
-      Some(vendor) => vendor.name(),
-      None => "Unknown vendor",
-  };
+        Some(vendor) => vendor.name(),
+        None => "Unknown vendor",
+    };
 
-  let product_name =
-      match UsbIdsDevice::from_vid_pid(device_desc.vendor_id(), device_desc.product_id()) {
-          Some(product) => product.name(),
-          None => "Unknown product",
-      };
+    let product_name =
+        match UsbIdsDevice::from_vid_pid(device_desc.vendor_id(), device_desc.product_id()) {
+            Some(product) => product.name(),
+            None => "Unknown product",
+        };
 
     return json!({
       "product_name": product_name,
@@ -109,8 +109,7 @@ fn list_devices_new() -> Vec<serde_json::Value> {
         .collect();
 }
 
-
-fn print_rust_text()-> Result<()> {
+fn print_rust_text() -> Result<()> {
     // let my_printer = printers_get_printer_by_name("EPSON TM-T88IV ReceiptE4");
     // my_printer.unwrap().print("test".as_bytes(), Some("My Job"));
 
@@ -129,12 +128,22 @@ fn print_rust_text()-> Result<()> {
         );
     }
 
+    let device_info = nusb::list_devices()
+        .map_err(|e| PrinterError::Io(e.to_string()))?
+        .find(|dev| dev.vendor_id() == 0x04b8 && dev.product_id() == 0x0202)
+        .ok_or(PrinterError::Io("USB device not found".to_string()))?;
+
+    let interface_number = device_info
+        .interfaces()
+        .map(|interface| interface.interface_number())
+        .next()
+        .ok_or_else(|| {
+            panic!("{err:?}");
+            PrinterError::Io("no suitable interface number found for USB device".to_string())
+        })?;
 
     println!("Test");
-    let driver_result = NativeUsbDriver::open(
-        0x04b8,
-        0x0202,
-    );
+    let driver_result = NativeUsbDriver::open(0x04b8, 0x0202);
 
     println!("Test 22");
 
@@ -149,24 +158,24 @@ fn print_rust_text()-> Result<()> {
     //      .init()?
     //      .writeln("Native USB test")?
     //      .print_cut()?;
-        //  .smoothing(true)?
-        //  .bold(true)?
-        //  .underline(UnderlineMode::Single)?
-        //  .writeln("Bold underline")?
-        //  .justify(JustifyMode::CENTER)?
-        //  .reverse(true)?
-        //  .bold(false)?
-        //  .writeln("Hello world - Reverse")?
-        //  .feed()?
-        //  .justify(JustifyMode::RIGHT)?
-        //  .reverse(false)?
-        //  .underline(UnderlineMode::None)?
-        //  .size(2, 3)?
-        //  .writeln("Hello world - Normal")?
-        //  .print_cut();
+    //  .smoothing(true)?
+    //  .bold(true)?
+    //  .underline(UnderlineMode::Single)?
+    //  .writeln("Bold underline")?
+    //  .justify(JustifyMode::CENTER)?
+    //  .reverse(true)?
+    //  .bold(false)?
+    //  .writeln("Hello world - Reverse")?
+    //  .feed()?
+    //  .justify(JustifyMode::RIGHT)?
+    //  .reverse(false)?
+    //  .underline(UnderlineMode::None)?
+    //  .size(2, 3)?
+    //  .writeln("Hello world - Normal")?
+    //  .print_cut();
 
-        println!("Test 3");
-         Ok(())
+    println!("Test 3");
+    Ok(())
 }
 
 #[tauri::command]
