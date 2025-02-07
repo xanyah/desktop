@@ -131,10 +131,9 @@ fn print_rust_text()-> Result<()> {
 
 
     println!("Test");
-    let driver_result = UsbDriver::open(
+    let driver_result = NativeUsbDriver::open(
         0x04b8,
         0x0202,
-        None
     );
 
     println!("Test 22");
