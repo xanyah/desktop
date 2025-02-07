@@ -142,8 +142,8 @@ fn print_rust_text()-> Result<()> {
 
     println!("Test");
     let driver_result = NativeUsbDriver::open(
-        1208 as u16,
-        514 as u16,
+        0x04b8,
+        0x0202,
     );
 
     println!("Test 22");
