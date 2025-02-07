@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Button, FormContainer, InputText } from '@/components'
 import { useCallback, useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
-import { PosPrinter, PosPrintData, PosPrintOptions } from "electron-pos-printer";
+const { PosPrinter } = require('electron').remote.require("electron-pos-printer");
 
 interface SignInForm {
   username: string
