@@ -2,7 +2,7 @@ use escpos::driver::NativeUsbDriver;
 use escpos::printer::Printer as EscPosPrinter;
 use escpos::printer_options::PrinterOptions;
 use escpos::errors::Result;
-use nusb;
+use rusb;
 use escpos::utils::*;
 use printers::common::base::printer::Printer;
 use printers::common::base::printer::PrinterState;
@@ -115,16 +115,15 @@ fn print_rust_text()-> Result<()> {
 
     // USBPRINT\EPSONL3110_SERIES\7&6832F64&0&USB001
 
-    for device in nusb::list_devices().unwrap() {
+    for device in rusb::devices().unwrap().iter() {
+        let device_desc = device.device_descriptor().unwrap();
+
         println!(
-            "Bus: {:03} address: {:03} VID: {:04x} PID: {:04x} Manufacturer: {} Product: {} S/N: {}",
+            "Bus: {:03} Device: {:03} VID: {:04x} PID: {:04x}",
             device.bus_number(),
-            device.device_address(),
-            device.vendor_id(),
-            device.product_id(),
-            device.manufacturer_string().unwrap_or_default(),
-            device.product_string().unwrap_or_default(),
-            device.serial_number().unwrap_or_default(),
+            device.address(),
+            device_desc.vendor_id(),
+            device_desc.product_id(),
         );
     }
 
