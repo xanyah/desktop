@@ -3,9 +3,10 @@ import { signIn } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { FormContainer, InputText } from '@/components'
-import { useCallback, useRef } from 'react'
+import { Button, FormContainer, InputText } from '@/components'
+import { useCallback, useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
+import { PosPrinter, PosPrintData, PosPrintOptions } from "electron-pos-printer";
 
 interface SignInForm {
   username: string
@@ -46,8 +47,31 @@ const SignIn = () => {
     mutate({ ...data, grantType: 'password' })
   }, [mutate])
 
+  const print = useCallback(() => {
+    PosPrinter.print([{
+      type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+      value: 'SAMPLE HEADING',
+      style: { fontWeight: "700", textAlign: 'center', fontSize: "24px" }
+    }, {
+      type: 'text',                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table'
+      value: 'Secondary text',
+      style: { textDecoration: "underline", fontSize: "10px", textAlign: "center", color: "red" }
+    }])
+      .then(console.log)
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [])
+
+  useEffect(() => {
+    window.webContents.getPrintersAsync()
+      .then(console.log)
+      .catch(console.error)
+  })
+
   return (
     <div className="min-h-screen flex flex-col items-stretch justify-center w-full p-8">
+      <Button type="button" onClick={print}>Print</Button>
       <FormContainer
         onSubmit={handleSubmit(onSubmit)}
         title={t('signIn.pageTitle')}
