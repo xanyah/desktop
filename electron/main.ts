@@ -1,7 +1,9 @@
 import path from 'path'
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { PosPrinter } from 'electron-pos-printer'
+import { printer as ThermalPrinter, types as PrinterTypes } from 'node-thermal-printer';
 
+
+import electronDriver from 'electron-printer'
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 process.env.DIST = path.join(__dirname, '../dist')
@@ -44,9 +46,27 @@ ipcMain.handle('get-printers', async () => {
   return win.webContents.getPrintersAsync()
 })
 
-ipcMain.handle('print', async (event, data, options) => {
+ipcMain.handle('print', async () => {
   try {
-    await PosPrinter.print(data, options)
+    const printer = new ThermalPrinter({
+      type: PrinterTypes.EPSON,
+      interface: `COM3`,
+    })
+
+    const isConnected = await printer.isPrinterConnected();
+    console.log('Printer connected:', isConnected);
+
+    if (!isConnected) {
+      throw new Error('Imprimante non connectée');
+    }
+
+    printer.alignCenter()
+    printer.println('Bonjour, ceci est un test')
+    printer.println('-----------------------------')
+    printer.println('Merci pour votre visite !')
+    printer.cut()
+
+    await printer.execute()
     return 'Impression réussie'
   }
   catch (error) {

@@ -22,7 +22,7 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
 });
 electron.contextBridge.exposeInMainWorld("electronAPI", {
   getPrinters: () => electron.ipcRenderer.invoke("get-printers"),
-  print: (data, options) => electron.ipcRenderer.invoke("print", data, options)
+  print: (printerName) => electron.ipcRenderer.invoke("print", printerName)
 });
 function domReady(condition = ["complete", "interactive"]) {
   return new Promise((resolve) => {

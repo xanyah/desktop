@@ -25,7 +25,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
 contextBridge.exposeInMainWorld('electronAPI', {
   getPrinters: () => ipcRenderer.invoke('get-printers'),
-  print: (data, options) => ipcRenderer.invoke('print', data, options),
+  print: printerName => ipcRenderer.invoke('print', printerName),
 
 })
 
@@ -34,7 +34,8 @@ function domReady(condition: DocumentReadyState[] = ['complete', 'interactive'])
   return new Promise((resolve) => {
     if (condition.includes(document.readyState)) {
       resolve(true)
-    } else {
+    }
+    else {
       document.addEventListener('readystatechange', () => {
         if (condition.includes(document.readyState)) {
           resolve(true)
