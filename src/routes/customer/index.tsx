@@ -10,8 +10,14 @@ import { Controller, useForm } from 'react-hook-form'
 import { FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
+import { AxiosResponse } from 'axios'
 
-const Customer = () => {
+type CustomerFormProps = {
+  onCancel?: () => void
+  onSuccess?: (data: AxiosResponse<Customer, any>) => void
+}
+
+const Customer = ({ onCancel, onSuccess }: CustomerFormProps) => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -25,7 +31,10 @@ const Customer = () => {
   })
 
   const pageTitle = useMemo(
-    () => customerData?.data ? `${customerData?.data.firstname} ${customerData?.data.lastname}` : t('customer.newPageTitle'),
+    () =>
+      customerData?.data
+        ? `${customerData?.data.firstname} ${customerData?.data.lastname}`
+        : t('customer.newPageTitle'),
     [t, customerData],
   )
 
@@ -40,13 +49,19 @@ const Customer = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
-      queryClient.setQueryData(['customers', { id }], data)
-      navigate(`/customers/${data.data.id}/edit`)
+    onSuccess: data => {
+      queryClient.setQueryData(['customers', { id: data.data.id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
+      if (!onSuccess) {
+        navigate(`/customers/${data.data.id}/edit`)
+      } else {
+        onSuccess?.(data)
+      }
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
@@ -55,21 +70,26 @@ const Customer = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       queryClient.setQueryData(['customers', { id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
-  const onSubmit = useCallback((data: customerSchemaType) => {
-    if (id) {
-      return updateApiCustomer(data)
-    }
-    return createApiCustomer(data)
-  }, [id, updateApiCustomer, createApiCustomer])
+  const onSubmit = useCallback(
+    (data: customerSchemaType) => {
+      if (id) {
+        return updateApiCustomer(data)
+      }
+      return createApiCustomer(data)
+    },
+    [id, updateApiCustomer, createApiCustomer],
+  )
 
   useEffect(() => {
     reset(customerData?.data)
@@ -80,10 +100,9 @@ const Customer = () => {
       title={pageTitle}
       subtitle={t('customer.pageSubtitle')}
       onSubmit={handleSubmit(onSubmit)}
+      onCancel={onCancel}
     >
-      <FormSection
-        title={t('customer.generalInformations')}
-      >
+      <FormSection title={t('customer.generalInformations')}>
         <Controller
           control={control}
           name="firstname"

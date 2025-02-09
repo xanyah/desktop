@@ -71,7 +71,10 @@
     "searchPlaceholder": "Barcode or article manufacturer code",
     "subtotal": "Subtotal",
     "total": "Total",
-    "validateButton": "Validate the sale"
+    "validateButton": "Validate the sale",
+    "customerPlaceholder": "Select a customer...",
+    "newCustomerButtonLabel": "Create a customer",
+    "customer": "Customers"
   },
   "components": {
     "dataTable": {

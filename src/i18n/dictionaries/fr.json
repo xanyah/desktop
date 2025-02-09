@@ -71,7 +71,10 @@
     "searchPlaceholder": "Code barre ou code fabricant de l'article",
     "subtotal": "Sous-total",
     "total": "Total",
-    "validateButton": "Valider la vente"
+    "customerPlaceholder": "Sélectionner un client...",
+    "newCustomerButtonLabel": "Créer un client",
+    "validateButton": "Valider la vente",
+    "customer": "Clients"
   },
   "components": {
     "dataTable": {
