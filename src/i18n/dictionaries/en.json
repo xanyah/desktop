@@ -336,5 +336,29 @@
     "passwordPlaceholder": "Your password",
     "signInButton": "Sign in",
     "successToast": "You have been signed in"
+  },
+  "store": {
+    "address": "Address",
+    "address1Label": "Address",
+    "address1Placeholder": "Address of your store",
+    "address2Label": "Additional address",
+    "address2Placeholder": "Additional address of your store",
+    "colorLabel": "Accent color",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Country of your store",
+    "customization": "Customization",
+    "emailAddressLabel": "Email address",
+    "emailAddressPlaceholder": "Email address of your store",
+    "generalInformations": "General information",
+    "nameLabel": "Name",
+    "namePlaceholder": "Name of your store",
+    "pageSubtitle": "Enter the data of your store here",
+    "pageTitle": "Store",
+    "phoneNumberLabel": "Phone number",
+    "phoneNumberPlaceholder": "Phone number of your store",
+    "websiteUrlLabel": "Website",
+    "websiteUrlPlaceholder": "Website of your store",
+    "zipcodeLabel": "Zipcode",
+    "zipcodePlaceholder": "Zipcode of your store"
   }
 }

@@ -9,6 +9,7 @@ import {
   NotebookText,
   ScanBarcode,
   Sparkles,
+  Store,
   Truck,
   User,
   Users,
@@ -74,6 +75,11 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
     label: t('sidebar.settings'),
     disabled: role === 'regular',
     items: [
+      {
+        icon: Store,
+        label: t('store.pageTitle'),
+        url: '/store',
+      },
       {
         icon: Sparkles,
         label: t('customAttributes.pageTitle'),

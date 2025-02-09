@@ -5,6 +5,7 @@ import Button from '../button'
 type FormContainerProps = {
   title: string
   subtitle?: string
+  isLoading?: boolean
   submitButtonLabel?: string
   button?: ReactNode
   onCancel?: () => void
@@ -21,6 +22,7 @@ const FormContainer = ({
   title,
   subtitle,
   children,
+  isLoading,
   button,
   submitButtonLabel,
   isNotForm = false,
@@ -44,11 +46,11 @@ const FormContainer = ({
       {!isNotForm && (
         <div className="flex flex-row justify-end items-center gap-4">
           {onCancel && (
-            <Button variant="ghost" className="self-end" type="button" onClick={onCancel}>
+            <Button disabled={isLoading} variant="ghost" className="self-end" type="button" onClick={onCancel}>
               {t('global.cancel')}
             </Button>
           )}
-          <Button className="self-end" type="submit">
+          <Button disabled={isLoading} className="self-end" type="submit">
             {submitButtonLabel || t('global.save')}
           </Button>
         </div>

@@ -336,5 +336,29 @@
     "passwordPlaceholder": "Votre mot de passe",
     "signInButton": "Me connecter",
     "successToast": "Vous êtes bien connecté"
+  },
+  "store": {
+    "address": "Adresse",
+    "address1Label": "Adresse",
+    "address1Placeholder": "Adresse de votre boutique",
+    "address2Label": "Complément d'adresse",
+    "address2Placeholder": "Complément d'adresse de votre boutique",
+    "colorLabel": "Couleur d'accent",
+    "countryLabel": "Pays",
+    "countryPlaceholder": "Pays de votre boutique",
+    "customization": "Personnalisation",
+    "emailAddressLabel": "Adresse e-mail",
+    "emailAddressPlaceholder": "Adresse e-mail de votre boutique",
+    "generalInformations": "Informations générales",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Nom de votre boutique",
+    "pageSubtitle": "Saisissez ici les informations de votre boutique",
+    "pageTitle": "Boutique",
+    "phoneNumberLabel": "Numéro de téléphone",
+    "phoneNumberPlaceholder": "Numéro de téléphone de votre boutique",
+    "websiteUrlLabel": "Site web",
+    "websiteUrlPlaceholder": "Site web de votre boutique",
+    "zipcodeLabel": "Code postal",
+    "zipcodePlaceholder": "Code postal de votre boutique"
   }
 }
