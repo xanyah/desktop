@@ -1,10 +1,16 @@
 interface Store {
-  address: string
+  address1: string
+  address2: string
+  zipcode: string
+  city: string
+  websiteUrl: string
+  phoneNumber: string
+  emailAddress: string
+  color: string
   country: Country
   id: string
   key: string
   name: string
-  notes: string
 }
 
 interface StoreMembership {

@@ -26,6 +26,7 @@ import Shipping from './shipping'
 import ShippingNew from './shipping-new'
 import Shippings from './shippings'
 import SignIn from './sign-in'
+import Store from './store'
 import { OfflineLayout, OnlineLayout } from '../layouts'
 
 const Router = () => {
@@ -79,6 +80,7 @@ const Router = () => {
           <Route path="shippings" element={<Shippings />} />
           <Route path="shippings/:id" element={<Shipping />} />
           <Route path="shippings/new" element={<ShippingNew />} />
+          <Route path="store" element={<Store />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
