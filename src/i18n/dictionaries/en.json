@@ -37,12 +37,13 @@
   },
   "checkout": {
     "customPayment": {
+      "addButton": "Add a payment method",
       "paymentTypeLabel": "Payment method",
-      "paymentTypePlaceholder": "Select a payment method..."
+      "paymentTypePlaceholder": "Select a payment method...",
+      "totalAmountLabel": "Amount",
+      "unattributedNegative": "There is {{ amount }} too much",
+      "unattributedPositive": "He's staying {{ amount }} to be distributed"
     },
-    "customPaymentAddButton": "Add a payment method",
-    "customPaymentUnattributedNegative": "There is {{ amount }} too much",
-    "customPaymentUnattributedPositive": "He's staying {{ amount }} to be distributed",
     "flatPromotionLabel": "Amount",
     "pageSubtitle": "Enter the data of your collection here",
     "pageTitle": "Collection",

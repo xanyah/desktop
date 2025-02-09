@@ -23,7 +23,7 @@ const CustomPayment = () => {
   return (
     <>
       {map(fields, (field, index) => (
-        <div className="flex flex-row items-center gap-4" key={field.id}>
+        <div className="flex flex-row items-end gap-4" key={field.id}>
           <Controller
             name={`salePaymentsAttributes.${index}.paymentTypeId`}
             render={({ field: { onChange, value } }) => (
@@ -40,25 +40,26 @@ const CustomPayment = () => {
             name={`salePaymentsAttributes.${index}.totalAmountCents`}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <InputText
+                label={t('checkout.customPayment.totalAmountLabel')}
                 onChange={onChange}
                 type="number"
                 value={value}
                 error={error?.message}
+                icon={<Euro />}
               />
             )}
           />
-          <div><Euro /></div>
           <Button variant="ghost" onClick={() => remove(index)}><X /></Button>
         </div>
       ))}
       {unattributed > 0 && (
         <p className="text-red-500 text-center">
-          {t('checkout.customPaymentUnattributedPositive', { amount: formatPrice(unattributed, 'EUR') })}
+          {t('checkout.customPayment.unattributedPositive', { amount: formatPrice(unattributed, 'EUR') })}
         </p>
       )}
       {unattributed < 0 && (
         <p className="text-red-500 text-center">
-          {t('checkout.customPaymentUnattributedNegative', { amount: formatPrice(unattributed, 'EUR') })}
+          {t('checkout.customPayment.unattributedNegative', { amount: formatPrice(unattributed, 'EUR') })}
         </p>
       )}
       <Button
@@ -66,7 +67,7 @@ const CustomPayment = () => {
         variant="ghost"
         onClick={() => append({ paymentTypeId: head(data?.data)?.id as string, totalAmountCents: 0, totalAmountCurrency: 'EUR' })}
       >
-        {t('checkout.customPaymentAddButton')}
+        {t('checkout.customPayment.addButton')}
       </Button>
     </>
   )

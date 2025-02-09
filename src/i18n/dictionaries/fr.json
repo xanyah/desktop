@@ -37,12 +37,13 @@
   },
   "checkout": {
     "customPayment": {
+      "addButton": "Ajouter un moyen de paiement",
       "paymentTypeLabel": "Moyen de paiement",
-      "paymentTypePlaceholder": "Sélectionner un moyen de paiement..."
+      "paymentTypePlaceholder": "Sélectionner un moyen de paiement...",
+      "totalAmountLabel": "Montant",
+      "unattributedNegative": "Il y a {{ amount }} en trop",
+      "unattributedPositive": "Il reste {{ amount }} à distribuer"
     },
-    "customPaymentAddButton": "Ajouter un moyen de paiement",
-    "customPaymentUnattributedNegative": "Il y a {{ amount }} en trop",
-    "customPaymentUnattributedPositive": "Il reste {{ amount }} à distribuer",
     "flatPromotionLabel": "Montant",
     "pageSubtitle": "Saisissez ici les données de votre encaissement",
     "pageTitle": "Encaissement",
