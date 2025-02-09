@@ -33,9 +33,6 @@ const Sale = () => {
       label: t('sale.pageTitle', { saleNumber: uuidNumber(saleData?.data.id) }),
     },
   ])
-  if (!saleData) {
-    return null
-  }
 
   const { mutate: print } = usePrint()
 
@@ -49,6 +46,10 @@ const Sale = () => {
         ) as PosPrintData[],
       )
     }
+  }
+
+  if (!saleData) {
+    return null
   }
 
   return (
