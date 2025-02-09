@@ -21,7 +21,6 @@
     "@tanstack/react-query": "^5.64.1",
     "@tanstack/react-table": "^8.20.6",
     "@uiw/react-color-circle": "^2.3.4",
-    "add": "^2.0.6",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
