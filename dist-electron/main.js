@@ -190,16 +190,18 @@ require$$0.ipcMain.handle("get-printers", async () => {
   if (!win) throw new Error("win not available");
   return win.webContents.getPrintersAsync();
 });
-require$$0.ipcMain.handle("print", async (printerName, data) => {
+require$$0.ipcMain.handle("print", async (event, printData) => {
+  const { data, printerName } = printData;
   const options = {
-    preview: false,
+    preview: true,
     margin: "0 0 0 0",
     copies: 1,
     printerName,
     timeOutPerLine: 400,
-    silent: true,
     pageSize: "80mm"
   };
+  console.log(printerName);
+  console.log(data);
   try {
     await distExports.PosPrinter.print(data, options);
     console.log("Printing successful");

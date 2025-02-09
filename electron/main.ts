@@ -50,16 +50,20 @@ ipcMain.handle('get-printers', async () => {
   return win.webContents.getPrintersAsync()
 })
 
-ipcMain.handle('print', async (printerName, data) => {
+ipcMain.handle('print', async (event, printData) => {
+  const { data, printerName } = printData
+
   const options = {
-    preview: false,
+    preview: true,
     margin: '0 0 0 0',
     copies: 1,
     printerName,
     timeOutPerLine: 400,
-    silent: true,
     pageSize: '80mm',
   }
+
+  console.log(printerName)
+  console.log(data)
 
   try {
     await PosPrinter.print(data, options)
@@ -69,6 +73,7 @@ ipcMain.handle('print', async (printerName, data) => {
     throw error
   }
 })
+
 
 app.on('window-all-closed', () => {
   app.quit()
