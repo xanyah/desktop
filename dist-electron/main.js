@@ -163,12 +163,17 @@ if (!require$$0.app.requestSingleInstanceLock()) {
 }
 let win;
 function createWindow() {
+  const mainScreen = require$$0.screen.getPrimaryDisplay();
+  const { width, height } = mainScreen.workAreaSize;
   win = new require$$0.BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, "logo.svg"),
+    icon: path.join(process.env.VITE_PUBLIC || "", "logo.svg"),
+    width,
+    height,
+    x: 0,
+    y: 0,
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
-      contextIsolation: true,
-      enableRemoteModule: false
+      contextIsolation: true
     }
   });
   win.webContents.on("did-finish-load", () => {
@@ -178,7 +183,7 @@ function createWindow() {
     win.loadURL(process.env.VITE_DEV_SERVER_URL);
     win.webContents.openDevTools();
   } else {
-    win.loadFile(path.join(process.env.DIST, "index.html"));
+    win.loadFile(path.join(process.env.DIST || "", "index.html"));
   }
 }
 require$$0.ipcMain.handle("get-printers", async () => {
@@ -194,7 +199,6 @@ require$$0.ipcMain.handle("print", async (printerName, data) => {
     timeOutPerLine: 400,
     silent: true,
     pageSize: "80mm"
-    // page size
   };
   try {
     await distExports.PosPrinter.print(data, options);

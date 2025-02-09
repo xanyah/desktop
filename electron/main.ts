@@ -1,5 +1,5 @@
 import path from 'path'
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, screen } from 'electron'
 import { PosPrinter } from 'electron-pos-printer'
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
@@ -17,12 +17,18 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null
 
 function createWindow() {
+  const mainScreen = screen.getPrimaryDisplay()
+  const { width, height } = mainScreen.workAreaSize
+
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'logo.svg'),
+    icon: path.join(process.env.VITE_PUBLIC || '', 'logo.svg'),
+    width,
+    height,
+    x: 0,
+    y: 0,
     webPreferences: {
       preload: path.join(__dirname, './preload.js'),
       contextIsolation: true,
-      enableRemoteModule: false,
     },
   })
 
@@ -35,7 +41,7 @@ function createWindow() {
     win.webContents.openDevTools()
   }
   else {
-    win.loadFile(path.join(process.env.DIST, 'index.html'))
+    win.loadFile(path.join(process.env.DIST || '', 'index.html'))
   }
 }
 
@@ -52,7 +58,7 @@ ipcMain.handle('print', async (printerName, data) => {
     printerName,
     timeOutPerLine: 400,
     silent: true,
-    pageSize: '80mm', // page size
+    pageSize: '80mm',
   }
 
   try {

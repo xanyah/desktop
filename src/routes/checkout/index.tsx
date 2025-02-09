@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom'
 import { useCurrentStore } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
-import PrintComponent from './printer'
 
 const Checkout = () => {
   const { t } = useTranslation()
@@ -72,7 +71,6 @@ const Checkout = () => {
           {t('checkout.validateButton')}
         </Button>
       </FormContainer>
-      <PrintComponent />
     </FormProvider>
   )
 }
