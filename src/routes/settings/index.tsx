@@ -1,4 +1,9 @@
-import { Button, FormContainer, ReactSelect } from '../../components'
+import {
+  Button,
+  FormContainer,
+  FormSection,
+  ReactSelect,
+} from '../../components'
 
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
@@ -7,11 +12,13 @@ import { useEffect, useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { find, map } from 'lodash'
 import { useLocalStorage, usePrint, usePrinters } from '@/hooks'
-import { printTestData } from './config'
-
-interface PrinterFormProps {
-  printer: string
-}
+import {
+  pageSizeOptions,
+  printerSchema,
+  printerSchemaType,
+  printTestData,
+} from './config'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const Settings = () => {
   const { t } = useTranslation()
@@ -21,8 +28,9 @@ const Settings = () => {
     undefined,
   )
 
-  const { control, handleSubmit, reset } = useForm<PrinterFormProps>({
-    defaultValues: { printer: '' },
+  const { control, handleSubmit, reset } = useForm<printerSchemaType>({
+    resolver: zodResolver(printerSchema),
+    defaultValues: { name: '', pageSize: '' },
   })
 
   const { data: printers, isSuccess } = usePrinters()
@@ -30,9 +38,9 @@ const Settings = () => {
 
   useEffect(() => {
     if (selectedPrinter && isSuccess) {
-      const findPrinter = find(printers, p => p.name === selectedPrinter)
+      const findPrinter = find(printers, p => p.name === selectedPrinter.name)
       if (findPrinter) {
-        reset({ printer: findPrinter.name })
+        reset(selectedPrinter)
       } else {
         removePrinter()
       }
@@ -41,15 +49,15 @@ const Settings = () => {
 
   const options = useMemo(() => {
     return printers
-      ? printers.map(printer => ({
+      ? map(printers, printer => ({
           value: printer.name,
           label: printer.name,
         }))
       : []
   }, [printers])
 
-  const onSavePrinter = (data: PrinterFormProps) => {
-    setSelectedPrinter(data.printer)
+  const onSavePrinter = (data: printerSchemaType) => {
+    setSelectedPrinter(data)
     toast.success(t('global.saved'))
   }
 
@@ -59,32 +67,49 @@ const Settings = () => {
 
   return (
     <FormContainer isNotForm title={t('settings.pageTitle')}>
-      <form
-        className="flex flex-col gap-8"
-        onSubmit={handleSubmit(onSavePrinter)}
-      >
-        <Controller
-          control={control}
-          name="printer"
-          render={({ field: { onChange, value } }) => (
-            <ReactSelect
-              onChange={item => onChange(item?.value)}
-              value={{ value, label: value }}
-              placeholder={t('settings.printerPlaceholder')}
-              options={options}
-              label={t('settings.printerLabel')}
-            />
-          )}
-        />
-        <div className="flex gap-4 self-end">
-          {selectedPrinter && (
-            <Button variant="outline" type="button" onClick={onPrintTest}>
-              {t('settings.testPrinter')}
-            </Button>
-          )}
-          <Button type="submit">{t('global.save')}</Button>
-        </div>
-      </form>
+      <FormSection title={t('settings.formSection')}>
+        <form
+          className="flex flex-col gap-8"
+          onSubmit={handleSubmit(onSavePrinter)}
+        >
+          <Controller
+            control={control}
+            name="name"
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <ReactSelect
+                error={error?.message}
+                onChange={item => onChange(item?.value)}
+                value={{ value, label: value }}
+                placeholder={t('settings.printerPlaceholder')}
+                options={options}
+                label={t('settings.printerLabel')}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="pageSize"
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <ReactSelect
+                error={error?.message}
+                onChange={item => onChange(item?.value)}
+                value={{ value, label: value }}
+                placeholder={t('settings.pageSizePrinterPlaceholder')}
+                options={pageSizeOptions}
+                label={t('settings.pageSizePrinterLabel')}
+              />
+            )}
+          />
+          <div className="flex gap-4 self-end">
+            {selectedPrinter && (
+              <Button variant="outline" type="button" onClick={onPrintTest}>
+                {t('settings.testPrinter')}
+              </Button>
+            )}
+            <Button type="submit">{t('global.save')}</Button>
+          </div>
+        </form>
+      </FormSection>
     </FormContainer>
   )
 }

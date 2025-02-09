@@ -15,13 +15,13 @@ export const usePrinters = () => useQuery({
 export const usePrint = () => {
   const { t } = useTranslation()
   const toastId = useRef<string>(null)
-  const [printerName] = useLocalStorage(
+  const [printer] = useLocalStorage(
     'printer',
     undefined,
   )
   return useMutation({
     mutationFn: async (data: PosPrintData[]) => {
-      await window.electronAPI.print({ printerName, data })
+      await window.electronAPI.print({ printerName: printer.printerName, pageSize: printer.pageSize, data })
     },
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))

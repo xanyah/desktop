@@ -21,7 +21,10 @@
     "printerPlaceholder": "Your printer",
     "testPrinter": "Test your printer",
     "printSuccess": "Print successful",
-    "printError": "Print error"
+    "printError": "Print error",
+    "pageSizePrinterLabel": "Page size",
+    "pageSizePrinterPlaceholder": "Printer page size",
+    "formSection": "Printer configuration"
   },
   "categories": {
     "createButtonLabel": "Create a category",

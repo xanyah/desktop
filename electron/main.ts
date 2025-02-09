@@ -51,19 +51,17 @@ ipcMain.handle('get-printers', async () => {
 })
 
 ipcMain.handle('print', async (event, printData) => {
-  const { data, printerName } = printData
+  const { data, printerName, pageSize } = printData
 
   const options = {
-    preview: true,
+    preview: !app.isPackaged,
     margin: '0 0 0 0',
     copies: 1,
     printerName,
     timeOutPerLine: 400,
-    pageSize: '80mm',
+    silent: true,
+    pageSize,
   }
-
-  console.log(printerName)
-  console.log(data)
 
   try {
     await PosPrinter.print(data, options)

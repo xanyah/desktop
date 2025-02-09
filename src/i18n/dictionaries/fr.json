@@ -21,7 +21,10 @@
     "printerPlaceholder": "Votre imprimante",
     "testPrinter": "Tester votre imprimante",
     "printSuccess": "Impression réussie",
-    "printError": "Erreur d'impression"
+    "printError": "Erreur d'impression",
+    "pageSizePrinterLabel": "Tille de la page",
+    "pageSizePrinterPlaceholder": "Tille de la page de l'imprimante",
+    "formSection": "Configuration de l'imprimante"
   },
   "categories": {
     "createButtonLabel": "Créer une catégorie",
