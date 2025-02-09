@@ -1,4 +1,9 @@
-import { usePrint, useSale, useSaleProducts } from '../../hooks'
+import {
+  useCurrentStore,
+  usePrint,
+  useSale,
+  useSaleProducts,
+} from '../../hooks'
 import { useParams } from 'react-router-dom'
 import { uuidNumber } from '@/helpers/uuid'
 import { Button, ShowContainer, ShowSection } from '@/components'
@@ -20,6 +25,8 @@ const Sale = () => {
     'q[saleIdEq]': saleData?.data?.id,
   })
 
+  const store = useCurrentStore()
+
   useBreadCrumbContext([
     { label: t('sales.pageTitle'), url: '/sales' },
     {
@@ -33,12 +40,15 @@ const Sale = () => {
   const { mutate: print } = usePrint()
 
   const onPrint = () => {
-    print(
-      formatDataPrinter(
-        saleData.data,
-        saleProductsData?.data,
-      ) as PosPrintData[],
-    )
+    if (saleData && saleProductsData && store) {
+      print(
+        formatDataPrinter(
+          saleData.data,
+          saleProductsData?.data,
+          store,
+        ) as PosPrintData[],
+      )
+    }
   }
 
   return (
@@ -50,7 +60,7 @@ const Sale = () => {
       button={
         <Button type="button" onClick={onPrint}>
           <ReceiptText />
-          {t('sale.receipt')}
+          {t('sale.printReceipt')}
         </Button>
       }
     >

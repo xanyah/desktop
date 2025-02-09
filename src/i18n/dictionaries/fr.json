@@ -288,7 +288,8 @@
     "pageSubtitle": "Vente effectuée le {{ saleDate }}",
     "pageTitle": "Vente {{ saleNumber }}",
     "products": "Articles vendus",
-    "user": "Vendeur"
+    "user": "Vendeur",
+    "printReceipt": "Imprimer le ticket"
   },
   "sales": {
     "pageTitle": "Ventes",

@@ -288,7 +288,8 @@
     "pageSubtitle": "Sale made on {{ saleDate }}",
     "pageTitle": "Sale {{ saleNumber }}",
     "products": "Items sold",
-    "user": "Seller"
+    "user": "Seller",
+    "printReceipt": "Print receipt"
   },
   "sales": {
     "pageTitle": "Sales",
