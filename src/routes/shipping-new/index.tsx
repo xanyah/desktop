@@ -55,7 +55,7 @@ const Shipping = () => {
   const { mutate: createApiShipping } = useMutation({
     mutationFn: (newData: any) =>
       createShipping({ ...newData, storeId: store?.id }),
-    onSuccess: data => {
+    onSuccess: (data) => {
       navigate(`/shippings/${data.data.id}`)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
@@ -91,7 +91,8 @@ const Shipping = () => {
           ...fields[existingProductIndex],
           quantity: fields[existingProductIndex].quantity + 1,
         })
-      } else {
+      }
+      else {
         append({ productId: newProductId, quantity: 1 })
       }
     },
@@ -137,8 +138,7 @@ const Shipping = () => {
               key={field.productId}
               onRemove={() => remove(index)}
               onQuantityUpdate={newQuantity =>
-                update(index, { ...field, quantity: newQuantity })
-              }
+                update(index, { ...field, quantity: newQuantity })}
             />
           ))}
         </FormSection>

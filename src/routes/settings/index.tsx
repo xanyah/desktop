@@ -41,7 +41,8 @@ const Settings = () => {
       const findPrinter = find(printers, p => p.name === selectedPrinter.name)
       if (findPrinter) {
         reset(selectedPrinter)
-      } else {
+      }
+      else {
         removePrinter()
       }
     }

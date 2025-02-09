@@ -31,7 +31,7 @@ const Checkout = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['sales'] })
       navigate(`/sales/${data.data.id}`)

@@ -58,12 +58,12 @@ const Sale = () => {
       subtitle={t('sale.pageSubtitle', {
         saleDate: formatLongDatetime(saleData?.data.createdAt),
       })}
-      button={
+      button={(
         <Button type="button" onClick={onPrint}>
           <ReceiptText />
           {t('sale.printReceipt')}
         </Button>
-      }
+      )}
     >
       <ShowSection title={t('sale.generalInformations')}>
         <SaleInfos sale={saleData?.data} />

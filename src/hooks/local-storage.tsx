@@ -13,23 +13,27 @@ const useLocalStorage = (key: string, defaultValue?: string) => {
       // localStorage and then return it
       if (value) {
         return JSON.parse(value)
-      } else if (defaultValue) {
+      }
+      else if (defaultValue) {
         localStorage.setItem(key, JSON.stringify(defaultValue))
         return defaultValue
       }
-    } catch (error) {
+    }
+    catch (error) {
+      console.error(error)
       localStorage.setItem(key, JSON.stringify(defaultValue))
       return defaultValue
     }
   })
 
   // this method update our localStorage and our state
-  const setLocalStorageStateValue = valueOrFn => {
+  const setLocalStorageStateValue = (valueOrFn) => {
     let newValue
     if (typeof valueOrFn === 'function') {
       const fn = valueOrFn
       newValue = fn(localStorageValue)
-    } else {
+    }
+    else {
       newValue = valueOrFn
     }
     localStorage.setItem(key, JSON.stringify(newValue))

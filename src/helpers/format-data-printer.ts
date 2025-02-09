@@ -24,7 +24,6 @@ export const formatDataPrinter = (sale: Sale, saleProducts: SaleProduct[], store
     },
   ])
 
-
   const data = [
     {
       type: 'text',
