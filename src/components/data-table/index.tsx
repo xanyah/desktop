@@ -26,7 +26,7 @@ function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const table = useReactTable({
     data,
     columns,

@@ -9,7 +9,6 @@ export const StyledSidebar = tw.div<StyledSidebarProps>`
   top-0
   left-0
   h-screen
-  border
   border-r
   w-64
   bg-gray-50
