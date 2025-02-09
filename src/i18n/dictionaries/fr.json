@@ -19,7 +19,9 @@
     "pageSubtitle": "Configurez votre imprimante",
     "printerLabel": "Imprimante",
     "printerPlaceholder": "Votre imprimante",
-    "testPrinter": "Tester votre imprimante"
+    "testPrinter": "Tester votre imprimante",
+    "printSuccess": "Impression réussie",
+    "printError": "Erreur d'impression"
   },
   "categories": {
     "createButtonLabel": "Créer une catégorie",

@@ -1,8 +1,7 @@
 import path from 'path'
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { printer as ThermalPrinter, types as PrinterTypes } from 'node-thermal-printer'
+import { PosPrinter } from 'electron-pos-printer'
 
-import electronDriver from 'electron-printer'
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 process.env.DIST = path.join(__dirname, '../dist')
@@ -45,41 +44,24 @@ ipcMain.handle('get-printers', async () => {
   return win.webContents.getPrintersAsync()
 })
 
-ipcMain.handle('print', async () => {
+ipcMain.handle('print', async (printerName, data) => {
   const options = {
-    preview: true,
+    preview: false,
     margin: '0 0 0 0',
     copies: 1,
-    printerName: 'EPSON TM-T88IV ReceiptE4',
+    printerName,
     timeOutPerLine: 400,
     silent: true,
     pageSize: '80mm', // page size
   }
 
-  const data = [
-    {
-      type: 'text', // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
-      value: 'SAMPLE HEADING',
-      style: { fontWeight: '700', textAlign: 'center', fontSize: '24px' },
-    }, {
-      type: 'text', // 'text' | 'barCode' | 'qrCode' | 'image' | 'table'
-      value: 'Secondary text',
-      style: { textDecoration: 'underline', fontSize: '10px', textAlign: 'center', color: 'red' },
-    }, {
-      type: 'barCode',
-      value: '023456789010',
-      height: 40, // height of barcode, applicable only to bar and QR codes
-      width: 2, // width of barcode, applicable only to bar and QR codes
-      displayValue: true, // Display value below barcode
-      fontsize: 12,
-    },
-  ]
-
-  PosPrinter.print(data, options)
-    .then(console.log)
-    .catch((error) => {
-      console.error(error)
-    })
+  try {
+    await PosPrinter.print(data, options)
+    console.log('Printing successful')
+  } catch (error) {
+    console.error('Error during print:', error)
+    throw error
+  }
 })
 
 app.on('window-all-closed', () => {

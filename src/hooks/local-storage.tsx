@@ -38,7 +38,6 @@ const useLocalStorage = (key: string, defaultValue?: string) => {
 
   const removeLocalStorageStateValue = () => {
     localStorage.removeItem(key)
-    setLocalStorageValue(undefined)
   }
   return [
     localStorageValue,

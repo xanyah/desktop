@@ -19,7 +19,9 @@
     "pageSubtitle": "Configure your printer",
     "printerLabel": "Printer",
     "printerPlaceholder": "Your printer",
-    "testPrinter": "Test your printer"
+    "testPrinter": "Test your printer",
+    "printSuccess": "Print successful",
+    "printError": "Print error"
   },
   "categories": {
     "createButtonLabel": "Create a category",

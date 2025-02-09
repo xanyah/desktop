@@ -1,7 +1,27 @@
 import AsyncSelect from 'react-select/async'
+import Select from 'react-select'
 import tw from 'tailwind-styled-components'
 
 export const StyledAsyncSelect = tw(AsyncSelect)`
+  w-full
+  whitespace-nowrap 
+  rounded-md 
+  border 
+  border-input 
+  bg-transparent 
+  text-sm 
+  shadow-sm 
+  ring-offset-background 
+  placeholder:text-muted-foreground 
+  focus:outline-hidden 
+  focus:ring-1 
+  focus:ring-ring 
+  disabled:cursor-not-allowed 
+  disabled:opacity-50 
+  [&>span]:line-clamp-1
+`
+
+export const StyledSelect = tw(Select)`
   w-full
   whitespace-nowrap 
   rounded-md 

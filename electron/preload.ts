@@ -25,7 +25,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
 contextBridge.exposeInMainWorld('electronAPI', {
   getPrinters: () => ipcRenderer.invoke('get-printers'),
-  print: printerName => ipcRenderer.invoke('print', printerName),
+  print: (printerName, data) => ipcRenderer.invoke('print', printerName, data),
 
 })
 
