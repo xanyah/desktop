@@ -16,9 +16,10 @@
   },
   "settings": {
     "pageTitle": "Paramètres",
-    "pageSubtitle": "Configure your printer",
+    "pageSubtitle": "Configurez votre imprimante",
     "printerLabel": "Imprimante",
-    "printerPlaceholder": "Votre imprimante"
+    "printerPlaceholder": "Votre imprimante",
+    "testPrinter": "Tester votre imprimante"
   },
   "categories": {
     "createButtonLabel": "Créer une catégorie",
