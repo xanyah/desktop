@@ -31,9 +31,15 @@
     "newCategoryPageTitle": "Nouvelle catégorie",
     "pageSubtitle": "Saisissez ici les informations de votre catégorie",
     "parentCategoryLabel": "Catégorie parente",
-    "vatLabel": "TVA"
+    "parentCategoryPlaceholder": "Sélectionner une catégorie...",
+    "vatLabel": "TVA",
+    "vatPlaceholder": "Sélectionner un taux de TVA..."
   },
   "checkout": {
+    "customPayment": {
+      "paymentTypeLabel": "Moyen de paiement",
+      "paymentTypePlaceholder": "Sélectionner un moyen de paiement..."
+    },
     "customPaymentAddButton": "Ajouter un moyen de paiement",
     "customPaymentUnattributedNegative": "Il y a {{ amount }} en trop",
     "customPaymentUnattributedPositive": "Il reste {{ amount }} à distribuer",
@@ -59,7 +65,7 @@
     "nameLabel": "Nom",
     "namePlaceholder": "Nom de l'attribut personnalisé",
     "newPageTitle": "Nouvel attribut personnalisé",
-    "pageSubtitle": "Les attributs personnalisés permettent d'ajouter des attributs sur les produits",
+    "pageSubtitle": "Les attributs personnalisés permettent d'ajouter des attributs sur les articles",
     "typeLabel": "Type d'attribut"
   },
   "customAttributes": {
@@ -154,11 +160,13 @@
     "withdraw": "Commande retirée"
   },
   "orderNew": {
-    "customerLabel": "Sélectionner un client...",
+    "customerLabel": "Client",
+    "customerPlaceholder": "Sélectionner un client...",
     "generalInformations": "Informations générales",
     "pageSubtitle": "Saisissez ici les données de votre nouvelle commande client",
     "pageTitle": "Nouvelle commande",
-    "productLabel": "Sélectionner un produit..."
+    "productLabel": "Articles",
+    "productPlaceholder": "Sélectionner un article..."
   },
   "orders": {
     "createButtonLabel": "Créer une commande",
@@ -198,17 +206,21 @@
     "buyingAmountLabel": "Prix d'achat",
     "buyingAmountPlaceholder": "Prix d'achat de l'article",
     "categoryLabel": "Catégorie",
+    "categoryPlaceholder": "Sélectionner une catégorie",
+    "deleteImageDescription": "Êtes-vous sûr de vouloir supprimer cette image?",
+    "deleteImageTitle": "Confirmation de suppression",
     "generalInformations": "Informations générales",
     "imagesLabel": "Images",
     "logistics": "Logistique",
     "manufacturerLabel": "Fabricant",
+    "manufacturerPlaceholder": "Sélectionner un fabricant...",
     "manufacturerSkuHint": "Le code fabricant est un code généralement composé des 4 premières lettres du nom du fabricant puis de l'identifiant de l'article",
     "manufacturerSkuLabel": "Code fabricant",
     "manufacturerSkuPlaceholder": "Code fabricant de l'article",
     "nameLabel": "Nom",
     "namePlaceholder": "Nom de l'article",
     "newPageTitle": "Nouvel article",
-    "pageSubtitle": "Saisissez ici les informations de votre produit",
+    "pageSubtitle": "Saisissez ici les informations de votre article",
     "skuHint": "Le SKU est un code barre spécifique à la boutique pour identifier l'article",
     "skuLabel": "SKU",
     "skuPlaceholder": "SKU de l'article",
@@ -217,8 +229,6 @@
     "taxFreeAmountPlaceholder": "Prix hors taxes de l'article",
     "upcHint": "L'UPC est le code barre d'origine de l'article",
     "upcLabel": "UPC",
-    "deleteImageTitle": "Confirmation de suppression",
-    "deleteImageDescription": "Êtes-vous sûr de vouloir supprimer cette image?",
     "upcPlaceholder": "UPC de l'article"
   },
   "products": {
@@ -288,11 +298,14 @@
     "validate": "Valider"
   },
   "shippingNew": {
-    "customerLabel": "Sélectionner un client...",
     "generalInformations": "Informations générales",
-    "pageSubtitle": "Saisissez ici les données de votre nouvelle livraison client",
+    "newProductButtonLabel": "Créer un article",
+    "pageSubtitle": "Saisissez ici les données de votre nouvelle livraison",
     "pageTitle": "Nouvelle livraison",
-    "productLabel": "Sélectionner un produit..."
+    "productLabel": "Articles",
+    "productPlaceholder": "Sélectionner un article...",
+    "providerLabel": "Fournisseur",
+    "providerPlaceholder": "Sélectionner un fournisseur..."
   },
   "shippings": {
     "createButtonLabel": "Créer une livraison",

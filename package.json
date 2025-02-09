@@ -60,6 +60,7 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "compare-json": "^0.4.0",
     "eslint": "^9.19.0",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
@@ -82,6 +83,7 @@
     "dev": "vite dev",
     "lint": "eslint \"./src/**/*.ts{,x}\"",
     "lint:fix": "eslint \"./src/**/*.ts{,x}\" --fix",
+    "i18n:lint": "comparejson ./src/i18n/dictionaries/*.json",
     "package": "tauri build",
     "test": "jest"
   },

@@ -17,9 +17,6 @@ const CustomPayment = () => {
   })
   const { data } = usePaymentTypes()
   const salePaymentsAttributes = watch('salePaymentsAttributes')
-  console.log(totalAmountCents)
-  console.log(map(salePaymentsAttributes, item => toNumber(item.totalAmountCents)))
-  console.log(sum(map(salePaymentsAttributes, item => toNumber(item.totalAmountCents))))
   const attributed = sum(map(salePaymentsAttributes, item => toNumber(item.totalAmountCents)))
   const unattributed = totalAmountCents - attributed
 
@@ -31,6 +28,8 @@ const CustomPayment = () => {
             name={`salePaymentsAttributes.${index}.paymentTypeId`}
             render={({ field: { onChange, value } }) => (
               <PaymentTypeSelect
+                label={t('checkout.customPayment.paymentTypeLabel')}
+                placeholder={t('checkout.customPayment.paymentTypePlaceholder')}
                 onChange={onChange}
                 value={value}
               />

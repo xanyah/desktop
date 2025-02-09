@@ -96,12 +96,14 @@ const Order = () => {
               onChange={onChange}
               value={value}
               label={t('orderNew.customerLabel')}
+              placeholder={t('orderNew.customerPlaceholder')}
             />
           )}
         />
         <ProductSelect
           onChange={onProductSelect}
           label={t('orderNew.productLabel')}
+          placeholder={t('orderNew.productPlaceholder')}
         />
         {map(fields, (field, index) => (
           <CheckoutProductCard

@@ -7,6 +7,7 @@ type FormContainerProps = {
   subtitle?: string
   submitButtonLabel?: string
   button?: ReactNode
+  onCancel?: () => void
 } & (
   | (DOMAttributes<HTMLFormElement> & {
     isNotForm?: false
@@ -23,6 +24,7 @@ const FormContainer = ({
   button,
   submitButtonLabel,
   isNotForm = false,
+  onCancel,
   ...formProps
 }: FormContainerProps) => {
   const { t } = useTranslation()
@@ -40,9 +42,16 @@ const FormContainer = ({
       {children}
 
       {!isNotForm && (
-        <Button className="self-end" type="submit">
-          {submitButtonLabel || t('global.save')}
-        </Button>
+        <div className="flex flex-row justify-end items-center gap-4">
+          {onCancel && (
+            <Button variant="ghost" className="self-end" type="button" onClick={onCancel}>
+              {t('global.cancel')}
+            </Button>
+          )}
+          <Button className="self-end" type="submit">
+            {submitButtonLabel || t('global.save')}
+          </Button>
+        </div>
       )}
     </Component>
   )

@@ -13,7 +13,7 @@ const AsyncReactSelect = ({ id, label, error, ...props }: Props) => {
     <StyledInputContainer>
       <StyledLabel htmlFor={id}>{label}</StyledLabel>
       <StyledAsyncSelect {...props} styles={style} />
-      <StyledError>{error}</StyledError>
+      {error && <StyledError>{error}</StyledError>}
     </StyledInputContainer>
   )
 }

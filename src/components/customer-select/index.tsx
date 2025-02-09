@@ -7,7 +7,8 @@ import { customerFullname } from '@/helpers/customer'
 interface CustomerSelectProps {
   onChange: (newValue?: Customer['id']) => void
   value?: Customer['id']
-  label?: string
+  label: string
+  placeholder: string
   error?: string
 }
 
@@ -15,6 +16,7 @@ const CustomerSelect = ({
   onChange,
   value,
   label,
+  placeholder,
   error,
 }: CustomerSelectProps) => {
   const store = useCurrentStore()
@@ -35,6 +37,7 @@ const CustomerSelect = ({
       key={store?.id}
       error={error}
       label={label}
+      placeholder={placeholder}
       onChange={onChange}
       value={value}
       useRecordHook={useCustomer}

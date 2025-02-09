@@ -6,13 +6,15 @@ import ApiDataSelect from '../api-data-select'
 interface CategorySelectProps {
   onChange: (newValue?: Category['id']) => void
   value?: Category['id']
-  label?: string
+  label: string
+  placeholder: string
   error?: string
 }
 
 const CategorySelect = ({
   onChange,
   value,
+  placeholder,
   label,
   error,
 }: CategorySelectProps) => {
@@ -34,6 +36,7 @@ const CategorySelect = ({
       key={store?.id}
       error={error}
       label={label}
+      placeholder={placeholder}
       onChange={onChange}
       value={value}
       useRecordHook={useCategory}

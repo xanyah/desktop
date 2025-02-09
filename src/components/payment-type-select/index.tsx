@@ -6,7 +6,8 @@ import ApiDataSelect from '../api-data-select'
 interface PaymentTypeSelectProps {
   onChange: (newValue?: PaymentType['id']) => void
   value?: PaymentType['id']
-  label?: string
+  label: string
+  placeholder: string
   error?: string
 }
 
@@ -14,6 +15,7 @@ const PaymentTypeSelect = ({
   onChange,
   value,
   label,
+  placeholder,
   error,
 }: PaymentTypeSelectProps) => {
   const store = useCurrentStore()
@@ -36,6 +38,7 @@ const PaymentTypeSelect = ({
       label={label}
       onChange={onChange}
       value={value}
+      placeholder={placeholder}
       useRecordHook={usePaymentType}
       getRecordValue={(record: PaymentType) => record.id}
       getRecordLabel={(record: PaymentType) => record.name}
