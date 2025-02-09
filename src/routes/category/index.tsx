@@ -112,6 +112,7 @@ const Category = () => {
               onChange={onChange}
               value={value}
               label={t('category.vatLabel')}
+              placeholder={t('category.vatPlaceholder')}
             />
           )}
         />
@@ -125,6 +126,7 @@ const Category = () => {
               onChange={onChange}
               value={value}
               label={t('category.parentCategoryLabel')}
+              placeholder={t('category.parentCategoryPlaceholder')}
             />
           )}
         />

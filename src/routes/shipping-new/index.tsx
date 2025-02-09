@@ -1,10 +1,10 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useCurrentStore } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { createShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
-import { CheckoutProductCard, ProviderSelect, FormContainer, FormSection } from '@/components'
+import { CheckoutProductCard, ProviderSelect, FormContainer, FormSection, Button, RightPanel, ProductForm } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,6 +12,7 @@ import ProductSelect from '@/components/product-select'
 import { findIndex, map } from 'lodash'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
+import { Plus } from 'lucide-react'
 
 const formSchema = z.object({
   providerId: z.string(),
@@ -29,6 +30,7 @@ const Shipping = () => {
   const navigate = useNavigate()
   const store = useCurrentStore()
   const { t } = useTranslation()
+  const [isPanelOpen, setIsPanelOpen] = useState(false)
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(formSchema),
   })
@@ -80,38 +82,62 @@ const Shipping = () => {
   }, [fields, append, update])
 
   return (
-    <FormContainer
-      title={t('shippingNew.pageTitle')}
-      subtitle={t('shippingNew.pageSubtitle')}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <FormSection title={t('shippingNew.generalInformations')}>
-        <Controller
-          control={control}
-          name="providerId"
-          render={({ field: { onChange, value } }) => (
-            <ProviderSelect
-              onChange={onChange}
-              value={value}
-            />
-          )}
-        />
-        <ProductSelect
-          onChange={onProductSelect}
-          label={t('shippingNew.productLabel')}
-        />
-        {map(fields, (field, index) => (
-          <CheckoutProductCard
-            withoutPrice
-            productId={field.productId}
-            quantity={field.quantity}
-            key={field.productId}
-            onRemove={() => remove(index)}
-            onQuantityUpdate={newQuantity => update(index, { ...field, quantity: newQuantity })}
+    <>
+      <FormContainer
+        title={t('shippingNew.pageTitle')}
+        subtitle={t('shippingNew.pageSubtitle')}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormSection title={t('shippingNew.generalInformations')}>
+          <Controller
+            control={control}
+            name="providerId"
+            render={({ field: { onChange, value } }) => (
+              <ProviderSelect
+                onChange={onChange}
+                value={value}
+                label={t('shippingNew.providerLabel')}
+                placeholder={t('shippingNew.providerPlaceholder')}
+              />
+            )}
           />
-        ))}
-      </FormSection>
-    </FormContainer>
+          <div className="flex flex-row items-end gap-4">
+            <ProductSelect
+              onChange={onProductSelect}
+              label={t('shippingNew.productLabel')}
+              placeholder={t('shippingNew.productPlaceholder')}
+            />
+            <Button onClick={() => setIsPanelOpen(true)}>
+              <Plus />
+              {t('shippingNew.newProductButtonLabel')}
+            </Button>
+          </div>
+          {map(fields, (field, index) => (
+            <CheckoutProductCard
+              withoutPrice
+              productId={field.productId}
+              quantity={field.quantity}
+              key={field.productId}
+              onRemove={() => remove(index)}
+              onQuantityUpdate={newQuantity => update(index, { ...field, quantity: newQuantity })}
+            />
+          ))}
+        </FormSection>
+      </FormContainer>
+
+      <RightPanel
+        isOpen={isPanelOpen}
+        onClose={() => setIsPanelOpen(false)}
+      >
+        <ProductForm
+          onCancel={() => setIsPanelOpen(false)}
+          onSuccess={({ data }) => {
+            onProductSelect(data.id)
+            setIsPanelOpen(false)
+          }}
+        />
+      </RightPanel>
+    </>
   )
 }
 

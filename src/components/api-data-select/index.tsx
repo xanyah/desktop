@@ -11,8 +11,9 @@ interface ApiDataSelectProps {
   getRecordValue: (record: any) => string
   getRecordLabel: (record: any) => string
   getFilteredRecords: (searchQuery: string) => Promise<AxiosResponse<any[]>>
-  label?: string
+  label: string
   error?: string
+  placeholder: string
 }
 
 const ApiDataSelect = ({
@@ -24,6 +25,7 @@ const ApiDataSelect = ({
   getFilteredRecords,
   label,
   error,
+  placeholder,
 }: ApiDataSelectProps) => {
   const { data } = useRecordHook(value)
 
@@ -61,6 +63,7 @@ const ApiDataSelect = ({
       loadOptions={loadOptions}
       label={label}
       error={error}
+      placeholder={placeholder}
     />
   )
 }

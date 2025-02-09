@@ -6,7 +6,8 @@ import ApiDataSelect from '../api-data-select'
 interface ProductSelectProps {
   onChange: (newValue?: Product['id']) => void
   value?: Product['id']
-  label?: string
+  label: string
+  placeholder: string
   error?: string
 }
 
@@ -14,6 +15,7 @@ const ProductSelect = ({
   onChange,
   value,
   label,
+  placeholder,
   error,
 }: ProductSelectProps) => {
   const store = useCurrentStore()
@@ -40,6 +42,7 @@ const ProductSelect = ({
       getRecordValue={(record: Product) => record.id}
       getRecordLabel={(record: Product) => `${record.name} - ${record.manufacturerSku}`}
       getFilteredRecords={getFilteredRecords}
+      placeholder={placeholder}
     />
   )
 }

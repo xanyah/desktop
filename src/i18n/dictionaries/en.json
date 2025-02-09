@@ -31,12 +31,19 @@
     "newCategoryPageTitle": "New category",
     "pageSubtitle": "Enter here the information in your category",
     "parentCategoryLabel": "Parent category",
-    "vatLabel": "VAT"
+    "parentCategoryPlaceholder": "Select a category...",
+    "vatLabel": "VAT",
+    "vatPlaceholder": "Select a VAT rate..."
   },
   "checkout": {
-    "customPaymentAddButton": "Add a payment method",
-    "customPaymentUnattributedNegative": "There is {{ amount }} too much",
-    "customPaymentUnattributedPositive": "He's staying {{ amount }} to be distributed",
+    "customPayment": {
+      "addButton": "Add a payment method",
+      "paymentTypeLabel": "Payment method",
+      "paymentTypePlaceholder": "Select a payment method...",
+      "totalAmountLabel": "Amount",
+      "unattributedNegative": "There is {{ amount }} too much",
+      "unattributedPositive": "He's staying {{ amount }} to be distributed"
+    },
     "flatPromotionLabel": "Amount",
     "pageSubtitle": "Enter the data of your collection here",
     "pageTitle": "Collection",
@@ -100,6 +107,7 @@
   },
   "global": {
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "edit": "Edit",
     "loading": "Loading in progress ...",
     "save": "Save",
@@ -153,11 +161,13 @@
     "withdraw": "Command withdrawn"
   },
   "orderNew": {
-    "customerLabel": "Select a customer ...",
+    "customerLabel": "Customer",
+    "customerPlaceholder": "Select a customer...",
     "generalInformations": "General information",
     "pageSubtitle": "Enter here the data of your new customer order",
     "pageTitle": "New order",
-    "productLabel": "Select a product ..."
+    "productLabel": "Products",
+    "productPlaceholder": "Select a product ..."
   },
   "orders": {
     "createButtonLabel": "Create an order",
@@ -197,10 +207,14 @@
     "buyingAmountLabel": "Purchase price",
     "buyingAmountPlaceholder": "Article purchase price",
     "categoryLabel": "Category",
+    "categoryPlaceholder": "Select a category...",
+    "deleteImageDescription": "Are you sure you want to delete this image ?",
+    "deleteImageTitle": "Delete confirmation",
     "generalInformations": "General information",
     "imagesLabel": "Images",
     "logistics": "Logistics",
     "manufacturerLabel": "Manufacturer",
+    "manufacturerPlaceholder": "Select a manufacturer...",
     "manufacturerSkuHint": "The manufacturer code is a code generally composed of the first 4 letters of the manufacturer's name and then the article identifier",
     "manufacturerSkuLabel": "Manufacturer code",
     "manufacturerSkuPlaceholder": "Article manufacturer code",
@@ -285,11 +299,14 @@
     "validate": "To validate"
   },
   "shippingNew": {
-    "customerLabel": "Select a customer ...",
     "generalInformations": "General information",
-    "pageSubtitle": "Enter the data from your new customer delivery here",
+    "newProductButtonLabel": "Create a product",
+    "pageSubtitle": "Enter the data from your new shipping here",
     "pageTitle": "New delivery",
-    "productLabel": "Select a product ..."
+    "productLabel": "Product",
+    "productPlaceholder": "Select a product ...",
+    "providerLabel": "Provider",
+    "providerPlaceholder": "Select a provider ..."
   },
   "shippings": {
     "createButtonLabel": "Create a delivery",

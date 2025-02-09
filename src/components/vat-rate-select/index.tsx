@@ -6,13 +6,15 @@ import ApiDataSelect from '../api-data-select'
 interface VatRateSelectProps {
   onChange: (newValue?: VatRate['id']) => void
   value?: VatRate['id']
-  label?: string
+  label: string
+  placeholder: string
   error?: string
 }
 
 const VatRateSelect = ({
   onChange,
   value,
+  placeholder,
   label,
   error,
 }: VatRateSelectProps) => {
@@ -34,6 +36,7 @@ const VatRateSelect = ({
       key={store?.id}
       error={error}
       label={label}
+      placeholder={placeholder}
       onChange={onChange}
       value={value}
       useRecordHook={useVatRate}
