@@ -37,13 +37,18 @@ const Checkout = () => {
       navigate(`/sales/${data.data.id}`)
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
-  const onSubmit = useCallback((data: CheckoutSchemaType) => {
-    mutate({ ...data, storeId: store?.id })
-  }, [mutate, store])
+  const onSubmit = useCallback(
+    (data: CheckoutSchemaType) => {
+      mutate({ ...data, storeId: store?.id })
+    },
+    [mutate, store],
+  )
 
   return (
     <FormProvider {...form}>

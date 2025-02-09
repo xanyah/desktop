@@ -14,6 +14,18 @@
     "security": "Security",
     "signOut": "Sign out"
   },
+  "settings": {
+    "pageTitle": "Parameters",
+    "pageSubtitle": "Configure your printer",
+    "printerLabel": "Printer",
+    "printerPlaceholder": "Your printer",
+    "testPrinter": "Test your printer",
+    "printSuccess": "Print successful",
+    "printError": "Print error",
+    "pageSizePrinterLabel": "Page size",
+    "pageSizePrinterPlaceholder": "Printer page size",
+    "formSection": "Printer configuration"
+  },
   "categories": {
     "createButtonLabel": "Create a category",
     "pageTitle": "Categories",
@@ -276,7 +288,8 @@
     "pageSubtitle": "Sale made on {{ saleDate }}",
     "pageTitle": "Sale {{ saleNumber }}",
     "products": "Items sold",
-    "user": "Seller"
+    "user": "Seller",
+    "printReceipt": "Print receipt"
   },
   "sales": {
     "pageTitle": "Sales",

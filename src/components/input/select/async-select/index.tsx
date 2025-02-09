@@ -1,6 +1,10 @@
 import { AsyncProps } from 'react-select/async'
-import { style, StyledAsyncSelect } from './styles'
-import { StyledError, StyledInputContainer, StyledLabel } from '../input-styles'
+import { style, StyledAsyncSelect } from '../styles'
+import {
+  StyledError,
+  StyledInputContainer,
+  StyledLabel,
+} from '../../input-styles'
 
 interface Props extends AsyncProps<any, any, any> {
   id?: string

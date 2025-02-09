@@ -1,17 +1,12 @@
-import { useSaleProducts } from '../../hooks'
 import { map } from 'lodash'
 import { SaleProductCard } from '@/components'
 
 interface SaleProductsProps {
-  sale: Sale
+  saleProductsData?: SaleProduct[]
 }
 
-const SaleProducts = ({ sale }: SaleProductsProps) => {
-  const { data: saleProductsData } = useSaleProducts({
-    'q[saleIdEq]': sale.id,
-  })
-
-  return map(saleProductsData?.data, saleProduct => (
+const SaleProducts = ({ saleProductsData }: SaleProductsProps) => {
+  return map(saleProductsData, saleProduct => (
     <SaleProductCard saleProduct={saleProduct} key={saleProduct.id} />
   ))
 }

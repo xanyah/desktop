@@ -28,6 +28,7 @@ import Shippings from './shippings'
 import SignIn from './sign-in'
 import Store from './store'
 import { OfflineLayout, OnlineLayout } from '../layouts'
+import Settings from './settings'
 
 const Router = () => {
   return (
@@ -39,6 +40,7 @@ const Router = () => {
         <Route element={<OnlineLayout />}>
           <Route path="" element={<Navigate to="/checkout" />} />
           <Route path="account" element={<Account />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:id/edit" element={<Category />} />
           <Route path="categories/new" element={<Category />} />

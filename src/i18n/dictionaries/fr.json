@@ -14,6 +14,18 @@
     "security": "Sécurité",
     "signOut": "Déconnexion"
   },
+  "settings": {
+    "pageTitle": "Paramètres",
+    "pageSubtitle": "Configurez votre imprimante",
+    "printerLabel": "Imprimante",
+    "printerPlaceholder": "Votre imprimante",
+    "testPrinter": "Tester votre imprimante",
+    "printSuccess": "Impression réussie",
+    "printError": "Erreur d'impression",
+    "pageSizePrinterLabel": "Tille de la page",
+    "pageSizePrinterPlaceholder": "Tille de la page de l'imprimante",
+    "formSection": "Configuration de l'imprimante"
+  },
   "categories": {
     "createButtonLabel": "Créer une catégorie",
     "pageTitle": "Catégories",
@@ -276,7 +288,8 @@
     "pageSubtitle": "Vente effectuée le {{ saleDate }}",
     "pageTitle": "Vente {{ saleNumber }}",
     "products": "Articles vendus",
-    "user": "Vendeur"
+    "user": "Vendeur",
+    "printReceipt": "Imprimer le ticket"
   },
   "sales": {
     "pageTitle": "Ventes",

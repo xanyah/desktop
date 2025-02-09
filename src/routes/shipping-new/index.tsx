@@ -4,7 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { createShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
-import { CheckoutProductCard, ProviderSelect, FormContainer, FormSection, Button, RightPanel, ProductForm } from '@/components'
+import {
+  CheckoutProductCard,
+  ProviderSelect,
+  FormContainer,
+  FormSection,
+  Button,
+  RightPanel,
+  ProductForm,
+} from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -55,31 +63,41 @@ const Shipping = () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onError: () => {
-      toast.error(t('global.savingError'), { id: toastId?.current || undefined })
+      toast.error(t('global.savingError'), {
+        id: toastId?.current || undefined,
+      })
     },
   })
 
-  const onSubmit = useCallback((data: FormType) => {
-    createApiShipping({ ...data, storeId: store?.id })
-  }, [store, createApiShipping])
+  const onSubmit = useCallback(
+    (data: FormType) => {
+      createApiShipping({ ...data, storeId: store?.id })
+    },
+    [store, createApiShipping],
+  )
 
-  const onProductSelect = useCallback((newProductId?: Product['id']) => {
-    if (!newProductId) {
-      return
-    }
+  const onProductSelect = useCallback(
+    (newProductId?: Product['id']) => {
+      if (!newProductId) {
+        return
+      }
 
-    const existingProductIndex = findIndex(fields, { productId: newProductId })
-
-    if (existingProductIndex !== -1) {
-      update(existingProductIndex, {
-        ...fields[existingProductIndex],
-        quantity: fields[existingProductIndex].quantity + 1,
+      const existingProductIndex = findIndex(fields, {
+        productId: newProductId,
       })
-    }
-    else {
-      append({ productId: newProductId, quantity: 1 })
-    }
-  }, [fields, append, update])
+
+      if (existingProductIndex !== -1) {
+        update(existingProductIndex, {
+          ...fields[existingProductIndex],
+          quantity: fields[existingProductIndex].quantity + 1,
+        })
+      }
+      else {
+        append({ productId: newProductId, quantity: 1 })
+      }
+    },
+    [fields, append, update],
+  )
 
   return (
     <>
@@ -107,7 +125,7 @@ const Shipping = () => {
               label={t('shippingNew.productLabel')}
               placeholder={t('shippingNew.productPlaceholder')}
             />
-            <Button onClick={() => setIsPanelOpen(true)}>
+            <Button type="button" onClick={() => setIsPanelOpen(true)}>
               <Plus />
               {t('shippingNew.newProductButtonLabel')}
             </Button>
@@ -119,16 +137,14 @@ const Shipping = () => {
               quantity={field.quantity}
               key={field.productId}
               onRemove={() => remove(index)}
-              onQuantityUpdate={newQuantity => update(index, { ...field, quantity: newQuantity })}
+              onQuantityUpdate={newQuantity =>
+                update(index, { ...field, quantity: newQuantity })}
             />
           ))}
         </FormSection>
       </FormContainer>
 
-      <RightPanel
-        isOpen={isPanelOpen}
-        onClose={() => setIsPanelOpen(false)}
-      >
+      <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
         <ProductForm
           onCancel={() => setIsPanelOpen(false)}
           onSuccess={({ data }) => {
