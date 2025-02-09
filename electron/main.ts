@@ -1,6 +1,6 @@
 import path from 'path'
 import { app, BrowserWindow, ipcMain, screen } from 'electron'
-import { PosPrinter } from 'electron-pos-printer'
+const { PosPrinter } = require('electron-pos-printer')
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
@@ -73,7 +73,6 @@ ipcMain.handle('print', async (event, printData) => {
     throw error
   }
 })
-
 
 app.on('window-all-closed', () => {
   app.quit()
