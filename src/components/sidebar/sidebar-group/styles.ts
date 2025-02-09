@@ -6,7 +6,7 @@ export const SidebarContainer = tw.div`
 `
 
 export const GroupLabel = tw.div`
-  h-8 flex items-center px-2 text-xs font-medium text-gray-700
+  h-8 flex items-center px-2 text-xs font-medium text-muted-foreground
 `
 
 export const ItemList = tw.ul`
@@ -14,5 +14,5 @@ export const ItemList = tw.ul`
 `
 
 export const ItemButton = tw(NavLink)`
-  flex w-full items-center gap-2 p-2 rounded-md text-left h-8 text-sm transition hover:bg-gray-200 [&>svg]:size-4 [&>svg]:shrink-0
+  flex w-full items-center gap-2 p-2 rounded-md text-left h-8 text-sm transition hover:bg-gray-200 [&>svg]:size-4 [&>svg]:shrink-0 dark:hover:bg-neutral-700
 `

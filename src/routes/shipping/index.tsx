@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cancelShipping, validateShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import DataTable from '@/components/data-table-new'
+import {DataTable} from '@/components'
 import { Button, ShowContainer, ShowSection, Badge } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 

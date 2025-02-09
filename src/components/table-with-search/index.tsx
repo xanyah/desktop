@@ -1,6 +1,6 @@
 import { Loader, Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import DataTableNew from '../data-table-new'
+import DataTable from '../data-table'
 import { ColumnDef } from '@tanstack/react-table'
 import Pagination from '../pagination'
 import { isUndefined } from 'lodash'
@@ -58,7 +58,7 @@ const TableWithSearch = <TData, TValue>({
         </Button>
       )}
     </div>
-    <DataTableNew data={data || []} columns={columns} />
+    <DataTable data={data || []} columns={columns} />
     {totalPages && currentPage && onPageChange && (
       <div className="flex justify-center mt-6">
         <Pagination

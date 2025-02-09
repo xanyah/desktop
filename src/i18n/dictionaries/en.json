@@ -61,6 +61,11 @@
     "total": "Total",
     "validateButton": "Validate the sale"
   },
+  "components": {
+    "dataTable": {
+      "noResults": "No results"
+    }
+  },
   "customAttribute": {
     "generalInformations": "General information",
     "nameLabel": "Name",

@@ -2,8 +2,8 @@ import { BadgeProps } from '@/components/badge'
 
 export const orderBadgeVariants: Record<Order['state'], BadgeProps['variant']> = {
   cancelled: 'destructive',
-  delivered: 'default',
+  delivered: 'warning',
   pending: 'default',
-  ordered: 'default',
-  withdrawn: 'secondary',
+  ordered: 'info',
+  withdrawn: 'success',
 }

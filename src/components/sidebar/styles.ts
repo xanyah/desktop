@@ -17,5 +17,8 @@ export const StyledSidebar = tw.div<StyledSidebarProps>`
   duration-300
   ease-in-out
   transform
+  overflow-y-auto
+  dark:bg-background
+
   ${p => (p.$isOpen ? 'translate-x-0' : '-translate-x-full')}
 `
