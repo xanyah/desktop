@@ -1,7 +1,6 @@
 import path from 'path'
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { printer as ThermalPrinter, types as PrinterTypes } from 'node-thermal-printer';
-
+import { printer as ThermalPrinter, types as PrinterTypes } from 'node-thermal-printer'
 
 import electronDriver from 'electron-printer'
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
@@ -47,31 +46,40 @@ ipcMain.handle('get-printers', async () => {
 })
 
 ipcMain.handle('print', async () => {
-  try {
-    const printer = new ThermalPrinter({
-      type: PrinterTypes.EPSON,
-      interface: `COM3`,
+  const options = {
+    preview: true,
+    margin: '0 0 0 0',
+    copies: 1,
+    printerName: 'EPSON TM-T88IV ReceiptE4',
+    timeOutPerLine: 400,
+    silent: true,
+    pageSize: '80mm', // page size
+  }
+
+  const data = [
+    {
+      type: 'text', // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+      value: 'SAMPLE HEADING',
+      style: { fontWeight: '700', textAlign: 'center', fontSize: '24px' },
+    }, {
+      type: 'text', // 'text' | 'barCode' | 'qrCode' | 'image' | 'table'
+      value: 'Secondary text',
+      style: { textDecoration: 'underline', fontSize: '10px', textAlign: 'center', color: 'red' },
+    }, {
+      type: 'barCode',
+      value: '023456789010',
+      height: 40, // height of barcode, applicable only to bar and QR codes
+      width: 2, // width of barcode, applicable only to bar and QR codes
+      displayValue: true, // Display value below barcode
+      fontsize: 12,
+    },
+  ]
+
+  PosPrinter.print(data, options)
+    .then(console.log)
+    .catch((error) => {
+      console.error(error)
     })
-
-    const isConnected = await printer.isPrinterConnected();
-    console.log('Printer connected:', isConnected);
-
-    if (!isConnected) {
-      throw new Error('Imprimante non connectée');
-    }
-
-    printer.alignCenter()
-    printer.println('Bonjour, ceci est un test')
-    printer.println('-----------------------------')
-    printer.println('Merci pour votre visite !')
-    printer.cut()
-
-    await printer.execute()
-    return 'Impression réussie'
-  }
-  catch (error) {
-    throw new Error(`Erreur lors de l'impression: ${error.message}`)
-  }
 })
 
 app.on('window-all-closed', () => {

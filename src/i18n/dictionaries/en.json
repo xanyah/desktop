@@ -14,6 +14,12 @@
     "security": "Security",
     "signOut": "Sign out"
   },
+  "settings": {
+    "pageTitle": "Paramètres",
+    "pageSubtitle": "Configurez votre imprimante",
+    "printerLabel": "Printer",
+    "printerPlaceholder": "Your printer"
+  },
   "categories": {
     "createButtonLabel": "Create a category",
     "pageTitle": "Categories",
