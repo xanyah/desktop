@@ -7,6 +7,7 @@ import {
   Factory,
   Group,
   NotebookText,
+  PackageOpen,
   ScanBarcode,
   Sparkles,
   Store,
@@ -65,7 +66,7 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
         url: '/inventories',
       },
       {
-        icon: Truck,
+        icon: PackageOpen,
         label: t('shippings.pageTitle'),
         url: '/shippings',
       },

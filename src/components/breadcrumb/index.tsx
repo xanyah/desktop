@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from './stryles'
+} from './styles'
 
 type BreadcrumbProps = {
   breadcrumb?: BreadCrumbElement[]

@@ -61,6 +61,11 @@
     "total": "Total",
     "validateButton": "Valider la vente"
   },
+  "components": {
+    "dataTable": {
+      "noResults": "Aucun résultat"
+    }
+  },
   "customAttribute": {
     "generalInformations": "Informations générales",
     "nameLabel": "Nom",
@@ -208,6 +213,7 @@
     "buyingAmountPlaceholder": "Prix d'achat de l'article",
     "categoryLabel": "Catégorie",
     "categoryPlaceholder": "Sélectionner une catégorie",
+    "customAttributes": "Attributs personnalisés",
     "deleteImageDescription": "Êtes-vous sûr de vouloir supprimer cette image?",
     "deleteImageTitle": "Confirmation de suppression",
     "generalInformations": "Informations générales",
@@ -222,6 +228,7 @@
     "namePlaceholder": "Nom de l'article",
     "newPageTitle": "Nouvel article",
     "pageSubtitle": "Saisissez ici les informations de votre article",
+    "pricing": "Facturation",
     "skuHint": "Le SKU est un code barre spécifique à la boutique pour identifier l'article",
     "skuLabel": "SKU",
     "skuPlaceholder": "SKU de l'article",

@@ -18,7 +18,7 @@ export const BreadcrumbLink = tw(Link)`
 `
 
 export const BreadcrumbPage = tw.span`
-  font-normal text-black cursor-default
+  font-normal text-foreground cursor-default
 `
 
 export const BreadcrumbSeparator = tw.li`

@@ -31,6 +31,7 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.474.0",
     "luxon": "^3.5.0",
+    "object-to-formdata": "^4.5.1",
     "react": "^19.0.0",
     "react-currency-input-field": "^3.9.0",
     "react-dom": "^19.0.0",

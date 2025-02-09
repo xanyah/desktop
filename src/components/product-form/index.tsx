@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { useCurrentStore, useProduct } from '../../hooks'
+import { useCurrentStore, useCustomAttributes, useProduct } from '../../hooks'
 import { createProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { validate } from 'uuid'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { forOwn, isEmpty, map, toNumber } from 'lodash'
-import { decamelize } from 'humps'
+import { find, isEmpty, map, omit, toNumber } from 'lodash'
+import { decamelizeKeys } from 'humps'
 import {
   CategorySelect,
   FormContainer,
@@ -22,6 +22,7 @@ import { Euro } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { z } from '../../constants/zod'
 import { AxiosResponse } from 'axios'
+import { serialize } from 'object-to-formdata'
 
 const ImageSchema = z.union([
   z.instanceof(File),
@@ -30,6 +31,12 @@ const ImageSchema = z.union([
     signed_id: z.string(),
   }),
 ])
+
+const productCustomAttributesAttributes = z.object({
+  id: z.string().optional(),
+  customAttributeId: z.string(),
+  value: z.string().optional().nullable(),
+})
 
 const formSchema = z.object({
   name: z.string(),
@@ -43,6 +50,7 @@ const formSchema = z.object({
   manufacturerSku: z.string(),
   upc: z.string(),
   images: z.array(ImageSchema).optional(),
+  productCustomAttributesAttributes: z.array(productCustomAttributesAttributes.optional().nullable()).optional(),
 })
 
 type formSchemaType = z.infer<typeof formSchema>
@@ -54,6 +62,9 @@ type ProductFormProps = {
 
 const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
   const store = useCurrentStore()
+  const { data: customAttributesData } = useCustomAttributes({
+    'q[storeIdEq]': store?.id,
+  })
   const { t } = useTranslation()
   const { id } = useParams()
   const { handleSubmit, control, setValue, reset } = useForm<formSchemaType>({
@@ -128,12 +139,7 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
 
   const onSubmit = useCallback(
     (data: formSchemaType) => {
-      const formData = new FormData()
-      forOwn(data, (value, key) => {
-        if (key !== 'images' && value) {
-          formData.append(`product[${decamelize(key)}]`, value.toString())
-        }
-      })
+      const formData = serialize({ product: omit(decamelizeKeys(data), 'images') })
 
       if (!isEmpty(data.images) && data.images) {
         data.images.forEach((item) => {
@@ -149,6 +155,8 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
         formData.append('product[images][]', '')
       }
 
+      console.log(formData)
+
       if (validate(id)) {
         updateApiProduct(formData)
       }
@@ -160,8 +168,21 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
   )
 
   useEffect(() => {
-    reset(initialValues)
-  }, [initialValues, reset])
+    reset({
+      ...initialValues,
+      productCustomAttributesAttributes: map(customAttributesData?.data, (customAttribute) => {
+        const existingCustomAttribute = find(
+          initialValues?.productCustomAttributes,
+          productCustomAttribute => productCustomAttribute.customAttribute.id === customAttribute.id,
+        )
+        return {
+          id: existingCustomAttribute?.id,
+          customAttributeId: customAttribute.id,
+          value: existingCustomAttribute?.value,
+        }
+      }),
+    })
+  }, [initialValues, reset, customAttributesData])
 
   useEffect(() => {
     if (store) {
@@ -284,7 +305,7 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
         />
       </FormSection>
 
-      <FormSection title="Tarification">
+      <FormSection title={t('product.pricing')}>
         <Controller
           control={control}
           name="buyingAmount"
@@ -338,6 +359,30 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
           )}
         />
       </FormSection>
+
+      {!isEmpty(customAttributesData?.data) && (
+        <FormSection title={t('product.customAttributes')}>
+          {map(customAttributesData?.data, (customAttribute, index) => (
+            <Controller
+              control={control}
+              name={`productCustomAttributesAttributes.${index}`}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <InputText
+                  placeholder={customAttribute.name}
+                  label={customAttribute.name}
+                  value={value?.value || ''}
+                  onChange={e => onChange({
+                    id: value?.id,
+                    customAttributeId: customAttribute.id,
+                    value: e.target.value,
+                  })}
+                  error={error?.message}
+                />
+              )}
+            />
+          ))}
+        </FormSection>
+      )}
     </FormContainer>
   )
 }

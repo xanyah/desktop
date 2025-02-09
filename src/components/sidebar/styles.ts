@@ -9,7 +9,6 @@ export const StyledSidebar = tw.div<StyledSidebarProps>`
   top-0
   left-0
   h-screen
-  border
   border-r
   w-64
   bg-gray-50
@@ -17,5 +16,8 @@ export const StyledSidebar = tw.div<StyledSidebarProps>`
   duration-300
   ease-in-out
   transform
+  overflow-y-auto
+  dark:bg-background
+
   ${p => (p.$isOpen ? 'translate-x-0' : '-translate-x-full')}
 `

@@ -4,7 +4,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-
 import { map, size } from 'lodash'
 import {
   StyledTable,
@@ -16,6 +15,7 @@ import {
   StyledTableHeader,
   StyledTableRow,
 } from './styles'
+import { useTranslation } from 'react-i18next'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -26,6 +26,7 @@ function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const { t } = useTranslation()
   const table = useReactTable({
     data,
     columns,
@@ -77,7 +78,7 @@ function DataTable<TData, TValue>({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      No results.
+                      {t('components.dataTable.noResults')}
                     </StyledTableCell>
                   </StyledTableRow>
                 )}

@@ -1,3 +1,9 @@
+interface ProductCustomAttribute {
+  id: string
+  customAttribute: CustomAttribute
+  value: string
+}
+
 interface Product {
   id: string
   name: string
@@ -22,4 +28,5 @@ interface Product {
     thumbnail: string
     signedId: string
   }[]
+  productCustomAttributes: ProductCustomAttribute[]
 }

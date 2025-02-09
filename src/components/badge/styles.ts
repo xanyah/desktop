@@ -5,10 +5,10 @@ export const StyledBadge = tw.div`
   items-center
   rounded-md
   border
-  px-2.5
-  py-0.5
+  px-2
+  py-0.25
   text-xs
-  font-semibold
+  font-medium
   transition-colors
   focus:outline-none
   focus:ring-2
