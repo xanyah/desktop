@@ -293,7 +293,8 @@
     "products": "Items sold",
     "customer": "Customer",
     "user": "Seller",
-    "printReceipt": "Print receipt"
+    "printReceipt": "Print receipt",
+    "printInvoice": "Print invoice"
   },
   "sales": {
     "pageTitle": "Sales",

@@ -12,8 +12,8 @@ import SaleInfos from './infos'
 import { formatLongDatetime } from '@/helpers/dates'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
-import { ReceiptText } from 'lucide-react'
-import { formatDataPrinter } from '@/helpers/format-data-printer'
+import { Barcode, ReceiptText } from 'lucide-react'
+import { formatDataPrinterInvoice, formatDataPrinterReceipt } from '@/helpers'
 import { PosPrintData } from 'electron-pos-printer'
 
 const Sale = () => {
@@ -36,13 +36,24 @@ const Sale = () => {
 
   const { mutate: print } = usePrint()
 
-  const onPrint = () => {
+  const onPrintReceipt = () => {
     if (saleData && saleProductsData && store) {
       print(
-        formatDataPrinter(
+        formatDataPrinterReceipt(
           saleData.data,
           saleProductsData?.data,
           store,
+        ) as PosPrintData[],
+      )
+    }
+  }
+
+  const onPrintInvoice = () => {
+    if (saleData && saleProductsData) {
+      print(
+        formatDataPrinterInvoice(
+          saleData.data,
+          saleProductsData?.data,
         ) as PosPrintData[],
       )
     }
@@ -59,10 +70,16 @@ const Sale = () => {
         saleDate: formatLongDatetime(saleData?.data.createdAt),
       })}
       button={(
-        <Button type="button" onClick={onPrint}>
-          <ReceiptText />
-          {t('sale.printReceipt')}
-        </Button>
+        <div className="flex gap-2 items-center">
+          <Button variant="outline" type="button" onClick={onPrintReceipt}>
+            <Barcode />
+            {t('sale.printReceipt')}
+          </Button>
+          <Button type="button" onClick={onPrintInvoice}>
+            <ReceiptText />
+            {t('sale.printInvoice')}
+          </Button>
+        </div>
       )}
     >
       <ShowSection title={t('sale.generalInformations')}>

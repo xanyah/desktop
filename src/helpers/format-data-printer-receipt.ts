@@ -3,7 +3,7 @@ import { uuidNumber } from './uuid'
 import { map } from 'lodash'
 import { formatPrice } from './price'
 
-export const formatDataPrinter = (sale: Sale, saleProducts: SaleProduct[], store: Store) => {
+export const formatDataPrinterReceipt = (sale: Sale, saleProducts: SaleProduct[], store: Store) => {
   const formattedDate = DateTime.fromISO(sale.createdAt).toFormat('dd/MM/yyyy')
 
   const prodcutTableBody = map(saleProducts, saleProduct => [

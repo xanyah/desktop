@@ -293,7 +293,8 @@
     "products": "Articles vendus",
     "user": "Vendeur",
     "customer": "Client",
-    "printReceipt": "Imprimer le ticket"
+    "printReceipt": "Imprimer le ticket",
+    "printInvoice": "Imprimer la facture"
   },
   "sales": {
     "pageTitle": "Ventes",
