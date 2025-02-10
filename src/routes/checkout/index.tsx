@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCurrentStore } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
+import Customer from './customer'
 
 const Checkout = () => {
   const { t } = useTranslation()
@@ -63,6 +64,9 @@ const Checkout = () => {
         </FormSection>
         <FormSection title={t('checkout.price')}>
           <Price />
+        </FormSection>
+        <FormSection title={t('checkout.customer')}>
+          <Customer />
         </FormSection>
         <FormSection title={t('checkout.payment')}>
           <Payment />

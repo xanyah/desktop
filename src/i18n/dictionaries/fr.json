@@ -71,7 +71,10 @@
     "searchPlaceholder": "Code barre ou code fabricant de l'article",
     "subtotal": "Sous-total",
     "total": "Total",
-    "validateButton": "Valider la vente"
+    "customerPlaceholder": "Sélectionner un client...",
+    "newCustomerButtonLabel": "Créer un client",
+    "validateButton": "Valider la vente",
+    "customer": "Clients"
   },
   "components": {
     "dataTable": {
@@ -289,7 +292,9 @@
     "pageTitle": "Vente {{ saleNumber }}",
     "products": "Articles vendus",
     "user": "Vendeur",
-    "printReceipt": "Imprimer le ticket"
+    "customer": "Client",
+    "printReceipt": "Imprimer le ticket",
+    "printInvoice": "Imprimer la facture"
   },
   "sales": {
     "pageTitle": "Ventes",

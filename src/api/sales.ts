@@ -4,6 +4,9 @@ import { decamelizeKeys } from 'humps'
 export const createSale = sale =>
   xanyahApi.post<Sale>('v2/sales', decamelizeKeys({ sale }))
 
+export const updateSale = (saleId, params) =>
+  xanyahApi.patch<Sale>(`v2/sales/${saleId}`, decamelizeKeys(params))
+
 export const getSales = params =>
   xanyahApi.get<Sale[]>('v2/sales', decamelizeKeys({ params }))
 

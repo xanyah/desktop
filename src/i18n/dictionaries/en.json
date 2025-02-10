@@ -71,7 +71,10 @@
     "searchPlaceholder": "Barcode or article manufacturer code",
     "subtotal": "Subtotal",
     "total": "Total",
-    "validateButton": "Validate the sale"
+    "validateButton": "Validate the sale",
+    "customerPlaceholder": "Select a customer...",
+    "newCustomerButtonLabel": "Create a customer",
+    "customer": "Customers"
   },
   "components": {
     "dataTable": {
@@ -288,8 +291,10 @@
     "pageSubtitle": "Sale made on {{ saleDate }}",
     "pageTitle": "Sale {{ saleNumber }}",
     "products": "Items sold",
+    "customer": "Customer",
     "user": "Seller",
-    "printReceipt": "Print receipt"
+    "printReceipt": "Print receipt",
+    "printInvoice": "Print invoice"
   },
   "sales": {
     "pageTitle": "Sales",

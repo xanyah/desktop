@@ -50,7 +50,9 @@ const formSchema = z.object({
   manufacturerSku: z.string(),
   upc: z.string(),
   images: z.array(ImageSchema).optional(),
-  productCustomAttributesAttributes: z.array(productCustomAttributesAttributes.optional().nullable()).optional(),
+  productCustomAttributesAttributes: z
+    .array(productCustomAttributesAttributes.optional().nullable())
+    .optional(),
 })
 
 type formSchemaType = z.infer<typeof formSchema>
@@ -139,7 +141,9 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
 
   const onSubmit = useCallback(
     (data: formSchemaType) => {
-      const formData = serialize({ product: omit(decamelizeKeys(data), 'images') })
+      const formData = serialize({
+        product: omit(decamelizeKeys(data), 'images'),
+      })
 
       if (!isEmpty(data.images) && data.images) {
         data.images.forEach((item) => {
@@ -155,8 +159,6 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
         formData.append('product[images][]', '')
       }
 
-      console.log(formData)
-
       if (validate(id)) {
         updateApiProduct(formData)
       }
@@ -170,17 +172,21 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
   useEffect(() => {
     reset({
       ...initialValues,
-      productCustomAttributesAttributes: map(customAttributesData?.data, (customAttribute) => {
-        const existingCustomAttribute = find(
-          initialValues?.productCustomAttributes,
-          productCustomAttribute => productCustomAttribute.customAttribute.id === customAttribute.id,
-        )
-        return {
-          id: existingCustomAttribute?.id,
-          customAttributeId: customAttribute.id,
-          value: existingCustomAttribute?.value,
-        }
-      }),
+      productCustomAttributesAttributes: map(
+        customAttributesData?.data,
+        (customAttribute) => {
+          const existingCustomAttribute = find(
+            initialValues?.productCustomAttributes,
+            productCustomAttribute =>
+              productCustomAttribute.customAttribute.id === customAttribute.id,
+          )
+          return {
+            id: existingCustomAttribute?.id,
+            customAttributeId: customAttribute.id,
+            value: existingCustomAttribute?.value,
+          }
+        },
+      ),
     })
   }, [initialValues, reset, customAttributesData])
 
@@ -366,16 +372,20 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
             <Controller
               control={control}
               name={`productCustomAttributesAttributes.${index}`}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <InputText
                   placeholder={customAttribute.name}
                   label={customAttribute.name}
                   value={value?.value || ''}
-                  onChange={e => onChange({
-                    id: value?.id,
-                    customAttributeId: customAttribute.id,
-                    value: e.target.value,
-                  })}
+                  onChange={e =>
+                    onChange({
+                      id: value?.id,
+                      customAttributeId: customAttribute.id,
+                      value: e.target.value,
+                    })}
                   error={error?.message}
                 />
               )}

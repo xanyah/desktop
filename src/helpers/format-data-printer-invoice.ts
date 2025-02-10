@@ -1,0 +1,111 @@
+import { DateTime } from 'luxon'
+import { uuidNumber } from './uuid'
+import { map, reduce } from 'lodash'
+import { formatPrice } from './price'
+import { customerFullname } from './customer'
+
+export const formatDataPrinterInvoice = (sale: Sale, saleProducts: SaleProduct[]) => {
+  const formattedDate = DateTime.fromISO(sale.createdAt).toFormat('dd/MM/yyyy')
+  const totalHT = reduce(saleProducts, (sum, item) => {
+    return sum + (item.quantity * item.product.taxFreeAmountCents)
+  }, 0)
+
+  console.log(totalHT)
+  const prodcutTableBody = map(saleProducts, saleProduct => [
+    {
+      type: 'text',
+      value: saleProduct.quantity,
+      style: { fontWeight: '500', width: '10%', textAlign: 'left', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: saleProduct.product.name,
+      style: { fontWeight: '500', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: formatPrice(saleProduct.amountCents, saleProduct.amountCurrency, '€'),
+      style: { fontWeight: '500', width: '25%', textAlign: 'right', fontFamily: 'sans-serif' },
+    },
+  ])
+
+  const data = [
+    {
+      type: 'text',
+      value: 'Revland',
+      style: { fontWeight: '700', textAlign: 'center', fontSize: '32px', fontFamily: 'sans-serif' },
+
+    },
+    {
+      type: 'text',
+      value: formattedDate,
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: `Facture N° ${uuidNumber(sale.id)}`,
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: customerFullname(sale.customer),
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: sale.customer.address,
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 40px 0', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'table',
+      // style the table
+      style: { borderBottom: '1px solid #ddd' },
+      // list of the columns to be rendered in the table header
+      tableHeader: [
+        {
+          type: 'text',
+          value: 'Qte',
+          style: { fontWeight: '700', width: '10%', textAlign: 'left', fontFamily: 'sans-serif' },
+        },
+        {
+          type: 'text',
+          value: 'Désignation',
+          style: { fontWeight: '700', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
+        },
+
+        {
+          type: 'text',
+          value: 'Prix',
+          style: { fontWeight: '700', width: '25%', textAlign: 'left', fontFamily: 'sans-serif' },
+        },
+      ],
+      // multi dimensional array depicting the rows and columns of the table body
+      tableBody: prodcutTableBody,
+      // list of columns to be rendered in the table footer
+      tableFooter: [],
+      // custom style for the table header
+      tableHeaderStyle: { fontWeight: '700' },
+      // custom style for the table body
+      tableBodyStyle: {},
+      // custom style for the table footer
+      tableFooterStyle: {},
+    },
+    {
+      type: 'text',
+      value: `Total HT: ${formatPrice(totalHT, sale.totalAmountCurrency, '€')}`,
+      style: { fontWeight: '700', textAlign: 'right', margin: '32px 0 0 0', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: `TVA: ${formatPrice(sale.totalAmountCents - totalHT, sale.totalAmountCurrency, '€')}`,
+      style: { fontWeight: '700', textAlign: 'right', margin: '14px 0 0 0', fontFamily: 'sans-serif' },
+    },
+    {
+      type: 'text',
+      value: `Total TTC: ${formatPrice(sale.totalAmountCents, sale.totalAmountCurrency, '€')}`,
+      style: { fontWeight: '700', textAlign: 'right', margin: '14px 0 0 0', fontFamily: 'sans-serif' },
+    },
+  ]
+
+  return data
+}
