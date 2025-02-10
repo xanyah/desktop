@@ -39,6 +39,7 @@ interface Sale {
   totalAmountCurrency: string
   createdAt: string
   // client: Client
+  customer: Customer
   store: Store
   user: User
   salePromotion?: SalePromotion

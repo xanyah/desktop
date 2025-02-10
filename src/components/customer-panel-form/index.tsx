@@ -1,22 +1,32 @@
-import { useState } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
-import { CheckoutSchemaType } from './schema'
+import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Button, CustomerSelect, RightPanel } from '@/components'
 import { Plus } from 'lucide-react'
-import CustomerForm from '../customer'
+import CustomerForm from '../../routes/customer'
 
-const Customer = () => {
+interface Props<T extends FieldValues> {
+  isPanelOpen: boolean
+  setIsPanelOpen: (value: boolean) => void
+  control: Control<T>
+  name: Path<T>
+  onSuccess?: (data: Customer) => void
+}
+
+function CustomerPanelForm<T extends FieldValues>({
+  control,
+  isPanelOpen,
+  setIsPanelOpen,
+  onSuccess,
+  name,
+}: Props<T>) {
   const { t } = useTranslation()
-  const { control, setValue } = useFormContext<CheckoutSchemaType>()
-  const [isPanelOpen, setIsPanelOpen] = useState(false)
 
   return (
     <>
       <div className="flex flex-row items-end gap-4">
         <Controller
           control={control}
-          name="customerId"
+          name={name}
           render={({ field: { onChange, value } }) => (
             <CustomerSelect
               onChange={onChange}
@@ -36,7 +46,7 @@ const Customer = () => {
         <CustomerForm
           onCancel={() => setIsPanelOpen(false)}
           onSuccess={({ data }) => {
-            setValue('customerId', data.id)
+            onSuccess?.(data)
             setIsPanelOpen(false)
           }}
         />
@@ -45,4 +55,4 @@ const Customer = () => {
   )
 }
 
-export default Customer
+export default CustomerPanelForm

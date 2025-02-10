@@ -292,6 +292,7 @@
     "pageTitle": "Vente {{ saleNumber }}",
     "products": "Articles vendus",
     "user": "Vendeur",
+    "customer": "Client",
     "printReceipt": "Imprimer le ticket"
   },
   "sales": {
