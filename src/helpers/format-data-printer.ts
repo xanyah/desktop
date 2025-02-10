@@ -10,17 +10,17 @@ export const formatDataPrinter = (sale: Sale, saleProducts: SaleProduct[], store
     {
       type: 'text',
       value: saleProduct.quantity,
-      style: { fontWeight: '500', width: '10%', textAlign: 'left' },
+      style: { fontWeight: '500', width: '10%', textAlign: 'left', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
       value: saleProduct.product.name,
-      style: { fontWeight: '500', width: '65%', textAlign: 'left' },
+      style: { fontWeight: '500', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
       value: formatPrice(saleProduct.amountCents, saleProduct.amountCurrency, '€'),
-      style: { fontWeight: '500', width: '25%', textAlign: 'left' },
+      style: { fontWeight: '500', width: '25%', textAlign: 'right', fontFamily: 'sans-serif' },
     },
   ])
 
@@ -28,33 +28,33 @@ export const formatDataPrinter = (sale: Sale, saleProducts: SaleProduct[], store
     {
       type: 'text',
       value: 'Revland',
-      style: { fontWeight: '700', textAlign: 'center', fontSize: '32px' },
+      style: { fontWeight: '700', textAlign: 'center', fontSize: '32px', fontFamily: 'sans-serif' },
 
     },
     {
       type: 'text',
       value: formattedDate,
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0' },
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
       value: `Ticket N° ${uuidNumber(sale.id)}`,
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0' },
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
       value: store.phoneNumber,
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0' },
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
       value: store.emailAddress,
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0' },
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
       value: store.websiteUrl,
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 40px 0' },
+      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 40px 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'table',
@@ -65,18 +65,18 @@ export const formatDataPrinter = (sale: Sale, saleProducts: SaleProduct[], store
         {
           type: 'text',
           value: 'Qte',
-          style: { fontWeight: '700', width: '10%', textAlign: 'left' },
+          style: { fontWeight: '700', width: '10%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
         {
           type: 'text',
           value: 'Désignation',
-          style: { fontWeight: '700', width: '65%', textAlign: 'left' },
+          style: { fontWeight: '700', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
 
         {
           type: 'text',
           value: 'Prix',
-          style: { fontWeight: '700', width: '25%', textAlign: 'left' },
+          style: { fontWeight: '700', width: '25%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
       ],
       // multi dimensional array depicting the rows and columns of the table body
@@ -94,7 +94,7 @@ export const formatDataPrinter = (sale: Sale, saleProducts: SaleProduct[], store
     {
       type: 'text',
       value: `Total TTC: ${formatPrice(sale.totalAmountCents, sale.totalAmountCurrency, '€')}`,
-      style: { fontWeight: '700', textAlign: 'right', margin: '32px 0 0 0' },
+      style: { fontWeight: '700', textAlign: 'right', margin: '32px 0 0 0', fontFamily: 'sans-serif' },
     },
   ]
 

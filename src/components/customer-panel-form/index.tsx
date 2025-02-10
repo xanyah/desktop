@@ -44,6 +44,7 @@ function CustomerPanelForm<T extends FieldValues>({
 
       <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
         <CustomerForm
+          isPanelForm
           onCancel={() => setIsPanelOpen(false)}
           onSuccess={({ data }) => {
             onSuccess?.(data)

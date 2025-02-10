@@ -15,9 +15,14 @@ import { AxiosResponse } from 'axios'
 type CustomerFormProps = {
   onCancel?: () => void
   onSuccess?: (data: AxiosResponse<Customer, any>) => void
+  isPanelForm?: boolean
 }
 
-const Customer = ({ onCancel, onSuccess }: CustomerFormProps) => {
+const Customer = ({
+  onCancel,
+  onSuccess,
+  isPanelForm = false,
+}: CustomerFormProps) => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -49,12 +54,13 @@ const Customer = ({ onCancel, onSuccess }: CustomerFormProps) => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       queryClient.setQueryData(['customers', { id: data.data.id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
       if (!onSuccess) {
         navigate(`/customers/${data.data.id}/edit`)
-      } else {
+      }
+      else {
         onSuccess?.(data)
       }
     },
@@ -70,7 +76,7 @@ const Customer = ({ onCancel, onSuccess }: CustomerFormProps) => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: data => {
+    onSuccess: (data) => {
       queryClient.setQueryData(['customers', { id }], data)
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
     },
@@ -83,7 +89,7 @@ const Customer = ({ onCancel, onSuccess }: CustomerFormProps) => {
 
   const onSubmit = useCallback(
     (data: customerSchemaType) => {
-      if (id) {
+      if (id && !isPanelForm) {
         return updateApiCustomer(data)
       }
       return createApiCustomer(data)
