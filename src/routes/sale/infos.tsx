@@ -1,4 +1,9 @@
-import { Button, CustomerPanelForm, ShowAttribute } from '@/components'
+import {
+  Button,
+  CustomerPanelForm,
+  FormSection,
+  ShowAttribute,
+} from '@/components'
 import { customerFullname } from '@/helpers/customer'
 import { formatPrice } from '@/helpers/price'
 import { useForm } from 'react-hook-form'
@@ -69,21 +74,23 @@ const SaleInfos = ({ sale }: SaleInfosProps) => {
             </ShowAttribute>
           )
         : (
-            <div className="flex flex-col gap-8">
-              <CustomerPanelForm
-                onSuccess={(data) => {
-                  setValue('customerId', data.id)
-                  setIsPanelOpen(false)
-                }}
-                name="customerId"
-                control={control}
-                isPanelOpen={isPanelOpen}
-                setIsPanelOpen={setIsPanelOpen}
-              />
-              <Button className="self-end" onClick={handleSubmit(onSaveCustomer)}>
-                {t('global.save')}
-              </Button>
-            </div>
+            <FormSection title={t('sale.customer')}>
+              <div className="flex flex-col gap-8">
+                <CustomerPanelForm
+                  onSuccess={(data) => {
+                    setValue('customerId', data.id)
+                    setIsPanelOpen(false)
+                  }}
+                  name="customerId"
+                  control={control}
+                  isPanelOpen={isPanelOpen}
+                  setIsPanelOpen={setIsPanelOpen}
+                />
+                <Button className="self-end" onClick={handleSubmit(onSaveCustomer)}>
+                  {t('global.save')}
+                </Button>
+              </div>
+            </FormSection>
           )}
     </div>
   )
