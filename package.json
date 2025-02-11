@@ -105,8 +105,8 @@
     "i18n:lint": "comparejson ./src/i18n/dictionaries/*.json",
     "lint": "eslint \"./src/**/*.ts{,x}\"",
     "lint:fix": "eslint \"./src/**/*.ts{,x}\" --fix",
-    "make": "yarn vite build && electron-forge make",
-    "package": "yarn vite build && electron-forge package",
+    "make": "vite build && electron-forge make",
+    "package": "vite build && electron-forge package",
     "start": "electron-forge start",
     "test": "jest"
   },
