@@ -5,7 +5,12 @@ import { GroupLabel, ItemButton, ItemList, SidebarContainer } from './styles'
 interface SidebarGroupProps {
   group: {
     label: string
-    items: { label: string, url: string, icon: React.ElementType }[]
+    items: {
+      label: string
+      url: string
+      icon: React.ElementType
+      disabled?: boolean
+    }[]
   }
 }
 
@@ -15,12 +20,16 @@ export const SidebarGroup: React.FC<SidebarGroupProps> = ({ group }) => {
       <GroupLabel>{group.label}</GroupLabel>
       <ItemList>
         {map(sortBy(group.items, 'label'), item => (
-          <li key={item.label} className="relative">
-            <ItemButton to={item.url}>
-              <item.icon />
-              <span>{item.label}</span>
-            </ItemButton>
-          </li>
+          item.disabled
+            ? null
+            : (
+                <li key={item.label} className="relative">
+                  <ItemButton to={item.url}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </ItemButton>
+                </li>
+              )
         ))}
       </ItemList>
     </SidebarContainer>

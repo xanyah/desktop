@@ -64,7 +64,6 @@ ipcMain.handle('print', async (event, printData) => {
 
   try {
     await PosPrinter.print(data, options)
-    console.log('Printing successful')
   } catch (error) {
     console.error('Error during print:', error)
     throw error

@@ -36,8 +36,7 @@ const SaleInfos = ({ sale }: SaleInfosProps) => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['sales'] })
     },

@@ -1,3 +1,4 @@
+import { isElectron } from '@/helpers/electron'
 import { TFunction } from 'i18next'
 import {
   Blend,
@@ -101,6 +102,7 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
         icon: Settings,
         label: t('settings.pageTitle'),
         url: '/settings',
+        disabled: !isElectron(),
       },
     ],
   },
