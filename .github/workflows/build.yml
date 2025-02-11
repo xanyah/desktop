@@ -29,6 +29,9 @@ jobs:
 
     - name: Package and make
       run: yarn make
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
     - name: Upload package to release
       uses: svenstaro/upload-release-action@v2
