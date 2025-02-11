@@ -52,7 +52,6 @@ ipcMain.handle('get-printers', async () => {
 
 ipcMain.handle('print', async (event, printData) => {
   const { data, printerName, pageSize } = printData
-
   const options = {
     preview: !app.isPackaged,
     margin: '0 0 0 0',
@@ -65,7 +64,6 @@ ipcMain.handle('print', async (event, printData) => {
 
   try {
     await PosPrinter.print(data, options)
-    console.log('Printing successful')
   } catch (error) {
     console.error('Error during print:', error)
     throw error

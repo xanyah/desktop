@@ -29,6 +29,7 @@ import SignIn from './sign-in'
 import Store from './store'
 import { OfflineLayout, OnlineLayout } from '../layouts'
 import Settings from './settings'
+import { isElectron } from '@/helpers/electron'
 
 const Router = () => {
   return (
@@ -40,7 +41,6 @@ const Router = () => {
         <Route element={<OnlineLayout />}>
           <Route path="" element={<Navigate to="/checkout" />} />
           <Route path="account" element={<Account />} />
-          <Route path="settings" element={<Settings />} />
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:id/edit" element={<Category />} />
           <Route path="categories/new" element={<Category />} />
@@ -79,6 +79,8 @@ const Router = () => {
           <Route path="providers/new" element={<Provider />} />
           <Route path="sales" element={<Sales />} />
           <Route path="sales/:id" element={<Sale />} />
+          {isElectron() && (
+            <Route path="settings" element={<Settings />} />)}
           <Route path="shippings" element={<Shippings />} />
           <Route path="shippings/:id" element={<Shipping />} />
           <Route path="shippings/new" element={<ShippingNew />} />

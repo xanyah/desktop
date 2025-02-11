@@ -14,18 +14,6 @@
     "security": "Security",
     "signOut": "Sign out"
   },
-  "settings": {
-    "pageTitle": "Parameters",
-    "pageSubtitle": "Configure your printer",
-    "printerLabel": "Printer",
-    "printerPlaceholder": "Your printer",
-    "testPrinter": "Test your printer",
-    "printSuccess": "Print successful",
-    "printError": "Print error",
-    "pageSizePrinterLabel": "Page size",
-    "pageSizePrinterPlaceholder": "Printer page size",
-    "formSection": "Printer configuration"
-  },
   "categories": {
     "createButtonLabel": "Create a category",
     "pageTitle": "Categories",
@@ -48,6 +36,8 @@
     "vatPlaceholder": "Select a VAT rate..."
   },
   "checkout": {
+    "customer": "Customers",
+    "customerPlaceholder": "Select a customer...",
     "customPayment": {
       "addButton": "Add a payment method",
       "paymentTypeLabel": "Payment method",
@@ -57,6 +47,7 @@
       "unattributedPositive": "He's staying {{ amount }} to be distributed"
     },
     "flatPromotionLabel": "Amount",
+    "newCustomerButtonLabel": "Create a customer",
     "pageSubtitle": "Enter the data of your collection here",
     "pageTitle": "Collection",
     "payment": "Payment",
@@ -163,11 +154,11 @@
     "order": "Order sent",
     "pageSubtitle": "Order placed on {{ orderDate }}",
     "pageTitle": "Order {{ orderNumber }}",
+    "products": "Order articles",
     "productTable": {
       "name": "Article name",
       "quantity": "Quantity"
     },
-    "products": "Order articles",
     "states": {
       "cancelled": "Canceled",
       "delivered": "Received",
@@ -214,6 +205,24 @@
     "table": {
       "description": "Description",
       "name": "Payment method name"
+    }
+  },
+  "print": {
+    "invoice": {
+      "invoiceNumber": "Invoice N°{{invoiceNumber}}",
+      "price": "Price",
+      "productName": "Product",
+      "quantity": "Qty",
+      "taxFreeAmount": "Total excl. tax: {{ amount }}",
+      "totalAmount": "Total incl. tax: {{ amount }}",
+      "vatAmount": "VAT: {{ amount }}"
+    },
+    "receipt": {
+      "price": "Price",
+      "productName": "Product",
+      "quantity": "Qty",
+      "receiptNumber": "Receipt N°{{receiptNumber}}",
+      "totalAmount": "Total incl. tax: {{ amount }}"
     }
   },
   "product": {
@@ -284,12 +293,14 @@
   },
   "sale": {
     "amount": "Sale",
+    "customer": "Customer",
     "generalInformations": "General information",
     "pageSubtitle": "Sale made on {{ saleDate }}",
     "pageTitle": "Sale {{ saleNumber }}",
+    "printInvoice": "Print invoice",
+    "printReceipt": "Print receipt",
     "products": "Items sold",
-    "user": "Seller",
-    "printReceipt": "Print receipt"
+    "user": "Seller"
   },
   "sales": {
     "pageTitle": "Sales",
@@ -301,16 +312,28 @@
       "user": "Seller"
     }
   },
+  "settings": {
+    "formSection": "Printer configuration",
+    "pageSizePrinterLabel": "Page size",
+    "pageSizePrinterPlaceholder": "Printer page size",
+    "pageSubtitle": "Configure your printer",
+    "pageTitle": "Settings",
+    "printerLabel": "Printer",
+    "printerPlaceholder": "Your printer",
+    "printError": "Print error",
+    "printSuccess": "Print successful",
+    "testPrinter": "Test your printer"
+  },
   "shipping": {
     "cancel": "Cancel delivery",
     "customer": "Customer",
     "pageSubtitle": "Order placed on {{ shippingDate }}",
     "pageTitle": "Order {{ shippingNumber }}",
+    "products": "Delivery items",
     "productTable": {
       "name": "Article name",
       "quantity": "Quantity"
     },
-    "products": "Delivery items",
     "states": {
       "cancelled": "Canceled",
       "pending": "On hold",

@@ -12,9 +12,9 @@ import SaleInfos from './infos'
 import { formatLongDatetime } from '@/helpers/dates'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
-import { ReceiptText } from 'lucide-react'
-import { formatDataPrinter } from '@/helpers/format-data-printer'
-import { PosPrintData } from 'electron-pos-printer'
+import { Barcode, ReceiptText } from 'lucide-react'
+import { formatDataPrinterInvoice, formatDataPrinterReceipt } from '@/helpers'
+import { useCallback } from 'react'
 
 const Sale = () => {
   const { t } = useTranslation()
@@ -36,17 +36,31 @@ const Sale = () => {
 
   const { mutate: print } = usePrint()
 
-  const onPrint = () => {
+  const onPrintReceipt = useCallback(() => {
     if (saleData && saleProductsData && store) {
       print(
-        formatDataPrinter(
+        formatDataPrinterReceipt(
           saleData.data,
           saleProductsData?.data,
           store,
-        ) as PosPrintData[],
+          t,
+        ),
       )
     }
-  }
+  }, [saleData, saleProductsData, store, t])
+
+  const onPrintInvoice = useCallback(() => {
+    if (saleData && saleProductsData && store) {
+      print(
+        formatDataPrinterInvoice(
+          saleData.data,
+          saleProductsData?.data,
+          store,
+          t,
+        ),
+      )
+    }
+  }, [saleData, saleProductsData, store, t])
 
   if (!saleData) {
     return null
@@ -59,10 +73,16 @@ const Sale = () => {
         saleDate: formatLongDatetime(saleData?.data.createdAt),
       })}
       button={(
-        <Button type="button" onClick={onPrint}>
-          <ReceiptText />
-          {t('sale.printReceipt')}
-        </Button>
+        <div className="flex gap-2 items-center">
+          <Button variant="outline" type="button" onClick={onPrintReceipt}>
+            <Barcode />
+            {t('sale.printReceipt')}
+          </Button>
+          <Button type="button" onClick={onPrintInvoice}>
+            <ReceiptText />
+            {t('sale.printInvoice')}
+          </Button>
+        </div>
       )}
     >
       <ShowSection title={t('sale.generalInformations')}>
