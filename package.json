@@ -110,5 +110,5 @@
     "start": "electron-forge start",
     "test": "jest"
   },
-  "version": "0.7.2"
+  "version": "0.7.3"
 }
