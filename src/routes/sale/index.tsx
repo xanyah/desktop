@@ -14,7 +14,7 @@ import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 import { Barcode, ReceiptText } from 'lucide-react'
 import { formatDataPrinterInvoice, formatDataPrinterReceipt } from '@/helpers'
-import { PosPrintData } from 'electron-pos-printer'
+import { useCallback } from 'react'
 
 const Sale = () => {
   const { t } = useTranslation()
@@ -36,28 +36,31 @@ const Sale = () => {
 
   const { mutate: print } = usePrint()
 
-  const onPrintReceipt = () => {
+  const onPrintReceipt = useCallback(() => {
     if (saleData && saleProductsData && store) {
       print(
         formatDataPrinterReceipt(
           saleData.data,
           saleProductsData?.data,
           store,
-        ) as PosPrintData[],
+          t,
+        ),
       )
     }
-  }
+  }, [saleData, saleProductsData, store, t])
 
-  const onPrintInvoice = () => {
-    if (saleData && saleProductsData) {
+  const onPrintInvoice = useCallback(() => {
+    if (saleData && saleProductsData && store) {
       print(
         formatDataPrinterInvoice(
           saleData.data,
           saleProductsData?.data,
-        ) as PosPrintData[],
+          store,
+          t,
+        ),
       )
     }
-  }
+  }, [saleData, saleProductsData, store, t])
 
   if (!saleData) {
     return null

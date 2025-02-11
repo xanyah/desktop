@@ -3,38 +3,43 @@ import { uuidNumber } from './uuid'
 import { map, reduce } from 'lodash'
 import { formatPrice } from './price'
 import { customerFullname } from './customer'
+import { TFunction } from 'i18next'
+import { PosPrintData, PosPrintTableField } from 'electron-pos-printer'
 
-export const formatDataPrinterInvoice = (sale: Sale, saleProducts: SaleProduct[]) => {
+export const formatDataPrinterInvoice = (
+  sale: Sale,
+  saleProducts: SaleProduct[],
+  store: Store,
+  t: TFunction<'translation', undefined>,
+): PosPrintData[] => {
   const formattedDate = DateTime.fromISO(sale.createdAt).toFormat('dd/MM/yyyy')
   const totalHT = reduce(saleProducts, (sum, item) => {
     return sum + (item.quantity * item.product.taxFreeAmountCents)
   }, 0)
 
-  console.log(totalHT)
-  const prodcutTableBody = map(saleProducts, saleProduct => [
+  const productTableBody: PosPrintTableField[][] = map(saleProducts, saleProduct => [
     {
-      type: 'text',
-      value: saleProduct.quantity,
+      type: 'text' as const,
+      value: saleProduct.quantity.toString(),
       style: { fontWeight: '500', width: '10%', textAlign: 'left', fontFamily: 'sans-serif' },
     },
     {
-      type: 'text',
+      type: 'text' as const,
       value: saleProduct.product.name,
       style: { fontWeight: '500', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
     },
     {
-      type: 'text',
+      type: 'text' as const,
       value: formatPrice(saleProduct.amountCents, saleProduct.amountCurrency, '€'),
       style: { fontWeight: '500', width: '25%', textAlign: 'right', fontFamily: 'sans-serif' },
     },
   ])
 
-  const data = [
+  return [
     {
       type: 'text',
-      value: 'Revland',
+      value: store.name,
       style: { fontWeight: '700', textAlign: 'center', fontSize: '32px', fontFamily: 'sans-serif' },
-
     },
     {
       type: 'text',
@@ -43,7 +48,7 @@ export const formatDataPrinterInvoice = (sale: Sale, saleProducts: SaleProduct[]
     },
     {
       type: 'text',
-      value: `Facture N° ${uuidNumber(sale.id)}`,
+      value: t('print.invoice.invoiceNumber', { invoiceNumber: uuidNumber(sale.id) }),
       style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
     },
     {
@@ -64,23 +69,23 @@ export const formatDataPrinterInvoice = (sale: Sale, saleProducts: SaleProduct[]
       tableHeader: [
         {
           type: 'text',
-          value: 'Qte',
+          value: t('print.invoice.quantity'),
           style: { fontWeight: '700', width: '10%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
         {
           type: 'text',
-          value: 'Désignation',
+          value: t('print.invoice.productName'),
           style: { fontWeight: '700', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
 
         {
           type: 'text',
-          value: 'Prix',
+          value: t('print.invoice.price'),
           style: { fontWeight: '700', width: '25%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
       ],
       // multi dimensional array depicting the rows and columns of the table body
-      tableBody: prodcutTableBody,
+      tableBody: productTableBody,
       // list of columns to be rendered in the table footer
       tableFooter: [],
       // custom style for the table header
@@ -92,20 +97,18 @@ export const formatDataPrinterInvoice = (sale: Sale, saleProducts: SaleProduct[]
     },
     {
       type: 'text',
-      value: `Total HT: ${formatPrice(totalHT, sale.totalAmountCurrency, '€')}`,
+      value: t('print.invoice.taxFreeAmount', { amount: formatPrice(totalHT, sale.totalAmountCurrency, '€') }),
       style: { fontWeight: '700', textAlign: 'right', margin: '32px 0 0 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
-      value: `TVA: ${formatPrice(sale.totalAmountCents - totalHT, sale.totalAmountCurrency, '€')}`,
+      value: t('print.invoice.vatAmount', { amount: formatPrice(sale.totalAmountCents - totalHT, sale.totalAmountCurrency, '€') }),
       style: { fontWeight: '700', textAlign: 'right', margin: '14px 0 0 0', fontFamily: 'sans-serif' },
     },
     {
       type: 'text',
-      value: `Total TTC: ${formatPrice(sale.totalAmountCents, sale.totalAmountCurrency, '€')}`,
+      value: t('print.invoice.totalAmount', { amount: formatPrice(sale.totalAmountCents, sale.totalAmountCurrency, '€') }),
       style: { fontWeight: '700', textAlign: 'right', margin: '14px 0 0 0', fontFamily: 'sans-serif' },
     },
   ]
-
-  return data
 }

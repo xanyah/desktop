@@ -14,18 +14,6 @@
     "security": "Sécurité",
     "signOut": "Déconnexion"
   },
-  "settings": {
-    "pageTitle": "Paramètres",
-    "pageSubtitle": "Configurez votre imprimante",
-    "printerLabel": "Imprimante",
-    "printerPlaceholder": "Votre imprimante",
-    "testPrinter": "Tester votre imprimante",
-    "printSuccess": "Impression réussie",
-    "printError": "Erreur d'impression",
-    "pageSizePrinterLabel": "Tille de la page",
-    "pageSizePrinterPlaceholder": "Tille de la page de l'imprimante",
-    "formSection": "Configuration de l'imprimante"
-  },
   "categories": {
     "createButtonLabel": "Créer une catégorie",
     "pageTitle": "Catégories",
@@ -48,6 +36,8 @@
     "vatPlaceholder": "Sélectionner un taux de TVA..."
   },
   "checkout": {
+    "customer": "Clients",
+    "customerPlaceholder": "Sélectionner un client...",
     "customPayment": {
       "addButton": "Ajouter un moyen de paiement",
       "paymentTypeLabel": "Moyen de paiement",
@@ -57,6 +47,7 @@
       "unattributedPositive": "Il reste {{ amount }} à distribuer"
     },
     "flatPromotionLabel": "Montant",
+    "newCustomerButtonLabel": "Créer un client",
     "pageSubtitle": "Saisissez ici les données de votre encaissement",
     "pageTitle": "Encaissement",
     "payment": "Paiement",
@@ -71,10 +62,7 @@
     "searchPlaceholder": "Code barre ou code fabricant de l'article",
     "subtotal": "Sous-total",
     "total": "Total",
-    "customerPlaceholder": "Sélectionner un client...",
-    "newCustomerButtonLabel": "Créer un client",
-    "validateButton": "Valider la vente",
-    "customer": "Clients"
+    "validateButton": "Valider la vente"
   },
   "components": {
     "dataTable": {
@@ -166,11 +154,11 @@
     "order": "Commande envoyée",
     "pageSubtitle": "Commande passée le {{ orderDate }}",
     "pageTitle": "Commande {{ orderNumber }}",
+    "products": "Articles de la commande",
     "productTable": {
       "name": "Nom de l'article",
       "quantity": "Quantité"
     },
-    "products": "Articles de la commande",
     "states": {
       "cancelled": "Annulée",
       "delivered": "Reçue",
@@ -217,6 +205,24 @@
     "table": {
       "description": "Description",
       "name": "Nom du moyen de paiement"
+    }
+  },
+  "print": {
+    "invoice": {
+      "invoiceNumber": "Facture N°{{invoiceNumber}}",
+      "price": "Prix",
+      "productName": "Article",
+      "quantity": "Qté",
+      "taxFreeAmount": "Total HT: {{ amount }}",
+      "totalAmount": "Total TTC: {{ amount }}",
+      "vatAmount": "TVA: {{ amount }}"
+    },
+    "receipt": {
+      "price": "Prix",
+      "productName": "Article",
+      "quantity": "Qté",
+      "receiptNumber": "Ticket N°{{receiptNumber}}",
+      "totalAmount": "Total TTC: {{ amount }}"
     }
   },
   "product": {
@@ -287,14 +293,14 @@
   },
   "sale": {
     "amount": "Montant de la vente",
+    "customer": "Client",
     "generalInformations": "Informations générales",
     "pageSubtitle": "Vente effectuée le {{ saleDate }}",
     "pageTitle": "Vente {{ saleNumber }}",
-    "products": "Articles vendus",
-    "user": "Vendeur",
-    "customer": "Client",
+    "printInvoice": "Imprimer la facture",
     "printReceipt": "Imprimer le ticket",
-    "printInvoice": "Imprimer la facture"
+    "products": "Articles vendus",
+    "user": "Vendeur"
   },
   "sales": {
     "pageTitle": "Ventes",
@@ -306,16 +312,28 @@
       "user": "Vendeur"
     }
   },
+  "settings": {
+    "formSection": "Configuration de l'imprimante",
+    "pageSizePrinterLabel": "Tille de la page",
+    "pageSizePrinterPlaceholder": "Tille de la page de l'imprimante",
+    "pageSubtitle": "Configurez votre imprimante",
+    "pageTitle": "Paramètres",
+    "printerLabel": "Imprimante",
+    "printerPlaceholder": "Votre imprimante",
+    "printError": "Erreur d'impression",
+    "printSuccess": "Impression réussie",
+    "testPrinter": "Tester votre imprimante"
+  },
   "shipping": {
     "cancel": "Annuler la livraison",
     "customer": "Client",
     "pageSubtitle": "Commande passée le {{ shippingDate }}",
     "pageTitle": "Commande {{ shippingNumber }}",
+    "products": "Articles de la livraison",
     "productTable": {
       "name": "Nom de l'article",
       "quantity": "Quantité"
     },
-    "products": "Articles de la livraison",
     "states": {
       "cancelled": "Annulée",
       "pending": "En attente",
