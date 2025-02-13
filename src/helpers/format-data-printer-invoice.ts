@@ -1,10 +1,10 @@
-import { DateTime } from 'luxon'
-import { uuidNumber } from './uuid'
-import { map, reduce } from 'lodash'
-import { formatPrice } from './price'
-import { customerFullname } from './customer'
-import { TFunction } from 'i18next'
 import { PosPrintData, PosPrintTableField } from 'electron-pos-printer'
+import { uuidNumber } from './uuid'
+import { formatPrice } from './price'
+import { DateTime } from 'luxon'
+import { TFunction } from 'i18next'
+import { map, reduce } from 'lodash'
+import { customerFullname } from './customer'
 
 export const formatDataPrinterInvoice = (
   sale: Sale,
@@ -35,6 +35,21 @@ export const formatDataPrinterInvoice = (
     },
   ])
 
+  const customerFields: PosPrintData[] = sale.customer
+    ? [
+        {
+          type: 'text',
+          value: customerFullname(sale.customer),
+          style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
+        },
+        {
+          type: 'text',
+          value: sale.customer.address,
+          style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 40px 0', fontFamily: 'sans-serif' },
+        },
+      ]
+    : []
+
   return [
     {
       type: 'text',
@@ -51,21 +66,10 @@ export const formatDataPrinterInvoice = (
       value: t('print.invoice.invoiceNumber', { invoiceNumber: uuidNumber(sale.id) }),
       style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
     },
-    {
-      type: 'text',
-      value: customerFullname(sale.customer),
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 12px 0', fontFamily: 'sans-serif' },
-    },
-    {
-      type: 'text',
-      value: sale.customer.address,
-      style: { fontWeight: '500', textAlign: 'center', fontSize: '16px', margin: '12px 0 40px 0', fontFamily: 'sans-serif' },
-    },
+    ...customerFields,
     {
       type: 'table',
-      // style the table
       style: { borderBottom: '1px solid #ddd' },
-      // list of the columns to be rendered in the table header
       tableHeader: [
         {
           type: 'text',
@@ -77,22 +81,16 @@ export const formatDataPrinterInvoice = (
           value: t('print.invoice.productName'),
           style: { fontWeight: '700', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
-
         {
           type: 'text',
           value: t('print.invoice.price'),
           style: { fontWeight: '700', width: '25%', textAlign: 'left', fontFamily: 'sans-serif' },
         },
       ],
-      // multi dimensional array depicting the rows and columns of the table body
       tableBody: productTableBody,
-      // list of columns to be rendered in the table footer
       tableFooter: [],
-      // custom style for the table header
       tableHeaderStyle: { fontWeight: '700' },
-      // custom style for the table body
       tableBodyStyle: {},
-      // custom style for the table footer
       tableFooterStyle: {},
     },
     {
