@@ -1,5 +1,5 @@
 import path from 'path'
-import { app, BrowserWindow, ipcMain, screen } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 const { PosPrinter } = require('electron-pos-printer')
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
@@ -17,15 +17,8 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null
 
 function createWindow() {
-  const mainScreen = screen.getPrimaryDisplay()
-  const { width, height } = mainScreen.workAreaSize
-
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC || '', 'logo.svg'),
-    width,
-    height,
-    x: 0,
-    y: 0,
     webPreferences: {
       preload: path.join(__dirname, './preload.js'),
       contextIsolation: true,
@@ -36,11 +29,14 @@ function createWindow() {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
+  win.removeMenu()
+
+  win.maximize()
+
   if (process.env.VITE_DEV_SERVER_URL) {
     win.loadURL(process.env.VITE_DEV_SERVER_URL)
     win.webContents.openDevTools()
-  }
-  else {
+  } else {
     win.loadFile(path.join(process.env.DIST || '', 'index.html'))
   }
 }

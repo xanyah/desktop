@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Account from './account'
 import Categories from './categories'
 import Category from './category'
@@ -33,7 +33,7 @@ import { isElectron } from '@/helpers/electron'
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route element={<OfflineLayout />}>
           <Route path="sign-in" element={<SignIn />} />
@@ -79,8 +79,7 @@ const Router = () => {
           <Route path="providers/new" element={<Provider />} />
           <Route path="sales" element={<Sales />} />
           <Route path="sales/:id" element={<Sale />} />
-          {isElectron() && (
-            <Route path="settings" element={<Settings />} />)}
+          {isElectron() && <Route path="settings" element={<Settings />} />}
           <Route path="shippings" element={<Shippings />} />
           <Route path="shippings/:id" element={<Shipping />} />
           <Route path="shippings/new" element={<ShippingNew />} />
@@ -88,7 +87,7 @@ const Router = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
