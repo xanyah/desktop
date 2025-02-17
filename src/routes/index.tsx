@@ -1,4 +1,10 @@
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter,
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom'
 import Account from './account'
 import Categories from './categories'
 import Category from './category'
@@ -31,9 +37,11 @@ import { OfflineLayout, OnlineLayout } from '../layouts'
 import Settings from './settings'
 import { isElectron } from '@/helpers/electron'
 
+const RouterComponent = isElectron() ? HashRouter : BrowserRouter
+
 const Router = () => {
   return (
-    <HashRouter>
+    <RouterComponent>
       <Routes>
         <Route element={<OfflineLayout />}>
           <Route path="sign-in" element={<SignIn />} />
@@ -87,7 +95,7 @@ const Router = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </RouterComponent>
   )
 }
 
