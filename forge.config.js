@@ -1,16 +1,13 @@
-const { FusesPlugin } = require('@electron-forge/plugin-fuses');
-const { FuseV1Options, FuseVersion } = require('@electron/fuses');
+const { FusesPlugin } = require('@electron-forge/plugin-fuses')
+const { FuseV1Options, FuseVersion } = require('@electron/fuses')
 
 module.exports = {
   packagerConfig: {
+    icon: './public/favicon',
     asar: true,
   },
   rebuildConfig: {},
   makers: [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
-    },
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
@@ -22,6 +19,15 @@ module.exports = {
     {
       name: '@electron-forge/maker-rpm',
       config: {},
+    },
+    {
+      name: '@electron-forge/maker-wix',
+      config: {
+        icon: './public/favicon.ico',
+        ui: {
+          chooseDirectory: true,
+        },
+      },
     },
   ],
   plugins: [
@@ -47,10 +53,10 @@ module.exports = {
       config: {
         repository: {
           owner: 'xanyah',
-          name: 'desktop'
+          name: 'desktop',
         },
-        prerelease: true
-      }
-    }
-  ]
-};
+        prerelease: true,
+      },
+    },
+  ],
+}
