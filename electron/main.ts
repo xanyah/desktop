@@ -5,9 +5,7 @@ const { PosPrinter } = require('electron-pos-printer')
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 process.env.DIST = path.join(__dirname, '../dist')
-process.env.VITE_PUBLIC = app.isPackaged
-  ? process.env.DIST
-  : path.join(process.env.DIST, '../public')
+process.env.VITE_PUBLIC = path.join(process.env.DIST, '../public')
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -18,7 +16,7 @@ let win: BrowserWindow | null
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC || '', 'favicon.svg'),
+    icon: path.join(process.env.VITE_PUBLIC || '', 'favicon.ico'),
     webPreferences: {
       preload: path.join(__dirname, './preload.js'),
       contextIsolation: true,

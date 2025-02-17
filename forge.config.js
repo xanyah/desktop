@@ -3,7 +3,7 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses')
 
 module.exports = {
   packagerConfig: {
-    icon: './favicon',
+    icon: './public/favicon',
     asar: true,
   },
   rebuildConfig: {},
@@ -23,6 +23,7 @@ module.exports = {
     {
       name: '@electron-forge/maker-wix',
       config: {
+        icon: './public/favicon.ico',
         ui: {
           chooseDirectory: true,
         },
