@@ -10,6 +10,7 @@ import { useCallback } from 'react'
 import { captureException } from '@sentry/react'
 import { getNextProductSku } from '@/api'
 import { useCurrentStore } from '@/hooks'
+import { Copy, RefreshCcw } from 'lucide-react'
 
 const ProductFormLogistics = () => {
   const store = useCurrentStore()
@@ -82,9 +83,11 @@ const ProductFormLogistics = () => {
         />
         <div className="flex flex-row gap-2 pt-5">
           <Button type="button" variant="outline" onClick={copyUpc}>
+            <Copy />
             {t('product.copyUpcToSku')}
           </Button>
           <Button type="button" variant="outline" onClick={generateSku}>
+            <RefreshCcw />
             {t('product.generateSku')}
           </Button>
         </div>

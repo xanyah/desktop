@@ -90,7 +90,7 @@ const ProductFormPricing = () => {
         name="ratioEnabled"
         render={({ field: { onChange, value } }) => (
           <>
-            <label>
+            <label className="flex flex-row gap-1 text-xs">
               <input
                 type="checkbox"
                 checked={value}

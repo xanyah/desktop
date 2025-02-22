@@ -12,6 +12,7 @@ import ProductSelect from '@/components/product-select'
 import { findIndex, map } from 'lodash'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
+import { Plus } from 'lucide-react'
 
 const formSchema = z.object({
   customerId: z.string(),
@@ -104,7 +105,8 @@ const Order = () => {
               )}
             />
             <Button type="button" onClick={() => setIsPanelOpen('customer')} variant="outline">
-              Créer
+              <Plus />
+              {t('global.create')}
             </Button>
           </div>
           <div className="flex flex-row items-end gap-4">
@@ -114,7 +116,8 @@ const Order = () => {
               placeholder={t('orderNew.productPlaceholder')}
             />
             <Button type="button" onClick={() => setIsPanelOpen('product')} variant="outline">
-              Créer
+              <Plus />
+              {t('global.create')}
             </Button>
           </div>
           {map(fields, (field, index) => (

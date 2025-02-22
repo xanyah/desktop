@@ -31,9 +31,7 @@
     "newCategoryPageTitle": "New category",
     "pageSubtitle": "Enter here the information in your category",
     "parentCategoryLabel": "Parent category",
-    "parentCategoryPlaceholder": "Select a category...",
-    "vatLabel": "VAT",
-    "vatPlaceholder": "Select a VAT rate..."
+    "parentCategoryPlaceholder": "Select a category..."
   },
   "checkout": {
     "customer": "Customers",
@@ -116,6 +114,7 @@
   "global": {
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "create": "Create",
     "edit": "Edit",
     "loading": "Loading in progress ...",
     "save": "Save",
@@ -234,10 +233,12 @@
     "buyingAmountPlaceholder": "Article purchase price",
     "categoryLabel": "Category",
     "categoryPlaceholder": "Select a category...",
+    "copyUpcToSku": "Copy UPC",
     "customAttributes": "Custom attributes",
     "deleteImageDescription": "Are you sure you want to delete this image ?",
     "deleteImageTitle": "Delete confirmation",
     "generalInformations": "General information",
+    "generateSku": "Generate",
     "imagesLabel": "Images",
     "logistics": "Logistics",
     "manufacturerLabel": "Manufacturer",
@@ -250,6 +251,10 @@
     "newPageTitle": "New article",
     "pageSubtitle": "Enter here the information of your product",
     "pricing": "Pricing",
+    "ratioCheckbox": "Calculate prices through a ratio",
+    "ratioHint": "The ratio is a multiplication factor used to calculate the price including VAT",
+    "ratioLabel": "Ratio",
+    "ratioPlaceholder": "Ratio to calculate price including VAT",
     "skuHint": "SKU is a barcode specific to the store to identify the article",
     "skuLabel": "SKU",
     "skuPlaceholder": "SKU of the article",
@@ -258,7 +263,9 @@
     "taxFreeAmountPlaceholder": "Price excluding taxes of the article",
     "upcHint": "The UPC is the original barcode of the article",
     "upcLabel": "UPC",
-    "upcPlaceholder": "UPC of the article"
+    "upcPlaceholder": "UPC of the article",
+    "vatLabel": "VAT",
+    "vatPlaceholder": "Select a VAT rate..."
   },
   "products": {
     "createButtonLabel": "Create an article",

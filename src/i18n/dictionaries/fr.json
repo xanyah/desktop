@@ -114,6 +114,7 @@
   "global": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
+    "create": "Créer",
     "edit": "Éditer",
     "loading": "Chargement en cours...",
     "save": "Enregistrer",
@@ -232,10 +233,12 @@
     "buyingAmountPlaceholder": "Prix d'achat de l'article",
     "categoryLabel": "Catégorie",
     "categoryPlaceholder": "Sélectionner une catégorie",
+    "copyUpcToSku": "Copier code fabricant",
     "customAttributes": "Attributs personnalisés",
     "deleteImageDescription": "Êtes-vous sûr de vouloir supprimer cette image?",
     "deleteImageTitle": "Confirmation de suppression",
     "generalInformations": "Informations générales",
+    "generateSku": "Générer",
     "imagesLabel": "Images",
     "logistics": "Logistique",
     "manufacturerLabel": "Fabricant",
@@ -262,8 +265,6 @@
     "upcLabel": "Code barre fabricant",
     "upcPlaceholder": "Code barre fabricant de l'article",
     "vatLabel": "TVA",
-    "copyUpcToSku": "Copier code fabricant",
-    "generateSku": "Générer",
     "vatPlaceholder": "Sélectionner un taux de TVA..."
   },
   "products": {
