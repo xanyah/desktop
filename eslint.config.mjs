@@ -4,6 +4,7 @@ import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import importPlugin from 'eslint-plugin-import';
 import stylistic from '@stylistic/eslint-plugin'
+import reactHooks from 'eslint-plugin-react-hooks';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 
 
@@ -23,7 +24,10 @@ export default [
   importPlugin.flatConfigs.warnings,
   importPlugin.flatConfigs.typescript,
   {
+    plugins: { 'react-hooks': reactHooks },
     rules: {
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       'react/no-unknown-property': 0,
       'react/prop-types': 0,
       '@typescript-eslint/no-explicit-any': 0,

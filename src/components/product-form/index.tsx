@@ -1,108 +1,67 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { useCurrentStore, useCustomAttributes, useProduct } from '../../hooks'
+import { useCurrentStore, useCustomAttributes } from '../../hooks'
 import { createProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { validate } from 'uuid'
-import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { find, isEmpty, map, omit, toNumber } from 'lodash'
+import { find, isEmpty, map, omit } from 'lodash'
 import { decamelizeKeys } from 'humps'
 import {
-  CategorySelect,
   FormContainer,
-  FormSection,
-  InputFile,
-  InputText,
-  ManufacturerSelect,
 } from '@/components'
-import { Controller, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Euro } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { z } from '../../constants/zod'
 import { AxiosResponse } from 'axios'
 import { serialize } from 'object-to-formdata'
-
-const ImageSchema = z.union([
-  z.instanceof(File),
-  z.object({
-    name: z.string(),
-    signed_id: z.string(),
-  }),
-])
-
-const productCustomAttributesAttributes = z.object({
-  id: z.string().optional(),
-  customAttributeId: z.string(),
-  value: z.string().optional().nullable(),
-})
-
-const formSchema = z.object({
-  name: z.string(),
-  categoryId: z.string(),
-  manufacturerId: z.string(),
-  storeId: z.string(),
-  amount: z.number(),
-  buyingAmount: z.number(),
-  taxFreeAmount: z.number(),
-  sku: z.string(),
-  manufacturerSku: z.string(),
-  upc: z.string(),
-  images: z.array(ImageSchema).optional(),
-  productCustomAttributesAttributes: z
-    .array(productCustomAttributesAttributes.optional().nullable())
-    .optional(),
-})
-
-type formSchemaType = z.infer<typeof formSchema>
+import ProductFormGeneral from './general'
+import ProductFormLogistics from './logistics'
+import ProductFormPricing from './pricing'
+import ProductFormCustomAttributes from './custom-attributes'
+import { formSchema, formSchemaType } from './config'
 
 type ProductFormProps = {
+  product?: Product
   onCancel?: () => void
   onSuccess?: (data: AxiosResponse<Product, any>) => void
 }
 
-const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
+const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
   const store = useCurrentStore()
   const { data: customAttributesData } = useCustomAttributes({
     'q[storeIdEq]': store?.id,
   })
   const { t } = useTranslation()
-  const { id } = useParams()
-  const { handleSubmit, control, setValue, reset } = useForm<formSchemaType>({
+  const methods = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
   })
+  const { handleSubmit, setValue, reset } = methods
   const toastId = useRef<string>(null)
-  const { data: productData } = useProduct(id)
   const pageTitle = useMemo(
-    () => productData?.data?.name || t('product.newPageTitle'),
-    [productData, t],
+    () => product?.name || t('product.newPageTitle'),
+    [product, t],
   )
   const queryClient = useQueryClient()
-  useBreadCrumbContext([
-    { label: t('products.pageTitle'), url: '/products' },
-    { label: pageTitle },
-  ])
+
   const initialValues = useMemo(
     () =>
-      productData?.data
+      product
         ? {
-            ...productData?.data,
-            categoryId: productData?.data?.category?.id,
-            manufacturerId: productData?.data?.manufacturer?.id,
+            ...product,
+            categoryId: product.category?.id,
+            manufacturerId: product.manufacturer?.id,
             storeId: store?.id,
-            buyingAmount: productData?.data?.buyingAmountCents / 100,
-            taxFreeAmount: productData?.data?.taxFreeAmountCents / 100,
-            amount: productData?.data?.amountCents / 100,
-            images: map(productData?.data?.images, image => ({
+            buyingAmount: product.buyingAmountCents / 100,
+            taxFreeAmount: product.taxFreeAmountCents / 100,
+            amount: product.amountCents / 100,
+            images: map(product.images, image => ({
               name: image.large.split('/').pop(),
               signed_id: image.signedId,
               thumbnail: image.thumbnail,
             })),
           }
         : undefined,
-    [productData, store],
+    [product, store],
   )
 
   const { mutate: createApiProduct } = useMutation({
@@ -122,10 +81,10 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
   })
 
   const { mutate: updateApiProduct } = useMutation({
-    mutationFn: (newData: FormData) => updateProduct(id, newData),
+    mutationFn: (newData: FormData) => updateProduct(product?.id, newData),
     onSuccess: (data) => {
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
-      queryClient.invalidateQueries({ queryKey: ['products', { id }] })
+      queryClient.invalidateQueries({ queryKey: ['products', { id: product?.id }] })
       onSuccess?.(data)
       reset(initialValues)
     },
@@ -159,241 +118,59 @@ const ProductForm = ({ onCancel, onSuccess }: ProductFormProps) => {
         formData.append('product[images][]', '')
       }
 
-      if (validate(id)) {
+      if (product) {
         updateApiProduct(formData)
       }
       else {
         createApiProduct(formData)
       }
     },
-    [id, updateApiProduct, createApiProduct],
+    [product, updateApiProduct, createApiProduct],
   )
 
   useEffect(() => {
-    reset({
-      ...initialValues,
-      productCustomAttributesAttributes: map(
-        customAttributesData?.data,
-        (customAttribute) => {
-          const existingCustomAttribute = find(
-            initialValues?.productCustomAttributes,
-            productCustomAttribute =>
-              productCustomAttribute.customAttribute.id === customAttribute.id,
-          )
-          return {
-            id: existingCustomAttribute?.id,
-            customAttributeId: customAttribute.id,
-            value: existingCustomAttribute?.value,
-          }
-        },
-      ),
-    })
-  }, [initialValues, reset, customAttributesData])
+    setValue('productCustomAttributesAttributes', map(
+      customAttributesData?.data,
+      (customAttribute) => {
+        const existingCustomAttribute = find(
+          initialValues?.productCustomAttributes,
+          productCustomAttribute =>
+            productCustomAttribute.customAttribute.id === customAttribute.id,
+        )
+        return {
+          id: existingCustomAttribute?.id,
+          customAttributeId: customAttribute.id,
+          value: existingCustomAttribute?.value,
+        }
+      },
+    ))
+  }, [initialValues, customAttributesData, setValue])
+
+  useEffect(() => {
+    reset(initialValues)
+  }, [initialValues, reset])
 
   useEffect(() => {
     if (store) {
       setValue('storeId', store?.id)
     }
-  }, [store, setValue])
+  }, [setValue, store])
 
   return (
-    <FormContainer
-      title={pageTitle}
-      subtitle={t('product.pageSubtitle')}
-      onSubmit={handleSubmit(onSubmit)}
-      onCancel={onCancel}
-    >
-      <FormSection title={t('product.generalInformations')}>
-        <Controller
-          control={control}
-          name="name"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder={t('product.namePlaceholder')}
-              type="text"
-              label={t('product.nameLabel')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="categoryId"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <CategorySelect
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              label={t('product.categoryLabel')}
-              placeholder={t('product.categoryPlaceholder')}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="manufacturerId"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <ManufacturerSelect
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              label={t('product.manufacturerLabel')}
-              placeholder={t('product.manufacturerPlaceholder')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="images"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputFile
-              label={t('product.imagesLabel')}
-              error={error?.message}
-              id="file-upload"
-              onFilesChange={onChange}
-              value={value as any}
-            />
-          )}
-        />
-      </FormSection>
-
-      <FormSection title={t('product.logistics')}>
-        <Controller
-          control={control}
-          name="manufacturerSku"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              hint={t('product.manufacturerSkuHint')}
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder={t('product.manufacturerSkuPlaceholder')}
-              type="text"
-              label={t('product.manufacturerSkuLabel')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="upc"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              hint={t('product.upcHint')}
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder={t('product.upcPlaceholder')}
-              type="text"
-              label={t('product.upcLabel')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="sku"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              hint={t('product.skuHint')}
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              placeholder={t('product.skuPlaceholder')}
-              type="text"
-              label={t('product.skuLabel')}
-            />
-          )}
-        />
-      </FormSection>
-
-      <FormSection title={t('product.pricing')}>
-        <Controller
-          control={control}
-          name="buyingAmount"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              icon={<Euro />}
-              step="0.1"
-              type="number"
-              hint={t('product.buyingAmountHint')}
-              placeholder={t('product.buyingAmountPlaceholder')}
-              label={t('product.buyingAmountLabel')}
-              value={value}
-              onChange={e => onChange(toNumber(e.target.value))}
-              error={error?.message}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="taxFreeAmount"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <InputText
-              icon={<Euro />}
-              step="0.1"
-              type="number"
-              hint={t('product.taxFreeAmountHint')}
-              placeholder={t('product.taxFreeAmountPlaceholder')}
-              label={t('product.taxFreeAmountLabel')}
-              value={value}
-              onChange={e => onChange(toNumber(e.target.value))}
-              error={error?.message}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="amount"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            // TODO: Should be tax_free amount * category.vat_rate
-            <InputText
-              icon={<Euro />}
-              step="0.1"
-              type="number"
-              hint={t('product.amountHint')}
-              placeholder={t('product.amountPlaceholder')}
-              label={t('product.amountLabel')}
-              value={value}
-              onChange={e => onChange(toNumber(e.target.value))}
-              error={error?.message}
-            />
-          )}
-        />
-      </FormSection>
-
-      {!isEmpty(customAttributesData?.data) && (
-        <FormSection title={t('product.customAttributes')}>
-          {map(customAttributesData?.data, (customAttribute, index) => (
-            <Controller
-              control={control}
-              name={`productCustomAttributesAttributes.${index}`}
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <InputText
-                  placeholder={customAttribute.name}
-                  label={customAttribute.name}
-                  value={value?.value || ''}
-                  onChange={e =>
-                    onChange({
-                      id: value?.id,
-                      customAttributeId: customAttribute.id,
-                      value: e.target.value,
-                    })}
-                  error={error?.message}
-                />
-              )}
-            />
-          ))}
-        </FormSection>
-      )}
-    </FormContainer>
+    <FormProvider {...methods}>
+      <input {...methods.register('storeId')} type="hidden" />
+      <FormContainer
+        title={pageTitle}
+        subtitle={t('product.pageSubtitle')}
+        onSubmit={handleSubmit(onSubmit)}
+        onCancel={onCancel}
+      >
+        <ProductFormGeneral />
+        <ProductFormLogistics />
+        <ProductFormPricing />
+        <ProductFormCustomAttributes />
+      </FormContainer>
+    </FormProvider>
   )
 }
 

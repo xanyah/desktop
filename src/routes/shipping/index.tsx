@@ -38,6 +38,7 @@ const Shipping = () => {
         storeId?: Store['id'],
       ) => Promise<AxiosResponse<Shipping, any>>,
     ) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       return useMutation({
         mutationFn: () => mutationFn(id),
         onSuccess: () => {
@@ -56,7 +57,7 @@ const Shipping = () => {
         },
       })
     },
-    [id],
+    [id, queryClient, t],
   )
 
   const { mutate: cancelApiShipping } = useChangeShippingStatus(cancelShipping)

@@ -54,7 +54,7 @@
     "paymentMethodOtherButton": "Other",
     "percentPromotionLabel": "Percentage",
     "price": "Total & Discounts",
-    "products": "Items",
+    "products": "Products",
     "promotionAddButton": "Add a discount",
     "promotionAmountLabel": "Amount",
     "promotionAmountPlaceholder": "Promotion",
@@ -262,7 +262,7 @@
   },
   "products": {
     "createButtonLabel": "Create an article",
-    "pageTitle": "Items",
+    "pageTitle": "Articles",
     "searchPlaceholder": "Search for an article ...",
     "table": {
       "amount": "Amount",
@@ -299,7 +299,7 @@
     "pageTitle": "Sale {{ saleNumber }}",
     "printInvoice": "Print invoice",
     "printReceipt": "Print receipt",
-    "products": "Items sold",
+    "products": "Articles sold",
     "user": "Seller"
   },
   "sales": {

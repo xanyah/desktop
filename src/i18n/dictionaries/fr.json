@@ -31,9 +31,7 @@
     "newCategoryPageTitle": "Nouvelle catégorie",
     "pageSubtitle": "Saisissez ici les informations de votre catégorie",
     "parentCategoryLabel": "Catégorie parente",
-    "parentCategoryPlaceholder": "Sélectionner une catégorie...",
-    "vatLabel": "TVA",
-    "vatPlaceholder": "Sélectionner un taux de TVA..."
+    "parentCategoryPlaceholder": "Sélectionner une catégorie..."
   },
   "checkout": {
     "customer": "Clients",
@@ -250,15 +248,23 @@
     "newPageTitle": "Nouvel article",
     "pageSubtitle": "Saisissez ici les informations de votre article",
     "pricing": "Facturation",
-    "skuHint": "Le SKU est un code barre spécifique à la boutique pour identifier l'article",
-    "skuLabel": "SKU",
-    "skuPlaceholder": "SKU de l'article",
+    "ratioCheckbox": "Calculer le prix selon un coefficient",
+    "ratioHint": "Le coefficient est un facteur de multiplication permettant de calculer le prix TTC",
+    "ratioLabel": "Coefficient",
+    "ratioPlaceholder": "Coefficient de calcul du prix TTC",
+    "skuHint": "Le code barre boutique est un code barre spécifique à la boutique pour identifier l'article",
+    "skuLabel": "Code barre boutique",
+    "skuPlaceholder": "Code barre boutique de l'article",
     "taxFreeAmountHint": "Le prix hors taxes est le prix de l'article avant l'application de la TVA",
     "taxFreeAmountLabel": "Prix hors taxes",
     "taxFreeAmountPlaceholder": "Prix hors taxes de l'article",
-    "upcHint": "L'UPC est le code barre d'origine de l'article",
-    "upcLabel": "UPC",
-    "upcPlaceholder": "UPC de l'article"
+    "upcHint": "Code barre fabricant est le code barre d'origine de l'article",
+    "upcLabel": "Code barre fabricant",
+    "upcPlaceholder": "Code barre fabricant de l'article",
+    "vatLabel": "TVA",
+    "copyUpcToSku": "Copier code fabricant",
+    "generateSku": "Générer",
+    "vatPlaceholder": "Sélectionner un taux de TVA..."
   },
   "products": {
     "createButtonLabel": "Créer un article",

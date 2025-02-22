@@ -28,7 +28,7 @@ const CountrySelect = ({
         'q[s]': 'name',
       })
     },
-    [store],
+    [],
   )
 
   return (

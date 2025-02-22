@@ -37,6 +37,7 @@ const Order = () => {
     (
       mutationFn: (storeId?: Store['id']) => Promise<AxiosResponse<Order, any>>,
     ) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       return useMutation({
         mutationFn: () => mutationFn(id),
         onSuccess: () => {
@@ -55,7 +56,7 @@ const Order = () => {
         },
       })
     },
-    [id],
+    [id, queryClient, t],
   )
 
   const { mutate: cancelApiOrder } = useChangeOrderStatus(cancelOrder)

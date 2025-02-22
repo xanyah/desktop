@@ -1,10 +1,10 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useCurrentStore } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { createOrder } from '../../api'
 import { useTranslation } from 'react-i18next'
-import { CheckoutProductCard, CustomerSelect, FormContainer, FormSection } from '@/components'
+import { Button, CheckoutProductCard, CustomerForm, CustomerSelect, FormContainer, FormSection, ProductForm, RightPanel } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,11 +28,12 @@ const formSchema = z.object({
 type FormType = z.infer<typeof formSchema>
 
 const Order = () => {
+  const [isPanelOpen, setIsPanelOpen] = useState<'customer' | 'product'>()
   const navigate = useNavigate()
   const store = useCurrentStore()
   const { t } = useTranslation()
   const toastId = useRef<string>(null)
-  const { handleSubmit, control } = useForm<FormType>({
+  const { handleSubmit, control, setValue } = useForm<FormType>({
     resolver: zodResolver(formSchema),
   })
   useBreadCrumbContext([
@@ -82,40 +83,72 @@ const Order = () => {
   }, [fields, append, update])
 
   return (
-    <FormContainer
-      title={t('orderNew.pageTitle')}
-      subtitle={t('orderNew.pageSubtitle')}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <FormSection title={t('orderNew.generalInformations')}>
-        <Controller
-          control={control}
-          name="customerId"
-          render={({ field: { onChange, value } }) => (
-            <CustomerSelect
-              onChange={onChange}
-              value={value}
-              label={t('orderNew.customerLabel')}
-              placeholder={t('orderNew.customerPlaceholder')}
+    <>
+      <FormContainer
+        title={t('orderNew.pageTitle')}
+        subtitle={t('orderNew.pageSubtitle')}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormSection title={t('orderNew.generalInformations')}>
+          <div className="flex flex-row items-end gap-4">
+            <Controller
+              control={control}
+              name="customerId"
+              render={({ field: { onChange, value } }) => (
+                <CustomerSelect
+                  onChange={onChange}
+                  value={value}
+                  label={t('orderNew.customerLabel')}
+                  placeholder={t('orderNew.customerPlaceholder')}
+                />
+              )}
             />
-          )}
-        />
-        <ProductSelect
-          onChange={onProductSelect}
-          label={t('orderNew.productLabel')}
-          placeholder={t('orderNew.productPlaceholder')}
-        />
-        {map(fields, (field, index) => (
-          <CheckoutProductCard
-            productId={field.productId}
-            quantity={field.quantity}
-            key={field.productId}
-            onRemove={() => remove(index)}
-            onQuantityUpdate={newQuantity => update(index, { ...field, quantity: newQuantity })}
+            <Button type="button" onClick={() => setIsPanelOpen('customer')} variant="outline">
+              Créer
+            </Button>
+          </div>
+          <div className="flex flex-row items-end gap-4">
+            <ProductSelect
+              onChange={onProductSelect}
+              label={t('orderNew.productLabel')}
+              placeholder={t('orderNew.productPlaceholder')}
+            />
+            <Button type="button" onClick={() => setIsPanelOpen('product')} variant="outline">
+              Créer
+            </Button>
+          </div>
+          {map(fields, (field, index) => (
+            <CheckoutProductCard
+              productId={field.productId}
+              quantity={field.quantity}
+              key={field.productId}
+              onRemove={() => remove(index)}
+              onQuantityUpdate={newQuantity => update(index, { ...field, quantity: newQuantity })}
+            />
+          ))}
+        </FormSection>
+      </FormContainer>
+      <RightPanel isOpen={!!isPanelOpen} onClose={() => setIsPanelOpen(undefined)}>
+        {isPanelOpen === 'customer' && (
+          <CustomerForm
+            onSuccess={({ data }) => {
+              setValue('customerId', data.id)
+              setIsPanelOpen(undefined)
+            }}
+            onCancel={() => setIsPanelOpen(undefined)}
           />
-        ))}
-      </FormSection>
-    </FormContainer>
+        )}
+        {isPanelOpen === 'product' && (
+          <ProductForm
+            onSuccess={({ data }) => {
+              onProductSelect(data.id)
+              setIsPanelOpen(undefined)
+            }}
+            onCancel={() => setIsPanelOpen(undefined)}
+          />
+        )}
+      </RightPanel>
+    </>
   )
 }
 

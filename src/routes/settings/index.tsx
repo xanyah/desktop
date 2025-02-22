@@ -46,7 +46,7 @@ const Settings = () => {
         removePrinter()
       }
     }
-  }, [isSuccess, selectedPrinter])
+  }, [isSuccess, selectedPrinter, printers, removePrinter, reset])
 
   const options = useMemo(() => {
     return printers

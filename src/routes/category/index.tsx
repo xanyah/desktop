@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { categorySchema, categorySchemaType } from './config'
 import { Controller, useForm } from 'react-hook-form'
-import { CategorySelect, FormContainer, FormSection, InputText, VatRateSelect } from '@/components'
+import { CategorySelect, FormContainer, FormSection, InputText } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
 
@@ -74,7 +74,6 @@ const Category = () => {
       reset({
         ...categoryData?.data,
         categoryId: categoryData?.data?.category?.id,
-        vatRateId: categoryData?.data?.vatRate?.id,
       })
     }
   }, [categoryData, reset])
@@ -99,20 +98,6 @@ const Category = () => {
               placeholder={t('category.namePlaceholder')}
               type="text"
               label={t('category.nameLabel')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="vatRateId"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <VatRateSelect
-              error={error?.message}
-              onChange={onChange}
-              value={value}
-              label={t('category.vatLabel')}
-              placeholder={t('category.vatPlaceholder')}
             />
           )}
         />

@@ -4,6 +4,9 @@ import { xanyahApi } from '../constants'
 export const getProducts = params =>
   xanyahApi.get<Product[]>('v2/products', decamelizeKeys({ params }))
 
+export const getNextProductSku = params =>
+  xanyahApi.get<{ nextSku: number }>('v2/products/next_sku', decamelizeKeys({ params }))
+
 export const getProduct = productId =>
   xanyahApi.get<Product>(`v2/products/${productId}`)
 

@@ -47,7 +47,7 @@ const Sale = () => {
         ),
       )
     }
-  }, [saleData, saleProductsData, store, t])
+  }, [saleData, saleProductsData, store, t, print])
 
   const onPrintInvoice = useCallback(() => {
     if (saleData && saleProductsData && store) {
@@ -60,7 +60,7 @@ const Sale = () => {
         ),
       )
     }
-  }, [saleData, saleProductsData, store, t])
+  }, [saleData, saleProductsData, store, t, print])
 
   if (!saleData) {
     return null
