@@ -8,7 +8,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { find, map } from 'lodash'
 import { useLocalStorage, usePrint, usePrinters } from '@/hooks'
@@ -36,17 +36,26 @@ const Settings = () => {
   const { data: printers, isSuccess } = usePrinters()
   const { mutate: print } = usePrint()
 
+  const [initialRender, setInitialRender] = useState(true)
+
   useEffect(() => {
-    if (selectedPrinter && isSuccess) {
+    if (selectedPrinter && isSuccess && initialRender) {
       const findPrinter = find(printers, p => p.name === selectedPrinter.name)
       if (findPrinter) {
         reset(selectedPrinter)
-      }
-      else {
+      } else {
         removePrinter()
       }
+      setInitialRender(false)
     }
-  }, [isSuccess, selectedPrinter, printers, removePrinter, reset])
+  }, [
+    isSuccess,
+    selectedPrinter,
+    printers,
+    removePrinter,
+    reset,
+    initialRender,
+  ])
 
   const options = useMemo(() => {
     return printers
