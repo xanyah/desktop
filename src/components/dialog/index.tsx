@@ -22,10 +22,10 @@ const Dialog: React.FC<DialogProps> = ({
   if (!open) return null
 
   return (
-    <Overlay>
-      <Content>
+    <Overlay $isOpen={open} onClick={onClose}>
+      <Content $isOpen={open} onClick={(e: Event) => e.stopPropagation()}>
         <CloseButton onClick={onClose} aria-label="Close">
-          <X className="h-5 w-5" />
+          <X className="cursor-pointer h-5 w-5" />
         </CloseButton>
         {title && <Header>{title}</Header>}
         <Body>{children}</Body>
