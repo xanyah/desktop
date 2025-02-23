@@ -12,6 +12,7 @@ import {
   Button,
   RightPanel,
   ProductForm,
+  Dialog,
 } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
@@ -52,6 +53,10 @@ const Shipping = () => {
     name: 'shippingProductsAttributes',
   })
 
+  const [existingProductIndex, setExistingProductIndex] = useState<
+    number | null
+  >(null)
+
   const { mutate: createApiShipping } = useMutation({
     mutationFn: (newData: any) =>
       createShipping({ ...newData, storeId: store?.id }),
@@ -76,27 +81,37 @@ const Shipping = () => {
     [store, createApiShipping],
   )
 
+  const onAddExistingProduct = useCallback(() => {
+    if (existingProductIndex === null) {
+      return
+    }
+
+    update(existingProductIndex, {
+      ...fields[existingProductIndex],
+      quantity: fields[existingProductIndex].quantity + 1,
+    })
+
+    setExistingProductIndex(null)
+  }, [existingProductIndex, fields, update])
+
   const onProductSelect = useCallback(
     (newProductId?: Product['id']) => {
       if (!newProductId) {
         return
       }
 
-      const existingProductIndex = findIndex(fields, {
+      const isExistingProductIndex = findIndex(fields, {
         productId: newProductId,
       })
 
-      if (existingProductIndex !== -1) {
-        update(existingProductIndex, {
-          ...fields[existingProductIndex],
-          quantity: fields[existingProductIndex].quantity + 1,
-        })
+      if (isExistingProductIndex !== -1) {
+        setExistingProductIndex(isExistingProductIndex)
       }
       else {
         append({ productId: newProductId, quantity: 1 })
       }
     },
-    [fields, append, update],
+    [fields, append],
   )
 
   return (
@@ -153,6 +168,27 @@ const Shipping = () => {
           }}
         />
       </RightPanel>
+
+      <Dialog
+        open={existingProductIndex !== null}
+        onClose={() => setExistingProductIndex(null)}
+        title={t('shipping.existingProduct.title')}
+        footer={(
+          <>
+            <Button
+              variant="outline"
+              onClick={() => setExistingProductIndex(null)}
+            >
+              {t('global.cancel')}
+            </Button>
+            <Button onClick={onAddExistingProduct}>
+              {t('global.confirm')}
+            </Button>
+          </>
+        )}
+      >
+        {t('shipping.existingProduct.description')}
+      </Dialog>
     </>
   )
 }

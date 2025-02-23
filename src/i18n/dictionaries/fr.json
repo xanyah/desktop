@@ -341,6 +341,10 @@
       "name": "Nom de l'article",
       "quantity": "Quantité"
     },
+    "existingProduct": {
+      "title": "Produit déjà présent",
+      "description": "Ce produit est déjà dans votre sélection. Voulez-vous augmenter sa quantité ?"
+    },
     "states": {
       "cancelled": "Annulée",
       "pending": "En attente",

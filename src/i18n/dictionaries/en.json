@@ -341,6 +341,10 @@
       "name": "Article name",
       "quantity": "Quantity"
     },
+    "existingProduct": {
+      "title": "Product Already Exists",
+      "description": "This product is already in your selection. Do you want to increase its quantity?"
+    },
     "states": {
       "cancelled": "Canceled",
       "pending": "On hold",
