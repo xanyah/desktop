@@ -30,7 +30,7 @@ export const formatDataPrinterInvoice = (
     },
     {
       type: 'text' as const,
-      value: formatPrice(saleProduct.amountCents, saleProduct.amountCurrency, '€'),
+      value: formatPrice(saleProduct.quantity * saleProduct.amountCents, saleProduct.amountCurrency, '€'),
       style: { fontWeight: '500', width: '25%', textAlign: 'right', fontFamily: 'sans-serif' },
     },
   ])

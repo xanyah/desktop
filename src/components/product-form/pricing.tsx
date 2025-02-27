@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ceil, isNumber, toNumber } from 'lodash'
-import {
-  FormSection,
-  InputText,
-  VatRateSelect,
-} from '@/components'
+import { FormSection, InputText, VatRateSelect } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Euro } from 'lucide-react'
 import { formSchemaType } from './config'
@@ -22,7 +18,10 @@ const ProductFormPricing = () => {
 
   const { data: vatRateData } = useVatRate(vatRateId)
 
-  const processedVatRate = useMemo(() => ((vatRateData?.data.ratePercentCents || 0) / 10000), [vatRateData?.data])
+  const processedVatRate = useMemo(
+    () => (vatRateData?.data.ratePercentCents || 0) / 10000,
+    [vatRateData?.data],
+  )
 
   const setPriceFromRatio = useCallback(() => {
     if (isNaN(buyingAmount) || !isNumber(ratioValue) || isNaN(ratioValue)) {
@@ -160,7 +159,6 @@ const ProductFormPricing = () => {
         )}
       />
     </FormSection>
-
   )
 }
 

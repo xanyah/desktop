@@ -14,6 +14,7 @@ interface Product {
   sku: string
   upc: string
   manufacturerSku: string
+  vatRate?: VatRate
   buyingAmountCents: number
   buyingAmountCurrency: string
   taxFreeAmountCents: number
