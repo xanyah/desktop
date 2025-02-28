@@ -1,13 +1,19 @@
 import { useMemo } from 'react'
 import { useCustomer } from '../../hooks'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { CustomerForm } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { AxiosResponse } from 'axios'
 
-const Customer = () => {
+type CustomerFormProps = {
+  onCancel?: () => void
+  onSuccess?: (data: AxiosResponse<Customer, any>) => void
+  isPanelForm?: boolean
+}
+
+const Customer = ({ isPanelForm, onCancel, onSuccess }: CustomerFormProps) => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const { id } = useParams()
   const { data: customerData } = useCustomer(id)
 
@@ -26,7 +32,11 @@ const Customer = () => {
 
   return (
     <CustomerForm
-      onSuccess={data => navigate(`/customers/${data.data.id}/edit`)}
+      onCancel={onCancel}
+      isPanelForm={isPanelForm}
+      onSuccess={(data) => {
+        onSuccess?.(data)
+      }}
     />
   )
 }
