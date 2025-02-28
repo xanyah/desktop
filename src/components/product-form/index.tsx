@@ -5,9 +5,7 @@ import { createProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { find, isEmpty, map, omit } from 'lodash'
 import { decamelizeKeys } from 'humps'
-import {
-  FormContainer,
-} from '@/components'
+import { FormContainer } from '@/components'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
@@ -54,6 +52,7 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
             buyingAmount: product.buyingAmountCents / 100,
             taxFreeAmount: product.taxFreeAmountCents / 100,
             amount: product.amountCents / 100,
+            vatRateId: product.vatRate?.id,
             images: map(product.images, image => ({
               name: image.large.split('/').pop(),
               signed_id: image.signedId,
@@ -84,7 +83,9 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
     mutationFn: (newData: FormData) => updateProduct(product?.id, newData),
     onSuccess: (data) => {
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
-      queryClient.invalidateQueries({ queryKey: ['products', { id: product?.id }] })
+      queryClient.invalidateQueries({
+        queryKey: ['products', { id: product?.id }],
+      })
       onSuccess?.(data)
       reset(initialValues)
     },
@@ -129,9 +130,9 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
   )
 
   useEffect(() => {
-    setValue('productCustomAttributesAttributes', map(
-      customAttributesData?.data,
-      (customAttribute) => {
+    setValue(
+      'productCustomAttributesAttributes',
+      map(customAttributesData?.data, (customAttribute) => {
         const existingCustomAttribute = find(
           initialValues?.productCustomAttributes,
           productCustomAttribute =>
@@ -142,8 +143,8 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
           customAttributeId: customAttribute.id,
           value: existingCustomAttribute?.value,
         }
-      },
-    ))
+      }),
+    )
   }, [initialValues, customAttributesData, setValue])
 
   useEffect(() => {
