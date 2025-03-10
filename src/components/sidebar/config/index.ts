@@ -42,6 +42,11 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
         label: t('sales.pageTitle'),
         url: '/sales',
       },
+      {
+        icon: ChartLine,
+        label: t('dailyReport.pageTitle'),
+        url: '/daily-report',
+      },
     ],
   },
   {

@@ -15,7 +15,8 @@ export const useSaleProducts = filters => useQuery({
   queryFn: () => getSaleProducts(filters),
   queryKey: ['saleProducts', filters],
 })
-export const useSalePayments = filters => useQuery({
+export const useSalePayments = (filters, enabled) => useQuery({
   queryFn: () => getSalePayments(filters),
   queryKey: ['salePayments', filters],
+  enabled,
 })

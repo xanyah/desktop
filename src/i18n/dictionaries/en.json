@@ -111,6 +111,10 @@
       "phone": "Phone"
     }
   },
+  "dailyReport": {
+    "pageTitle": "Daily report",
+    "receiptNumber": "Receipt N° {{receiptNumber}}"
+  },
   "global": {
     "cancel": "Cancel",
     "confirm": "Confirm",

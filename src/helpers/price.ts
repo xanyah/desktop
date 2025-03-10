@@ -4,7 +4,7 @@ import { ceil, isUndefined, upperCase } from 'lodash'
 
 export const formatPrice = (amount?: number, currency?: string, symbol?: string) => {
   if (isUndefined(amount) || isUndefined(currency)) {
-    return ''
+    return `0.00 ${symbol || ''}`
   }
 
   return toDecimal(

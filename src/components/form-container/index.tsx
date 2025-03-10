@@ -7,20 +7,22 @@ type FormContainerProps = {
   subtitle?: string
   isLoading?: boolean
   submitButtonLabel?: string
+  classname?: string
   button?: ReactNode
   onCancel?: () => void
 } & (
   | (DOMAttributes<HTMLFormElement> & {
-    isNotForm?: false
-  })
+      isNotForm?: false
+    })
   | (DOMAttributes<HTMLDivElement> & {
-    isNotForm: true
-  })
+      isNotForm: true
+    })
 )
 
 const FormContainer = ({
   title,
   subtitle,
+  classname,
   children,
   isLoading,
   button,
@@ -33,7 +35,10 @@ const FormContainer = ({
   const Component: any = isNotForm ? 'div' : 'form'
 
   return (
-    <Component {...formProps} className="flex flex-col gap-8 max-w-2xl">
+    <Component
+      {...formProps}
+      className={`flex flex-col gap-8 max-w-2xl ${classname}`}
+    >
       <div className="flex flex-row items-center justify-between border-b pb-4">
         <div className="flex flex-col gap-2">
           <h1>{title}</h1>
@@ -46,7 +51,13 @@ const FormContainer = ({
       {!isNotForm && (
         <div className="flex flex-row justify-end items-center gap-4">
           {onCancel && (
-            <Button disabled={isLoading} variant="ghost" className="self-end" type="button" onClick={onCancel}>
+            <Button
+              disabled={isLoading}
+              variant="ghost"
+              className="self-end"
+              type="button"
+              onClick={onCancel}
+            >
               {t('global.cancel')}
             </Button>
           )}

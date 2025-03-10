@@ -111,6 +111,10 @@
       "phone": "Téléphone"
     }
   },
+  "dailyReport": {
+    "pageTitle": "Rapport journalier",
+    "receiptNumber": "Ticket N° {{receiptNumber}}"
+  },
   "global": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
