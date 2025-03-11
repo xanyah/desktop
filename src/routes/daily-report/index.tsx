@@ -10,8 +10,8 @@ import { useTranslation } from 'react-i18next'
 
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { DateTime } from 'luxon'
-import { chain, filter, find, groupBy, isEmpty, map, sumBy } from 'lodash'
-import { Button, FormContainer } from '@/components'
+import { filter, isEmpty, map, sumBy } from 'lodash'
+import { Button, DatePicker, FormContainer } from '@/components'
 import { uuidNumber } from '@/helpers/uuid'
 import { formatPrice } from '@/helpers/price'
 
@@ -30,15 +30,15 @@ const DailyReport = () => {
   })
 
   const saleIds = useMemo(
-    () => map(sales?.data, sale => sale.id) || [],
-    [sales],
+    () => map(sales?.data, (sale) => sale.id) || [],
+    [sales]
   )
 
   const { data: salesPayments } = useSalePayments(
     {
       'q[sale_id_in][]': saleIds,
     },
-    !isEmpty(saleIds),
+    !isEmpty(saleIds)
   )
 
   const { data: paymentTypes } = usePaymentTypes({
@@ -46,10 +46,10 @@ const DailyReport = () => {
     'q[storeIdEq]': currentStore?.id,
   })
 
-  const totalPayments = map(paymentTypes?.data, paymentType => {
+  const totalPayments = map(paymentTypes?.data, (paymentType) => {
     const foundPayments = filter(
       salesPayments?.data,
-      item => item?.paymentType?.id === paymentType.id,
+      (item) => item?.paymentType?.id === paymentType.id
     )
 
     return {
@@ -64,71 +64,94 @@ const DailyReport = () => {
   })
 
   return (
-    <div className="flex gap-20 w-full">
+    <div className="flex flex-col gap-10">
       <FormContainer
         button={
-          <div className="flex gap-2 items-center">
-            <Button variant="outline">{t('sale.printReceipt')}</Button>
-            <Button type="button">{t('sale.printInvoice')}</Button>
+          <div className="flex justify-between w-full gap-2 items-center print:hidden">
+            <DatePicker
+              value={date.toJSDate()}
+              onChange={(v) =>
+                setDate(DateTime.fromJSDate(v) as DateTime<true>)
+              }
+            />
+            <Button onClick={() => window.print()}>
+              {t('dailyReport.print')}
+            </Button>
           </div>
         }
         classname="w-full"
+        title={t('dailyReport.pageTitle')}
         isNotForm
-        title={`${pageTitle}: ${date.toFormat('dd/MM/yyyy')}`}
       >
-        {map(sales?.data, sale => (
-          <div>
-            <h4 className="font-semibold">
-              {t('print.receipt.receiptNumber', {
-                receiptNumber: uuidNumber(sale.id),
-              })}
-            </h4>
-            {map(
-              filter(
-                salesPayments?.data,
-                salesPayment => salesPayment.saleId === sale.id,
-              ),
-              payment => (
-                <div className="flex flex-col gap-3 mt-5">
-                  <div className="flex justify-between">
-                    <p>{payment.paymentType?.name}</p>
+        <div className="flex gap-14">
+          <div className="w-1/2">
+            <h1>{currentStore?.name}</h1>
+            <h3 className="mt-3.5">{date.toFormat('dd/MM/yyyy')}</h3>
+          </div>
+          <div className="flex flex-col gap-6 w-1/2">
+            {isEmpty(sales?.data) ? (
+              <p className="text-center">{t('dailyReport.emptySales')}</p>
+            ) : (
+              map(sales?.data, (sale) => (
+                <div>
+                  <h4 className="font-semibold">
+                    {t('print.receipt.receiptNumber', {
+                      receiptNumber: uuidNumber(sale.id),
+                    })}
+                  </h4>
+                  {map(
+                    filter(
+                      salesPayments?.data,
+                      (salesPayment) => salesPayment.saleId === sale.id
+                    ),
+                    (payment) => (
+                      <div className="flex flex-col mt-5">
+                        <div className="flex justify-between">
+                          <p>{payment.paymentType?.name}</p>
 
-                    <p>
-                      {formatPrice(
-                        payment.totalAmountCents,
-                        payment.totalAmountCurrency,
-                        '€',
-                      )}
-                    </p>
-                  </div>
+                          <p>
+                            {formatPrice(
+                              payment.totalAmountCents,
+                              payment.totalAmountCurrency,
+                              '€'
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  )}
                 </div>
-              ),
+              ))
             )}
           </div>
-        ))}
+        </div>
       </FormContainer>
 
-      <FormContainer classname="w-full" isNotForm title="Moyens de paiements">
-        {map(totalPayments, totalPayment => (
+      <FormContainer
+        classname="w-full"
+        isNotForm
+        title={t('dailyReport.paymentsMethods')}
+      >
+        {map(totalPayments, (totalPayment) => (
           <div className="flex justify-between">
             <p>{totalPayment?.name}</p>
             <p>
               {formatPrice(
                 totalPayment.totalAmountCents,
                 totalPayment.currency,
-                '€',
+                '€'
               )}
             </p>
           </div>
         ))}
 
         <div className="flex justify-between">
-          <h4 className="font-semibold">Total TTC</h4>
+          <h4 className="font-semibold">{t('dailyReport.total')}</h4>
           <p className="font-semibold">
             {formatPrice(
               sumBy(totalPayments, 'totalAmountCents'),
               totalPayments[0]?.currency,
-              '€',
+              '€'
             )}
           </p>
         </div>

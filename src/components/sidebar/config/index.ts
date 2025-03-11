@@ -8,6 +8,7 @@ import {
   Factory,
   Group,
   NotebookText,
+  NotepadText,
   PackageOpen,
   ScanBarcode,
   Settings,
@@ -43,7 +44,7 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
         url: '/sales',
       },
       {
-        icon: ChartLine,
+        icon: NotepadText,
         label: t('dailyReport.pageTitle'),
         url: '/daily-report',
       },

@@ -113,6 +113,10 @@
   },
   "dailyReport": {
     "pageTitle": "Daily report",
+    "print": "Print",
+    "paymentsMethods": "Payments Methods",
+    "total": "Total incl. tax",
+    "emptySales": "No sales were made on this day.",
     "receiptNumber": "Receipt N° {{receiptNumber}}"
   },
   "global": {

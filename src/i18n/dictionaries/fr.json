@@ -113,6 +113,10 @@
   },
   "dailyReport": {
     "pageTitle": "Rapport journalier",
+    "print": "Imprimer",
+    "total": "Total TTC",
+    "paymentsMethods": "Moyens de paiements",
+    "emptySales": "Aucune vente n'a été réalisée ce jour.",
     "receiptNumber": "Ticket N° {{receiptNumber}}"
   },
   "global": {

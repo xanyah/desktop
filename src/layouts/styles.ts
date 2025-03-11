@@ -15,7 +15,8 @@ export const ContentContainer = tw.div<ContentContainerProps>`
   transition-all
   duration-300
   ease-in-out
-  ${p => (p.$isSidebarOpen ? 'ml-64' : 'ml-0')} 
+  ${(p) => (p.$isSidebarOpen ? 'ml-64' : 'ml-0')} 
+  print:ml-0
 `
 
 export const Header = tw.header`
@@ -25,6 +26,7 @@ export const Header = tw.header`
   items-center
   gap-2
   border-b
+  print:hidden
 `
 export const HeaderContainer = tw.div`
   flex items-center gap-2 px-4 h-full
