@@ -89,40 +89,28 @@ const DailyReport = () => {
             <h3 className="mt-3.5">{date.toFormat('dd/MM/yyyy')}</h3>
           </div>
           <div className="flex flex-col gap-6 w-1/2">
-            {isEmpty(sales?.data) ? (
-              <p className="text-center">{t('dailyReport.emptySales')}</p>
-            ) : (
-              map(sales?.data, (sale) => (
-                <div>
-                  <h4 className="font-semibold">
-                    {t('print.receipt.receiptNumber', {
-                      receiptNumber: uuidNumber(sale.id),
-                    })}
-                  </h4>
-                  {map(
-                    filter(
-                      salesPayments?.data,
-                      (salesPayment) => salesPayment.saleId === sale.id
-                    ),
-                    (payment) => (
-                      <div className="flex flex-col mt-5">
-                        <div className="flex justify-between">
-                          <p>{payment.paymentType?.name}</p>
-
-                          <p>
-                            {formatPrice(
-                              payment.totalAmountCents,
-                              payment.totalAmountCurrency,
-                              '€'
-                            )}
-                          </p>
-                        </div>
-                      </div>
-                    )
+            {map(totalPayments, (totalPayment) => (
+              <div className="flex justify-between">
+                <p>{totalPayment?.name}</p>
+                <p>
+                  {formatPrice(
+                    totalPayment.totalAmountCents,
+                    totalPayment.currency,
+                    '€'
                   )}
-                </div>
-              ))
-            )}
+                </p>
+              </div>
+            ))}
+            <div className="flex justify-between">
+              <h4 className="font-semibold">{t('dailyReport.total')}</h4>
+              <p className="font-semibold">
+                {formatPrice(
+                  sumBy(totalPayments, 'totalAmountCents'),
+                  totalPayments[0]?.currency,
+                  '€'
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </FormContainer>
@@ -130,31 +118,42 @@ const DailyReport = () => {
       <FormContainer
         classname="w-full"
         isNotForm
-        title={t('dailyReport.paymentsMethods')}
+        title={t('dailyReport.sales')}
       >
-        {map(totalPayments, (totalPayment) => (
-          <div className="flex justify-between">
-            <p>{totalPayment?.name}</p>
-            <p>
-              {formatPrice(
-                totalPayment.totalAmountCents,
-                totalPayment.currency,
-                '€'
-              )}
-            </p>
-          </div>
-        ))}
+        {isEmpty(sales?.data) ? (
+          <p className="text-center">{t('dailyReport.emptySales')}</p>
+        ) : (
+          map(sales?.data, (sale) => (
+            <div>
+              <h4 className="font-semibold">
+                {t('print.receipt.receiptNumber', {
+                  receiptNumber: uuidNumber(sale.id),
+                })}
+              </h4>
+              {map(
+                filter(
+                  salesPayments?.data,
+                  (salesPayment) => salesPayment.saleId === sale.id
+                ),
+                (payment) => (
+                  <div className="flex flex-col mt-5">
+                    <div className="flex justify-between">
+                      <p>{payment.paymentType?.name}</p>
 
-        <div className="flex justify-between">
-          <h4 className="font-semibold">{t('dailyReport.total')}</h4>
-          <p className="font-semibold">
-            {formatPrice(
-              sumBy(totalPayments, 'totalAmountCents'),
-              totalPayments[0]?.currency,
-              '€'
-            )}
-          </p>
-        </div>
+                      <p>
+                        {formatPrice(
+                          payment.totalAmountCents,
+                          payment.totalAmountCurrency,
+                          '€'
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+          ))
+        )}
       </FormContainer>
     </div>
   )

@@ -114,7 +114,7 @@
   "dailyReport": {
     "pageTitle": "Daily report",
     "print": "Print",
-    "paymentsMethods": "Payments Methods",
+    "sales": "Sales",
     "total": "Total incl. tax",
     "emptySales": "No sales were made on this day.",
     "receiptNumber": "Receipt N° {{receiptNumber}}"
