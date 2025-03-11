@@ -12,11 +12,11 @@ type FormContainerProps = {
   onCancel?: () => void
 } & (
   | (DOMAttributes<HTMLFormElement> & {
-      isNotForm?: false
-    })
+    isNotForm?: false
+  })
   | (DOMAttributes<HTMLDivElement> & {
-      isNotForm: true
-    })
+    isNotForm: true
+  })
 )
 
 const FormContainer = ({

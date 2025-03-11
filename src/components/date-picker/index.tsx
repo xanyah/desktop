@@ -24,11 +24,13 @@ function DatePicker({ value, onChange }: Props) {
           }`}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {value ? (
-            DateTime.fromJSDate(value).toFormat('dd / MM / yyyy')
-          ) : (
-            <span>Pick a date</span>
-          )}
+          {value
+            ? (
+                DateTime.fromJSDate(value).toFormat('dd / MM / yyyy')
+              )
+            : (
+                <span>Pick a date</span>
+              )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">

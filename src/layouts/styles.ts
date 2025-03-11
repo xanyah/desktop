@@ -15,7 +15,7 @@ export const ContentContainer = tw.div<ContentContainerProps>`
   transition-all
   duration-300
   ease-in-out
-  ${(p) => (p.$isSidebarOpen ? 'ml-64' : 'ml-0')} 
+  ${p => (p.$isSidebarOpen ? 'ml-64' : 'ml-0')} 
   print:ml-0
 `
 

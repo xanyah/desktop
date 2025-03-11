@@ -83,8 +83,7 @@ const CustomPayment = () => {
             paymentTypeId: head(data?.data)?.id as string,
             totalAmountCents: 0,
             totalAmountCurrency: 'EUR',
-          })
-        }
+          })}
       >
         {t('checkout.customPayment.addButton')}
       </Button>

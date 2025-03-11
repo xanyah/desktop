@@ -20,5 +20,5 @@ export const StyledSidebar = tw.div<StyledSidebarProps>`
   dark:bg-background
   print:hidden
 
-  ${(p) => (p.$isOpen ? 'translate-x-0' : '-translate-x-full')}
+  ${p => (p.$isOpen ? 'translate-x-0' : '-translate-x-full')}
 `
