@@ -11,13 +11,19 @@ const CustomPayment = () => {
   const { t } = useTranslation()
   const { totalAmountCents } = useCheckoutAmounts()
   const { control, watch } = useFormContext<CheckoutSchemaType>()
-  const { fields, append, remove } = useFieldArray<CheckoutSchemaType, 'salePaymentsAttributes', 'id'>({
+  const { fields, append, remove } = useFieldArray<
+    CheckoutSchemaType,
+    'salePaymentsAttributes',
+    'id'
+  >({
     name: 'salePaymentsAttributes',
     control,
   })
   const { data } = usePaymentTypes()
   const salePaymentsAttributes = watch('salePaymentsAttributes')
-  const attributed = sum(map(salePaymentsAttributes, item => toNumber(item.totalAmountCents)))
+  const attributed = sum(
+    map(salePaymentsAttributes, item => toNumber(item.totalAmountCents)),
+  )
   const unattributed = totalAmountCents - attributed
 
   return (
@@ -41,31 +47,43 @@ const CustomPayment = () => {
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <InputText
                 label={t('checkout.customPayment.totalAmountLabel')}
-                onChange={onChange}
+                onChange={event => onChange(toNumber(event.target.value) * 100)}
+                min={0}
                 type="number"
-                value={value}
+                value={value / 100}
                 error={error?.message}
                 icon={<Euro />}
               />
             )}
           />
-          <Button variant="ghost" onClick={() => remove(index)}><X /></Button>
+          <Button variant="ghost" onClick={() => remove(index)}>
+            <X />
+          </Button>
         </div>
       ))}
       {unattributed > 0 && (
         <p className="text-red-500 text-center">
-          {t('checkout.customPayment.unattributedPositive', { amount: formatPrice(unattributed, 'EUR') })}
+          {t('checkout.customPayment.unattributedPositive', {
+            amount: formatPrice(unattributed, 'EUR'),
+          })}
         </p>
       )}
       {unattributed < 0 && (
         <p className="text-red-500 text-center">
-          {t('checkout.customPayment.unattributedNegative', { amount: formatPrice(unattributed, 'EUR') })}
+          {t('checkout.customPayment.unattributedNegative', {
+            amount: formatPrice(unattributed, 'EUR'),
+          })}
         </p>
       )}
       <Button
         className="self-center"
         variant="ghost"
-        onClick={() => append({ paymentTypeId: head(data?.data)?.id as string, totalAmountCents: 0, totalAmountCurrency: 'EUR' })}
+        onClick={() =>
+          append({
+            paymentTypeId: head(data?.data)?.id as string,
+            totalAmountCents: 0,
+            totalAmountCurrency: 'EUR',
+          })}
       >
         {t('checkout.customPayment.addButton')}
       </Button>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ceil, isNumber, toNumber } from 'lodash'
+import { ceil, isNumber, round, toNumber } from 'lodash'
 import { FormSection, InputText, VatRateSelect } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Euro } from 'lucide-react'
@@ -13,7 +13,6 @@ const ProductFormPricing = () => {
   const vatRateId = watch('vatRateId')
   const ratioValue = watch('ratio')
   const buyingAmount = watch('buyingAmount')
-  const taxFreeAmount = watch('taxFreeAmount')
   const ratioEnabled = watch('ratioEnabled')
 
   const { data: vatRateData } = useVatRate(vatRateId)
@@ -29,27 +28,40 @@ const ProductFormPricing = () => {
     }
 
     const total = buyingAmount * ratioValue
-    setValue('amount', total)
-    setValue('taxFreeAmount', ceil(total / (1 + processedVatRate), 2))
+
+    setValue('amount', round(total, 2))
+    setValue('taxFreeAmount', round(ceil(total / (1 + processedVatRate), 2), 2))
   }, [buyingAmount, processedVatRate, setValue, ratioValue])
 
-  const setPriceFromTaxFreePrice = useCallback(() => {
-    if (isNaN(taxFreeAmount)) {
-      return
-    }
+  const setPriceFromTaxFreePrice = useCallback(
+    (value: number) => {
+      if (isNaN(value)) {
+        return
+      }
 
-    setValue('amount', ceil(taxFreeAmount * (1 + processedVatRate), 2))
-  }, [taxFreeAmount, processedVatRate, setValue])
+      setValue('taxFreeAmount', value)
+      setValue('amount', ceil(value * (1 + processedVatRate), 2))
+    },
+    [processedVatRate, setValue],
+  )
+
+  const setTaxFreeFromPrice = useCallback(
+    (value: number) => {
+      if (isNaN(value)) {
+        return
+      }
+
+      setValue('amount', value)
+      setValue('taxFreeAmount', ceil(value / (1 + processedVatRate), 2))
+    },
+    [processedVatRate, setValue],
+  )
 
   useEffect(() => {
     if (ratioEnabled) {
       setPriceFromRatio()
     }
   }, [setPriceFromRatio, ratioEnabled])
-
-  useEffect(() => {
-    setPriceFromTaxFreePrice()
-  }, [setPriceFromTaxFreePrice])
 
   return (
     <FormSection title={t('product.pricing')}>
@@ -123,7 +135,7 @@ const ProductFormPricing = () => {
       <Controller
         control={control}
         name="taxFreeAmount"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
+        render={({ field: { value }, fieldState: { error } }) => (
           <InputText
             icon={<Euro />}
             step="0.1"
@@ -133,7 +145,7 @@ const ProductFormPricing = () => {
             label={t('product.taxFreeAmountLabel')}
             value={value}
             disabled={ratioEnabled}
-            onChange={e => onChange(toNumber(e.target.value))}
+            onChange={e => setPriceFromTaxFreePrice(toNumber(e.target.value))}
             error={error?.message}
           />
         )}
@@ -142,18 +154,17 @@ const ProductFormPricing = () => {
       <Controller
         control={control}
         name="amount"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
+        render={({ field: { value }, fieldState: { error } }) => (
           // TODO: Should be tax_free amount * category.vat_rate
           <InputText
             icon={<Euro />}
             step="0.1"
             type="number"
-            disabled
             hint={t('product.amountHint')}
             placeholder={t('product.amountPlaceholder')}
             label={t('product.amountLabel')}
             value={value}
-            onChange={e => onChange(toNumber(e.target.value))}
+            onChange={e => setTaxFreeFromPrice(toNumber(e.target.value))}
             error={error?.message}
           />
         )}

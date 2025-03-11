@@ -36,6 +36,7 @@ import Store from './store'
 import { OfflineLayout, OnlineLayout } from '../layouts'
 import Settings from './settings'
 import { isElectron } from '@/helpers/electron'
+import DailyReport from './daily-report'
 
 const RouterComponent = isElectron() ? HashRouter : BrowserRouter
 
@@ -53,6 +54,7 @@ const Router = () => {
           <Route path="categories/:id/edit" element={<Category />} />
           <Route path="categories/new" element={<Category />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="daily-report" element={<DailyReport />} />
           <Route path="custom-attributes/new" element={<CustomAttribute />} />
           <Route
             path="custom-attributes/:id/edit"

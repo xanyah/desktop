@@ -28,6 +28,7 @@ interface PaymentType {
 
 interface SalePayment {
   id: string
+  saleId: string
   totalAmountCents: number
   totalAmountCurrency: string
   paymentType?: PaymentType

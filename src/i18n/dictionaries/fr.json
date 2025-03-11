@@ -111,6 +111,14 @@
       "phone": "Téléphone"
     }
   },
+  "dailyReport": {
+    "pageTitle": "Rapport journalier",
+    "print": "Imprimer",
+    "total": "Total TTC",
+    "sales": "Ventes",
+    "emptySales": "Aucune vente n'a été réalisée ce jour.",
+    "receiptNumber": "Ticket N° {{receiptNumber}}"
+  },
   "global": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
