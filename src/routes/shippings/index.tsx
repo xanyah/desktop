@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useCurrentStore, useShippings } from '../../hooks'
+import { useCurrentStore, usePaginatedSearch, useShippings } from '../../hooks'
 import { TableWithSearch, Badge } from '@/components'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { formatLongDatetime } from '@/helpers/dates'
@@ -14,12 +14,12 @@ const Shippings = () => {
   const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('shippings.pageTitle') }])
   const currentStore = useCurrentStore()
-  const [searchQuery, setSearchQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
   const { data, isLoading } = useShippings({
     page,
     'q[idOrProviderNameCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
+    'q[s]': 'created_at desc',
   })
 
   const columnHelper = createColumnHelper<Shipping>()
@@ -69,7 +69,7 @@ const Shippings = () => {
   return (
     <TableWithSearch
       searchPlaceholder={t('shippings.searchPlaceholder')}
-      onSearchQueryChange={setSearchQuery}
+      onSearchQueryChange={onSearchQueryChange}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl="/shippings/new"

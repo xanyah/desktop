@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useCurrentStore, useManufacturers } from '../../hooks'
+import { useCurrentStore, useManufacturers, usePaginatedSearch } from '../../hooks'
 import { TableWithSearch } from '@/components'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
@@ -10,8 +10,7 @@ const Manufacturers = () => {
   const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('manufacturers.pageTitle') }])
   const currentStore = useCurrentStore()
-  const [searchQuery, setSearchQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
 
   const { data, isLoading } = useManufacturers({
     page,
@@ -46,7 +45,7 @@ const Manufacturers = () => {
   return (
     <TableWithSearch
       searchPlaceholder={t('manufacturers.searchPlaceholder')}
-      onSearchQueryChange={setSearchQuery}
+      onSearchQueryChange={onSearchQueryChange}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl="/manufacturers/new"

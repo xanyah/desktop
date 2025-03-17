@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useCurrentStore, useOrders } from '../../hooks'
+import { useCurrentStore, useOrders, usePaginatedSearch } from '../../hooks'
 import { TableWithSearch, Badge } from '@/components'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 
@@ -15,8 +15,7 @@ const Orders = () => {
   const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('orders.pageTitle') }])
   const currentStore = useCurrentStore()
-  const [searchQuery, setSearchQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
   const { data, isLoading } = useOrders({
     page,
     'q[clientFirstnameOrClientLastnameCont]': searchQuery,
@@ -72,7 +71,7 @@ const Orders = () => {
   return (
     <TableWithSearch
       searchPlaceholder={t('orders.searchPlaceholder')}
-      onSearchQueryChange={setSearchQuery}
+      onSearchQueryChange={onSearchQueryChange}
       searchQuery={searchQuery}
       isLoading={isLoading}
       createUrl="/orders/new"

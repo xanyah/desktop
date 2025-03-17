@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useCurrentStore, useProducts } from '../../hooks'
+import { useCurrentStore, usePaginatedSearch, useProducts } from '../../hooks'
 import { TableWithSearch } from '@/components'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatPrice } from '@/helpers/price'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
@@ -11,8 +11,7 @@ const Products = () => {
   const { t } = useTranslation()
   useBreadCrumbContext([{ label: t('products.pageTitle') }])
   const currentStore = useCurrentStore()
-  const [searchQuery, setSearchQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
   const { data, isLoading } = useProducts({
     'q[nameOrSkuOrUpcCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
@@ -82,7 +81,7 @@ const Products = () => {
   return (
     <TableWithSearch
       searchPlaceholder={t('products.searchPlaceholder')}
-      onSearchQueryChange={setSearchQuery}
+      onSearchQueryChange={onSearchQueryChange}
       currentPage={page}
       totalPages={data?.headers['total-pages']}
       onPageChange={setPage}
