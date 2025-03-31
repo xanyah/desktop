@@ -33,18 +33,18 @@ export const registerHandlers = (app: Electron.App, window: BrowserWindow | null
     /**
      * Indent code: 250
      */
-    return new Promise<void>(async (resolve, reject) => {
-      const instruction = '\nN\nB' + + ',95,0,E30,2,24,54,B,"' + product.sku.trim() + '"\n' +
+    return new Promise<void>((resolve, reject) => {
+      const instruction = '\nN\nB,95,0,E30,2,24,54,B,"' + product.sku.trim() + '"\n' +
         'A250,00,0,4,1,1,N,"' +
         product.amountCents / 100 + ' E"\n' +
-        'A250,50,0,2,1,1,N,"' +
-        product.name + '"\n' +
-        'A250,70,0,2,1,1,N,"' +
-        product.manufacturerSku + '"\n' +
-        'A' + (250 - 10) + ',30,1,4,1,1,N,"' + store.name + '"\n' +
+        'A250,50,0,2,1,1,N,"' + product.name + '"\n' +
+        'A250,70,0,2,1,1,N,"' + product.manufacturerSku + '"\n' +
+        'A240,30,1,4,1,1,N,"' + store.name + '"\n' +
         'P' + count + ',1\n';
 
-      const serialPort = new SerialPort({ path: 'COM2', baudRate: 9600, })
+      console.log(instruction)
+
+      const serialPort = new SerialPort({ path: 'COM2', baudRate: 9600 })
       serialPort.write(instruction, (err) => {
         if (err) {
           return reject(err)
