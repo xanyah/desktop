@@ -5,7 +5,7 @@ import { createProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { find, isEmpty, map, omit } from 'lodash'
 import { decamelizeKeys } from 'humps'
-import { FormContainer } from '@/components'
+import { Button, FormContainer } from '@/components'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
@@ -45,20 +45,20 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
     () =>
       product
         ? {
-            ...product,
-            categoryId: product.category?.id,
-            manufacturerId: product.manufacturer?.id,
-            storeId: store?.id,
-            buyingAmount: product.buyingAmountCents / 100,
-            taxFreeAmount: product.taxFreeAmountCents / 100,
-            amount: product.amountCents / 100,
-            vatRateId: product.vatRate?.id,
-            images: map(product.images, image => ({
-              name: image.large.split('/').pop(),
-              signed_id: image.signedId,
-              thumbnail: image.thumbnail,
-            })),
-          }
+          ...product,
+          categoryId: product.category?.id,
+          manufacturerId: product.manufacturer?.id,
+          storeId: store?.id,
+          buyingAmount: product.buyingAmountCents / 100,
+          taxFreeAmount: product.taxFreeAmountCents / 100,
+          amount: product.amountCents / 100,
+          vatRateId: product.vatRate?.id,
+          images: map(product.images, image => ({
+            name: image.large.split('/').pop(),
+            signed_id: image.signedId,
+            thumbnail: image.thumbnail,
+          })),
+        }
         : undefined,
     [product, store],
   )
@@ -129,6 +129,15 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
     [product, updateApiProduct, createApiProduct],
   )
 
+  const printTicket = useCallback(() => {
+    if (product && store) {
+      window.electronAPI.printBarcode({ product, store, count: 1 })
+        .then(() => console.log('ok'))
+        .catch(console.error)
+    }
+  }, [product, store])
+
+
   useEffect(() => {
     setValue(
       'productCustomAttributesAttributes',
@@ -165,6 +174,7 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
         subtitle={t('product.pageSubtitle')}
         onSubmit={handleSubmit(onSubmit)}
         onCancel={onCancel}
+        button={<Button onClick={printTicket} type="button">Imprimer</Button>}
       >
         <ProductFormGeneral />
         <ProductFormLogistics />

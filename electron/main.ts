@@ -1,8 +1,8 @@
 import path from 'path'
-import { app, BrowserWindow, ipcMain } from 'electron'
-const { PosPrinter } = require('electron-pos-printer')
+import { app, BrowserWindow } from 'electron'
+import { registerHandlers } from './handlers'
 
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 process.env.DIST = path.join(__dirname, '../dist')
 process.env.VITE_PUBLIC = path.join(process.env.DIST, '../public')
@@ -12,7 +12,7 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 
-let win: BrowserWindow | null
+let win: BrowserWindow | null = null
 
 function createWindow() {
   win = new BrowserWindow({
@@ -39,30 +39,7 @@ function createWindow() {
   }
 }
 
-ipcMain.handle('get-printers', async () => {
-  if (!win) throw new Error('win not available')
-  return win.webContents.getPrintersAsync()
-})
-
-ipcMain.handle('print', async (event, printData) => {
-  const { data, printerName, pageSize } = printData
-  const options = {
-    preview: !app.isPackaged,
-    margin: '0 0 0 0',
-    copies: 1,
-    printerName,
-    timeOutPerLine: 400,
-    silent: true,
-    pageSize,
-  }
-
-  try {
-    await PosPrinter.print(data, options)
-  } catch (error) {
-    console.error('Error during print:', error)
-    throw error
-  }
-})
+registerHandlers(app, win)
 
 app.on('window-all-closed', () => {
   app.quit()
