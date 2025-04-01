@@ -3602,10 +3602,10 @@ electron-installer-redhat@^3.2.0:
     word-wrap "^1.2.3"
     yargs "^16.0.2"
 
-electron-pos-printer@1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/electron-pos-printer/-/electron-pos-printer-1.3.6.tgz#d70778d99b7ad73264b307adeeb8bc2580ed2e47"
-  integrity sha512-hWi4a57F971/whR+v7gH70L1Kcc0jVNO1PD+ZaNdbGsz2E7LdJY8C2PAOQdoZnvqpasrcK8PyT0QwwmfnY9QQg==
+electron-pos-printer@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/electron-pos-printer/-/electron-pos-printer-1.3.7.tgz#49b07adb00da2f3ed0dc9d81da72db332e389ddd"
+  integrity sha512-hvRZ3zbqQffLZhklNodgmG1JOznBTpwuDKHh+Qp5fGwlab4kwO7Fh2VFQOxcHFnUIRYXFZDTVQk46L5bh7bFtQ==
   dependencies:
     jsbarcode "^3.11.5"
     qrcode "^1.5.1"

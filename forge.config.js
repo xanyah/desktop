@@ -26,8 +26,8 @@ module.exports = {
       config: {},
     },
     new MakerSquirrel({
-      name: "Xanyah",
-      setupIcon: "./public/favicon.ico",
+      name: 'Xanyah',
+      setupIcon: './public/favicon.ico',
     }),
     // {
     //   name: '@electron-forge/maker-wix',
@@ -77,16 +77,17 @@ module.exports = {
        * What we do here is to install them explicitly and then remove the files that are not for the platform
        * we are building for
        */
-      const packageJson = JSON.parse(fs.readFileSync(path.resolve(buildPath, "package.json")).toString());
+      const packageJson = JSON.parse(fs.readFileSync(path.resolve(buildPath, 'package.json')).toString());
 
       packageJson.dependencies = {
-        serialport: "^12.0.0",
+        'electron-pos-printer': '^1.3.7',
+        serialport: '^12.0.0',
       };
 
-      fs.writeFileSync(path.resolve(buildPath, "package.json"), JSON.stringify(packageJson));
-      spawnSync("yarn", ["install", "--production"], {
+      fs.writeFileSync(path.resolve(buildPath, 'package.json'), JSON.stringify(packageJson));
+      spawnSync('yarn', ['install', '--production'], {
         cwd: buildPath,
-        stdio: "inherit",
+        stdio: 'inherit',
         shell: true,
       });
 
