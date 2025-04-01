@@ -24,6 +24,10 @@ jobs:
         node-version-file: .node-version
         cache: yarn
 
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.13"
+
     - name: Install dependencies
       run: yarn --frozen-lockfile
 

@@ -1,5 +1,9 @@
 import path from 'path'
 import { app, BrowserWindow } from 'electron'
+
+// run this as early in the main process as possible
+if (require('electron-squirrel-startup')) app.quit();
+
 import { registerHandlers } from './handlers'
 
 // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
