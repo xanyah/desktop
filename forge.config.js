@@ -1,5 +1,10 @@
+const fs = require('fs')
+const path = require('path')
 const { FusesPlugin } = require('@electron-forge/plugin-fuses')
 const { FuseV1Options, FuseVersion } = require('@electron/fuses')
+const { MakerSquirrel } = require('@electron-forge/maker-squirrel')
+const { globSync } = require('glob')
+const { spawnSync } = require('child_process')
 
 module.exports = {
   packagerConfig: {
@@ -20,15 +25,19 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {},
     },
-    {
-      name: '@electron-forge/maker-wix',
-      config: {
-        icon: './public/favicon.ico',
-        ui: {
-          chooseDirectory: true,
-        },
-      },
-    },
+    new MakerSquirrel({
+      name: "Xanyah",
+      setupIcon: "./public/favicon.ico",
+    }),
+    // {
+    //   name: '@electron-forge/maker-wix',
+    //   config: {
+    //     icon: './public/favicon.ico',
+    //     ui: {
+    //       chooseDirectory: true,
+    //     },
+    //   },
+    // },
   ],
   plugins: [
     {
@@ -59,4 +68,34 @@ module.exports = {
       },
     },
   ],
+  hooks: {
+    packageAfterPrune: async (_forgeConfig, buildPath, _electronVersion, platform, _arch) => {
+      /**
+       * https://github.com/Dygmalab/Bazecor/blob/development/forge.config.ts
+       * Serialport, usb and uiohook-napi are problematic libraries to run in Electron.
+       * When Electron app is been built, these libraries are not included properly in the final executable.
+       * What we do here is to install them explicitly and then remove the files that are not for the platform
+       * we are building for
+       */
+      const packageJson = JSON.parse(fs.readFileSync(path.resolve(buildPath, "package.json")).toString());
+
+      packageJson.dependencies = {
+        serialport: "^12.0.0",
+      };
+
+      fs.writeFileSync(path.resolve(buildPath, "package.json"), JSON.stringify(packageJson));
+      spawnSync("yarn", ["install", "--production"], {
+        cwd: buildPath,
+        stdio: "inherit",
+        shell: true,
+      });
+
+      const prebuilds = globSync(`${buildPath}/**/prebuilds/*`);
+      prebuilds.forEach(function (path) {
+        if (!path.includes(platform)) {
+          fs.rmSync(path, { recursive: true });
+        }
+      });
+    },
+  },
 }
