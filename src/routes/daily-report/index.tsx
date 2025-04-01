@@ -73,7 +73,7 @@ const DailyReport = () => {
               onChange={v =>
                 setDate(DateTime.fromJSDate(v) as DateTime<true>)}
             />
-            <Button onClick={() => window.print()}>
+            <Button onClick={window.electronAPI.printWindow}>
               {t('dailyReport.print')}
             </Button>
           </div>

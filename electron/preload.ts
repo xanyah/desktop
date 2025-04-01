@@ -21,7 +21,8 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
 contextBridge.exposeInMainWorld('electronAPI', {
   getPrinters: () => ipcRenderer.invoke('get-printers'),
-  print: printData => ipcRenderer.invoke('print', printData),
+  exportSelectionToPDF: () => ipcRenderer.invoke('exportSelectionToPDF'),
+  printThermal: printData => ipcRenderer.invoke('print:thermal', printData),
   printBarcode: printData => ipcRenderer.invoke('print:barcode', printData),
   listSerial: () => ipcRenderer.invoke('serial:list')
 })

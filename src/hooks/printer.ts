@@ -20,9 +20,8 @@ export const usePrint = () => {
     undefined,
   )
   return useMutation({
-    mutationFn: async (data: PosPrintData[]) => {
-      await window.electronAPI.print({ printerName: printer.printerName, pageSize: printer.pageSize, data })
-    },
+    mutationFn: (data: PosPrintData[]) =>
+      window.electronAPI.printThermal({ printerName: printer.printerName, pageSize: printer.pageSize, data }),
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },

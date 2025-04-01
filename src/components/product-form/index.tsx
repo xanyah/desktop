@@ -45,20 +45,20 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
     () =>
       product
         ? {
-          ...product,
-          categoryId: product.category?.id,
-          manufacturerId: product.manufacturer?.id,
-          storeId: store?.id,
-          buyingAmount: product.buyingAmountCents / 100,
-          taxFreeAmount: product.taxFreeAmountCents / 100,
-          amount: product.amountCents / 100,
-          vatRateId: product.vatRate?.id,
-          images: map(product.images, image => ({
-            name: image.large.split('/').pop(),
-            signed_id: image.signedId,
-            thumbnail: image.thumbnail,
-          })),
-        }
+            ...product,
+            categoryId: product.category?.id,
+            manufacturerId: product.manufacturer?.id,
+            storeId: store?.id,
+            buyingAmount: product.buyingAmountCents / 100,
+            taxFreeAmount: product.taxFreeAmountCents / 100,
+            amount: product.amountCents / 100,
+            vatRateId: product.vatRate?.id,
+            images: map(product.images, image => ({
+              name: image.large.split('/').pop(),
+              signed_id: image.signedId,
+              thumbnail: image.thumbnail,
+            })),
+          }
         : undefined,
     [product, store],
   )
@@ -136,7 +136,6 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
         .catch(console.error)
     }
   }, [product, store])
-
 
   useEffect(() => {
     setValue(

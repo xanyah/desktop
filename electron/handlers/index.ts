@@ -8,7 +8,7 @@ export const registerHandlers = (app: Electron.App, window: BrowserWindow | null
     return window.webContents.getPrintersAsync()
   })
 
-  ipcMain.handle('print', async (event, printData) => {
+  ipcMain.handle('print:thermal', async (event, printData) => {
     const { data, printerName, pageSize } = printData
     const options = {
       boolean: false,
@@ -59,4 +59,12 @@ export const registerHandlers = (app: Electron.App, window: BrowserWindow | null
   })
 
   ipcMain.handle('serial:list', SerialPort.list)
+
+  ipcMain.handle('print:window', (e) => {
+    let window = BrowserWindow.fromWebContents(e.sender);
+
+    if (window) {
+      window.webContents.print({})
+    }
+  });
 }
