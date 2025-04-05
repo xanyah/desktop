@@ -75,6 +75,7 @@
     "@electron/fuses": "^1.8.0",
     "@eslint/js": "^9.19.0",
     "@hookform/devtools": "^4.3.3",
+    "@reforged/maker-appimage": "^5.0.0",
     "@serialport/bindings-cpp": "^12.0.0",
     "@stylistic/eslint-plugin": "^3.0.1",
     "@tailwindcss/postcss": "^4.0.3",
