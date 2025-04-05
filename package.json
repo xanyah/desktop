@@ -121,5 +121,5 @@
     "start": "cross-env NODE_ENV=development electron-forge start",
     "test": "jest"
   },
-  "version": "0.9.4"
+  "version": "0.9.5"
 }
