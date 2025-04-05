@@ -73,7 +73,7 @@ const DailyReport = () => {
               onChange={v =>
                 setDate(DateTime.fromJSDate(v) as DateTime<true>)}
             />
-            <Button onClick={window.electronAPI.printWindow}>
+            <Button onClick={() => window.electronAPI.printWindow()}>
               {t('dailyReport.print')}
             </Button>
           </div>
@@ -89,7 +89,7 @@ const DailyReport = () => {
           </div>
           <div className="flex flex-col gap-6 w-1/2">
             {map(totalPayments, totalPayment => (
-              <div className="flex justify-between">
+              <div className="flex justify-between" key={totalPayment.name}>
                 <p>{totalPayment?.name}</p>
                 <p>
                   {formatPrice(

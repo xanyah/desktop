@@ -16,14 +16,24 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
-      name: "bazecor",
+      name: "xanyah",
       setupIcon: "./public/favicon.ico",
     }),
     new MakerZIP({}, ["darwin"]),
     {
       name: "@electron-forge/maker-dmg",
       config: {
-        icon: "./build/logo.icns",
+        icon: "./public/web-app-manifest-512x512.icns",
+      },
+    },
+    {
+      name: "@reforged/maker-appimage",
+      config: {
+        options: {
+          bin: "Xanyah",
+          categories: ["Utility"],
+          icon: "./public/web-app-manifest-512x512.png",
+        },
       },
     },
   ],
