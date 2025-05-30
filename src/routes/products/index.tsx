@@ -13,7 +13,7 @@ const Products = () => {
   const currentStore = useCurrentStore()
   const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
   const { data, isLoading } = useProducts({
-    'q[nameOrSkuOrUpcCont]': searchQuery,
+    'q[nameOrSkuOrManufacturerSkuOrUpcCont]': searchQuery,
     'q[storeIdEq]': currentStore?.id,
     'q[s]': ['name', 'manufacturers.name'],
     'page': page,
