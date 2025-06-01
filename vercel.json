@@ -1,4 +1,5 @@
 {
+  "buildCommand": "yarn vite build --config config/vite.web.config.ts",
   "routes": [
     {
       "dest": "/",
