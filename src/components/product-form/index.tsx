@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCurrentStore, useCustomAttributes } from '../../hooks'
 import { createProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { find, isEmpty, map, omit } from 'lodash'
+import { filter, find, isEmpty, last, map, omit, split } from 'lodash'
 import { decamelizeKeys } from 'humps'
 import { Button, FormContainer } from '@/components'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -54,7 +54,7 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
             amount: product.amountCents / 100,
             vatRateId: product.vatRate?.id,
             images: map(product.images, image => ({
-              name: image.large.split('/').pop(),
+              name: last(split(image.large, '/')),
               signed_id: image.signedId,
               thumbnail: image.thumbnail,
             })),
