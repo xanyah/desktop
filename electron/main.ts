@@ -34,7 +34,7 @@ function createWindow() {
   win.removeMenu()
 
   win.maximize()
-  
+
   // Load the index.html of the app window.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     win.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
@@ -42,9 +42,10 @@ function createWindow() {
   } else {
     win.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
+
+  registerHandlers(app, win)
 }
 
-registerHandlers(app, win)
 
 app.on('window-all-closed', () => {
   app.quit()
