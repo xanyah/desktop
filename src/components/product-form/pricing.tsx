@@ -34,7 +34,14 @@ const ProductFormPricing = () => {
   }, [buyingAmount, processedVatRate, setValue, ratioValue])
 
   const setPriceFromTaxFreePrice = useCallback(
-    (value: number) => {
+    (value?: number) => {
+      if (!value) {
+        setValue('taxFreeAmount', undefined)
+        setValue('amount', undefined)
+
+        return
+      }
+
       if (isNaN(value)) {
         return
       }
@@ -46,7 +53,12 @@ const ProductFormPricing = () => {
   )
 
   const setTaxFreeFromPrice = useCallback(
-    (value: number) => {
+    (value?: number) => {
+      if (!value) {
+        setValue('amount', undefined)
+        setValue('taxFreeAmount', undefined)
+        return
+      }
       if (isNaN(value)) {
         return
       }
@@ -77,7 +89,10 @@ const ProductFormPricing = () => {
             placeholder={t('product.buyingAmountPlaceholder')}
             label={t('product.buyingAmountLabel')}
             value={value}
-            onChange={e => onChange(toNumber(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.value
+              onChange(v ? toNumber(e.target.value) : undefined)
+            }}
             error={error?.message}
           />
         )}
@@ -125,7 +140,10 @@ const ProductFormPricing = () => {
               placeholder={t('product.ratioPlaceholder')}
               label={t('product.ratioLabel')}
               value={value || ''}
-              onChange={e => onChange(toNumber(e.target.value))}
+              onChange={(e) => {
+                const v = e.target.value
+                onChange(v ? toNumber(e.target.value) : undefined)
+              }}
               error={error?.message}
             />
           )}
@@ -145,7 +163,10 @@ const ProductFormPricing = () => {
             label={t('product.taxFreeAmountLabel')}
             value={value}
             disabled={ratioEnabled}
-            onChange={e => setPriceFromTaxFreePrice(toNumber(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.value
+              setPriceFromTaxFreePrice(v ? toNumber(e.target.value) : undefined)
+            }}
             error={error?.message}
           />
         )}
@@ -164,7 +185,10 @@ const ProductFormPricing = () => {
             placeholder={t('product.amountPlaceholder')}
             label={t('product.amountLabel')}
             value={value}
-            onChange={e => setTaxFreeFromPrice(toNumber(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.value
+              setTaxFreeFromPrice(v ? toNumber(e.target.value) : undefined)
+            }}
             error={error?.message}
           />
         )}

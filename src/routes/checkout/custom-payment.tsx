@@ -47,7 +47,10 @@ const CustomPayment = () => {
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <InputText
                 label={t('checkout.customPayment.totalAmountLabel')}
-                onChange={event => onChange(toNumber(event.target.value) * 100)}
+                onChange={(e) => {
+                  const v = e.target.value
+                  onChange(v ? toNumber(e.target.value) * 100 : undefined)
+                }}
                 min={0}
                 type="number"
                 value={value / 100}
