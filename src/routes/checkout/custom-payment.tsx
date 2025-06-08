@@ -22,7 +22,7 @@ const CustomPayment = () => {
   const { data } = usePaymentTypes()
   const salePaymentsAttributes = watch('salePaymentsAttributes')
   const attributed = sum(
-    map(salePaymentsAttributes, item => toNumber(item.totalAmountCents)),
+    map(salePaymentsAttributes, (item) => toNumber(item.totalAmountCents))
   )
   const unattributed = totalAmountCents - attributed
 
@@ -47,7 +47,10 @@ const CustomPayment = () => {
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <InputText
                 label={t('checkout.customPayment.totalAmountLabel')}
-                onChange={event => onChange(toNumber(event.target.value) * 100)}
+                onChange={(e) => {
+                  const v = e.target.value
+                  onChange(v ? toNumber(e.target.value) * 100 : undefined)
+                }}
                 min={0}
                 type="number"
                 value={value / 100}
@@ -83,7 +86,8 @@ const CustomPayment = () => {
             paymentTypeId: head(data?.data)?.id as string,
             totalAmountCents: 0,
             totalAmountCurrency: 'EUR',
-          })}
+          })
+        }
       >
         {t('checkout.customPayment.addButton')}
       </Button>

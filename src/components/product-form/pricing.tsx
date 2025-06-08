@@ -19,7 +19,7 @@ const ProductFormPricing = () => {
 
   const processedVatRate = useMemo(
     () => (vatRateData?.data.ratePercentCents || 0) / 10000,
-    [vatRateData?.data],
+    [vatRateData?.data]
   )
 
   const setPriceFromRatio = useCallback(() => {
@@ -34,7 +34,11 @@ const ProductFormPricing = () => {
   }, [buyingAmount, processedVatRate, setValue, ratioValue])
 
   const setPriceFromTaxFreePrice = useCallback(
-    (value: number) => {
+    (value?: number) => {
+      if (!value) {
+        return
+      }
+
       if (isNaN(value)) {
         return
       }
@@ -42,11 +46,14 @@ const ProductFormPricing = () => {
       setValue('taxFreeAmount', value)
       setValue('amount', ceil(value * (1 + processedVatRate), 2))
     },
-    [processedVatRate, setValue],
+    [processedVatRate, setValue]
   )
 
   const setTaxFreeFromPrice = useCallback(
-    (value: number) => {
+    (value?: number) => {
+      if (!value) {
+        return
+      }
       if (isNaN(value)) {
         return
       }
@@ -54,7 +61,7 @@ const ProductFormPricing = () => {
       setValue('amount', value)
       setValue('taxFreeAmount', ceil(value / (1 + processedVatRate), 2))
     },
-    [processedVatRate, setValue],
+    [processedVatRate, setValue]
   )
 
   useEffect(() => {
@@ -77,7 +84,10 @@ const ProductFormPricing = () => {
             placeholder={t('product.buyingAmountPlaceholder')}
             label={t('product.buyingAmountLabel')}
             value={value}
-            onChange={e => onChange(toNumber(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.value
+              onChange(v ? toNumber(e.target.value) : undefined)
+            }}
             error={error?.message}
           />
         )}
@@ -105,7 +115,7 @@ const ProductFormPricing = () => {
               <input
                 type="checkbox"
                 checked={value}
-                onChange={e => onChange(e.target.checked)}
+                onChange={(e) => onChange(e.target.checked)}
               />
               {t('product.ratioCheckbox')}
             </label>
@@ -125,7 +135,10 @@ const ProductFormPricing = () => {
               placeholder={t('product.ratioPlaceholder')}
               label={t('product.ratioLabel')}
               value={value || ''}
-              onChange={e => onChange(toNumber(e.target.value))}
+              onChange={(e) => {
+                const v = e.target.value
+                onChange(v ? toNumber(e.target.value) : undefined)
+              }}
               error={error?.message}
             />
           )}
@@ -145,7 +158,10 @@ const ProductFormPricing = () => {
             label={t('product.taxFreeAmountLabel')}
             value={value}
             disabled={ratioEnabled}
-            onChange={e => setPriceFromTaxFreePrice(toNumber(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.value
+              setPriceFromTaxFreePrice(v ? toNumber(e.target.value) : undefined)
+            }}
             error={error?.message}
           />
         )}
@@ -164,7 +180,10 @@ const ProductFormPricing = () => {
             placeholder={t('product.amountPlaceholder')}
             label={t('product.amountLabel')}
             value={value}
-            onChange={e => setTaxFreeFromPrice(toNumber(e.target.value))}
+            onChange={(e) => {
+              const v = e.target.value
+              setTaxFreeFromPrice(v ? toNumber(e.target.value) : undefined)
+            }}
             error={error?.message}
           />
         )}
