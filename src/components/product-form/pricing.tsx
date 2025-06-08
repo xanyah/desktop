@@ -19,7 +19,7 @@ const ProductFormPricing = () => {
 
   const processedVatRate = useMemo(
     () => (vatRateData?.data.ratePercentCents || 0) / 10000,
-    [vatRateData?.data]
+    [vatRateData?.data],
   )
 
   const setPriceFromRatio = useCallback(() => {
@@ -49,7 +49,7 @@ const ProductFormPricing = () => {
       setValue('taxFreeAmount', value)
       setValue('amount', ceil(value * (1 + processedVatRate), 2))
     },
-    [processedVatRate, setValue]
+    [processedVatRate, setValue],
   )
 
   const setTaxFreeFromPrice = useCallback(
@@ -66,7 +66,7 @@ const ProductFormPricing = () => {
       setValue('amount', value)
       setValue('taxFreeAmount', ceil(value / (1 + processedVatRate), 2))
     },
-    [processedVatRate, setValue]
+    [processedVatRate, setValue],
   )
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const ProductFormPricing = () => {
               <input
                 type="checkbox"
                 checked={value}
-                onChange={(e) => onChange(e.target.checked)}
+                onChange={e => onChange(e.target.checked)}
               />
               {t('product.ratioCheckbox')}
             </label>

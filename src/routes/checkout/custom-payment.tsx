@@ -22,7 +22,7 @@ const CustomPayment = () => {
   const { data } = usePaymentTypes()
   const salePaymentsAttributes = watch('salePaymentsAttributes')
   const attributed = sum(
-    map(salePaymentsAttributes, (item) => toNumber(item.totalAmountCents))
+    map(salePaymentsAttributes, item => toNumber(item.totalAmountCents)),
   )
   const unattributed = totalAmountCents - attributed
 
@@ -86,8 +86,7 @@ const CustomPayment = () => {
             paymentTypeId: head(data?.data)?.id as string,
             totalAmountCents: 0,
             totalAmountCurrency: 'EUR',
-          })
-        }
+          })}
       >
         {t('checkout.customPayment.addButton')}
       </Button>

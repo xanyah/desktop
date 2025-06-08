@@ -16,7 +16,7 @@ const Promotion = () => {
       { label: t('checkout.flatPromotionLabel'), value: 'flat_discount' },
       { label: t('checkout.percentPromotionLabel'), value: 'percent_discount' },
     ],
-    [t]
+    [t],
   )
   const promotionType = watch('salePromotionAttributes.type')
 
@@ -78,8 +78,7 @@ const Promotion = () => {
               amountCents: 0,
               amountCurrency: 'EUR',
               type: 'flat_discount',
-            })
-          }
+            })}
         >
           {t('checkout.promotionAddButton')}
         </Button>
@@ -95,7 +94,7 @@ const Promotion = () => {
           name="salePromotionAttributes.type"
           render={({ field: { value, onChange } }) => (
             <Select
-              onChange={(item) => onChange(item?.value)}
+              onChange={item => onChange(item?.value)}
               value={find(options, { value })}
               options={options}
             />
