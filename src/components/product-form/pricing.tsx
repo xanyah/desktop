@@ -36,6 +36,9 @@ const ProductFormPricing = () => {
   const setPriceFromTaxFreePrice = useCallback(
     (value?: number) => {
       if (!value) {
+        setValue('taxFreeAmount', undefined)
+        setValue('amount', undefined)
+
         return
       }
 
@@ -52,6 +55,8 @@ const ProductFormPricing = () => {
   const setTaxFreeFromPrice = useCallback(
     (value?: number) => {
       if (!value) {
+        setValue('amount', undefined)
+        setValue('taxFreeAmount', undefined)
         return
       }
       if (isNaN(value)) {
