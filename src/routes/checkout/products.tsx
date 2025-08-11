@@ -8,8 +8,8 @@ const Products = () => {
   const { watch, setValue } = useFormContext<CheckoutSchemaType>()
   const products = watch('saleProductsAttributes')
 
-  const onQuantityUpdate = useCallback((index: number, value: number) => {
-    setValue(`saleProductsAttributes.${index}.quantity`, value)
+  const onQuantityUpdate = useCallback((index: number, value: number | undefined) => {
+    setValue(`saleProductsAttributes.${index}.quantity`, value as any)
   }, [setValue])
 
   const onRemove = useCallback((productId: string) => {
