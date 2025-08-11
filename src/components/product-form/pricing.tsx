@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ceil, isNumber, round, toNumber } from 'lodash'
+import { ceil, isNumber, isUndefined, round, toNumber } from 'lodash'
 import { FormSection, InputText, VatRateSelect } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Euro } from 'lucide-react'
@@ -9,7 +9,7 @@ import { useVatRate } from '@/hooks'
 
 const ProductFormPricing = () => {
   const { t } = useTranslation()
-  const { control, setValue, watch } = useFormContext<formSchemaType>()
+  const { control, setValue, watch } = useFormContext<Partial<formSchemaType>>()
   const vatRateId = watch('vatRateId')
   const ratioValue = watch('ratio')
   const buyingAmount = watch('buyingAmount')
@@ -23,7 +23,7 @@ const ProductFormPricing = () => {
   )
 
   const setPriceFromRatio = useCallback(() => {
-    if (isNaN(buyingAmount) || !isNumber(ratioValue) || isNaN(ratioValue)) {
+    if (isUndefined(buyingAmount) || isNaN(buyingAmount) || !isNumber(ratioValue) || isNaN(ratioValue)) {
       return
     }
 
