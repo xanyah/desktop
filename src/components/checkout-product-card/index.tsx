@@ -9,7 +9,7 @@ import Button from '../button'
 interface CheckoutProductCardProps {
   onQuantityUpdate: (newQuantity: number) => void
   onRemove: () => void
-  onRemoveCancel: () => void
+  onRemoveCancel?: () => void
   productId: string
   quantity: number
   withoutPrice?: boolean
