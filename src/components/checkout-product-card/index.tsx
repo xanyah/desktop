@@ -1,6 +1,6 @@
 import { formatPrice } from '@/helpers/price'
 import { useProduct } from '@/hooks'
-import { X } from 'lucide-react'
+import { RotateCcw, X } from 'lucide-react'
 import { toNumber } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { InputText } from '../input'
@@ -9,9 +9,11 @@ import Button from '../button'
 interface CheckoutProductCardProps {
   onQuantityUpdate: (newQuantity: number) => void
   onRemove: () => void
+  onRemoveCancel?: () => void
   productId: string
   quantity: number
   withoutPrice?: boolean
+  willBeRemoved?: boolean
 }
 
 const CheckoutProductCard = ({
@@ -20,6 +22,8 @@ const CheckoutProductCard = ({
   quantity,
   onQuantityUpdate,
   withoutPrice,
+  willBeRemoved,
+  onRemoveCancel,
 }: CheckoutProductCardProps) => {
   const { t } = useTranslation()
   const { data, isLoading } = useProduct(productId)
@@ -31,7 +35,7 @@ const CheckoutProductCard = ({
   const product = data.data
 
   return (
-    <div className="flex flex-row items-center justify-between gap-4">
+    <div className={`${willBeRemoved && `opacity-30`} flex flex-row items-center justify-between gap-4`}>
       <div className="flex flex-col flex-1">
         <h4>{product.name}</h4>
         <p>
@@ -51,9 +55,18 @@ const CheckoutProductCard = ({
           {formatPrice(product.amountCents * quantity, product.amountCurrency)}
         </p>
       )}
-      <Button variant="ghost" onClick={onRemove}>
-        <X />
-      </Button>
+      {willBeRemoved
+        ? (
+            <Button type="button" variant="ghost" onClick={onRemoveCancel}>
+              <RotateCcw />
+            </Button>
+          )
+        : (
+            <Button type="button" variant="ghost" onClick={onRemove}>
+              <X />
+            </Button>
+          )}
+
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react'
 import { useShipping, useShippingProducts } from '../../hooks'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { cancelShipping, validateShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +16,7 @@ import toast from 'react-hot-toast'
 
 const Shipping = () => {
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
   const { id } = useParams()
   const { data: shippingData } = useShipping(id)
   const { data: shippingProductsData } = useShippingProducts({
@@ -143,7 +144,16 @@ const Shipping = () => {
           <p>{shippingData.data.provider.name}</p>
         </div>
       </ShowSection>
-      <ShowSection title={t('shipping.products')}>
+      <ShowSection
+        title={t('shipping.products')}
+        button={
+          shippingData?.data.state === 'pending' && (
+            <Button onClick={() => navigate(`/shippings/${id}/edit`)} size="sm" variant="ghost">
+              {t('shipping.editProducts')}
+            </Button>
+          )
+        }
+      >
         <DataTable data={shippingProductsData?.data || []} columns={columns} />
       </ShowSection>
     </ShowContainer>

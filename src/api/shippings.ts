@@ -7,8 +7,8 @@ export const getShippings = params =>
 export const getShipping = shippingId =>
   xanyahApi.get<Shipping>(`v2/shippings/${shippingId}`)
 
-export const updateShipping = (shippingId, params) =>
-  xanyahApi.patch<Shipping>(`v2/shippings/${shippingId}`, decamelizeKeys(params))
+export const updateShipping = (shippingId, shipping) =>
+  xanyahApi.patch<Shipping>(`v2/shippings/${shippingId}`, decamelizeKeys({ shipping }))
 
 export const validateShipping = shippingId =>
   xanyahApi.patch<Shipping>(`v2/shippings/${shippingId}/validate`)

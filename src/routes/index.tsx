@@ -37,6 +37,7 @@ import { OfflineLayout, OnlineLayout } from '../layouts'
 import Settings from './settings'
 import { isElectron } from '@/helpers/electron'
 import DailyReport from './daily-report'
+import ShippingEdit from './shipping-edit'
 
 const RouterComponent = isElectron() ? HashRouter : BrowserRouter
 
@@ -92,6 +93,7 @@ const Router = () => {
           {isElectron() && <Route path="settings" element={<Settings />} />}
           <Route path="shippings" element={<Shippings />} />
           <Route path="shippings/:id" element={<Shipping />} />
+          <Route path="shippings/:id/edit" element={<ShippingEdit />} />
           <Route path="shippings/new" element={<ShippingNew />} />
           <Route path="store" element={<Store />} />
           <Route path="*" element={<Navigate to="/" />} />
