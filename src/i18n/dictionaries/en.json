@@ -112,12 +112,12 @@
     }
   },
   "dailyReport": {
+    "emptySales": "No sales were made on this day.",
     "pageTitle": "Daily report",
     "print": "Print",
+    "receiptNumber": "Receipt N° {{receiptNumber}}",
     "sales": "Sales",
-    "total": "Total incl. tax",
-    "emptySales": "No sales were made on this day.",
-    "receiptNumber": "Receipt N° {{receiptNumber}}"
+    "total": "Total incl. tax"
   },
   "global": {
     "cancel": "Cancel",
@@ -342,16 +342,17 @@
   "shipping": {
     "cancel": "Cancel delivery",
     "customer": "Customer",
+    "editProducts": "Edit items",
+    "existingProduct": {
+      "description": "This product is already in your selection. Do you want to increase its quantity?",
+      "title": "Product Already Exists"
+    },
     "pageSubtitle": "Order placed on {{ shippingDate }}",
     "pageTitle": "Order {{ shippingNumber }}",
     "products": "Delivery items",
     "productTable": {
       "name": "Article name",
       "quantity": "Quantity"
-    },
-    "existingProduct": {
-      "title": "Product Already Exists",
-      "description": "This product is already in your selection. Do you want to increase its quantity?"
     },
     "states": {
       "cancelled": "Canceled",
