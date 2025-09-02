@@ -4,7 +4,7 @@ import { head, map, sum, toNumber } from 'lodash'
 import { CheckoutSchemaType } from './schema'
 import { Button, InputText, PaymentTypeSelect } from '@/components'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
-import { formatPrice } from '@/helpers/price'
+import { formatPrice, formatPriceCentsInput, formatPriceCentsInputValue } from '@/helpers/price'
 import { useTranslation } from 'react-i18next'
 
 const CustomPayment = () => {
@@ -47,13 +47,10 @@ const CustomPayment = () => {
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <InputText
                 label={t('checkout.customPayment.totalAmountLabel')}
-                onChange={(e) => {
-                  const v = e.target.value
-                  onChange(v ? toNumber(e.target.value) * 100 : undefined)
-                }}
+                onChange={e => onChange(formatPriceCentsInput(e))}
                 min={0}
                 type="number"
-                value={value / 100}
+                value={formatPriceCentsInputValue(value)}
                 error={error?.message}
                 icon={<Euro />}
               />

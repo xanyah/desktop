@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ceil, isNumber, isUndefined, round, toNumber } from 'lodash'
+import { ceil, isNumber, isUndefined, round } from 'lodash'
 import { FormSection, InputText, VatRateSelect } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Euro } from 'lucide-react'
 import { formSchemaType } from './config'
 import { useVatRate } from '@/hooks'
+import { formatNumberInput, formatPriceCentsInput, formatPriceCentsInputValue } from '@/helpers/price'
 
 const ProductFormPricing = () => {
   const { t } = useTranslation()
@@ -34,7 +35,7 @@ const ProductFormPricing = () => {
   }, [buyingAmount, processedVatRate, setValue, ratioValue])
 
   const setPriceFromTaxFreePrice = useCallback(
-    (value?: number) => {
+    (value?: number | null) => {
       if (!value) {
         setValue('taxFreeAmount', undefined)
         setValue('amount', undefined)
@@ -53,7 +54,7 @@ const ProductFormPricing = () => {
   )
 
   const setTaxFreeFromPrice = useCallback(
-    (value?: number) => {
+    (value?: number | null) => {
       if (!value) {
         setValue('amount', undefined)
         setValue('taxFreeAmount', undefined)
@@ -88,11 +89,8 @@ const ProductFormPricing = () => {
             hint={t('product.buyingAmountHint')}
             placeholder={t('product.buyingAmountPlaceholder')}
             label={t('product.buyingAmountLabel')}
-            value={value}
-            onChange={(e) => {
-              const v = e.target.value
-              onChange(v ? toNumber(e.target.value) : undefined)
-            }}
+            value={formatPriceCentsInputValue(value)}
+            onChange={e => onChange(formatPriceCentsInput(e))}
             error={error?.message}
           />
         )}
@@ -139,11 +137,8 @@ const ProductFormPricing = () => {
               hint={t('product.ratioHint')}
               placeholder={t('product.ratioPlaceholder')}
               label={t('product.ratioLabel')}
-              value={value || ''}
-              onChange={(e) => {
-                const v = e.target.value
-                onChange(v ? toNumber(e.target.value) : undefined)
-              }}
+              value={value}
+              onChange={e => onChange(formatNumberInput(e))}
               error={error?.message}
             />
           )}
@@ -161,12 +156,9 @@ const ProductFormPricing = () => {
             hint={t('product.taxFreeAmountHint')}
             placeholder={t('product.taxFreeAmountPlaceholder')}
             label={t('product.taxFreeAmountLabel')}
-            value={value}
+            value={formatPriceCentsInputValue(value)}
             disabled={ratioEnabled}
-            onChange={(e) => {
-              const v = e.target.value
-              setPriceFromTaxFreePrice(v ? toNumber(e.target.value) : undefined)
-            }}
+            onChange={e => setPriceFromTaxFreePrice(formatPriceCentsInput(e))}
             error={error?.message}
           />
         )}
@@ -184,11 +176,8 @@ const ProductFormPricing = () => {
             hint={t('product.amountHint')}
             placeholder={t('product.amountPlaceholder')}
             label={t('product.amountLabel')}
-            value={value}
-            onChange={(e) => {
-              const v = e.target.value
-              setTaxFreeFromPrice(v ? toNumber(e.target.value) : undefined)
-            }}
+            value={formatPriceCentsInputValue(value)}
+            onChange={e => setTaxFreeFromPrice(formatPriceCentsInput(e))}
             error={error?.message}
           />
         )}

@@ -1,11 +1,12 @@
 import { Euro, Percent } from 'lucide-react'
-import { find, toNumber } from 'lodash'
+import { find } from 'lodash'
 import Select from 'react-select'
 import { CheckoutSchemaType } from './schema'
 import { Button, InputText } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { formatNumberInput, formatPriceCentsInput, formatPriceCentsInputValue } from '@/helpers/price'
 
 const Promotion = () => {
   const { t } = useTranslation()
@@ -34,11 +35,8 @@ const Promotion = () => {
                 type="number"
                 label={t('checkout.promotionAmountLabel')}
                 placeholder={t('checkout.promotionAmountPlaceholder')}
-                value={(value || 0) / 100}
-                onChange={(e) => {
-                  const v = e.target.value
-                  onChange(v ? toNumber(e.target.value) * 100 : undefined)
-                }}
+                value={formatPriceCentsInputValue(value)}
+                onChange={e => onChange(formatPriceCentsInput(e))}
                 error={error?.message}
               />
             )}
@@ -57,10 +55,7 @@ const Promotion = () => {
                 label={t('checkout.promotionAmountLabel')}
                 placeholder={t('checkout.promotionAmountPlaceholder')}
                 value={value}
-                onChange={(e) => {
-                  const v = e.target.value
-                  onChange(v ? toNumber(e.target.value) : undefined)
-                }}
+                onChange={e => onChange(formatNumberInput(e))}
                 error={error?.message}
               />
             )}
