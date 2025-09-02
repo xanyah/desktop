@@ -24,7 +24,7 @@ const ManufacturerSelect = ({
     (searchQuery) => {
       return getManufacturers({
         'q[storeIdEq]': store?.id,
-        'q[nameOrNoteCont]': searchQuery,
+        'q[nameOrNotesCont]': searchQuery,
         'q[s]': 'name',
       })
     },

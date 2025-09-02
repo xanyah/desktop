@@ -49,9 +49,9 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
             categoryId: product.category?.id,
             manufacturerId: product.manufacturer?.id,
             storeId: store?.id,
-            buyingAmount: product.buyingAmountCents / 100,
-            taxFreeAmount: product.taxFreeAmountCents / 100,
-            amount: product.amountCents / 100,
+            buyingAmount: product.buyingAmountCents,
+            taxFreeAmount: product.taxFreeAmountCents,
+            amount: product.amountCents,
             vatRateId: product.vatRate?.id,
             images: map(product.images, image => ({
               name: last(split(image.large, '/')),

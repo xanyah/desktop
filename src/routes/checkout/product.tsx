@@ -1,14 +1,13 @@
-import { formatPrice } from '@/helpers/price'
+import { formatNumberInput, formatPrice } from '@/helpers/price'
 import { useProduct } from '@/hooks'
 import { X } from 'lucide-react'
-import { toNumber } from 'lodash'
 import { CheckoutSchemaType } from './schema'
 import { Button, InputText } from '@/components'
 import { useTranslation } from 'react-i18next'
 
 interface ProductProps {
   saleProduct: CheckoutSchemaType['saleProductsAttributes'][0]
-  onQuantityUpdate: (newQuantity?: number) => void
+  onQuantityUpdate: (newQuantity?: number | null) => void
   onRemove: () => void
   quantity: number
 }
@@ -41,10 +40,7 @@ const Product = ({
         <InputText
           type="number"
           value={quantity}
-          onChange={(e) => {
-            const v = e.target.value
-            onQuantityUpdate(v ? toNumber(e.target.value) : undefined)
-          }}
+          onChange={e => onQuantityUpdate(formatNumberInput(e))}
         />
       </div>
       <p className="w-32 text-right">

@@ -16,7 +16,7 @@ const ProviderSelect = ({ onChange, value, label, placeholder }: ProviderSelectP
   const getFilteredRecords = useCallback((searchQuery) => {
     return getProviders({
       'q[storeIdEq]': store?.id,
-      'q[nameOrNoteCont]': searchQuery,
+      'q[nameOrNotesCont]': searchQuery,
       'q[s]': 'name',
     })
   }, [store])
