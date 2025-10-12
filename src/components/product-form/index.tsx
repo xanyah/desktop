@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCurrentStore, useCustomAttributes } from '../../hooks'
-import { createProduct, updateProduct } from '../../api'
+import { archiveProduct, createProduct, unarchiveProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { find, isEmpty, last, map, omit, split } from 'lodash'
 import { decamelizeKeys } from 'humps'
@@ -79,13 +79,17 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
     },
   })
 
+  const invalidateProduct = useCallback(() => {
+    queryClient.invalidateQueries({
+      queryKey: ['products', { id: product?.id }],
+    })
+  }, [queryClient, product])
+
   const { mutate: updateApiProduct } = useMutation({
     mutationFn: (newData: FormData) => updateProduct(product?.id, newData),
     onSuccess: (data) => {
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
-      queryClient.invalidateQueries({
-        queryKey: ['products', { id: product?.id }],
-      })
+      invalidateProduct()
       onSuccess?.(data)
       reset(initialValues)
     },
@@ -97,6 +101,16 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
         id: toastId?.current || undefined,
       })
     },
+  })
+
+  const { mutate: archiveApiProduct } = useMutation({
+    mutationFn: () => archiveProduct(product?.id),
+    onSuccess: invalidateProduct,
+  })
+
+  const { mutate: unarchiveApiProduct } = useMutation({
+    mutationFn: () => unarchiveProduct(product?.id),
+    onSuccess: invalidateProduct,
   })
 
   const onSubmit = useCallback(
@@ -173,7 +187,14 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
         subtitle={t('product.pageSubtitle')}
         onSubmit={handleSubmit(onSubmit)}
         onCancel={onCancel}
-        button={<Button onClick={printTicket} type="button">Imprimer</Button>}
+        button={(
+          <div className="flex flex-row gap-4">
+            {product?.archivedAt
+              ? <Button onClick={() => unarchiveApiProduct()} type="button" variant="ghost">{t('global.unarchive')}</Button>
+              : <Button onClick={() => archiveApiProduct()} type="button" color="red">{t('global.archive')}</Button>}
+            <Button onClick={printTicket} type="button">{t('product.printLabel')}</Button>
+          </div>
+        )}
       >
         <ProductFormGeneral />
         <ProductFormLogistics />

@@ -30,4 +30,5 @@ interface Product {
     signedId: string
   }[]
   productCustomAttributes: ProductCustomAttribute[]
+  archivedAt: string | null
 }

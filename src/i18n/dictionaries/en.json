@@ -44,19 +44,26 @@
       "unattributedNegative": "There is {{ amount }} too much",
       "unattributedPositive": "He's staying {{ amount }} to be distributed"
     },
+    "customProduct": "Custom product",
     "flatPromotionLabel": "Amount",
     "newCustomerButtonLabel": "Create a customer",
     "pageSubtitle": "Enter the data of your collection here",
-    "pageTitle": "Collection",
+    "pageTitle": "Checkout",
     "payment": "Payment",
     "paymentMethodOtherButton": "Other",
     "percentPromotionLabel": "Percentage",
     "price": "Total & Discounts",
+    "product": {
+      "name": "Product",
+      "quantity": "Quantity",
+      "totalPrice": "Total",
+      "unitPrice": "Unit price"
+    },
     "products": "Products",
     "promotionAddButton": "Add a discount",
     "promotionAmountLabel": "Amount",
     "promotionAmountPlaceholder": "Promotion",
-    "searchButton": "To research",
+    "searchButton": "Search",
     "searchPlaceholder": "Barcode or article manufacturer code",
     "subtotal": "Subtotal",
     "total": "Total",
@@ -120,15 +127,19 @@
     "total": "Total incl. tax"
   },
   "global": {
+    "archive": "Archive",
     "cancel": "Cancel",
     "confirm": "Confirm",
     "create": "Create",
     "edit": "Edit",
     "loading": "Loading in progress ...",
+    "or": "Or",
+    "print": "Print",
     "save": "Save",
     "saved": "Saved",
     "saving": "Saving...",
-    "savingError": "Error while saving"
+    "savingError": "Error while saving",
+    "unarchive": "Unarchive"
   },
   "inventories": {
     "pageTitle": "Inventories"
@@ -259,6 +270,7 @@
     "newPageTitle": "New article",
     "pageSubtitle": "Enter here the information of your product",
     "pricing": "Pricing",
+    "printLabel": "Print label",
     "ratioCheckbox": "Calculate prices through a ratio",
     "ratioHint": "The ratio is a multiplication factor used to calculate the price including VAT",
     "ratioLabel": "Ratio",
@@ -341,7 +353,6 @@
   },
   "shipping": {
     "cancel": "Cancel delivery",
-    "customer": "Customer",
     "editProducts": "Edit items",
     "existingProduct": {
       "description": "This product is already in your selection. Do you want to increase its quantity?",
@@ -349,11 +360,15 @@
     },
     "pageSubtitle": "Order placed on {{ shippingDate }}",
     "pageTitle": "Order {{ shippingNumber }}",
+    "printBarcodes": {
+      "title": "Print labels"
+    },
     "products": "Delivery items",
     "productTable": {
       "name": "Article name",
       "quantity": "Quantity"
     },
+    "provider": "Provider",
     "states": {
       "cancelled": "Canceled",
       "pending": "On hold",

@@ -6,6 +6,13 @@ import { TFunction } from 'i18next'
 import { map, reduce } from 'lodash'
 import { customerFullname } from './customer'
 
+const taxFreePrice = (saleProduct: SaleProduct) => {
+  if (saleProduct.product) {
+    return saleProduct.product.taxFreeAmountCents
+  }
+  return saleProduct.amountCents / 1.2
+}
+
 export const formatDataPrinterInvoice = (
   sale: Sale,
   saleProducts: SaleProduct[],
@@ -14,7 +21,7 @@ export const formatDataPrinterInvoice = (
 ): PosPrintData[] => {
   const formattedDate = DateTime.fromISO(sale.createdAt).toFormat('dd/MM/yyyy')
   const totalHT = reduce(saleProducts, (sum, item) => {
-    return sum + (item.quantity * item.product.taxFreeAmountCents)
+    return sum + (item.quantity * taxFreePrice(item))
   }, 0)
 
   const productTableBody: PosPrintTableField[][] = map(saleProducts, saleProduct => [
@@ -25,7 +32,7 @@ export const formatDataPrinterInvoice = (
     },
     {
       type: 'text' as const,
-      value: saleProduct.product.name,
+      value: saleProduct.product ? saleProduct.product.name : saleProduct.customLabel,
       style: { fontWeight: '500', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
     },
     {
