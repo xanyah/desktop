@@ -40,7 +40,7 @@ const ProductSearch = () => {
       e.preventDefault()
       const formData = new FormData(e.currentTarget)
       const query = formData.get('query')
-      const { data } = await getProducts({ 'q[storeIdEq]': store?.id, 'q[skuOrUpcOrManufacturerSkuEq]': query })
+      const { data } = await getProducts({ 'q[storeIdEq]': store?.id, 'q[skuOrUpcOrManufacturerSkuEq]': query, 'q[archivedAtNull]': true })
 
       if (size(data) === 1) {
         addProduct(head(data) as Product);
@@ -52,11 +52,29 @@ const ProductSearch = () => {
     }
   }, [addProduct, store])
 
+  const addCustomProduct = useCallback(() => {
+    const saleProductsAttributes = watch('saleProductsAttributes')
+    setValue(
+      `saleProductsAttributes.${size(saleProductsAttributes)}`,
+      {
+        amountCents: 0,
+        amountCurrency: 'EUR',
+        customLabel: '',
+        quantity: 1,
+      })
+  }, [setValue, watch])
+
   return (
-    <form className="flex flex-row gap-4" onSubmit={onSubmit}>
-      <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
-      <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
-    </form>
+    <div className="flex items-center gap-4 self-stretch">
+      <form className="flex flex-1 flex-row gap-4" onSubmit={onSubmit}>
+        <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
+        <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
+      </form>
+      <span className="text-sm text-slate-600">
+        {t('global.or').toUpperCase()}
+      </span>
+      <Button variant="outline" onClick={addCustomProduct}>{t('checkout.customProduct')}</Button>
+    </div>
   )
 }
 

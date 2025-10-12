@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useShipping, useShippingProducts } from '../../hooks'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -13,11 +13,13 @@ import { AxiosResponse } from 'axios'
 import { uuidNumber } from '@/helpers/uuid'
 import { formatLongDatetime } from '@/helpers/dates'
 import toast from 'react-hot-toast'
+import PrintBarcodesDialog from './print-barcodes-dialog'
 
 const Shipping = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const { id } = useParams()
+  const [isBarcodesDialogOpen, setIsBarcodesDialogOpen] = useState(false)
   const { data: shippingData } = useShipping(id)
   const { data: shippingProductsData } = useShippingProducts({
     'q[shippingIdEq]': id,
@@ -139,23 +141,35 @@ const Shipping = () => {
         )
       }
     >
-      <ShowSection title={t('shipping.customer')}>
+      <ShowSection title={t('shipping.provider')}>
         <div className="flex flex-col gap-2">
           <p>{shippingData.data.provider.name}</p>
         </div>
       </ShowSection>
+
       <ShowSection
         title={t('shipping.products')}
-        button={
-          shippingData?.data.state === 'pending' && (
-            <Button onClick={() => navigate(`/shippings/${id}/edit`)} size="sm" variant="ghost">
-              {t('shipping.editProducts')}
+        button={(
+          <div className="flex flex-row gap-2">
+            {shippingData?.data.state === 'pending' && (
+              <Button onClick={() => navigate(`/shippings/${id}/edit`)} size="sm" variant="ghost">
+                {t('shipping.editProducts')}
+              </Button>
+            )}
+            <Button onClick={() => setIsBarcodesDialogOpen(true)} size="sm">
+              {t('shipping.printBarcodes.title')}
             </Button>
-          )
-        }
+          </div>
+        )}
       >
         <DataTable data={shippingProductsData?.data || []} columns={columns} />
       </ShowSection>
+
+      <PrintBarcodesDialog
+        open={isBarcodesDialogOpen}
+        onClose={() => setIsBarcodesDialogOpen(false)}
+        shippingProducts={shippingProductsData?.data || []}
+      />
     </ShowContainer>
   )
 }

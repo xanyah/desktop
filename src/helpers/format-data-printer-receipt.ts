@@ -21,7 +21,7 @@ export const formatDataPrinterReceipt = (
     },
     {
       type: 'text' as const,
-      value: saleProduct.product.name,
+      value: saleProduct.product ? saleProduct.product.name : saleProduct.customLabel,
       style: { fontWeight: '500', width: '65%', textAlign: 'left', fontFamily: 'sans-serif' },
     },
     {

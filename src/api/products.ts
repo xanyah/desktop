@@ -17,6 +17,12 @@ export const updateProduct = (productId, params) =>
     },
   })
 
+export const archiveProduct = productId =>
+  xanyahApi.patch<Product>(`v2/products/${productId}/archive`)
+
+export const unarchiveProduct = productId =>
+  xanyahApi.patch<Product>(`v2/products/${productId}/unarchive`)
+
 export const createProduct = newProduct =>
   xanyahApi.post<Product>(`v2/products`, newProduct, {
     headers: {

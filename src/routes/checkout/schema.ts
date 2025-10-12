@@ -8,10 +8,11 @@ export const checkoutSchema = z.object({
     z.object({
       amountCents: z.number().positive(),
       amountCurrency: z.string(),
-      originalAmountCents: z.number().positive(),
-      originalAmountCurrency: z.string(),
-      productId: z.string(),
+      originalAmountCents: z.number().positive().optional(),
+      originalAmountCurrency: z.string().optional(),
+      productId: z.string().optional(),
       quantity: z.number().positive(),
+      customLabel: z.string().optional(),
     }),
   ).min(1),
   salePaymentsAttributes: z.array(

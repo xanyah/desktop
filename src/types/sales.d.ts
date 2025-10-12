@@ -10,7 +10,8 @@ interface SaleProduct {
   quantity: number
   amountCents: number
   amountCurrency: string
-  product: Product
+  product?: Product
+  customLabel?: string
 }
 
 interface SalePromotion {

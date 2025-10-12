@@ -1,10 +1,12 @@
 import { useFormContext } from 'react-hook-form'
 import { CheckoutSchemaType } from './schema'
-import { filter, map } from 'lodash'
+import { filter, isEmpty, map } from 'lodash'
 import Product from './product'
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Products = () => {
+  const { t } = useTranslation()
   const { watch, setValue } = useFormContext<CheckoutSchemaType>()
   const products = watch('saleProductsAttributes')
 
@@ -12,20 +14,47 @@ const Products = () => {
     setValue(`saleProductsAttributes.${index}.quantity`, value as any)
   }, [setValue])
 
-  const onRemove = useCallback((productId: string) => {
+  const onRemove = useCallback((index: number) => {
     const actualSaleProducts = watch('saleProductsAttributes')
-    setValue(`saleProductsAttributes`, filter(actualSaleProducts, product => product.productId !== productId))
+    setValue(`saleProductsAttributes`, filter(actualSaleProducts, (_, productIndex) => productIndex === index))
   }, [setValue, watch])
+
+  const onCustomLabelUpdate = useCallback((index: number, value: string | undefined | null) => {
+    setValue(`saleProductsAttributes.${index}.customLabel`, value as any)
+  }, [setValue])
+
+  const onPriceUpdate = useCallback((index: number, value: number | undefined | null) => {
+    setValue(`saleProductsAttributes.${index}.amountCents`, value as any)
+  }, [setValue])
 
   return (
     <div className="flex flex-col gap-4">
+      {!isEmpty(products) && (
+        <div className="flex flex-row items-center justify-between gap-4">
+          <div className="flex flex-col flex-1">
+            <h3>{t('checkout.product.name')}</h3>
+          </div>
+          <div className="w-24">
+            <h3>{t('checkout.product.unitPrice')}</h3>
+          </div>
+          <div className="w-24">
+            <h3>{t('checkout.product.quantity')}</h3>
+          </div>
+          <p className="w-32 text-right">
+            <h3>{t('checkout.product.totalPrice')}</h3>
+          </p>
+          <div className="w-10" />
+        </div>
+      )}
       {map(products, (productAttribute, index) => (
         <Product
           key={productAttribute.productId}
           saleProduct={productAttribute}
           onQuantityUpdate={newQuantity => onQuantityUpdate(index, newQuantity)}
           quantity={productAttribute.quantity}
-          onRemove={() => onRemove(productAttribute.productId)}
+          onRemove={() => onRemove(index)}
+          onCustomLabelUpdate={newLabel => onCustomLabelUpdate(index, newLabel)}
+          onPriceUpdate={newLabel => onPriceUpdate(index, newLabel)}
         />
       ),
       )}

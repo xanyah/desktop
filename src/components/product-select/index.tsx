@@ -24,6 +24,7 @@ const ProductSelect = ({
     (searchQuery) => {
       return getProducts({
         'q[storeIdEq]': store?.id,
+        'q[archivedAtNull]': true,
         'q[nameOrSkuOrManufacturerSkuOrUpcCont]': searchQuery,
         'q[s]': ['name'],
       })

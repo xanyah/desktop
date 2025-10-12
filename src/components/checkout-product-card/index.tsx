@@ -8,7 +8,7 @@ import Button from '../button'
 
 interface CheckoutProductCardProps {
   onQuantityUpdate: (newQuantity: number) => void
-  onRemove: () => void
+  onRemove?: () => void
   onRemoveCancel?: () => void
   productId: string
   quantity: number
@@ -55,17 +55,18 @@ const CheckoutProductCard = ({
           {formatPrice(product.amountCents * quantity, product.amountCurrency)}
         </p>
       )}
-      {willBeRemoved
-        ? (
-            <Button type="button" variant="ghost" onClick={onRemoveCancel}>
-              <RotateCcw />
-            </Button>
-          )
-        : (
-            <Button type="button" variant="ghost" onClick={onRemove}>
-              <X />
-            </Button>
-          )}
+      {onRemove && (
+        willBeRemoved
+          ? (
+              <Button type="button" variant="ghost" onClick={onRemoveCancel}>
+                <RotateCcw />
+              </Button>
+            )
+          : (
+              <Button type="button" variant="ghost" onClick={onRemove}>
+                <X />
+              </Button>
+            ))}
 
     </div>
   )

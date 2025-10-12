@@ -145,7 +145,7 @@ const ShippingEdit = () => {
         subtitle={t('shippingNew.pageSubtitle')}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <ShowSection title={t('shipping.customer')}>
+        <ShowSection title={t('shipping.provider')}>
           <div className="flex flex-col gap-2">
             <p>{shippingData?.data.provider.name}</p>
           </div>
