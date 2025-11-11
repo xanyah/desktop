@@ -1,15 +1,12 @@
 import { useFormContext } from 'react-hook-form'
 import { CheckoutSchemaType } from './schema'
-import { findIndex, head, size } from 'lodash'
-import { Button, InputText } from '@/components'
-import { FormEventHandler, useCallback } from 'react'
-import { useCurrentStore } from '@/hooks'
-import { getProducts } from '@/api'
+import { findIndex, size } from 'lodash'
+import { Button, ProductSearchForm } from '@/components'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const ProductSearch = () => {
   const { t } = useTranslation()
-  const store = useCurrentStore()
   const { watch, setValue } = useFormContext<CheckoutSchemaType>()
 
   const addProduct = useCallback((product: Product) => {
@@ -35,23 +32,6 @@ const ProductSearch = () => {
     }
   }, [setValue, watch])
 
-  const onSubmit = useCallback<FormEventHandler<HTMLFormElement>>(async (e) => {
-    try {
-      e.preventDefault()
-      const formData = new FormData(e.currentTarget)
-      const query = formData.get('query')
-      const { data } = await getProducts({ 'q[storeIdEq]': store?.id, 'q[skuOrUpcOrManufacturerSkuEq]': query, 'q[archivedAtNull]': true })
-
-      if (size(data) === 1) {
-        addProduct(head(data) as Product);
-        (e.target as HTMLFormElement).reset()
-      }
-    }
-    catch (err) {
-      console.error(err)
-    }
-  }, [addProduct, store])
-
   const addCustomProduct = useCallback(() => {
     const saleProductsAttributes = watch('saleProductsAttributes')
     setValue(
@@ -66,10 +46,7 @@ const ProductSearch = () => {
 
   return (
     <div className="flex items-center gap-4 self-stretch">
-      <form className="flex flex-1 flex-row gap-4" onSubmit={onSubmit}>
-        <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
-        <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
-      </form>
+      <ProductSearchForm onProductSelect={addProduct} />
       <span className="text-sm text-slate-600">
         {t('global.or').toUpperCase()}
       </span>

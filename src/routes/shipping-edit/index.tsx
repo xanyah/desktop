@@ -12,11 +12,11 @@ import {
   ProductForm,
   Dialog,
   ShowSection,
+  ProductSearchForm,
 } from '@/components'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ProductSelect from '@/components/product-select'
 import { findIndex, map, pick } from 'lodash'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
@@ -143,7 +143,7 @@ const ShippingEdit = () => {
       <FormContainer
         title={t('shippingNew.pageTitle')}
         subtitle={t('shippingNew.pageSubtitle')}
-        onSubmit={handleSubmit(onSubmit)}
+        isNotForm
       >
         <ShowSection title={t('shipping.provider')}>
           <div className="flex flex-col gap-2">
@@ -151,11 +151,7 @@ const ShippingEdit = () => {
           </div>
         </ShowSection>
         <div className="flex flex-row items-end gap-4">
-          <ProductSelect
-            onChange={onProductSelect}
-            label={t('shippingNew.productLabel')}
-            placeholder={t('shippingNew.productPlaceholder')}
-          />
+          <ProductSearchForm onProductSelect={product => onProductSelect(product.id)} />
           <Button type="button" onClick={() => setIsPanelOpen(true)}>
             <Plus />
             {t('shippingNew.newProductButtonLabel')}
@@ -175,6 +171,9 @@ const ShippingEdit = () => {
             onRemove={() => update(index, { ...field, _destroy: true })}
           />
         ))}
+        <Button className="self-end" onClick={handleSubmit(onSubmit)}>
+          {t('global.save')}
+        </Button>
       </FormContainer>
 
       <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>

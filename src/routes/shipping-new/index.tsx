@@ -13,11 +13,11 @@ import {
   RightPanel,
   ProductForm,
   Dialog,
+  ProductSearchForm,
 } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ProductSelect from '@/components/product-select'
 import { findIndex, map } from 'lodash'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
@@ -95,20 +95,20 @@ const Shipping = () => {
   }, [existingProductIndex, fields, update])
 
   const onProductSelect = useCallback(
-    (newProductId?: Product['id']) => {
-      if (!newProductId) {
+    (newProduct?: Product) => {
+      if (!newProduct) {
         return
       }
 
       const isExistingProductIndex = findIndex(fields, {
-        productId: newProductId,
+        productId: newProduct.id,
       })
 
       if (isExistingProductIndex !== -1) {
         setExistingProductIndex(isExistingProductIndex)
       }
       else {
-        append({ productId: newProductId, quantity: 1 })
+        append({ productId: newProduct.id, quantity: 1 })
       }
     },
     [fields, append],
@@ -119,7 +119,7 @@ const Shipping = () => {
       <FormContainer
         title={t('shippingNew.pageTitle')}
         subtitle={t('shippingNew.pageSubtitle')}
-        onSubmit={handleSubmit(onSubmit)}
+        isNotForm
       >
         <FormSection title={t('shippingNew.generalInformations')}>
           <Controller
@@ -135,11 +135,7 @@ const Shipping = () => {
             )}
           />
           <div className="flex flex-row items-end gap-4">
-            <ProductSelect
-              onChange={onProductSelect}
-              label={t('shippingNew.productLabel')}
-              placeholder={t('shippingNew.productPlaceholder')}
-            />
+            <ProductSearchForm onProductSelect={onProductSelect} />
             <Button type="button" onClick={() => setIsPanelOpen(true)}>
               <Plus />
               {t('shippingNew.newProductButtonLabel')}
@@ -157,13 +153,16 @@ const Shipping = () => {
             />
           ))}
         </FormSection>
+        <Button className="self-end" onClick={handleSubmit(onSubmit)}>
+          {t('global.save')}
+        </Button>
       </FormContainer>
 
       <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
         <ProductForm
           onCancel={() => setIsPanelOpen(false)}
           onSuccess={({ data }) => {
-            onProductSelect(data.id)
+            onProductSelect(data)
             setIsPanelOpen(false)
           }}
         />

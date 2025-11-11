@@ -1,13 +1,17 @@
-import { useFormContext } from 'react-hook-form'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 import { CheckoutSchemaType } from './schema'
-import { filter, isEmpty, map } from 'lodash'
+import { isEmpty, map } from 'lodash'
 import Product from './product'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const Products = () => {
   const { t } = useTranslation()
-  const { watch, setValue } = useFormContext<CheckoutSchemaType>()
+  const { control, watch, setValue } = useFormContext<CheckoutSchemaType>()
+  const { remove } = useFieldArray({
+    control,
+    name: 'saleProductsAttributes',
+  })
   const products = watch('saleProductsAttributes')
 
   const onQuantityUpdate = useCallback((index: number, value: number | undefined | null) => {
@@ -15,9 +19,8 @@ const Products = () => {
   }, [setValue])
 
   const onRemove = useCallback((index: number) => {
-    const actualSaleProducts = watch('saleProductsAttributes')
-    setValue(`saleProductsAttributes`, filter(actualSaleProducts, (_, productIndex) => productIndex === index))
-  }, [setValue, watch])
+    remove(index)
+  }, [remove])
 
   const onCustomLabelUpdate = useCallback((index: number, value: string | undefined | null) => {
     setValue(`saleProductsAttributes.${index}.customLabel`, value as any)

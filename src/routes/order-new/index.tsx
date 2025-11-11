@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { createOrder } from '../../api'
 import { useTranslation } from 'react-i18next'
-import { Button, CheckoutProductCard, CustomerForm, CustomerSelect, FormContainer, FormSection, ProductForm, RightPanel } from '@/components'
+import { Button, CheckoutProductCard, CustomerForm, CustomerSelect, FormContainer, FormSection, ProductForm, ProductSearchForm, RightPanel } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ProductSelect from '@/components/product-select'
 import { findIndex, map } from 'lodash'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
@@ -88,7 +87,7 @@ const Order = () => {
       <FormContainer
         title={t('orderNew.pageTitle')}
         subtitle={t('orderNew.pageSubtitle')}
-        onSubmit={handleSubmit(onSubmit)}
+        isNotForm
       >
         <FormSection title={t('orderNew.generalInformations')}>
           <div className="flex flex-row items-end gap-4">
@@ -110,11 +109,7 @@ const Order = () => {
             </Button>
           </div>
           <div className="flex flex-row items-end gap-4">
-            <ProductSelect
-              onChange={onProductSelect}
-              label={t('orderNew.productLabel')}
-              placeholder={t('orderNew.productPlaceholder')}
-            />
+            <ProductSearchForm onProductSelect={product => onProductSelect(product.id)} />
             <Button type="button" onClick={() => setIsPanelOpen('product')} variant="outline">
               <Plus />
               {t('global.create')}
@@ -131,6 +126,9 @@ const Order = () => {
             />
           ))}
         </FormSection>
+        <Button className="self-end" onClick={handleSubmit(onSubmit)}>
+          {t('global.save')}
+        </Button>
       </FormContainer>
       <RightPanel isOpen={!!isPanelOpen} onClose={() => setIsPanelOpen(undefined)}>
         {isPanelOpen === 'customer' && (
