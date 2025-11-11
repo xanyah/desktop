@@ -1,9 +1,12 @@
 import { Button, CheckoutProductCard, Dialog } from '@/components'
 import { useCurrentStore } from '@/hooks'
 import { useMutation } from '@tanstack/react-query'
-import { map } from 'lodash'
-import { useCallback, useEffect, useState } from 'react'
+import { map, values } from 'lodash'
+import { z } from '../../constants/zod'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 type PrintBarcodesDialogProps = {
   shippingProducts: ShippingProduct[]
@@ -11,22 +14,22 @@ type PrintBarcodesDialogProps = {
   onClose: () => void
 }
 
+const formSchema = z.array(
+  z.object({
+    id: z.string(),
+    quantity: z.number(),
+    product: z.any(),
+  }),
+).min(1)
+
+type FormType = z.infer<typeof formSchema>
+
 const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesDialogProps) => {
   const { t } = useTranslation()
   const store = useCurrentStore()
-  const [reactiveShippingProducts, setReactiveShippingProducts] = useState(shippingProducts)
-
-  const updateProductQuantity = useCallback((productId: Product['id'], quantity: number) => {
-    setReactiveShippingProducts(currentProducts => map(currentProducts, (shippingProduct) => {
-      if (shippingProduct.id === productId) {
-        return {
-          ...shippingProduct,
-          quantity: quantity,
-        }
-      }
-      return shippingProduct
-    }))
-  }, [setReactiveShippingProducts])
+  const { control, reset, getValues, watch } = useForm<FormType>({
+    resolver: zodResolver(formSchema),
+  })
 
   const { mutate: onPrint, isPending } = useMutation({
     mutationFn: async () => {
@@ -34,7 +37,7 @@ const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesD
         return
       }
 
-      for (const shippingProduct of reactiveShippingProducts) {
+      for (const shippingProduct of values(getValues())) {
         await window.electronAPI.printBarcode({ product: shippingProduct.product, store, count: shippingProduct.quantity })
       }
     },
@@ -42,8 +45,8 @@ const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesD
   })
 
   useEffect(() => {
-    setReactiveShippingProducts(shippingProducts)
-  }, [setReactiveShippingProducts, shippingProducts])
+    reset(shippingProducts)
+  }, [reset, shippingProducts])
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -51,14 +54,14 @@ const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesD
         <h2>{t('shipping.printBarcodes.title')}</h2>
 
         <div className="flex flex-col items-stretch gap-4">
-          {map(reactiveShippingProducts, shippingProduct => (
+          {map(watch(), (shippingProduct, index) => (
             <CheckoutProductCard
               withoutPrice
               productId={shippingProduct.product.id}
+              control={control as any}
               quantity={shippingProduct.quantity}
+              quantityInputName={`${index}.quantity`}
               key={shippingProduct.id}
-              onQuantityUpdate={newQuantity =>
-                updateProductQuantity(shippingProduct.product.id, newQuantity)}
             />
           ))}
         </div>

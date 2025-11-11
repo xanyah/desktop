@@ -124,9 +124,10 @@ const Order = () => {
             <CheckoutProductCard
               productId={field.productId}
               quantity={field.quantity}
+              control={control}
+              quantityInputName={`orderProductsAttributes.${index}.quantity`}
               key={field.productId}
               onRemove={() => remove(index)}
-              onQuantityUpdate={newQuantity => update(index, { ...field, quantity: newQuantity })}
             />
           ))}
         </FormSection>

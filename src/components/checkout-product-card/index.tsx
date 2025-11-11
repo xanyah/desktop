@@ -5,23 +5,26 @@ import { toNumber } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { InputText } from '../input'
 import Button from '../button'
+import { Control, Controller } from 'react-hook-form'
 
 interface CheckoutProductCardProps {
-  onQuantityUpdate: (newQuantity: number) => void
   onRemove?: () => void
   onRemoveCancel?: () => void
   productId: string
   quantity: number
+  quantityInputName: string
+  control: Control<any, any, any>
   withoutPrice?: boolean
   willBeRemoved?: boolean
 }
 
 const CheckoutProductCard = ({
   productId,
+  control,
   onRemove,
   quantity,
-  onQuantityUpdate,
   withoutPrice,
+  quantityInputName,
   willBeRemoved,
   onRemoveCancel,
 }: CheckoutProductCardProps) => {
@@ -45,9 +48,15 @@ const CheckoutProductCard = ({
         </p>
       </div>
       <div className="w-24">
-        <InputText
-          value={quantity}
-          onChange={e => onQuantityUpdate(toNumber(e.target.value))}
+        <Controller
+          control={control}
+          name={quantityInputName}
+          render={({ field: { onChange, value } }) => (
+            <InputText
+              value={value}
+              onChange={e => onChange(toNumber(e.target.value))}
+            />
+          )}
         />
       </div>
       {!withoutPrice && (

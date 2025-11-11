@@ -150,10 +150,10 @@ const Shipping = () => {
               withoutPrice
               productId={field.productId}
               quantity={field.quantity}
+              quantityInputName={`shippingProductsAttributes.${index}.quantity`}
               key={field.productId}
               onRemove={() => remove(index)}
-              onQuantityUpdate={newQuantity =>
-                update(index, { ...field, quantity: newQuantity })}
+              control={control}
             />
           ))}
         </FormSection>

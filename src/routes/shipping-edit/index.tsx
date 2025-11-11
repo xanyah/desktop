@@ -52,7 +52,7 @@ const ShippingEdit = () => {
   const { data: shippingProductsData } = useShippingProducts({
     'q[shippingIdEq]': id,
   })
-  const { fields, append, update } = useFieldArray({
+  const { fields, update, append } = useFieldArray({
     keyName: 'rhfId',
     control,
     name: 'shippingProductsAttributes',
@@ -123,7 +123,7 @@ const ShippingEdit = () => {
         append({ productId: newProductId, quantity: 1 })
       }
     },
-    [fields, append],
+    [append, fields],
   )
 
   useEffect(() => {
@@ -161,17 +161,18 @@ const ShippingEdit = () => {
             {t('shippingNew.newProductButtonLabel')}
           </Button>
         </div>
+
         {map(fields, (field, index) => (
           <CheckoutProductCard
             withoutPrice
             productId={field.productId}
             quantity={field.quantity}
             key={field.rhfId}
+            control={control}
+            quantityInputName={`shippingProductsAttributes.${index}.quantity`}
             willBeRemoved={field._destroy}
             onRemoveCancel={() => update(index, { ...field, _destroy: undefined })}
             onRemove={() => update(index, { ...field, _destroy: true })}
-            onQuantityUpdate={newQuantity =>
-              update(index, { ...field, quantity: newQuantity })}
           />
         ))}
       </FormContainer>
