@@ -39,6 +39,7 @@ const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesD
 
       for (const shippingProduct of values(getValues())) {
         await window.electronAPI.printBarcode({ product: shippingProduct.product, store, count: shippingProduct.quantity })
+        await new Promise(resolve => setTimeout(resolve, shippingProduct.quantity * 1000))
       }
     },
     onSuccess: () => onClose(),
