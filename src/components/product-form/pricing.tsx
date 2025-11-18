@@ -13,7 +13,7 @@ const ProductFormPricing = () => {
   const { control, setValue, watch } = useFormContext<Partial<formSchemaType>>()
   const vatRateId = watch('vatRateId')
   const ratioValue = watch('ratio')
-  const buyingAmount = watch('buyingAmount')
+  const buyingAmount = watch('buyingAmountCents')
   const ratioEnabled = watch('ratioEnabled')
 
   const { data: vatRateData } = useVatRate(vatRateId)
@@ -30,15 +30,15 @@ const ProductFormPricing = () => {
 
     const total = buyingAmount * ratioValue
 
-    setValue('amount', round(total, 2))
-    setValue('taxFreeAmount', round(ceil(total / (1 + processedVatRate), 2), 2))
+    setValue('amountCents', round(total, 2))
+    setValue('taxFreeAmountCents', round(ceil(total / (1 + processedVatRate), 2), 2))
   }, [buyingAmount, processedVatRate, setValue, ratioValue])
 
   const setPriceFromTaxFreePrice = useCallback(
     (value?: number | null) => {
       if (!value) {
-        setValue('taxFreeAmount', undefined)
-        setValue('amount', undefined)
+        setValue('taxFreeAmountCents', undefined)
+        setValue('amountCents', undefined)
 
         return
       }
@@ -47,8 +47,8 @@ const ProductFormPricing = () => {
         return
       }
 
-      setValue('taxFreeAmount', value)
-      setValue('amount', ceil(value * (1 + processedVatRate), 2))
+      setValue('taxFreeAmountCents', value)
+      setValue('amountCents', ceil(value * (1 + processedVatRate), 2))
     },
     [processedVatRate, setValue],
   )
@@ -56,16 +56,16 @@ const ProductFormPricing = () => {
   const setTaxFreeFromPrice = useCallback(
     (value?: number | null) => {
       if (!value) {
-        setValue('amount', undefined)
-        setValue('taxFreeAmount', undefined)
+        setValue('amountCents', undefined)
+        setValue('taxFreeAmountCents', undefined)
         return
       }
       if (isNaN(value)) {
         return
       }
 
-      setValue('amount', value)
-      setValue('taxFreeAmount', ceil(value / (1 + processedVatRate), 2))
+      setValue('amountCents', value)
+      setValue('taxFreeAmountCents', ceil(value / (1 + processedVatRate), 2))
     },
     [processedVatRate, setValue],
   )
@@ -80,7 +80,7 @@ const ProductFormPricing = () => {
     <FormSection title={t('product.pricing')}>
       <Controller
         control={control}
-        name="buyingAmount"
+        name="buyingAmountCents"
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <InputText
             icon={<Euro />}
@@ -147,7 +147,7 @@ const ProductFormPricing = () => {
 
       <Controller
         control={control}
-        name="taxFreeAmount"
+        name="taxFreeAmountCents"
         render={({ field: { value }, fieldState: { error } }) => (
           <InputText
             icon={<Euro />}
@@ -166,9 +166,8 @@ const ProductFormPricing = () => {
 
       <Controller
         control={control}
-        name="amount"
+        name="amountCents"
         render={({ field: { value }, fieldState: { error } }) => (
-          // TODO: Should be tax_free amount * category.vat_rate
           <InputText
             icon={<Euro />}
             step="0.1"
