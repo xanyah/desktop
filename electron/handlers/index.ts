@@ -35,6 +35,10 @@ export const registerHandlers = (app: Electron.App, window: BrowserWindow | null
      */
     return new Promise<void>((resolve, reject) => {
       try {
+        if (count <= 0) {
+          return resolve()
+        }
+
         const instruction = '\nN\nB270,100,0,E30,2,24,54,B,"' + product.sku.trim() + '"\n' +
           'A270,05,0,4,1,1,N,"' + product.amountCents / 100 + ' E"\n' +
           'A270,55,0,2,1,1,N,"' + product.name + '"\n' +
