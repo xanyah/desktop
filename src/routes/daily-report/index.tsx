@@ -46,7 +46,7 @@ const DailyReport = () => {
     'q[storeIdEq]': currentStore?.id,
   })
 
-  const totalPayments = map(paymentTypes?.data, (paymentType) => {
+  const totalPayments = useMemo(() => map(paymentTypes?.data, (paymentType) => {
     const foundPayments = filter(
       salesPayments?.data,
       item => item?.paymentType?.id === paymentType.id,
@@ -61,7 +61,9 @@ const DailyReport = () => {
         ? foundPayments[0].totalAmountCurrency
         : undefined,
     }
-  })
+  }), [paymentTypes, salesPayments])
+
+  const totalAmountCents = useMemo(() => sumBy(totalPayments, 'totalAmountCents'), [totalPayments])
 
   return (
     <div className="flex flex-col gap-10">
@@ -83,14 +85,14 @@ const DailyReport = () => {
         isNotForm
       >
         <div className="flex gap-14">
-          <div className="w-1/2">
+          <div className="w-1/2 flex flex-col gap-2">
             <h1>{currentStore?.name}</h1>
-            <h3 className="mt-3.5">{date.toFormat('dd/MM/yyyy')}</h3>
+            <h3>{date.toFormat('dd/MM/yyyy')}</h3>
           </div>
-          <div className="flex flex-col gap-6 w-1/2">
+          <div className="flex flex-col gap-2 w-1/2 print:text-sm print:gap-1">
             {map(totalPayments, totalPayment => (
               <div className="flex justify-between" key={totalPayment.name}>
-                <p>{totalPayment?.name}</p>
+                <p className="text-slate-600">{totalPayment?.name}</p>
                 <p>
                   {formatPrice(
                     totalPayment.totalAmountCents,
@@ -104,8 +106,8 @@ const DailyReport = () => {
               <h4 className="font-semibold">{t('dailyReport.total')}</h4>
               <p className="font-semibold">
                 {formatPrice(
-                  sumBy(totalPayments, 'totalAmountCents'),
-                  totalPayments[0]?.currency,
+                  totalAmountCents,
+                  'EUR',
                   '€',
                 )}
               </p>
@@ -115,46 +117,47 @@ const DailyReport = () => {
       </FormContainer>
 
       <FormContainer
-        classname="w-full"
         isNotForm
         title={t('dailyReport.sales')}
       >
-        {isEmpty(sales?.data)
-          ? (
-              <p className="text-center">{t('dailyReport.emptySales')}</p>
-            )
-          : (
-              map(sales?.data, sale => (
-                <div>
-                  <h4 className="font-semibold">
-                    {t('print.receipt.receiptNumber', {
-                      receiptNumber: uuidNumber(sale.id),
-                    })}
-                  </h4>
-                  {map(
-                    filter(
-                      salesPayments?.data,
-                      salesPayment => salesPayment.saleId === sale.id,
-                    ),
-                    payment => (
-                      <div className="flex flex-col mt-5">
-                        <div className="flex justify-between">
-                          <p>{payment.paymentType?.name}</p>
+        <div className="flex flex-col gap-4 items-stretch print:gap-2">
+          {isEmpty(sales?.data)
+            ? (
+                <p className="text-center">{t('dailyReport.emptySales')}</p>
+              )
+            : (
+                map(sales?.data, sale => (
+                  <div className="flex flex-row items-center gap-2 print:gap-1" key={sale.id}>
+                    <h4 className="font-semibold flex-1 print:text-sm">
+                      {t('print.receipt.receiptNumber', {
+                        receiptNumber: uuidNumber(sale.id),
+                      })}
+                    </h4>
+                    <div className="flex flex-col gap-2 print:gap-1 print:text-xs">
+                      {map(
+                        filter(
+                          salesPayments?.data,
+                          salesPayment => salesPayment.saleId === sale.id,
+                        ),
+                        payment => (
+                          <div className="flex flex-row justify-between gap-4 print:text-xs" key={payment.id}>
+                            <p>{payment.paymentType?.name}</p>
 
-                          <p>
-                            {formatPrice(
-                              payment.totalAmountCents,
-                              payment.totalAmountCurrency,
-                              '€',
-                            )}
-                          </p>
-                        </div>
-                      </div>
-                    ),
-                  )}
-                </div>
-              ))
-            )}
+                            <p>
+                              {formatPrice(
+                                payment.totalAmountCents,
+                                payment.totalAmountCurrency,
+                                '€',
+                              )}
+                            </p>
+                          </div>
+                        ),
+                      )}
+                    </div>
+                  </div>
+                ))
+              )}
+        </div>
       </FormContainer>
     </div>
   )

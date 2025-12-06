@@ -39,7 +39,7 @@ const FormContainer = ({
       {...formProps}
       className={`flex flex-col gap-8 max-w-2xl ${classname}`}
     >
-      <div className="flex flex-row items-center justify-between border-b pb-4">
+      <div className="flex flex-row items-center justify-between border-b pb-4 print:hidden">
         {title && (
           <div className="flex flex-col gap-2 w-full">
             {typeof title === 'string' ? <h1>{title}</h1> : title}
