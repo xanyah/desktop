@@ -43,15 +43,13 @@ const Products = () => {
           <div className="w-24">
             <h3>{t('checkout.product.quantity')}</h3>
           </div>
-          <p className="w-32 text-right">
-            <h3>{t('checkout.product.totalPrice')}</h3>
-          </p>
+          <h3 className="w-32 text-right">{t('checkout.product.totalPrice')}</h3>
           <div className="w-10" />
         </div>
       )}
       {map(products, (productAttribute, index) => (
         <Product
-          key={productAttribute.productId}
+          key={productAttribute.productId || Math.random()}
           saleProduct={productAttribute}
           onQuantityUpdate={newQuantity => onQuantityUpdate(index, newQuantity)}
           quantity={productAttribute.quantity}

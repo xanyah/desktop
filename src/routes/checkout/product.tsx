@@ -34,14 +34,14 @@ const Product = ({
             onChange={e => onCustomLabelUpdate(e.target.value)}
           />
         </div>
-        <p className="w-24 text-right">
+        <div className="w-24 text-right">
           <InputText
             type="number"
             min="0"
             value={formatPriceCentsInputValue(saleProduct.amountCents)}
             onChange={e => onPriceUpdate(formatPriceCentsInput(e))}
           />
-        </p>
+        </div>
         <div className="w-24">
           <InputText
             type="number"

@@ -15,6 +15,7 @@ import { useCurrentStore } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import Customer from './customer'
+import useFormPersist from 'react-hook-form-persist'
 
 const Checkout = () => {
   const { t } = useTranslation()
@@ -26,6 +27,12 @@ const Checkout = () => {
     resolver: zodResolver(checkoutSchema),
   })
   const toastId = useRef<string>(null)
+
+  useFormPersist('checkout', {
+    watch: form.watch,
+    setValue: form.setValue,
+    storage: window.localStorage,
+  })
 
   const { mutate } = useMutation({
     mutationFn: createSale,
@@ -71,9 +78,14 @@ const Checkout = () => {
         <FormSection title={t('checkout.payment')}>
           <Payment />
         </FormSection>
-        <Button className="self-end" onClick={form.handleSubmit(onSubmit)}>
-          {t('checkout.validateButton')}
-        </Button>
+        <div className="flex flex-row gap-4 justify-end">
+          <Button onClick={() => form.reset()} type="button" variant="ghost">
+            {t('checkout.resetButton')}
+          </Button>
+          <Button onClick={form.handleSubmit(onSubmit)}>
+            {t('checkout.validateButton')}
+          </Button>
+        </div>
       </FormContainer>
     </FormProvider>
   )

@@ -22,7 +22,7 @@ export const formatPriceCentsInput = (e: ChangeEvent<HTMLInputElement>) => {
     return null
   }
 
-  return toNumber(e.target.value) * 100
+  return Math.round(toNumber(e.target.value) * 100)
 }
 
 export const formatPriceCentsInputValue = (value: number | undefined | null) => {
