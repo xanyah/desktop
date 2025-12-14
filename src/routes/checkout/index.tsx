@@ -40,6 +40,7 @@ const Checkout = () => {
       toastId.current = toast.loading(t('global.loading'))
     },
     onSuccess: (data) => {
+      form.reset()
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['sales'] })
       navigate(`/sales/${data.data.id}`)
@@ -51,11 +52,10 @@ const Checkout = () => {
     },
   })
 
-  const onSubmit = useCallback(
-    (data: CheckoutSchemaType) => {
-      mutate({ ...data, storeId: store?.id })
-    },
-    [mutate, store],
+  const onSubmit = useCallback((data: CheckoutSchemaType) => {
+    mutate({ ...data, storeId: store?.id })
+  },
+  [mutate, store],
   )
 
   return (
