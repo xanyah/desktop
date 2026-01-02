@@ -57,6 +57,7 @@
     "sweetalert": "^2.1.0",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
+    "use-query-params": "^2.2.2",
     "uuid": "^11.0.5",
     "vite-plugin-electron": "^0.29.0",
     "yarn": "^1.22.22",
@@ -123,6 +124,6 @@
     "start": "cross-env NODE_ENV=development electron-forge start",
     "test": "jest"
   },
-  "version": "0.11.2",
+  "version": "0.12.0",
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

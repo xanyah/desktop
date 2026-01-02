@@ -43,12 +43,14 @@ const ApiDataSelect = ({
     if (data?.data) {
       return formatRecord(data.data)
     }
+
     return null
   }, [data, formatRecord])
 
   const loadOptions = useCallback(
     async (inputValue: string) => {
       const { data } = await getFilteredRecords(inputValue)
+
       return map(data, formatRecord)
     },
     [getFilteredRecords, formatRecord],

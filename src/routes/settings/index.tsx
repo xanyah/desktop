@@ -3,19 +3,20 @@ import {
   FormContainer,
   FormSection,
   ReactSelect,
+  VatRateSelect,
 } from '../../components'
 
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { find, map } from 'lodash'
+import { find, map, pick } from 'lodash'
 import { useLocalStorage, usePrint, usePrinters } from '@/hooks'
 import {
   pageSizeOptions,
-  printerSchema,
-  printerSchemaType,
+  settingsSchema,
+  settingsSchemaType,
   printTestData,
 } from './config'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -27,9 +28,13 @@ const Settings = () => {
     'printer',
     undefined,
   )
+  const [defaultVatRateId, setDefaultVatRateId] = useLocalStorage(
+    'defaultVatRateId',
+    undefined,
+  )
 
-  const { control, handleSubmit, reset } = useForm<printerSchemaType>({
-    resolver: zodResolver(printerSchema),
+  const { control, handleSubmit, setValue } = useForm<settingsSchemaType>({
+    resolver: zodResolver(settingsSchema),
     defaultValues: { name: '', pageSize: '' },
   })
 
@@ -42,7 +47,8 @@ const Settings = () => {
     if (selectedPrinter && isSuccess && initialRender) {
       const findPrinter = find(printers, p => p.name === selectedPrinter.name)
       if (findPrinter) {
-        reset(selectedPrinter)
+        setValue('name', selectedPrinter.name)
+        setValue('pageSize', selectedPrinter.pageSize)
       }
       else {
         removePrinter()
@@ -54,7 +60,7 @@ const Settings = () => {
     selectedPrinter,
     printers,
     removePrinter,
-    reset,
+    setValue,
     initialRender,
   ])
 
@@ -67,22 +73,24 @@ const Settings = () => {
       : []
   }, [printers])
 
-  const onSavePrinter = (data: printerSchemaType) => {
-    setSelectedPrinter(data)
+  const onSavePrinter = useCallback((data: settingsSchemaType) => {
+    setSelectedPrinter(pick(data, ['name', 'pageSize']))
+    setDefaultVatRateId(data.defaultVatRateId || undefined)
     toast.success(t('global.saved'))
-  }
+  }, [setSelectedPrinter, setDefaultVatRateId, t])
 
   const onPrintTest = () => {
     print(printTestData)
   }
 
+  useEffect(() => {
+    setValue('defaultVatRateId', defaultVatRateId)
+  }, [setValue, defaultVatRateId])
+
   return (
     <FormContainer isNotForm title={t('settings.pageTitle')}>
-      <FormSection title={t('settings.formSection')}>
-        <form
-          className="flex flex-col gap-8"
-          onSubmit={handleSubmit(onSavePrinter)}
-        >
+      <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSavePrinter)}>
+        <FormSection title={t('settings.formSection')}>
           <Controller
             control={control}
             name="name"
@@ -111,6 +119,7 @@ const Settings = () => {
               />
             )}
           />
+
           <div className="flex gap-4 self-end">
             {selectedPrinter && (
               <Button variant="outline" type="button" onClick={onPrintTest}>
@@ -119,8 +128,28 @@ const Settings = () => {
             )}
             <Button type="submit">{t('global.save')}</Button>
           </div>
-        </form>
-      </FormSection>
+        </FormSection>
+        <FormSection title={t('settings.formSection')}>
+
+          <Controller
+            control={control}
+            name="defaultVatRateId"
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <VatRateSelect
+                error={error?.message}
+                onChange={onChange}
+                value={value}
+                label={t('product.vatLabel')}
+                placeholder={t('product.vatPlaceholder')}
+              />
+            )}
+          />
+
+          <div className="flex gap-4 self-end">
+            <Button type="submit">{t('global.save')}</Button>
+          </div>
+        </FormSection>
+      </form>
     </FormContainer>
   )
 }

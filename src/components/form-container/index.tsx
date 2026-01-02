@@ -7,7 +7,7 @@ type FormContainerProps = {
   subtitle?: string
   isLoading?: boolean
   submitButtonLabel?: string
-  classname?: string
+  className?: string
   button?: ReactNode
   onCancel?: () => void
 } & (
@@ -22,7 +22,7 @@ type FormContainerProps = {
 const FormContainer = ({
   title,
   subtitle,
-  classname,
+  className,
   children,
   isLoading,
   button,
@@ -37,7 +37,7 @@ const FormContainer = ({
   return (
     <Component
       {...formProps}
-      className={`flex flex-col gap-8 max-w-2xl ${classname}`}
+      className={`flex flex-col gap-8 max-w-2xl ${className}`}
     >
       <div className="flex flex-row items-center justify-between border-b pb-4 print:hidden">
         {title && (

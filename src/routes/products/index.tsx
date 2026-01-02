@@ -85,6 +85,7 @@ const Products = () => {
       onSearchQueryChange={onSearchQueryChange}
       currentPage={page}
       totalPages={data?.headers['total-pages']}
+      totalElements={data?.headers['total-count']}
       onPageChange={setPage}
       searchQuery={searchQuery}
       isLoading={isLoading}

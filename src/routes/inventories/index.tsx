@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useCurrentStore, useInventories } from '../../hooks'
-import { Badge, TableWithSearch } from '@/components'
+import { TableWithSearch } from '@/components'
 import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
+import { useTranslation } from 'react-i18next'
 
 const Inventories = () => {
-  useBreadCrumbContext([{ label: 'Inventories' }])
+  const { t } = useTranslation()
+  useBreadCrumbContext([{ label: t('inventories.pageTitle') }])
   const currentStore = useCurrentStore()
   const [page, setPage] = useState(1)
 
@@ -19,35 +21,27 @@ const Inventories = () => {
   const columns = useMemo(
     () =>
       [
-        columnHelper.accessor('lockedAt', {
-          header: 'Statut',
-          cell: props =>
-            props.getValue()
-              ? (
-                  <Badge variant="outline">Locked</Badge>
-                )
-              : (
-                  <Badge variant="default">Open</Badge>
-                ),
-        }),
-        columnHelper.accessor('id', {
-          header: 'ID',
+        columnHelper.accessor('createdAt', {
+          header: t('inventories.table.createdAt'),
           cell: props => (
-            <Link className="underline" to={`/orders/${props.getValue()}`}>
+            <Link
+              className="underline"
+              to={`/inventories/${props.row.original.id}`}
+            >
               {props.getValue()}
             </Link>
           ),
         }),
-        columnHelper.accessor('createdAt', {
-          header: 'Creation date',
+        columnHelper.accessor('status', {
+          header: t('inventories.table.status'),
         }),
       ] as ColumnDef<Inventory>[],
-    [columnHelper],
+    [columnHelper, t],
   )
 
   return (
     <TableWithSearch
-      searchPlaceholder="Search an inventory"
+      searchPlaceholder={t('inventories.searchPlaceholder')}
       isLoading={isLoading}
       columns={columns}
       data={data?.data}

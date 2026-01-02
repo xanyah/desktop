@@ -5,7 +5,11 @@ import { Button, ProductSearchForm } from '@/components'
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
-const ProductSearch = () => {
+type ProductSearchProps = {
+  productSearchInputRef?: React.RefObject<HTMLInputElement | null>
+}
+
+const ProductSearch = ({ productSearchInputRef }: ProductSearchProps) => {
   const { t } = useTranslation()
   const { watch, setValue } = useFormContext<CheckoutSchemaType>()
 
@@ -46,7 +50,10 @@ const ProductSearch = () => {
 
   return (
     <div className="flex items-center gap-4 self-stretch">
-      <ProductSearchForm onProductSelect={addProduct} />
+      <ProductSearchForm
+        productSearchInputRef={productSearchInputRef}
+        onProductSelect={addProduct}
+      />
       <span className="text-sm text-slate-600">
         {t('global.or').toUpperCase()}
       </span>

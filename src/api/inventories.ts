@@ -5,7 +5,7 @@ export const getInventories = params =>
   xanyahApi.get<Inventory[]>('v2/inventories', decamelizeKeys({ params }))
 
 export const getInventory = id =>
-  xanyahApi.get<Inventory>(`inventories/${id}`)
+  xanyahApi.get<Inventory>(`v2/inventories/${id}`)
 
 export const getInventoryProducts = params =>
-  xanyahApi.get<InventoryProduct[]>('inventory_products', decamelizeKeys({ params }))
+  xanyahApi.get<InventoryProduct[]>('v2/inventory_products', decamelizeKeys({ params }))

@@ -133,6 +133,8 @@
     "confirm": "Confirmer",
     "create": "Créer",
     "edit": "Éditer",
+    "elementsCount_one": "{{count}} élément",
+    "elementsCount_other": "{{count}} éléments",
     "loading": "Chargement en cours...",
     "or": "Ou",
     "print": "Imprimer",
@@ -142,8 +144,26 @@
     "savingError": "Erreur lors de l'enregistrement",
     "unarchive": "Désarchiver"
   },
+  "home": "Accueil",
   "inventories": {
-    "pageTitle": "Inventaires"
+    "pageTitle": "Inventaires",
+    "searchPlaceholder": "Rechercher un inventaire...",
+    "table": {
+      "createdAt": "Date de création",
+      "status": "Statut"
+    }
+  },
+  "inventory": {
+    "table": {
+      "currentQuantity": "Quantité actuelle",
+      "manufacturerSku": "Code fabricant",
+      "name": "Nom",
+      "newQuantity": "Nouvelle quantité",
+      "sku": "Code barre",
+      "status": "Statut",
+      "statusMismatch": "Incohérence",
+      "statusOk": "OK"
+    }
   },
   "manufacturer": {
     "codeHint": "Un code permettant d'identifier le fabricant (souvent les 4 premières lettres du fabricant)",
@@ -279,6 +299,8 @@
     "skuHint": "Le code barre boutique est un code barre spécifique à la boutique pour identifier l'article",
     "skuLabel": "Code barre boutique",
     "skuPlaceholder": "Code barre boutique de l'article",
+    "subCategoryLabel": "Sous-Catégorie",
+    "subCategoryPlaceholder": "Sélectionner une sous-catégorie",
     "taxFreeAmountHint": "Le prix hors taxes est le prix de l'article avant l'application de la TVA",
     "taxFreeAmountLabel": "Prix hors taxes",
     "taxFreeAmountPlaceholder": "Prix hors taxes de l'article",

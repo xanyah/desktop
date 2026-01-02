@@ -63,8 +63,8 @@
     "promotionAddButton": "Add a discount",
     "promotionAmountLabel": "Amount",
     "promotionAmountPlaceholder": "Promotion",
-    "searchButton": "Search",
     "resetButton": "Reset",
+    "searchButton": "Search",
     "searchPlaceholder": "Barcode or article manufacturer code",
     "subtotal": "Subtotal",
     "total": "Total",
@@ -133,6 +133,8 @@
     "confirm": "Confirm",
     "create": "Create",
     "edit": "Edit",
+    "elementsCount_one": "{{count}} item",
+    "elementsCount_other": "{{count}} items",
     "loading": "Loading in progress ...",
     "or": "Or",
     "print": "Print",
@@ -142,8 +144,26 @@
     "savingError": "Error while saving",
     "unarchive": "Unarchive"
   },
+  "home": "Home",
   "inventories": {
-    "pageTitle": "Inventories"
+    "pageTitle": "Inventories",
+    "searchPlaceholder": "Search an inventory...",
+    "table": {
+      "createdAt": "Creation date",
+      "status": "Status"
+    }
+  },
+  "inventory": {
+    "table": {
+      "currentQuantity": "Current quantity",
+      "manufacturerSku": "Manufacturer code",
+      "name": "Name",
+      "newQuantity": "New quantity",
+      "sku": "Barcode",
+      "status": "Status",
+      "statusMismatch": "Mismatch",
+      "statusOk": "OK"
+    }
   },
   "manufacturer": {
     "codeHint": "A code to identify the manufacturer (often the first 4 letters of the manufacturer)",
@@ -279,6 +299,8 @@
     "skuHint": "SKU is a barcode specific to the store to identify the article",
     "skuLabel": "SKU",
     "skuPlaceholder": "SKU of the article",
+    "subCategoryLabel": "Subcategory",
+    "subCategoryPlaceholder": "Select a subcategory...",
     "taxFreeAmountHint": "The price excluding taxes is the price of the item before applying VAT",
     "taxFreeAmountLabel": "Price excluding taxes",
     "taxFreeAmountPlaceholder": "Price excluding taxes of the article",

@@ -80,7 +80,7 @@ const DailyReport = () => {
             </Button>
           </div>
         )}
-        classname="w-full"
+        className="w-full"
         title={t('dailyReport.pageTitle')}
         isNotForm
       >

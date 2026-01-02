@@ -38,67 +38,71 @@ import Settings from './settings'
 import { isElectron } from '@/helpers/electron'
 import DailyReport from './daily-report'
 import ShippingEdit from './shipping-edit'
+import { QueryParamProvider } from 'use-query-params'
+import ReactRouter7Adapter from '@/constants/react-router-v7-adapter'
 
 const RouterComponent = isElectron() ? HashRouter : BrowserRouter
 
 const Router = () => {
   return (
     <RouterComponent>
-      <Routes>
-        <Route element={<OfflineLayout />}>
-          <Route path="sign-in" element={<SignIn />} />
-        </Route>
-        <Route element={<OnlineLayout />}>
-          <Route path="" element={<Navigate to="/checkout" />} />
-          <Route path="account" element={<Account />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="categories/:id/edit" element={<Category />} />
-          <Route path="categories/new" element={<Category />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="daily-report" element={<DailyReport />} />
-          <Route path="custom-attributes/new" element={<CustomAttribute />} />
-          <Route
-            path="custom-attributes/:id/edit"
-            element={<CustomAttribute />}
-          />
-          <Route path="custom-attributes" element={<CustomAttributes />} />
-          <Route
-            path="custom-attributes/:id/edit"
-            element={<CustomAttribute />}
-          />
-          <Route path="custom-attributes/new" element={<CustomAttribute />} />
-          <Route path="customers" element={<Customers />} />
-          <Route path="customers/:id/edit" element={<Customer />} />
-          <Route path="customers/new" element={<Customer />} />
-          <Route path="inventories" element={<Inventories />} />
-          <Route path="inventories/:id" element={<Inventory />} />
-          <Route path="manufacturers" element={<Manufacturers />} />
-          <Route path="manufacturers/:id/edit" element={<Manufacturer />} />
-          <Route path="manufacturers/new" element={<Manufacturer />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="orders/:id" element={<Order />} />
-          <Route path="orders/new" element={<OrderNew />} />
-          <Route path="payment-types" element={<PaymentTypes />} />
-          <Route path="payment-types/:id/edit" element={<PaymentType />} />
-          <Route path="payment-types/new" element={<PaymentType />} />
-          <Route path="products" element={<Products />} />
-          <Route path="products/new" element={<Product />} />
-          <Route path="products/:id/edit" element={<Product />} />
-          <Route path="products/new" element={<Product />} />
-          <Route path="providers" element={<Providers />} />
-          <Route path="providers/:id/edit" element={<Provider />} />
-          <Route path="providers/new" element={<Provider />} />
-          <Route path="sales" element={<Sales />} />
-          <Route path="sales/:id" element={<Sale />} />
-          {isElectron() && <Route path="settings" element={<Settings />} />}
-          <Route path="shippings" element={<Shippings />} />
-          <Route path="shippings/:id" element={<Shipping />} />
-          <Route path="shippings/:id/edit" element={<ShippingEdit />} />
-          <Route path="shippings/new" element={<ShippingNew />} />
-          <Route path="store" element={<Store />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Route>
-      </Routes>
+      <QueryParamProvider adapter={ReactRouter7Adapter}>
+        <Routes>
+          <Route element={<OfflineLayout />}>
+            <Route path="sign-in" element={<SignIn />} />
+          </Route>
+          <Route element={<OnlineLayout />}>
+            <Route path="" element={<Navigate to="/checkout" />} />
+            <Route path="account" element={<Account />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="categories/:id/edit" element={<Category />} />
+            <Route path="categories/new" element={<Category />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="daily-report" element={<DailyReport />} />
+            <Route path="custom-attributes/new" element={<CustomAttribute />} />
+            <Route
+              path="custom-attributes/:id/edit"
+              element={<CustomAttribute />}
+            />
+            <Route path="custom-attributes" element={<CustomAttributes />} />
+            <Route
+              path="custom-attributes/:id/edit"
+              element={<CustomAttribute />}
+            />
+            <Route path="custom-attributes/new" element={<CustomAttribute />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="customers/:id/edit" element={<Customer />} />
+            <Route path="customers/new" element={<Customer />} />
+            <Route path="inventories" element={<Inventories />} />
+            <Route path="inventories/:id" element={<Inventory />} />
+            <Route path="manufacturers" element={<Manufacturers />} />
+            <Route path="manufacturers/:id/edit" element={<Manufacturer />} />
+            <Route path="manufacturers/new" element={<Manufacturer />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="orders/:id" element={<Order />} />
+            <Route path="orders/new" element={<OrderNew />} />
+            <Route path="payment-types" element={<PaymentTypes />} />
+            <Route path="payment-types/:id/edit" element={<PaymentType />} />
+            <Route path="payment-types/new" element={<PaymentType />} />
+            <Route path="products" element={<Products />} />
+            <Route path="products/new" element={<Product />} />
+            <Route path="products/:id/edit" element={<Product />} />
+            <Route path="products/new" element={<Product />} />
+            <Route path="providers" element={<Providers />} />
+            <Route path="providers/:id/edit" element={<Provider />} />
+            <Route path="providers/new" element={<Provider />} />
+            <Route path="sales" element={<Sales />} />
+            <Route path="sales/:id" element={<Sale />} />
+            {isElectron() && <Route path="settings" element={<Settings />} />}
+            <Route path="shippings" element={<Shippings />} />
+            <Route path="shippings/:id" element={<Shipping />} />
+            <Route path="shippings/:id/edit" element={<ShippingEdit />} />
+            <Route path="shippings/new" element={<ShippingNew />} />
+            <Route path="store" element={<Store />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Route>
+        </Routes>
+      </QueryParamProvider>
     </RouterComponent>
   )
 }

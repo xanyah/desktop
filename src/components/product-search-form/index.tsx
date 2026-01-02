@@ -8,13 +8,14 @@ import Button from '../button'
 
 type ProductSearchFormProps = {
   onProductSelect: (product: Product) => void
+  productSearchInputRef?: React.RefObject<HTMLInputElement | null>
 }
 
 /** Product search form
  * Used to search and select a product by SKU, UPC, or Manufacturer SKU.
  * The component uses a form because scanners typically emulate keyboard input followed by an Enter key.
  */
-const ProductSearchForm = ({ onProductSelect }: ProductSearchFormProps) => {
+const ProductSearchForm = ({ onProductSelect, productSearchInputRef }: ProductSearchFormProps) => {
   const store = useCurrentStore()
   const { t } = useTranslation()
 
@@ -37,7 +38,7 @@ const ProductSearchForm = ({ onProductSelect }: ProductSearchFormProps) => {
 
   return (
     <form className="flex flex-1 flex-row gap-4" onSubmit={onSubmit}>
-      <InputText name="query" placeholder={t('checkout.searchPlaceholder')} />
+      <InputText ref={productSearchInputRef} name="query" placeholder={t('checkout.searchPlaceholder')} />
       <Button variant="outline" type="submit">{t('checkout.searchButton')}</Button>
     </form>
   )

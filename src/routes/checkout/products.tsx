@@ -49,7 +49,7 @@ const Products = () => {
       )}
       {map(products, (productAttribute, index) => (
         <Product
-          key={productAttribute.productId || Math.random()}
+          key={productAttribute.productId || index}
           saleProduct={productAttribute}
           onQuantityUpdate={newQuantity => onQuantityUpdate(index, newQuantity)}
           quantity={productAttribute.quantity}
@@ -57,8 +57,7 @@ const Products = () => {
           onCustomLabelUpdate={newLabel => onCustomLabelUpdate(index, newLabel)}
           onPriceUpdate={newLabel => onPriceUpdate(index, newLabel)}
         />
-      ),
-      )}
+      ))}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useCurrentStore, useCustomAttributes } from '../../hooks'
+import { useCurrentStore, useCustomAttributes, useLocalStorage } from '../../hooks'
 import { archiveProduct, createProduct, unarchiveProduct, updateProduct } from '../../api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { find, isEmpty, last, map, omit, split } from 'lodash'
@@ -39,6 +39,7 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
     () => product?.name || t('product.newPageTitle'),
     [product, t],
   )
+  const [defaultVatRateId] = useLocalStorage('defaultVatRateId')
   const queryClient = useQueryClient()
 
   const initialValues = useMemo(
@@ -59,8 +60,11 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
               thumbnail: image.thumbnail,
             })),
           }
-        : undefined,
-    [product, store],
+        : {
+            vatRateId: defaultVatRateId,
+            productCustomAttributes: [],
+          },
+    [product, store, defaultVatRateId],
   )
 
   const { mutate: createApiProduct } = useMutation({

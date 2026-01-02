@@ -10,7 +10,6 @@ import Payment from './payment'
 import { useCallback, useRef } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createSale } from '@/api'
-import { useNavigate } from 'react-router-dom'
 import { useCurrentStore } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
@@ -21,7 +20,7 @@ const Checkout = () => {
   const { t } = useTranslation()
   const store = useCurrentStore()
   const queryClient = useQueryClient()
-  const navigate = useNavigate()
+  const productSearchInputRef = useRef<HTMLInputElement>(null)
   useBreadCrumbContext([{ label: t('checkout.pageTitle') }])
   const form = useForm<CheckoutSchemaType>({
     resolver: zodResolver(checkoutSchema),
@@ -39,11 +38,11 @@ const Checkout = () => {
     onMutate: () => {
       toastId.current = toast.loading(t('global.loading'))
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       form.reset()
       toast.success(t('global.saved'), { id: toastId?.current || undefined })
       queryClient.invalidateQueries({ queryKey: ['sales'] })
-      navigate(`/sales/${data.data.id}`)
+      productSearchInputRef?.current?.focus()
     },
     onError: () => {
       toast.error(t('global.savingError'), {
@@ -54,28 +53,27 @@ const Checkout = () => {
 
   const onSubmit = useCallback((data: CheckoutSchemaType) => {
     mutate({ ...data, storeId: store?.id })
-  },
-  [mutate, store],
-  )
+  }, [mutate, store])
 
   return (
     <FormProvider {...form}>
       <FormContainer
         title={t('checkout.pageTitle')}
         subtitle={t('checkout.pageSubtitle')}
+        className="gap-2!"
         isNotForm
       >
-        <FormSection title={t('checkout.products')}>
-          <ProductSearch />
+        <FormSection className="gap-1!" title={t('checkout.products')}>
+          <ProductSearch productSearchInputRef={productSearchInputRef} />
           <Products />
         </FormSection>
-        <FormSection title={t('checkout.price')}>
+        <FormSection className="gap-1!" title={t('checkout.price')}>
           <Price />
         </FormSection>
-        <FormSection title={t('checkout.customer')}>
+        <FormSection className="gap-1!" title={t('checkout.customer')}>
           <Customer />
         </FormSection>
-        <FormSection title={t('checkout.payment')}>
+        <FormSection className="gap-1!" title={t('checkout.payment')}>
           <Payment />
         </FormSection>
         <div className="flex flex-row gap-4 justify-end">

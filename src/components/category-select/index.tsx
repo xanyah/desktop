@@ -9,6 +9,8 @@ interface CategorySelectProps {
   label: string
   placeholder: string
   error?: string
+  noSubcategories?: boolean
+  categoryId?: string
 }
 
 const CategorySelect = ({
@@ -17,6 +19,8 @@ const CategorySelect = ({
   placeholder,
   label,
   error,
+  categoryId,
+  noSubcategories,
 }: CategorySelectProps) => {
   const store = useCurrentStore()
 
@@ -25,10 +29,12 @@ const CategorySelect = ({
       return getCategories({
         'q[storeIdEq]': store?.id,
         'q[nameCont]': searchQuery,
+        'q[categoryIdEq]': categoryId,
+        'q[categoryIdNull]': noSubcategories ? '1' : undefined,
         'q[s]': 'name',
       })
     },
-    [store],
+    [store, categoryId, noSubcategories],
   )
 
   return (

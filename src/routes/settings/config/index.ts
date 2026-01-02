@@ -30,9 +30,10 @@ export const pageSizeOptions = [
   { value: '44mm', label: '44mm' },
 ]
 
-export const printerSchema = z.object({
+export const settingsSchema = z.object({
+  defaultVatRateId: z.string().optional(),
   name: z.string().min(1),
   pageSize: z.enum(map(pageSizeOptions, option => option.value) as any),
 })
 
-export type printerSchemaType = z.infer<typeof printerSchema>
+export type settingsSchemaType = z.infer<typeof settingsSchema>

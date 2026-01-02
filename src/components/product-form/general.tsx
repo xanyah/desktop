@@ -11,7 +11,8 @@ import { formSchemaType } from './config'
 
 const ProductFormGeneral = () => {
   const { t } = useTranslation()
-  const { control } = useFormContext<formSchemaType>()
+  const { control, watch } = useFormContext<formSchemaType>()
+  const parentCategoryId = watch('categoryId')
 
   return (
     <FormSection title={t('product.generalInformations')}>
@@ -40,9 +41,29 @@ const ProductFormGeneral = () => {
             value={value}
             label={t('product.categoryLabel')}
             placeholder={t('product.categoryPlaceholder')}
+            noSubcategories
           />
         )}
       />
+
+      {parentCategoryId && (
+        <Controller
+          control={control}
+          name="subCategoryId"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <CategorySelect
+              key={parentCategoryId}
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label={t('product.subCategoryLabel')}
+              placeholder={t('product.subCategoryPlaceholder')}
+              categoryId={parentCategoryId}
+            />
+          )}
+        />
+      )}
+
       <Controller
         control={control}
         name="manufacturerId"
