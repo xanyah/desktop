@@ -14,7 +14,7 @@ export const usePaginatedSearch = () => {
       onSearchQueryChange(q)
       setPage(1)
     },
-    page: page || undefined,
+    page: page || 1,
     setPage,
   }
 }
