@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCurrentStore, usePaginatedSearch, useProducts } from '../../hooks'
-import { TableWithSearch } from '@/components'
-import { useMemo } from 'react'
+import { CategorySelect, ManufacturerSelect, TableWithSearch } from '@/components'
+import { useMemo, useState } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatPrice } from '@/helpers/price'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
@@ -12,9 +12,19 @@ const Products = () => {
   useBreadCrumbContext([{ label: t('products.pageTitle') }])
   const currentStore = useCurrentStore()
   const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
+  const [parentCategoryId, setParentCategoryId] = useState<string | undefined>()
+  const [subCategoryId, setSubCategoryId] = useState<string | undefined>()
+  const [manufacturerId, setManufacturerId] = useState<string | undefined>()
+  const [stockFilter, setStockFilter] = useState<string | undefined>()
+
   const { data, isLoading } = useProducts({
     'q[archivedAtNull]': true,
     'q[nameOrSkuOrManufacturerSkuOrUpcCont]': searchQuery,
+    'q[categoryIdEq]': subCategoryId,
+    'q[categoryIdOrCategoryCategoryIdEq]': !subCategoryId ? parentCategoryId : undefined,
+    'q[manufacturerIdEq]': manufacturerId,
+    'q[quantityGt]': stockFilter === 'in_stock' ? 0 : undefined,
+    'q[quantityEq]': stockFilter === 'out_of_stock' ? 0 : undefined,
     'q[storeIdEq]': currentStore?.id,
     'q[s]': ['name', 'manufacturers.name'],
     'page': page,
@@ -93,7 +103,50 @@ const Products = () => {
       createLabel={t('products.createButtonLabel')}
       columns={columns}
       data={data?.data}
-    />
+      filtersLabel={t('products.filtersLabel')}
+    >
+      <div className="grid grid-cols-2 gap-4">
+        <CategorySelect
+          onChange={(value) => {
+            setParentCategoryId(value)
+            setSubCategoryId(undefined)
+          }}
+          value={parentCategoryId}
+          label={t('products.parentCategoryFilterLabel')}
+          placeholder={t('products.parentCategoryFilterPlaceholder')}
+          noSubcategories
+        />
+        {parentCategoryId && (
+          <CategorySelect
+            onChange={setSubCategoryId}
+            value={subCategoryId}
+            label={t('products.subCategoryFilterLabel')}
+            placeholder={t('products.subCategoryFilterPlaceholder')}
+            categoryId={parentCategoryId}
+          />
+        )}
+        <ManufacturerSelect
+          onChange={setManufacturerId}
+          value={manufacturerId}
+          label={t('products.manufacturerFilterLabel')}
+          placeholder={t('products.manufacturerFilterPlaceholder')}
+        />
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {t('products.stockFilterLabel')}
+          </label>
+          <select
+            value={stockFilter || ''}
+            onChange={(e) => setStockFilter(e.target.value || undefined)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">{t('products.stockFilterAll')}</option>
+            <option value="in_stock">{t('products.stockFilterInStock')}</option>
+            <option value="out_of_stock">{t('products.stockFilterOutOfStock')}</option>
+          </select>
+        </div>
+      </div>
+    </TableWithSearch>
   )
 }
 

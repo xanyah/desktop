@@ -1,4 +1,4 @@
-import { Loader, Plus } from 'lucide-react'
+import { Loader, Plus, ChevronDown, ChevronUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import DataTable from '../data-table'
 import { ColumnDef } from '@tanstack/react-table'
@@ -7,6 +7,7 @@ import { isUndefined } from 'lodash'
 import { InputText } from '../input'
 import Button from '../button'
 import { useTranslation } from 'react-i18next'
+import { ReactNode, useState } from 'react'
 
 interface TableWithSearchProps<TData, TValue> {
   searchPlaceholder: string
@@ -21,6 +22,8 @@ interface TableWithSearchProps<TData, TValue> {
   createLabel?: string
   columns: ColumnDef<TData, TValue>[]
   data?: TData[]
+  children?: ReactNode
+  filtersLabel?: string
 }
 
 const TableWithSearch = <TData, TValue>({
@@ -36,8 +39,11 @@ const TableWithSearch = <TData, TValue>({
   totalPages,
   currentPage,
   onPageChange,
+  children,
+  filtersLabel,
 }: TableWithSearchProps<TData, TValue>) => {
   const { t } = useTranslation()
+  const [showFilters, setShowFilters] = useState(false)
 
   return (
     <div className="flex flex-1 flex-col items-stretch gap-4">
@@ -58,15 +64,34 @@ const TableWithSearch = <TData, TValue>({
           {isLoading && <Loader className="animate-spin" />}
         </div>
 
-        {createUrl && createLabel && (
-          <Button>
-            <Link className="flex items-center gap-2" to={createUrl}>
-              <Plus />
-              {createLabel}
-            </Link>
-          </Button>
-        )}
+        <div className="flex items-center gap-4">
+          {children && (
+            <button
+              type="button"
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              {filtersLabel || t('global.filters')}
+              {showFilters ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+          )}
+          {createUrl && createLabel && (
+            <Button>
+              <Link className="flex items-center gap-2" to={createUrl}>
+                <Plus />
+                {createLabel}
+              </Link>
+            </Button>
+          )}
+        </div>
       </div>
+
+      {children && showFilters && (
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          {children}
+        </div>
+      )}
+
       <DataTable data={data || []} columns={columns} />
       {totalPages && currentPage && onPageChange && (
         <div className="flex justify-center mt-6">

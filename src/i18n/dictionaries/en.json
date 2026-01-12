@@ -31,7 +31,8 @@
     "newCategoryPageTitle": "New category",
     "pageSubtitle": "Enter here the information in your category",
     "parentCategoryLabel": "Parent category",
-    "parentCategoryPlaceholder": "Select a category..."
+    "parentCategoryPlaceholder": "Select a category...",
+    "productsTitle": "Products in this category"
   },
   "checkout": {
     "customer": "Customers",
@@ -135,6 +136,7 @@
     "edit": "Edit",
     "elementsCount_one": "{{count}} item",
     "elementsCount_other": "{{count}} items",
+    "filters": "Filters",
     "loading": "Loading in progress ...",
     "or": "Or",
     "print": "Print",
@@ -175,10 +177,14 @@
     "newPageTitle": "New manufacturer",
     "notesLabel": "Notes",
     "notesPlaceholder": "Notes on the manufacturer",
-    "pageSubtitle": "Enter here the information from your manufacturer"
+    "pageSubtitle": "Enter here the information from your manufacturer",
+    "productsTitle": "Products from this manufacturer"
   },
   "manufacturers": {
+    "categoryFilterLabel": "Category",
+    "categoryFilterPlaceholder": "Select a category",
     "createButtonLabel": "Create a manufacturer",
+    "filtersLabel": "Filters",
     "pageTitle": "Manufacturers",
     "searchPlaceholder": "Search for a manufacturer ...",
     "table": {
@@ -312,8 +318,19 @@
   },
   "products": {
     "createButtonLabel": "Create an article",
+    "filtersLabel": "Filters",
+    "manufacturerFilterLabel": "Manufacturer",
+    "manufacturerFilterPlaceholder": "Select a manufacturer",
     "pageTitle": "Articles",
+    "parentCategoryFilterLabel": "Category",
+    "parentCategoryFilterPlaceholder": "Select a category",
     "searchPlaceholder": "Search for an article ...",
+    "stockFilterAll": "All products",
+    "stockFilterInStock": "In stock",
+    "stockFilterLabel": "Stock",
+    "stockFilterOutOfStock": "Out of stock",
+    "subCategoryFilterLabel": "Subcategory",
+    "subCategoryFilterPlaceholder": "Select a subcategory",
     "table": {
       "amount": "Amount",
       "category": "Category",

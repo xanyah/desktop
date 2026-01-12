@@ -14,6 +14,7 @@ interface ApiDataSelectProps {
   label: string
   error?: string
   placeholder: string
+  isClearable?: boolean
 }
 
 const ApiDataSelect = ({
@@ -26,6 +27,7 @@ const ApiDataSelect = ({
   label,
   error,
   placeholder,
+  isClearable = true,
 }: ApiDataSelectProps) => {
   const { data } = useRecordHook(value)
 
@@ -60,6 +62,7 @@ const ApiDataSelect = ({
     <AsyncReactSelect
       cacheOptions
       defaultOptions
+      isClearable={isClearable}
       onChange={item => onChange(item?.value)}
       value={selectValue}
       loadOptions={loadOptions}

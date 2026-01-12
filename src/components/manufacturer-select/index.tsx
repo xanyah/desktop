@@ -5,7 +5,7 @@ import ApiDataSelect from '../api-data-select'
 
 interface ManufacturerSelectProps {
   onChange: (newValue?: Manufacturer['id']) => void
-  value: Manufacturer['id']
+  value?: Manufacturer['id']
   label: string
   placeholder: string
   error?: string

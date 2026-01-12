@@ -31,7 +31,8 @@
     "newCategoryPageTitle": "Nouvelle catégorie",
     "pageSubtitle": "Saisissez ici les informations de votre catégorie",
     "parentCategoryLabel": "Catégorie parente",
-    "parentCategoryPlaceholder": "Sélectionner une catégorie..."
+    "parentCategoryPlaceholder": "Sélectionner une catégorie...",
+    "productsTitle": "Produits de cette catégorie"
   },
   "checkout": {
     "customer": "Clients",
@@ -135,6 +136,7 @@
     "edit": "Éditer",
     "elementsCount_one": "{{count}} élément",
     "elementsCount_other": "{{count}} éléments",
+    "filters": "Filtres",
     "loading": "Chargement en cours...",
     "or": "Ou",
     "print": "Imprimer",
@@ -175,10 +177,14 @@
     "newPageTitle": "Nouveau fabricant",
     "notesLabel": "Notes",
     "notesPlaceholder": "Notes sur le fabricant",
-    "pageSubtitle": "Saisissez ici les informations de votre fabricant"
+    "pageSubtitle": "Saisissez ici les informations de votre fabricant",
+    "productsTitle": "Produits de ce fabricant"
   },
   "manufacturers": {
+    "categoryFilterLabel": "Catégorie",
+    "categoryFilterPlaceholder": "Sélectionner une catégorie",
     "createButtonLabel": "Créer un fabricant",
+    "filtersLabel": "Filtres",
     "pageTitle": "Fabricants",
     "searchPlaceholder": "Rechercher un fabricant...",
     "table": {
@@ -312,8 +318,19 @@
   },
   "products": {
     "createButtonLabel": "Créer un article",
+    "filtersLabel": "Filtres",
+    "manufacturerFilterLabel": "Fabricant",
+    "manufacturerFilterPlaceholder": "Sélectionner un fabricant",
     "pageTitle": "Articles",
+    "parentCategoryFilterLabel": "Catégorie",
+    "parentCategoryFilterPlaceholder": "Sélectionner une catégorie",
     "searchPlaceholder": "Rechercher un article...",
+    "stockFilterAll": "Tous les produits",
+    "stockFilterInStock": "En stock",
+    "stockFilterLabel": "Stock",
+    "stockFilterOutOfStock": "Hors stock",
+    "subCategoryFilterLabel": "Sous-catégorie",
+    "subCategoryFilterPlaceholder": "Sélectionner une sous-catégorie",
     "table": {
       "amount": "Montant",
       "category": "Catégorie",
