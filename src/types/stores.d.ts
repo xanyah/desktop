@@ -11,6 +11,7 @@ interface Store {
   id: string
   key: string
   name: string
+  openaiApiKey?: string
 }
 
 interface StoreMembership {

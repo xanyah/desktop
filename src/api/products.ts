@@ -29,3 +29,6 @@ export const createProduct = newProduct =>
       'Content-Type': 'multipart/form-data',
     },
   })
+
+export const generateProductDescription = productId =>
+  xanyahApi.post<{ description: string }>(`v2/products/${productId}/generate_description`)

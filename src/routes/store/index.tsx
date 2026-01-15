@@ -19,6 +19,7 @@ const formSchema = z.object({
   phoneNumber: z.string().nullable().optional(),
   emailAddress: z.string().nullable().optional(),
   color: z.string().nullable().optional(),
+  openaiApiKey: z.string().nullable().optional(),
   countryId: z.string(),
   key: z.string(),
   name: z.string(),
@@ -205,6 +206,23 @@ const Store = () => {
               onChange={onChange}
               value={value || ''}
               label={t('store.colorLabel')}
+            />
+          )}
+        />
+      </FormSection>
+      <FormSection title={t('store.integrations')}>
+        <Controller
+          control={control}
+          name="openaiApiKey"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value || ''}
+              placeholder={t('store.openaiApiKeyPlaceholder')}
+              type="password"
+              label={t('store.openaiApiKeyLabel')}
+              hint={t('store.openaiApiKeyHint')}
             />
           )}
         />

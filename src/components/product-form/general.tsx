@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import {
+  Button,
   CategorySelect,
   FormSection,
   InputFile,
@@ -9,11 +10,36 @@ import {
 } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { formSchemaType } from './config'
+import { useMutation } from '@tanstack/react-query'
+import { generateProductDescription } from '@/api'
+import toast from 'react-hot-toast'
+import { useParams } from 'react-router-dom'
 
 const ProductFormGeneral = () => {
   const { t } = useTranslation()
-  const { control, watch } = useFormContext<formSchemaType>()
+  const { control, watch, setValue } = useFormContext<formSchemaType>()
+  const { id: productId } = useParams()
   const parentCategoryId = watch('categoryId')
+
+  const { mutate: generateDescription, isPending: isGenerating } = useMutation({
+    mutationFn: () => generateProductDescription(productId!),
+    onSuccess: (response) => {
+      setValue('description', response.data.description)
+      toast.success(t('product.descriptionGenerated'))
+    },
+    onError: (error: any) => {
+      const errorMessage = error.response?.data?.error || t('product.descriptionGenerationError')
+      toast.error(errorMessage)
+    },
+  })
+
+  const handleGenerateDescription = () => {
+    if (!productId) {
+      toast.error(t('product.saveProductFirst'))
+      return
+    }
+    generateDescription()
+  }
 
   return (
     <FormSection title={t('product.generalInformations')}>
@@ -32,18 +58,31 @@ const ProductFormGeneral = () => {
         )}
       />
 
-      <Controller
-        control={control}
-        name="description"
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <InputHtml
-            error={error?.message}
-            onChange={onChange}
-            value={value}
-            label={t('product.descriptionLabel')}
-          />
+      <div>
+        <Controller
+          control={control}
+          name="description"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputHtml
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label={t('product.descriptionLabel')}
+            />
+          )}
+        />
+        {productId && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleGenerateDescription}
+            disabled={isGenerating}
+            className="mt-2"
+          >
+            {isGenerating ? t('product.generatingDescription') : t('product.generateDescription')}
+          </Button>
         )}
-      />
+      </div>
 
       <Controller
         control={control}
