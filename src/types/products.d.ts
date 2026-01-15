@@ -7,6 +7,7 @@ interface ProductCustomAttribute {
 interface Product {
   id: string
   name: string
+  description?: string
   category?: Category
   manufacturer?: Manufacturer
   createdAt: string

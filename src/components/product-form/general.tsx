@@ -4,6 +4,7 @@ import {
   FormSection,
   InputFile,
   InputText,
+  InputHtml,
   ManufacturerSelect,
 } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -27,6 +28,19 @@ const ProductFormGeneral = () => {
             placeholder={t('product.namePlaceholder')}
             type="text"
             label={t('product.nameLabel')}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="description"
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <InputHtml
+            error={error?.message}
+            onChange={onChange}
+            value={value}
+            label={t('product.descriptionLabel')}
           />
         )}
       />

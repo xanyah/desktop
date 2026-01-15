@@ -54,6 +54,7 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
             taxFreeAmount: product.taxFreeAmountCents,
             amount: product.amountCents,
             vatRateId: product.vatRate?.id,
+            description: product.description || '',
             images: map(product.images, image => ({
               name: last(split(image.large, '/')),
               signed_id: image.signedId,
