@@ -137,7 +137,7 @@ const Products = () => {
           </label>
           <select
             value={stockFilter || ''}
-            onChange={(e) => setStockFilter(e.target.value || undefined)}
+            onChange={e => setStockFilter(e.target.value || undefined)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">{t('products.stockFilterAll')}</option>

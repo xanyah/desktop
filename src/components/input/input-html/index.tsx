@@ -1,6 +1,8 @@
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useRef } from 'react'
+import Quill from 'quill'
 import { StyledError, StyledInputContainer, StyledLabel } from '../input-styles'
-import 'react-quill/dist/quill.snow.css'
+import { StyledQuillWrapper } from './styles'
+import Editor from './editor'
 
 interface Props {
   id?: string
@@ -13,50 +15,19 @@ interface Props {
 
 const InputHtml = forwardRef<HTMLDivElement, Props>(
   ({ id, label, error, hint, value, onChange }, ref) => {
-    const [ReactQuill, setReactQuill] = useState<any>(null)
-
-    useEffect(() => {
-      import('react-quill').then((module) => {
-        setReactQuill(() => module.default)
-      })
-    }, [])
-
-    const modules = {
-      toolbar: [
-        [{ header: [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['link'],
-        ['clean'],
-      ],
-    }
-
-    const formats = [
-      'header',
-      'bold',
-      'italic',
-      'underline',
-      'strike',
-      'list',
-      'bullet',
-      'link',
-    ]
+    const quillRef = useRef<Quill | null>(null)
 
     return (
       <StyledInputContainer ref={ref}>
         {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 
-        <div className="quill-wrapper">
-          {ReactQuill && (
-            <ReactQuill
-              theme="snow"
-              value={value || ''}
-              onChange={onChange}
-              modules={modules}
-              formats={formats}
-            />
-          )}
-        </div>
+        <StyledQuillWrapper>
+          <Editor
+            ref={quillRef}
+            value={value}
+            onChange={onChange}
+          />
+        </StyledQuillWrapper>
 
         {error && <StyledError>{error}</StyledError>}
         {hint && <p className="text-small">{hint}</p>}

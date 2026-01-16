@@ -74,6 +74,18 @@
   "components": {
     "dataTable": {
       "noResults": "Aucun résultat"
+    },
+    "inputHtml": {
+      "bold": "Gras",
+      "italic": "Italique",
+      "underline": "Souligné",
+      "heading": "Titre",
+      "paragraph": "Paragraphe",
+      "list": "Liste à puces",
+      "listItem": "Élément de liste",
+      "link": "Lien",
+      "preview": "Aperçu",
+      "edit": "Modifier"
     }
   },
   "customAttribute": {
@@ -271,6 +283,9 @@
     }
   },
   "product": {
+    "aiSuggestionsApplied": "Suggestions IA appliquées avec succès",
+    "aiSuggestionsError": "Erreur lors de la génération des suggestions IA",
+    "aiSuggestionsNoResults": "L'IA n'a pas pu générer de suggestions pour ce produit",
     "amountHint": "Le prix TTC correspond au prix final qui sera payé par le client",
     "amountLabel": "Prix TTC",
     "amountPlaceholder": "Prix TTC de l'article",
@@ -283,8 +298,12 @@
     "customAttributes": "Attributs personnalisés",
     "deleteImageDescription": "Êtes-vous sûr de vouloir supprimer cette image?",
     "deleteImageTitle": "Confirmation de suppression",
+    "descriptionGenerated": "Description générée avec succès",
+    "descriptionLabel": "Description",
     "generalInformations": "Informations générales",
     "generateSku": "Générer",
+    "generatingAiSuggestions": "Génération en cours...",
+    "getAiSuggestions": "Obtenir des suggestions IA",
     "imagesLabel": "Images",
     "logistics": "Logistique",
     "manufacturerLabel": "Fabricant",
@@ -302,6 +321,7 @@
     "ratioHint": "Le coefficient est un facteur de multiplication permettant de calculer le prix TTC",
     "ratioLabel": "Coefficient",
     "ratioPlaceholder": "Coefficient de calcul du prix TTC",
+    "saveProductFirst": "Veuillez enregistrer le produit avant de générer des suggestions",
     "skuHint": "Le code barre boutique est un code barre spécifique à la boutique pour identifier l'article",
     "skuLabel": "Code barre boutique",
     "skuPlaceholder": "Code barre boutique de l'article",
@@ -310,6 +330,7 @@
     "taxFreeAmountHint": "Le prix hors taxes est le prix de l'article avant l'application de la TVA",
     "taxFreeAmountLabel": "Prix hors taxes",
     "taxFreeAmountPlaceholder": "Prix hors taxes de l'article",
+    "titleSuggested": "Titre amélioré suggéré",
     "upcHint": "Code barre fabricant est le code barre d'origine de l'article",
     "upcLabel": "Code barre fabricant",
     "upcPlaceholder": "Code barre fabricant de l'article",
@@ -461,6 +482,9 @@
     "address1Placeholder": "Adresse de votre boutique",
     "address2Label": "Complément d'adresse",
     "address2Placeholder": "Complément d'adresse de votre boutique",
+    "aiPromptHint": "Instructions personnalisées pour l'IA (langue, ton, spécificités de votre activité...)",
+    "aiPromptLabel": "Instructions IA personnalisées",
+    "aiPromptPlaceholder": "Ex: Rédiger toujours en français. Nous vendons des modèles réduits de trains. Utiliser un ton professionnel mais convivial.",
     "colorLabel": "Couleur d'accent",
     "countryLabel": "Pays",
     "countryPlaceholder": "Pays de votre boutique",
@@ -468,8 +492,12 @@
     "emailAddressLabel": "Adresse e-mail",
     "emailAddressPlaceholder": "Adresse e-mail de votre boutique",
     "generalInformations": "Informations générales",
+    "integrations": "Intégrations",
     "nameLabel": "Nom",
     "namePlaceholder": "Nom de votre boutique",
+    "openaiApiKeyHint": "Clé API OpenAI pour générer des descriptions de produits avec l'IA",
+    "openaiApiKeyLabel": "Clé API OpenAI",
+    "openaiApiKeyPlaceholder": "sk-...",
     "pageSubtitle": "Saisissez ici les informations de votre boutique",
     "pageTitle": "Boutique",
     "phoneNumberLabel": "Numéro de téléphone",

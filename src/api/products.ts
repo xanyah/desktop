@@ -30,5 +30,5 @@ export const createProduct = newProduct =>
     },
   })
 
-export const getAiSuggestions = productId =>
-  xanyahApi.post<{ title: string | null; description: string | null }>(`v2/products/${productId}/ai_suggestions`)
+export const getAiSuggestions = (productId, params?: { title?: string, description?: string }) =>
+  xanyahApi.post<{ title: string | null, description: string | null }>(`v2/products/${productId}/ai_suggestions`, decamelizeKeys(params), { timeout: 60000 })

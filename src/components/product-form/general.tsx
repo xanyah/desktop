@@ -22,7 +22,8 @@ const ProductFormGeneral = () => {
   const parentCategoryId = watch('categoryId')
 
   const { mutate: generateSuggestions, isPending: isGenerating } = useMutation({
-    mutationFn: () => getAiSuggestions(productId!),
+    mutationFn: ({ title, description }: { title?: string, description?: string }) =>
+      getAiSuggestions(productId!, { title, description }),
     onSuccess: (response) => {
       const { title, description } = response.data
 
@@ -56,7 +57,9 @@ const ProductFormGeneral = () => {
       toast.error(t('product.saveProductFirst'))
       return
     }
-    generateSuggestions()
+    const currentTitle = watch('name')
+    const currentDescription = watch('description')
+    generateSuggestions({ title: currentTitle, description: currentDescription })
   }
 
   return (

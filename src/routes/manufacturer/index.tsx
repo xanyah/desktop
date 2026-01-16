@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useManufacturer, useCurrentStore, usePaginatedSearch, useProducts } from '../../hooks'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -7,12 +7,11 @@ import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { manufacturerSchema, manufacturerSchemaType } from './config'
 import { Controller, useForm } from 'react-hook-form'
-import { FormContainer, FormSection, InputText } from '@/components'
+import { FormContainer, FormSection, InputText, DataTable, Pagination } from '@/components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import toast from 'react-hot-toast'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { formatPrice } from '@/helpers/price'
-import { DataTable, Pagination } from '@/components'
 
 const Manufacturer = () => {
   const queryClient = useQueryClient()
@@ -76,7 +75,7 @@ const Manufacturer = () => {
 
   const { searchQuery, page, setPage, onSearchQueryChange } = usePaginatedSearch()
 
-  const { data: productsData, isLoading: isLoadingProducts } = useProducts({
+  const { data: productsData } = useProducts({
     'q[archivedAtNull]': true,
     'q[manufacturerIdEq]': id,
     'q[nameOrSkuOrManufacturerSkuOrUpcCont]': searchQuery,
@@ -206,7 +205,7 @@ const Manufacturer = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder={t('products.searchPlaceholder')}
               value={searchQuery}
-              onChange={(e) => onSearchQueryChange(e.target.value)}
+              onChange={e => onSearchQueryChange(e.target.value)}
             />
           </div>
           <DataTable
