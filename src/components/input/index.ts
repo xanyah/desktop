@@ -1,4 +1,6 @@
 export { default as InputText } from './input-text'
 export { default as InputFile } from './input-file'
 export { default as InputColor } from './input-color'
+export { default as InputHtml } from './input-html'
+export { default as InputTextarea } from './input-textarea'
 export * from './select'

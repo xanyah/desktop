@@ -3,7 +3,7 @@ import { useCurrentStore } from '../../hooks'
 import { Controller, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateStore } from '../../api'
-import { CountrySelect, FormContainer, FormSection, InputColor, InputText } from '../../components'
+import { CountrySelect, FormContainer, FormSection, InputColor, InputText, InputTextarea } from '../../components'
 import { useBreadCrumbContext } from '@/contexts/breadcrumb'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
@@ -19,6 +19,8 @@ const formSchema = z.object({
   phoneNumber: z.string().nullable().optional(),
   emailAddress: z.string().nullable().optional(),
   color: z.string().nullable().optional(),
+  openaiApiKey: z.string().nullable().optional(),
+  aiPrompt: z.string().nullable().optional(),
   countryId: z.string(),
   key: z.string(),
   name: z.string(),
@@ -205,6 +207,38 @@ const Store = () => {
               onChange={onChange}
               value={value || ''}
               label={t('store.colorLabel')}
+            />
+          )}
+        />
+      </FormSection>
+      <FormSection title={t('store.integrations')}>
+        <Controller
+          control={control}
+          name="openaiApiKey"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputText
+              error={error?.message}
+              onChange={onChange}
+              value={value || ''}
+              placeholder={t('store.openaiApiKeyPlaceholder')}
+              type="password"
+              label={t('store.openaiApiKeyLabel')}
+              hint={t('store.openaiApiKeyHint')}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="aiPrompt"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputTextarea
+              error={error?.message}
+              onChange={onChange}
+              value={value || ''}
+              placeholder={t('store.aiPromptPlaceholder')}
+              label={t('store.aiPromptLabel')}
+              hint={t('store.aiPromptHint')}
+              rows={4}
             />
           )}
         />

@@ -16,6 +16,7 @@ const productCustomAttributesAttributes = z.object({
 
 export const formSchema = z.object({
   name: z.string(),
+  description: z.string().optional(),
   categoryId: z.string(),
   subCategoryId: z.string().optional(),
   vatRateId: z.string(),

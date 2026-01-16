@@ -1,18 +1,66 @@
 import { useTranslation } from 'react-i18next'
 import {
+  Button,
   CategorySelect,
   FormSection,
   InputFile,
   InputText,
+  InputHtml,
   ManufacturerSelect,
 } from '@/components'
 import { Controller, useFormContext } from 'react-hook-form'
 import { formSchemaType } from './config'
+import { useMutation } from '@tanstack/react-query'
+import { getAiSuggestions } from '@/api'
+import toast from 'react-hot-toast'
+import { useParams } from 'react-router-dom'
 
 const ProductFormGeneral = () => {
   const { t } = useTranslation()
-  const { control, watch } = useFormContext<formSchemaType>()
+  const { control, watch, setValue } = useFormContext<formSchemaType>()
+  const { id: productId } = useParams()
   const parentCategoryId = watch('categoryId')
+
+  const { mutate: generateSuggestions, isPending: isGenerating } = useMutation({
+    mutationFn: ({ title, description }: { title?: string, description?: string }) =>
+      getAiSuggestions(productId!, { title, description }),
+    onSuccess: (response) => {
+      const { title, description } = response.data
+
+      if (!title && !description) {
+        toast.error(t('product.aiSuggestionsNoResults'))
+        return
+      }
+
+      if (title) {
+        setValue('name', title)
+        toast.success(t('product.titleSuggested'))
+      }
+
+      if (description) {
+        setValue('description', description)
+        toast.success(t('product.descriptionGenerated'))
+      }
+
+      if (title && description) {
+        toast.success(t('product.aiSuggestionsApplied'))
+      }
+    },
+    onError: (error: any) => {
+      const errorMessage = error.response?.data?.error || t('product.aiSuggestionsError')
+      toast.error(errorMessage)
+    },
+  })
+
+  const handleGenerateSuggestions = () => {
+    if (!productId) {
+      toast.error(t('product.saveProductFirst'))
+      return
+    }
+    const currentTitle = watch('name')
+    const currentDescription = watch('description')
+    generateSuggestions({ title: currentTitle, description: currentDescription })
+  }
 
   return (
     <FormSection title={t('product.generalInformations')}>
@@ -30,6 +78,32 @@ const ProductFormGeneral = () => {
           />
         )}
       />
+
+      <div>
+        <Controller
+          control={control}
+          name="description"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <InputHtml
+              error={error?.message}
+              onChange={onChange}
+              value={value}
+              label={t('product.descriptionLabel')}
+            />
+          )}
+        />
+        {productId && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleGenerateSuggestions}
+            disabled={isGenerating}
+            className="mt-2"
+          >
+            {isGenerating ? t('product.generatingAiSuggestions') : t('product.getAiSuggestions')}
+          </Button>
+        )}
+      </div>
 
       <Controller
         control={control}

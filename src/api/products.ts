@@ -29,3 +29,6 @@ export const createProduct = newProduct =>
       'Content-Type': 'multipart/form-data',
     },
   })
+
+export const getAiSuggestions = (productId, params?: { title?: string, description?: string }) =>
+  xanyahApi.post<{ title: string | null, description: string | null }>(`v2/products/${productId}/ai_suggestions`, decamelizeKeys(params), { timeout: 60000 })
