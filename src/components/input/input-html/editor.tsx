@@ -20,6 +20,7 @@ const Editor = forwardRef<Quill | null, EditorProps>(
     const onSelectionChangeRef = useRef(onSelectionChange)
     const onChangeRef = useRef(onChange)
     const quillRef = useRef<Quill | null>(null)
+    const isUserTypingRef = useRef(false)
 
     useLayoutEffect(() => {
       onTextChangeRef.current = onTextChange
@@ -70,6 +71,7 @@ const Editor = forwardRef<Quill | null, EditorProps>(
       quill.on(Quill.events.TEXT_CHANGE, (...args) => {
         onTextChangeRef.current?.(...args)
         const html = quill.root.innerHTML
+        isUserTypingRef.current = true
         onChangeRef.current?.(html)
       })
 
@@ -87,15 +89,28 @@ const Editor = forwardRef<Quill | null, EditorProps>(
         quillRef.current = null
         container.innerHTML = ''
       }
-    }, [ref, value])
+    }, [ref])
 
-    // Update content when value changes
+    // Update content when value changes externally (not from user typing)
     useEffect(() => {
       if (quillRef.current && value !== undefined) {
         const currentHTML = quillRef.current.root.innerHTML
-        if (currentHTML !== value) {
+        
+        // Only update if value is different AND it's not from user typing
+        if (currentHTML !== value && !isUserTypingRef.current) {
+          const selection = quillRef.current.getSelection()
           quillRef.current.clipboard.dangerouslyPasteHTML(value || '')
+          
+          // Restore cursor position if there was one
+          if (selection) {
+            setTimeout(() => {
+              quillRef.current?.setSelection(selection)
+            }, 0)
+          }
         }
+        
+        // Reset the typing flag
+        isUserTypingRef.current = false
       }
     }, [value])
 
