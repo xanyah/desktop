@@ -89,18 +89,18 @@ const Editor = forwardRef<Quill | null, EditorProps>(
         quillRef.current = null
         container.innerHTML = ''
       }
-    }, [ref])
+    }, [ref, value])
 
     // Update content when value changes externally (not from user typing)
     useEffect(() => {
       if (quillRef.current && value !== undefined) {
         const currentHTML = quillRef.current.root.innerHTML
-        
+
         // Only update if value is different AND it's not from user typing
         if (currentHTML !== value && !isUserTypingRef.current) {
           const selection = quillRef.current.getSelection()
           quillRef.current.clipboard.dangerouslyPasteHTML(value || '')
-          
+
           // Restore cursor position if there was one
           if (selection) {
             setTimeout(() => {
@@ -108,7 +108,7 @@ const Editor = forwardRef<Quill | null, EditorProps>(
             }, 0)
           }
         }
-        
+
         // Reset the typing flag
         isUserTypingRef.current = false
       }
