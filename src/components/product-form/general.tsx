@@ -11,7 +11,7 @@ import {
 import { Controller, useFormContext } from 'react-hook-form'
 import { formSchemaType } from './config'
 import { useMutation } from '@tanstack/react-query'
-import { generateProductDescription } from '@/api'
+import { getAiSuggestions } from '@/api'
 import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 
@@ -21,24 +21,42 @@ const ProductFormGeneral = () => {
   const { id: productId } = useParams()
   const parentCategoryId = watch('categoryId')
 
-  const { mutate: generateDescription, isPending: isGenerating } = useMutation({
-    mutationFn: () => generateProductDescription(productId!),
+  const { mutate: generateSuggestions, isPending: isGenerating } = useMutation({
+    mutationFn: () => getAiSuggestions(productId!),
     onSuccess: (response) => {
-      setValue('description', response.data.description)
-      toast.success(t('product.descriptionGenerated'))
+      const { title, description } = response.data
+
+      if (!title && !description) {
+        toast.error(t('product.aiSuggestionsNoResults'))
+        return
+      }
+
+      if (title) {
+        setValue('name', title)
+        toast.success(t('product.titleSuggested'))
+      }
+
+      if (description) {
+        setValue('description', description)
+        toast.success(t('product.descriptionGenerated'))
+      }
+
+      if (title && description) {
+        toast.success(t('product.aiSuggestionsApplied'))
+      }
     },
     onError: (error: any) => {
-      const errorMessage = error.response?.data?.error || t('product.descriptionGenerationError')
+      const errorMessage = error.response?.data?.error || t('product.aiSuggestionsError')
       toast.error(errorMessage)
     },
   })
 
-  const handleGenerateDescription = () => {
+  const handleGenerateSuggestions = () => {
     if (!productId) {
       toast.error(t('product.saveProductFirst'))
       return
     }
-    generateDescription()
+    generateSuggestions()
   }
 
   return (
@@ -75,11 +93,11 @@ const ProductFormGeneral = () => {
           <Button
             type="button"
             variant="outline"
-            onClick={handleGenerateDescription}
+            onClick={handleGenerateSuggestions}
             disabled={isGenerating}
             className="mt-2"
           >
-            {isGenerating ? t('product.generatingDescription') : t('product.generateDescription')}
+            {isGenerating ? t('product.generatingAiSuggestions') : t('product.getAiSuggestions')}
           </Button>
         )}
       </div>

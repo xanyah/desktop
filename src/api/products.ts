@@ -30,5 +30,5 @@ export const createProduct = newProduct =>
     },
   })
 
-export const generateProductDescription = productId =>
-  xanyahApi.post<{ description: string }>(`v2/products/${productId}/generate_description`)
+export const getAiSuggestions = productId =>
+  xanyahApi.post<{ title: string | null; description: string | null }>(`v2/products/${productId}/ai_suggestions`)

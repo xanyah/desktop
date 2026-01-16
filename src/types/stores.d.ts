@@ -12,6 +12,7 @@ interface Store {
   key: string
   name: string
   openaiApiKey?: string
+  aiPrompt?: string
 }
 
 interface StoreMembership {
