@@ -11,6 +11,8 @@ interface Shipping {
 interface ShippingProduct {
   id: string
   quantity: number
+  newAmountCents?: number
+  newAmountCurrency?: string
   createdAt: string
   updatedAt: string
   product: Product

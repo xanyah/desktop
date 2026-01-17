@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query'
 import { updateShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
 import {
-  CheckoutProductCard,
+  ShippingProductCard,
   FormContainer,
   Button,
   RightPanel,
@@ -28,6 +28,7 @@ const formSchema = z.object({
       id: z.string().optional(),
       productId: z.string(),
       quantity: z.number(),
+      newAmount: z.string().optional(),
       _destroy: z.boolean().optional(),
     }),
   ),
@@ -120,7 +121,7 @@ const ShippingEdit = () => {
         setExistingProductIndex(isExistingProductIndex)
       }
       else {
-        append({ productId: newProductId, quantity: 1 })
+        append({ productId: newProductId, quantity: 1, newAmount: '' })
       }
     },
     [append, fields],
@@ -133,6 +134,7 @@ const ShippingEdit = () => {
           id: shippingProduct.id,
           quantity: shippingProduct.quantity,
           productId: shippingProduct.product.id,
+          newAmountCents: shippingProduct.newAmountCents || '',
         })),
       })
     }
@@ -159,13 +161,12 @@ const ShippingEdit = () => {
         </div>
 
         {map(fields, (field, index) => (
-          <CheckoutProductCard
-            withoutPrice
+          <ShippingProductCard
             productId={field.productId}
-            quantity={field.quantity}
             key={field.rhfId}
             control={control}
             quantityInputName={`shippingProductsAttributes.${index}.quantity`}
+            newAmountInputName={`shippingProductsAttributes.${index}.newAmountCents`}
             willBeRemoved={field._destroy}
             onRemoveCancel={() => update(index, { ...field, _destroy: undefined })}
             onRemove={() => update(index, { ...field, _destroy: true })}
