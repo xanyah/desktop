@@ -43,8 +43,27 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
   const queryClient = useQueryClient()
 
   const initialValues = useMemo(
-    () =>
-      product
+    () => {
+      // Sort custom attributes to ensure stable ordering
+      const sortedCustomAttributes = customAttributesData?.data
+        ? [...customAttributesData.data].sort((a, b) => a.id.localeCompare(b.id))
+        : []
+
+      const productCustomAttributesAttributes = map(sortedCustomAttributes, (customAttribute) => {
+        const existingCustomAttribute = find(
+          product?.productCustomAttributes,
+          productCustomAttribute =>
+            productCustomAttribute.customAttribute.id === customAttribute.id,
+        )
+
+        return {
+          id: existingCustomAttribute?.id,
+          customAttributeId: customAttribute.id,
+          value: existingCustomAttribute?.value,
+        }
+      })
+
+      const values = product
         ? {
             ...product,
             categoryId: product.category?.id,
@@ -55,6 +74,8 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
             amount: product.amountCents,
             vatRateId: product.vatRate?.id,
             description: product.description || '',
+            productCustomAttributes: product.productCustomAttributes,
+            productCustomAttributesAttributes,
             images: map(product.images, image => ({
               name: last(split(image.large, '/')),
               signed_id: image.signedId,
@@ -64,8 +85,11 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
         : {
             vatRateId: defaultVatRateId,
             productCustomAttributes: [],
-          },
-    [product, store, defaultVatRateId],
+            productCustomAttributesAttributes,
+          }
+      return values
+    },
+    [product, store, defaultVatRateId, customAttributesData],
   )
 
   const { mutate: createApiProduct } = useMutation({
@@ -120,8 +144,30 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
 
   const onSubmit = useCallback(
     (data: formSchemaType) => {
+      // Filter out custom attributes with no value and no existing id
+      // Only send attributes that have been filled in or already exist in the database
+      const filteredCustomAttributes = data.productCustomAttributesAttributes?.filter((attr) => {
+        // Keep if it has an existing id (even if value is empty, to allow updates/deletions)
+        if (attr?.id) return true
+        // Keep if it has a value (new attribute being created)
+        if (attr?.value) return true
+        // Filter out attributes with no id and no value
+        return false
+      })
+
+      // Convert array to indexed object for Rails nested attributes
+      const indexedCustomAttributes = filteredCustomAttributes?.reduce((acc: any, attr: any, index: number) => {
+        acc[index] = attr
+        return acc
+      }, {})
+
+      const productData = {
+        ...data,
+        productCustomAttributesAttributes: indexedCustomAttributes,
+      }
+
       const formData = serialize({
-        product: omit(decamelizeKeys(data), 'images'),
+        product: omit(decamelizeKeys(productData), 'images'),
       })
 
       if (!isEmpty(data.images) && data.images) {
@@ -155,24 +201,6 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
         .catch(console.error)
     }
   }, [product, store])
-
-  useEffect(() => {
-    setValue(
-      'productCustomAttributesAttributes',
-      map(customAttributesData?.data, (customAttribute) => {
-        const existingCustomAttribute = find(
-          initialValues?.productCustomAttributes,
-          productCustomAttribute =>
-            productCustomAttribute.customAttribute.id === customAttribute.id,
-        )
-        return {
-          id: existingCustomAttribute?.id,
-          customAttributeId: customAttribute.id,
-          value: existingCustomAttribute?.value,
-        }
-      }),
-    )
-  }, [initialValues, customAttributesData, setValue])
 
   useEffect(() => {
     reset(initialValues)

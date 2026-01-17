@@ -20,9 +20,14 @@ const ProductFormCustomAttributes = () => {
     return null
   }
 
+  // Sort custom attributes to match the order in initialValues
+  const sortedCustomAttributes = [...(customAttributesData?.data || [])].sort((a, b) =>
+    a.id.localeCompare(b.id),
+  )
+
   return (
     <FormSection title={t('product.customAttributes')}>
-      {map(customAttributesData?.data, (customAttribute, index) => (
+      {map(sortedCustomAttributes, (customAttribute, index) => (
         <Controller
           key={customAttribute.id}
           control={control}
