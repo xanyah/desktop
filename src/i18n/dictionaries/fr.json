@@ -414,11 +414,13 @@
   },
   "shipping": {
     "cancel": "Annuler la livraison",
+    "currentPrice": "Prix actuel",
     "editProducts": "Modifier les articles",
     "existingProduct": {
       "description": "Ce produit est déjà dans votre sélection. Voulez-vous augmenter sa quantité ?",
       "title": "Produit déjà présent"
     },
+    "newPrice": "Nouveau prix",
     "pageSubtitle": "Commande passée le {{ shippingDate }}",
     "pageTitle": "Commande {{ shippingNumber }}",
     "printBarcodes": {
@@ -430,6 +432,7 @@
       "quantity": "Quantité"
     },
     "provider": "Fournisseur",
+    "quantity": "Quantité",
     "states": {
       "cancelled": "Annulée",
       "pending": "En attente",

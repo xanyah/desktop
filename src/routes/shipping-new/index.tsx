@@ -5,7 +5,6 @@ import { useMutation } from '@tanstack/react-query'
 import { createShipping } from '../../api'
 import { useTranslation } from 'react-i18next'
 import {
-  CheckoutProductCard,
   ProviderSelect,
   FormContainer,
   FormSection,
@@ -14,6 +13,7 @@ import {
   ProductForm,
   Dialog,
   ProductSearchForm,
+  ShippingProductCard,
 } from '@/components'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from '../../constants/zod'
@@ -29,6 +29,7 @@ const formSchema = z.object({
     z.object({
       productId: z.string(),
       quantity: z.number(),
+      newAmount: z.string().optional(),
     }),
   ),
 })
@@ -142,10 +143,9 @@ const Shipping = () => {
             </Button>
           </div>
           {map(fields, (field, index) => (
-            <CheckoutProductCard
-              withoutPrice
+            <ShippingProductCard
               productId={field.productId}
-              quantity={field.quantity}
+              newAmountInputName={`shippingProductsAttributes.${index}.newAmountCents`}
               quantityInputName={`shippingProductsAttributes.${index}.quantity`}
               key={field.productId}
               onRemove={() => remove(index)}
