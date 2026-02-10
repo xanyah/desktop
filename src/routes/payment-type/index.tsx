@@ -110,6 +110,20 @@ const PaymentType = () => {
             />
           )}
         />
+        <Controller
+          control={control}
+          name="isRefund"
+          render={({ field: { onChange, value } }) => (
+            <label className="flex flex-row gap-2 text-sm items-center">
+              <input
+                type="checkbox"
+                checked={value || false}
+                onChange={e => onChange(e.target.checked)}
+              />
+              {t('paymentType.isRefundLabel')}
+            </label>
+          )}
+        />
       </FormSection>
     </FormContainer>
   )

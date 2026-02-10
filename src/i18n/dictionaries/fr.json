@@ -250,6 +250,7 @@
     "descriptionLabel": "Description",
     "descriptionPlaceholder": "Description du moyen de paiement",
     "generalInformations": "Informations générales",
+    "isRefundLabel": "Ce moyen de paiement est un remboursement",
     "nameLabel": "Nom",
     "namePlaceholder": "Nom du moyen de paiement",
     "newPageTitle": "Nouveau moyen de paiement",
@@ -414,13 +415,16 @@
   },
   "shipping": {
     "cancel": "Annuler la livraison",
-    "currentPrice": "Prix actuel",
+    "currentBuyingPrice": "Prix d'achat actuel",
+    "currentSellingPrice": "Prix de vente actuel",
+    "currentStock": "Stock actuel",
     "editProducts": "Modifier les articles",
     "existingProduct": {
       "description": "Ce produit est déjà dans votre sélection. Voulez-vous augmenter sa quantité ?",
       "title": "Produit déjà présent"
     },
-    "newPrice": "Nouveau prix",
+    "newBuyingPrice": "Nouveau prix d'achat",
+    "newSellingPrice": "Nouveau prix de vente",
     "pageSubtitle": "Commande passée le {{ shippingDate }}",
     "pageTitle": "Commande {{ shippingNumber }}",
     "printBarcodes": {
@@ -433,6 +437,7 @@
     },
     "provider": "Fournisseur",
     "quantity": "Quantité",
+    "updatePrice": "Modifier le prix",
     "states": {
       "cancelled": "Annulée",
       "pending": "En attente",

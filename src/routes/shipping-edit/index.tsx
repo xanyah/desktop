@@ -28,7 +28,8 @@ const formSchema = z.object({
       id: z.string().optional(),
       productId: z.string(),
       quantity: z.number(),
-      newAmount: z.string().optional(),
+      newBuyingAmountCents: z.string().optional(),
+      newSellingAmountCents: z.string().optional(),
       _destroy: z.boolean().optional(),
     }),
   ),
@@ -121,7 +122,7 @@ const ShippingEdit = () => {
         setExistingProductIndex(isExistingProductIndex)
       }
       else {
-        append({ productId: newProductId, quantity: 1, newAmount: '' })
+        append({ productId: newProductId, quantity: 1, newBuyingAmountCents: '', newSellingAmountCents: '' })
       }
     },
     [append, fields],
@@ -134,7 +135,8 @@ const ShippingEdit = () => {
           id: shippingProduct.id,
           quantity: shippingProduct.quantity,
           productId: shippingProduct.product.id,
-          newAmountCents: shippingProduct.newAmountCents || '',
+          newBuyingAmountCents: shippingProduct.newBuyingAmountCents?.toString() || '',
+          newSellingAmountCents: shippingProduct.newSellingAmountCents?.toString() || '',
         })),
       })
     }
@@ -166,7 +168,8 @@ const ShippingEdit = () => {
             key={field.rhfId}
             control={control}
             quantityInputName={`shippingProductsAttributes.${index}.quantity`}
-            newAmountInputName={`shippingProductsAttributes.${index}.newAmountCents`}
+            newBuyingAmountInputName={`shippingProductsAttributes.${index}.newBuyingAmountCents`}
+            newSellingAmountInputName={`shippingProductsAttributes.${index}.newSellingAmountCents`}
             willBeRemoved={field._destroy}
             onRemoveCancel={() => update(index, { ...field, _destroy: undefined })}
             onRemove={() => update(index, { ...field, _destroy: true })}

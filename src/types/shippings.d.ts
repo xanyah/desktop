@@ -11,8 +11,10 @@ interface Shipping {
 interface ShippingProduct {
   id: string
   quantity: number
-  newAmountCents?: number
-  newAmountCurrency?: string
+  newBuyingAmountCents?: number
+  newBuyingAmountCurrency?: string
+  newSellingAmountCents?: number
+  newSellingAmountCurrency?: string
   createdAt: string
   updatedAt: string
   product: Product

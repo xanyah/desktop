@@ -29,7 +29,8 @@ const formSchema = z.object({
     z.object({
       productId: z.string(),
       quantity: z.number(),
-      newAmount: z.string().optional(),
+      newBuyingAmountCents: z.string().optional(),
+      newSellingAmountCents: z.string().optional(),
     }),
   ),
 })
@@ -145,7 +146,8 @@ const Shipping = () => {
           {map(fields, (field, index) => (
             <ShippingProductCard
               productId={field.productId}
-              newAmountInputName={`shippingProductsAttributes.${index}.newAmountCents`}
+              newBuyingAmountInputName={`shippingProductsAttributes.${index}.newBuyingAmountCents`}
+              newSellingAmountInputName={`shippingProductsAttributes.${index}.newSellingAmountCents`}
               quantityInputName={`shippingProductsAttributes.${index}.quantity`}
               key={field.productId}
               onRemove={() => remove(index)}

@@ -52,14 +52,17 @@ const DailyReport = () => {
       item => item?.paymentType?.id === paymentType.id,
     )
 
+    const multiplier = paymentType.isRefund ? -1 : 1
+
     return {
       name: paymentType.name,
       totalAmountCents: !isEmpty(foundPayments)
-        ? sumBy(foundPayments, 'totalAmountCents')
+        ? sumBy(foundPayments, 'totalAmountCents') * multiplier
         : 0,
       currency: !isEmpty(foundPayments)
         ? foundPayments[0].totalAmountCurrency
         : undefined,
+      isRefund: paymentType.isRefund,
     }
   }), [paymentTypes, salesPayments])
 
@@ -139,19 +142,22 @@ const DailyReport = () => {
                           salesPayments?.data,
                           salesPayment => salesPayment.saleId === sale.id,
                         ),
-                        payment => (
-                          <div className="flex flex-row justify-between gap-4 print:text-xs" key={payment.id}>
-                            <p>{payment.paymentType?.name}</p>
+                        (payment) => {
+                          const multiplier = payment.paymentType?.isRefund ? -1 : 1
+                          return (
+                            <div className="flex flex-row justify-between gap-4 print:text-xs" key={payment.id}>
+                              <p>{payment.paymentType?.name}</p>
 
-                            <p>
-                              {formatPrice(
-                                payment.totalAmountCents,
-                                payment.totalAmountCurrency,
-                                '€',
-                              )}
-                            </p>
-                          </div>
-                        ),
+                              <p>
+                                {formatPrice(
+                                  payment.totalAmountCents * multiplier,
+                                  payment.totalAmountCurrency,
+                                  '€',
+                                )}
+                              </p>
+                            </div>
+                          )
+                        },
                       )}
                     </div>
                   </div>

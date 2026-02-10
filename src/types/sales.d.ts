@@ -25,6 +25,7 @@ interface PaymentType {
   id: string
   name: string
   description: string
+  isRefund: boolean
 }
 
 interface SalePayment {

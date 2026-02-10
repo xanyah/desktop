@@ -12,7 +12,7 @@ import {
   HeaderContainer,
   StyledButton,
 } from './styles'
-import { PanelLeft } from 'lucide-react'
+import { PanelLeft, ArrowLeft } from 'lucide-react'
 
 const Online = () => {
   const { isLoading, isError } = useCurrentUser()
@@ -30,6 +30,10 @@ const Online = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
 
+  const goBack = () => {
+    navigate(-1)
+  }
+
   return (
     <OnlineContainer>
       <Sidebar isOpen={isSidebarOpen} />
@@ -38,6 +42,9 @@ const Online = () => {
           <HeaderContainer>
             <StyledButton size="sm" variant="ghost" onClick={toggleSidebar}>
               <PanelLeft size={16} />
+            </StyledButton>
+            <StyledButton size="sm" variant="ghost" onClick={goBack}>
+              <ArrowLeft size={16} />
             </StyledButton>
             <Separator classname="h-4" orientation="vertical" />
             <Breadcrumb breadcrumb={breadcrumb} />

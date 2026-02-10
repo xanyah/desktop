@@ -31,6 +31,16 @@ const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesD
     resolver: zodResolver(formSchema),
   })
 
+  const { mutate: onPrintSingle, isPending: isPrintingSingle } = useMutation({
+    mutationFn: async ({ product, quantity }: { product: any, quantity: number }) => {
+      if (!store) {
+        return
+      }
+
+      await window.electronAPI.printBarcode({ product, store, count: quantity })
+    },
+  })
+
   const { mutate: onPrint, isPending } = useMutation({
     mutationFn: async () => {
       if (!store) {
@@ -56,14 +66,27 @@ const PrintBarcodesDialog = ({ shippingProducts, open, onClose }: PrintBarcodesD
 
         <div className="flex flex-col items-stretch gap-4">
           {map(watch(), (shippingProduct, index) => (
-            <CheckoutProductCard
-              withoutPrice
-              productId={shippingProduct.product.id}
-              control={control as any}
-              quantity={shippingProduct.quantity}
-              quantityInputName={`${index}.quantity`}
-              key={shippingProduct.id}
-            />
+            <div key={shippingProduct.id} className="flex flex-row items-center gap-4">
+              <div className="flex-1">
+                <CheckoutProductCard
+                  withoutPrice
+                  productId={shippingProduct.product.id}
+                  control={control as any}
+                  quantity={shippingProduct.quantity}
+                  quantityInputName={`${index}.quantity`}
+                />
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => onPrintSingle({
+                  product: shippingProduct.product,
+                  quantity: shippingProduct.quantity,
+                })}
+                disabled={isPrintingSingle}
+              >
+                {t('global.print')}
+              </Button>
+            </div>
           ))}
         </div>
 

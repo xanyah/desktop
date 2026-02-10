@@ -250,6 +250,7 @@
     "descriptionLabel": "Description",
     "descriptionPlaceholder": "Description of the payment method",
     "generalInformations": "General information",
+    "isRefundLabel": "This payment method is a refund",
     "nameLabel": "Name",
     "namePlaceholder": "Name of the payment method",
     "newPageTitle": "New payment method ",
@@ -414,13 +415,16 @@
   },
   "shipping": {
     "cancel": "Cancel delivery",
-    "currentPrice": "Current price",
+    "currentBuyingPrice": "Current buying price",
+    "currentSellingPrice": "Current selling price",
+    "currentStock": "Current stock",
     "editProducts": "Edit items",
     "existingProduct": {
       "description": "This product is already in your selection. Do you want to increase its quantity?",
       "title": "Product Already Exists"
     },
-    "newPrice": "New price",
+    "newBuyingPrice": "New buying price",
+    "newSellingPrice": "New selling price",
     "pageSubtitle": "Order placed on {{ shippingDate }}",
     "pageTitle": "Order {{ shippingNumber }}",
     "printBarcodes": {
@@ -433,6 +437,7 @@
     },
     "provider": "Provider",
     "quantity": "Quantity",
+    "updatePrice": "Update price",
     "states": {
       "cancelled": "Canceled",
       "pending": "On hold",
