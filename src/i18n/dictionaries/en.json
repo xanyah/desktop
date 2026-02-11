@@ -363,6 +363,24 @@
       "sku": "Barcode"
     }
   },
+  "productsCategorizer": {
+    "pageTitle": "Articles Categorizer",
+    "pageSubtitle": "Classify articles by assigning them to the appropriate categories",
+    "noCategoryLabel": "No category",
+    "parentCategoryLabel": "Parent Category",
+    "subcategoryLabel": "Subcategory",
+    "subcategoryPlaceholder": "Select a subcategory...",
+    "saveButton": "Save",
+    "noArticles": "No articles to categorize",
+    "aiSuggestion": "AI Suggestion",
+    "generateSuggestion": "Generate suggestion",
+    "acceptSuggestion": "Accept",
+    "rejectSuggestion": "Reject",
+    "loadingSuggestion": "Loading suggestion...",
+    "noDescription": "No description",
+    "generatedDescription": "Generated Description",
+    "currentDescription": "Current Description"
+  },
   "provider": {
     "generalInformations": "General information",
     "nameLabel": "Name",

@@ -6,6 +6,7 @@ import {
   Coins,
   CreditCard,
   Factory,
+  FolderTree,
   Group,
   NotebookText,
   NotepadText,
@@ -57,6 +58,11 @@ export const getItems = (t: TFunction, role: StoreMembership['role']) => [
         icon: Blend,
         label: t('products.pageTitle'),
         url: '/products',
+      },
+      {
+        icon: FolderTree,
+        label: t('productsCategorizer.pageTitle'),
+        url: '/products-categorizer',
       },
       {
         icon: Factory,

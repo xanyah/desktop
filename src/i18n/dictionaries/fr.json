@@ -363,6 +363,24 @@
       "sku": "Code barre"
     }
   },
+  "productsCategorizer": {
+    "pageTitle": "Catégorisateur d'Articles",
+    "pageSubtitle": "Classez les articles en leur attribuant les catégories appropriées",
+    "noCategoryLabel": "Aucune catégorie",
+    "parentCategoryLabel": "Catégorie Parente",
+    "subcategoryLabel": "Sous-catégorie",
+    "subcategoryPlaceholder": "Sélectionner une sous-catégorie...",
+    "saveButton": "Enregistrer",
+    "noArticles": "Aucun article à catégoriser",
+    "aiSuggestion": "Suggestion IA",
+    "generateSuggestion": "Générer une suggestion",
+    "acceptSuggestion": "Accepter",
+    "rejectSuggestion": "Rejeter",
+    "loadingSuggestion": "Chargement de la suggestion...",
+    "noDescription": "Aucune description",
+    "generatedDescription": "Description Générée",
+    "currentDescription": "Description Actuelle"
+  },
   "provider": {
     "generalInformations": "Informations générales",
     "nameLabel": "Nom",

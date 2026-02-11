@@ -24,6 +24,7 @@ import PaymentType from './payment-type'
 import PaymentTypes from './payment-types'
 import Product from './product'
 import Products from './products'
+import ProductsCategorizer from './products-categorizer'
 import Provider from './provider'
 import Providers from './providers'
 import Sale from './sale'
@@ -88,6 +89,7 @@ const Router = () => {
             <Route path="products/new" element={<Product />} />
             <Route path="products/:id/edit" element={<Product />} />
             <Route path="products/new" element={<Product />} />
+            <Route path="products-categorizer" element={<ProductsCategorizer />} />
             <Route path="providers" element={<Providers />} />
             <Route path="providers/:id/edit" element={<Provider />} />
             <Route path="providers/new" element={<Provider />} />
