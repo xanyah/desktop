@@ -370,6 +370,7 @@
     "parentCategoryLabel": "Parent Category",
     "subcategoryLabel": "Subcategory",
     "subcategoryPlaceholder": "Select a subcategory...",
+    "categoryLabel": "Category",
     "saveButton": "Save",
     "noArticles": "No articles to categorize",
     "aiSuggestion": "AI Suggestion",

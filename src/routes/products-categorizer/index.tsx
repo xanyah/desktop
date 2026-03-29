@@ -24,12 +24,14 @@ interface ProductWithSuggestion extends Product {
   aiSuggestion?: {
     title?: string | null
     description?: string | null
+    categoryId?: string | null
   }
   loadingSuggestion?: boolean
 }
 
 interface ProductFormProps {
   product: Product
+  categories?: Category[]
   onSave: (productId: string, data: ProductFormData) => void
   onGenerateSuggestion: (product: Product) => void
   onRejectSuggestion: (productId: string) => void
@@ -39,6 +41,7 @@ interface ProductFormProps {
 
 const ProductForm = ({
   product,
+  categories,
   onSave,
   onGenerateSuggestion,
   onRejectSuggestion,
@@ -76,6 +79,13 @@ const ProductForm = ({
     }
     if (productState?.aiSuggestion?.title) {
       setValue('name', productState.aiSuggestion.title, { shouldDirty: true })
+    }
+    if (productState?.aiSuggestion?.categoryId && categories) {
+      const suggestedCategory = categories.find(c => c.id === productState.aiSuggestion?.categoryId)
+      if (suggestedCategory?.category) {
+        setValue('parentCategoryId', suggestedCategory.category.id, { shouldDirty: true })
+        setValue('subCategoryId', suggestedCategory.id, { shouldDirty: true })
+      }
     }
     onRejectSuggestion(product.id) // Clear the suggestion state
   }
@@ -218,6 +228,18 @@ const ProductForm = ({
                     <p className="text-sm text-gray-900 line-clamp-3">{productState.aiSuggestion.description}</p>
                   </div>
                 )}
+                {productState.aiSuggestion.categoryId && (() => {
+                  const suggestedCategory = categories?.find(c => c.id === productState.aiSuggestion?.categoryId)
+                  if (!suggestedCategory) return null
+                  return (
+                    <div>
+                      <p className="text-xs font-medium text-gray-700">{t('productsCategorizer.categoryLabel')}:</p>
+                      <p className="text-sm text-gray-900">
+                        {suggestedCategory.category ? `${suggestedCategory.category.name} › ${suggestedCategory.name}` : suggestedCategory.name}
+                      </p>
+                    </div>
+                  )
+                })()}
               </div>
             )}
 
@@ -401,6 +423,7 @@ const ProductsCategorizer = () => {
           <ProductForm
             key={product.id}
             product={product}
+            categories={categoriesData?.data}
             onSave={handleSaveProduct}
             onGenerateSuggestion={handleGenerateSuggestion}
             onRejectSuggestion={handleRejectSuggestion}
