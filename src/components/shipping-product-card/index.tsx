@@ -6,20 +6,20 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { InputText } from '../input'
 import Button from '../button'
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 
-interface ShippingProductCardProps {
+interface ShippingProductCardProps<T extends FieldValues> {
   onRemove?: () => void
   onRemoveCancel?: () => void
   productId: string
-  quantityInputName: string
-  newBuyingAmountInputName: string
-  newSellingAmountInputName: string
-  control: Control<any, any, any>
+  quantityInputName: FieldPath<T>
+  newBuyingAmountInputName: FieldPath<T>
+  newSellingAmountInputName: FieldPath<T>
+  control: Control<T>
   willBeRemoved?: boolean
 }
 
-const ShippingProductCard = ({
+const ShippingProductCard = <T extends FieldValues>({
   productId,
   control,
   onRemove,
@@ -28,7 +28,7 @@ const ShippingProductCard = ({
   newSellingAmountInputName,
   willBeRemoved,
   onRemoveCancel,
-}: ShippingProductCardProps) => {
+}: ShippingProductCardProps<T>) => {
   const { t } = useTranslation()
   const { data, isLoading } = useProduct(productId)
   const [showPriceFields, setShowPriceFields] = useState(false)

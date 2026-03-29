@@ -5,20 +5,20 @@ import { toNumber } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { InputText } from '../input'
 import Button from '../button'
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form'
 
-interface CheckoutProductCardProps {
+interface CheckoutProductCardProps<T extends FieldValues> {
   onRemove?: () => void
   onRemoveCancel?: () => void
   productId: string
   quantity: number
-  quantityInputName: string
-  control: Control<any, any, any>
+  quantityInputName: FieldPath<T>
+  control: Control<T>
   withoutPrice?: boolean
   willBeRemoved?: boolean
 }
 
-const CheckoutProductCard = ({
+const CheckoutProductCard = <T extends FieldValues>({
   productId,
   control,
   onRemove,
@@ -27,7 +27,7 @@ const CheckoutProductCard = ({
   quantityInputName,
   willBeRemoved,
   onRemoveCancel,
-}: CheckoutProductCardProps) => {
+}: CheckoutProductCardProps<T>) => {
   const { t } = useTranslation()
   const { data, isLoading } = useProduct(productId)
 
