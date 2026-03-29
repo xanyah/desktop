@@ -66,7 +66,8 @@ const ProductForm = ({ onCancel, onSuccess, product }: ProductFormProps) => {
       const values = product
         ? {
             ...product,
-            categoryId: product.category?.id,
+            categoryId: product.category?.category?.id ?? product.category?.id,
+            subCategoryId: product.category?.category ? product.category?.id : undefined,
             manufacturerId: product.manufacturer?.id,
             storeId: store?.id,
             buyingAmount: product.buyingAmountCents,
