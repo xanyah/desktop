@@ -99,17 +99,19 @@ const ProductForm = ({
       <div className="flex gap-4">
         {/* Product Image */}
         <div className="shrink-0">
-          {product.images && product.images.length > 0 ? (
-            <img
-              src={product.images[0].thumbnail}
-              alt={product.name}
-              className="w-20 h-20 object-cover rounded"
-            />
-          ) : (
-            <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center">
-              <span className="text-gray-400 text-xs">No image</span>
-            </div>
-          )}
+          {product.images && product.images.length > 0
+            ? (
+                <img
+                  src={product.images[0].thumbnail}
+                  alt={product.name}
+                  className="w-20 h-20 object-cover rounded"
+                />
+              )
+            : (
+                <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center">
+                  <span className="text-gray-400 text-xs">No image</span>
+                </div>
+              )}
         </div>
 
         {/* Product Info & Form */}
@@ -218,13 +220,19 @@ const ProductForm = ({
                 </div>
                 {productState.aiSuggestion.title && (
                   <div>
-                    <p className="text-xs font-medium text-gray-700">{t('product.nameLabel')}:</p>
+                    <p className="text-xs font-medium text-gray-700">
+                      {t('product.nameLabel')}
+                      :
+                    </p>
                     <p className="text-sm text-gray-900">{productState.aiSuggestion.title}</p>
                   </div>
                 )}
                 {productState.aiSuggestion.description && (
                   <div>
-                    <p className="text-xs font-medium text-gray-700">{t('product.descriptionLabel')}:</p>
+                    <p className="text-xs font-medium text-gray-700">
+                      {t('product.descriptionLabel')}
+                      :
+                    </p>
                     <p className="text-sm text-gray-900 line-clamp-3">{productState.aiSuggestion.description}</p>
                   </div>
                 )}
@@ -233,7 +241,10 @@ const ProductForm = ({
                   if (!suggestedCategory) return null
                   return (
                     <div>
-                      <p className="text-xs font-medium text-gray-700">{t('productsCategorizer.categoryLabel')}:</p>
+                      <p className="text-xs font-medium text-gray-700">
+                        {t('productsCategorizer.categoryLabel')}
+                        :
+                      </p>
                       <p className="text-sm text-gray-900">
                         {suggestedCategory.category ? `${suggestedCategory.category.name} › ${suggestedCategory.name}` : suggestedCategory.name}
                       </p>
@@ -295,7 +306,7 @@ const ProductsCategorizer = () => {
   })
 
   // Filter products: no category OR category has no parent (is a top-level category)
-  const uncategorizedProducts = filter(productsData?.data, product => {
+  const uncategorizedProducts = filter(productsData?.data, (product) => {
     if (!product.category) return true
     // Check if the category has no parent
     return !product.category.category
@@ -307,7 +318,7 @@ const ProductsCategorizer = () => {
       productId,
       name,
       categoryId,
-      description
+      description,
     }: {
       productId: string
       name?: string
@@ -368,7 +379,9 @@ const ProductsCategorizer = () => {
             loadingSuggestion: false,
           } as ProductWithSuggestion,
         }))
-      } catch (error) {
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      catch (_) {
         setProductsState(prev => ({
           ...prev,
           [product.id]: {
